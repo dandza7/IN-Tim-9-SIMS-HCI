@@ -18,7 +18,7 @@ using WpfApp1.Model;
 using WpfApp1.View.Dialog;
 using WpfApp1.View.Model;
 
-namespace WpfApp1.View
+namespace WpfApp1.Service
 {
     /// <summary>
     /// Interaction logic for PatientMenu.xaml

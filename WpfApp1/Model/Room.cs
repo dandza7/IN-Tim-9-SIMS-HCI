@@ -14,8 +14,17 @@ namespace WpfApp1.Model
         public RoomType Type { get; set; }
 
         //public Appointment[] appointment;
+        public Room(int id, string nametag, int type)
+        {
+            Id = id;
+            Nametag = nametag;
+            Available = true;
+            Type = (RoomType)type;
+        }
 
     }
+
+    
 
     public enum RoomType
     {
