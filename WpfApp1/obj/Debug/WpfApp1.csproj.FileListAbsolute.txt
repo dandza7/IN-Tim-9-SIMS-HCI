@@ -80,3 +80,47 @@ C:\Users\Acer\Desktop\FAX\6. Semestar\Specifikacija i modeliranje softvera\IN-Ti
 C:\Users\Acer\Desktop\FAX\6. Semestar\Specifikacija i modeliranje softvera\IN-Tim-9-SIMS-HCI\WpfApp1\obj\Debug\View\SecretaryMenu.baml
 C:\Users\Acer\Desktop\FAX\6. Semestar\Specifikacija i modeliranje softvera\IN-Tim-9-SIMS-HCI\WpfApp1\obj\Debug\View\MainWindow.g.cs
 C:\Users\Acer\Desktop\FAX\6. Semestar\Specifikacija i modeliranje softvera\IN-Tim-9-SIMS-HCI\WpfApp1\obj\Debug\View\MainWindow.baml
+C:\Users\nikol\OneDrive\Desktop\Fakultet\III godina\II semestar\SIMS\IN-Tim-9-SIMS-HCI\WpfApp1\bin\Debug\WpfApp1.exe.config
+C:\Users\nikol\OneDrive\Desktop\Fakultet\III godina\II semestar\SIMS\IN-Tim-9-SIMS-HCI\WpfApp1\bin\Debug\WpfApp1.exe
+C:\Users\nikol\OneDrive\Desktop\Fakultet\III godina\II semestar\SIMS\IN-Tim-9-SIMS-HCI\WpfApp1\bin\Debug\WpfApp1.pdb
+C:\Users\nikol\OneDrive\Desktop\Fakultet\III godina\II semestar\SIMS\IN-Tim-9-SIMS-HCI\WpfApp1\bin\Debug\Xceed.Wpf.AvalonDock.dll
+C:\Users\nikol\OneDrive\Desktop\Fakultet\III godina\II semestar\SIMS\IN-Tim-9-SIMS-HCI\WpfApp1\bin\Debug\Xceed.Wpf.AvalonDock.Themes.Aero.dll
+C:\Users\nikol\OneDrive\Desktop\Fakultet\III godina\II semestar\SIMS\IN-Tim-9-SIMS-HCI\WpfApp1\bin\Debug\Xceed.Wpf.AvalonDock.Themes.Metro.dll
+C:\Users\nikol\OneDrive\Desktop\Fakultet\III godina\II semestar\SIMS\IN-Tim-9-SIMS-HCI\WpfApp1\bin\Debug\Xceed.Wpf.AvalonDock.Themes.VS2010.dll
+C:\Users\nikol\OneDrive\Desktop\Fakultet\III godina\II semestar\SIMS\IN-Tim-9-SIMS-HCI\WpfApp1\bin\Debug\Xceed.Wpf.Toolkit.dll
+C:\Users\nikol\OneDrive\Desktop\Fakultet\III godina\II semestar\SIMS\IN-Tim-9-SIMS-HCI\WpfApp1\bin\Debug\cs-CZ\Xceed.Wpf.AvalonDock.resources.dll
+C:\Users\nikol\OneDrive\Desktop\Fakultet\III godina\II semestar\SIMS\IN-Tim-9-SIMS-HCI\WpfApp1\bin\Debug\de\Xceed.Wpf.AvalonDock.resources.dll
+C:\Users\nikol\OneDrive\Desktop\Fakultet\III godina\II semestar\SIMS\IN-Tim-9-SIMS-HCI\WpfApp1\bin\Debug\es\Xceed.Wpf.AvalonDock.resources.dll
+C:\Users\nikol\OneDrive\Desktop\Fakultet\III godina\II semestar\SIMS\IN-Tim-9-SIMS-HCI\WpfApp1\bin\Debug\fr\Xceed.Wpf.AvalonDock.resources.dll
+C:\Users\nikol\OneDrive\Desktop\Fakultet\III godina\II semestar\SIMS\IN-Tim-9-SIMS-HCI\WpfApp1\bin\Debug\hu\Xceed.Wpf.AvalonDock.resources.dll
+C:\Users\nikol\OneDrive\Desktop\Fakultet\III godina\II semestar\SIMS\IN-Tim-9-SIMS-HCI\WpfApp1\bin\Debug\it\Xceed.Wpf.AvalonDock.resources.dll
+C:\Users\nikol\OneDrive\Desktop\Fakultet\III godina\II semestar\SIMS\IN-Tim-9-SIMS-HCI\WpfApp1\bin\Debug\ja-JP\Xceed.Wpf.AvalonDock.resources.dll
+C:\Users\nikol\OneDrive\Desktop\Fakultet\III godina\II semestar\SIMS\IN-Tim-9-SIMS-HCI\WpfApp1\bin\Debug\pt-BR\Xceed.Wpf.AvalonDock.resources.dll
+C:\Users\nikol\OneDrive\Desktop\Fakultet\III godina\II semestar\SIMS\IN-Tim-9-SIMS-HCI\WpfApp1\bin\Debug\ro\Xceed.Wpf.AvalonDock.resources.dll
+C:\Users\nikol\OneDrive\Desktop\Fakultet\III godina\II semestar\SIMS\IN-Tim-9-SIMS-HCI\WpfApp1\bin\Debug\ru\Xceed.Wpf.AvalonDock.resources.dll
+C:\Users\nikol\OneDrive\Desktop\Fakultet\III godina\II semestar\SIMS\IN-Tim-9-SIMS-HCI\WpfApp1\bin\Debug\sv\Xceed.Wpf.AvalonDock.resources.dll
+C:\Users\nikol\OneDrive\Desktop\Fakultet\III godina\II semestar\SIMS\IN-Tim-9-SIMS-HCI\WpfApp1\bin\Debug\zh-Hans\Xceed.Wpf.AvalonDock.resources.dll
+C:\Users\nikol\OneDrive\Desktop\Fakultet\III godina\II semestar\SIMS\IN-Tim-9-SIMS-HCI\WpfApp1\obj\Debug\WpfApp1.csproj.AssemblyReference.cache
+C:\Users\nikol\OneDrive\Desktop\Fakultet\III godina\II semestar\SIMS\IN-Tim-9-SIMS-HCI\WpfApp1\obj\Debug\WpfApp1.csproj.SuggestedBindingRedirects.cache
+C:\Users\nikol\OneDrive\Desktop\Fakultet\III godina\II semestar\SIMS\IN-Tim-9-SIMS-HCI\WpfApp1\obj\Debug\View\MainWindow.g.cs
+C:\Users\nikol\OneDrive\Desktop\Fakultet\III godina\II semestar\SIMS\IN-Tim-9-SIMS-HCI\WpfApp1\obj\Debug\View\AppointmentForm.g.cs
+C:\Users\nikol\OneDrive\Desktop\Fakultet\III godina\II semestar\SIMS\IN-Tim-9-SIMS-HCI\WpfApp1\obj\Debug\View\DoctorMenu.g.cs
+C:\Users\nikol\OneDrive\Desktop\Fakultet\III godina\II semestar\SIMS\IN-Tim-9-SIMS-HCI\WpfApp1\obj\Debug\View\ExecutiveMenu.g.cs
+C:\Users\nikol\OneDrive\Desktop\Fakultet\III godina\II semestar\SIMS\IN-Tim-9-SIMS-HCI\WpfApp1\obj\Debug\View\PatientMenu.g.cs
+C:\Users\nikol\OneDrive\Desktop\Fakultet\III godina\II semestar\SIMS\IN-Tim-9-SIMS-HCI\WpfApp1\obj\Debug\View\SecretaryMenu.g.cs
+C:\Users\nikol\OneDrive\Desktop\Fakultet\III godina\II semestar\SIMS\IN-Tim-9-SIMS-HCI\WpfApp1\obj\Debug\App.g.cs
+C:\Users\nikol\OneDrive\Desktop\Fakultet\III godina\II semestar\SIMS\IN-Tim-9-SIMS-HCI\WpfApp1\obj\Debug\WpfApp1_MarkupCompile.cache
+C:\Users\nikol\OneDrive\Desktop\Fakultet\III godina\II semestar\SIMS\IN-Tim-9-SIMS-HCI\WpfApp1\obj\Debug\WpfApp1_MarkupCompile.lref
+C:\Users\nikol\OneDrive\Desktop\Fakultet\III godina\II semestar\SIMS\IN-Tim-9-SIMS-HCI\WpfApp1\obj\Debug\View\MainWindow.baml
+C:\Users\nikol\OneDrive\Desktop\Fakultet\III godina\II semestar\SIMS\IN-Tim-9-SIMS-HCI\WpfApp1\obj\Debug\View\AppointmentForm.baml
+C:\Users\nikol\OneDrive\Desktop\Fakultet\III godina\II semestar\SIMS\IN-Tim-9-SIMS-HCI\WpfApp1\obj\Debug\View\DoctorMenu.baml
+C:\Users\nikol\OneDrive\Desktop\Fakultet\III godina\II semestar\SIMS\IN-Tim-9-SIMS-HCI\WpfApp1\obj\Debug\View\ExecutiveMenu.baml
+C:\Users\nikol\OneDrive\Desktop\Fakultet\III godina\II semestar\SIMS\IN-Tim-9-SIMS-HCI\WpfApp1\obj\Debug\View\PatientMenu.baml
+C:\Users\nikol\OneDrive\Desktop\Fakultet\III godina\II semestar\SIMS\IN-Tim-9-SIMS-HCI\WpfApp1\obj\Debug\View\SecretaryMenu.baml
+C:\Users\nikol\OneDrive\Desktop\Fakultet\III godina\II semestar\SIMS\IN-Tim-9-SIMS-HCI\WpfApp1\obj\Debug\WpfApp1.g.resources
+C:\Users\nikol\OneDrive\Desktop\Fakultet\III godina\II semestar\SIMS\IN-Tim-9-SIMS-HCI\WpfApp1\obj\Debug\WpfApp1.Properties.Resources.resources
+C:\Users\nikol\OneDrive\Desktop\Fakultet\III godina\II semestar\SIMS\IN-Tim-9-SIMS-HCI\WpfApp1\obj\Debug\WpfApp1.csproj.GenerateResource.cache
+C:\Users\nikol\OneDrive\Desktop\Fakultet\III godina\II semestar\SIMS\IN-Tim-9-SIMS-HCI\WpfApp1\obj\Debug\WpfApp1.csproj.CoreCompileInputs.cache
+C:\Users\nikol\OneDrive\Desktop\Fakultet\III godina\II semestar\SIMS\IN-Tim-9-SIMS-HCI\WpfApp1\obj\Debug\WpfApp1.csproj.CopyComplete
+C:\Users\nikol\OneDrive\Desktop\Fakultet\III godina\II semestar\SIMS\IN-Tim-9-SIMS-HCI\WpfApp1\obj\Debug\WpfApp1.exe
+C:\Users\nikol\OneDrive\Desktop\Fakultet\III godina\II semestar\SIMS\IN-Tim-9-SIMS-HCI\WpfApp1\obj\Debug\WpfApp1.pdb
