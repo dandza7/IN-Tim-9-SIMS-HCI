@@ -10,7 +10,6 @@ namespace WpfApp1.Repository
 {
     public class AppointmentRepository
     {
-        private const string NOT_FOUND_ERROR = "Account with {0}:{1} can not be found!";
         private string _path;
         private string _delimiter;
 
