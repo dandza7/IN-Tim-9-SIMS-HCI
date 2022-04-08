@@ -6,6 +6,17 @@ using System.Threading.Tasks;
 
 namespace WpfApp1.Model
 {
+    public class Room
+    {
+        public int Id { get; set; }
+        public string Nametag { get; set; }
+        public bool Available { get; set; }
+        public RoomType Type { get; set; }
+
+        //public Appointment[] appointment;
+
+    }
+
     public enum RoomType
     {
         operating,
@@ -14,19 +25,4 @@ namespace WpfApp1.Model
         storage,
         lobby
     }
-
-    internal class Room
-    {
-        public int Id { get; set; }
-        public string Nametag { get; set; }
-        public bool Available { get; set; }
-        public RoomType Type { get; set; }
-
-
-
-        //public Appointment[] appointment;
-
-    }
-
-
 }
