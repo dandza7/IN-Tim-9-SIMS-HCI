@@ -79,10 +79,10 @@
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
 
-        <Button Name="ListButton" Grid.Row="0" Grid.Column="0" Style="{StaticResource NavBarButton}" Click="ListButton_Click" FontSize="30">Show rooms</Button>
-        <Button Name="AddButton" Grid.Row="0" Grid.Column="1" Style="{StaticResource NavBarButton}" Click="AddButton_Click" FontSize="30">Add room</Button>
-        <Button Name="EditButton" Grid.Row="0" Grid.Column="2" Style="{StaticResource NavBarButton}" Click="EditButton_Click" FontSize="30">Edit room type</Button>
-        <Button Name="DeleteButton" Grid.Row="0" Grid.Column="3" Style="{StaticResource NavBarButton}" Click="DeleteButton_Click" FontSize="30">Delete room</Button>
+        <Button Name="ListButton" Grid.Row="0" Grid.Column="0" Style="{StaticResource NavBarButton}" Click="ListButton_Click" FontSize="31">Show rooms</Button>
+        <Button Name="AddButton" Grid.Row="0" Grid.Column="1" Style="{StaticResource NavBarButton}" Click="AddButton_Click" FontSize="31">Add room</Button>
+        <Button Name="EditButton" Grid.Row="0" Grid.Column="2" Style="{StaticResource NavBarButton}" Click="EditButton_Click" FontSize="31">Edit room type</Button>
+        <Button Name="DeleteButton" Grid.Row="0" Grid.Column="3" Style="{StaticResource NavBarButton}" Click="DeleteButton_Click" FontSize="31">Delete room</Button>
 
         <Border Name="AddContainer" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="4" Grid.RowSpan="4" Style="{StaticResource DialogModal}" Visibility="Collapsed">
             <Grid>
