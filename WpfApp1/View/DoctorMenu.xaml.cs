@@ -10,27 +10,18 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
-using WpfApp1.View;
 
-namespace WpfApp1
+namespace WpfApp1.View
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for DoctorMenu.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class DoctorMenu : Window
     {
-        public MainWindow()
+        public DoctorMenu()
         {
             InitializeComponent();
-            DataContext = this;
-        }
-
-        private void ShowPatientOptions(object sender, RoutedEventArgs e)
-        {
-            var s = new PatientMenu();
-            s.Show();
         }
     }
 }

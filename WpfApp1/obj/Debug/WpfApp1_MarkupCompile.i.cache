@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-C:\Users\nikol\source\repos\WpfApp1\WpfApp1\obj\Debug\
+C:\Users\Acer\Desktop\FAX\6. Semestar\Specifikacija i modeliranje softvera\IN-Tim-9-SIMS-HCI\WpfApp1\obj\Debug\
 WpfApp1
 none
 false
 DEBUG;TRACE
-C:\Users\nikol\source\repos\WpfApp1\WpfApp1\App.xaml
-31792080532
+C:\Users\Acer\Desktop\FAX\6. Semestar\Specifikacija i modeliranje softvera\IN-Tim-9-SIMS-HCI\WpfApp1\App.xaml
+61506641080
 
-10-134714408
-18281678826
-MainWindow.xaml;View\AppointmentForm.xaml;View\PatientMenu.xaml;
+132086133256
+1818689157
+View\MainWindow.xaml;View\AppointmentForm.xaml;View\DoctorMenu.xaml;View\ExecutiveMenu.xaml;View\PatientMenu.xaml;View\SecretaryMenu.xaml;
 
-True
+False
 

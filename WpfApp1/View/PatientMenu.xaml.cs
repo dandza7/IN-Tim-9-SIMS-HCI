@@ -74,6 +74,6 @@ namespace WpfApp1.View
             s.Show();
         }
 
-        private void CloseAppointments(object sender, RoutedEventArgs e) => Close();
+        
     }
 }
