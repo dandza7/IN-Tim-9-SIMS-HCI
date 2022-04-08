@@ -73,6 +73,7 @@
     <Compile Include="Model\Appointment.cs" />
     <Compile Include="Model\Patient.cs" />
     <Compile Include="Model\Room.cs" />
+    <Compile Include="Repository\AppointmentRepository.cs" />
     <Compile Include="View\AppointmentForm.xaml.cs">
       <DependentUpon>AppointmentForm.xaml</DependentUpon>
     </Compile>
@@ -147,6 +148,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Data\appointments.csv" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
