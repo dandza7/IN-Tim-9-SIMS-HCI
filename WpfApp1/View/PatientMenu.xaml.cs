@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -12,6 +13,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using WpfApp1.Controller;
 using WpfApp1.Model;
 
 namespace WpfApp1.View
@@ -25,45 +27,62 @@ namespace WpfApp1.View
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        protected virtual void OnPropertyChanged(string name)
+        private void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
-            if (PropertyChanged != null)
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        private int _id;
+        private DateTime _beginning;
+        private DateTime _ending;
+        private AppointmentController _appointmentController;
+
+        public int Id
+        {
+            get => _id;
+            set
             {
-                PropertyChanged(this, new PropertyChangedEventArgs(name));
+                if (_id != value)
+                {
+                    _id = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+
+        public DateTime Beginning
+        {
+            get => _beginning;
+            set
+            {
+                if (_beginning != value)
+                {
+                    _beginning = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        public DateTime Ending
+        {
+            get => _ending;
+            set
+            {
+                if (_ending != value)
+                {
+                    _ending = value;
+                    OnPropertyChanged();
+                }
             }
         }
         public PatientMenu()
         {
             InitializeComponent();
+            var app = Application.Current as App;
+            _appointmentController = app.AppointmentController;
             this.Patient = new Patient
             {
-                Appointments = new List<Appointment>()
-                {
-                    new Appointment
-                    {
-                        Id = 1,
-                        Beginning = DateTime.Now,
-                        Ending = DateTime.Now
-                    },
-                    new Appointment
-                    {
-                        Id = 2,
-                        Beginning = DateTime.Now,
-                        Ending = DateTime.Now
-                    },
-                    new Appointment
-                    {
-                        Id = 3,
-                        Beginning = DateTime.Now,
-                        Ending = DateTime.Now
-                    },
-                    new Appointment
-                    {
-                        Id = 4,
-                        Beginning = DateTime.Now,
-                        Ending = DateTime.Now
-                    }
-                }
+                Appointments = _appointmentController.GetAll().ToList()
             };
             this.DataContext = this.Patient;
         }

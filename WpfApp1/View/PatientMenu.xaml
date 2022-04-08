@@ -13,8 +13,8 @@
         <DataGrid AutoGenerateColumns="False" Margin="0,100,0,0" VerticalAlignment="Top" ItemsSource="{Binding Appointments}">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Id" Width="auto" Binding="{Binding Id}"/>
-                <DataGridTextColumn Header="Beginning" Width="auto" Binding="{Binding Beginning}"/>
-                <DataGridTextColumn Header="Ending" Width="auto" Binding="{Binding Ending}"/>
+                <DataGridTextColumn Header="Beginning" Width="auto" Binding="{Binding Beginning, StringFormat=dd.MM.yyyy. HH:mm:ss}"/>
+                <DataGridTextColumn Header="Ending" Width="auto" Binding="{Binding Ending, StringFormat=dd.MM.yyyy. HH:mm:ss}"/>
                 <DataGridTemplateColumn Header="Move">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
