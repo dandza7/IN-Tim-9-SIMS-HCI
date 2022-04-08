@@ -35,7 +35,7 @@ namespace WpfApp1.View
         private int _id;
         private DateTime _beginning;
         private DateTime _ending;
-        private AppointmentController _appointmentController;
+        private readonly AppointmentController _appointmentController;
 
         public int Id
         {

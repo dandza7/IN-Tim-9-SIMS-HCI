@@ -30,7 +30,6 @@ namespace WpfApp1.Service
 
         public Appointment Create(Appointment appointment)
         {
-
             // save appointments
             return _appointmentRepo.Create(appointment);
         }

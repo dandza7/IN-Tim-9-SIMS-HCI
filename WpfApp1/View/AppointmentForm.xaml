@@ -14,7 +14,7 @@
         <Label Content="From:" HorizontalAlignment="Left" Margin="200,160,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
         <Label Content="To:" HorizontalAlignment="Left" Margin="200,190,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
         <Label Content="Choose a doctor:" HorizontalAlignment="Left" Margin="77,255,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
-        <Button Content="Confirm" HorizontalAlignment="Left" Margin="345,381,0,0" VerticalAlignment="Top"/>
+        <Button Content="Confirm" HorizontalAlignment="Left" Margin="345,381,0,0" VerticalAlignment="Top" Click="CreateNewAppointment"/>
         <ComboBox HorizontalAlignment="Left" Margin="277,95,0,0" VerticalAlignment="Top" Width="120">
             <ComboBoxItem Content="Time"/>
             <ComboBoxItem Content="Doctor"/>
@@ -25,7 +25,7 @@
             <ComboBoxItem Content="Pera Perić"/>
             <ComboBoxItem Content="Slavko Slavić"/>
         </ComboBox>
-        <xctk:DateTimePicker HorizontalAlignment="Left" Margin="245,160,0,0" VerticalAlignment="Top"/>
-        <xctk:DateTimePicker HorizontalAlignment="Left" Margin="245,190,0,0" VerticalAlignment="Top"/>
+        <xctk:DateTimePicker x:Name="BeginningDTP" HorizontalAlignment="Left" Margin="245,160,0,0" VerticalAlignment="Top"/>
+        <xctk:DateTimePicker x:Name="EndingDTP" HorizontalAlignment="Left" Margin="245,190,0,0" VerticalAlignment="Top"/>
     </Grid>
 </Window>

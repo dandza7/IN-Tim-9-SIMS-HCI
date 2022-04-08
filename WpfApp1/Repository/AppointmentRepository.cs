@@ -14,7 +14,6 @@ namespace WpfApp1.Repository
         private string _path;
         private string _delimiter;
         private readonly string _datetimeFormat;
-        private int _appointmentMaxId;
 
         public AppointmentRepository(string path, string delimiter, string datetimeFormat)
         {
@@ -23,9 +22,9 @@ namespace WpfApp1.Repository
             _datetimeFormat = datetimeFormat;
         }
 
-        private long GetMaxId(IEnumerable<Appointment> appointments)
+        private int GetMaxId(IEnumerable<Appointment> appointments)
         {
-            return appointments.Count() == 0 ? 0 : appointments.Max(transaction => transaction.Id);
+            return appointments.Count() == 0 ? 0 : appointments.Max(appointment => appointment.Id);
         }
 
         public IEnumerable<Appointment> GetAll()
@@ -36,7 +35,8 @@ namespace WpfApp1.Repository
         }
         public Appointment Create(Appointment appointment)
         {
-            appointment.Id = ++_appointmentMaxId;
+            int maxId = GetMaxId(GetAll());
+            appointment.Id = ++maxId;
             AppendLineToFile(_path, ConvertAppointmentToCSVFormat(appointment));
             return appointment;
         }
@@ -44,7 +44,6 @@ namespace WpfApp1.Repository
         private Appointment ConvertCSVFormatToAppointment(string appointmentCSVFormat)
         {
             var tokens = appointmentCSVFormat.Split(_delimiter.ToCharArray());
-            //Console.Write("ID pregleda: {0} Datum pocetka: {1} Datum kraja: {2}\n", int.Parse(tokens[0]), DateTime.Parse(tokens[1]), DateTime.Parse(tokens[2]));
             return new Appointment(int.Parse(tokens[0]), DateTime.Parse(tokens[1]), DateTime.Parse(tokens[2]));
         }
         private string ConvertAppointmentToCSVFormat(Appointment appointment)
