@@ -78,8 +78,10 @@
     <Compile Include="Model\Patient.cs" />
     <Compile Include="Model\Room.cs" />
     <Compile Include="Repository\AppointmentRepository.cs" />
-    <Compile Include="View\AppointmentForm.xaml.cs">
-      <DependentUpon>AppointmentForm.xaml</DependentUpon>
+    <Compile Include="View\Converter\AbstractConverter.cs" />
+    <Compile Include="View\Converter\AppointmentConverter.cs" />
+    <Compile Include="View\Dialog\AddPatientAppointmentDialog.xaml.cs">
+      <DependentUpon>AddPatientAppointmentDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\DoctorMenu.xaml.cs">
       <DependentUpon>DoctorMenu.xaml</DependentUpon>
@@ -87,12 +89,22 @@
     <Compile Include="View\ExecutiveMenu.xaml.cs">
       <DependentUpon>ExecutiveMenu.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Model\AppointmentView.xaml.cs">
+      <DependentUpon>AppointmentView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Model\PatientAppointmentsView.xaml.cs">
+      <DependentUpon>PatientAppointmentsView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\PatientMenu.xaml.cs">
       <DependentUpon>PatientMenu.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\SecretaryMenu.xaml.cs">
       <DependentUpon>SecretaryMenu.xaml</DependentUpon>
     </Compile>
+    <Page Include="View\Dialog\AddPatientAppointmentDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -105,15 +117,19 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="View\AppointmentForm.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="View\DoctorMenu.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\ExecutiveMenu.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Model\AppointmentView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Model\PatientAppointmentsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
