@@ -83,6 +83,9 @@
     <Compile Include="View\Dialog\AddPatientAppointmentDialog.xaml.cs">
       <DependentUpon>AddPatientAppointmentDialog.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Dialog\MovePatientAppointmentDialog.xaml.cs">
+      <DependentUpon>MovePatientAppointmentDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\DoctorMenu.xaml.cs">
       <DependentUpon>DoctorMenu.xaml</DependentUpon>
     </Compile>
@@ -102,6 +105,10 @@
       <DependentUpon>SecretaryMenu.xaml</DependentUpon>
     </Compile>
     <Page Include="View\Dialog\AddPatientAppointmentDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Dialog\MovePatientAppointmentDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

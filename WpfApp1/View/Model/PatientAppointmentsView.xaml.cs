@@ -14,6 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using WpfApp1.Controller;
+using WpfApp1.Model;
 using WpfApp1.View.Converter;
 using WpfApp1.View.Dialog;
 
@@ -42,6 +43,24 @@ namespace WpfApp1.View.Model
         {
             var window = new AddPatientAppointmentDialog();
             window.ShowDialog();
+        }
+
+        private void MoveAppointment_Click(object sender, RoutedEventArgs e)
+        {
+            int appointmentId = ((AppointmentView)PatientAppointmentsDataGrid.SelectedItem).Id;
+            Console.WriteLine("Id reda koji je selektovan je {0}", appointmentId);
+            var window = new MovePatientAppointmentDialog();
+            window.ShowDialog();
+        }
+
+        private void RemoveAppointment_Click(object sender, RoutedEventArgs e)
+        {
+            int appointmentId = ((AppointmentView)PatientAppointmentsDataGrid.SelectedItem).Id;
+            var app = Application.Current as App;
+            _appointmentController = app.AppointmentController;
+
+            _appointmentController.Delete(appointmentId);
+            Console.WriteLine("Deleted appointment with {0}: {1}", "ID", appointmentId);
         }
     }
 }

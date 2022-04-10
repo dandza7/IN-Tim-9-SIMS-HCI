@@ -41,6 +41,41 @@ namespace WpfApp1.Repository
             return appointment;
         }
 
+        public Appointment Update(Appointment appointment)
+        {
+            List<Appointment> appointments = GetAll().ToList();
+            List<string> newFile = new List<string>();
+            foreach(Appointment a in appointments)
+            {
+
+                if(a.Id == appointment.Id)
+                {
+                    a.Beginning = appointment.Beginning;
+                    a.Ending = appointment.Ending;
+                }
+                newFile.Add(ConvertAppointmentToCSVFormat(a));
+            }
+            File.WriteAllLines(_path, newFile);
+            return appointment;
+        }
+
+        public bool Delete(int id)
+        {
+            List<Appointment> appointments = GetAll().ToList();
+            List<string> newFile = new List<string>();
+            bool isDeleted = false;
+            foreach (Appointment a in appointments)
+            {
+                if (a.Id != id)
+                {
+                    newFile.Add(ConvertAppointmentToCSVFormat(a));
+                    isDeleted = true;
+                }
+            }
+            File.WriteAllLines(_path, newFile);
+            return isDeleted;
+        }
+
         private Appointment ConvertCSVFormatToAppointment(string appointmentCSVFormat)
         {
             var tokens = appointmentCSVFormat.Split(_delimiter.ToCharArray());
@@ -55,6 +90,12 @@ namespace WpfApp1.Repository
         }
 
         private void AppendLineToFile(string path, string line)
+        {
+            Console.WriteLine("Linija koju dodajem je:\n{0}", line);
+            File.AppendAllText(path, line + Environment.NewLine);
+        }
+
+        private void EditLineOfFile(string path, string line)
         {
             File.AppendAllText(path, line + Environment.NewLine);
         }
