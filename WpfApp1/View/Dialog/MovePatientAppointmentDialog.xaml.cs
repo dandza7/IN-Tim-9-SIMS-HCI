@@ -39,11 +39,10 @@ namespace WpfApp1.View.Dialog
             var app = Application.Current as App;
             _appointmentController = app.AppointmentController;
             if (BeginningDTP.Text == null || EndingDTP.Text == null) return;
-            //int Id = 4;
+            Id = (int)app.Properties["appointmentId"];
             Beginning = DateTime.Parse(BeginningDTP.Text);
             Ending = DateTime.Parse(EndingDTP.Text);
-            //Appointment updatedAppointment = _appointmentController.Update(new Appointment(Id, Beginning, Ending));
-            //UpdatePatientAppointmentView(updatedAppointment);
+            _appointmentController.Update(new Appointment(Id, Beginning, Ending));
             Close();
         }
     }

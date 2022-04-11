@@ -19,7 +19,7 @@
                 <DataGridTemplateColumn Header="Move">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button Content="Move" Click="MoveAppointment_Click"/>
+                            <Button Content="Move" Click="OpenMoveAppointmentDialog_Click"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>

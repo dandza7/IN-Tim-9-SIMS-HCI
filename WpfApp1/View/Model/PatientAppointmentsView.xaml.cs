@@ -45,9 +45,11 @@ namespace WpfApp1.View.Model
             window.ShowDialog();
         }
 
-        private void MoveAppointment_Click(object sender, RoutedEventArgs e)
+        private void OpenMoveAppointmentDialog_Click(object sender, RoutedEventArgs e)
         {
             int appointmentId = ((AppointmentView)PatientAppointmentsDataGrid.SelectedItem).Id;
+            var app = Application.Current as App;
+            app.Properties["appointmentId"] = appointmentId;
             Console.WriteLine("Id reda koji je selektovan je {0}", appointmentId);
             var window = new MovePatientAppointmentDialog();
             window.ShowDialog();
