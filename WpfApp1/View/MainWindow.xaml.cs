@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using WpfApp1.View;
+using WpfApp1.View.Model;
 
 namespace WpfApp1.View
 {
@@ -48,5 +49,6 @@ namespace WpfApp1.View
             var s = new SecretaryMenu();
             s.Show();
         }
+
     }
 }

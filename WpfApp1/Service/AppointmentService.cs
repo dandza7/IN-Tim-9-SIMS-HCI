@@ -30,9 +30,19 @@ namespace WpfApp1.Service
 
         public Appointment Create(Appointment appointment)
         {
-
             // save appointments
             return _appointmentRepo.Create(appointment);
+        }
+
+        public Appointment Update(Appointment appointment)
+        {
+            // save appointments
+            return _appointmentRepo.Update(appointment);
+        }
+
+        public bool Delete(int id)
+        {
+            return _appointmentRepo.Delete(id);
         }
     }
 }

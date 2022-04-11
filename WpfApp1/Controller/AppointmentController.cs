@@ -27,5 +27,15 @@ namespace WpfApp1.Controller
         {
             return _appointmentService.Create(appointment);
         }
+
+        public Appointment Update(Appointment appointment)
+        {
+            return _appointmentService.Update(appointment);
+        }
+
+        public bool Delete(int id)
+        {
+            return  _appointmentService.Delete(id);
+        }
     }
 }
