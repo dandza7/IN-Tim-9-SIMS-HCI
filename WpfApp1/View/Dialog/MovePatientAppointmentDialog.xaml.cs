@@ -38,7 +38,6 @@ namespace WpfApp1.View.Dialog
         {
             var app = Application.Current as App;
             _appointmentController = app.AppointmentController;
-
             if (BeginningDTP.Text == null || EndingDTP.Text == null) return;
             //int Id = 4;
             Beginning = DateTime.Parse(BeginningDTP.Text);
