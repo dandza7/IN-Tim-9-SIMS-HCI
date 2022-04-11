@@ -20,5 +20,20 @@ namespace WpfApp1.Service
         {
             return _roomRepository.GetAll();
         }
+
+        public Room Create(Room room)
+        {
+            return _roomRepository.Create(room);
+        }
+
+        public Room Update(Room room)
+        {
+            return _roomRepository.Update(room);
+        }
+
+        public bool Delete(int id)
+        {
+            return _roomRepository.Delete(id);
+        }
     }
 }

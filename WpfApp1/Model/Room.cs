@@ -21,6 +21,13 @@ namespace WpfApp1.Model
             Available = true;
             Type = (RoomType)type;
         }
+        public Room(int id, string nametag, RoomType type)
+        {
+            Id = id;
+            Nametag = nametag;
+            Available = true;
+            Type = type;
+        }
 
     }
 

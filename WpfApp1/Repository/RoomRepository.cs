@@ -13,11 +13,13 @@ namespace WpfApp1.Repository
         private const string NOT_FOUND_ERROR = "Room with {0}:{1} can not be found!";
         private string _path;
         private string _delimiter;
+        private int _roomMaxId;
 
         public RoomRepository(string path, string delimiter)
         {
             _path = path;
             _delimiter = delimiter;
+            _roomMaxId = GetMaxId(GetAll());
         }
 
         public Room Get(int id)
@@ -34,12 +36,14 @@ namespace WpfApp1.Repository
 
         public int GetMaxId(List<Room> rooms)
         {
-            throw new NotImplementedException();
+            return rooms.Count() == 0 ? 0 : rooms.Max(room => room.Id);
         }
 
-        public int Create(Room room)
+        public Room Create(Room room)
         {
-            throw new NotImplementedException();
+            room.Id = ++_roomMaxId;
+            AppendLineToFile(_path, ConvertRoomToCsvFormat(room));
+            return room;
         }
 
         public Room ConvertCsvFormatToRoom(string roomCsvFormat)
@@ -53,22 +57,50 @@ namespace WpfApp1.Repository
 
         public string ConvertRoomToCsvFormat(Room room)
         {
-            throw new NotImplementedException();
+            return string.Join(_delimiter,
+                room.Id,
+                room.Nametag,
+                (int)room.Type);
         }
 
         public void AppendLineToFile(String path, String line)
         {
-            throw new NotImplementedException();
+            File.AppendAllText(path, line + Environment.NewLine);
         }
 
         public bool Delete(int id)
         {
-            throw new NotImplementedException();
+            List<Room> rooms = GetAll().ToList();
+            List<string> newFile = new List<string>();
+            bool isDeleted = false;
+            foreach (Room r in rooms)
+            {
+                if (r.Id != id)
+                {
+                    newFile.Add(ConvertRoomToCsvFormat(r));
+                    isDeleted = true;
+                }
+            }
+            File.WriteAllLines(_path, newFile);
+            return isDeleted;
         }
 
         public Room Update(Room room)
         {
-            throw new NotImplementedException();
+            List<Room> rooms = GetAll().ToList();
+            List<string> newFile = new List<string>();
+            foreach (Room r in rooms)
+            {
+
+                if (r.Id == room.Id)
+                {
+                    r.Type = room.Type;
+
+                }
+                newFile.Add(ConvertRoomToCsvFormat(r));
+            }
+            File.WriteAllLines(_path, newFile);
+            return room;
         }
 
     }

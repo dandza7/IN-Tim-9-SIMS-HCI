@@ -10,16 +10,30 @@ namespace WpfApp1.Controller
 {
     public class RoomController
     {
-        private readonly RoomService _service;
+        private readonly RoomService _roomService;
 
         public RoomController(RoomService service)
         {
-            _service = service;
+            _roomService = service;
         }
 
         public List<Room> GetAll()
         {
-            return _service.GetAll();
+            return _roomService.GetAll();
+        }
+
+        public Room Create(Room room)
+        {
+            return _roomService.Create(room);
+        }
+
+        public Room Update(Room room)
+        {
+            return _roomService.Update(room);
+        }
+        public bool Delete(int id)
+        {
+            return _roomService.Delete(id);
         }
     }
 }

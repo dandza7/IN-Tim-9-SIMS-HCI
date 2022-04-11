@@ -26,6 +26,9 @@ namespace WpfApp1.Service
 
         public event PropertyChangedEventHandler PropertyChanged;
         public List<Room> Rooms {get; set;}
+        public List<String> Nametags { get; set; }
+        public List<RoomType> TypesList { get; set;}
+
 
         public ExecutiveMenu()
         {
@@ -33,6 +36,15 @@ namespace WpfApp1.Service
             var app = Application.Current as App;
             _roomController = app.RoomController;
             this.Rooms = _roomController.GetAll();
+            var roomTypes = Enum.GetValues(typeof(RoomType));
+            TypesList = roomTypes.OfType<RoomType>().ToList();
+            this.Nametags = new List<String>();
+            foreach (Room room in Rooms)
+            {
+                Nametags.Add(room.Nametag);
+            }
+            this.DataContext = this;
+
         }
         //----------------------------------------------------------------------------------------------------------------
         //              LISTANJE PROSTORIJA
@@ -51,7 +63,7 @@ namespace WpfApp1.Service
             DeleteButton.Background = (SolidColorBrush)new BrushConverter().ConvertFrom("#88C6FC");
 
             this.Rooms = _roomController.GetAll();
-            this.DataContext = this;
+
         }
 
         private void XListButton_Click(object sender, RoutedEventArgs e)
@@ -62,7 +74,7 @@ namespace WpfApp1.Service
 
 
         //----------------------------------------------------------------------------------------------------------------
-
+        //              DODAVANJE PROSTORIJE
         //----------------------------------------------------------------------------------------------------------------
         private void AddButton_Click(object sender, RoutedEventArgs e)
         {
@@ -75,20 +87,33 @@ namespace WpfApp1.Service
             AddButton.Background = (SolidColorBrush)new BrushConverter().ConvertFrom("#0082F0");
             EditButton.Background = (SolidColorBrush)new BrushConverter().ConvertFrom("#88C6FC");
             DeleteButton.Background = (SolidColorBrush)new BrushConverter().ConvertFrom("#88C6FC");
+
+
         }
-
-
-
 
         private void XAddButton_Click(object sender, RoutedEventArgs e)
         {
             AddContainer.Visibility = Visibility.Collapsed;
+            AddButton.Background = (SolidColorBrush)new BrushConverter().ConvertFrom("#88C6FC");
 
         }
+
+        private void AddConfirm_Click(object sender, RoutedEventArgs e)
+        {
+            Room room = new Room(0, AddNametagTextBox.Text, (RoomType)Enum.Parse(typeof(RoomType), AddRoomTypeComboBox.Text, true));
+            _roomController.Create(room);
+            AddContainer.Visibility = Visibility.Collapsed;
+            AddButton.Background = (SolidColorBrush)new BrushConverter().ConvertFrom("#88C6FC");
+        }
+
+        //----------------------------------------------------------------------------------------------------------------
+        //              IZMENA TIPA PROSTORIJE
+        //----------------------------------------------------------------------------------------------------------------
 
         private void XEditButton_Click(object sender, RoutedEventArgs e)
         {
             EditContainer.Visibility = Visibility.Collapsed;
+            EditButton.Background = (SolidColorBrush)new BrushConverter().ConvertFrom("#88C6FC");
         }
 
         private void EditButton_Click(object sender, RoutedEventArgs e)
@@ -104,9 +129,35 @@ namespace WpfApp1.Service
             DeleteButton.Background = (SolidColorBrush)new BrushConverter().ConvertFrom("#88C6FC");
         }
 
+        private void EditConfirm_Click(object sender, RoutedEventArgs e)
+        {
+            int id = -1;
+            foreach (Room r in Rooms)
+            {
+                if (r.Nametag.Equals(EditNametagComboBox.Text))
+                {
+                    id = r.Id;
+                }
+            }
+            if (id == -1)
+            {
+                Console.WriteLine("Error: Selected room doesn't exist anymore!");
+                return;
+            }
+            Room room = new Room(id, EditNametagComboBox.Text, (RoomType)Enum.Parse(typeof(RoomType), EditRoomTypeComboBox.Text, true));
+            _roomController.Update(room);
+            EditContainer.Visibility = Visibility.Collapsed;
+            EditButton.Background = (SolidColorBrush)new BrushConverter().ConvertFrom("#88C6FC");
+        }
+
+        //----------------------------------------------------------------------------------------------------------------
+        //              BRISANJE PROSTORIJE
+        //----------------------------------------------------------------------------------------------------------------
+
         private void XDeleteButton_Click(object sender, RoutedEventArgs e)
         {
             DeleteContainer.Visibility = Visibility.Collapsed;
+            DeleteButton.Background = (SolidColorBrush)new BrushConverter().ConvertFrom("#88C6FC");
         }
 
         private void DeleteButton_Click(object sender, RoutedEventArgs e)
@@ -120,6 +171,26 @@ namespace WpfApp1.Service
             AddButton.Background = (SolidColorBrush)new BrushConverter().ConvertFrom("#88C6FC");
             EditButton.Background = (SolidColorBrush)new BrushConverter().ConvertFrom("#88C6FC");
             DeleteButton.Background = (SolidColorBrush)new BrushConverter().ConvertFrom("#0082F0");
+        }
+
+        private void DeleteConfirm_Click(object sender, RoutedEventArgs e)
+        {
+            int id = -1;
+            foreach (Room r in Rooms)
+            {
+                if (r.Nametag.Equals(DeleteNametagComboBox.Text))
+                {
+                    id = r.Id;
+                }
+            }
+            if (id == -1)
+            {
+                Console.WriteLine("Error: Selected room doesn't exist anymore!");
+                return;
+            }
+            _roomController.Delete(id);
+            DeleteContainer.Visibility = Visibility.Collapsed;
+            DeleteButton.Background = (SolidColorBrush)new BrushConverter().ConvertFrom("#88C6FC");
         }
     }
 }
