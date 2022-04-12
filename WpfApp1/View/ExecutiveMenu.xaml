@@ -45,7 +45,8 @@
             <Setter Property="FontFamily" Value="Impact"></Setter>
             <Setter Property="Foreground" Value="#0082F0"></Setter>
             <Setter Property="BorderBrush" Value="#0082F0"></Setter>
-            <Setter Property="VerticalAlignment" Value="Center"></Setter>
+            <!--<Setter Property="VerticalAlignment" Value="Center"></Setter>-->
+            <Setter Property="Height" Value="50"></Setter>            
             <Setter Property="Padding" Value="0 10 0 10"></Setter>
         </Style>
         <Style x:Key="ClassicButton" TargetType="Button">
@@ -157,7 +158,7 @@
                 </Grid.RowDefinitions>
                 <TextBlock Grid.Column="1" Grid.Row="1" Style="{StaticResource Title}">Evidetion of rooms</TextBlock>
                 <Button Name="XListButton" Grid.Column="2" Grid.Row="1" Style="{StaticResource ClassicButton}" Click="XListButton_Click">X</Button>
-                <DataGrid AutoGenerateColumns="False" Grid.Row="2" Grid.Column="1" ItemsSource="{Binding Rooms}" Style="{StaticResource DataGrid}">
+                <DataGrid Name="DGList" AutoGenerateColumns="False" Grid.Row="2" Grid.Column="1" ItemsSource="{Binding Rooms}" Style="{StaticResource DataGrid}">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header=" ID" Width="2*" CellStyle="{StaticResource DGColumn}" HeaderStyle="{StaticResource DGHeader}"  Binding="{Binding Id}"/>
                         <DataGridTextColumn Header=" NAMETAG" Width="9*" CellStyle="{StaticResource DGColumn}" HeaderStyle="{StaticResource DGHeader}" Binding="{Binding Nametag}"/>
@@ -238,6 +239,24 @@
                 </Grid>
 
                 <Button Name="XDeleteButton" Grid.Column="2" Grid.Row="1" Style="{StaticResource ClassicButton}" Click="XDeleteButton_Click">X</Button>
+            </Grid>
+        </Border>
+        <Border Name="FeedbackContainer" Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="2" Grid.RowSpan="2" Style="{StaticResource DialogModal}" Visibility="Collapsed">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="5*"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="10"></RowDefinition>
+                    <RowDefinition Height="3*"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="10"></RowDefinition>
+                </Grid.RowDefinitions>
+                <TextBlock Grid.Row="1" Grid.Column="1" Foreground="#0082F0" Margin="0 0 0 10" FontSize="13" FontFamily="Impact" Text="{Binding Notification}"
+                           TextAlignment="Center" TextWrapping="Wrap"></TextBlock>
+                <Button Name="OkFeedback" Grid.Column="1" Grid.Row="2" FontSize="15" Margin="30 0 30 0" Style="{StaticResource ClassicButton}" Click="OkFeedback_Click">OK</Button>
             </Grid>
         </Border>
     </Grid>
