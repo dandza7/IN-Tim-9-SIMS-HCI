@@ -14,6 +14,21 @@
     <WarningLevel>4</WarningLevel>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -36,7 +51,9 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -70,10 +87,34 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Controller\PatientController.cs" />
     <Compile Include="Model\Appointment.cs" />
+    <Compile Include="Controller\AppointmentController.cs" />
+    <Compile Include="Repository\PatientRepository.cs" />
+    <Compile Include="Service\AppointmentService.cs" />
     <Compile Include="Model\Patient.cs" />
-    <Compile Include="View\AppointmentForm.xaml.cs">
-      <DependentUpon>AppointmentForm.xaml</DependentUpon>
+    <Compile Include="Model\Room.cs" />
+    <Compile Include="Repository\AppointmentRepository.cs" />
+    <Compile Include="Service\PatientService.cs" />
+    <Compile Include="View\Converter\AbstractConverter.cs" />
+    <Compile Include="View\Converter\AppointmentConverter.cs" />
+    <Compile Include="View\Converter\PatientConverter.cs" />
+    <Compile Include="View\Dialog\AddPatientAppointmentDialog.xaml.cs">
+      <DependentUpon>AddPatientAppointmentDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Dialog\MovePatientAppointmentDialog.xaml.cs">
+      <DependentUpon>MovePatientAppointmentDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controller\RoomController.cs" />
+    <Compile Include="Repository\RoomRepository.cs" />
+    <Compile Include="View\Dialog\SecretaryAddGuestPatientDialog.xaml.cs">
+      <DependentUpon>SecretaryAddGuestPatientDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Dialog\SecretaryAddPatientDialog.xaml.cs">
+      <DependentUpon>SecretaryAddPatientDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Dialog\SecretaryUpdatePatientDialog.xaml.cs">
+      <DependentUpon>SecretaryUpdatePatientDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\DoctorMenu.xaml.cs">
       <DependentUpon>DoctorMenu.xaml</DependentUpon>
@@ -81,12 +122,45 @@
     <Compile Include="View\ExecutiveMenu.xaml.cs">
       <DependentUpon>ExecutiveMenu.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Model\AppointmentView.xaml.cs">
+      <DependentUpon>AppointmentView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Model\PatientAppointmentsView.xaml.cs">
+      <DependentUpon>PatientAppointmentsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Model\PatientView.xaml.cs">
+      <DependentUpon>PatientView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Model\SecretaryPatientsView.xaml.cs">
+      <DependentUpon>SecretaryPatientsView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\PatientMenu.xaml.cs">
       <DependentUpon>PatientMenu.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Service\RoomService.cs" />
     <Compile Include="View\SecretaryMenu.xaml.cs">
       <DependentUpon>SecretaryMenu.xaml</DependentUpon>
     </Compile>
+    <Page Include="View\Dialog\AddPatientAppointmentDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Dialog\MovePatientAppointmentDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Dialog\SecretaryAddGuestPatientDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Dialog\SecretaryAddPatientDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Dialog\SecretaryUpdatePatientDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -99,15 +173,27 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="View\AppointmentForm.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="View\DoctorMenu.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\ExecutiveMenu.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Model\AppointmentView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Model\PatientAppointmentsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Model\PatientView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Model\SecretaryPatientsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -146,6 +232,23 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Data\patients.csv" />
+    <None Include="Resources\Data\rooms.csv" />
+    <None Include="Resources\Data\appointments.csv" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.7.2">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.7.2 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

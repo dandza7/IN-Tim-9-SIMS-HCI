@@ -13,8 +13,10 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using WpfApp1.View;
+using WpfApp1.View.Model;
+using WpfApp1.Service;
 
-namespace WpfApp1.View
+namespace WpfApp1.Service
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
@@ -48,5 +50,6 @@ namespace WpfApp1.View
             var s = new SecretaryMenu();
             s.Show();
         }
+
     }
 }
