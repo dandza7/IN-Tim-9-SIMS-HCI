@@ -15,6 +15,7 @@ namespace WpfApp1.Model
 
         public string Surname { get; set; }
 
+
         public string Username { get; set; }
 
         public string Password { get; set; }
@@ -22,6 +23,7 @@ namespace WpfApp1.Model
         public string PhoneNumber { get; set; }
 
         public string JMBG { get; set; }
+
 
 
         public Patient()
@@ -36,6 +38,7 @@ namespace WpfApp1.Model
             Name = name;
             Surname = surname;
         }
+
         public Patient(string name, string surname)
         {
             Appointments = new List<Appointment>();
@@ -62,5 +65,6 @@ namespace WpfApp1.Model
             Password = password;
             JMBG = jMBG;
         }
+
     }
 }
