@@ -53,6 +53,11 @@ namespace WpfApp1.Repository
                     p.Username = patient.Username;
                     p.Password = patient.Password;
 
+                    p.Email = patient.Email;
+                    p.PhoneNumber = patient.PhoneNumber;
+
+
+
 
                 }
                 newFile.Add(ConvertPatientToCSVFormat(p));
