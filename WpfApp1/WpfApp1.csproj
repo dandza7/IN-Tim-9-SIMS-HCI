@@ -107,6 +107,9 @@
     </Compile>
     <Compile Include="Controller\RoomController.cs" />
     <Compile Include="Repository\RoomRepository.cs" />
+    <Compile Include="View\Dialog\SecretaryAddGuestPatientDialog.xaml.cs">
+      <DependentUpon>SecretaryAddGuestPatientDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Dialog\SecretaryAddPatientDialog.xaml.cs">
       <DependentUpon>SecretaryAddPatientDialog.xaml</DependentUpon>
     </Compile>
@@ -143,6 +146,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Dialog\MovePatientAppointmentDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Dialog\SecretaryAddGuestPatientDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

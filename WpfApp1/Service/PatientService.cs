@@ -44,5 +44,11 @@ namespace WpfApp1.Service
 
             return _patientRepo.Delete(patientId);
         }
+        public Patient Find(int patientId)
+        {
+
+
+            return _patientRepo.Find(patientId);
+        }
     }
 }

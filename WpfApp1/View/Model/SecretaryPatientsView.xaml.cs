@@ -49,18 +49,31 @@ namespace WpfApp1.View.Model
             _patientController = app.PatientController;
 
             _patientController.Delete(patientId);
-
+            Patients = new ObservableCollection<UserControl>(
+PatientConverter.ConvertPatientListToPatientViewList(_patientController.GetAll().ToList()));
+            SecretaryPatientsDataGrid.ItemsSource = Patients;
+            SecretaryPatientsDataGrid.Items.Refresh();
         }
         private void UpdatePatient_Click(object sender, RoutedEventArgs e)
         {
             int patientId = ((PatientView)SecretaryPatientsDataGrid.SelectedItem).Id;
-            string patientName = ((PatientView)SecretaryPatientsDataGrid.SelectedItem).Name;
-            string patientSurname = ((PatientView)SecretaryPatientsDataGrid.SelectedItem).Surname;
-            string patientJMBG = ((PatientView)SecretaryPatientsDataGrid.SelectedItem).JMBG;
-            string patientUsername = ((PatientView)SecretaryPatientsDataGrid.SelectedItem).Username;
-            string patientPassword = ((PatientView)SecretaryPatientsDataGrid.SelectedItem).Password;
-            SecretaryUpdatePatientDialog s = new SecretaryUpdatePatientDialog(patientId, patientName, patientSurname, patientJMBG, patientUsername, patientPassword);
+
+            SecretaryUpdatePatientDialog s = new SecretaryUpdatePatientDialog(patientId);
             s.Show();
+        }
+
+        private void MakeGuest_Click(object sender, RoutedEventArgs e)
+        {
+            var s = new SecretaryAddGuestPatientDialog();
+            s.Show();
+        }
+
+        private void Refresh_Click(object sender, RoutedEventArgs e)
+        {
+            Patients = new ObservableCollection<UserControl>(
+    PatientConverter.ConvertPatientListToPatientViewList(_patientController.GetAll().ToList()));
+            SecretaryPatientsDataGrid.ItemsSource = Patients;
+            SecretaryPatientsDataGrid.Items.Refresh();
         }
     }
 }
