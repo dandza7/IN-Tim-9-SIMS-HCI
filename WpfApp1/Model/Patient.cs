@@ -20,10 +20,11 @@ namespace WpfApp1.Model
 
         public string Password { get; set; }
 
-        public string PhoneNumber { get; set; }
+        public string Email { get; set; }
 
         public string JMBG { get; set; }
 
+        public string PhoneNumber { get; set; }
 
 
         public Patient()
@@ -46,6 +47,8 @@ namespace WpfApp1.Model
             Surname = surname;
         }
 
+
+
         public Patient(int id, string name, string surname, string jMBG, string username, string password)
         {
             Appointments = new List<Appointment>();
@@ -57,8 +60,10 @@ namespace WpfApp1.Model
             JMBG = jMBG;
         }
 
+
         public Patient(string name, string surname, string jMBG, string username, string password)
         {
+            Appointments = new List<Appointment>();
             Name = name;
             Surname = surname;
             Username = username;
@@ -66,5 +71,29 @@ namespace WpfApp1.Model
             JMBG = jMBG;
         }
 
+        public Patient(int id, string name, string surname, string jMBG, string username, string password,string email, string phoneNumber)
+        {
+            Appointments = new List<Appointment>();
+            Id = id;
+            Name = name;
+            Surname = surname;
+            Username = username;
+            Password = password;
+            Email = email;
+            JMBG = jMBG;
+            PhoneNumber = phoneNumber;
+        }
+
+        public Patient(string name, string surname, string jMBG, string username, string password, string email, string brojTelefona)
+        {
+            Appointments = new List<Appointment>();
+            Name = name;
+            Surname = surname;
+            Username = username;
+            Password = password;
+            Email = email;
+            JMBG = jMBG;
+            PhoneNumber = brojTelefona;
+        }
     }
 }

@@ -22,16 +22,21 @@ namespace WpfApp1.View.Dialog
     public partial class SecretaryUpdatePatientDialog : Window
     {
         private PatientController _patientController;
-        public SecretaryUpdatePatientDialog(int patientId, string patientName, string patientSurname, string patientJMBG, string patientUsername, string patientPassword)
+        public SecretaryUpdatePatientDialog(int patientId)
         {
             InitializeComponent();
             DataContext = this;
-            updateidTB.Text = patientId.ToString();
-            updatenameTB.Text = patientName;
-            updatesurnameTB.Text = patientSurname;
-            updatejmbgTB.Text = patientJMBG;
-            updateusernameTB.Text = patientUsername;
-            updatepasswordTB.Text = patientPassword;
+            var app = Application.Current as App;
+            _patientController = app.PatientController;
+            Patient p =  this._patientController.Find(patientId);
+            updateidTB.Text = p.Id.ToString();
+            updatenameTB.Text = p.Name;
+            updatesurnameTB.Text = p.Surname;
+            updatejmbgTB.Text = p.JMBG;
+            updateusernameTB.Text = p.Username;
+            updatepasswordTB.Text = p.Password;
+            updateemailTB.Text = p.Email;
+            updatebrtelTB.Text = p.PhoneNumber;
         }
         private void UpdateButton_Click(object sender, RoutedEventArgs e)
         {
@@ -43,8 +48,9 @@ namespace WpfApp1.View.Dialog
                 updatesurnameTB.Text,
                 updatejmbgTB.Text,
                 updateusernameTB.Text,
-                updatepasswordTB.Text
-
+                updatepasswordTB.Text,
+                updateemailTB.Text,
+                updatebrtelTB.Text
 
                 );
 

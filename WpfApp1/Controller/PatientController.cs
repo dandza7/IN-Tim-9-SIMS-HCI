@@ -35,5 +35,9 @@ namespace WpfApp1.Controller
         {
             return _patientService.Delete(patientId);
         }
+        public Patient Find(int patientId)
+        {
+            return _patientService.Find(patientId);
+        }
     }
 }

@@ -17,17 +17,19 @@ using WpfApp1.Model;
 namespace WpfApp1.View.Dialog
 {
     /// <summary>
-    /// Interaction logic for SecretaryAddPatientDialog.xaml
+    /// Interaction logic for SecretaryAddGuestPatientDialog.xaml
     /// </summary>
-    public partial class SecretaryAddPatientDialog : Window
+    public partial class SecretaryAddGuestPatientDialog : Window
     {
-        public SecretaryAddPatientDialog()
+        public SecretaryAddGuestPatientDialog()
         {
             InitializeComponent();
             DataContext = this;
         }
+
         private PatientController _patientController;
-        private void InsertButton_Click(object sender, RoutedEventArgs e)
+
+        private void AddGuestPatient_Click(object sender, RoutedEventArgs e)
         {
             var app = Application.Current as App;
             _patientController = app.PatientController;
@@ -36,10 +38,12 @@ namespace WpfApp1.View.Dialog
                 nameTB.Text,
                 surnameTB.Text,
                 jmbgTB.Text,
-                usernameTB.Text,
-                passwordTB.Text,
-                emailTB.Text,
-                brtelTB.Text
+                jmbgTB.Text,
+                jmbgTB.Text,
+                "",
+                ""
+
+
                 );
 
             _patientController.Create(patient);

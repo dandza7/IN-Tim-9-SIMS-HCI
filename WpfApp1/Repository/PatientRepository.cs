@@ -76,12 +76,29 @@ namespace WpfApp1.Repository
             File.WriteAllLines(_path, newFile);
             return isDeleted;
         }
+        public Patient Find(int patientId)
+        {
+            List<Patient> patients = GetAll().ToList();
+            List<string> newFile = new List<string>();
+            bool isFound = false;
+            foreach (Patient p in patients)
+            {
+                if (p.Id == patientId)
+                {
+                    isFound = true;
+                    return p;
+                }
+                
+            }
 
+              return null;
+            
+        }
         private Patient ConvertCSVFormatToPatient(string patientCSVFormat)
         {
             var tokens = patientCSVFormat.Split(_delimiter.ToCharArray());
 
-            return new Patient(int.Parse(tokens[0]), tokens[1], tokens[2], tokens[3], tokens[4], tokens[5]);
+            return new Patient(int.Parse(tokens[0]), tokens[1], tokens[2], tokens[3], tokens[4], tokens[5], tokens[6], tokens[7]);
         }
         private string ConvertPatientToCSVFormat(Patient patient)
         {
@@ -91,7 +108,9 @@ namespace WpfApp1.Repository
                 patient.Surname.ToString(),
                 patient.JMBG.ToString(),
                 patient.Username.ToString(),
-                patient.Password.ToString());
+                patient.Password.ToString(),
+                patient.Email.ToString(),
+                patient.PhoneNumber.ToString());
         }
 
         private void AppendLineToFile(string path, string line)
