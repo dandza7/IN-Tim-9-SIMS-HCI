@@ -29,14 +29,17 @@ namespace WpfApp1.Repository
 
         public IEnumerable<Appointment> GetAll()
         {
-            /*List<string> lines = File.ReadAllLines(_path).ToList();
+            List<string> lines = File.ReadAllLines(_path).ToList();
+            List<Appointment> appointments = new List<Appointment>();
             foreach (string line in lines)
             {
-                Console.WriteLine(line);
-            }*/
-            return File.ReadAllLines(_path)
+                if (line == "") continue;
+                appointments.Add(ConvertCSVFormatToAppointment(line));
+            }
+            return appointments;
+            /*return File.ReadAllLines(_path)
                 .Select(ConvertCSVFormatToAppointment)
-                .ToList();
+                .ToList();*/
         }
         public Appointment Create(Appointment appointment)
         {
