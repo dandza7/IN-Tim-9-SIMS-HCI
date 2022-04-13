@@ -34,8 +34,6 @@ namespace WpfApp1.View.Dialog
         }
 
         private AppointmentController _appointmentController;
-        public DateTime Beginning;
-        public DateTime Ending;
 
         private void ConfirmButton_Click(object sender, RoutedEventArgs e)
         {
@@ -43,10 +41,10 @@ namespace WpfApp1.View.Dialog
             _appointmentController = app.AppointmentController;
 
             if (BeginningDTP.Text == null || EndingDTP.Text == null) return;
-            Beginning = DateTime.Parse(BeginningDTP.Text);
-            Ending = DateTime.Parse(EndingDTP.Text);
-            Appointment newAppointment = _appointmentController.Create(new Appointment(Beginning, Ending));
-            //UpdatePatientAppointmentView(newAppointment);
+            _appointmentController.Create(new Appointment(DateTime.Parse(BeginningDTP.Text), DateTime.Parse(EndingDTP.Text)));
+            DataGrid dataView = (DataGrid)app.Properties["DataView"];
+            dataView.ItemsSource = null;
+            dataView.ItemsSource = _appointmentController.updateAppointments();
             Close();
         }
     }

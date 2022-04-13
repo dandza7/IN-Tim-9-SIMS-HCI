@@ -23,7 +23,7 @@ namespace WpfApp1.View.Model
     /// <summary>
     /// Interaction logic for AppointmentView.xaml
     /// </summary>
-    public partial class AppointmentView : UserControl
+    public partial class AppointmentView : UserControl, INotifyPropertyChanged
     {
         public AppointmentView()
         {
@@ -43,7 +43,7 @@ namespace WpfApp1.View.Model
                 if (_id != value)
                 {
                     _id = value;
-                    OnPropertyChanged();
+                    OnPropertyChanged("Id");
                 }
             }
         }
@@ -55,7 +55,7 @@ namespace WpfApp1.View.Model
                 if (_beginning != value)
                 {
                     _beginning = value;
-                    OnPropertyChanged();
+                    OnPropertyChanged("Beginning");
                 }
             }
         }
@@ -67,16 +67,19 @@ namespace WpfApp1.View.Model
                 if (_ending != value)
                 {
                     _ending = value;
-                    OnPropertyChanged();
+                    OnPropertyChanged("Ending");
                 }
             }
         }
         
 
         public event PropertyChangedEventHandler PropertyChanged;
-        private void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        protected virtual void OnPropertyChanged(string name)
         {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(name));
+            }
         }
     }
 }

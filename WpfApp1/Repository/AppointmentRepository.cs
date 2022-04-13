@@ -94,5 +94,8 @@ namespace WpfApp1.Repository
             Console.WriteLine("Linija koju dodajem je:\n{0}", line);
             File.AppendAllText(path, line + Environment.NewLine);
         }
+
+        public List<Appointment> updateAppointments()
+            => GetAll().ToList();
     }
 }

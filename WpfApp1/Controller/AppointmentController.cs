@@ -37,5 +37,10 @@ namespace WpfApp1.Controller
         {
             return  _appointmentService.Delete(id);
         }
+
+        public List<Appointment> updateAppointments()
+        {
+            return _appointmentService.updateAppointments();
+        }
     }
 }
