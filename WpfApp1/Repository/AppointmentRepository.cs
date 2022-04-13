@@ -29,6 +29,11 @@ namespace WpfApp1.Repository
 
         public IEnumerable<Appointment> GetAll()
         {
+            /*List<string> lines = File.ReadAllLines(_path).ToList();
+            foreach (string line in lines)
+            {
+                Console.WriteLine(line);
+            }*/
             return File.ReadAllLines(_path)
                 .Select(ConvertCSVFormatToAppointment)
                 .ToList();
@@ -95,7 +100,9 @@ namespace WpfApp1.Repository
             File.AppendAllText(path, line + Environment.NewLine);
         }
 
-        public List<Appointment> updateAppointments()
-            => GetAll().ToList();
+        public List<Appointment> UpdateAppointments()
+        {
+            return GetAll().ToList(); 
+        }
     }
 }

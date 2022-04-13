@@ -26,7 +26,7 @@ namespace WpfApp1.View.Model
     public partial class PatientAppointmentsView : UserControl
     {
         private AppointmentController _appointmentController;
-        public ObservableCollection<UserControl> Appointments { get; set; }
+        public ObservableCollection<Appointment> Appointments { get; set; }
 
         public PatientAppointmentsView()
         {
@@ -35,8 +35,7 @@ namespace WpfApp1.View.Model
             var app = Application.Current as App;
             _appointmentController = app.AppointmentController;
 
-            Appointments = new ObservableCollection<UserControl>(
-                AppointmentConverter.ConvertAppointmentListToAppointmentViewList(_appointmentController.GetAll().ToList()));
+            Appointments = new ObservableCollection<Appointment>(_appointmentController.GetAll().ToList());
         }
 
         private void AddAppointment_Click(object sender, RoutedEventArgs e)
@@ -60,13 +59,13 @@ namespace WpfApp1.View.Model
 
         private void RemoveAppointment_Click(object sender, RoutedEventArgs e)
         {
-            int appointmentId = ((AppointmentView)PatientAppointmentsDataGrid.SelectedItem).Id;
+            int appointmentId = ((Appointment)PatientAppointmentsDataGrid.SelectedItem).Id;
             var app = Application.Current as App;
             _appointmentController = app.AppointmentController;
 
             _appointmentController.Delete(appointmentId);
             PatientAppointmentsDataGrid.ItemsSource = null;
-            PatientAppointmentsDataGrid.ItemsSource = _appointmentController.updateAppointments();
+            PatientAppointmentsDataGrid.ItemsSource = _appointmentController.UpdateAppointments();
         }
     }
 }
