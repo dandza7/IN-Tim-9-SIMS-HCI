@@ -9,7 +9,7 @@
         >
     <Grid>
         <util:TabletMenuBar Grid.Column="1"/>
-        <Frame x:Name="PatientFrame" Margin="0, 45, 0, 0" NavigationUIVisibility="Hidden">
+        <Frame x:Name="PatientFrame" Margin="0, 45, 0, 0" NavigationUIVisibility="Hidden" Background="{StaticResource LightestBlueBrush}">
             
         </Frame>
     </Grid>

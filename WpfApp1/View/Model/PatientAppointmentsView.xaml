@@ -6,23 +6,24 @@
              xmlns:util="clr-namespace:WpfApp1.View.Util"
              xmlns:model="clr-namespace:WpfApp1.Model" 
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="2269.975" d:DesignWidth="3765.468">
     <Grid>
-        <Label Content="YOUR APPOINTMENTS" Margin="300,30,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
-        <Button Content="Add Appointment" HorizontalAlignment="Left" Margin="650,80,0,0" VerticalAlignment="Top" Click="AddAppointment_Click"/>
+        <Rectangle Width="850" Height="580" Stroke="{StaticResource LightBlueBrush}" StrokeThickness="3"></Rectangle>
+        <Button Content="Logout" Style="{StaticResource LogoutButton}"/>
+        <Button Content="Add Appointment" Style="{StaticResource AddAppointmentButton}" Click="AddAppointment_Click"/>
         <DataGrid x:Name="PatientAppointmentsDataGrid" Style="{StaticResource PatientDataGrid}" ItemsSource="{Binding Appointments, UpdateSourceTrigger=PropertyChanged}">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Id" Binding="{Binding Id}" CanUserSort="False"/>
                 <DataGridTextColumn Header="Beginning" Binding="{Binding Beginning, StringFormat=dd.MM.yyyy. HH:mm:ss}" CanUserSort="False"/>
                 <DataGridTextColumn Header="Ending" Binding="{Binding Ending, StringFormat=dd.MM.yyyy. HH:mm:ss}" CanUserSort="False"/>
-                <DataGridTemplateColumn Header="Move">
+                <DataGridTemplateColumn Header="Move" MinWidth="90">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <Button Content="Move" Style="{StaticResource PatientDataGridButton}" Click="OpenMoveAppointmentDialog_Click"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTemplateColumn Header="Remove">
+                <DataGridTemplateColumn Header="Remove" MinWidth="90">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <Button Content="Remove" Style="{StaticResource PatientDataGridButton}" Click="RemoveAppointment_Click"/>
