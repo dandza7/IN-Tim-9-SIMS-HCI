@@ -29,9 +29,17 @@ namespace WpfApp1.Repository
 
         public IEnumerable<Appointment> GetAll()
         {
-            return File.ReadAllLines(_path)
+            List<string> lines = File.ReadAllLines(_path).ToList();
+            List<Appointment> appointments = new List<Appointment>();
+            foreach (string line in lines)
+            {
+                if (line == "") continue;
+                appointments.Add(ConvertCSVFormatToAppointment(line));
+            }
+            return appointments;
+            /*return File.ReadAllLines(_path)
                 .Select(ConvertCSVFormatToAppointment)
-                .ToList();
+                .ToList();*/
         }
         public Appointment Create(Appointment appointment)
         {
@@ -93,6 +101,11 @@ namespace WpfApp1.Repository
         {
             Console.WriteLine("Linija koju dodajem je:\n{0}", line);
             File.AppendAllText(path, line + Environment.NewLine);
+        }
+
+        public List<Appointment> UpdateAppointments()
+        {
+            return GetAll().ToList(); 
         }
     }
 }

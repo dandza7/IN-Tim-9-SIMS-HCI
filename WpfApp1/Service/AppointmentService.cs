@@ -44,5 +44,10 @@ namespace WpfApp1.Service
         {
             return _appointmentRepo.Delete(id);
         }
+
+        public List<Appointment> UpdateAppointments()
+        {
+            return _appointmentRepo.UpdateAppointments();
+        }
     }
 }

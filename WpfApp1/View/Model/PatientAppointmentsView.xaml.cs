@@ -26,7 +26,7 @@ namespace WpfApp1.View.Model
     public partial class PatientAppointmentsView : UserControl
     {
         private AppointmentController _appointmentController;
-        public ObservableCollection<UserControl> Appointments { get; set; }
+        public ObservableCollection<Appointment> Appointments { get; set; }
 
         public PatientAppointmentsView()
         {
@@ -35,21 +35,23 @@ namespace WpfApp1.View.Model
             var app = Application.Current as App;
             _appointmentController = app.AppointmentController;
 
-            Appointments = new ObservableCollection<UserControl>(
-                AppointmentConverter.ConvertAppointmentListToAppointmentViewList(_appointmentController.GetAll().ToList()));
+            Appointments = new ObservableCollection<Appointment>(_appointmentController.GetAll().ToList());
         }
 
         private void AddAppointment_Click(object sender, RoutedEventArgs e)
         {
             var window = new AddPatientAppointmentDialog();
+            var app = Application.Current as App;
+            app.Properties["DataView"] = PatientAppointmentsDataGrid;
             window.ShowDialog();
         }
 
         private void OpenMoveAppointmentDialog_Click(object sender, RoutedEventArgs e)
         {
-            int appointmentId = ((AppointmentView)PatientAppointmentsDataGrid.SelectedItem).Id;
+            int appointmentId = ((Appointment)PatientAppointmentsDataGrid.SelectedItem).Id;
             var app = Application.Current as App;
             app.Properties["appointmentId"] = appointmentId;
+            app.Properties["DataView"] = PatientAppointmentsDataGrid;
             Console.WriteLine("Id reda koji je selektovan je {0}", appointmentId);
             var window = new MovePatientAppointmentDialog();
             window.ShowDialog();
@@ -57,12 +59,13 @@ namespace WpfApp1.View.Model
 
         private void RemoveAppointment_Click(object sender, RoutedEventArgs e)
         {
-            int appointmentId = ((AppointmentView)PatientAppointmentsDataGrid.SelectedItem).Id;
+            int appointmentId = ((Appointment)PatientAppointmentsDataGrid.SelectedItem).Id;
             var app = Application.Current as App;
             _appointmentController = app.AppointmentController;
 
             _appointmentController.Delete(appointmentId);
-            Console.WriteLine("Deleted appointment with {0}: {1}", "ID", appointmentId);
+            PatientAppointmentsDataGrid.ItemsSource = null;
+            PatientAppointmentsDataGrid.ItemsSource = _appointmentController.UpdateAppointments();
         }
     }
 }

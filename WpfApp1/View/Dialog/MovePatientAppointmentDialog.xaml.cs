@@ -43,6 +43,9 @@ namespace WpfApp1.View.Dialog
             Beginning = DateTime.Parse(BeginningDTP.Text);
             Ending = DateTime.Parse(EndingDTP.Text);
             _appointmentController.Update(new Appointment(Id, Beginning, Ending));
+            DataGrid dataView = (DataGrid)app.Properties["DataView"];
+            dataView.ItemsSource = null;
+            dataView.ItemsSource = _appointmentController.UpdateAppointments();
             Close();
         }
     }

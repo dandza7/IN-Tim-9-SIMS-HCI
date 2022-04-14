@@ -5,13 +5,14 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:WpfApp1.View.Model"
              xmlns:dialog="clr-namespace:WpfApp1.View.Dialog"
+             xmlns:model="clr-namespace:WpfApp1.Model" d:DataContext="{d:DesignInstance Type=model:Appointment}"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
         
         <Label Content="YOUR APPOINTMENTS" Margin="300,30,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
         <Button Content="Add Appointment" HorizontalAlignment="Left" Margin="650,80,0,0" VerticalAlignment="Top" Click="AddAppointment_Click"/>
-        <DataGrid x:Name="PatientAppointmentsDataGrid" AutoGenerateColumns="False" Margin="0,100,0,0" VerticalAlignment="Top" ItemsSource="{Binding Appointments}">
+        <DataGrid x:Name="PatientAppointmentsDataGrid" CanUserAddRows="False" AutoGenerateColumns="False" Margin="0,100,0,0" VerticalAlignment="Top" ItemsSource="{Binding Appointments, UpdateSourceTrigger=PropertyChanged}">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Id" Width="auto" Binding="{Binding Id}"/>
                 <DataGridTextColumn Header="Beginning" Width="auto" Binding="{Binding Beginning, StringFormat=dd.MM.yyyy. HH:mm:ss}"/>

@@ -97,7 +97,6 @@
     <Compile Include="Repository\AppointmentRepository.cs" />
     <Compile Include="Service\PatientService.cs" />
     <Compile Include="View\Converter\AbstractConverter.cs" />
-    <Compile Include="View\Converter\AppointmentConverter.cs" />
     <Compile Include="View\Converter\PatientConverter.cs" />
     <Compile Include="View\Dialog\AddPatientAppointmentDialog.xaml.cs">
       <DependentUpon>AddPatientAppointmentDialog.xaml</DependentUpon>
@@ -121,9 +120,6 @@
     </Compile>
     <Compile Include="View\ExecutiveMenu.xaml.cs">
       <DependentUpon>ExecutiveMenu.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\Model\AppointmentView.xaml.cs">
-      <DependentUpon>AppointmentView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Model\PatientAppointmentsView.xaml.cs">
       <DependentUpon>PatientAppointmentsView.xaml</DependentUpon>
@@ -178,10 +174,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\ExecutiveMenu.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\Model\AppointmentView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
