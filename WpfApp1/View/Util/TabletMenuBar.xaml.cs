@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -12,24 +10,27 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
-using WpfApp1.Controller;
-using WpfApp1.Model;
-using WpfApp1.View.Dialog;
 using WpfApp1.View.Model;
 
-namespace WpfApp1.Service
+namespace WpfApp1.View.Util
 {
     /// <summary>
-    /// Interaction logic for PatientMenu.xaml
+    /// Interaction logic for TabletMenuBar.xaml
     /// </summary>
-    public partial class PatientMenu : Window
+    public partial class TabletMenuBar : UserControl
     {
-        public PatientMenu()
+        public TabletMenuBar()
         {
             InitializeComponent();
+        }
+
+        private void ShowAppointments_Click(object sender, RoutedEventArgs e)
+        {
             var app = Application.Current as App;
-            app.Properties["PatientFrame"] = PatientFrame;
+            Frame patientFrame = (Frame)app.Properties["PatientFrame"];
+            patientFrame.Content = new PatientAppointmentsView();
         }
     }
 }
