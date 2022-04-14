@@ -23,7 +23,7 @@ namespace WpfApp1.View.Model
     /// <summary>
     /// Interaction logic for PatientAppointmentsView.xaml
     /// </summary>
-    public partial class PatientAppointmentsView : UserControl
+    public partial class PatientAppointmentsView : Page
     {
         private AppointmentController _appointmentController;
         public ObservableCollection<Appointment> Appointments { get; set; }
