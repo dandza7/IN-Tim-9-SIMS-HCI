@@ -85,10 +85,38 @@
         <Setter Property="Margin" Value="10,10,10,10"/>
         <Setter Property="VerticalAlignment" Value="Top"/>
         <Setter Property="HorizontalAlignment" Value="Right"/>
+        <Setter Property="Content" Value="Logout"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
                     <Border Name="border" BorderThickness="0" BorderBrush="{StaticResource WhiteBrush}" Background="{TemplateBinding Background}">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="{StaticResource BlueBrush}"/>
+                            <Setter Property="Foreground" Value="{StaticResource WhiteBrush}"/>
+                            <Setter Property="Opacity" Value="0.8"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="{x:Type Button}" x:Key="HelpButton">
+        <Setter Property="Background" Value="{StaticResource AccentBlueBrush}"/>
+        <Setter Property="Foreground" Value="{StaticResource WhiteBrush}"/>
+        <Setter Property="MinWidth" Value="30"/>
+        <Setter Property="Height" Value="30"/>
+        <Setter Property="FontSize" Value="17"/>
+        <Setter Property="FontWeight" Value="Bold"/>
+        <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="Content" Value="?"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border Name="border" CornerRadius="25" BorderThickness="1" BorderBrush="{StaticResource WhiteBrush}" Background="{TemplateBinding Background}">
                         <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
                     </Border>
                     <ControlTemplate.Triggers>

@@ -20,7 +20,7 @@ namespace WpfApp1.View.Dialog
     /// <summary>
     /// Interaction logic for MovePatientAppointmentDialog.xaml
     /// </summary>
-    public partial class MovePatientAppointmentDialog : Window
+    public partial class MovePatientAppointmentDialog : Page
     {
 
         public MovePatientAppointmentDialog()
@@ -46,7 +46,8 @@ namespace WpfApp1.View.Dialog
             DataGrid dataView = (DataGrid)app.Properties["DataView"];
             dataView.ItemsSource = null;
             dataView.ItemsSource = _appointmentController.UpdateAppointments();
-            Close();
+            Frame patientFrame = (Frame)app.Properties["PatientFrame"];
+            patientFrame.Content = new PatientAppointmentsView();
         }
     }
 }

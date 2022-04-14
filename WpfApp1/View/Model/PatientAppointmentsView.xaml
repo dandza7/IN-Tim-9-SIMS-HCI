@@ -9,7 +9,7 @@
              d:DesignHeight="2269.975" d:DesignWidth="3765.468">
     <Grid>
         <Rectangle Width="850" Height="580" Stroke="{StaticResource LightBlueBrush}" StrokeThickness="3"></Rectangle>
-        <Button Content="Logout" Style="{StaticResource LogoutButton}"/>
+        <Button Style="{StaticResource LogoutButton}"/>
         <Button Content="Add Appointment" Style="{StaticResource AddAppointmentButton}" Click="AddAppointment_Click"/>
         <DataGrid x:Name="PatientAppointmentsDataGrid" Style="{StaticResource PatientDataGrid}" ItemsSource="{Binding Appointments, UpdateSourceTrigger=PropertyChanged}">
             <DataGrid.Columns>
