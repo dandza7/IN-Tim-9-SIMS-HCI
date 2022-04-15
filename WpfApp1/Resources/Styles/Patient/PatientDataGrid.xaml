@@ -37,8 +37,5 @@
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
-        <Setter Property="Margin" Value="0,100,0,0"/>
-        <Setter Property="GridLinesVisibility" Value="None"/>
-        <Setter Property="MinHeight" Value="35"/>
     </Style>
 </ResourceDictionary>
