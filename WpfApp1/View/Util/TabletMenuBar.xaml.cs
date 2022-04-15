@@ -28,9 +28,47 @@ namespace WpfApp1.View.Util
 
         private void ShowAppointments_Click(object sender, RoutedEventArgs e)
         {
+            PatientAppointments.Background = (Brush)(new BrushConverter().ConvertFrom("#0082F0"));
+            MyProfile.Background = (Brush)(new BrushConverter().ConvertFrom("#199EF3"));
+            PatientNotes.Background = (Brush)(new BrushConverter().ConvertFrom("#199EF3"));
+            PatientReports.Background = (Brush)(new BrushConverter().ConvertFrom("#199EF3"));
             var app = Application.Current as App;
             Frame patientFrame = (Frame)app.Properties["PatientFrame"];
             patientFrame.Content = new PatientAppointmentsView();
+            
+        }
+
+        private void MyProfile_Click(object sender, RoutedEventArgs e)
+        {
+            PatientAppointments.Background = (Brush)(new BrushConverter().ConvertFrom("#199EF3"));
+            MyProfile.Background = (Brush)(new BrushConverter().ConvertFrom("#0082F0"));
+            PatientNotes.Background = (Brush)(new BrushConverter().ConvertFrom("#199EF3"));
+            PatientReports.Background = (Brush)(new BrushConverter().ConvertFrom("#199EF3"));
+            var app = Application.Current as App;
+            Frame patientFrame = (Frame)app.Properties["PatientFrame"];
+            patientFrame.Content = new PatientProfileView();
+        }
+
+        private void PatientNotes_Click(object sender, RoutedEventArgs e)
+        {
+            PatientAppointments.Background = (Brush)(new BrushConverter().ConvertFrom("#199EF3"));
+            MyProfile.Background = (Brush)(new BrushConverter().ConvertFrom("#199EF3"));
+            PatientNotes.Background = (Brush)(new BrushConverter().ConvertFrom("#0082F0"));
+            PatientReports.Background = (Brush)(new BrushConverter().ConvertFrom("#199EF3"));
+            var app = Application.Current as App;
+            Frame patientFrame = (Frame)app.Properties["PatientFrame"];
+            patientFrame.Content = new PatientNotesView();
+        }
+
+        private void PatientReports_Click(object sender, RoutedEventArgs e)
+        {
+            PatientAppointments.Background = (Brush)(new BrushConverter().ConvertFrom("#199EF3"));
+            MyProfile.Background = (Brush)(new BrushConverter().ConvertFrom("#199EF3"));
+            PatientNotes.Background = (Brush)(new BrushConverter().ConvertFrom("#199EF3"));
+            PatientReports.Background = (Brush)(new BrushConverter().ConvertFrom("#0082F0"));
+            var app = Application.Current as App;
+            Frame patientFrame = (Frame)app.Properties["PatientFrame"];
+            patientFrame.Content = new PatientReportsView();
         }
     }
 }

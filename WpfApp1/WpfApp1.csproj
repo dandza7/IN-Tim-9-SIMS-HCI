@@ -124,6 +124,15 @@
     <Compile Include="View\Model\PatientAppointmentsView.xaml.cs">
       <DependentUpon>PatientAppointmentsView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Model\PatientNotesView.xaml.cs">
+      <DependentUpon>PatientNotesView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Model\PatientProfileView.xaml.cs">
+      <DependentUpon>PatientProfileView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Model\PatientReportsView.xaml.cs">
+      <DependentUpon>PatientReportsView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Model\PatientView.xaml.cs">
       <DependentUpon>PatientView.xaml</DependentUpon>
     </Compile>
@@ -193,6 +202,18 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Model\PatientAppointmentsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Model\PatientNotesView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Model\PatientProfileView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Model\PatientReportsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
