@@ -23,10 +23,8 @@ namespace WpfApp1.View.Dialog
     /// <summary>
     /// Interaction logic for AddPatientAppointmentDialog.xaml
     /// </summary>
-    public partial class AddPatientAppointmentDialog : Window
+    public partial class AddPatientAppointmentDialog : Page
     {
-
-        //private readonly PatientAppointmentsView _appointmentsView;
         public AddPatientAppointmentDialog()
         {
             InitializeComponent();
@@ -45,7 +43,15 @@ namespace WpfApp1.View.Dialog
             DataGrid dataView = (DataGrid)app.Properties["DataView"];
             dataView.ItemsSource = null;
             dataView.ItemsSource = _appointmentController.UpdateAppointments();
-            Close();
+            Frame patientFrame = (Frame)app.Properties["PatientFrame"];
+            patientFrame.Content = new PatientAppointmentsView();
+        }
+
+        private void DiscardButton_Click(object sender, RoutedEventArgs e)
+        {
+            var app = Application.Current as App;
+            Frame patientFrame = (Frame)app.Properties["PatientFrame"];
+            patientFrame.Content = new PatientAppointmentsView();
         }
     }
 }

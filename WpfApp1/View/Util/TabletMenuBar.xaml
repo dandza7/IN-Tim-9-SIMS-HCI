@@ -8,10 +8,10 @@
              d:DesignHeight="768" d:DesignWidth="1024">
     <Grid>
         <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Height="45">
-            <Button Content="Moj Profil" Style="{StaticResource PatientMenuButton}"/>
-            <Button Content="Termini" Style="{StaticResource PatientMenuButton}" Click="ShowAppointments_Click"/>
-            <Button Content="Napomene" Style="{StaticResource PatientMenuButton}"/>
-            <Button Content="Izveštaji" Style="{StaticResource PatientMenuButton}"/>
+            <Button x:Name="MyProfile" Content="My Profile" Style="{StaticResource PatientMenuButton}" Click="MyProfile_Click"/>
+            <Button x:Name="PatientAppointments" Content="Appointments" Style="{StaticResource PatientMenuButton}" Click="ShowAppointments_Click"/>
+            <Button x:Name="PatientNotes" Content="Notes" Style="{StaticResource PatientMenuButton}" Click="PatientNotes_Click"/>
+            <Button x:Name="PatientReports" Content="Reports" Style="{StaticResource PatientMenuButton}" Click="PatientReports_Click"/>
         </StackPanel>
     </Grid>
 </UserControl>

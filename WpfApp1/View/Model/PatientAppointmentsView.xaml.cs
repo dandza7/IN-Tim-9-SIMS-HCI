@@ -40,10 +40,10 @@ namespace WpfApp1.View.Model
 
         private void AddAppointment_Click(object sender, RoutedEventArgs e)
         {
-            var window = new AddPatientAppointmentDialog();
             var app = Application.Current as App;
             app.Properties["DataView"] = PatientAppointmentsDataGrid;
-            window.ShowDialog();
+            Frame patientFrame = (Frame)app.Properties["PatientFrame"];
+            patientFrame.Content = new AddPatientAppointmentDialog();
         }
 
         private void OpenMoveAppointmentDialog_Click(object sender, RoutedEventArgs e)
@@ -52,9 +52,8 @@ namespace WpfApp1.View.Model
             var app = Application.Current as App;
             app.Properties["appointmentId"] = appointmentId;
             app.Properties["DataView"] = PatientAppointmentsDataGrid;
-            Console.WriteLine("Id reda koji je selektovan je {0}", appointmentId);
-            var window = new MovePatientAppointmentDialog();
-            window.ShowDialog();
+            Frame patientFrame = (Frame)app.Properties["PatientFrame"];
+            patientFrame.Content = new MovePatientAppointmentDialog();
         }
 
         private void RemoveAppointment_Click(object sender, RoutedEventArgs e)
