@@ -22,11 +22,11 @@ namespace WpfApp1.View.Model
     /// <summary>
     /// Interaction logic for SecretaryPatientsView.xaml
     /// </summary>
-    public partial class SecretaryPatientsView : UserControl
+    public partial class SecretaryPatientsView : Page
     {
+
         private PatientController _patientController;
         public ObservableCollection<UserControl> Patients { get; set; }
-
         public SecretaryPatientsView()
         {
             InitializeComponent();
@@ -50,7 +50,7 @@ namespace WpfApp1.View.Model
 
             _patientController.Delete(patientId);
             Patients = new ObservableCollection<UserControl>(
-PatientConverter.ConvertPatientListToPatientViewList(_patientController.GetAll().ToList()));
+            PatientConverter.ConvertPatientListToPatientViewList(_patientController.GetAll().ToList()));
             SecretaryPatientsDataGrid.ItemsSource = Patients;
             SecretaryPatientsDataGrid.Items.Refresh();
         }
