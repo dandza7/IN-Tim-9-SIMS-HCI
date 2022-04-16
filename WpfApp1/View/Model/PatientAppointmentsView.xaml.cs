@@ -34,10 +34,6 @@ namespace WpfApp1.View.Model
             var app = Application.Current as App;
             _appointmentController = app.AppointmentController;
             Appointments = new ObservableCollection<Appointment>(_appointmentController.GetAll().ToList());
-            foreach(Appointment a in Appointments)
-            {
-                Console.WriteLine(a.Doctor.Username);
-            }
         }
 
         private void AddAppointment_Click(object sender, RoutedEventArgs e)
