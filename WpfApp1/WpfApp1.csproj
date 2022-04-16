@@ -146,6 +146,9 @@
     <Compile Include="View\SecretaryMenu.xaml.cs">
       <DependentUpon>SecretaryMenu.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Util\SecretaryMenuBar.xaml.cs">
+      <DependentUpon>SecretaryMenuBar.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Util\TabletMenuBar.xaml.cs">
       <DependentUpon>TabletMenuBar.xaml</DependentUpon>
     </Compile>
@@ -158,6 +161,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Resources\Styles\Patient\PatientDataGrid.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\Styles\Secretary\SecretaryButtons.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\Styles\Secretary\SecretaryPatientsDataGrid.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -230,6 +241,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\SecretaryMenu.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Util\SecretaryMenuBar.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
