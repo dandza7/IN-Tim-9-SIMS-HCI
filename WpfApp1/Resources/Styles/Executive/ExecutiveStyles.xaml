@@ -1,0 +1,98 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Style x:Key="NavBarButton" TargetType="Button">
+        <Setter Property="Background" Value="{StaticResource LightBlueBrush}"></Setter>
+        <Setter Property="BorderBrush" Value="{StaticResource AccentBlueBrush}"></Setter>
+        <Setter Property="Margin" Value="1"></Setter>
+        <Setter Property="FontFamily" Value="Impact"></Setter>
+        <Setter Property="Foreground" Value="{StaticResource WhiteBrush}"></Setter>
+        <Setter Property="BorderThickness" Value="2"></Setter>
+        <Setter Property="FontSize" Value="40"></Setter>
+    </Style>
+    <Style x:Key="DialogModal" TargetType="Border">
+        <Setter Property="Background" Value="{StaticResource LightestBlueBrush}"></Setter>
+        <Setter Property="BorderBrush" Value="{StaticResource AccentBlueBrush}"></Setter>
+        <Setter Property="BorderThickness" Value="2"></Setter>
+        <Setter Property="Margin" Value="100 20"></Setter>
+    </Style>
+    <Style x:Key="OverlayModal" TargetType="Border">
+        <Setter Property="Background" Value="#CF0082F0"></Setter>
+    </Style>
+    <Style x:Key="FormLabel" TargetType="Label">
+        <Setter Property="FontSize" Value="24"></Setter>
+        <Setter Property="FontFamily" Value="Impact"></Setter>
+        <Setter Property="Foreground" Value="{StaticResource WhiteBrush}"></Setter>
+        <Setter Property="HorizontalAlignment" Value="Left"></Setter>
+        <Setter Property="VerticalAlignment" Value="Bottom"></Setter>
+    </Style>
+    <Style x:Key="FormInputBox" TargetType="TextBox">
+        <Setter Property="Background" Value="{StaticResource WhiteBrush}"></Setter>
+        <Setter Property="FontSize" Value="24"></Setter>
+        <Setter Property="FontFamily" Value="Impact"></Setter>
+        <Setter Property="Foreground" Value="{StaticResource AccentBlueBrush}"></Setter>
+        <Setter Property="BorderBrush" Value="{StaticResource AccentBlueBrush}"></Setter>
+        <Setter Property="VerticalAlignment" Value="Center"></Setter>
+    </Style>
+    <Style x:Key="FormInputPassword" TargetType="PasswordBox">
+        <Setter Property="Background" Value="{StaticResource WhiteBrush}"></Setter>
+        <Setter Property="FontSize" Value="24"></Setter>
+        <Setter Property="FontFamily" Value="Impact"></Setter>
+        <Setter Property="Foreground" Value="{StaticResource AccentBlueBrush}"></Setter>
+        <Setter Property="BorderBrush" Value="{StaticResource AccentBlueBrush}"></Setter>
+        <Setter Property="VerticalAlignment" Value="Center"></Setter>
+    </Style>
+    <Style x:Key="FormInputComboBox" TargetType="ComboBox">
+        <Setter Property="Background" Value="{StaticResource WhiteBrush}"></Setter>
+        <Setter Property="Margin" Value="10"></Setter>
+        <Setter Property="FontSize" Value="24"></Setter>
+        <Setter Property="FontFamily" Value="Impact"></Setter>
+        <Setter Property="Foreground" Value="{StaticResource AccentBlueBrush}"></Setter>
+        <Setter Property="BorderBrush" Value="{StaticResource AccentBlueBrush}"></Setter>
+        <!--<Setter Property="VerticalAlignment" Value="Center"></Setter>-->
+        <Setter Property="Height" Value="50"></Setter>
+        <Setter Property="Padding" Value="0 10 0 10"></Setter>
+    </Style>
+    <Style x:Key="ClassicButton" TargetType="Button">
+        <Setter Property="Background" Value="{StaticResource AccentBlueBrush}"></Setter>
+        <Setter Property="BorderBrush" Value="{StaticResource LightBlueBrush}"></Setter>
+        <Setter Property="FontSize" Value="25"></Setter>
+        <Setter Property="FontFamily" Value="Impact"></Setter>
+        <Setter Property="Foreground" Value="{StaticResource WhiteBrush}"></Setter>
+        <Setter Property="BorderThickness" Value="1"></Setter>
+    </Style>
+    <Style x:Key="Title" TargetType="TextBlock">
+        <Setter Property="VerticalAlignment" Value="Center"></Setter>
+        <Setter Property="HorizontalAlignment" Value="Center"></Setter>
+        <Setter Property="FontSize" Value="40"></Setter>
+        <Setter Property="FontFamily" Value="Impact"></Setter>
+        <Setter Property="Foreground" Value="{StaticResource WhiteBrush}"></Setter>
+    </Style>
+    <Style x:Key="NotificationText" TargetType="TextBlock">
+        <Setter Property="Background" Value="{StaticResource WhiteBrush}"></Setter>
+        <Setter Property="FontSize" Value="30"></Setter>
+        <Setter Property="FontFamily" Value="Impact"></Setter>
+        <Setter Property="Foreground" Value="{StaticResource AccentBlueBrush}"></Setter>
+        <Setter Property="TextWrapping" Value="Wrap"></Setter>
+        <Setter Property="Padding" Value="10"></Setter>
+
+    </Style>
+    <Style x:Key="DataGrid" TargetType="DataGrid">
+        <Setter Property="FontFamily" Value="Impact"></Setter>
+        <Setter Property="Foreground" Value="{StaticResource AccentBlueBrush}"></Setter>
+        <Setter Property="FontSize" Value="25"></Setter>
+        <Setter Property="VerticalAlignment" Value="Center"></Setter>
+        <Setter Property="HorizontalAlignment" Value="Right"></Setter>
+        <Setter Property="RowHeight" Value="30"></Setter>
+        <Setter Property="Background" Value="{StaticResource AccentBlueBrush}"></Setter>
+
+    </Style>
+    <Style x:Key="DGColumn" TargetType="DataGridCell">
+        <Setter Property="BorderBrush" Value="{StaticResource AccentBlueBrush}"></Setter>
+        <Setter Property="Background" Value="{StaticResource LightBlueBrush}"></Setter>
+    </Style>
+    <Style x:Key="DGHeader" TargetType="DataGridColumnHeader">
+        <Setter Property="BorderBrush" Value="{StaticResource AccentBlueBrush}"></Setter>
+        <Setter Property="Background" Value="{StaticResource AccentBlueBrush}"></Setter>
+        <Setter Property="Foreground" Value="{StaticResource WhiteBrush}"></Setter>
+    </Style>
+</ResourceDictionary>
