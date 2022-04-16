@@ -27,15 +27,17 @@ namespace WpfApp1.View.Model
     {
         private AppointmentController _appointmentController;
         public ObservableCollection<Appointment> Appointments { get; set; }
-
         public PatientAppointmentsView()
         {
             InitializeComponent();
             DataContext = this;
             var app = Application.Current as App;
             _appointmentController = app.AppointmentController;
-
             Appointments = new ObservableCollection<Appointment>(_appointmentController.GetAll().ToList());
+            foreach(Appointment a in Appointments)
+            {
+                Console.WriteLine(a.Doctor.Username);
+            }
         }
 
         private void AddAppointment_Click(object sender, RoutedEventArgs e)

@@ -27,9 +27,9 @@ namespace WpfApp1.Model
             executive
         }
 
+        private int _id;
         private string _name;
         private string _surname;
-        private int _id;
         private string _username;
         private string _password;
         private string _phoneNumber;
@@ -140,11 +140,11 @@ namespace WpfApp1.Model
             }
         }
 
-        public User(string name, string surname, int id, string username, string password, string phoneNumber, string jmbg, RoleType role)
+        public User(int id, string name, string surname, string username, string password, string phoneNumber, string jmbg, RoleType role)
         {
+            Id = id;
             Name = name;
             Surname = surname;
-            Id = id;
             Username = username;
             Password = password;
             PhoneNumber = phoneNumber;

@@ -22,12 +22,13 @@ namespace WpfApp1
         private string APPOINTMENT_FILE = _projectPath + "\\Resources\\Data\\appointments.csv";
         private string ROOM_FILE = _projectPath + "\\Resources\\Data\\rooms.csv";
         private string PATIENT_FILE = _projectPath + "\\Resources\\Data\\patients.csv";
+        private string DOCTOR_FILE = _projectPath + "\\Resources\\Data\\doctors.csv";
         private const string CSV_DELIMITER = ";";
         private const string APPOINTMENT_DATETIME_FORMAT = "dd.MM.yyyy. HH:mm:ss";
 
         public AppointmentController AppointmentController { get; set; }
         public RoomController RoomController { get; set; }
-
+        public DoctorController DoctorController { get; set; }
         public PatientController PatientController { get; set; }
 
         public App()
@@ -49,6 +50,12 @@ namespace WpfApp1
             var patientService = new PatientService(patientRepository);
 
             PatientController = new PatientController(patientService);
+
+            var doctorRepository = new DoctorRepository(DOCTOR_FILE, CSV_DELIMITER);
+
+            var doctorService = new DoctorService(doctorRepository);
+
+            DoctorController = new DoctorController(doctorService);
         }
     }
 }

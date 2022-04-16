@@ -32,14 +32,15 @@ namespace WpfApp1.View.Dialog
         }
 
         private AppointmentController _appointmentController;
-
+        private DoctorController _doctorController;
         private void ConfirmButton_Click(object sender, RoutedEventArgs e)
         {
             var app = Application.Current as App;
             _appointmentController = app.AppointmentController;
-
+            _doctorController = app.DoctorController;
+            Doctor doctor = _doctorController.GetById(1);
             if (BeginningDTP.Text == null || EndingDTP.Text == null) return;
-            _appointmentController.Create(new Appointment(DateTime.Parse(BeginningDTP.Text), DateTime.Parse(EndingDTP.Text)));
+            _appointmentController.Create(new Appointment(DateTime.Parse(BeginningDTP.Text), DateTime.Parse(EndingDTP.Text), doctor));
             DataGrid dataView = (DataGrid)app.Properties["DataView"];
             dataView.ItemsSource = null;
             dataView.ItemsSource = _appointmentController.UpdateAppointments();

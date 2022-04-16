@@ -14,8 +14,8 @@ namespace WpfApp1.Model
             neurologist,
             radiologist,
             generalPracticioner,
-            pediatricians,
-            anesthesiologists
+            pediatrician,
+            anesthesiologist
         }
 
         private SpecType _specialization;
@@ -47,8 +47,8 @@ namespace WpfApp1.Model
             }
         }
 
-        public Doctor(string name, string surname, int id, string username, string password, string phoneNumber, string jmbg, RoleType role,
-            SpecType specialization, bool isAvailable): base(name, surname, id, username, password, phoneNumber, jmbg, role)
+        public Doctor(int id, string name, string surname, string username, string password, string phoneNumber, string jmbg, RoleType role,
+            SpecType specialization, bool isAvailable): base(id, name, surname, username, password, phoneNumber, jmbg, role)
         {
             Specialization = specialization;
             IsAvailable = isAvailable;

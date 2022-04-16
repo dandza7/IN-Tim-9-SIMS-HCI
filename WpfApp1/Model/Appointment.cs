@@ -84,16 +84,18 @@ namespace WpfApp1.Model
         }
 
         public Appointment() {}
-        public Appointment(DateTime beginning, DateTime ending)
+        public Appointment(DateTime beginning, DateTime ending, Doctor doctor)
         {
             Beginning = beginning;
             Ending = ending;
+            Doctor = doctor;
         }
-        public Appointment(int id, DateTime beginning, DateTime ending)
+        public Appointment(int id, DateTime beginning, DateTime ending, Doctor doctor)
         {
             Id = id;
             Beginning = beginning;
             Ending = ending;
+            Doctor = doctor;
         }
 
         
