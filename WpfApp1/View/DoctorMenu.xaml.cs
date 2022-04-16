@@ -23,6 +23,7 @@ namespace WpfApp1.Service
     public partial class DoctorMenu : Window
     {
         private AppointmentController _appointmentController;
+        private DoctorController _doctorController;
 
         public IEnumerable<Appointment> appointments { get; set; }
         public List<int> Ids { get; set; }
@@ -71,7 +72,8 @@ namespace WpfApp1.Service
 
         private void AddConfirm_Click(object sender, RoutedEventArgs e)
         {
-            Appointment appointment = new Appointment(Convert.ToDateTime(StartDP.Text), Convert.ToDateTime(EndDP.Text));
+            Doctor doctor = _doctorController.GetById(1);
+            Appointment appointment = new Appointment(Convert.ToDateTime(StartDP.Text), Convert.ToDateTime(EndDP.Text), doctor);
             _appointmentController.Create(appointment);
             AddContainer.Visibility = Visibility.Collapsed;
 
@@ -95,8 +97,8 @@ namespace WpfApp1.Service
 
         private void EditConfirm_Click(object sender, RoutedEventArgs e)
         {
-
-            Appointment appointment = new Appointment(Convert.ToInt32(IdLabel.Content), Convert.ToDateTime(EditStartDP.Text), Convert.ToDateTime(EditEndDP.Text));
+            Doctor doctor = _doctorController.GetById(2);
+            Appointment appointment = new Appointment(Convert.ToInt32(IdLabel.Content), Convert.ToDateTime(EditStartDP.Text), Convert.ToDateTime(EditEndDP.Text), doctor);
             _appointmentController.Update(appointment);
             EditContainer.Visibility = Visibility.Collapsed;
         }

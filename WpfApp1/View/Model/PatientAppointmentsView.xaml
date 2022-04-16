@@ -13,9 +13,9 @@
         <Button Content="Add Appointment" Style="{StaticResource AddAppointmentButton}" Click="AddAppointment_Click"/>
         <DataGrid x:Name="PatientAppointmentsDataGrid" Style="{StaticResource PatientDataGrid}" ItemsSource="{Binding Appointments, UpdateSourceTrigger=PropertyChanged}">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Id" Binding="{Binding Id}" CanUserSort="False"/>
-                <DataGridTextColumn Header="Beginning" Binding="{Binding Beginning, StringFormat=dd.MM.yyyy. HH:mm:ss}" CanUserSort="False"/>
-                <DataGridTextColumn Header="Ending" Binding="{Binding Ending, StringFormat=dd.MM.yyyy. HH:mm:ss}" CanUserSort="False"/>
+                <DataGridTextColumn Header="Id" Binding="{Binding Id}" CanUserSort="False" ElementStyle="{StaticResource ColumnElementStyle}"/>
+                <DataGridTextColumn Header="Doctor" Binding="{Binding Doctor.Username}" CanUserSort="False" ElementStyle="{StaticResource ColumnElementStyle}"/>
+                <DataGridTextColumn Header="Beginning" Binding="{Binding Beginning, StringFormat=dd.MM.yyyy. HH:mm:ss}" CanUserSort="False" ElementStyle="{StaticResource ColumnElementStyle}"/>
                 <DataGridTemplateColumn Header="Move" MinWidth="90">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>

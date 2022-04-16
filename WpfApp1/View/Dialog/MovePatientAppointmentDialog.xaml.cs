@@ -30,6 +30,7 @@ namespace WpfApp1.View.Dialog
         }
 
         private AppointmentController _appointmentController;
+        private DoctorController _doctorController;
         public DateTime Beginning;
         public DateTime Ending;
         public int Id;
@@ -39,10 +40,11 @@ namespace WpfApp1.View.Dialog
             var app = Application.Current as App;
             _appointmentController = app.AppointmentController;
             if (BeginningDTP.Text == null || EndingDTP.Text == null) return;
+            Doctor doctor = _doctorController.GetById(1);
             Id = (int)app.Properties["appointmentId"];
             Beginning = DateTime.Parse(BeginningDTP.Text);
             Ending = DateTime.Parse(EndingDTP.Text);
-            _appointmentController.Update(new Appointment(Id, Beginning, Ending));
+            _appointmentController.Update(new Appointment(Id, Beginning, Ending, doctor));
             DataGrid dataView = (DataGrid)app.Properties["DataView"];
             dataView.ItemsSource = null;
             dataView.ItemsSource = _appointmentController.UpdateAppointments();
