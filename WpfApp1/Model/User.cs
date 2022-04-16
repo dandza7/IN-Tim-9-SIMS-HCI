@@ -139,5 +139,17 @@ namespace WpfApp1.Model
                 }
             }
         }
+
+        public User(string name, string surname, int id, string username, string password, string phoneNumber, string jmbg, RoleType role)
+        {
+            Name = name;
+            Surname = surname;
+            Id = id;
+            Username = username;
+            Password = password;
+            PhoneNumber = phoneNumber;
+            Jmbg = jmbg;
+            Role = role;
+        }
     }
 }

@@ -21,7 +21,7 @@ namespace WpfApp1.Model
         private int _id;
         private DateTime _beginning;
         private DateTime _ending;
-
+        private Doctor _doctor;
         public int Id
         {
             get
@@ -64,6 +64,21 @@ namespace WpfApp1.Model
                 {
                     _ending = value;
                     OnPropertyChanged("Ending");
+                }
+            }
+        }
+        public Doctor Doctor
+        {
+            get
+            {
+                return _doctor;
+            }
+            set
+            {
+                if (value != _doctor)
+                {
+                    _doctor = value;
+                    OnPropertyChanged("Doctor");
                 }
             }
         }
