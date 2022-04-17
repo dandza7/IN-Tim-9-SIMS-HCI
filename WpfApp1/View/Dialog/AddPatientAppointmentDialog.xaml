@@ -24,12 +24,7 @@
             <ComboBoxItem Content="Time"/>
             <ComboBoxItem Content="Doctor"/>
         </ComboBox>
-        <ComboBox HorizontalAlignment="Left" Margin="537,375,0,0" VerticalAlignment="Top" Width="120">
-            <ComboBoxItem Content="Petar Petrović"/>
-            <ComboBoxItem Content="Mika Mikić"/>
-            <ComboBoxItem Content="Pera Perić"/>
-            <ComboBoxItem Content="Slavko Slavić"/>
-        </ComboBox>
+        <ComboBox x:Name="DoctorComboBox" HorizontalAlignment="Left" Margin="537,375,0,0" VerticalAlignment="Top" Width="120" ItemsSource="{Binding Doctors}" DisplayMemberPath="Username"/>
         <xctk:DateTimePicker x:Name="BeginningDTP" HorizontalAlignment="Left" Margin="505,280,0,0" VerticalAlignment="Top"/>
         <xctk:DateTimePicker x:Name="EndingDTP" HorizontalAlignment="Left" Margin="505,310,0,0" VerticalAlignment="Top"/>
     </Grid>

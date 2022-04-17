@@ -27,6 +27,11 @@ namespace WpfApp1.Controller
             return _doctorService.GetById(id);
         }
 
+        public Doctor GetByUsername(string username)
+        {
+            return _doctorService.GetByUsername(username);
+        }
+
         public Doctor Create(Doctor doctor)
         {
             return _doctorService.Create(doctor);
