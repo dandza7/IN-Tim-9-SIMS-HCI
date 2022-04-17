@@ -42,7 +42,7 @@ namespace WpfApp1.View.Dialog
             _appointmentController.Create(new Appointment(DateTime.Parse(BeginningDTP.Text), DateTime.Parse(EndingDTP.Text), 1));
             DataGrid dataView = (DataGrid)app.Properties["DataView"];
             dataView.ItemsSource = null;
-            dataView.ItemsSource = _appointmentController.UpdateAppointments();
+            dataView.ItemsSource = _appointmentController.UpdateData();
             Frame patientFrame = (Frame)app.Properties["PatientFrame"];
             patientFrame.Content = new PatientAppointmentsView();
         }

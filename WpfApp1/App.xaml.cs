@@ -39,12 +39,6 @@ namespace WpfApp1
 
             RoomController = new RoomController(roomService);
 
-            var appointmentRepository = new AppointmentRepository(APPOINTMENT_FILE, CSV_DELIMITER, APPOINTMENT_DATETIME_FORMAT);
-
-            var appointmentService = new AppointmentService(appointmentRepository);
-
-            AppointmentController = new AppointmentController(appointmentService);
-
             var patientRepository = new PatientRepository(PATIENT_FILE, CSV_DELIMITER);
 
             var patientService = new PatientService(patientRepository);
@@ -56,6 +50,12 @@ namespace WpfApp1
             var doctorService = new DoctorService(doctorRepository);
 
             DoctorController = new DoctorController(doctorService);
+
+            var appointmentRepository = new AppointmentRepository(APPOINTMENT_FILE, CSV_DELIMITER, APPOINTMENT_DATETIME_FORMAT);
+
+            var appointmentService = new AppointmentService(appointmentRepository, doctorRepository);
+
+            AppointmentController = new AppointmentController(appointmentService);
         }
     }
 }

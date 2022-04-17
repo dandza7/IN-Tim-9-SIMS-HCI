@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using WpfApp1.Model;
 using WpfApp1.Service;
+using WpfApp1.View.Model;
 
 namespace WpfApp1.Controller
 {
@@ -38,9 +39,14 @@ namespace WpfApp1.Controller
             return  _appointmentService.Delete(id);
         }
 
-        public List<Appointment> UpdateAppointments()
+        public List<AppointmentView> UpdateData()
         {
-            return _appointmentService.UpdateAppointments();
+            return _appointmentService.UpdateData();
+        }
+
+        public List<AppointmentView> GetAppointmentViews()
+        {
+            return _appointmentService.GetAppointmentViews();
         }
     }
 }
