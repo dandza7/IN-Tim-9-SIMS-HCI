@@ -127,6 +127,12 @@
     <Compile Include="View\ExecutiveMenu.xaml.cs">
       <DependentUpon>ExecutiveMenu.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Model\Executive\ExecutiveMainPage.xaml.cs">
+      <DependentUpon>ExecutiveMainPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Model\Executive\ExecutiveRoomPages.xaml.cs">
+      <DependentUpon>ExecutiveRoomPages.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Model\PatientAppointmentsView.xaml.cs">
       <DependentUpon>PatientAppointmentsView.xaml</DependentUpon>
     </Compile>
@@ -159,6 +165,10 @@
       <DependentUpon>TabletMenuBar.xaml</DependentUpon>
     </Compile>
     <Page Include="Resources\Styles\Colors.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\Styles\Executive\ExecutiveStyles.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -215,6 +225,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\ExecutiveMenu.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Model\Executive\ExecutiveMainPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Model\Executive\ExecutiveRoomPages.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
