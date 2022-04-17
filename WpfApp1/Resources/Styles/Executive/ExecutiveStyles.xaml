@@ -43,14 +43,12 @@
     </Style>
     <Style x:Key="FormInputComboBox" TargetType="ComboBox">
         <Setter Property="Background" Value="{StaticResource WhiteBrush}"></Setter>
-        <Setter Property="Margin" Value="10"></Setter>
         <Setter Property="FontSize" Value="24"></Setter>
         <Setter Property="FontFamily" Value="Impact"></Setter>
         <Setter Property="Foreground" Value="{StaticResource AccentBlueBrush}"></Setter>
         <Setter Property="BorderBrush" Value="{StaticResource AccentBlueBrush}"></Setter>
         <!--<Setter Property="VerticalAlignment" Value="Center"></Setter>-->
         <Setter Property="Height" Value="50"></Setter>
-        <Setter Property="Padding" Value="0 10 0 10"></Setter>
     </Style>
     <Style x:Key="ClassicButton" TargetType="Button">
         <Setter Property="Background" Value="{StaticResource AccentBlueBrush}"></Setter>
@@ -66,6 +64,13 @@
         <Setter Property="FontSize" Value="40"></Setter>
         <Setter Property="FontFamily" Value="Impact"></Setter>
         <Setter Property="Foreground" Value="{StaticResource WhiteBrush}"></Setter>
+    </Style>
+    <Style x:Key="SmallText" TargetType="TextBlock">
+        <Setter Property="VerticalAlignment" Value="Top"></Setter>
+        <Setter Property="HorizontalAlignment" Value="Left"></Setter>
+        <Setter Property="FontSize" Value="15"></Setter>
+        <Setter Property="FontFamily" Value="Impact"></Setter>
+        <Setter Property="Foreground" Value="{StaticResource AccentBlueBrush}"></Setter>
     </Style>
     <Style x:Key="NotificationText" TargetType="TextBlock">
         <Setter Property="Background" Value="{StaticResource WhiteBrush}"></Setter>

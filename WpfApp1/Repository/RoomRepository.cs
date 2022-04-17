@@ -53,7 +53,7 @@ namespace WpfApp1.Repository
             return new Room(
                 int.Parse(tokens[0]),
                 tokens[1],
-                int.Parse(tokens[2]));
+                tokens[2]);
         }
 
         public string ConvertRoomToCsvFormat(Room room)
@@ -61,7 +61,7 @@ namespace WpfApp1.Repository
             return string.Join(_delimiter,
                 room.Id,
                 room.Nametag,
-                (int)room.Type);
+                room.Type);
         }
 
         public void AppendLineToFile(String path, String line)
