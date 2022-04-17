@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using WpfApp1.Model;
 using WpfApp1.Repository;
 using WpfApp1.View.Converter;
-using WpfApp1.View.Model;
+using WpfApp1.View.Model.Patient;
 
 namespace WpfApp1.Service
 {

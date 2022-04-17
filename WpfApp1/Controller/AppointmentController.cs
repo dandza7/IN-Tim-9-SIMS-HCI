@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using WpfApp1.Model;
 using WpfApp1.Service;
-using WpfApp1.View.Model;
+using WpfApp1.View.Model.Patient;
 
 namespace WpfApp1.Controller
 {
