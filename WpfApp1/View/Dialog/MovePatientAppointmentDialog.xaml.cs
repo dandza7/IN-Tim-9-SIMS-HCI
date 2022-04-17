@@ -42,8 +42,6 @@ namespace WpfApp1.View.Dialog
             });
         }
 
-        public int Id { get { return _id; } set { _id = value; } }
-
         private void MoveAppointment_Click(object sender, RoutedEventArgs e)
         {
             var app = Application.Current as App;
@@ -52,8 +50,15 @@ namespace WpfApp1.View.Dialog
             if (BeginningDTP.Text == null || EndingDTP.Text == null) return;
             if (DoctorComboBox.SelectedValue == null) return;
             Doctor doctor = _doctorController.GetByUsername(((Doctor)DoctorComboBox.SelectedValue).Username);
-            Id = (int)app.Properties["appointmentId"];
-            _appointmentController.Update(new Appointment(Id, DateTime.Parse(BeginningDTP.Text), DateTime.Parse(EndingDTP.Text), AppointmentType.regular, false, doctor.Id, 3, 1));
+            _appointmentController.Update(new Appointment(
+                (int)app.Properties["appointmentId"], 
+                DateTime.Parse(BeginningDTP.Text), 
+                DateTime.Parse(EndingDTP.Text), 
+                AppointmentType.regular, 
+                false, 
+                doctor.Id, 
+                3, 
+                doctor.RoomId));
             DataGrid dataView = (DataGrid)app.Properties["DataView"];
             dataView.ItemsSource = null;
             dataView.ItemsSource = _appointmentController.UpdateData();

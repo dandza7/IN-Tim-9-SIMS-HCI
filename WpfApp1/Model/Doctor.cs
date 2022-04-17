@@ -20,7 +20,7 @@ namespace WpfApp1.Model
 
         private SpecType _specialization;
         private bool _isAvailable;
-
+        private int _roomId;
         public SpecType Specialization
         {
             get { return _specialization; }
@@ -47,11 +47,28 @@ namespace WpfApp1.Model
             }
         }
 
+        public int RoomId
+        {
+            get
+            {
+                return _roomId;
+            }
+            set
+            {
+                if (value != _roomId)
+                {
+                    _roomId = value;
+                    OnPropertyChanged("RoomId");
+                }
+            }
+        }
+
         public Doctor(int id, string name, string surname, string username, string password, string phoneNumber, string jmbg, RoleType role,
-            SpecType specialization, bool isAvailable): base(id, name, surname, username, password, phoneNumber, jmbg, role)
+            SpecType specialization, bool isAvailable, int roomId): base(id, name, surname, username, password, phoneNumber, jmbg, role)
         {
             Specialization = specialization;
             IsAvailable = isAvailable;
+            RoomId = roomId;
         }
     }
 }
