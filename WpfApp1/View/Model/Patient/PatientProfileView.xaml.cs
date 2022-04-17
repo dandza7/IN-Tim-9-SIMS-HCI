@@ -13,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace WpfApp1.View.Model
+namespace WpfApp1.View.Model.Patient
 {
     /// <summary>
-    /// Interaction logic for PatientNotesView.xaml
+    /// Interaction logic for PatientProfileView.xaml
     /// </summary>
-    public partial class PatientNotesView : Page
+    public partial class PatientProfileView : Page
     {
-        public PatientNotesView()
+        public PatientProfileView()
         {
             InitializeComponent();
         }

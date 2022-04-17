@@ -12,7 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using WpfApp1.View.Model;
+using WpfApp1.View.Model.Patient;
 
 namespace WpfApp1.View.Util
 {

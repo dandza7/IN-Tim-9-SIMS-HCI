@@ -128,7 +128,7 @@
     <Compile Include="View\ExecutiveMenu.xaml.cs">
       <DependentUpon>ExecutiveMenu.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Model\AppointmentView.xaml.cs">
+    <Compile Include="View\Model\Patient\AppointmentView.xaml.cs">
       <DependentUpon>AppointmentView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Model\Executive\ExecutiveMainPage.xaml.cs">
@@ -137,20 +137,20 @@
     <Compile Include="View\Model\Executive\ExecutiveRoomPages.xaml.cs">
       <DependentUpon>ExecutiveRoomPages.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Model\PatientAppointmentsView.xaml.cs">
+    <Compile Include="View\Model\Patient\PatientAppointmentsView.xaml.cs">
       <DependentUpon>PatientAppointmentsView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\Model\PatientNotesView.xaml.cs">
-      <DependentUpon>PatientNotesView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\Model\PatientProfileView.xaml.cs">
-      <DependentUpon>PatientProfileView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\Model\PatientReportsView.xaml.cs">
-      <DependentUpon>PatientReportsView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Model\PatientView.xaml.cs">
       <DependentUpon>PatientView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Model\Patient\PatientNotesView.xaml.cs">
+      <DependentUpon>PatientNotesView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Model\Patient\PatientProfileView.xaml.cs">
+      <DependentUpon>PatientProfileView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Model\Patient\PatientReportsView.xaml.cs">
+      <DependentUpon>PatientReportsView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Model\SecretaryPatientsView.xaml.cs">
       <DependentUpon>SecretaryPatientsView.xaml</DependentUpon>
@@ -232,7 +232,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Model\AppointmentView.xaml">
+    <Page Include="View\Model\Patient\AppointmentView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -244,25 +244,25 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Model\PatientAppointmentsView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\Model\PatientNotesView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\Model\PatientProfileView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\Model\PatientReportsView.xaml">
+    <Page Include="View\Model\Patient\PatientAppointmentsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Model\PatientView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Model\Patient\PatientNotesView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\Model\Patient\PatientProfileView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\Model\Patient\PatientReportsView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="View\Model\SecretaryPatientsView.xaml">
       <SubType>Designer</SubType>

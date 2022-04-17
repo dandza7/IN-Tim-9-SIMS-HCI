@@ -18,7 +18,7 @@ using WpfApp1.Model;
 using WpfApp1.View.Converter;
 using WpfApp1.View.Dialog;
 
-namespace WpfApp1.View.Model
+namespace WpfApp1.View.Model.Patient
 {
     /// <summary>
     /// Interaction logic for PatientAppointmentsView.xaml

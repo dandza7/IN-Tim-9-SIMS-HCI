@@ -14,7 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace WpfApp1.View.Model
+namespace WpfApp1.View.Model.Patient
 {
     /// <summary>
     /// Interaction logic for AppointmentView.xaml
