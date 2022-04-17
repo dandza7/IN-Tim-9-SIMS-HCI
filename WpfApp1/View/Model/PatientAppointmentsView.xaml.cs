@@ -26,14 +26,15 @@ namespace WpfApp1.View.Model
     public partial class PatientAppointmentsView : Page
     {
         private AppointmentController _appointmentController;
-        public ObservableCollection<Appointment> Appointments { get; set; }
+        //private DoctorController _doctorController;
+        public ObservableCollection<AppointmentView> Appointments { get; set; }
         public PatientAppointmentsView()
         {
             InitializeComponent();
             DataContext = this;
             var app = Application.Current as App;
             _appointmentController = app.AppointmentController;
-            Appointments = new ObservableCollection<Appointment>(_appointmentController.GetAll().ToList());
+            Appointments = new ObservableCollection<AppointmentView>(_appointmentController.GetAppointmentViews().ToList());
         }
 
         private void AddAppointment_Click(object sender, RoutedEventArgs e)
@@ -46,7 +47,7 @@ namespace WpfApp1.View.Model
 
         private void OpenMoveAppointmentDialog_Click(object sender, RoutedEventArgs e)
         {
-            int appointmentId = ((Appointment)PatientAppointmentsDataGrid.SelectedItem).Id;
+            int appointmentId = ((AppointmentView)PatientAppointmentsDataGrid.SelectedItem).Id;
             var app = Application.Current as App;
             app.Properties["appointmentId"] = appointmentId;
             app.Properties["DataView"] = PatientAppointmentsDataGrid;
@@ -56,13 +57,13 @@ namespace WpfApp1.View.Model
 
         private void RemoveAppointment_Click(object sender, RoutedEventArgs e)
         {
-            int appointmentId = ((Appointment)PatientAppointmentsDataGrid.SelectedItem).Id;
+            int appointmentId = ((AppointmentView)PatientAppointmentsDataGrid.SelectedItem).Id;
             var app = Application.Current as App;
             _appointmentController = app.AppointmentController;
 
             _appointmentController.Delete(appointmentId);
             PatientAppointmentsDataGrid.ItemsSource = null;
-            PatientAppointmentsDataGrid.ItemsSource = _appointmentController.UpdateAppointments();
+            PatientAppointmentsDataGrid.ItemsSource = _appointmentController.UpdateData();
         }
     }
 }

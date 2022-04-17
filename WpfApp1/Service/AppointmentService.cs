@@ -5,16 +5,19 @@ using System.Text;
 using System.Threading.Tasks;
 using WpfApp1.Model;
 using WpfApp1.Repository;
+using WpfApp1.View.Converter;
+using WpfApp1.View.Model;
 
 namespace WpfApp1.Service
 {
     public class AppointmentService
     {
         private readonly AppointmentRepository _appointmentRepo;
-
-        public AppointmentService(AppointmentRepository appointmentRepo)
+        private readonly DoctorRepository _doctorRepo;
+        public AppointmentService(AppointmentRepository appointmentRepo, DoctorRepository doctorRepository)
         {
             _appointmentRepo = appointmentRepo;
+            _doctorRepo = doctorRepository;
         }
 
         internal IEnumerable<Appointment> GetAll()
@@ -40,9 +43,28 @@ namespace WpfApp1.Service
             return _appointmentRepo.Delete(id);
         }
 
-        public List<Appointment> UpdateAppointments()
+        public List<AppointmentView> UpdateData()
         {
-            return _appointmentRepo.UpdateAppointments();
+            List<AppointmentView> appointmentViews = new List<AppointmentView>();
+            List<Appointment> appointments = _appointmentRepo.UpdateAppointments();
+            foreach (Appointment appointment in appointments)
+            {
+                Doctor doctor = _doctorRepo.GetById(appointment.DoctorId);
+                appointmentViews.Add(AppointmentConverter.ConvertAppointmentAndDoctorToAppointmentView(appointment, doctor));
+            }
+            return appointmentViews;
+        }
+
+        public List<AppointmentView> GetAppointmentViews()
+        {
+            List<AppointmentView> appointmentViews = new List<AppointmentView>();
+            List<Appointment> appointments = _appointmentRepo.GetAll().ToList();
+            foreach (Appointment appointment in appointments)
+            {
+                Doctor doctor = _doctorRepo.GetById(appointment.DoctorId);
+                appointmentViews.Add(AppointmentConverter.ConvertAppointmentAndDoctorToAppointmentView(appointment, doctor));
+            }
+            return appointmentViews;
         }
     }
 }

@@ -45,7 +45,7 @@ namespace WpfApp1.View.Dialog
             _appointmentController.Update(new Appointment(Id, Beginning, Ending, 1));
             DataGrid dataView = (DataGrid)app.Properties["DataView"];
             dataView.ItemsSource = null;
-            dataView.ItemsSource = _appointmentController.UpdateAppointments();
+            dataView.ItemsSource = _appointmentController.UpdateData();
             Frame patientFrame = (Frame)app.Properties["PatientFrame"];
             patientFrame.Content = new PatientAppointmentsView();
         }
