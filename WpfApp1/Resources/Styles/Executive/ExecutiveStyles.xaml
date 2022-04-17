@@ -76,23 +76,28 @@
         <Setter Property="Padding" Value="10"></Setter>
 
     </Style>
-    <Style x:Key="DataGrid" TargetType="DataGrid">
+    <Style x:Key="ExecutiveDataGrid" TargetType="DataGrid">
+        <Setter Property="Background" Value="{StaticResource AccentBlueBrush}"/>
+        <Setter Property="RowBackground" Value="{StaticResource LightestBlueBrush}"/>
+        <Setter Property="AlternatingRowBackground" Value="{StaticResource LightBlueBrush}"/>
+        <Setter Property="AlternationCount" Value="2"/>
+        <Setter Property="FontSize" Value="30"></Setter>
         <Setter Property="FontFamily" Value="Impact"></Setter>
-        <Setter Property="Foreground" Value="{StaticResource AccentBlueBrush}"></Setter>
-        <Setter Property="FontSize" Value="25"></Setter>
-        <Setter Property="VerticalAlignment" Value="Center"></Setter>
-        <Setter Property="HorizontalAlignment" Value="Right"></Setter>
-        <Setter Property="RowHeight" Value="30"></Setter>
-        <Setter Property="Background" Value="{StaticResource AccentBlueBrush}"></Setter>
-
+        <Setter Property="BorderThickness" Value="0"></Setter>
+        <Setter Property="VerticalGridLinesBrush" Value="{StaticResource AccentBlueBrush}"></Setter>
+        <Setter Property="HorizontalGridLinesBrush" Value="{StaticResource AccentBlueBrush}"></Setter>
     </Style>
-    <Style x:Key="DGColumn" TargetType="DataGridCell">
+    <Style x:Key="ExecutiveDGHeader" TargetType="DataGridColumnHeader">
         <Setter Property="BorderBrush" Value="{StaticResource AccentBlueBrush}"></Setter>
-        <Setter Property="Background" Value="{StaticResource LightBlueBrush}"></Setter>
-    </Style>
-    <Style x:Key="DGHeader" TargetType="DataGridColumnHeader">
-        <Setter Property="BorderBrush" Value="{StaticResource AccentBlueBrush}"></Setter>
-        <Setter Property="Background" Value="{StaticResource AccentBlueBrush}"></Setter>
+        <Setter Property="BorderThickness" Value="2"></Setter>
+        <Setter Property="Background" Value="{StaticResource BlueBrush}"></Setter>
         <Setter Property="Foreground" Value="{StaticResource WhiteBrush}"></Setter>
+        <Setter Property="FontSize" Value="30"></Setter>
+        <Setter Property="FontFamily" Value="Impact"></Setter>
+    </Style>
+    <Style x:Key="ExecutiveDGCell" TargetType="DataGridCell">
+        <Setter Property="Foreground" Value="{StaticResource AccentBlueBrush}"></Setter>
+        <Setter Property="BorderBrush" Value="{StaticResource AccentBlueBrush}"></Setter>
+        <Setter Property="BorderThickness" Value="2"></Setter>
     </Style>
 </ResourceDictionary>

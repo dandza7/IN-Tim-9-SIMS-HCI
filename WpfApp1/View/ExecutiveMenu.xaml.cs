@@ -15,6 +15,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using WpfApp1.Controller;
 using WpfApp1.Model;
+using WpfApp1.View.Model.Executive;
 
 namespace WpfApp1.Service
 {
@@ -60,16 +61,35 @@ namespace WpfApp1.Service
             string pw = PasswordField.Password.ToString();
             if (user != "dandza" || pw != "0904")
             {
-                NotificationContainer.Visibility = Visibility.Visible;
+                ErrorContainer.Visibility = Visibility.Visible;
             } else
             {
+                UsernameField.Text = "";
+                PasswordField.Clear();
                 LogInContainer.Visibility = Visibility.Collapsed;
+                ExecutiveMainFrame.Content = new ExecutiveMainPage();
+                ExecutiveMainFrame.Visibility = Visibility.Visible;
+                LogOutButton.Visibility = Visibility.Visible;
+                NotificationsButton.Visibility = Visibility.Visible;
             }
         }
 
-        private void OKNotification_Click(object sender, RoutedEventArgs e)
+        private void OkToError_Click(object sender, RoutedEventArgs e)
         {
-            NotificationContainer.Visibility=Visibility.Collapsed;
+            ErrorContainer.Visibility=Visibility.Collapsed;
+        }
+
+        private void LogOutButton_Click(object sender, RoutedEventArgs e)
+        {
+            LogInContainer.Visibility = Visibility.Visible;
+            ExecutiveMainFrame.Visibility = Visibility.Collapsed;
+            LogOutButton.Visibility = Visibility.Collapsed;
+            NotificationsButton.Visibility = Visibility.Collapsed;
+        }
+
+        private void NotificationsButton_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
