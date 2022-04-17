@@ -15,13 +15,14 @@
         <Setter Property="VerticalContentAlignment" Value="Center"/>
         <Setter Property="FontSize" Value="17"/>
         <Setter Property="MaxWidth" Value="785"/>
+        <Setter Property="ColumnHeaderStyle" Value="{DynamicResource PatientHeaderStyle}"/>
     </Style>
 
     <Style x:Key="ColumnElementStyle" TargetType="TextBlock">
         <Setter Property="Margin" Value="10,0,20,0" />
     </Style>
     
-    <Style BasedOn="{StaticResource {x:Type DataGridColumnHeader}}" TargetType="{x:Type DataGridColumnHeader}">
+    <Style x:Key="PatientHeaderStyle" TargetType="DataGridColumnHeader">
         <Setter Property="Background" Value="{StaticResource BlueBrush}"/>
         <Setter Property="Foreground" Value="{StaticResource WhiteBrush}"/>
         <Setter Property="Width" Value="Auto"/>
@@ -29,7 +30,7 @@
         <Setter Property="FontSize" Value="19"/>
         <Setter Property="HorizontalContentAlignment" Value="Center"/>
     </Style>
-
+    
     <Style BasedOn="{StaticResource {x:Type DataGridCell}}" TargetType="{x:Type DataGridCell}">
         <Setter Property="Foreground" Value="{StaticResource WhiteBrush}"/>
         <Setter Property="Template">

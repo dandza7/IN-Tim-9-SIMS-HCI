@@ -8,10 +8,10 @@
             <ResourceDictionary.MergedDictionaries>
                 <!-- Colors mora biti na vrhu jer je referenciran u drugim stilovima -->
                 <ResourceDictionary Source="Resources/Styles/Colors.xaml"/>
-                <ResourceDictionary Source="Resources/Styles/Patient/PatientDataGrid.xaml"/>
                 <ResourceDictionary Source="Resources/Styles/Patient/PatientButtons.xaml"/>
                 <ResourceDictionary Source="Resources/Styles/Secretary/SecretaryPatientsDataGrid.xaml"/>
                 <ResourceDictionary Source="Resources/Styles/Secretary/SecretaryButtons.xaml"/>
+                <ResourceDictionary Source="Resources/Styles/Patient/PatientDataGrid.xaml"/>
                 <ResourceDictionary Source="Resources/Styles/Executive/ExecutiveStyles.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>

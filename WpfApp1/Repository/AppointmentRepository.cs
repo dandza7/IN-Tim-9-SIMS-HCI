@@ -15,10 +15,6 @@ namespace WpfApp1.Repository
         private string _delimiter;
         private readonly string _datetimeFormat;
 
-        private static string _projectPath = System.Reflection.Assembly.GetExecutingAssembly().Location
-            .Split(new string[] { "bin" }, StringSplitOptions.None)[0];
-        private DoctorRepository _doctorRepository = new DoctorRepository(_projectPath + "\\Resources\\Data\\doctors.csv", ";");
-
         public AppointmentRepository(string path, string delimiter, string datetimeFormat)
         {
             _path = path;
@@ -91,8 +87,7 @@ namespace WpfApp1.Repository
         private Appointment ConvertCSVFormatToAppointment(string appointmentCSVFormat)
         {
             var tokens = appointmentCSVFormat.Split(_delimiter.ToCharArray());
-            Doctor doctor = _doctorRepository.GetById(int.Parse(tokens[3]));
-            return new Appointment(int.Parse(tokens[0]), DateTime.Parse(tokens[1]), DateTime.Parse(tokens[2]), doctor);
+            return new Appointment(int.Parse(tokens[0]), DateTime.Parse(tokens[1]), DateTime.Parse(tokens[2]), int.Parse(tokens[3]));
         }
         private string ConvertAppointmentToCSVFormat(Appointment appointment)
         {
@@ -100,7 +95,7 @@ namespace WpfApp1.Repository
                 appointment.Id,
                 appointment.Beginning.ToString(_datetimeFormat),
                 appointment.Ending.ToString(_datetimeFormat),
-                appointment.Doctor.Id.ToString());
+                appointment.DoctorId.ToString());
         }
 
         private void AppendLineToFile(string path, string line)
