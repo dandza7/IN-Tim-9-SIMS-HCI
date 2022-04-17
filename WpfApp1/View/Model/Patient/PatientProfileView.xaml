@@ -5,24 +5,30 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:WpfApp1.View.Model"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
+      d:DesignHeight="768" d:DesignWidth="1024"
       Title="PatientProfileView">
 
     <Grid>
         <Button Style="{StaticResource LogoutButton}"/>
         <Label Content="MyProfile" FontSize="30" FontWeight="ExtraBlack" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-        <TabControl Style="{StaticResource PatientTabControl}" Height="600" Width="600">
-            <TabItem Header="Information" Background="{StaticResource LightestBlueBrush}" Foreground="{StaticResource DarkBlueBrush}">
-                <Grid Background="{StaticResource LightBlueBrush}"/>
+        <TabControl Style="{StaticResource PatientTabControl}" Height="600" Width="765">
+            <TabItem Header="Information" Style="{StaticResource PatientTabItem}">
+                <Grid Background="{StaticResource DarkBlueBrush}"/>
             </TabItem>
-            <TabItem Header="Therapies">
-                <Grid Background="#FFE5E5E5"/>
+            <TabItem Header="Therapies" Style="{StaticResource PatientTabItem}">
+                <Grid Background="{StaticResource DarkBlueBrush}"/>
             </TabItem>
-            <TabItem Header="Reports">
-                <Grid Background="#FFE5E5E5"/>
+            <TabItem Header="Reports" Style="{StaticResource PatientTabItem}">
+                <Grid Background="{StaticResource DarkBlueBrush}"/>
             </TabItem>
-            <TabItem Header="Notifications">
-                <Grid Background="#FFE5E5E5"/>
+            <TabItem Header="Notifications" Style="{StaticResource PatientTabItem}">
+                <Grid Background="{StaticResource DarkBlueBrush}">
+                    <DataGrid x:Name="PatientNotificationsDataGrid" MaxWidth="707" Style="{StaticResource PatientDataGrid}">
+                        <DataGridTextColumn Header="Date and Time" CanUserSort="False" ElementStyle="{StaticResource ColumnElementStyle}"/>
+                        <DataGridTextColumn Header="Content of Notification" CanUserSort="False" ElementStyle="{StaticResource ColumnElementStyle}"/>
+                        <DataGridTextColumn Header="Remove" CanUserSort="False" ElementStyle="{StaticResource ColumnElementStyle}"/>
+                    </DataGrid>
+                </Grid>
             </TabItem>
         </TabControl>
     </Grid>
