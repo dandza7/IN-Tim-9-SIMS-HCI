@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,26 +24,38 @@ namespace WpfApp1.View.Dialog
     public partial class MovePatientAppointmentDialog : Page
     {
 
+        
+
+        private AppointmentController _appointmentController;
+        private DoctorController _doctorController;
+        private int _id;
+        public ObservableCollection<Doctor> Doctors { get; set; }
         public MovePatientAppointmentDialog()
         {
             InitializeComponent();
             DataContext = this;
+            var app = Application.Current as App;
+            _doctorController = app.DoctorController;
+            Doctors = new ObservableCollection<Doctor>();
+            List<Doctor> allDoctors = _doctorController.GetAll().ToList();
+            allDoctors.ForEach(doctor =>
+            {
+                if (doctor.Specialization == Doctor.SpecType.generalPracticioner && doctor.IsAvailable) Doctors.Add(doctor);
+            });
         }
 
-        private AppointmentController _appointmentController;
-        public DateTime Beginning;
-        public DateTime Ending;
-        public int Id;
+        public int Id { get { return _id; } set { _id = value; } }
 
         private void MoveAppointment_Click(object sender, RoutedEventArgs e)
         {
             var app = Application.Current as App;
             _appointmentController = app.AppointmentController;
+            _doctorController = app.DoctorController;
             if (BeginningDTP.Text == null || EndingDTP.Text == null) return;
+            if (DoctorComboBox.SelectedValue == null) return;
+            Doctor doctor = _doctorController.GetByUsername(((Doctor)DoctorComboBox.SelectedValue).Username);
             Id = (int)app.Properties["appointmentId"];
-            Beginning = DateTime.Parse(BeginningDTP.Text);
-            Ending = DateTime.Parse(EndingDTP.Text);
-            _appointmentController.Update(new Appointment(Id, Beginning, Ending, 1));
+            _appointmentController.Update(new Appointment(Id, DateTime.Parse(BeginningDTP.Text), DateTime.Parse(EndingDTP.Text), doctor.Id));
             DataGrid dataView = (DataGrid)app.Properties["DataView"];
             dataView.ItemsSource = null;
             dataView.ItemsSource = _appointmentController.UpdateData();

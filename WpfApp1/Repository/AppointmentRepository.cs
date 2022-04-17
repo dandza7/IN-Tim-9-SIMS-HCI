@@ -60,6 +60,7 @@ namespace WpfApp1.Repository
                 {
                     a.Beginning = appointment.Beginning;
                     a.Ending = appointment.Ending;
+                    a.DoctorId = appointment.DoctorId;
                 }
                 newFile.Add(ConvertAppointmentToCSVFormat(a));
             }
