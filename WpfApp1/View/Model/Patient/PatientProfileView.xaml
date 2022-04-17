@@ -11,5 +11,19 @@
     <Grid>
         <Button Style="{StaticResource LogoutButton}"/>
         <Label Content="MyProfile" FontSize="30" FontWeight="ExtraBlack" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <TabControl Style="{StaticResource PatientTabControl}" Height="600" Width="600">
+            <TabItem Header="Information" Background="{StaticResource LightestBlueBrush}" Foreground="{StaticResource DarkBlueBrush}">
+                <Grid Background="{StaticResource LightBlueBrush}"/>
+            </TabItem>
+            <TabItem Header="Therapies">
+                <Grid Background="#FFE5E5E5"/>
+            </TabItem>
+            <TabItem Header="Reports">
+                <Grid Background="#FFE5E5E5"/>
+            </TabItem>
+            <TabItem Header="Notifications">
+                <Grid Background="#FFE5E5E5"/>
+            </TabItem>
+        </TabControl>
     </Grid>
 </Page>

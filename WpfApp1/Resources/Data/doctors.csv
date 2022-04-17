@@ -1,5 +1,5 @@
-﻿1;Pera;Perić;PeraHemisfera;D0ktor;0661111111;0308000123123;doctor;generalPracticioner;true
-2;Žika;Žikić;LudiŽika;D0ktor;0662222222;0404000123123;doctor;generalPracticioner;true
-4;Mika;Mikić;MikaPrika;D0ktor;0663333333;0505000123123;doctor;generalPracticioner;true
-6;Laza;Lazić;U_Laze;D0ktor;0664444444;060600012123;doctor;anesthesiologist;true
-10;Marko;Marković;Markan;D0ktor;0665555555;0707000123123;doctor;cardiologist;false
+﻿1;Pera;Perić;PeraHemisfera;D0ktor;0661111111;0308000123123;doctor;generalPracticioner;true;1
+2;Žika;Žikić;LudiŽika;D0ktor;0662222222;0404000123123;doctor;generalPracticioner;true;1
+4;Mika;Mikić;MikaPrika;D0ktor;0663333333;0505000123123;doctor;generalPracticioner;true;1
+6;Laza;Lazić;U_Laze;D0ktor;0664444444;060600012123;doctor;anesthesiologist;true;1
+10;Marko;Marković;Markan;D0ktor;0665555555;0707000123123;doctor;cardiologist;false;1

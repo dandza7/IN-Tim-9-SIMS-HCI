@@ -15,7 +15,8 @@
     
     <Color x:Key="AccentBlue">#0082F0</Color>
     <SolidColorBrush x:Key="AccentBlueBrush" Color="{StaticResource AccentBlue}"/>
-    
 
+    <Color x:Key="DarkBlue">#00316E</Color>
+    <SolidColorBrush x:Key="DarkBlueBrush" Color="{StaticResource DarkBlue}"/>
 
 </ResourceDictionary>

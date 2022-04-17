@@ -127,7 +127,8 @@ namespace WpfApp1.Repository
                 tokens[6], 
                 role, 
                 spec, 
-                bool.Parse(tokens[9]));
+                bool.Parse(tokens[9]),
+                int.Parse(tokens[10]));
         }
         private string ConvertDoctorToCSVFormat(Doctor doctor)
         {
@@ -141,7 +142,8 @@ namespace WpfApp1.Repository
                doctor.Jmbg.ToString(),
                doctor.Role.ToString(),
                doctor.Specialization.ToString(),
-               doctor.IsAvailable.ToString()); 
+               doctor.IsAvailable.ToString(),
+               doctor.RoomId.ToString());
         }
         private void AppendLineToFile(string path, string line)
         {
