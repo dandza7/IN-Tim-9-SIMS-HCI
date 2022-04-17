@@ -12,6 +12,7 @@
                 <ResourceDictionary Source="Resources/Styles/Secretary/SecretaryPatientsDataGrid.xaml"/>
                 <ResourceDictionary Source="Resources/Styles/Secretary/SecretaryButtons.xaml"/>
                 <ResourceDictionary Source="Resources/Styles/Patient/PatientDataGrid.xaml"/>
+                <ResourceDictionary Source="Resources/Styles/Executive/ExecutiveStyles.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>
