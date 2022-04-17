@@ -116,11 +116,18 @@ namespace WpfApp1.Repository
         private Doctor ConvertCSVFormatToDoctor(string doctorCSVFormat)
         {
             var tokens = doctorCSVFormat.Split(_delimiter.ToCharArray());
-            RoleType role;
-            Enum.TryParse(tokens[7], true, out role);
-            SpecType spec;
-            Enum.TryParse(tokens[8], true, out spec);
-            return new Doctor(int.Parse(tokens[0]), tokens[1], tokens[2], tokens[3], tokens[4], tokens[5], tokens[6], role, spec, bool.Parse(tokens[9]));
+            Enum.TryParse(tokens[7], true, out RoleType role);
+            Enum.TryParse(tokens[8], true, out SpecType spec);
+            return new Doctor(int.Parse(tokens[0]), 
+                tokens[1], 
+                tokens[2], 
+                tokens[3], 
+                tokens[4], 
+                tokens[5], 
+                tokens[6], 
+                role, 
+                spec, 
+                bool.Parse(tokens[9]));
         }
         private string ConvertDoctorToCSVFormat(Doctor doctor)
         {

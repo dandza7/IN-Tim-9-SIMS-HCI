@@ -18,6 +18,7 @@ using WpfApp1.Controller;
 using WpfApp1.Model;
 using WpfApp1.View.Converter;
 using WpfApp1.View.Model.Patient;
+using static WpfApp1.Model.Appointment;
 
 namespace WpfApp1.View.Dialog
 {
@@ -52,7 +53,7 @@ namespace WpfApp1.View.Dialog
             if (DoctorComboBox.SelectedValue == null) return;
             if (BeginningDTP.Text == null || EndingDTP.Text == null) return;
             Doctor doctor = _doctorController.GetByUsername(((Doctor)DoctorComboBox.SelectedValue).Username);
-            _appointmentController.Create(new Appointment(DateTime.Parse(BeginningDTP.Text), DateTime.Parse(EndingDTP.Text), doctor.Id));
+            _appointmentController.Create(new Appointment(DateTime.Parse(BeginningDTP.Text), DateTime.Parse(EndingDTP.Text), AppointmentType.regular, false, doctor.Id, 3, 1));
             DataGrid dataView = (DataGrid)app.Properties["DataView"];
             dataView.ItemsSource = null;
             dataView.ItemsSource = _appointmentController.UpdateData();
