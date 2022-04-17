@@ -21,7 +21,7 @@ namespace WpfApp1.Model
         private int _id;
         private DateTime _beginning;
         private DateTime _ending;
-        private Doctor _doctor;
+        private int _doctorId;
         public int Id
         {
             get
@@ -67,35 +67,35 @@ namespace WpfApp1.Model
                 }
             }
         }
-        public Doctor Doctor
+        public int DoctorId
         {
             get
             {
-                return _doctor;
+                return _doctorId;
             }
             set
             {
-                if (value != _doctor)
+                if (value != _doctorId)
                 {
-                    _doctor = value;
-                    OnPropertyChanged("Doctor");
+                    _doctorId = value;
+                    OnPropertyChanged("DoctorId");
                 }
             }
         }
 
         public Appointment() {}
-        public Appointment(DateTime beginning, DateTime ending, Doctor doctor)
+        public Appointment(DateTime beginning, DateTime ending, int doctorId)
         {
             Beginning = beginning;
             Ending = ending;
-            Doctor = doctor;
+            DoctorId = doctorId;
         }
-        public Appointment(int id, DateTime beginning, DateTime ending, Doctor doctor)
+        public Appointment(int id, DateTime beginning, DateTime ending, int doctorId)
         {
             Id = id;
             Beginning = beginning;
             Ending = ending;
-            Doctor = doctor;
+            DoctorId = doctorId;
         }
 
         

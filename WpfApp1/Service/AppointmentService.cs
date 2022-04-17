@@ -23,11 +23,6 @@ namespace WpfApp1.Service
             return appointments;
         }
 
-        private Appointment FindAppointmentById(IEnumerable<Appointment> appointments, long id)
-        {
-            return appointments.SingleOrDefault(appointment => appointment.Id == id);
-        }
-
         public Appointment Create(Appointment appointment)
         {
             // save appointments

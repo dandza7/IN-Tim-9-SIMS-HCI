@@ -24,7 +24,6 @@ namespace WpfApp1.Service
     {
         private AppointmentController _appointmentController;
         private DoctorController _doctorController;
-
         public IEnumerable<Appointment> appointments { get; set; }
         public List<int> Ids { get; set; }
         public List<String> Priorities = new List<String>();
@@ -72,8 +71,7 @@ namespace WpfApp1.Service
 
         private void AddConfirm_Click(object sender, RoutedEventArgs e)
         {
-            Doctor doctor = _doctorController.GetById(1);
-            Appointment appointment = new Appointment(Convert.ToDateTime(StartDP.Text), Convert.ToDateTime(EndDP.Text), doctor);
+            Appointment appointment = new Appointment(Convert.ToDateTime(StartDP.Text), Convert.ToDateTime(EndDP.Text), 1);
             _appointmentController.Create(appointment);
             AddContainer.Visibility = Visibility.Collapsed;
 
@@ -97,8 +95,7 @@ namespace WpfApp1.Service
 
         private void EditConfirm_Click(object sender, RoutedEventArgs e)
         {
-            Doctor doctor = _doctorController.GetById(2);
-            Appointment appointment = new Appointment(Convert.ToInt32(IdLabel.Content), Convert.ToDateTime(EditStartDP.Text), Convert.ToDateTime(EditEndDP.Text), doctor);
+            Appointment appointment = new Appointment(Convert.ToInt32(IdLabel.Content), Convert.ToDateTime(EditStartDP.Text), Convert.ToDateTime(EditEndDP.Text), 1);
             _appointmentController.Update(appointment);
             EditContainer.Visibility = Visibility.Collapsed;
         }
