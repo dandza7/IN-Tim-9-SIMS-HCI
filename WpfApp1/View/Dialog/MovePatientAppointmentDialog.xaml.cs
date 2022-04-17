@@ -15,6 +15,7 @@ using System.Windows.Shapes;
 using WpfApp1.Controller;
 using WpfApp1.Model;
 using WpfApp1.View.Model.Patient;
+using static WpfApp1.Model.Appointment;
 
 namespace WpfApp1.View.Dialog
 {
@@ -23,9 +24,6 @@ namespace WpfApp1.View.Dialog
     /// </summary>
     public partial class MovePatientAppointmentDialog : Page
     {
-
-        
-
         private AppointmentController _appointmentController;
         private DoctorController _doctorController;
         private int _id;
@@ -55,7 +53,7 @@ namespace WpfApp1.View.Dialog
             if (DoctorComboBox.SelectedValue == null) return;
             Doctor doctor = _doctorController.GetByUsername(((Doctor)DoctorComboBox.SelectedValue).Username);
             Id = (int)app.Properties["appointmentId"];
-            _appointmentController.Update(new Appointment(Id, DateTime.Parse(BeginningDTP.Text), DateTime.Parse(EndingDTP.Text), doctor.Id));
+            _appointmentController.Update(new Appointment(Id, DateTime.Parse(BeginningDTP.Text), DateTime.Parse(EndingDTP.Text), AppointmentType.regular, false, doctor.Id, 3, 1));
             DataGrid dataView = (DataGrid)app.Properties["DataView"];
             dataView.ItemsSource = null;
             dataView.ItemsSource = _appointmentController.UpdateData();

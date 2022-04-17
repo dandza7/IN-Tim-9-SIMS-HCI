@@ -18,10 +18,22 @@ namespace WpfApp1.Model
             }
         }
 
+        public enum AppointmentType
+        {
+            surgery,
+            regular
+        }
+
         private int _id;
         private DateTime _beginning;
         private DateTime _ending;
+        private AppointmentType _type;
+        private bool _isUrgent;
+
         private int _doctorId;
+        private int _patientId;
+        private int _roomId;
+
         public int Id
         {
             get
@@ -67,6 +79,36 @@ namespace WpfApp1.Model
                 }
             }
         }
+
+        public AppointmentType Type
+        {
+            get { return _type; }
+            set
+            {
+                if (value != _type)
+                {
+                    _type = value;
+                    OnPropertyChanged("Type");
+                }
+            }
+        }
+
+        public bool IsUrgent
+        {
+            get
+            {
+                return _isUrgent;
+            }
+            set
+            {
+                if (value != _isUrgent)
+                {
+                    _isUrgent = value;
+                    OnPropertyChanged("IsUrgent");
+                }
+            }
+        }
+
         public int DoctorId
         {
             get
@@ -83,19 +125,58 @@ namespace WpfApp1.Model
             }
         }
 
-        public Appointment() {}
-        public Appointment(DateTime beginning, DateTime ending, int doctorId)
+        public int PatientId
+        {
+            get
+            {
+                return _patientId;
+            }
+            set
+            {
+                if (value != _patientId)
+                {
+                    _patientId = value;
+                    OnPropertyChanged("PatientId");
+                }
+            }
+        }
+
+        public int RoomId
+        {
+            get
+            {
+                return _roomId;
+            }
+            set
+            {
+                if (value != _roomId)
+                {
+                    _roomId = value;
+                    OnPropertyChanged("RoomId");
+                }
+            }
+        }
+
+        public Appointment(DateTime beginning, DateTime ending, AppointmentType type, bool isUrgent, int doctorId, int patientId, int roomId)
         {
             Beginning = beginning;
             Ending = ending;
+            Type = type;
+            IsUrgent = isUrgent;
             DoctorId = doctorId;
+            PatientId = patientId;
+            RoomId = roomId;
         }
-        public Appointment(int id, DateTime beginning, DateTime ending, int doctorId)
+        public Appointment(int id, DateTime beginning, DateTime ending, AppointmentType type, bool isUrgent, int doctorId, int patientId, int roomId)
         {
             Id = id;
             Beginning = beginning;
             Ending = ending;
+            Type = type;
+            IsUrgent = isUrgent;
             DoctorId = doctorId;
+            PatientId = patientId;
+            RoomId = roomId;
         }
 
         

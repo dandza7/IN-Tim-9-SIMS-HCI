@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using WpfApp1.Model;
+using static WpfApp1.Model.Appointment;
 
 namespace WpfApp1.Repository
 {
@@ -88,7 +89,16 @@ namespace WpfApp1.Repository
         private Appointment ConvertCSVFormatToAppointment(string appointmentCSVFormat)
         {
             var tokens = appointmentCSVFormat.Split(_delimiter.ToCharArray());
-            return new Appointment(int.Parse(tokens[0]), DateTime.Parse(tokens[1]), DateTime.Parse(tokens[2]), int.Parse(tokens[3]));
+            Enum.TryParse(tokens[3], true, out AppointmentType type);
+            //(int id, DateTime beginning, DateTime ending, AppointmentType type, bool isUrgent, int doctorId, int patientId, int roomId)
+            return new Appointment(int.Parse(tokens[0]), 
+                DateTime.Parse(tokens[1]), 
+                DateTime.Parse(tokens[2]), 
+                type, 
+                bool.Parse(tokens[4]), 
+                int.Parse(tokens[5]), 
+                int.Parse(tokens[6]), 
+                int.Parse(tokens[7]));
         }
         private string ConvertAppointmentToCSVFormat(Appointment appointment)
         {
@@ -96,7 +106,11 @@ namespace WpfApp1.Repository
                 appointment.Id,
                 appointment.Beginning.ToString(_datetimeFormat),
                 appointment.Ending.ToString(_datetimeFormat),
-                appointment.DoctorId.ToString());
+                appointment.Type.ToString(),
+                appointment.IsUrgent.ToString(),
+                appointment.DoctorId.ToString(),
+                appointment.PatientId.ToString(),
+                appointment.RoomId.ToString());
         }
 
         private void AppendLineToFile(string path, string line)
