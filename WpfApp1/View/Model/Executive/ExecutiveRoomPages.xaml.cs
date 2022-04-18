@@ -223,5 +223,64 @@ namespace WpfApp1.View.Model.Executive
             this._roomController.Delete(r.Id);
             RefreshSource();
         }
+        //--------------------------------------------------------------------------------------------------------
+        //          Renovating button manipulation code:
+        //--------------------------------------------------------------------------------------------------------
+
+        private void RenovationButton_MouseEnter(object sender, MouseEventArgs e)
+        {
+            BasicRenovationButton.Visibility = Visibility.Visible;
+            AdvancedRenovationButton.Visibility = Visibility.Visible;
+        }
+
+
+        private void BARenovationButton_MouseLeave(object sender, MouseEventArgs e)
+        {
+            BasicRenovationButton.Visibility = Visibility.Collapsed;
+            AdvancedRenovationButton.Visibility = Visibility.Collapsed;
+        }
+
+        //--------------------------------------------------------------------------------------------------------
+        //          Basic Room Renovating code:
+        //--------------------------------------------------------------------------------------------------------
+        private void BasicRenovationButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (RoomsDG.SelectedItems.Count == 0)
+            {
+                NotSelectedContainer.Visibility = Visibility.Visible;
+                DialogContainer.Visibility = Visibility.Visible;
+                return;
+            }
+            Feedback = "";
+            DialogContainer.Visibility = Visibility.Visible;
+            BasicRenovationContainer.Visibility = Visibility.Visible;
+            Room r = (Room)RoomsDG.SelectedItems[0];
+            SelectedId = r.Id;
+            SelectedNametag = r.Nametag;
+            BRNametag.Text = r.Nametag;
+            BRType.Text = r.Type;
+        }
+
+        private void BRConfirm_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void XBRButton_Click(object sender, RoutedEventArgs e)
+        {
+            Feedback = "";
+            DialogContainer.Visibility = Visibility.Collapsed;
+            BasicRenovationContainer.Visibility = Visibility.Collapsed;
+            BRNametag.Text = "";
+            BRType.Text = "";
+        }
+
+        //--------------------------------------------------------------------------------------------------------
+        //          Advanced Room Renovating code:
+        //--------------------------------------------------------------------------------------------------------
+        private void AdvancedRenovationButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
