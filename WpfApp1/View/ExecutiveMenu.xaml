@@ -102,7 +102,7 @@
                 </Grid.RowDefinitions>
                 <TextBlock Grid.Row="1" Grid.Column="1" Text="Problem with logging in." Style="{StaticResource Title}"></TextBlock>
                 <TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding Path=BadLoginText}" Style="{StaticResource NotificationText}" Height="300" Margin="150 0 150 50"></TextBlock>
-                <Button x:Name="OkToError" Grid.Column="1" Grid.Row="3" Margin="300 0" Style="{StaticResource ClassicButton}" Click="OkToError_Click">OK</Button>
+                <Button x:Name="OkToError" Grid.Column="1" Grid.Row="3" Margin="300 0" Style="{StaticResource ClassicButton}" BorderThickness="3" Click="OkToError_Click">OK</Button>
             </Grid>
         </Border>
         <Button x:Name="LogOutButton" Style="{StaticResource ClassicButton}" Width="100" Height="40" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5 105 0 0" Click="LogOutButton_Click" Visibility="Collapsed">Log out</Button>

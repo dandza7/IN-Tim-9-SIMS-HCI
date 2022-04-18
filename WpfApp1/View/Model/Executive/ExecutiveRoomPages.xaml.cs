@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,15 +21,55 @@ namespace WpfApp1.View.Model.Executive
     /// <summary>
     /// Interaction logic for ExecutiveRoomPages.xaml
     /// </summary>
-    public partial class ExecutiveRoomPages : Page
+    public partial class ExecutiveRoomPages : Page, INotifyPropertyChanged
     {
+        //--------------------------------------------------------------------------------------------------------
+        //          INotifyPropertyChanged fields:
+        //--------------------------------------------------------------------------------------------------------
+        #region NotifyProperties
+        public String _feedback;
+        public string Feedback
+        {
+            get
+            {
+                return _feedback;
+            }
+            set
+            {
+                if (value != _feedback)
+                {
+                    _feedback = value;
+                    OnPropertyChanged("Feedback");
+                }
+            }
+        }
+        #endregion
+        #region PropertyChangedNotifier
+        protected virtual void OnPropertyChanged(string name)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(name));
+            }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        #endregion
+
+        //--------------------------------------------------------------------------------------------------------
+        //          Basic fields
+        //--------------------------------------------------------------------------------------------------------
+
         private RoomController _roomController;
         public List<Room> Rooms { get; set; }
         public List<String> RoomTypes { get; set; }
-        public String Feedback { get; set; }
+
         public int SelectedId { get; set; }
         public String SelectedNametag { get; set; }
 
+        //--------------------------------------------------------------------------------------------------------
+        //          Constructor code:
+        //--------------------------------------------------------------------------------------------------------
 
         public ExecutiveRoomPages()
         {
@@ -43,6 +84,24 @@ namespace WpfApp1.View.Model.Executive
             SelectedId = 0;
 
         }
+
+        //--------------------------------------------------------------------------------------------------------
+        //          Global methods code:
+        //--------------------------------------------------------------------------------------------------------
+
+        public void RefreshSource()
+        {
+            this.Rooms = this._roomController.GetAll();
+            RoomsDG.ItemsSource = Rooms;
+            RoomsDG.Items.Refresh();
+        }
+
+        private void NotSelectedOK_Click(object sender, RoutedEventArgs e)
+        {
+            NotSelectedContainer.Visibility = Visibility.Collapsed;
+            DialogContainer.Visibility = Visibility.Collapsed;
+        }
+
         //--------------------------------------------------------------------------------------------------------
         //          Room Adding code:
         //--------------------------------------------------------------------------------------------------------
@@ -67,9 +126,15 @@ namespace WpfApp1.View.Model.Executive
         {
             if(AddNametag.Text == "" || AddType.Text == "")
             {
+                
                 Feedback = "*You have to fill all fields!";
                 return;
-            } 
+            }
+            if(AddNametag.Text.Contains(";"))
+            {
+                Feedback = "*You can't use semicolon (;) in Nametag!";
+                return;
+            }
             foreach(Room room in Rooms)
             {
                 if(room.Nametag == AddNametag.Text)
@@ -79,12 +144,14 @@ namespace WpfApp1.View.Model.Executive
                 }
             }
 
-            Feedback = "";
-            AddNametag.Text = "";
-            AddType.Text = "";
+
             _roomController.Create(new Room(0, AddNametag.Text, AddType.Text));
             DialogContainer.Visibility = Visibility.Collapsed;
             AddContainer.Visibility = Visibility.Collapsed;
+            RefreshSource();
+            Feedback = "";
+            AddNametag.Text = "";
+            AddType.Text = "";
 
 
         }
@@ -97,7 +164,8 @@ namespace WpfApp1.View.Model.Executive
         {
             if(RoomsDG.SelectedItems.Count == 0)
             {
-                Console.WriteLine("Nije selektovano!");
+                NotSelectedContainer.Visibility = Visibility.Visible;
+                DialogContainer.Visibility = Visibility.Visible;
                 return;
             }
             Feedback = "";
@@ -132,6 +200,28 @@ namespace WpfApp1.View.Model.Executive
             EditType.Text = "";
             DialogContainer.Visibility = Visibility.Collapsed;
             EditContainer.Visibility = Visibility.Collapsed;
+            RefreshSource();
+        }
+
+
+
+
+
+        //--------------------------------------------------------------------------------------------------------
+        //          Room Deleting code:
+        //--------------------------------------------------------------------------------------------------------
+
+        private void DeleteRoomButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (RoomsDG.SelectedItems.Count == 0)
+            {
+                NotSelectedContainer.Visibility = Visibility.Visible;
+                DialogContainer.Visibility = Visibility.Visible;
+                return;
+            }
+            Room r = (Room)RoomsDG.SelectedItems[0];
+            this._roomController.Delete(r.Id);
+            RefreshSource();
         }
     }
 }
