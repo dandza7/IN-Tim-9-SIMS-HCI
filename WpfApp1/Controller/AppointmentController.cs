@@ -21,7 +21,6 @@ namespace WpfApp1.Controller
 
         public IEnumerable<Appointment> GetAll()
         {
-            //Console.WriteLine("nesto\n");
             return _appointmentService.GetAll();
         }
 

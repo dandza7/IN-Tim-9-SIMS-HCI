@@ -24,10 +24,9 @@ namespace WpfApp1.Service
 
         }
 
-        internal IEnumerable<Appointment> GetAll()
+        public IEnumerable<Appointment> GetAll()
         {
-            var appointments = _appointmentRepo.GetAll();
-            return appointments;
+            return _appointmentRepo.GetAll();
         }
 
         public Appointment Create(Appointment appointment)
