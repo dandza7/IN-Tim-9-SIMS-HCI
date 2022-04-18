@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using WpfApp1.Model;
 using WpfApp1.Service;
 using WpfApp1.View.Model.Patient;
+using WpfApp1.View.Model.Secretary;
 
 namespace WpfApp1.Controller
 {
@@ -47,6 +48,10 @@ namespace WpfApp1.Controller
         public List<AppointmentView> GetAppointmentViews()
         {
             return _appointmentService.GetAppointmentViews();
+        }
+        public List<SecretaryAppointmentView> GetSecretaryAppointmentViews()
+        {
+            return _appointmentService.GetSecretaryAppointmentViews();
         }
     }
 }

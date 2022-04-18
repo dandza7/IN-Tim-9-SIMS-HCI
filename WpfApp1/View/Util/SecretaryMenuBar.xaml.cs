@@ -14,6 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using WpfApp1.Service;
 using WpfApp1.View.Model;
+using WpfApp1.View.Model.Secretary;
 
 namespace WpfApp1.View.Util
 {
@@ -35,6 +36,11 @@ namespace WpfApp1.View.Util
         {
             PageHeader.Text = "Patient List";
             Main.Content = new SecretaryPatientsView();
+        }
+        private void SecretaryAppointments_Click(object sender, RoutedEventArgs e)
+        {
+            PageHeader.Text = "Appointment List";
+            Main.Content = new SecretaryAppointmentsView();
         }
     }
 }
