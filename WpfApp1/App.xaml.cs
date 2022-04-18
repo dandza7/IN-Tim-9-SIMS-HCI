@@ -14,7 +14,7 @@ namespace WpfApp1
     /// <summary>
     /// Interaction logic for App.xaml
     /// </summary>
-    
+
     public partial class App : Application
     {
         private static string _projectPath = System.Reflection.Assembly.GetExecutingAssembly().Location
@@ -24,14 +24,16 @@ namespace WpfApp1
         private string PATIENT_FILE = _projectPath + "\\Resources\\Data\\patients.csv";
         private string DOCTOR_FILE = _projectPath + "\\Resources\\Data\\doctors.csv";
         private string DRUG_FILE = _projectPath + "\\Resources\\Data\\drugs.csv";
+        private string NOTIFICATION_FILE = _projectPath + "\\Resources\\Data\\notification.csv";
         private const string CSV_DELIMITER = ";";
-        private const string APPOINTMENT_DATETIME_FORMAT = "dd.MM.yyyy. HH:mm:ss";
+        private const string DATETIME_FORMAT = "dd.MM.yyyy. HH:mm:ss";
 
         public AppointmentController AppointmentController { get; set; }
         public RoomController RoomController { get; set; }
         public DoctorController DoctorController { get; set; }
         public PatientController PatientController { get; set; }
         public DrugController DrugController { get; set; }
+        public NotificationController NotificationController { get; set; }
 
         public App()
         {
@@ -53,7 +55,7 @@ namespace WpfApp1
 
             DoctorController = new DoctorController(doctorService);
 
-            var appointmentRepository = new AppointmentRepository(APPOINTMENT_FILE, CSV_DELIMITER, APPOINTMENT_DATETIME_FORMAT);
+            var appointmentRepository = new AppointmentRepository(APPOINTMENT_FILE, CSV_DELIMITER, DATETIME_FORMAT);
 
             var appointmentService = new AppointmentService(appointmentRepository, doctorRepository, patientRepository);
 
@@ -64,6 +66,12 @@ namespace WpfApp1
             var drugService = new DrugService(drugRepository);
 
             DrugController = new DrugController(drugService);
+
+            var notificationRepository = new NotificationRepository(NOTIFICATION_FILE, CSV_DELIMITER, DATETIME_FORMAT);
+
+            var notificationService = new NotificationService(notificationRepository);
+
+            NotificationController = new NotificationController(notificationService);
         }
     }
 }
