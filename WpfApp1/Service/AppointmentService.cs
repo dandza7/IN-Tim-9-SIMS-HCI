@@ -49,7 +49,7 @@ namespace WpfApp1.Service
         public List<AppointmentView> UpdateData()
         {
             List<AppointmentView> appointmentViews = new List<AppointmentView>();
-            List<Appointment> appointments = _appointmentRepo.UpdateAppointments();
+            List<Appointment> appointments = _appointmentRepo.GetAll().ToList();
             foreach (Appointment appointment in appointments)
             {
                 Doctor doctor = _doctorRepo.GetById(appointment.DoctorId);

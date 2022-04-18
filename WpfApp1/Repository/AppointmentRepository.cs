@@ -117,10 +117,5 @@ namespace WpfApp1.Repository
         {
             File.AppendAllText(path, line + Environment.NewLine);
         }
-
-        public List<Appointment> UpdateAppointments()
-        {
-            return GetAll().ToList(); 
-        }
     }
 }
