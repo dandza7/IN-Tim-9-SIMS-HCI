@@ -53,7 +53,7 @@ namespace WpfApp1
 
             var appointmentRepository = new AppointmentRepository(APPOINTMENT_FILE, CSV_DELIMITER, APPOINTMENT_DATETIME_FORMAT);
 
-            var appointmentService = new AppointmentService(appointmentRepository, doctorRepository);
+            var appointmentService = new AppointmentService(appointmentRepository, doctorRepository, patientRepository);
 
             AppointmentController = new AppointmentController(appointmentService);
         }

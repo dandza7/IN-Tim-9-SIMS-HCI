@@ -155,6 +155,12 @@
     <Compile Include="View\Model\SecretaryPatientsView.xaml.cs">
       <DependentUpon>SecretaryPatientsView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Model\Secretary\SecretaryAppointmentsView.xaml.cs">
+      <DependentUpon>SecretaryAppointmentsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Model\Secretary\SecretaryAppointmentView.xaml.cs">
+      <DependentUpon>SecretaryAppointmentView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\PatientMenu.xaml.cs">
       <DependentUpon>PatientMenu.xaml</DependentUpon>
     </Compile>
@@ -269,6 +275,14 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="View\Model\SecretaryPatientsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Model\Secretary\SecretaryAppointmentsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Model\Secretary\SecretaryAppointmentView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

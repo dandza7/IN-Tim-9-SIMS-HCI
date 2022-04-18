@@ -7,6 +7,7 @@ using WpfApp1.Model;
 using WpfApp1.Repository;
 using WpfApp1.View.Converter;
 using WpfApp1.View.Model.Patient;
+using WpfApp1.View.Model.Secretary;
 
 namespace WpfApp1.Service
 {
@@ -14,10 +15,13 @@ namespace WpfApp1.Service
     {
         private readonly AppointmentRepository _appointmentRepo;
         private readonly DoctorRepository _doctorRepo;
-        public AppointmentService(AppointmentRepository appointmentRepo, DoctorRepository doctorRepository)
+        private readonly PatientRepository _patientRepo;
+        public AppointmentService(AppointmentRepository appointmentRepo, DoctorRepository doctorRepository, PatientRepository patientRepo)
         {
             _appointmentRepo = appointmentRepo;
             _doctorRepo = doctorRepository;
+            _patientRepo = patientRepo;
+
         }
 
         internal IEnumerable<Appointment> GetAll()
@@ -66,5 +70,19 @@ namespace WpfApp1.Service
             }
             return appointmentViews;
         }
+        public List<SecretaryAppointmentView> GetSecretaryAppointmentViews()
+        {
+            List<SecretaryAppointmentView> appointmentViews = new List<SecretaryAppointmentView>();
+            List<Appointment> appointments = _appointmentRepo.GetAll().ToList();
+            foreach (Appointment appointment in appointments)
+            {
+                Doctor doctor = _doctorRepo.GetById(appointment.DoctorId);
+                Patient patient = _patientRepo.Find(appointment.PatientId);
+                appointmentViews.Add(AppointmentConverter.ConvertSecretaryAppointmentSecretaryAppointmentView(appointment, doctor, patient));
+            }
+            return appointmentViews;
+        }
+
+
     }
 }
