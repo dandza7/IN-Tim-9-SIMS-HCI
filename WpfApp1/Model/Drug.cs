@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace WpfApp1.Model
 {
-    public class Drug: INotifyPropertyChanged
+    public class Drug : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
         protected virtual void OnPropertyChanged(string name)
