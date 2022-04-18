@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace WpfApp1.Model
 {
-    public class Notification : INotifyPropertyChanged
+    public class Notification: INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
         protected virtual void OnPropertyChanged(string name)
