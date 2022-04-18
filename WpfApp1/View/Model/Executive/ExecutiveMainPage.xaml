@@ -18,11 +18,11 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
         <StackPanel Height="100" Grid.Row="0" Orientation="Horizontal">
-            <Button Name="DrugsButton" Width="256" Content="Drugs" Style="{StaticResource NavBarButton}" Click="DrugsButton_Click"/>
-            <Button Name="RoomsButton" Width="256" Content="Rooms" Style="{StaticResource NavBarButton}" Click="RoomsButton_Click"/>
-            <Button Name="InventoryButton" Width="256" Content="Inventory" Style="{StaticResource NavBarButton}" Click="InventoryButton_Click"/>
-            <Button Name="StatisticsButton" Width="256" Content="Statistics" Style="{StaticResource NavBarButton}" Click="StatisticsButton_Click"/>
-            <Button Name="HelpButton" Width="256" Content="Help" Style="{StaticResource NavBarButton}" Click="HelpButton_Click"/>
+            <Button Name="DrugsButton" Width="254" Content="Drugs" Style="{StaticResource NavBarButton}" Click="DrugsButton_Click"/>
+            <Button Name="RoomsButton" Width="254" Content="Rooms" Style="{StaticResource NavBarButton}" Click="RoomsButton_Click"/>
+            <Button Name="InventoryButton" Width="254" Content="Inventory" Style="{StaticResource NavBarButton}" Click="InventoryButton_Click"/>
+            <Button Name="StatisticsButton" Width="254" Content="Statistics" Style="{StaticResource NavBarButton}" Click="StatisticsButton_Click"/>
+            <Button Name="HelpButton" Width="254" Content="Help" Style="{StaticResource NavBarButton}" Click="HelpButton_Click"/>
         </StackPanel>
         <Frame x:Name="ExecutivePagesFrame" Grid.Row="2" NavigationUIVisibility="Hidden"></Frame>
     </Grid>
