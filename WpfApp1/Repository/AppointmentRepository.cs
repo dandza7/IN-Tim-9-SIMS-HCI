@@ -115,7 +115,6 @@ namespace WpfApp1.Repository
 
         private void AppendLineToFile(string path, string line)
         {
-            Console.WriteLine("Linija koju dodajem je:\n{0}", line);
             File.AppendAllText(path, line + Environment.NewLine);
         }
 
