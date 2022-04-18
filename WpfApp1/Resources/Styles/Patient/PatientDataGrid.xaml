@@ -29,8 +29,8 @@
         <Setter Property="FontSize" Value="19"/>
         <Setter Property="HorizontalContentAlignment" Value="Center"/>
     </Style>
-    
-    <Style BasedOn="{StaticResource {x:Type DataGridCell}}" TargetType="{x:Type DataGridCell}">
+
+    <Style x:Key="PatientDataGridCell" TargetType="{x:Type DataGridCell}">
         <Setter Property="Foreground" Value="{StaticResource WhiteBrush}"/>
         <Setter Property="Template">
             <Setter.Value>
