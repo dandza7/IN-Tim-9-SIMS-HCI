@@ -36,7 +36,7 @@
                    Color="{StaticResource White}"/>
             </DataGrid.Resources>
         </DataGrid>
-        <Border x:Name="DialogContainer" Grid.ColumnSpan="4" Grid.RowSpan="2" Style="{StaticResource OverlayModal}" Visibility="Visible">
+        <Border x:Name="DialogContainer" Grid.ColumnSpan="4" Grid.RowSpan="2" Style="{StaticResource OverlayModal}" Visibility="Collapsed">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="300"/>
@@ -108,7 +108,7 @@
                         <Button x:Name="XEditButton" Grid.Column="3" Grid.Row="1" Style="{StaticResource ClassicButton}" Click="XEditButton_Click">X</Button>
                     </Grid>
                 </Border>
-                <Border x:Name="BasicRenovationContainer" Grid.Column="1" Grid.Row="1" Style="{StaticResource DialogModal}" Margin="100 0 100 -70" Visibility="Visible">
+                <Border x:Name="BasicRenovationContainer" Grid.Column="1" Grid.Row="1" Style="{StaticResource DialogModal}" Margin="100 0 100 -70" Visibility="Collapsed">
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="50"/>
@@ -136,9 +136,9 @@
                         <Label Grid.Row="2" Grid.Column="1" Content="Type:" Style="{StaticResource FormLabel}" HorizontalAlignment="Center"></Label>
                         <TextBox x:Name="BRType" Grid.Row="2" Grid.Column="2" Style="{StaticResource FormInputBox}" IsEnabled="False"></TextBox>
                         <Label Grid.Row="3" Grid.Column="1" Content="Beginning:" Style="{StaticResource FormLabel}" HorizontalAlignment="Center"></Label>
-                        <ComboBox x:Name="BRBeginning" Grid.Row="3" Grid.Column="2" Style="{StaticResource FormInputComboBox}" Height="30"></ComboBox>
+                        <ComboBox x:Name="BRBeginning" Grid.Row="3" Grid.Column="2" Style="{StaticResource FormInputComboBox}" Height="30" Width="200" Text="{Binding SelectedBeginning}"  ItemsSource="{Binding Path=Beginnings}" IsEnabled="False"></ComboBox>
                         <Label Grid.Row="4" Grid.Column="1" Content="Ending:" Style="{StaticResource FormLabel}" HorizontalAlignment="Center"></Label>
-                        <ComboBox x:Name="BREnding" Grid.Row="4" Grid.Column="2" Style="{StaticResource FormInputComboBox}" Height="30" IsEnabled="False"></ComboBox>
+                        <ComboBox x:Name="BREnding" Grid.Row="4" Grid.Column="2" Style="{StaticResource FormInputComboBox}" Height="30" Width="200" ItemsSource="{Binding Path=Endings}" IsEnabled="False"></ComboBox>
                         <Label Grid.Row="5" Grid.Column="1" Content="Description:" Style="{StaticResource FormLabel}" HorizontalAlignment="Center"></Label>
                         <TextBox x:Name="BRDescription" Grid.Row="6" Grid.Column="1" Grid.ColumnSpan="2" Grid.RowSpan="3" Style="{StaticResource DescriptionBox}" Margin="20 5 20 15"></TextBox>
                         <TextBlock Grid.Row="9" Grid.Column="1" Grid.ColumnSpan="2" Grid.RowSpan="2" Style="{StaticResource SmallText}" Text="{Binding Path=Feedback, UpdateSourceTrigger=PropertyChanged}"></TextBlock>

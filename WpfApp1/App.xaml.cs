@@ -25,6 +25,7 @@ namespace WpfApp1
         private string DOCTOR_FILE = _projectPath + "\\Resources\\Data\\doctors.csv";
         private string DRUG_FILE = _projectPath + "\\Resources\\Data\\drugs.csv";
         private string NOTIFICATION_FILE = _projectPath + "\\Resources\\Data\\notification.csv";
+        private string RENOVATION_FILE = _projectPath + "\\Resources\\Data\\renovation.csv";
         private const string CSV_DELIMITER = ";";
         private const string DATETIME_FORMAT = "dd.MM.yyyy. HH:mm:ss";
 
@@ -34,6 +35,7 @@ namespace WpfApp1
         public PatientController PatientController { get; set; }
         public DrugController DrugController { get; set; }
         public NotificationController NotificationController { get; set; }
+        public RenovationController RenovationController { get; set; }
 
         public App()
         {
@@ -72,6 +74,12 @@ namespace WpfApp1
             var notificationService = new NotificationService(notificationRepository);
 
             NotificationController = new NotificationController(notificationService);
+
+            var renovationRepository = new RenovationRepository(RENOVATION_FILE, CSV_DELIMITER);
+
+            var renovationService = new RenovationService(renovationRepository, appointmentRepository);
+
+            RenovationController = new RenovationController(renovationService);
         }
     }
 }

@@ -47,8 +47,15 @@
         <Setter Property="FontFamily" Value="Impact"></Setter>
         <Setter Property="Foreground" Value="{StaticResource AccentBlueBrush}"></Setter>
         <Setter Property="BorderBrush" Value="{StaticResource AccentBlueBrush}"></Setter>
-        <!--<Setter Property="VerticalAlignment" Value="Center"></Setter>-->
+        <Setter Property="VerticalAlignment" Value="Center"></Setter>
+        <Setter Property="HorizontalAlignment" Value="Left"></Setter>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="HorizontalContentAlignment" Value="Left"/>
         <Setter Property="Height" Value="50"></Setter>
+    </Style>
+    <Style TargetType="ComboBoxItem">
+        <Setter Property="HorizontalContentAlignment" Value="Left" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
     </Style>
     <Style x:Key="ClassicButton" TargetType="Button">
         <Setter Property="Background" Value="{StaticResource AccentBlueBrush}"></Setter>

@@ -91,17 +91,20 @@
     <Compile Include="Controller\DrugController.cs" />
     <Compile Include="Controller\NotificationController.cs" />
     <Compile Include="Controller\PatientController.cs" />
+    <Compile Include="Controller\RenovationController.cs" />
     <Compile Include="Model\Appointment.cs" />
     <Compile Include="Controller\AppointmentController.cs" />
     <Compile Include="Model\Doctor.cs" />
     <Compile Include="Model\Drug.cs" />
     <Compile Include="Model\Notification.cs" />
+    <Compile Include="Model\Renovation.cs" />
     <Compile Include="Model\User.cs" />
     <Compile Include="Repository\DoctorRepository.cs" />
     <Compile Include="Repository\DrugRepository.cs" />
     <Compile Include="Repository\NotificationRepository.cs" />
     <Compile Include="Repository\PatientRepository.cs" />
     <None Include="Resources\Data\doctors.csv" />
+    <Compile Include="Repository\RenovationRepository.cs" />
     <Compile Include="Service\AppointmentService.cs" />
     <Compile Include="Model\Patient.cs" />
     <Compile Include="Model\Room.cs" />
@@ -110,6 +113,7 @@
     <Compile Include="Service\DrugService.cs" />
     <Compile Include="Service\NotificationService.cs" />
     <Compile Include="Service\PatientService.cs" />
+    <Compile Include="Service\RenovationService.cs" />
     <Compile Include="View\Converter\AbstractConverter.cs" />
     <Compile Include="View\Converter\AppointmentConverter.cs" />
     <Compile Include="View\Converter\PatientConverter.cs" />
@@ -341,6 +345,7 @@
   <ItemGroup>
     <None Include="Resources\Data\drugs.csv" />
     <None Include="Resources\Data\patients.csv" />
+    <None Include="Resources\Data\renovation.csv" />
     <None Include="Resources\Data\rooms.csv" />
     <None Include="Resources\Data\appointments.csv" />
   </ItemGroup>
