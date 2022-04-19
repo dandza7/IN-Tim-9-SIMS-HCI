@@ -28,7 +28,7 @@ namespace WpfApp1.View.Dialog
             DataContext = this;
             var app = Application.Current as App;
             _patientController = app.PatientController;
-            Patient p =  this._patientController.Find(patientId);
+            Patient p =  this._patientController.GetById(patientId);
             updateidTB.Text = p.Id.ToString();
             updatenameTB.Text = p.Name;
             updatesurnameTB.Text = p.Surname;

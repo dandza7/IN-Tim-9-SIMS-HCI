@@ -19,7 +19,6 @@ namespace WpfApp1.Controller
 
         public IEnumerable<Patient> GetAll()
         {
-            //Console.WriteLine("nesto\n");
             return _patientService.GetAll();
         }
 
@@ -35,9 +34,14 @@ namespace WpfApp1.Controller
         {
             return _patientService.Delete(patientId);
         }
-        public Patient Find(int patientId)
+        public Patient GetById(int patientId)
         {
-            return _patientService.Find(patientId);
+            return _patientService.GetById(patientId);
+        }
+
+        public IEnumerable<Notification> GetPatientsNotifications(int patientId)
+        {
+            return _patientService.GetPatientsNotifications(patientId);
         }
     }
 }

@@ -22,9 +22,9 @@ namespace WpfApp1.View.Converter
         public static SecretaryAppointmentView ConvertSecretaryAppointmentSecretaryAppointmentView(Appointment appointment, Doctor doctor, Patient patient)
         => new SecretaryAppointmentView
         {
-        Beginning = appointment.Beginning,
-        Patient = patient.Name + " " + patient.Surname,
-        Doctor = doctor.Name + " " + doctor.Surname
+            Beginning = appointment.Beginning,
+            Patient = patient.Name + " " + patient.Surname,
+            Doctor = doctor.Name + " " + doctor.Surname
 
         };
         

@@ -76,7 +76,7 @@ namespace WpfApp1.Service
             foreach (Appointment appointment in appointments)
             {
                 Doctor doctor = _doctorRepo.GetById(appointment.DoctorId);
-                Patient patient = _patientRepo.Find(appointment.PatientId);
+                Patient patient = _patientRepo.GetById(appointment.PatientId);
                 appointmentViews.Add(AppointmentConverter.ConvertSecretaryAppointmentSecretaryAppointmentView(appointment, doctor, patient));
             }
             return appointmentViews;

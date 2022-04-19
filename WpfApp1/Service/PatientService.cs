@@ -11,10 +11,11 @@ namespace WpfApp1.Service
     public class PatientService
     {
         private readonly PatientRepository _patientRepo;
-
-        public PatientService(PatientRepository patientRepo)
+        private readonly NotificationRepository _notificationRepo;
+        public PatientService(PatientRepository patientRepo, NotificationRepository notificationRepo) 
         {
             _patientRepo = patientRepo;
+            _notificationRepo = notificationRepo;
         }
 
         public IEnumerable<Patient> GetAll()
@@ -23,7 +24,19 @@ namespace WpfApp1.Service
             return patients;
         }
 
-
+        public List<Notification> GetPatientsNotifications(int userId)
+        {
+            List<Notification> notifications = _notificationRepo.GetAll().ToList();
+            List<Notification> patientsNotifications = new List<Notification>();
+            foreach (Notification  notification in notifications)
+            {
+                if(notification.UserId == userId)
+                {
+                    patientsNotifications.Add(notification);
+                }
+            }
+            return patientsNotifications;
+        }
 
         public Patient Create(Patient patient)
         {
@@ -44,11 +57,11 @@ namespace WpfApp1.Service
 
             return _patientRepo.Delete(patientId);
         }
-        public Patient Find(int patientId)
+        public Patient GetById(int patientId)
         {
 
 
-            return _patientRepo.Find(patientId);
+            return _patientRepo.GetById(patientId);
         }
     }
 }

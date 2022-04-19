@@ -19,7 +19,17 @@ namespace WpfApp1.Service
 
         public IEnumerable<Notification> GetAll()
         {
+            List<Notification> ns = _notificationRepo.GetAll().ToList();
+            foreach (var nsItem in ns)
+            {
+                Console.WriteLine(nsItem.Content);
+            }
             return _notificationRepo.GetAll();
+        }
+
+        public Notification GetById(int id)
+        {
+            return _notificationRepo.GetById(id);
         }
 
         public Notification Create(Notification notification)
