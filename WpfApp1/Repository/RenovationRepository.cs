@@ -30,7 +30,7 @@ namespace WpfApp1.Repository
         public List<Renovation> GetAll()
         {
             return File.ReadAllLines(_path)
-                .Select(ConvertCsvFormatToRoom)
+                .Select(ConvertCsvFormatToRenovation)
                 .ToList();
         }
 
@@ -42,11 +42,11 @@ namespace WpfApp1.Repository
         public Renovation Create(Renovation renovation)
         {
             renovation.Id = ++_renovationMaxId;
-            AppendLineToFile(_path, ConvertRoomToCsvFormat(renovation));
+            AppendLineToFile(_path, ConvertRenovationToCsvFormat(renovation));
             return renovation;
         }
 
-        public Renovation ConvertCsvFormatToRoom(string renovationCsvFormat)
+        public Renovation ConvertCsvFormatToRenovation(string renovationCsvFormat)
         {
             var tokens = renovationCsvFormat.Split(_delimiter.ToCharArray());
             return new Renovation(
@@ -57,7 +57,7 @@ namespace WpfApp1.Repository
                 DateTime.Parse(tokens[4]));
         }
 
-        public string ConvertRoomToCsvFormat(Renovation renovation)
+        public string ConvertRenovationToCsvFormat(Renovation renovation)
         {
             return string.Join(_delimiter,
                 renovation.Id,
@@ -81,7 +81,7 @@ namespace WpfApp1.Repository
             {
                 if (r.Id != id)
                 {
-                    newFile.Add(ConvertRoomToCsvFormat(r));
+                    newFile.Add(ConvertRenovationToCsvFormat(r));
                     isDeleted = true;
                 }
             }

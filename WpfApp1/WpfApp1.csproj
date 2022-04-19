@@ -88,6 +88,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Controller\DoctorController.cs" />
+    <Compile Include="Controller\InventoryController.cs" />
     <Compile Include="Controller\TherapyController.cs" />
     <Compile Include="Controller\DrugController.cs" />
     <Compile Include="Controller\NotificationController.cs" />
@@ -97,10 +98,13 @@
     <Compile Include="Controller\AppointmentController.cs" />
     <Compile Include="Model\Doctor.cs" />
     <Compile Include="Model\Drug.cs" />
+    <Compile Include="Model\Inventory.cs" />
     <Compile Include="Model\Notification.cs" />
+    <Compile Include="Model\Preview\InventoryPreview.cs" />
     <Compile Include="Model\Renovation.cs" />
     <Compile Include="Model\Therapy.cs" />
     <Compile Include="Model\User.cs" />
+    <Compile Include="Repository\InventoryRepository.cs" />
     <Compile Include="Repository\TherapyRepository.cs" />
     <Compile Include="Repository\DoctorRepository.cs" />
     <Compile Include="Repository\DrugRepository.cs" />
@@ -109,7 +113,9 @@
     <None Include="packages.config" />
     <None Include="Resources\Data\doctors.csv" />
     <Compile Include="Repository\RenovationRepository.cs" />
+    <None Include="Resources\Data\inventory.csv" />
     <None Include="Resources\Data\therapy.csv" />
+    <Compile Include="Service\InventoryService.cs" />
     <Compile Include="Service\TherapyService.cs" />
     <Compile Include="Service\AppointmentService.cs" />
     <Compile Include="Model\Patient.cs" />
@@ -145,6 +151,9 @@
     </Compile>
     <Compile Include="View\ExecutiveMenu.xaml.cs">
       <DependentUpon>ExecutiveMenu.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Model\Executive\ExecutiveInventoryPages.xaml.cs">
+      <DependentUpon>ExecutiveInventoryPages.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Model\Patient\AppointmentView.xaml.cs">
       <DependentUpon>AppointmentView.xaml</DependentUpon>
@@ -257,6 +266,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\ExecutiveMenu.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Model\Executive\ExecutiveInventoryPages.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

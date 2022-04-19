@@ -25,7 +25,15 @@ namespace WpfApp1.Repository
 
         public Room Get(int id)
         {
-            throw new NotImplementedException();
+            List<Room> rooms = File.ReadAllLines(_path)
+                .Select(ConvertCsvFormatToRoom)
+                .ToList();
+            foreach (Room room in rooms)
+            {
+                if (room.Id == id)
+                    return room;
+            }
+            return null;
         }
 
         public List<Room> GetAll()

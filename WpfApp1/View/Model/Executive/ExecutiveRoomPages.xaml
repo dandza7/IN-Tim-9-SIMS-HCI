@@ -72,7 +72,7 @@
                         <Label Grid.Row="3" Grid.Column="1" Content="Nametag:" Style="{StaticResource FormLabel}"></Label>
                         <TextBox x:Name="AddNametag" Grid.Row="4" Grid.Column="1" Style="{StaticResource FormInputBox}"></TextBox>
                         <Label Grid.Row="5" Grid.Column="1" Content="Type:" Style="{StaticResource FormLabel}"></Label>
-                        <ComboBox Name="AddType" Grid.Row="6" Grid.Column="1" Style="{StaticResource FormInputComboBox}" Height="30" ItemsSource="{Binding Path=RoomTypes}"></ComboBox>
+                        <ComboBox Name="AddType" Grid.Row="6" Grid.Column="1" Style="{StaticResource FormInputComboBox}" Height="30" Width="260" ItemsSource="{Binding Path=RoomTypes}"></ComboBox>
                         <TextBlock Grid.Row="7" Grid.Column="1" Style="{StaticResource SmallText}" Text="{Binding Path=Feedback, UpdateSourceTrigger=PropertyChanged}"></TextBlock>
                         <Button x:Name="AddConfirm" Grid.Column="1" Grid.Row="8" Style="{StaticResource ClassicButton}" Margin="70 4" Click="AddConfirm_Click">Add Room</Button>
                         <Button x:Name="XAddButton" Grid.Column="3" Grid.Row="1" Style="{StaticResource ClassicButton}" Click="XAddButton_Click">X</Button>
@@ -102,7 +102,7 @@
                         <Label Grid.Row="3" Grid.Column="1" Content="Nametag:" Style="{StaticResource FormLabel}"></Label>
                         <TextBox x:Name="EditNametag" Grid.Row="4" Grid.Column="1" Style="{StaticResource FormInputBox}" IsEnabled="False"></TextBox>
                         <Label Grid.Row="5" Grid.Column="1" Content="Type:" Style="{StaticResource FormLabel}"></Label>
-                        <ComboBox Name="EditType" Grid.Row="6" Grid.Column="1" Style="{StaticResource FormInputComboBox}" Height="30" ItemsSource="{Binding Path=RoomTypes}"></ComboBox>
+                        <ComboBox Name="EditType" Grid.Row="6" Grid.Column="1" Style="{StaticResource FormInputComboBox}" Height="30" Width="260" ItemsSource="{Binding Path=RoomTypes}"></ComboBox>
                         <TextBlock Grid.Row="7" Grid.Column="1" Style="{StaticResource SmallText}" Text="{Binding Path=Feedback, UpdateSourceTrigger=PropertyChanged}"></TextBlock>
                         <Button x:Name="EditConfirm" Grid.Column="1" Grid.Row="8" Style="{StaticResource ClassicButton}" Margin="70 4" Click="EditConfirm_Click">Edit Room</Button>
                         <Button x:Name="XEditButton" Grid.Column="3" Grid.Row="1" Style="{StaticResource ClassicButton}" Click="XEditButton_Click">X</Button>
