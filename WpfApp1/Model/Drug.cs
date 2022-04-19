@@ -67,7 +67,7 @@ namespace WpfApp1.Model
             {
                 if (value != _info)
                 {
-                    _name = value;
+                    _info = value;
                     OnPropertyChanged("Info");
                 }
             }

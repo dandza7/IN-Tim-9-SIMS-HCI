@@ -22,6 +22,11 @@ namespace WpfApp1.Controller
             return _drugService.GetAll();
         }
 
+        public Drug GetById(int id)
+        {
+            return _drugService.GetById(id);
+        }
+
         public Drug Create(Drug drug)
         {
             return _drugService.Create(drug);

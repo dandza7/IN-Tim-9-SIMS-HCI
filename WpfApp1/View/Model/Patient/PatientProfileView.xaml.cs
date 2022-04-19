@@ -24,14 +24,28 @@ namespace WpfApp1.View.Model.Patient
     public partial class PatientProfileView : Page
     {
         private PatientController _patientController;
+        /*private TherapyController _therapyController;
+        private DrugController _drugController;*/
+
         public ObservableCollection<Notification> Notifications { get; set; }
         public PatientProfileView()
         {
             InitializeComponent();
             DataContext = this;
             var app = Application.Current as App;
-            _patientController = app.PatientController;
+            /*_patientController = app.PatientController;
+            _therapyController = app.TherapyController;
+            _drugController = app.DrugController;*/
+
             Notifications = new ObservableCollection<Notification>(_patientController.GetPatientsNotifications(3));
+            /*List<Therapy> therapies = _patientController.GetPatientsTherapies(3).ToList();
+            List<Drug> drugs = new List<Drug>();
+            therapies.ForEach(therapy => drugs.Add(_drugController.GetById(therapy.DrugId)));
+            Console.WriteLine("Terapije koje uzima pacijent sa Id-em 3 su:");
+            foreach(Drug drug in drugs)
+            {
+                Console.WriteLine(drug.Name);
+            }*/
         }
     }
 }

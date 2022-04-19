@@ -35,6 +35,13 @@ namespace WpfApp1.Repository
             }
             return therapies;
         }
+
+        public Therapy GetById(int id)
+        {
+            List<Therapy> therapies = GetAll().ToList();
+            return therapies.FirstOrDefault(therapy => therapy.Id == id);
+        }
+
         public Therapy Create(Therapy therapy)
         {
             int maxId = GetMaxId(GetAll());
