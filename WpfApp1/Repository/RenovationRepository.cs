@@ -34,7 +34,7 @@ namespace WpfApp1.Repository
                 .ToList();
         }
 
-        public int GetMaxId(List<Renovation> renovations)
+        private int GetMaxId(List<Renovation> renovations)
         {
             return renovations.Count() == 0 ? 0 : renovations.Max(renovation => renovation.Id);
         }
@@ -46,7 +46,7 @@ namespace WpfApp1.Repository
             return renovation;
         }
 
-        public Renovation ConvertCsvFormatToRenovation(string renovationCsvFormat)
+        private Renovation ConvertCsvFormatToRenovation(string renovationCsvFormat)
         {
             var tokens = renovationCsvFormat.Split(_delimiter.ToCharArray());
             return new Renovation(
@@ -57,7 +57,7 @@ namespace WpfApp1.Repository
                 DateTime.Parse(tokens[4]));
         }
 
-        public string ConvertRenovationToCsvFormat(Renovation renovation)
+        private string ConvertRenovationToCsvFormat(Renovation renovation)
         {
             return string.Join(_delimiter,
                 renovation.Id,
@@ -67,7 +67,7 @@ namespace WpfApp1.Repository
                 renovation.Ending);
         }
 
-        public void AppendLineToFile(String path, String line)
+        private void AppendLineToFile(String path, String line)
         {
             File.AppendAllText(path, line + Environment.NewLine);
         }

@@ -50,6 +50,7 @@ namespace WpfApp1.Service
 
             return patientsTherapies;
         }
+      
         public Patient Create(Patient patient)
         {
 

@@ -9,7 +9,7 @@ namespace WpfApp1.Model
     public class Patient: User
     {
 
-        private string _email { get; set; }
+        private string _email;
         private List<int> _therapyIds;
 
         public string Email
@@ -72,6 +72,7 @@ namespace WpfApp1.Model
 
         public Patient(string name, string surname, string jmbg, string username, string password, string phoneNumber, string email)
             : base(name, surname, jmbg, username, password, phoneNumber, RoleType.patient)
+
         {
             Email = email;
         }

@@ -43,7 +43,7 @@ namespace WpfApp1.Repository
                 .ToList();
         }
 
-        public int GetMaxId(List<Room> rooms)
+        private int GetMaxId(List<Room> rooms)
         {
             return rooms.Count() == 0 ? 0 : rooms.Max(room => room.Id);
         }
@@ -55,7 +55,7 @@ namespace WpfApp1.Repository
             return room;
         }
 
-        public Room ConvertCsvFormatToRoom(string roomCsvFormat)
+        private Room ConvertCsvFormatToRoom(string roomCsvFormat)
         {
             var tokens = roomCsvFormat.Split(_delimiter.ToCharArray());
             return new Room(
@@ -64,7 +64,7 @@ namespace WpfApp1.Repository
                 tokens[2]);
         }
 
-        public string ConvertRoomToCsvFormat(Room room)
+        private string ConvertRoomToCsvFormat(Room room)
         {
             return string.Join(_delimiter,
                 room.Id,
@@ -72,7 +72,7 @@ namespace WpfApp1.Repository
                 room.Type);
         }
 
-        public void AppendLineToFile(String path, String line)
+        private void AppendLineToFile(String path, String line)
         {
             File.AppendAllText(path, line + Environment.NewLine);
         }
