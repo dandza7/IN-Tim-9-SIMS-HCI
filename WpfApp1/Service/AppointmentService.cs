@@ -16,12 +16,16 @@ namespace WpfApp1.Service
         private readonly AppointmentRepository _appointmentRepo;
         private readonly DoctorRepository _doctorRepo;
         private readonly PatientRepository _patientRepo;
-        public AppointmentService(AppointmentRepository appointmentRepo, DoctorRepository doctorRepository, PatientRepository patientRepo)
+        private readonly RoomRepository _roomRepo;
+        public AppointmentService(AppointmentRepository appointmentRepo, 
+            DoctorRepository doctorRepository, 
+            PatientRepository patientRepo,
+            RoomRepository roomRepository)
         {
             _appointmentRepo = appointmentRepo;
             _doctorRepo = doctorRepository;
             _patientRepo = patientRepo;
-
+            _roomRepo = roomRepository;
         }
 
         public IEnumerable<Appointment> GetAll()
@@ -53,7 +57,8 @@ namespace WpfApp1.Service
             foreach (Appointment appointment in appointments)
             {
                 Doctor doctor = _doctorRepo.GetById(appointment.DoctorId);
-                appointmentViews.Add(AppointmentConverter.ConvertAppointmentAndDoctorToAppointmentView(appointment, doctor));
+                Room room = _roomRepo.Get(doctor.RoomId);
+                appointmentViews.Add(AppointmentConverter.ConvertAppointmentAndDoctorToAppointmentView(appointment, doctor, room));
             }
             return appointmentViews;
         }
@@ -65,7 +70,8 @@ namespace WpfApp1.Service
             foreach (Appointment appointment in appointments)
             {
                 Doctor doctor = _doctorRepo.GetById(appointment.DoctorId);
-                appointmentViews.Add(AppointmentConverter.ConvertAppointmentAndDoctorToAppointmentView(appointment, doctor));
+                Room room = _roomRepo.Get(doctor.RoomId);
+                appointmentViews.Add(AppointmentConverter.ConvertAppointmentAndDoctorToAppointmentView(appointment, doctor, room));
             }
             return appointmentViews;
         }

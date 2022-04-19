@@ -33,7 +33,7 @@ namespace WpfApp1.View.Model.Patient
         private int _id;
         private DateTime _beginning;
         private string _username;
-
+        private string _nameTag;
         public AppointmentView()
         {
             InitializeComponent();
@@ -81,6 +81,19 @@ namespace WpfApp1.View.Model.Patient
                 {
                     _username = value;
                     OnPropertyChanged("Username");
+                }
+            }
+        }
+
+        public string NameTag
+        {
+            get { return _nameTag; }
+            set
+            {
+                if (value != _nameTag)
+                {
+                    _nameTag = value;
+                    OnPropertyChanged("NameTag");
                 }
             }
         }

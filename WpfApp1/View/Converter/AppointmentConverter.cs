@@ -11,12 +11,13 @@ namespace WpfApp1.View.Converter
 {
     internal class AppointmentConverter: AbstractConverter
     {
-        public static AppointmentView ConvertAppointmentAndDoctorToAppointmentView(Appointment appointment, Doctor doctor)
+        public static AppointmentView ConvertAppointmentAndDoctorToAppointmentView(Appointment appointment, Doctor doctor, Room room)
         => new AppointmentView
         {
             Id = appointment.Id,
             Beginning = appointment.Beginning,
-            Username = doctor.Username
+            Username = doctor.Username,
+            NameTag = room.Nametag
         };
 
         public static SecretaryAppointmentView ConvertSecretaryAppointmentSecretaryAppointmentView(Appointment appointment, Doctor doctor, Patient patient)
