@@ -96,7 +96,29 @@ namespace WpfApp1.Repository
         private Patient ConvertCSVFormatToPatient(string patientCSVFormat)
         {
             var tokens = patientCSVFormat.Split(_delimiter.ToCharArray());
-            return new Patient(int.Parse(tokens[0]), tokens[1], tokens[2], tokens[3], tokens[4], tokens[5], tokens[6], tokens[7]);
+            List<string> stringTherapyIds = tokens[8].Split("|".ToCharArray()).ToList();
+            List<int> therapyIds = ConvertStringListToIntList(stringTherapyIds);
+            return new Patient(int.Parse(tokens[0]), 
+                tokens[1], 
+                tokens[2], 
+                tokens[3], 
+                tokens[4], 
+                tokens[5], 
+                tokens[6], 
+                tokens[7],
+                therapyIds);
+        }
+
+        private List<int> ConvertStringListToIntList(List<string> stringList)
+        {
+            List<string> strings = stringList.ToList();
+            List<int> notificationIds = new List<int>();
+            foreach(string str in strings)
+            {
+                if (str == "") continue;
+                notificationIds.Add(int.Parse(str));
+            }
+            return notificationIds;
         }
 
         private string ConvertPatientToCSVFormat(Patient patient)
@@ -109,7 +131,13 @@ namespace WpfApp1.Repository
                 patient.Username.ToString(),
                 patient.Password.ToString(),
                 patient.PhoneNumber.ToString(),
-                patient.Email.ToString());
+                patient.Email.ToString(),
+                ConvertIntListToCSVFormat(patient.TherapyIds));
+        }
+
+        private string ConvertIntListToCSVFormat(List<int> therapyIds)
+        {
+            return string.Join("|", therapyIds.Select(id => id.ToString()).ToArray());
         }
 
         private void AppendLineToFile(string path, string line)

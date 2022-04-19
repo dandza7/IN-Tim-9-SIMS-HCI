@@ -43,5 +43,10 @@ namespace WpfApp1.Controller
         {
             return _patientService.GetPatientsNotifications(patientId);
         }
+
+        public IEnumerable<Therapy> GetPatientsTherapies(int patientId)
+        {
+            return _patientService.GetPatientsTherapies(patientId);
+        }
     }
 }

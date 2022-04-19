@@ -9,8 +9,9 @@ namespace WpfApp1.Model
     public class Patient: User
     {
 
-        private string _email { get; set; }
-        
+        private string _email;
+        private List<int> _therapyIds;
+
         public string Email
         {
             get { return _email; }
@@ -20,6 +21,19 @@ namespace WpfApp1.Model
                 {
                     _email = value;
                     OnPropertyChanged("Email");
+                }
+            }
+        }
+
+        public List<int> TherapyIds
+        {
+            get { return _therapyIds; }
+            set
+            {
+                if (value != _therapyIds)
+                {
+                    _therapyIds = value;
+                    OnPropertyChanged("TherapyIds");
                 }
             }
         }
@@ -58,8 +72,24 @@ namespace WpfApp1.Model
 
         public Patient(string name, string surname, string jmbg, string username, string password, string phoneNumber, string email)
             : base(name, surname, jmbg, username, password, phoneNumber, RoleType.patient)
+
         {
             Email = email;
+        }
+
+        public Patient(int id,
+            string name,
+            string surname,
+            string jmbg,
+            string username,
+            string password,
+            string phoneNumber,
+            string email,
+            List<int> therapyIds)
+            : base(id, name, surname, jmbg, username, password, phoneNumber, RoleType.patient)
+        {
+            Email = email;
+            _therapyIds = therapyIds;
         }
     }
 }

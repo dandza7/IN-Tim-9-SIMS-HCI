@@ -35,6 +35,12 @@ namespace WpfApp1.Repository
             }
             return drugs;
         }
+
+        public Drug GetById(int id)
+        {
+            return GetAll().ToList().SingleOrDefault(drug => drug.Id == id);
+        }
+
         public Drug Create(Drug drug)
         {
             int maxId = GetMaxId(GetAll());
