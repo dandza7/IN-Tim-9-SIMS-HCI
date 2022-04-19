@@ -10,6 +10,7 @@ namespace WpfApp1.Model
     {
 
         private string _email { get; set; }
+        
         public string Email
         {
             get { return _email; }
@@ -22,7 +23,6 @@ namespace WpfApp1.Model
                 }
             }
         }
-
 
         public Patient(int id, string name, string surname): base(id, name, surname, RoleType.patient)
         {

@@ -11,8 +11,6 @@ namespace WpfApp1.Model
         public int Id { get; set; }
         public string Nametag { get; set; }
         public String Type { get; set; }
-
-        //public Appointment[] appointment; Da li je ovo neophodno?
         public Room(int id, string nametag, String type)
         {
             Id = id;
