@@ -19,7 +19,8 @@
             <RowDefinition Height="70"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <Button x:Name="AddNewStaticEquipment" Grid.Column="3"  Style="{StaticResource ClassicButton}" Margin="0 5 20 5" Click="AddNewStaticEquipment_Click">Add New Static Equipment</Button>
+        <Button x:Name="MoveStaticInventory" Grid.Column="2"  Style="{StaticResource ClassicButton}" Margin="20 5 20 5" Click="MoveStaticInventory_Click">Move Static Inventory</Button>
+        <Button x:Name="AddNewStaticEquipment" Grid.Column="3"  Style="{StaticResource ClassicButton}" Margin="0 5 20 5" Click="AddNewStaticEquipment_Click">Add New Static Inventory</Button>
         <DataGrid x:Name="InventoryDG" AutoGenerateColumns="False" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="4" Style="{StaticResource ExecutiveDataGrid}" ItemsSource="{Binding Inventory}">
             <DataGrid.Columns>
                 <DataGridTextColumn Header=" ID" Width="*"  Binding="{Binding Id}" HeaderStyle="{StaticResource ExecutiveDGHeader}" CellStyle="{StaticResource ExecutiveDGCell}"/>
@@ -33,5 +34,49 @@
                    Color="{StaticResource White}"/>
             </DataGrid.Resources>
         </DataGrid>
+        <Border x:Name="DialogContainer" Grid.ColumnSpan="4" Grid.RowSpan="2" Style="{StaticResource OverlayModal}" Visibility="Collapsed">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="300"/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="300"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition/>
+                    <RowDefinition Height="80"/>
+                </Grid.RowDefinitions>
+                <Border x:Name="AddContainer" Grid.Column="1" Grid.Row="1" Style="{StaticResource DialogModal}" Visibility="Collapsed">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="100"/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition Width="50"/>
+                            <ColumnDefinition Width="40"/>
+                            <ColumnDefinition Width="10"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="10"/>
+                            <RowDefinition Height="40"/>
+                            <RowDefinition Height="10"/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Label Grid.Row="3" Grid.Column="1" Content="Name:" Style="{StaticResource FormLabel}"></Label>
+                        <TextBox x:Name="AddName" Grid.Row="4" Grid.Column="1" Style="{StaticResource FormInputBox}"></TextBox>
+                        <Label Grid.Row="5" Grid.Column="1" Content="Type:" Style="{StaticResource FormLabel}"></Label>
+                        <ComboBox Name="AddRooms" Grid.Row="6" Grid.Column="1" Style="{StaticResource FormInputComboBox}" Height="30" Width="260" ItemsSource="{Binding Path=SOPRooms}"></ComboBox>
+                        <TextBlock Grid.Row="7" Grid.Column="1" Style="{StaticResource SmallText}" Text="{Binding Path=Feedback, UpdateSourceTrigger=PropertyChanged}"></TextBlock>
+                        <Button x:Name="AddConfirm" Grid.Column="1" Grid.Row="8" Style="{StaticResource ClassicButton}" Margin="50 4" Click="AddConfirm_Click">Add Equipment</Button>
+                        <Button x:Name="XAddButton" Grid.Column="3" Grid.Row="1" Style="{StaticResource ClassicButton}" Click="XAddButton_Click">X</Button>
+                    </Grid>
+                </Border>
+            </Grid>
+        </Border>
     </Grid>
 </Page>

@@ -31,5 +31,32 @@ namespace WpfApp1.Service
             }
             return inventoryPreviews;
         }
+        public List<string> GetSOPRooms()
+        {
+            List<Room> rooms = _roomRepository.GetAll();
+            List<string> sopRooms = new List<string>();
+            foreach(Room room in rooms)
+            {
+                if(room.Type.Equals("Storage") || room.Type.Equals("Operating"))
+                {
+                    sopRooms.Add(room.Nametag);
+                }
+            }
+            return sopRooms;
+        }
+
+        public Inventory Create(Inventory inv, string roomName)
+        {
+            Inventory newInv = inv;
+            List<Room> rooms = _roomRepository.GetAll();
+            foreach(Room room in rooms)
+            {
+                if (room.Nametag.Equals(roomName))
+                {
+                    newInv.RoomId = room.Id;
+                }
+            }
+            return _inventoryRepository.Create(newInv);
+        }
     }
 }
