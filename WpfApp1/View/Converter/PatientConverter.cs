@@ -16,7 +16,7 @@ namespace WpfApp1.View.Converter
         Id = patient.Id,
         Name = patient.Name,
         Surname = patient.Surname,
-        JMBG = patient.JMBG,
+        JMBG = patient.Jmbg,
         Username = patient.Username,
         Password = patient.Password
     };

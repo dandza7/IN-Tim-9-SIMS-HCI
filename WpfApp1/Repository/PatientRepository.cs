@@ -49,7 +49,7 @@ namespace WpfApp1.Repository
                 {
                     p.Name = patient.Name;
                     p.Surname = patient.Surname;
-                    p.JMBG = patient.JMBG;
+                    p.Jmbg = patient.Jmbg;
                     p.Username = patient.Username;
                     p.Password = patient.Password;
 
@@ -111,7 +111,7 @@ namespace WpfApp1.Repository
                 patient.Id,
                 patient.Name.ToString(),
                 patient.Surname.ToString(),
-                patient.JMBG.ToString(),
+                patient.Jmbg.ToString(),
                 patient.Username.ToString(),
                 patient.Password.ToString(),
                 patient.Email.ToString(),

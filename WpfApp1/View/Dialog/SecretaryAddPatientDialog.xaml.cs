@@ -38,8 +38,9 @@ namespace WpfApp1.View.Dialog
                 jmbgTB.Text,
                 usernameTB.Text,
                 passwordTB.Text,
-                emailTB.Text,
-                brtelTB.Text
+                brtelTB.Text,
+                emailTB.Text
+                
                 );
 
             _patientController.Create(patient);

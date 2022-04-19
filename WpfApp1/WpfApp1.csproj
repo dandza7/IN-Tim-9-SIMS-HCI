@@ -93,6 +93,7 @@
     <Compile Include="Controller\PatientController.cs" />
     <Compile Include="Model\Appointment.cs" />
     <Compile Include="Controller\AppointmentController.cs" />
+	<Compile Include="Controller\TherapyController.cs" />
     <Compile Include="Model\Doctor.cs" />
     <Compile Include="Model\Drug.cs" />
     <Compile Include="Model\Notification.cs" />
@@ -103,11 +104,14 @@
     <Compile Include="Repository\NotificationRepository.cs" />
     <Compile Include="Repository\PatientRepository.cs" />
     <None Include="packages.config" />
+	<None Include="Resources\Data\therapy.csv" />
     <None Include="Resources\Data\doctors.csv" />
     <Compile Include="Service\AppointmentService.cs" />
     <Compile Include="Model\Patient.cs" />
     <Compile Include="Model\Room.cs" />
+	<Compile Include="Repository\TherapyRepository.cs" />
     <Compile Include="Repository\AppointmentRepository.cs" />
+	<Compile Include="Service\TherapyService.cs" />
     <Compile Include="Service\DoctorService.cs" />
     <Compile Include="Service\DrugService.cs" />
     <Compile Include="Service\NotificationService.cs" />

@@ -65,7 +65,7 @@ namespace WpfApp1.Model
         }
 
         public Doctor(int id, string name, string surname, string username, string password, string phoneNumber, string jmbg, RoleType role,
-            SpecType specialization, bool isAvailable, int roomId): base(id, name, surname, username, password, phoneNumber, jmbg, role)
+            SpecType specialization, bool isAvailable, int roomId): base(id, name, surname, username, password, phoneNumber, jmbg, RoleType.doctor)
         {
             Specialization = specialization;
             IsAvailable = isAvailable;
