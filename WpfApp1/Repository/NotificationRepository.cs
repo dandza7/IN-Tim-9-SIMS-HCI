@@ -37,6 +37,19 @@ namespace WpfApp1.Repository
             }
             return notifications;
         }
+
+        public Notification GetById(int id)
+        {
+            List<Notification> notifications = GetAll().ToList();
+            foreach(Notification notification in notifications)
+            {
+                if(notification.Id == id)
+                {
+                    return notification;
+                }
+            }
+            return null;
+        }
         public Notification Create(Notification notification)
         {
             int maxId = GetMaxId(GetAll());
@@ -86,7 +99,8 @@ namespace WpfApp1.Repository
             return new Notification(int.Parse(tokens[0]),
                 DateTime.Parse(tokens[1]),
                 tokens[2],
-                tokens[3]);
+                tokens[3],
+                int.Parse(tokens[4]));
         }
         private string ConvertNotificationToCSVFormat(Notification notification)
         {
@@ -94,7 +108,8 @@ namespace WpfApp1.Repository
                 notification.Id,
                 notification.Date.ToString(_datetimeFormat),
                 notification.Content,
-                notification.Title);
+                notification.Title,
+                notification.UserId);
         }
 
         private void AppendLineToFile(string path, string line)

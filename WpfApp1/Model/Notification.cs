@@ -22,6 +22,7 @@ namespace WpfApp1.Model
         private DateTime _date;
         private string _content;
         private string _title;
+        private int _userId;
 
         public int Id
         {
@@ -87,12 +88,29 @@ namespace WpfApp1.Model
             }
         }
 
-        public Notification(int id, DateTime date, string content, string title)
+        public int UserId
+        {
+            get
+            {
+                return _userId;
+            }
+            set
+            {
+                if (value != _userId)
+                {
+                    _userId = value;
+                    OnPropertyChanged("UserId");
+                }
+            }
+        }
+
+        public Notification(int id, DateTime date, string content, string title, int userId)
         {
             Id = id;
             Date = date;
             Content = content;
             Title = title;
+            UserId = userId;
         }
     }
 }

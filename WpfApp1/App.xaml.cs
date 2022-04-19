@@ -43,6 +43,12 @@ namespace WpfApp1
 
         public App()
         {
+            var notificationRepository = new NotificationRepository(NOTIFICATION_FILE, CSV_DELIMITER, DATETIME_FORMAT);
+
+            var notificationService = new NotificationService(notificationRepository);
+
+            NotificationController = new NotificationController(notificationService);
+
             var roomRepository = new RoomRepository(ROOM_FILE, CSV_DELIMITER);
 
             var roomService = new RoomService(roomRepository);
@@ -51,7 +57,7 @@ namespace WpfApp1
 
             var patientRepository = new PatientRepository(PATIENT_FILE, CSV_DELIMITER);
 
-            var patientService = new PatientService(patientRepository);
+            var patientService = new PatientService(patientRepository, notificationRepository);
 
             PatientController = new PatientController(patientService);
 
@@ -72,12 +78,6 @@ namespace WpfApp1
             var drugService = new DrugService(drugRepository);
 
             DrugController = new DrugController(drugService);
-
-            var notificationRepository = new NotificationRepository(NOTIFICATION_FILE, CSV_DELIMITER, DATETIME_FORMAT);
-
-            var notificationService = new NotificationService(notificationRepository);
-
-            NotificationController = new NotificationController(notificationService);
 
             var renovationRepository = new RenovationRepository(RENOVATION_FILE, CSV_DELIMITER);
 
