@@ -32,7 +32,7 @@ namespace WpfApp1.View.Dialog
             updateidTB.Text = p.Id.ToString();
             updatenameTB.Text = p.Name;
             updatesurnameTB.Text = p.Surname;
-            updatejmbgTB.Text = p.JMBG;
+            updatejmbgTB.Text = p.Jmbg;
             updateusernameTB.Text = p.Username;
             updatepasswordTB.Text = p.Password;
             updateemailTB.Text = p.Email;

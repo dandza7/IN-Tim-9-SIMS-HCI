@@ -96,6 +96,7 @@
     <Compile Include="Controller\RenovationController.cs" />
     <Compile Include="Model\Appointment.cs" />
     <Compile Include="Controller\AppointmentController.cs" />
+	<Compile Include="Controller\TherapyController.cs" />
     <Compile Include="Model\Doctor.cs" />
     <Compile Include="Model\Drug.cs" />
     <Compile Include="Model\Inventory.cs" />
@@ -120,7 +121,9 @@
     <Compile Include="Service\AppointmentService.cs" />
     <Compile Include="Model\Patient.cs" />
     <Compile Include="Model\Room.cs" />
+	<Compile Include="Repository\TherapyRepository.cs" />
     <Compile Include="Repository\AppointmentRepository.cs" />
+	<Compile Include="Service\TherapyService.cs" />
     <Compile Include="Service\DoctorService.cs" />
     <Compile Include="Service\DrugService.cs" />
     <Compile Include="Service\NotificationService.cs" />
