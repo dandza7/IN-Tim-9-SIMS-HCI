@@ -38,7 +38,7 @@ namespace WpfApp1.View.Model.Executive
 
         private void InventoryButton_Click(object sender, RoutedEventArgs e)
         {
-
+            ExecutivePagesFrame.Content = new ExecutiveInventoryPages();
         }
 
         private void StatisticsButton_Click(object sender, RoutedEventArgs e)

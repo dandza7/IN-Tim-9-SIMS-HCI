@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WpfApp1.Model.Preview;
 using WpfApp1.Service;
 
 namespace WpfApp1.Controller
@@ -14,6 +15,11 @@ namespace WpfApp1.Controller
         public InventoryController(InventoryService inventoryService)
         {
             _inventoryService = inventoryService;
+        }
+
+        public List<InventoryPreview> GetPreviews()
+        {
+            return _inventoryService.GetPreviews();
         }
     }
 }

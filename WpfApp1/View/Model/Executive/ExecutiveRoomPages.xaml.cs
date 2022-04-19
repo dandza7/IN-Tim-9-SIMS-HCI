@@ -350,7 +350,7 @@ namespace WpfApp1.View.Model.Executive
         //--------------------------------------------------------------------------------------------------------
         private void AdvancedRenovationButton_Click(object sender, RoutedEventArgs e)
         {
-
+            
         }
     }
 }
