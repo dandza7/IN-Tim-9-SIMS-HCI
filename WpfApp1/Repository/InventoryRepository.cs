@@ -34,7 +34,7 @@ namespace WpfApp1.Repository
                 .ToList();
         }
 
-        public int GetMaxId(List<Inventory> inventories)
+        private int GetMaxId(List<Inventory> inventories)
         {
             return inventories.Count() == 0 ? 0 : inventories.Max(inventory => inventory.Id);
         }
@@ -46,7 +46,7 @@ namespace WpfApp1.Repository
             return inventory;
         }
 
-        public Inventory ConvertCsvFormatToInventory(string inventoryCsvFormat)
+        private Inventory ConvertCsvFormatToInventory(string inventoryCsvFormat)
         {
             var tokens = inventoryCsvFormat.Split(_delimiter.ToCharArray());
             return new Inventory(
@@ -57,7 +57,7 @@ namespace WpfApp1.Repository
                 int.Parse(tokens[4]));
         }
 
-        public string ConvertInventoryToCsvFormat(Inventory inventory)
+        private string ConvertInventoryToCsvFormat(Inventory inventory)
         {
             return string.Join(_delimiter,
                 inventory.Id,
@@ -67,7 +67,7 @@ namespace WpfApp1.Repository
                 inventory.Amount);
         }
 
-        public void AppendLineToFile(String path, String line)
+        private void AppendLineToFile(String path, String line)
         {
             File.AppendAllText(path, line + Environment.NewLine);
         }
