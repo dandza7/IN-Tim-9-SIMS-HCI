@@ -109,6 +109,62 @@ namespace WpfApp1.Repository
             return null;
         }
 
+        public IEnumerable<User> GetAllPatients()
+        {
+            List<User> users = GetAll().ToList();
+            List<User> patients = new List<User>();
+            foreach(User user in users)
+            {
+                if(user.Role == RoleType.patient)
+                {
+                    patients.Add(user);
+                }
+            }
+            return patients;
+        }
+
+        public IEnumerable<User> GetAllDoctors()
+        {
+            List<User> users = GetAll().ToList();
+            List<User> doctors = new List<User>();
+            foreach (User user in users)
+            {
+                if (user.Role == RoleType.doctor)
+                {
+                    doctors.Add(user);
+                }
+            }
+            return doctors;
+        }
+
+        public IEnumerable<User> GetAllExecutives()
+        {
+            List<User> users = GetAll().ToList();
+            List<User> executives = new List<User>();
+            foreach (User user in users)
+            {
+                if (user.Role == RoleType.executive)
+                {
+                    executives.Add(user);
+                }
+            }
+            return executives;
+        }
+
+        public IEnumerable<User> GetAllSecretaries()
+        {
+            List<User> users = GetAll().ToList();
+            List<User> secretaries = new List<User>();
+            foreach (User user in users)
+            {
+                if (user.Role == RoleType.secretary)
+                {
+                    secretaries.Add(user);
+                }
+            }
+            return secretaries;
+        }
+
         private User ConvertCSVFormatToUser(string userCSVFormat)
         {
             var tokens = userCSVFormat.Split(_delimiter.ToCharArray());

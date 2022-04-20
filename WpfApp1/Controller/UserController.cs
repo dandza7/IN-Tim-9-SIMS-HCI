@@ -32,6 +32,26 @@ namespace WpfApp1.Controller
             return _userService.GetByUsername(username);
         }
 
+        public IEnumerable<User> GetAllPatients()
+        {
+            return _userService.GetAllPatients();
+        }
+
+        public IEnumerable<User> GetAllDoctors()
+        {
+            return _userService.GetAllDoctors();
+        }
+
+        public IEnumerable<User> GetAllExecutives()
+        {
+            return _userService.GetAllExecutives();
+        }
+
+        public IEnumerable<User> GetAllSecretaries()
+        {
+            return _userService.GetAllSecretaries();
+        }
+
         public User Create(User user)
         {
             return _userService.Create(user);
