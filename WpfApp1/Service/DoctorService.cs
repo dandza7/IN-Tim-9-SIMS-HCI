@@ -29,7 +29,8 @@ namespace WpfApp1.Service
 
         public Doctor GetByUsername(string username)
         {
-            return _doctorRepo.GetByUsername(username);
+            User user = _userRepo.GetByUsername(username);
+            return _doctorRepo.GetById(user.Id);
         }
 
         public Doctor Create(Doctor doctor)

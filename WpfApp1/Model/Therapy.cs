@@ -19,7 +19,7 @@ namespace WpfApp1.Model
         }
 
         private int _id;
-        private int _patientId;
+        private int _medicalRecordId;
         private int _drugId;
         private double _frequency;
         private int _duration;
@@ -40,18 +40,18 @@ namespace WpfApp1.Model
             }
         }
 
-        public int PatientId
+        public int MedicalRecordId
         {
             get
             {
-                return _patientId;
+                return _medicalRecordId;
             }
             set
             {
-                if (value != _patientId)
+                if (value != _medicalRecordId)
                 {
-                    _patientId = value;
-                    OnPropertyChanged("PatientId");
+                    _medicalRecordId = value;
+                    OnPropertyChanged("MedicalRecordId");
                 }
             }
         }
@@ -104,18 +104,18 @@ namespace WpfApp1.Model
             }
         }
 
-        public Therapy(int id, int patientId, int drugId, double frequency, int duration)
+        public Therapy(int id, int medicalRecordId, int drugId, double frequency, int duration)
         {
             Id = id;
-            PatientId = patientId;
+            MedicalRecordId = medicalRecordId;
             DrugId = drugId;
             Frequency = frequency;
             Duration = duration;
         }
 
-        public Therapy(int patientId, int drugId, double frequency, int duration)
+        public Therapy(int medicalRecordId, int drugId, double frequency, int duration)
         {
-            PatientId = patientId;
+            MedicalRecordId = medicalRecordId;
             DrugId = drugId;
             Frequency = frequency;
             Duration = duration;

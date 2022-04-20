@@ -26,6 +26,9 @@ namespace WpfApp1.View.Model
     {
 
         private PatientController _patientController;
+
+        private UserController _userController;
+
         public ObservableCollection<UserControl> Patients { get; set; }
         public SecretaryPatientsView()
         {
@@ -33,9 +36,10 @@ namespace WpfApp1.View.Model
             DataContext = this;
             var app = Application.Current as App;
             _patientController = app.PatientController;
+            _userController = app.UserController;
 
             Patients = new ObservableCollection<UserControl>(
-                PatientConverter.ConvertPatientListToPatientViewList(_patientController.GetAll().ToList()));
+                PatientConverter.ConvertPatientListToPatientViewList(_userController.GetAllPatients().ToList()));
         }
         private void AddPatient_Click(object sender, RoutedEventArgs e)
         {
@@ -50,7 +54,7 @@ namespace WpfApp1.View.Model
 
             _patientController.Delete(patientId);
             Patients = new ObservableCollection<UserControl>(
-            PatientConverter.ConvertPatientListToPatientViewList(_patientController.GetAll().ToList()));
+            PatientConverter.ConvertPatientListToPatientViewList(_userController.GetAllPatients().ToList()));
             SecretaryPatientsDataGrid.ItemsSource = Patients;
             SecretaryPatientsDataGrid.Items.Refresh();
         }
@@ -71,7 +75,7 @@ namespace WpfApp1.View.Model
         private void Refresh_Click(object sender, RoutedEventArgs e)
         {
             Patients = new ObservableCollection<UserControl>(
-    PatientConverter.ConvertPatientListToPatientViewList(_patientController.GetAll().ToList()));
+    PatientConverter.ConvertPatientListToPatientViewList(_userController.GetAllPatients().ToList()));
             SecretaryPatientsDataGrid.ItemsSource = Patients;
             SecretaryPatientsDataGrid.Items.Refresh();
         }

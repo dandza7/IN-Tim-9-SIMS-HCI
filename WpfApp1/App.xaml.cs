@@ -30,6 +30,7 @@ namespace WpfApp1
         private string THERAPY_FILE = _projectPath + "\\Resources\\Data\\therapy.csv";
         private string INVENTORY_FILE = _projectPath + "\\Resources\\Data\\inventory.csv";
         private string INVENTORY_MOVING_FILE = _projectPath + "\\Resources\\Data\\inventoryMoving.csv";
+        private string MEDICAL_RECORD_FILE = _projectPath + "\\Resources\\Data\\medical_record.csv";
         private const string CSV_DELIMITER = ";";
         private const string DATETIME_FORMAT = "dd.MM.yyyy. HH:mm:ss";
 
@@ -44,6 +45,8 @@ namespace WpfApp1
         public InventoryController InventoryController { get; set; }
         public InventoryMovingController InventoryMovingController { get; set; }
         public UserController UserController { get; set; } 
+        public MedicalRecordController MedicalRecordController { get; set; }
+
         public App()
         {
             var notificationRepository = new NotificationRepository(NOTIFICATION_FILE, CSV_DELIMITER, DATETIME_FORMAT);
@@ -57,6 +60,7 @@ namespace WpfApp1
             var inventoryRepository = new InventoryRepository(INVENTORY_FILE, CSV_DELIMITER);
             var inventoryMovingRepository = new InventoryMovingRepository(INVENTORY_MOVING_FILE, CSV_DELIMITER);
             var userRepository = new UserRepository(USER_FILE, CSV_DELIMITER);
+            var medicalRecordRepository = new MedicalRecordRepository(MEDICAL_RECORD_FILE, CSV_DELIMITER);
 
             var notificationService = new NotificationService(notificationRepository);
             NotificationController = new NotificationController(notificationService);
@@ -64,7 +68,7 @@ namespace WpfApp1
             var roomService = new RoomService(roomRepository);
             RoomController = new RoomController(roomService);
 
-            var patientService = new PatientService(userRepository, patientRepository, notificationRepository, therapyRepository);
+            var patientService = new PatientService(userRepository, patientRepository, therapyRepository);
             PatientController = new PatientController(patientService);
 
             var doctorService = new DoctorService(userRepository, doctorRepository);
@@ -88,8 +92,11 @@ namespace WpfApp1
             var inventoryMovingService = new InventoryMovingService(inventoryMovingRepository, inventoryRepository);
             InventoryMovingController = new InventoryMovingController(inventoryMovingService);
 
-            var userService = new UserService(userRepository);
+            var userService = new UserService(userRepository, notificationRepository);
             UserController = new UserController(userService);
+
+            var medicalRecordService = new MedicalRecordService(medicalRecordRepository);
+            MedicalRecordController = new MedicalRecordController(medicalRecordService);
         }
     }
 }

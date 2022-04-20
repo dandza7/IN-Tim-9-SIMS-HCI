@@ -39,11 +39,6 @@ namespace WpfApp1.Controller
             return _patientService.GetById(patientId);
         }
 
-        public IEnumerable<Notification> GetPatientsNotifications(int patientId)
-        {
-            return _patientService.GetPatientsNotifications(patientId);
-        }
-
         /*public IEnumerable<Therapy> GetPatientsTherapies(int patientId)
         {
             return _patientService.GetPatientsTherapies(patientId);

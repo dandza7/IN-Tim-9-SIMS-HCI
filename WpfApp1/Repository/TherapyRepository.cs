@@ -58,7 +58,7 @@ namespace WpfApp1.Repository
             {
                 if (t.Id == therapy.Id)
                 {
-                    t.PatientId = therapy.PatientId;
+                    t.MedicalRecordId = therapy.MedicalRecordId;
                     t.DrugId = therapy.DrugId;
                     t.Frequency = therapy.Frequency;
                     t.Duration = therapy.Duration;
@@ -99,7 +99,7 @@ namespace WpfApp1.Repository
         {
             return string.Join(_delimiter,
                 therapy.Id,
-                therapy.PatientId,
+                therapy.MedicalRecordId,
                 therapy.DrugId,
                 therapy.Frequency,
                 therapy.Duration);
