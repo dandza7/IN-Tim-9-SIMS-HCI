@@ -13,13 +13,11 @@ namespace WpfApp1.Repository
         private const string NOT_FOUND_ERROR = "Inventory with {0}:{1} can not be found!";
         private string _path;
         private string _delimiter;
-        private int _inventoryMaxId;
 
         public InventoryRepository(string path, string delimiter)
         {
             _path = path;
             _delimiter = delimiter;
-            _inventoryMaxId = GetMaxId(GetAll());
         }
 
         public Inventory Get(int id)
@@ -41,7 +39,7 @@ namespace WpfApp1.Repository
 
         public Inventory Create(Inventory inventory)
         {
-            inventory.Id = ++_inventoryMaxId;
+            inventory.Id = GetMaxId(GetAll()) + 1;
             AppendLineToFile(_path, ConvertInventoryToCsvFormat(inventory));
             return inventory;
         }

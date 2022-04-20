@@ -14,13 +14,11 @@ namespace WpfApp1.Repository
         private const string NOT_FOUND_ERROR = "Renovation with {0}:{1} can not be found!";
         private string _path;
         private string _delimiter;
-        private int _renovationMaxId;
 
         public RenovationRepository(string path, string delimiter)
         {
             _path = path;
             _delimiter = delimiter;
-            _renovationMaxId = GetMaxId(GetAll());
         }
 
         public Renovation Get(int id)
@@ -42,7 +40,7 @@ namespace WpfApp1.Repository
 
         public Renovation Create(Renovation renovation)
         {
-            renovation.Id = ++_renovationMaxId;
+            renovation.Id = GetMaxId(GetAll()) + 1;
             AppendLineToFile(_path, ConvertRenovationToCsvFormat(renovation));
             return renovation;
         }
