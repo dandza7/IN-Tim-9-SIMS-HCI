@@ -89,6 +89,7 @@
     </ApplicationDefinition>
     <Compile Include="Controller\DoctorController.cs" />
     <Compile Include="Controller\InventoryController.cs" />
+    <Compile Include="Controller\MedicalRecordController.cs" />
     <Compile Include="Controller\TherapyController.cs" />
     <Compile Include="Controller\DrugController.cs" />
     <Compile Include="Controller\NotificationController.cs" />
@@ -101,12 +102,14 @@
     <Compile Include="Model\Doctor.cs" />
     <Compile Include="Model\Drug.cs" />
     <Compile Include="Model\Inventory.cs" />
+    <Compile Include="Model\MedicalRecord.cs" />
     <Compile Include="Model\Notification.cs" />
     <Compile Include="Model\Preview\InventoryPreview.cs" />
     <Compile Include="Model\Renovation.cs" />
     <Compile Include="Model\Therapy.cs" />
     <Compile Include="Model\User.cs" />
     <Compile Include="Repository\InventoryRepository.cs" />
+    <Compile Include="Repository\MedicalRecordRepository.cs" />
     <Compile Include="Repository\TherapyRepository.cs" />
     <Compile Include="Repository\DoctorRepository.cs" />
     <Compile Include="Repository\DrugRepository.cs" />
@@ -120,7 +123,9 @@
     <None Include="Resources\Data\notification.csv" />
     <None Include="Resources\Data\user.csv" />
     <Compile Include="Repository\UserRepository.cs" />
+    <None Include="Resources\Data\medical_record.csv" />
     <Compile Include="Service\InventoryService.cs" />
+    <Compile Include="Service\MedicalRecordService.cs" />
     <Compile Include="Service\TherapyService.cs" />
     <Compile Include="Service\AppointmentService.cs" />
     <Compile Include="Model\Patient.cs" />
