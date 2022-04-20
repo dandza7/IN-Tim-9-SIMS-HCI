@@ -50,7 +50,7 @@ namespace WpfApp1.View.Dialog
             _doctorController = app.DoctorController;
             if (BeginningDTP.Text == null || EndingDTP.Text == null) return;
             if (DoctorComboBox.SelectedValue == null) return;
-            Doctor doctor = _doctorController.GetById(_userController.GetByUsername(((User)DoctorComboBox.SelectedValue).Username).Id);
+            Doctor doctor = _doctorController.GetByUsername(((User)DoctorComboBox.SelectedValue).Username);
             _appointmentController.Update(new Appointment(
                 (int)app.Properties["appointmentId"], 
                 DateTime.Parse(BeginningDTP.Text), 

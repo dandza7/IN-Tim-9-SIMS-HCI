@@ -27,11 +27,6 @@ namespace WpfApp1.Controller
             return _userService.GetById(userId);
         }
 
-        public User GetByUsername(string username)
-        {
-            return _userService.GetByUsername(username);
-        }
-
         public IEnumerable<User> GetAllPatients()
         {
             return _userService.GetAllPatients();
@@ -50,6 +45,11 @@ namespace WpfApp1.Controller
         public IEnumerable<User> GetAllSecretaries()
         {
             return _userService.GetAllSecretaries();
+        }
+
+        public IEnumerable<Notification> GetUsersNotifications(int userId)
+        {
+            return _userService.GetUsersNotifications(userId);
         }
 
         public User Create(User user)
