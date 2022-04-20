@@ -6,9 +6,10 @@
         xmlns:local="clr-namespace:WpfApp1.Service"
         mc:Ignorable="d"
         Title="ExecutiveMenu" Height="720" Width="1280"
-        Background="{StaticResource WhiteBrush}">
+        Background="{StaticResource WhiteBrush}"
+        ResizeMode="NoResize">
     <Window.Resources>
-       
+
     </Window.Resources>
     <Grid>
         <Frame Name="ExecutiveMainFrame" Visibility="Collapsed" NavigationUIVisibility="Hidden"></Frame>
@@ -27,7 +28,7 @@
                     <RowDefinition></RowDefinition>
                     <RowDefinition></RowDefinition>
                 </Grid.RowDefinitions>
-                <StackPanel Height="100" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="4" Orientation="Horizontal">
+                <StackPanel Height="100" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="4" Orientation="Horizontal" HorizontalAlignment="Stretch">
                     <Button x:Name="LogInButton" Width="640" Content="Log In" Style="{StaticResource NavBarButton}" Click="LogInButton_Click"/>
                     <Button Name="HelpButton" Width="640" Content="Help" Style="{StaticResource NavBarButton}" Click="HelpButton_Click"/>
                 </StackPanel>

@@ -163,6 +163,34 @@
                         <TextBlock Grid.Row="1" Grid.Column="1" Text="You have to select room from table first!" Style="{StaticResource NotificationText}"></TextBlock>
                     </Grid>
                 </Border>
+                <Border x:Name="DeleteContainer" Grid.Column="1" Grid.Row="1" Style="{StaticResource DialogModal}" Visibility="Collapsed">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="100"/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition Width="50"/>
+                            <ColumnDefinition Width="40"/>
+                            <ColumnDefinition Width="10"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="10"/>
+                            <RowDefinition Height="40"/>
+                            <RowDefinition Height="10"/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <TextBlock Grid.Row="3" Grid.Column="0" Grid.RowSpan="2" Grid.ColumnSpan="3" Padding="50 0 0 0" Style="{StaticResource Title}" TextWrapping="Wrap">Confirm deleting of room:</TextBlock>
+                        <Label Grid.Row="5" Grid.Column="1" Content="Nametag:" Style="{StaticResource FormLabel}"></Label>
+                        <TextBox x:Name="DeleteNametag" Grid.Row="6" Grid.Column="1" Style="{StaticResource FormInputBox}" IsEnabled="False"></TextBox>
+                        <Button x:Name="DeleteConfirm" Grid.Column="1" Grid.Row="8" Style="{StaticResource ClassicButton}" Margin="70 4" Click="DeleteConfirm_Click">Confirm</Button>
+                        <Button x:Name="XDeleteButton" Grid.Column="3" Grid.Row="1" Style="{StaticResource ClassicButton}" Click="XDeleteButton_Click">X</Button>
+                    </Grid>
+                </Border>
             </Grid>
         </Border>
     </Grid>

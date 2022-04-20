@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -49,12 +50,15 @@ namespace WpfApp1.Repository
         private Renovation ConvertCsvFormatToRenovation(string renovationCsvFormat)
         {
             var tokens = renovationCsvFormat.Split(_delimiter.ToCharArray());
+            string format = "dd/MM/yyyy H:mm:ss";
             return new Renovation(
                 int.Parse(tokens[0]),
                 int.Parse(tokens[1]),
                 tokens[2],
-                DateTime.Parse(tokens[3]),
-                DateTime.Parse(tokens[4]));
+                DateTime.ParseExact(tokens[3], format,
+                CultureInfo.InvariantCulture),
+                DateTime.ParseExact(tokens[4], format,
+                CultureInfo.InvariantCulture));
         }
 
         private string ConvertRenovationToCsvFormat(Renovation renovation)
