@@ -17,15 +17,19 @@ namespace WpfApp1.Service
         private readonly DoctorRepository _doctorRepo;
         private readonly PatientRepository _patientRepo;
         private readonly RoomRepository _roomRepo;
+        private readonly UserRepository _userRepo;
+
         public AppointmentService(AppointmentRepository appointmentRepo, 
             DoctorRepository doctorRepository, 
             PatientRepository patientRepo,
-            RoomRepository roomRepository)
+            RoomRepository roomRepository,
+            UserRepository userRepository)
         {
             _appointmentRepo = appointmentRepo;
             _doctorRepo = doctorRepository;
             _patientRepo = patientRepo;
             _roomRepo = roomRepository;
+            _userRepo = userRepository;
         }
 
         public IEnumerable<Appointment> GetAll()
@@ -35,13 +39,11 @@ namespace WpfApp1.Service
 
         public Appointment Create(Appointment appointment)
         {
-            // save appointments
             return _appointmentRepo.Create(appointment);
         }
 
         public Appointment Update(Appointment appointment)
         {
-            // save appointments
             return _appointmentRepo.Update(appointment);
         }
 
@@ -70,8 +72,9 @@ namespace WpfApp1.Service
             foreach (Appointment appointment in appointments)
             {
                 Doctor doctor = _doctorRepo.GetById(appointment.DoctorId);
+                User user = _userRepo.GetById(doctor.Id);
                 Room room = _roomRepo.Get(doctor.RoomId);
-                appointmentViews.Add(AppointmentConverter.ConvertAppointmentAndDoctorToAppointmentView(appointment, doctor, room));
+                appointmentViews.Add(AppointmentConverter.ConvertAppointmentAndDoctorToAppointmentView(appointment, user, room));
             }
             return appointmentViews;
         }
@@ -81,8 +84,8 @@ namespace WpfApp1.Service
             List<Appointment> appointments = _appointmentRepo.GetAll().ToList();
             foreach (Appointment appointment in appointments)
             {
-                Doctor doctor = _doctorRepo.GetById(appointment.DoctorId);
-                Patient patient = _patientRepo.GetById(appointment.PatientId);
+                User doctor = _userRepo.GetById(_doctorRepo.GetById(appointment.DoctorId).Id);
+                User patient = _userRepo.GetById(_patientRepo.GetById(appointment.PatientId).Id);
                 appointmentViews.Add(AppointmentConverter.ConvertSecretaryAppointmentSecretaryAppointmentView(appointment, doctor, patient));
             }
             return appointmentViews;

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace WpfApp1.Model
 {
 
-    public abstract class User: INotifyPropertyChanged
+    public class User: INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
         protected virtual void OnPropertyChanged(string name)
@@ -138,6 +138,11 @@ namespace WpfApp1.Model
                     OnPropertyChanged("Role");
                 }
             }
+        }
+
+        public User()
+        {
+
         }
 
         public User(int id, string name, string surname, string username, string password, string phoneNumber, string jmbg, RoleType role)

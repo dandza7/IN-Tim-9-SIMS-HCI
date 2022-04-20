@@ -30,18 +30,21 @@ namespace WpfApp1.View.Dialog
         
         private AppointmentController _appointmentController;
         private DoctorController _doctorController;
-        public ObservableCollection<Doctor> Doctors { get; set; }
+        private UserController _userController;
+        public ObservableCollection<User> Doctors { get; set; }
         public AddPatientAppointmentDialog()
         {
             InitializeComponent();
             DataContext = this;
             var app = Application.Current as App;
             _doctorController = app.DoctorController;
-            Doctors = new ObservableCollection<Doctor>();
+            _userController = app.UserController;
+            Doctors = new ObservableCollection<User>();
             List<Doctor> allDoctors = _doctorController.GetAll().ToList();
+            
             allDoctors.ForEach(doctor =>
             { 
-                if (doctor.Specialization == Doctor.SpecType.generalPracticioner && doctor.IsAvailable) Doctors.Add(doctor); 
+                if (doctor.Specialization == Doctor.SpecType.generalPracticioner && doctor.IsAvailable) Doctors.Add(_userController.GetById(doctor.Id)); 
             });
         }
         
@@ -52,7 +55,7 @@ namespace WpfApp1.View.Dialog
             _doctorController = app.DoctorController;
             if (DoctorComboBox.SelectedValue == null) return;
             if (BeginningDTP.Text == null || EndingDTP.Text == null) return;
-            Doctor doctor = _doctorController.GetByUsername(((Doctor)DoctorComboBox.SelectedValue).Username);
+            Doctor doctor = _doctorController.GetById(_userController.GetByUsername(((User)DoctorComboBox.SelectedValue).Username).Id);
             _appointmentController.Create(new Appointment(DateTime.Parse(BeginningDTP.Text), DateTime.Parse(EndingDTP.Text), AppointmentType.regular, false, doctor.Id, 3, doctor.RoomId));
             DataGrid dataView = (DataGrid)app.Properties["DataView"];
             dataView.ItemsSource = null;

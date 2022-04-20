@@ -45,9 +45,5 @@ namespace WpfApp1.Controller
         {
             return _doctorService.Delete(id);
         }
-        public List<Doctor> UpdateDoctorss()
-        {
-            return _doctorService.UpdateDoctors();
-        }
     }
 }
