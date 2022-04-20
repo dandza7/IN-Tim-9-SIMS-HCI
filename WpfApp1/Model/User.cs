@@ -172,27 +172,6 @@ namespace WpfApp1.Model
             Role = role;
         }
 
-        public User(int id, string name, string surname, string jmbg, string username, string password, RoleType role)
-        {
-            Id = id;
-            Name = name;
-            Surname= surname;
-            Jmbg= jmbg;
-            Username = username;
-            Password = password;
-            Role = role;
-        }
-
-        public User(string name, string surname, string jmbg, string username, string password, RoleType role)
-        {
-            Name = name;
-            Surname = surname;
-            Jmbg = jmbg;
-            Username = username;
-            Password = password;
-            Role = role;
-        }
-
         public User(string name, string surname, string jmbg, string username, string password, string phoneNumber, RoleType role)
         {
             Name = name;
