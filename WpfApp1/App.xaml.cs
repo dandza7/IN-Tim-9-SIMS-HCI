@@ -61,7 +61,7 @@ namespace WpfApp1
             var roomService = new RoomService(roomRepository);
             RoomController = new RoomController(roomService);
 
-            var patientService = new PatientService(userRepository, patientRepository, notificationRepository, therapyRepository);
+            var patientService = new PatientService(userRepository, patientRepository, therapyRepository);
             PatientController = new PatientController(patientService);
 
             var doctorService = new DoctorService(userRepository, doctorRepository);
@@ -82,7 +82,7 @@ namespace WpfApp1
             var inventoryService = new InventoryService(inventoryRepository, roomRepository);
             InventoryController = new InventoryController(inventoryService);
 
-            var userService = new UserService(userRepository);
+            var userService = new UserService(userRepository, notificationRepository);
             UserController = new UserController(userService);
         }
     }

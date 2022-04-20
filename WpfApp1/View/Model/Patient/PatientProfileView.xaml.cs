@@ -24,6 +24,7 @@ namespace WpfApp1.View.Model.Patient
     public partial class PatientProfileView : Page
     {
         private PatientController _patientController;
+        private UserController _userController;
         /*private TherapyController _therapyController;
         private DrugController _drugController;*/
 
@@ -33,11 +34,12 @@ namespace WpfApp1.View.Model.Patient
             InitializeComponent();
             DataContext = this;
             var app = Application.Current as App;
+            _userController = app.UserController;
             /*_patientController = app.PatientController;
             _therapyController = app.TherapyController;
             _drugController = app.DrugController;*/
 
-            Notifications = new ObservableCollection<Notification>(_patientController.GetPatientsNotifications(3));
+            Notifications = new ObservableCollection<Notification>(_userController.GetUsersNotifications(3));
             /*List<Therapy> therapies = _patientController.GetPatientsTherapies(3).ToList();
             List<Drug> drugs = new List<Drug>();
             therapies.ForEach(therapy => drugs.Add(_drugController.GetById(therapy.DrugId)));

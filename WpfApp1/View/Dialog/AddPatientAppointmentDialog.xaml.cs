@@ -55,7 +55,7 @@ namespace WpfApp1.View.Dialog
             _doctorController = app.DoctorController;
             if (DoctorComboBox.SelectedValue == null) return;
             if (BeginningDTP.Text == null || EndingDTP.Text == null) return;
-            Doctor doctor = _doctorController.GetById(_userController.GetByUsername(((User)DoctorComboBox.SelectedValue).Username).Id);
+            Doctor doctor = _doctorController.GetByUsername(((User)DoctorComboBox.SelectedValue).Username);
             _appointmentController.Create(new Appointment(DateTime.Parse(BeginningDTP.Text), DateTime.Parse(EndingDTP.Text), AppointmentType.regular, false, doctor.Id, 3, doctor.RoomId));
             DataGrid dataView = (DataGrid)app.Properties["DataView"];
             dataView.ItemsSource = null;
