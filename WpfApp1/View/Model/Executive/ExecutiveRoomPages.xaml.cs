@@ -243,8 +243,24 @@ namespace WpfApp1.View.Model.Executive
                 return;
             }
             Room r = (Room)RoomsDG.SelectedItems[0];
-            this._roomController.Delete(r.Id);
+            SelectedId = r.Id;
+            DeleteNametag.Text = r.Nametag;
+            DialogContainer.Visibility = Visibility.Visible;
+            DeleteContainer.Visibility = Visibility.Visible;
+            
+        }
+        private void XDeleteButton_Click(object sender, RoutedEventArgs e)
+        {
+            DialogContainer.Visibility = Visibility.Collapsed;
+            DeleteContainer.Visibility = Visibility.Collapsed;
+        }
+
+        private void DeleteConfirm_Click(object sender, RoutedEventArgs e)
+        {
+            this._roomController.Delete(SelectedId);
             RefreshSource();
+            DialogContainer.Visibility = Visibility.Collapsed;
+            DeleteContainer.Visibility = Visibility.Collapsed;
         }
         //--------------------------------------------------------------------------------------------------------
         //          Renovating button manipulation code:
@@ -352,5 +368,7 @@ namespace WpfApp1.View.Model.Executive
         {
             
         }
+
+
     }
 }

@@ -14,13 +14,11 @@ namespace WpfApp1.Repository
         private const string NOT_FOUND_ERROR = "Room with {0}:{1} can not be found!";
         private string _path;
         private string _delimiter;
-        private int _roomMaxId;
 
         public RoomRepository(string path, string delimiter)
         {
             _path = path;
             _delimiter = delimiter;
-            _roomMaxId = GetMaxId(GetAll());
         }
 
         public Room Get(int id)
@@ -50,7 +48,7 @@ namespace WpfApp1.Repository
 
         public Room Create(Room room)
         {
-            room.Id = ++_roomMaxId;
+            room.Id = GetMaxId(GetAll()) + 1;
             AppendLineToFile(_path, ConvertRoomToCsvFormat(room));
             return room;
         }

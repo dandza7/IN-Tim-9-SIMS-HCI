@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -13,13 +14,11 @@ namespace WpfApp1.Repository
         private const string NOT_FOUND_ERROR = "Renovation with {0}:{1} can not be found!";
         private string _path;
         private string _delimiter;
-        private int _renovationMaxId;
 
         public RenovationRepository(string path, string delimiter)
         {
             _path = path;
             _delimiter = delimiter;
-            _renovationMaxId = GetMaxId(GetAll());
         }
 
         public Renovation Get(int id)
@@ -41,7 +40,7 @@ namespace WpfApp1.Repository
 
         public Renovation Create(Renovation renovation)
         {
-            renovation.Id = ++_renovationMaxId;
+            renovation.Id = GetMaxId(GetAll()) + 1;
             AppendLineToFile(_path, ConvertRenovationToCsvFormat(renovation));
             return renovation;
         }
@@ -49,12 +48,15 @@ namespace WpfApp1.Repository
         private Renovation ConvertCsvFormatToRenovation(string renovationCsvFormat)
         {
             var tokens = renovationCsvFormat.Split(_delimiter.ToCharArray());
+            string format = "dd/MM/yyyy H:mm:ss";
             return new Renovation(
                 int.Parse(tokens[0]),
                 int.Parse(tokens[1]),
                 tokens[2],
-                DateTime.Parse(tokens[3]),
-                DateTime.Parse(tokens[4]));
+                DateTime.ParseExact(tokens[3], format,
+                CultureInfo.InvariantCulture),
+                DateTime.ParseExact(tokens[4], format,
+                CultureInfo.InvariantCulture));
         }
 
         private string ConvertRenovationToCsvFormat(Renovation renovation)
