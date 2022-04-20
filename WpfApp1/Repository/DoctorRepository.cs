@@ -116,31 +116,16 @@ namespace WpfApp1.Repository
         private Doctor ConvertCSVFormatToDoctor(string doctorCSVFormat)
         {
             var tokens = doctorCSVFormat.Split(_delimiter.ToCharArray());
-            Enum.TryParse(tokens[7], true, out RoleType role);
-            Enum.TryParse(tokens[8], true, out SpecType spec);
+            Enum.TryParse(tokens[1], true, out SpecType spec);
             return new Doctor(int.Parse(tokens[0]), 
-                tokens[1], 
-                tokens[2], 
-                tokens[3], 
-                tokens[4], 
-                tokens[5], 
-                tokens[6], 
-                role, 
                 spec, 
-                bool.Parse(tokens[9]),
-                int.Parse(tokens[10]));
+                bool.Parse(tokens[2]),
+                int.Parse(tokens[3]));
         }
         private string ConvertDoctorToCSVFormat(Doctor doctor)
         {
             return string.Join(_delimiter,
                doctor.Id,
-               doctor.Name.ToString(),
-               doctor.Surname.ToString(),
-               doctor.Username.ToString(),
-               doctor.Password.ToString(),
-               doctor.PhoneNumber.ToString(),
-               doctor.Jmbg.ToString(),
-               doctor.Role.ToString(),
                doctor.Specialization.ToString(),
                doctor.IsAvailable.ToString(),
                doctor.RoomId.ToString());
@@ -148,10 +133,6 @@ namespace WpfApp1.Repository
         private void AppendLineToFile(string path, string line)
         {
             File.AppendAllText(path, line + Environment.NewLine);
-        }
-        public List<Doctor> UpdateDoctors()
-        {
-            return GetAll().ToList();
         }
     }
 }

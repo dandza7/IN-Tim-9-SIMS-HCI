@@ -26,19 +26,20 @@ namespace WpfApp1.View.Dialog
     {
         private AppointmentController _appointmentController;
         private DoctorController _doctorController;
-        private int _id;
-        public ObservableCollection<Doctor> Doctors { get; set; }
+        private UserController _userController;
+        public ObservableCollection<User> Doctors { get; set; }
         public MovePatientAppointmentDialog()
         {
             InitializeComponent();
             DataContext = this;
             var app = Application.Current as App;
             _doctorController = app.DoctorController;
-            Doctors = new ObservableCollection<Doctor>();
+            _userController = app.UserController;
+            Doctors = new ObservableCollection<User>();
             List<Doctor> allDoctors = _doctorController.GetAll().ToList();
             allDoctors.ForEach(doctor =>
             {
-                if (doctor.Specialization == Doctor.SpecType.generalPracticioner && doctor.IsAvailable) Doctors.Add(doctor);
+                if (doctor.Specialization == Doctor.SpecType.generalPracticioner && doctor.IsAvailable) Doctors.Add(_userController.GetById(doctor.Id));
             });
         }
 
@@ -49,7 +50,7 @@ namespace WpfApp1.View.Dialog
             _doctorController = app.DoctorController;
             if (BeginningDTP.Text == null || EndingDTP.Text == null) return;
             if (DoctorComboBox.SelectedValue == null) return;
-            Doctor doctor = _doctorController.GetByUsername(((Doctor)DoctorComboBox.SelectedValue).Username);
+            Doctor doctor = _doctorController.GetById(_userController.GetByUsername(((User)DoctorComboBox.SelectedValue).Username).Id);
             _appointmentController.Update(new Appointment(
                 (int)app.Properties["appointmentId"], 
                 DateTime.Parse(BeginningDTP.Text), 

@@ -71,5 +71,13 @@ namespace WpfApp1.Model
             IsAvailable = isAvailable;
             RoomId = roomId;
         }
+
+        public Doctor(int id, SpecType specialization, bool isAvailable, int roomId)
+        {
+            Id = id;
+            Specialization = specialization;
+            IsAvailable = isAvailable;
+            RoomId = roomId;
+        }
     }
 }

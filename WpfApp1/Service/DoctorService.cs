@@ -11,10 +11,11 @@ namespace WpfApp1.Service
     public class DoctorService
     {
         private readonly DoctorRepository _doctorRepo;
-
-        public DoctorService(DoctorRepository doctorRepo)
+        private readonly UserRepository _userRepo;
+        public DoctorService(UserRepository userRepo, DoctorRepository doctorRepo)
         {
             _doctorRepo = doctorRepo;
+            _userRepo = userRepo;
         }
         internal IEnumerable<Doctor> GetAll()
         {
@@ -42,10 +43,6 @@ namespace WpfApp1.Service
         public bool Delete(int id)
         {
             return _doctorRepo.Delete(id);
-        }
-        public List<Doctor> UpdateDoctors()
-        {
-            return _doctorRepo.UpdateDoctors();
         }
     }
 }
