@@ -32,6 +32,26 @@ namespace WpfApp1.Service
             return _userRepository.GetByUsername(username);
         }
 
+        public IEnumerable<User> GetAllPatients()
+        {
+            return _userRepository.GetAllPatients();
+        }
+
+        public IEnumerable<User> GetAllDoctors()
+        {
+            return _userRepository.GetAllDoctors();
+        }
+
+        public IEnumerable<User> GetAllExecutives()
+        {
+            return _userRepository.GetAllExecutives();
+        }
+
+        public IEnumerable<User> GetAllSecretaries()
+        {
+            return _userRepository.GetAllSecretaries();
+        }
+
         public User Create(User user)
         {
             return _userRepository.Create(user);
