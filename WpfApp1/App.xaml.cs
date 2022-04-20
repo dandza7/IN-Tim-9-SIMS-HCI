@@ -29,6 +29,7 @@ namespace WpfApp1
         private string RENOVATION_FILE = _projectPath + "\\Resources\\Data\\renovation.csv";
         private string THERAPY_FILE = _projectPath + "\\Resources\\Data\\therapy.csv";
         private string INVENTORY_FILE = _projectPath + "\\Resources\\Data\\inventory.csv";
+        private string INVENTORY_MOVING_FILE = _projectPath + "\\Resources\\Data\\inventoryMoving.csv";
         private const string CSV_DELIMITER = ";";
         private const string DATETIME_FORMAT = "dd.MM.yyyy. HH:mm:ss";
 
@@ -41,6 +42,7 @@ namespace WpfApp1
         public RenovationController RenovationController { get; set; }
         public TherapyController TherapyController { get; set; }
         public InventoryController InventoryController { get; set; }
+        public InventoryMovingController InventoryMovingController { get; set; }
         public UserController UserController { get; set; } 
         public App()
         {
@@ -53,6 +55,7 @@ namespace WpfApp1
             var drugRepository = new DrugRepository(DRUG_FILE, CSV_DELIMITER);
             var renovationRepository = new RenovationRepository(RENOVATION_FILE, CSV_DELIMITER);
             var inventoryRepository = new InventoryRepository(INVENTORY_FILE, CSV_DELIMITER);
+            var inventoryMovingRepository = new InventoryMovingRepository(INVENTORY_MOVING_FILE, CSV_DELIMITER);
             var userRepository = new UserRepository(USER_FILE, CSV_DELIMITER);
 
             var notificationService = new NotificationService(notificationRepository);
@@ -79,8 +82,11 @@ namespace WpfApp1
             var therapyService = new TherapyService(therapyRepository);
             TherapyController = new TherapyController(therapyService);
 
-            var inventoryService = new InventoryService(inventoryRepository, roomRepository);
+            var inventoryService = new InventoryService(inventoryRepository, roomRepository, inventoryMovingRepository);
             InventoryController = new InventoryController(inventoryService);
+
+            var inventoryMovingService = new InventoryMovingService(inventoryMovingRepository, inventoryRepository);
+            InventoryMovingController = new InventoryMovingController(inventoryMovingService);
 
             var userService = new UserService(userRepository);
             UserController = new UserController(userService);

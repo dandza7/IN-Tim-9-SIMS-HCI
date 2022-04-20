@@ -54,11 +54,9 @@ namespace WpfApp1.View.Model.Executive
             }
             set
             {
-                Console.WriteLine("CHANGE: {0} // {1}", value, _wrongSelection);
                 if (value != _wrongSelection)
                 {
-                    Console.WriteLine("CHANGED!");
-                    _feedback = value;
+                    _wrongSelection = value;
                     OnPropertyChanged("WrongSelection");
                 }
             }
@@ -83,6 +81,9 @@ namespace WpfApp1.View.Model.Executive
         public List<InventoryPreview> Inventory { get; set; }
         public List<string> SOPRooms { get; set; }
         private InventoryController _inventoryController;
+        private InventoryMovingController _inventoryMovingController;
+        private RoomController _roomController;
+        public int SelectedId { get; set; }
 
         //--------------------------------------------------------------------------------------------------------
         //          Constructor code:
@@ -93,10 +94,13 @@ namespace WpfApp1.View.Model.Executive
             this.DataContext = this;
             var app = Application.Current as App;
             _inventoryController = app.InventoryController;
+            _inventoryMovingController = app.InventoryMovingController;
+            _roomController = app.RoomController;
             this.SOPRooms = new List<string>();
             this.Inventory = _inventoryController.GetPreviews();
             this.Feedback = "";
             this.WrongSelection = "";
+            SelectedId = -1;
         }
         //--------------------------------------------------------------------------------------------------------
         //          Global methods code:
@@ -181,6 +185,7 @@ namespace WpfApp1.View.Model.Executive
                 return;
             }
             MoveOldRoom.Text = i.Room;
+            SelectedId = i.Id;
             RefreshRooms();
             DialogContainer.Visibility = Visibility.Visible;
             MoveContainer.Visibility = Visibility.Visible;
@@ -200,8 +205,10 @@ namespace WpfApp1.View.Model.Executive
             }
             DialogContainer.Visibility = Visibility.Collapsed;
             MoveContainer.Visibility = Visibility.Collapsed;
-            RefreshInventory();
             MoveOldRoom.Text = "";
+            _inventoryMovingController.NewMoving(new InventoryMoving(0, SelectedId, _roomController.GetIdByNametag(MoveNewRoom.Text), DateTime.Parse(MoveDate.Text)));
+            RefreshInventory();
+
         }
 
         private void XMoveButton_Click(object sender, RoutedEventArgs e)

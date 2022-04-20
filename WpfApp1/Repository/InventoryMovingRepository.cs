@@ -60,7 +60,8 @@ namespace WpfApp1.Repository
             return new InventoryMoving(
                 int.Parse(tokens[0]),
                 int.Parse(tokens[1]),
-                DateTime.ParseExact(tokens[2], format,
+                int.Parse(tokens[2]),
+                DateTime.ParseExact(tokens[3], format,
                 CultureInfo.InvariantCulture));
         }
 
@@ -68,6 +69,7 @@ namespace WpfApp1.Repository
         {
             return string.Join(_delimiter,
                 invMov.Id,
+                invMov.InventoryId,
                 invMov.RoomId,
                 invMov.MovingDate);
         }

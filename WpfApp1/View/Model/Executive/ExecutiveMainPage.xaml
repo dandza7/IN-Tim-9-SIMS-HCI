@@ -17,7 +17,7 @@
             <RowDefinition Height="50"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <StackPanel Height="100" Grid.Row="0" Orientation="Horizontal" Background="{StaticResource AccentBlueBrush}" HorizontalAlignment="Center">
+        <StackPanel Height="100" Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Center">
             <Button Name="DrugsButton" Width="254" Content="Drugs" Style="{StaticResource NavBarButton}" Click="DrugsButton_Click"/>
             <Button Name="RoomsButton" Width="254" Content="Rooms" Style="{StaticResource NavBarButton}" Click="RoomsButton_Click"/>
             <Button Name="InventoryButton" Width="254" Content="Inventory" Style="{StaticResource NavBarButton}" Click="InventoryButton_Click"/>

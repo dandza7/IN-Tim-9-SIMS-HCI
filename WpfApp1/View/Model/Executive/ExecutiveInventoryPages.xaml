@@ -104,7 +104,7 @@
                         <ComboBox Name="MoveNewRoom" Grid.Row="5" Grid.Column="1" Style="{StaticResource FormInputComboBox}" Height="30" Width="260" ItemsSource="{Binding Path=SOPRooms}"></ComboBox>
                         <Label Grid.Row="6" Grid.Column="1" Content="Date of Moving:" Style="{StaticResource FormLabel}"></Label>
                         <DatePicker Name="MoveDate" Grid.Row="7" Grid.Column="1" Style="{StaticResource DatePickerExecutive}" Height="30" Width="260"></DatePicker>
-                        <TextBlock Grid.Row="8" Grid.Column="1" Style="{StaticResource SmallText}" Text="{Binding Path=Feedback, UpdateSourceTrigger=PropertyChanged}"></TextBlock>
+                        <TextBlock Grid.Row="8" Grid.Column="1" Style="{StaticResource SmallText}" Text="{Binding Path=Feedback, UpdateSourceTrigger=PropertyChanged}" TextWrapping="Wrap"></TextBlock>
                         <Button x:Name="MoveConfirm" Grid.Column="1" Grid.Row="9" Style="{StaticResource ClassicButton}" Margin="50 0" Click="MoveConfirm_Click">Schedule</Button>
                         <Button x:Name="XMoveButton" Grid.Column="3" Grid.Row="1" Style="{StaticResource ClassicButton}" Click="XMoveButton_Click">X</Button>
                     </Grid>

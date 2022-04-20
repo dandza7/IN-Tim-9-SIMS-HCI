@@ -119,6 +119,7 @@
     <None Include="Resources\Data\doctors.csv" />
     <Compile Include="Repository\RenovationRepository.cs" />
     <None Include="Resources\Data\inventory.csv" />
+    <None Include="Resources\Data\inventoryMoving.csv" />
     <None Include="Resources\Data\therapy.csv" />
     <None Include="Resources\Data\notification.csv" />
     <None Include="Resources\Data\user.csv" />
