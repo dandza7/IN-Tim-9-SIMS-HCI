@@ -35,5 +35,17 @@ namespace WpfApp1.Service
         {
             return _roomRepository.Delete(id);
         }
+        public int GetIdByNametag(string nametag)
+        {
+            List<Room> rooms = _roomRepository.GetAll();
+            foreach(Room room in rooms)
+            {
+                if (room.Nametag.Equals(nametag))
+                {
+                    return room.Id;
+                }
+            }
+            return -1;
+        }
     }
 }
