@@ -21,7 +21,7 @@ namespace WpfApp1.Model
         private int _id;
         private int _medicalRecordId;
         private int _drugId;
-        private double _frequency;
+        private float _frequency;
         private int _duration;
 
         public int Id
@@ -72,7 +72,7 @@ namespace WpfApp1.Model
             }
         }
 
-        public double Frequency
+        public float Frequency
         {
             get
             {
@@ -104,7 +104,7 @@ namespace WpfApp1.Model
             }
         }
 
-        public Therapy(int id, int medicalRecordId, int drugId, double frequency, int duration)
+        public Therapy(int id, int medicalRecordId, int drugId, float frequency, int duration)
         {
             Id = id;
             MedicalRecordId = medicalRecordId;
@@ -113,7 +113,7 @@ namespace WpfApp1.Model
             Duration = duration;
         }
 
-        public Therapy(int medicalRecordId, int drugId, double frequency, int duration)
+        public Therapy(int medicalRecordId, int drugId, float frequency, int duration)
         {
             MedicalRecordId = medicalRecordId;
             DrugId = drugId;

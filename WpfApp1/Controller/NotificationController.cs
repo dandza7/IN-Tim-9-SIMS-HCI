@@ -36,5 +36,10 @@ namespace WpfApp1.Controller
         {
             return _notificationService.Delete(id);
         }
+
+        public void SchedulePatientsNotifications(int patientId, Therapy therapy)
+        {
+            _notificationService.SchedulePatientsNotifications(patientId, therapy);
+        }
     }
 }

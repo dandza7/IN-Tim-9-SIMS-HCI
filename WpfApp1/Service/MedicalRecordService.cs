@@ -11,7 +11,6 @@ namespace WpfApp1.Service
     public class MedicalRecordService
     {
         private readonly MedicalRecordRepository _medicalRecordRepo;
-
         public MedicalRecordService(MedicalRecordRepository medicalRecordRepo)
         {
             _medicalRecordRepo = medicalRecordRepo;
