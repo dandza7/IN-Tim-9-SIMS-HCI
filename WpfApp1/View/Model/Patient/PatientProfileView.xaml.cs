@@ -28,6 +28,7 @@ namespace WpfApp1.View.Model.Patient
         private PatientController _patientController;
 
         public ObservableCollection<Notification> Notifications { get; set; }
+        
         public PatientProfileView()
         {
             InitializeComponent();
@@ -44,6 +45,20 @@ namespace WpfApp1.View.Model.Patient
                 _notificationController.SchedulePatientsNotifications(3, therapy);
             }
             Notifications = new ObservableCollection<Notification>(_userController.GetUsersNotifications(3));
+        }
+
+        private void DeleteNotification_Click(object sender, RoutedEventArgs e)
+        {
+            int patientId = 3;
+            int notificationId = ((Notification)PatientNotificationsDataGrid.SelectedItem).Id;
+
+            var app = Application.Current as App;
+            _notificationController = app.NotificationController;
+            _userController = app.UserController;
+
+            _notificationController.Delete(notificationId);
+            PatientNotificationsDataGrid.ItemsSource = null;
+            PatientNotificationsDataGrid.ItemsSource = _userController.GetUsersNotifications(patientId);
         }
     }
 }

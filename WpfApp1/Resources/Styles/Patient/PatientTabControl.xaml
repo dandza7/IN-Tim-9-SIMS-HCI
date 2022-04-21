@@ -6,6 +6,10 @@
         <Setter Property="Padding" Value="-1"/>
     </Style>
 
+    <Style x:Key="ProfileColumnElementStyle" TargetType="TextBlock">
+        <Setter Property="Margin" Value="23, 0"/>
+    </Style>
+    
     <Style x:Key="PatientTabItem" TargetType="TabItem">
         <Setter Property="Foreground" Value="{StaticResource WhiteBrush}"/>
         <Setter Property="FontSize" Value="17"/>

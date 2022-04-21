@@ -38,15 +38,15 @@ namespace WpfApp1.Service
             return _notificationRepo.Create(notification);
         }
 
-        public bool CreateNotificationForPatient(int patientId, string drugName, DateTime when)
+        public bool CreateNotificationForPatient(int patientId, string drugName, DateTime whenToSend)
         {
             
             string content = "Take " + drugName + " in one hour time!";
-            string title = "Patient Therapy";
+            string title = "Patient " + patientId + " " + drugName + " Therapy";
 
-            if(when < DateTime.Now)
+            if(whenToSend < DateTime.Now)
             {
-                Notification notification = new Notification(when, content, title, patientId);
+                Notification notification = new Notification(whenToSend, content, title, patientId);
                 _notificationRepo.Create(notification);
                 return true;
             }
@@ -59,6 +59,7 @@ namespace WpfApp1.Service
             string drugName = _drugRepo.GetById(therapy.DrugId).Name;
             DateTime startingTime = DateTime.Today.AddHours(8);
             int howManyTimes = (int)(Math.Ceiling(therapy.Frequency));
+
             for(int i = 0; i < howManyTimes; i++)
             {
                 CreateNotificationForPatient(patientId, drugName, startingTime);

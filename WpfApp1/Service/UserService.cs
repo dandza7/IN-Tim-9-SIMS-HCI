@@ -59,7 +59,8 @@ namespace WpfApp1.Service
                     usersNotifications.Add(notification);
                 }
             }
-            return usersNotifications;
+            //sortira userove notifikacije u rastucem redoslijedu vremena kada su poslane (starije notifikacije idu na vrh)
+            return usersNotifications.OrderBy(notification => notification.Date).ToList();
         }
 
         public User Create(User user)
