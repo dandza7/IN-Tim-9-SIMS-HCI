@@ -36,7 +36,7 @@ namespace WpfApp1.Service
         public List<Therapy> GetPatientsTherapies(int patientId)
         {
             MedicalRecord medicalRecord = _medicalRecordRepo.GetPatientsMedicalRecord(patientId);
-            List<Therapy> patientsTherapies = _therapyRepo.GetPatientsTherapies(medicalRecord.PatientId).ToList();
+            List<Therapy> patientsTherapies = _therapyRepo.GetPatientsTherapies(medicalRecord.Id).ToList();
 
             return patientsTherapies;
         }

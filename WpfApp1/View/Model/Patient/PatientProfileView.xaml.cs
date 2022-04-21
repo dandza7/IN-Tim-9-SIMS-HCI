@@ -39,11 +39,7 @@ namespace WpfApp1.View.Model.Patient
             _patientController = app.PatientController;
             //_drugController = app.DrugController;
 
-            List<Therapy> therapies = _patientController.GetPatientsTherapies(3).ToList();
-            foreach(Therapy therapy in therapies)
-            {
-                _notificationController.SchedulePatientsNotifications(3, therapy);
-            }
+            _notificationController.GetScheduledPatientsNotifications(3);
             Notifications = new ObservableCollection<Notification>(_userController.GetUsersNotifications(3));
         }
 
