@@ -18,7 +18,8 @@ namespace WpfApp1.View.Converter
         Surname = patient.Surname,
         JMBG = patient.Jmbg,
         Username = patient.Username,
-        Password = patient.Password
+        Password = patient.Password,
+        Phonenumber = patient.PhoneNumber
     };
 
         public static IList<PatientView> ConvertPatientListToPatientViewList(IList<User> patients)

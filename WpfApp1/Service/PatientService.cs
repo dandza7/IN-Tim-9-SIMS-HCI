@@ -56,9 +56,10 @@ namespace WpfApp1.Service
         }
         public Patient GetById(int patientId)
         {
-
-
-            return _patientRepo.GetById(patientId);
+            User u = _userRepo.GetById(patientId);
+            Patient p = _patientRepo.GetById(patientId);
+            Patient p1 = new Patient(u.Name, u.Surname, u.Jmbg, u.Username, u.Password, u.PhoneNumber, p.Email);
+            return p1;
         }
     }
 }
