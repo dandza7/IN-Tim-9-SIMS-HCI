@@ -179,8 +179,9 @@ namespace WpfApp1.Model
             Jmbg = jmbg;
             Username = username;
             Password = password;
-            Role = role;
             PhoneNumber = phoneNumber;
+            Role = role;
         }
+
     }
 }

@@ -22,14 +22,17 @@ namespace WpfApp1.View.Dialog
     public partial class SecretaryUpdatePatientDialog : Window
     {
         private PatientController _patientController;
+
+        private UserController _userController;
         public SecretaryUpdatePatientDialog(int patientId)
         {
             InitializeComponent();
             DataContext = this;
             var app = Application.Current as App;
             _patientController = app.PatientController;
+            _userController = app.UserController;
             Patient p =  this._patientController.GetById(patientId);
-            updateidTB.Text = p.Id.ToString();
+            updateidTB.Text = patientId.ToString();
             updatenameTB.Text = p.Name;
             updatesurnameTB.Text = p.Surname;
             updatejmbgTB.Text = p.Jmbg;
@@ -42,19 +45,25 @@ namespace WpfApp1.View.Dialog
         {
             var app = Application.Current as App;
             _patientController = app.PatientController;
-            Patient patient = new Patient(
+            _userController = app.UserController;
+            User user = new User(
                 int.Parse(updateidTB.Text),
                 updatenameTB.Text,
                 updatesurnameTB.Text,
-                updatejmbgTB.Text,
                 updateusernameTB.Text,
                 updatepasswordTB.Text,
-                updateemailTB.Text,
-                updatebrtelTB.Text
-
+                updatebrtelTB.Text,
+                updatejmbgTB.Text,
+                User.RoleType.patient
+                );
+            Patient patient = new Patient(
+                int.Parse(updateidTB.Text),
+                updateemailTB.Text
                 );
 
+
             _patientController.Update(patient);
+            _userController.Update(user);
             Close();
         }
     }
