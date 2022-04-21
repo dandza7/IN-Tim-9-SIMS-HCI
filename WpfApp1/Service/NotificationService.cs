@@ -11,10 +11,11 @@ namespace WpfApp1.Service
     public class NotificationService
     {
         private readonly NotificationRepository _notificationRepo;
-
-        public NotificationService(NotificationRepository notificationRepo)
+        private readonly DrugRepository _drugRepo;
+        public NotificationService(NotificationRepository notificationRepo, DrugRepository drugRepo)
         {
             _notificationRepo = notificationRepo;
+            _drugRepo = drugRepo;
         }
 
         public IEnumerable<Notification> GetAll()
@@ -35,6 +36,34 @@ namespace WpfApp1.Service
         public Notification Create(Notification notification)
         {
             return _notificationRepo.Create(notification);
+        }
+
+        public bool CreateNotificationForPatient(int patientId, string drugName, DateTime when)
+        {
+            
+            string content = "Take " + drugName + " in one hour time!";
+            string title = "Patient Therapy";
+
+            if(when < DateTime.Now)
+            {
+                Notification notification = new Notification(when, content, title, patientId);
+                _notificationRepo.Create(notification);
+                return true;
+            }
+            return false;
+        }
+
+        public void SchedulePatientsNotifications(int patientId, Therapy therapy)
+        {
+            double timeBetweenNotifications = 24 / therapy.Frequency;
+            string drugName = _drugRepo.GetById(therapy.DrugId).Name;
+            DateTime startingTime = DateTime.Today.AddHours(8);
+            int howManyTimes = (int)(Math.Ceiling(therapy.Frequency));
+            for(int i = 0; i < howManyTimes; i++)
+            {
+                CreateNotificationForPatient(patientId, drugName, startingTime);
+                startingTime = startingTime.AddHours(timeBetweenNotifications);
+            }
         }
 
         public Notification Update(Notification notification)

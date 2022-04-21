@@ -36,6 +36,7 @@ namespace WpfApp1.Repository
             }
             return users;
         }
+
         public User Create(User user)
         {
             int maxId = GetMaxId(GetAll());

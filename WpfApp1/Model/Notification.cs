@@ -112,5 +112,13 @@ namespace WpfApp1.Model
             Title = title;
             UserId = userId;
         }
+
+        public Notification(DateTime date, string content, string title, int userId)
+        {
+            Date = date;
+            Content = content;
+            Title = title;
+            UserId = userId;
+        }
     }
 }

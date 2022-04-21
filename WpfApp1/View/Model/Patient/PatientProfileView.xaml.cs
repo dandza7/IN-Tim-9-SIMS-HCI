@@ -23,10 +23,9 @@ namespace WpfApp1.View.Model.Patient
     /// </summary>
     public partial class PatientProfileView : Page
     {
-        private PatientController _patientController;
+        private NotificationController _notificationController;
         private UserController _userController;
-        /*private TherapyController _therapyController;
-        private DrugController _drugController;*/
+        private PatientController _patientController;
 
         public ObservableCollection<Notification> Notifications { get; set; }
         public PatientProfileView()
@@ -35,19 +34,16 @@ namespace WpfApp1.View.Model.Patient
             DataContext = this;
             var app = Application.Current as App;
             _userController = app.UserController;
-            /*_patientController = app.PatientController;
-            _therapyController = app.TherapyController;
-            _drugController = app.DrugController;*/
+            _notificationController = app.NotificationController;
+            _patientController = app.PatientController;
+            //_drugController = app.DrugController;
 
-            Notifications = new ObservableCollection<Notification>(_userController.GetUsersNotifications(3));
-            /*List<Therapy> therapies = _patientController.GetPatientsTherapies(3).ToList();
-            List<Drug> drugs = new List<Drug>();
-            therapies.ForEach(therapy => drugs.Add(_drugController.GetById(therapy.DrugId)));
-            Console.WriteLine("Terapije koje uzima pacijent sa Id-em 3 su:");
-            foreach(Drug drug in drugs)
+            List<Therapy> therapies = _patientController.GetPatientsTherapies(3).ToList();
+            foreach(Therapy therapy in therapies)
             {
-                Console.WriteLine(drug.Name);
-            }*/
+                _notificationController.SchedulePatientsNotifications(3, therapy);
+            }
+            Notifications = new ObservableCollection<Notification>(_userController.GetUsersNotifications(3));
         }
     }
 }
