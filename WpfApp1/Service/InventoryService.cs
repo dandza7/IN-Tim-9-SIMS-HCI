@@ -12,16 +12,34 @@ namespace WpfApp1.Service
     public class InventoryService
     {
         public readonly InventoryRepository _inventoryRepository;
+        public readonly InventoryMovingRepository _inventoryMovingRepository;
         public readonly RoomRepository _roomRepository;
 
-        public InventoryService(InventoryRepository inventoryRepository, RoomRepository roomRepositroy)
+        public InventoryService(InventoryRepository inventoryRepository, RoomRepository roomRepositroy, InventoryMovingRepository inventoryMovingRepository)
         {
             _inventoryRepository = inventoryRepository;
             _roomRepository = roomRepositroy;
+            _inventoryMovingRepository = inventoryMovingRepository;
         }
 
         public List<InventoryPreview> GetPreviews()
         {
+            List<InventoryMoving> invMovs = _inventoryMovingRepository.GetAll();
+            List<int> forDelete = new List<int>();
+            foreach(InventoryMoving invMov in invMovs)
+            {
+                if(DateTime.Compare(invMov.MovingDate, DateTime.Today) <= 0)
+                {
+                    Inventory inv = _inventoryRepository.Get(invMov.InventoryId);
+                    inv.RoomId = invMov.RoomId;
+                    _inventoryRepository.Update(inv);
+                    forDelete.Add(invMov.Id);
+                }
+            }
+            foreach(int id in forDelete)
+            {
+                _inventoryMovingRepository.Delete(id);
+            }
             List<Inventory> invs = _inventoryRepository.GetAll();
             List<InventoryPreview> inventoryPreviews = new List<InventoryPreview>();
             foreach(Inventory inv in invs)

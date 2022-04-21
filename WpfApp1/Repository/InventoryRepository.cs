@@ -22,7 +22,15 @@ namespace WpfApp1.Repository
 
         public Inventory Get(int id)
         {
-            throw new NotImplementedException();
+            List<Inventory> invs = File.ReadAllLines(_path)
+                                    .Select(ConvertCsvFormatToInventory)
+                                    .ToList();
+            foreach (Inventory inv in invs)
+            {
+                if (inv.Id == id)
+                    return inv;
+            }
+            return null;
         }
 
         public List<Inventory> GetAll()

@@ -45,6 +45,23 @@ namespace WpfApp1.View.Model.Executive
             }
         }
 
+        public String _wrongSelection;
+        public string WrongSelection
+        {
+            get
+            {
+                return _wrongSelection;
+            }
+            set
+            {
+                if (value != _wrongSelection)
+                {
+                    _wrongSelection = value;
+                    OnPropertyChanged("WrongSelection");
+                }
+            }
+        }
+
         #endregion
         #region PropertyChangedNotifier
         protected virtual void OnPropertyChanged(string name)
@@ -64,6 +81,9 @@ namespace WpfApp1.View.Model.Executive
         public List<InventoryPreview> Inventory { get; set; }
         public List<string> SOPRooms { get; set; }
         private InventoryController _inventoryController;
+        private InventoryMovingController _inventoryMovingController;
+        private RoomController _roomController;
+        public int SelectedId { get; set; }
 
         //--------------------------------------------------------------------------------------------------------
         //          Constructor code:
@@ -74,8 +94,13 @@ namespace WpfApp1.View.Model.Executive
             this.DataContext = this;
             var app = Application.Current as App;
             _inventoryController = app.InventoryController;
+            _inventoryMovingController = app.InventoryMovingController;
+            _roomController = app.RoomController;
             this.SOPRooms = new List<string>();
             this.Inventory = _inventoryController.GetPreviews();
+            this.Feedback = "";
+            this.WrongSelection = "";
+            SelectedId = -1;
         }
         //--------------------------------------------------------------------------------------------------------
         //          Global methods code:
@@ -85,6 +110,8 @@ namespace WpfApp1.View.Model.Executive
             this.SOPRooms = _inventoryController.GetSOPRooms();
             AddRooms.ItemsSource = SOPRooms;
             AddRooms.Items.Refresh();
+            MoveNewRoom.ItemsSource = SOPRooms;
+            MoveNewRoom.Items.Refresh();
         }
         public void RefreshInventory()
         {
@@ -142,7 +169,62 @@ namespace WpfApp1.View.Model.Executive
 
         private void MoveStaticInventory_Click(object sender, RoutedEventArgs e)
         {
+            if (InventoryDG.SelectedItems.Count == 0)
+            {
+                WrongSelection = "You must select inventory for moving first!";
+                WrongSelectionContainer.Visibility = Visibility.Visible;
+                DialogContainer.Visibility = Visibility.Visible;
+                return;
+            }
+            InventoryPreview i = (InventoryPreview)InventoryDG.SelectedItems[0];
+            if (i.Type.Equals("D"))
+            {
+                WrongSelection = "You can only move static inventory!";
+                WrongSelectionContainer.Visibility = Visibility.Visible;
+                DialogContainer.Visibility = Visibility.Visible;
+                return;
+            }
+            MoveOldRoom.Text = i.Room;
+            SelectedId = i.Id;
+            RefreshRooms();
+            DialogContainer.Visibility = Visibility.Visible;
+            MoveContainer.Visibility = Visibility.Visible;
+        }
 
+        private void MoveConfirm_Click(object sender, RoutedEventArgs e)
+        {
+            if (MoveNewRoom.Text == "" || MoveDate.Text == "")
+            {
+                Feedback = "*you must fill all fields!";
+                return;
+            }
+            if (DateTime.Compare(DateTime.Parse(MoveDate.Text), DateTime.Today) < 0)
+            {
+                Feedback = "*you must select date that is either today or in future!";
+                return;
+            }
+            DialogContainer.Visibility = Visibility.Collapsed;
+            MoveContainer.Visibility = Visibility.Collapsed;
+            MoveOldRoom.Text = "";
+            _inventoryMovingController.NewMoving(new InventoryMoving(0, SelectedId, _roomController.GetIdByNametag(MoveNewRoom.Text), DateTime.Parse(MoveDate.Text)));
+            RefreshInventory();
+
+        }
+
+        private void XMoveButton_Click(object sender, RoutedEventArgs e)
+        {
+            DialogContainer.Visibility = Visibility.Collapsed;
+            MoveContainer.Visibility = Visibility.Collapsed;
+            MoveOldRoom.Text = "";
+        }
+
+        //--------------------------------------------------------------------------------------------------------
+        //          Wrong selection code:
+        //--------------------------------------------------------------------------------------------------------
+        private void WrongSelectionOK_Click(object sender, RoutedEventArgs e)
+        {
+            DialogContainer.Visibility = Visibility.Collapsed;
+            WrongSelectionContainer.Visibility = Visibility.Collapsed;
         }
     }
 }
