@@ -28,6 +28,7 @@ namespace WpfApp1.View.Model.Patient
         private PatientController _patientController;
 
         public ObservableCollection<Notification> Notifications { get; set; }
+        
         public PatientProfileView()
         {
             InitializeComponent();
