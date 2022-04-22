@@ -57,7 +57,6 @@ namespace WpfApp1.Service
             if(whenToSend < DateTime.Now)
             {
                 Notification notification = new Notification(whenToSend, content, title, patientId);
-                Console.WriteLine("napravio novu notifikaciju");
                 _notificationRepo.Create(notification);
                 return true;
             }
@@ -68,13 +67,14 @@ namespace WpfApp1.Service
         {
             int medicalRecordId = _medicalRecordRepo.GetPatientsMedicalRecord(patientId).Id;
             List<Therapy> therapies = _therapyRepo.GetPatientsTherapies(medicalRecordId).ToList();
-            DateTime startingTime = DateTime.Today.AddHours(8);
             
             foreach (Therapy therapy in therapies)
             {
-                double timeBetweenNotifications = 24 / therapy.Frequency;
+                double timeBetweenNotifications = 16 / therapy.Frequency;
                 string drugName = _drugRepo.GetById(therapy.DrugId).Name;
                 int howManyTimes = (int)(Math.Ceiling(therapy.Frequency));
+                DateTime startingTime = DateTime.Today.AddHours(7);
+
                 for (int i = 0; i < howManyTimes; i++)
                 {
                     CreateNotificationForPatient(patientId, drugName, startingTime);
