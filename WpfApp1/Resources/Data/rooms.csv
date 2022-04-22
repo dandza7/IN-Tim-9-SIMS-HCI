@@ -1,8 +1,10 @@
-1;M25;Meeting
-2;M22;Meeting
+1;MainStorage;Storage
+2;MainOffice;Office
 3;OP21;Operating
 4;OF43;Office
 5;S10;Storage
 7;OP35;Operating
 8;OF33;Office
 9;OP17;Operating
+10;M25;Meeting
+11;M22;Meeting

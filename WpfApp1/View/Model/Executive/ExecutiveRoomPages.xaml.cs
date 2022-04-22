@@ -43,6 +43,22 @@ namespace WpfApp1.View.Model.Executive
                 }
             }
         }
+        public String _selectionProblem;
+        public string SelectionProblem
+        {
+            get
+            {
+                return _selectionProblem;
+            }
+            set
+            {
+                if (value != _selectionProblem)
+                {
+                    _selectionProblem = value;
+                    OnPropertyChanged("SelectionProblem");
+                }
+            }
+        }
         public String _selectedBeginning;
         public string SelectedBeginning
         {
@@ -187,18 +203,26 @@ namespace WpfApp1.View.Model.Executive
         {
             if(RoomsDG.SelectedItems.Count == 0)
             {
+                SelectionProblem = "You have to select room for editing first!";
                 NotSelectedContainer.Visibility = Visibility.Visible;
                 DialogContainer.Visibility = Visibility.Visible;
                 return;
             }
             Feedback = "";
             EditType.Text = "";
-            DialogContainer.Visibility = Visibility.Visible;
-            EditContainer.Visibility = Visibility.Visible;
             Room r = (Room)RoomsDG.SelectedItems[0];
             SelectedId = r.Id;
+            if (SelectedId == 1 || SelectedId == 2)
+            {
+                SelectionProblem = "You can't edit this room!";
+                NotSelectedContainer.Visibility = Visibility.Visible;
+                DialogContainer.Visibility = Visibility.Visible;
+                return;
+            }
             SelectedNametag = r.Nametag;
             EditNametag.Text = r.Nametag;
+            DialogContainer.Visibility = Visibility.Visible;
+            EditContainer.Visibility = Visibility.Visible;
         }
 
         private void XEditButton_Click(object sender, RoutedEventArgs e)
@@ -238,12 +262,20 @@ namespace WpfApp1.View.Model.Executive
         {
             if (RoomsDG.SelectedItems.Count == 0)
             {
+                SelectionProblem = "You have to select room for deleting first!";
                 NotSelectedContainer.Visibility = Visibility.Visible;
                 DialogContainer.Visibility = Visibility.Visible;
                 return;
             }
             Room r = (Room)RoomsDG.SelectedItems[0];
             SelectedId = r.Id;
+            if (SelectedId == 1 || SelectedId == 2)
+            {
+                SelectionProblem = "You can't delete this room!";
+                NotSelectedContainer.Visibility = Visibility.Visible;
+                DialogContainer.Visibility = Visibility.Visible;
+                return;
+            }
             DeleteNametag.Text = r.Nametag;
             DialogContainer.Visibility = Visibility.Visible;
             DeleteContainer.Visibility = Visibility.Visible;
@@ -286,6 +318,7 @@ namespace WpfApp1.View.Model.Executive
         {
             if (RoomsDG.SelectedItems.Count == 0)
             {
+                SelectionProblem = "You have to select room for renovation first!";
                 NotSelectedContainer.Visibility = Visibility.Visible;
                 DialogContainer.Visibility = Visibility.Visible;
                 return;
