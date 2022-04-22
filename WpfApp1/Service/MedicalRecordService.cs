@@ -30,7 +30,10 @@ namespace WpfApp1.Service
         {
             return _medicalRecordRepo.Create(medicalRecord);
         }
-
+        public MedicalRecord GetPatientsMedicalRecord(int id)
+        {
+            return _medicalRecordRepo.GetPatientsMedicalRecord(id);
+        }
         public MedicalRecord Update(MedicalRecord medicalRecord)
         {
             return _medicalRecordRepo.Update(medicalRecord);
