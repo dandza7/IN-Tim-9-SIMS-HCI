@@ -31,6 +31,7 @@ namespace WpfApp1
         private string INVENTORY_FILE = _projectPath + "\\Resources\\Data\\inventory.csv";
         private string INVENTORY_MOVING_FILE = _projectPath + "\\Resources\\Data\\inventoryMoving.csv";
         private string MEDICAL_RECORD_FILE = _projectPath + "\\Resources\\Data\\medical_record.csv";
+        private string ALLERGY_FILE = _projectPath + "\\Resources\\Data\\allergy.csv";
         private const string CSV_DELIMITER = ";";
         private const string DATETIME_FORMAT = "dd.MM.yyyy. HH:mm:ss";
 
@@ -46,7 +47,7 @@ namespace WpfApp1
         public InventoryMovingController InventoryMovingController { get; set; }
         public UserController UserController { get; set; } 
         public MedicalRecordController MedicalRecordController { get; set; }
-
+        public AllergyController AllergyController { get; set; }
         public App()
         {
             var notificationRepository = new NotificationRepository(NOTIFICATION_FILE, CSV_DELIMITER, DATETIME_FORMAT);
@@ -61,6 +62,7 @@ namespace WpfApp1
             var inventoryMovingRepository = new InventoryMovingRepository(INVENTORY_MOVING_FILE, CSV_DELIMITER);
             var userRepository = new UserRepository(USER_FILE, CSV_DELIMITER);
             var medicalRecordRepository = new MedicalRecordRepository(MEDICAL_RECORD_FILE, CSV_DELIMITER);
+            var allergyRepository = new AllergyRepository(ALLERGY_FILE, CSV_DELIMITER);
 
             var notificationService = new NotificationService(notificationRepository, drugRepository, patientRepository, medicalRecordRepository, therapyRepository);
             NotificationController = new NotificationController(notificationService);
@@ -97,6 +99,9 @@ namespace WpfApp1
 
             var medicalRecordService = new MedicalRecordService(medicalRecordRepository);
             MedicalRecordController = new MedicalRecordController(medicalRecordService);
+
+            var allergyService = new AllergyService(allergyRepository);
+            AllergyController = new AllergyController(allergyService);
         }
     }
 }
