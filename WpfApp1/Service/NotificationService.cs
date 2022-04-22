@@ -57,6 +57,7 @@ namespace WpfApp1.Service
             if(whenToSend < DateTime.Now)
             {
                 Notification notification = new Notification(whenToSend, content, title, patientId);
+                Console.WriteLine("napravio novu notifikaciju");
                 _notificationRepo.Create(notification);
                 return true;
             }
