@@ -69,6 +69,15 @@ namespace WpfApp1.Repository
             File.WriteAllLines(_path, newFile);
             return doctor;
         }
+        public void UpdateAll(List<Doctor> doctors)
+        {
+            List<string> newFile = new List<string>();
+            foreach (Doctor doctor in doctors)
+            {
+                newFile.Add(ConvertDoctorToCSVFormat(doctor));
+            }
+            File.WriteAllLines(_path, newFile);
+        }
         public bool Delete(int doctorId)
         {
             List<Doctor> doctors = GetAll().ToList();

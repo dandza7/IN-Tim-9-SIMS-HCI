@@ -110,8 +110,18 @@ namespace WpfApp1.Repository
                 }
                 newFile.Add(ConvertInventoryToCsvFormat(i));
             }
+
             File.WriteAllLines(_path, newFile);
             return inventory;
+        }
+        public void UpdateAll(List<Inventory> inventories)
+        {
+            List<string> newFile = new List<string>();
+            foreach (Inventory inventory in inventories)
+            {
+                newFile.Add(ConvertInventoryToCsvFormat(inventory));
+            }
+            File.WriteAllLines(_path, newFile);
         }
     }
 }
