@@ -14,6 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using WpfApp1.Controller;
+using WpfApp1.View.Dialog;
 using WpfApp1.View.Model.Patient;
 
 namespace WpfApp1.View.Model.Secretary
@@ -32,6 +33,14 @@ namespace WpfApp1.View.Model.Secretary
             var app = Application.Current as App;
             _appointmentController = app.AppointmentController;
             Appointments = new ObservableCollection<SecretaryAppointmentView>(_appointmentController.GetSecretaryAppointmentViews().ToList());
+        }
+       
+        private void ViewAppointmentDetails(object sender, RoutedEventArgs e)
+        {
+            int appointmentId = ((SecretaryAppointmentView)SecretaryAppointmentsDataGrid.SelectedItem).Id;
+
+            var s = new SecretaryViewAppointmentsDialog(appointmentId);
+            s.Show();
         }
     }
 }

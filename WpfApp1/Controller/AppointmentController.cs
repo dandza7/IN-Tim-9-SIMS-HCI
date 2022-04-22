@@ -52,5 +52,9 @@ namespace WpfApp1.Controller
         {
             return _appointmentService.GetSecretaryAppointmentViews();
         }
+        public Appointment GetById(int id)
+        {
+            return _appointmentService.GetById(id);
+        }
     }
 }

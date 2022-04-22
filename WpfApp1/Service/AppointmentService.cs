@@ -90,7 +90,10 @@ namespace WpfApp1.Service
             }
             return appointmentViews;
         }
-
+        public Appointment GetById(int appointmentId)
+        {
+            return _appointmentRepo.GetById(appointmentId);
+        }
 
     }
 }

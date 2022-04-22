@@ -161,6 +161,9 @@
     <Compile Include="View\Dialog\SecretaryUpdatePatientDialog.xaml.cs">
       <DependentUpon>SecretaryUpdatePatientDialog.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Dialog\SecretaryViewAppointmentsDialog.xaml.cs">
+      <DependentUpon>SecretaryViewAppointmentsDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\DoctorMenu.xaml.cs">
       <DependentUpon>DoctorMenu.xaml</DependentUpon>
     </Compile>
@@ -261,6 +264,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Dialog\SecretaryUpdatePatientDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Dialog\SecretaryViewAppointmentsDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
