@@ -52,6 +52,10 @@ namespace WpfApp1.Controller
             return _userService.GetUsersNotifications(userId);
         }
 
+        public User CheckLogIn(string username, string pw)
+        {
+            return this._userService.CheckLogIn(username, pw);
+        }
         public User Create(User user)
         {
             return _userService.Create(user);
