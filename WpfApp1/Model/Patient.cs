@@ -61,5 +61,9 @@ namespace WpfApp1.Model
             Id = id;
             Email = email;
         }
+        public Patient(string email)
+        {
+            Email = email;
+        }
     }
 }
