@@ -13,11 +13,19 @@ namespace WpfApp1.Service
         private readonly PatientRepository _patientRepo;
         private readonly TherapyRepository _therapyRepo;
         private readonly UserRepository _userRepo;
-        public PatientService(UserRepository userRepo, PatientRepository patientRepo, TherapyRepository therapyRepository) 
+        private readonly MedicalRecordRepository _medicalRecordRepo;
+        private readonly DrugRepository _drugRepo;
+        public PatientService(UserRepository userRepo, 
+            PatientRepository patientRepo, 
+            TherapyRepository therapyRepository, 
+            MedicalRecordRepository medicalRecordRepository,
+            DrugRepository drugRepository) 
         {
             _patientRepo = patientRepo;
             _therapyRepo = therapyRepository;
             _userRepo = userRepo;
+            _medicalRecordRepo = medicalRecordRepository;
+            _drugRepo = drugRepository;
         }
 
         public IEnumerable<Patient> GetAll()
@@ -25,20 +33,26 @@ namespace WpfApp1.Service
             return _patientRepo.GetAll();
         }
 
-        /*public List<Therapy> GetPatientsTherapies(int patientId)
+        public List<Therapy> GetPatientsTherapies(int patientId)
         {
-            List<Therapy> patientsTherapies = new List<Therapy>();
-            //List<int> therapyIds = _patientRepo.GetById(patientId).TherapyIds;
-
-            //therapyIds.ForEach(therapy => patientsTherapies.Add(_therapyRepo.GetById(therapy)));
+            MedicalRecord medicalRecord = _medicalRecordRepo.GetPatientsMedicalRecord(patientId);
+            List<Therapy> patientsTherapies = _therapyRepo.GetPatientsTherapies(medicalRecord.Id).ToList();
 
             return patientsTherapies;
-        }*/
+        }
+
+        public List<Drug> GetPatientsDrugs(int patientId)
+        {
+            List<Drug> drugs = new List<Drug>();
+            List<Therapy> patientsTherapies = GetPatientsTherapies(patientId);
+
+            patientsTherapies.ForEach(therapy => drugs.Add(_drugRepo.GetById(therapy.DrugId)));
+
+            return drugs;
+        }
       
         public Patient Create(Patient patient)
         {
-
-
             return _patientRepo.Create(patient);
         }
 

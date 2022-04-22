@@ -19,7 +19,7 @@
     </Style>
 
     <Style x:Key="ColumnElementStyle" TargetType="TextBlock">
-        <Setter Property="Margin" Value="10,0,20,0"/>
+        <Setter Property="Margin" Value="33, 0"/>
     </Style>
     
     <Style x:Key="PatientHeaderStyle" TargetType="DataGridColumnHeader">

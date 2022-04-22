@@ -23,31 +23,38 @@ namespace WpfApp1.View.Model.Patient
     /// </summary>
     public partial class PatientProfileView : Page
     {
-        private PatientController _patientController;
+        private NotificationController _notificationController;
         private UserController _userController;
-        /*private TherapyController _therapyController;
-        private DrugController _drugController;*/
+        private PatientController _patientController;
 
         public ObservableCollection<Notification> Notifications { get; set; }
+        
         public PatientProfileView()
         {
             InitializeComponent();
             DataContext = this;
             var app = Application.Current as App;
             _userController = app.UserController;
-            /*_patientController = app.PatientController;
-            _therapyController = app.TherapyController;
-            _drugController = app.DrugController;*/
+            _notificationController = app.NotificationController;
+            _patientController = app.PatientController;
+            //_drugController = app.DrugController;
 
+            _notificationController.GetScheduledPatientsNotifications(3);
             Notifications = new ObservableCollection<Notification>(_userController.GetUsersNotifications(3));
-            /*List<Therapy> therapies = _patientController.GetPatientsTherapies(3).ToList();
-            List<Drug> drugs = new List<Drug>();
-            therapies.ForEach(therapy => drugs.Add(_drugController.GetById(therapy.DrugId)));
-            Console.WriteLine("Terapije koje uzima pacijent sa Id-em 3 su:");
-            foreach(Drug drug in drugs)
-            {
-                Console.WriteLine(drug.Name);
-            }*/
+        }
+
+        private void DeleteNotification_Click(object sender, RoutedEventArgs e)
+        {
+            int patientId = 3;
+            int notificationId = ((Notification)PatientNotificationsDataGrid.SelectedItem).Id;
+
+            var app = Application.Current as App;
+            _notificationController = app.NotificationController;
+            _userController = app.UserController;
+
+            _notificationController.Delete(notificationId);
+            PatientNotificationsDataGrid.ItemsSource = null;
+            PatientNotificationsDataGrid.ItemsSource = _userController.GetUsersNotifications(patientId);
         }
     }
 }

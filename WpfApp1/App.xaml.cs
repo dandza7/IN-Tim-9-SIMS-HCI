@@ -62,13 +62,13 @@ namespace WpfApp1
             var userRepository = new UserRepository(USER_FILE, CSV_DELIMITER);
             var medicalRecordRepository = new MedicalRecordRepository(MEDICAL_RECORD_FILE, CSV_DELIMITER);
 
-            var notificationService = new NotificationService(notificationRepository);
+            var notificationService = new NotificationService(notificationRepository, drugRepository, patientRepository, medicalRecordRepository, therapyRepository);
             NotificationController = new NotificationController(notificationService);
 
-            var roomService = new RoomService(roomRepository);
+            var roomService = new RoomService(roomRepository, doctorRepository, inventoryMovingRepository, inventoryRepository, renovationRepository, notificationRepository, appointmentRepository);
             RoomController = new RoomController(roomService);
 
-            var patientService = new PatientService(userRepository, patientRepository, therapyRepository);
+            var patientService = new PatientService(userRepository, patientRepository, therapyRepository, medicalRecordRepository, drugRepository);
             PatientController = new PatientController(patientService);
 
             var doctorService = new DoctorService(userRepository, doctorRepository);

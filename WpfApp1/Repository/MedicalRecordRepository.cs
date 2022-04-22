@@ -41,6 +41,11 @@ namespace WpfApp1.Repository
             return GetAll().ToList().SingleOrDefault(medicalRecord => medicalRecord.Id == id);
         }
 
+        public MedicalRecord GetPatientsMedicalRecord(int patientId)
+        {
+            return GetAll().ToList().SingleOrDefault(medicalRecord => medicalRecord.PatientId == patientId);
+        }
+
         public MedicalRecord Create(MedicalRecord medicalRecord)
         {
             int maxId = GetMaxId(GetAll());

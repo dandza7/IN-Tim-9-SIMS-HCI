@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -36,6 +37,20 @@ namespace WpfApp1.Repository
             return therapies;
         }
 
+        public IEnumerable<Therapy> GetPatientsTherapies(int medicalRecordId)
+        {
+            List<Therapy> patientsTherapies = new List<Therapy>();
+            List<Therapy> therapies = GetAll().ToList();
+            therapies.ForEach(therapy =>
+            {
+                if (therapy.MedicalRecordId == medicalRecordId)
+                {
+                    patientsTherapies.Add(therapy);
+                }
+            });
+
+            return patientsTherapies;
+        }
         public Therapy GetById(int id)
         {
             List<Therapy> therapies = GetAll().ToList();
@@ -92,9 +107,10 @@ namespace WpfApp1.Repository
             return new Therapy(int.Parse(tokens[0]),
                 int.Parse(tokens[1]),
                 int.Parse(tokens[2]),
-                double.Parse(tokens[3]),
+                float.Parse(tokens[3], CultureInfo.InvariantCulture.NumberFormat),
                 int.Parse(tokens[4]));
         }
+
         private string ConvertTherapyToCSVFormat(Therapy therapy)
         {
             return string.Join(_delimiter,
