@@ -68,6 +68,26 @@ namespace WpfApp1.Service
             return _userRepository.Create(user);
         }
 
+        public User CheckLogIn(string username, string pw)
+        {
+            List<User> users = _userRepository.GetAll().ToList();
+            foreach(User user in users)
+            {
+                if (user.Username.Equals(username))
+                {
+                    if (user.Password.Equals(pw))
+                    {
+                        return user;
+                    } 
+                    else
+                    {
+                        return null;
+                    }
+                }
+            }
+            return null;
+        }
+
         public User Update(User user)
         {
             return _userRepository.Update(user);
