@@ -30,7 +30,7 @@ namespace WpfApp1.View.Model.Secretary
                 PropertyChanged(this, new PropertyChangedEventArgs(name));
             }
         }
-
+        private int _id;
         private DateTime _beginning;
         private string _patient;
         private string _doctor;
@@ -39,8 +39,6 @@ namespace WpfApp1.View.Model.Secretary
             InitializeComponent();
             DataContext = this;
         }
-
-
 
         public DateTime Beginning
         {
@@ -54,6 +52,22 @@ namespace WpfApp1.View.Model.Secretary
                 {
                     _beginning = value;
                     OnPropertyChanged("Beginning");
+                }
+            }
+        }
+
+        public int Id
+        {
+            get
+            {
+                return _id;
+            }
+            set
+            {
+                if (value != _id)
+                {
+                    _id = value;
+                    OnPropertyChanged("Id");
                 }
             }
         }
