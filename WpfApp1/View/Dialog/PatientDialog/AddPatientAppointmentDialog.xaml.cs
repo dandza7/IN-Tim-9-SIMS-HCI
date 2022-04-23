@@ -27,7 +27,6 @@ namespace WpfApp1.View.Dialog.PatientDialog
     /// </summary>
     public partial class AddPatientAppointmentDialog : Page
     {
-        
         private AppointmentController _appointmentController;
         private DoctorController _doctorController;
         private UserController _userController;
@@ -37,8 +36,10 @@ namespace WpfApp1.View.Dialog.PatientDialog
             InitializeComponent();
             DataContext = this;
             var app = Application.Current as App;
+
             _doctorController = app.DoctorController;
             _userController = app.UserController;
+
             Doctors = new ObservableCollection<User>();
             List<Doctor> allDoctors = _doctorController.GetAll().ToList();
             
@@ -53,22 +54,19 @@ namespace WpfApp1.View.Dialog.PatientDialog
             var app = Application.Current as App;
             _appointmentController = app.AppointmentController;
             _doctorController = app.DoctorController;
+
             if (PriorityComboBox.SelectedValue == null) return;
             if (DoctorComboBox.SelectedValue == null) return;
             if (BeginningDTP.Text == null || EndingDTP.Text == null) return;
+
             Doctor doctor = _doctorController.GetByUsername(((User)DoctorComboBox.SelectedValue).Username);
 
             app.Properties["priority"] = PriorityComboBox.SelectedValue.ToString().TrimStart("System.Windows.Controls.ComboBoxItem: ".ToCharArray());
             app.Properties["doctorId"] = doctor.Id;
             app.Properties["startOfInterval"] = DateTime.Parse(BeginningDTP.Text);
             app.Properties["endOfInterval"] = DateTime.Parse(EndingDTP.Text);
-            app.Properties["patientId"] = 3;
-            /*_appointmentController.Create(new Appointment(DateTime.Parse(BeginningDTP.Text), DateTime.Parse(EndingDTP.Text), AppointmentType.regular, false, doctor.Id, 3, doctor.RoomId));
-            DataGrid dataView = (DataGrid)app.Properties["DataView"];
-            dataView.ItemsSource = null;
-            dataView.ItemsSource = _appointmentController.UpdateData();*/
+
             Frame patientFrame = (Frame)app.Properties["PatientFrame"];
-            //patientFrame.Content = new PatientAppointmentsView();
             patientFrame.Content = new ListAvailableAppointments();
         }
 

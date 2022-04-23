@@ -32,9 +32,11 @@ namespace WpfApp1.View.Dialog.PatientDialog
         {
             InitializeComponent();
             DataContext = this;
+
             var app = Application.Current as App;
             _doctorController = app.DoctorController;
             _userController = app.UserController;
+
             Doctors = new ObservableCollection<User>();
             List<Doctor> allDoctors = _doctorController.GetAll().ToList();
             allDoctors.ForEach(doctor =>
@@ -48,8 +50,13 @@ namespace WpfApp1.View.Dialog.PatientDialog
             var app = Application.Current as App;
             _appointmentController = app.AppointmentController;
             _doctorController = app.DoctorController;
+
+            int patientId = (int)app.Properties["userId"];
+
             if (BeginningDTP.Text == null || EndingDTP.Text == null) return;
             if (DoctorComboBox.SelectedValue == null) return;
+            if (PriorityComboBox.SelectedValue == null) return;
+
             Doctor doctor = _doctorController.GetByUsername(((User)DoctorComboBox.SelectedValue).Username);
             _appointmentController.Update(new Appointment(
                 (int)app.Properties["appointmentId"], 
@@ -57,12 +64,14 @@ namespace WpfApp1.View.Dialog.PatientDialog
                 DateTime.Parse(EndingDTP.Text), 
                 AppointmentType.regular, 
                 false, 
-                doctor.Id, 
-                3, 
+                doctor.Id,
+                patientId, 
                 doctor.RoomId));
+
             DataGrid dataView = (DataGrid)app.Properties["DataView"];
             dataView.ItemsSource = null;
-            dataView.ItemsSource = _appointmentController.GetPatientsAppointmentsView(3).ToList();
+            dataView.ItemsSource = _appointmentController.GetPatientsAppointmentsView(patientId).ToList();
+
             Frame patientFrame = (Frame)app.Properties["PatientFrame"];
             patientFrame.Content = new PatientAppointmentsView();
         }
@@ -70,6 +79,7 @@ namespace WpfApp1.View.Dialog.PatientDialog
         private void DiscardButton_Click(object sender, RoutedEventArgs e)
         {
             var app = Application.Current as App;
+
             Frame patientFrame = (Frame)app.Properties["PatientFrame"];
             patientFrame.Content = new PatientAppointmentsView();
         }
