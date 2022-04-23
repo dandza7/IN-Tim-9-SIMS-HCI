@@ -35,6 +35,7 @@ namespace WpfApp1.View.Model.Patient
             int patientId = (int)app.Properties["userId"];
             
             _appointmentController = app.AppointmentController;
+            
             Appointments = new ObservableCollection<AppointmentView>(_appointmentController.GetPatientsAppointmentsView(patientId).ToList());
         }
 

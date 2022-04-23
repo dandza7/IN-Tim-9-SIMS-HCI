@@ -39,7 +39,7 @@ namespace WpfApp1.View.Dialog.PatientDialog
             DateTime endOfInterval = (DateTime)app.Properties["endOfInterval"];
             int doctorId = (int)app.Properties["doctorId"];
             int patientId = (int)app.Properties["userId"];
-            
+
             _appointmentController = app.AppointmentController;
             AvailableAppointments = new ObservableCollection<AppointmentView>(_appointmentController.GetAvailableAppointmentOptions(priority,
                 startOfInterval,
