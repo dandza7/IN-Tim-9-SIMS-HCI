@@ -25,7 +25,6 @@ namespace WpfApp1.View.Model.Patient
     {
         private NotificationController _notificationController;
         private UserController _userController;
-        private PatientController _patientController;
 
         public ObservableCollection<Notification> Notifications { get; set; }
         
@@ -34,21 +33,22 @@ namespace WpfApp1.View.Model.Patient
             InitializeComponent();
             DataContext = this;
             var app = Application.Current as App;
+
             _userController = app.UserController;
             _notificationController = app.NotificationController;
-            _patientController = app.PatientController;
-            //_drugController = app.DrugController;
+            
+            int patientId = (int)app.Properties["userId"];
 
-            _notificationController.GetScheduledPatientsNotifications(3);
-            Notifications = new ObservableCollection<Notification>(_userController.GetUsersNotifications(3));
+            _notificationController.GetScheduledPatientsNotifications(patientId);
+            Notifications = new ObservableCollection<Notification>(_userController.GetUsersNotifications(patientId));
         }
 
         private void DeleteNotification_Click(object sender, RoutedEventArgs e)
         {
-            int patientId = 3;
+            var app = Application.Current as App;
+            int patientId = (int)app.Properties["userId"];
             int notificationId = ((Notification)PatientNotificationsDataGrid.SelectedItem).Id;
 
-            var app = Application.Current as App;
             _notificationController = app.NotificationController;
             _userController = app.UserController;
 
