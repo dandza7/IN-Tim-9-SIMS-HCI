@@ -72,8 +72,7 @@ namespace WpfApp1.Service
         {
             HelpLogIn.Visibility = Visibility.Collapsed;
             LogInForm.Visibility = Visibility.Visible;
-            LogInConfirm.Visibility = Visibility.Collapsed;
-            FakeLogInButton1.Visibility = Visibility.Visible;
+            LogInConfirm.Visibility = Visibility.Visible;
         }
 
         private void XLogInButton_Click(object sender, RoutedEventArgs e)
@@ -126,59 +125,6 @@ namespace WpfApp1.Service
         private void OkToError_Click(object sender, RoutedEventArgs e)
         {
             ErrorContainer.Visibility = Visibility.Collapsed;
-        }
-
-
-        // JOKES ON YOU
-        private void FakeLogInButton1_MouseEnter(object sender, MouseEventArgs e)
-        {
-            FakeLogInButton1.Visibility = Visibility.Collapsed;
-            FakeLogInButton2.Visibility = Visibility.Visible;
-        }
-        private void FakeLogInButton2_MouseEnter(object sender, MouseEventArgs e)
-        {
-            FakeLogInButton2.Visibility = Visibility.Collapsed;
-            FakeLogInButton3.Visibility = Visibility.Visible;
-        }
-        private void FakeLogInButton3_MouseEnter(object sender, MouseEventArgs e)
-        {
-            FakeLogInButton3.Visibility = Visibility.Collapsed;
-            FakeLogInButton4.Visibility = Visibility.Visible;
-        }
-        private void FakeLogInButton4_MouseEnter(object sender, MouseEventArgs e)
-        {
-            FakeLogInButton4.Visibility = Visibility.Collapsed;
-            FakeLogInButton5.Visibility = Visibility.Visible;
-        }
-        private void FakeLogInButton5_MouseEnter(object sender, MouseEventArgs e)
-        {
-            FakeLogInButton5.Visibility = Visibility.Collapsed;
-            FakeLogInButton6.Visibility = Visibility.Visible;
-        }
-        private void FakeLogInButton6_MouseEnter(object sender, MouseEventArgs e)
-        {
-            FakeLogInButton6.Visibility = Visibility.Collapsed;
-            FakeLogInButton7.Visibility = Visibility.Visible;
-        }
-        private void FakeLogInButton7_MouseEnter(object sender, MouseEventArgs e)
-        {
-            FakeLogInButton7.Visibility = Visibility.Collapsed;
-            FakeLogInButton8.Visibility = Visibility.Visible;
-        }
-        private void FakeLogInButton8_MouseEnter(object sender, MouseEventArgs e)
-        {
-            FakeLogInButton8.Visibility = Visibility.Collapsed;
-            FakeLogInButton9.Visibility = Visibility.Visible;
-        }
-        private void FakeLogInButton9_MouseEnter(object sender, MouseEventArgs e)
-        {
-            FakeLogInButton9.Visibility = Visibility.Collapsed;
-            FakeLogInButton10.Visibility = Visibility.Visible;
-        }
-        private void FakeLogInButton10_MouseEnter(object sender, MouseEventArgs e)
-        {
-            FakeLogInButton10.Visibility = Visibility.Collapsed;
-            LogInConfirm.Visibility = Visibility.Visible;
         }
 
     }

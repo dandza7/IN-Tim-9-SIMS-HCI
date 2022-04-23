@@ -33,6 +33,11 @@ namespace WpfApp1.Service
             return _doctorRepo.GetById(user.Id);
         }
 
+        public IEnumerable<Doctor> GetAllGeneralPracticioners()
+        {
+            return _doctorRepo.GetAllGeneralPracticioners();
+        }
+
         public Doctor Create(Doctor doctor)
         {
             return _doctorRepo.Create(doctor);
