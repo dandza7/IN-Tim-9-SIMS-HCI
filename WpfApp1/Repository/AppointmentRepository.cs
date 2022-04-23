@@ -11,7 +11,6 @@ namespace WpfApp1.Repository
 {
     public class AppointmentRepository
     {
-        private const string NOT_FOUND_ERROR = "Appointment with {0}:{1} can not be found!";
         private string _path;
         private string _delimiter;
         private readonly string _datetimeFormat;
@@ -38,10 +37,82 @@ namespace WpfApp1.Repository
                 appointments.Add(ConvertCSVFormatToAppointment(line));
             }
             return appointments;
-            /*return File.ReadAllLines(_path)
-                .Select(ConvertCSVFormatToAppointment)
-                .ToList();*/
         }
+
+        public IEnumerable<Appointment> GetAllAppointmentsInTimeInterval(DateTime startOfInterval, DateTime endOfInterval)
+        {
+            List<Appointment> allAppointments = GetAll().ToList();
+            List<Appointment> appointmentsInTimeInterval = new List<Appointment>();
+
+            foreach (Appointment appointment in allAppointments)
+            {
+                // Kraj appointmenta upada u traženi vremenksi interval
+                if (appointment.Beginning < startOfInterval && appointment.Ending > startOfInterval)
+                {
+                    appointmentsInTimeInterval.Add(appointment);
+                }
+                // Početak appointmenta upada u traženi vremenski interval
+                if (appointment.Beginning < endOfInterval && appointment.Ending > endOfInterval)
+                {
+                    appointmentsInTimeInterval.Add(appointment);
+                }
+                // Appointment čitavom dužinom upada u traženi vremenksi interval
+                if(appointment.Beginning > startOfInterval && appointment.Ending < endOfInterval)
+                {
+                    appointmentsInTimeInterval.Add(appointment);
+                }
+                // Appointment počinje kasnije ali se završava baš tad 
+                if(appointment.Beginning > startOfInterval && appointment.Ending == endOfInterval)
+                {
+                    appointmentsInTimeInterval.Add(appointment);
+                }
+                // Appointment počinje baš tad ali se završava ranije
+                if (appointment.Beginning == startOfInterval && appointment.Ending < endOfInterval)
+                {
+                    appointmentsInTimeInterval.Add(appointment);
+                }
+                // Appointment poklapa traženi vremenski interval (neko je izabrao samo jedan sat za interval)
+                if (appointment.Beginning == startOfInterval && appointment.Ending == endOfInterval)
+                {
+                    appointmentsInTimeInterval.Add(appointment);
+                }
+            }
+
+            return appointmentsInTimeInterval.OrderBy(appointment => appointment.Beginning).ToList();
+        }
+
+        public IEnumerable<Appointment> GetAllAppointmentsInTimeIntervalForDoctor(DateTime startOfInterval, DateTime endOfInterval, int doctorId)
+        {
+            List<Appointment> appointmentsInTimeInterval = GetAllAppointmentsInTimeInterval(startOfInterval, endOfInterval).ToList();
+            List<Appointment> doctorsAppointmentsInTimeInterval = new List<Appointment>();
+
+            foreach (Appointment appointment in appointmentsInTimeInterval)
+            {
+                if (appointment.DoctorId == doctorId)
+                {
+                    doctorsAppointmentsInTimeInterval.Add(appointment);
+                }
+            }
+
+            return doctorsAppointmentsInTimeInterval.OrderBy(appointment => appointment.Beginning).ToList();
+        }
+        
+        public IEnumerable<Appointment> GetAllAppointmentsForDoctor(int doctorId)
+        {
+            List<Appointment> allAppointments = GetAll().ToList();
+            List<Appointment> appointmentsForDoctor = new List<Appointment>();
+
+            foreach (Appointment appointment in allAppointments)
+            {
+                if (appointment.DoctorId == doctorId)
+                {
+                    appointmentsForDoctor.Add(appointment);
+                }
+            }
+
+            return appointmentsForDoctor.OrderBy(appointment => appointment.Beginning).ToList();
+        }
+
         public Appointment Create(Appointment appointment)
         {
             int maxId = GetMaxId(GetAll());

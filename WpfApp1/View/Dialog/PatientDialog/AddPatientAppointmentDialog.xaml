@@ -1,4 +1,4 @@
-﻿<Page x:Class="WpfApp1.View.Dialog.AddPatientAppointmentDialog"
+﻿<Page x:Class="WpfApp1.View.Dialog.PatientDialog.AddPatientAppointmentDialog"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -20,7 +20,7 @@
         <Label Foreground="White" Content="Choose a doctor:" HorizontalAlignment="Left" Margin="337,375,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
         <Button Style="{StaticResource PatientDataGridButton}" Content="Confirm" HorizontalAlignment="Center" Margin="0,0,0,100" VerticalAlignment="Bottom" Click="ConfirmButton_Click"/>
         <Button Style="{StaticResource PatientDataGridButton}" Content="Discard" HorizontalAlignment="Center" Margin="210,0,0,100" VerticalAlignment="Bottom" Click="DiscardButton_Click"/>
-        <ComboBox HorizontalAlignment="Left" Margin="537,175,0,0" VerticalAlignment="Top" Width="120">
+        <ComboBox x:Name="PriorityComboBox" HorizontalAlignment="Left" Margin="537,175,0,0" VerticalAlignment="Top" Width="120">
             <ComboBoxItem Content="Time"/>
             <ComboBoxItem Content="Doctor"/>
         </ComboBox>

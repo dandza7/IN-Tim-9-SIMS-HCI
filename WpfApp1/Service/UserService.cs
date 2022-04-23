@@ -48,7 +48,7 @@ namespace WpfApp1.Service
             return _userRepository.GetAllSecretaries();
         }
 
-        public List<Notification> GetUsersNotifications(int userId)
+        public IEnumerable<Notification> GetUsersNotifications(int userId)
         {
             List<Notification> notifications = _notificationRepo.GetAll().ToList();
             List<Notification> usersNotifications = new List<Notification>();

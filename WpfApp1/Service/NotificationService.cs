@@ -48,7 +48,7 @@ namespace WpfApp1.Service
             return _notificationRepo.Create(notification);
         }
 
-        public bool CreateNotificationForPatient(int patientId, string drugName, DateTime whenToSend)
+        public void CreateNotificationForPatient(int patientId, string drugName, DateTime whenToSend)
         {
             
             string content = "Take " + drugName + " in one hour time!";
@@ -57,11 +57,8 @@ namespace WpfApp1.Service
             if(whenToSend < DateTime.Now)
             {
                 Notification notification = new Notification(whenToSend, content, title, patientId);
-                Console.WriteLine("napravio novu notifikaciju");
                 _notificationRepo.Create(notification);
-                return true;
             }
-            return false;
         }
 
         public void GetScheduledPatientsNotifications(int patientId)

@@ -39,18 +39,23 @@ namespace WpfApp1.Controller
             return  _appointmentService.Delete(id);
         }
 
-        public List<AppointmentView> UpdateData()
-        {
-            return _appointmentService.UpdateData();
-        }
-
-        public List<AppointmentView> GetAppointmentViews()
-        {
-            return _appointmentService.GetAppointmentViews();
-        }
         public List<SecretaryAppointmentView> GetSecretaryAppointmentViews()
         {
             return _appointmentService.GetSecretaryAppointmentViews();
+        }
+
+        public List<AppointmentView> GetPatientsAppointmentsView(int patientId)
+        {
+            return _appointmentService.GetPatientsAppointmentsView(patientId);
+        }
+
+        public List<AppointmentView> GetAvailableAppointmentOptions(string priority, 
+            DateTime startOfInterval, 
+            DateTime endOfInterval, 
+            int doctorId, 
+            int patientId)
+        {
+            return _appointmentService.GetAvailableAppointmentOptions(priority, startOfInterval, endOfInterval, doctorId, patientId);
         }
     }
 }
