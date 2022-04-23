@@ -35,11 +35,15 @@ namespace WpfApp1.View.Util
         private void SecretaryPatients_Click(object sender, RoutedEventArgs e)
         {
             PageHeader.Text = "Patient List";
+            PatientsColorMark.Background = (SolidColorBrush)new BrushConverter().ConvertFromString("#FFFD8117");
+            AppointmentsColorMark.Background = (SolidColorBrush)new BrushConverter().ConvertFromString("#FF101010");
             Main.Content = new SecretaryPatientsView();
         }
         private void SecretaryAppointments_Click(object sender, RoutedEventArgs e)
         {
             PageHeader.Text = "Appointment List";
+            AppointmentsColorMark.Background = (SolidColorBrush)new BrushConverter().ConvertFromString("#FFFD8117");
+            PatientsColorMark.Background = (SolidColorBrush)new BrushConverter().ConvertFromString("#FF101010");
             Main.Content = new SecretaryAppointmentsView();
         }
     }

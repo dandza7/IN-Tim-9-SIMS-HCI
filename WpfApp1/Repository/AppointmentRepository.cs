@@ -156,6 +156,19 @@ namespace WpfApp1.Repository
             File.WriteAllLines(_path, newFile);
             return isDeleted;
         }
+        public Appointment GetById(int appointmentId)
+        {
+            List<Appointment> appointments = GetAll().ToList();
+            foreach (Appointment a in appointments)
+            {
+                if (a.Id == appointmentId)
+                {
+                    return a;
+                }
+
+            }
+            return null;
+        }
 
         private Appointment ConvertCSVFormatToAppointment(string appointmentCSVFormat)
         {

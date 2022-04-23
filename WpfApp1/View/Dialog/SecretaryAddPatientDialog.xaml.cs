@@ -27,11 +27,16 @@ namespace WpfApp1.View.Dialog
             DataContext = this;
         }
         private PatientController _patientController;
+        private UserController _userController;
         private void InsertButton_Click(object sender, RoutedEventArgs e)
         {
             var app = Application.Current as App;
             _patientController = app.PatientController;
+            _userController = app.UserController;
             Patient patient = new Patient(
+                emailTB.Text
+                );
+            User user = new User(
 
                 nameTB.Text,
                 surnameTB.Text,
@@ -39,12 +44,13 @@ namespace WpfApp1.View.Dialog
                 usernameTB.Text,
                 passwordTB.Text,
                 brtelTB.Text,
-                emailTB.Text
-                
+                User.RoleType.patient
                 );
 
+            _userController.Create(user);
             _patientController.Create(patient);
             Close();
+
         }
     }
 }

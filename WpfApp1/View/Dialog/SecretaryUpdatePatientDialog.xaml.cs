@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,6 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using WpfApp1.Controller;
 using WpfApp1.Model;
+using WpfApp1.View.Converter;
 
 namespace WpfApp1.View.Dialog
 {
@@ -24,6 +26,12 @@ namespace WpfApp1.View.Dialog
         private PatientController _patientController;
 
         private UserController _userController;
+
+        private MedicalRecordController _mrController;
+
+        private AllergyController _allergyController;
+
+        public ObservableCollection<UserControl> Allergies { get; set; }
         public SecretaryUpdatePatientDialog(int patientId)
         {
             InitializeComponent();
@@ -31,7 +39,12 @@ namespace WpfApp1.View.Dialog
             var app = Application.Current as App;
             _patientController = app.PatientController;
             _userController = app.UserController;
-            Patient p =  this._patientController.GetById(patientId);
+            _mrController = app.MedicalRecordController;
+            _allergyController = app.AllergyController;
+            Patient p = this._patientController.GetById(patientId);
+            MedicalRecord r = this._mrController.GetByPatientId(patientId);
+            Console.WriteLine(patientId);
+            Console.WriteLine(r.Id);
             updateidTB.Text = patientId.ToString();
             updatenameTB.Text = p.Name;
             updatesurnameTB.Text = p.Surname;
@@ -40,6 +53,8 @@ namespace WpfApp1.View.Dialog
             updatepasswordTB.Text = p.Password;
             updateemailTB.Text = p.Email;
             updatebrtelTB.Text = p.PhoneNumber;
+            Allergies = new ObservableCollection<UserControl>(
+                AllergyConverter.ConvertAllergyListToAllergyViewList(_allergyController.GetAllAllergiesForPatient(r.Id).ToList()));
         }
         private void UpdateButton_Click(object sender, RoutedEventArgs e)
         {

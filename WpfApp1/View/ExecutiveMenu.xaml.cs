@@ -25,71 +25,27 @@ namespace WpfApp1.Service
     public partial class ExecutiveMenu : Window
     {
 
-        public string BadLoginText { get; set; }
 
         public ExecutiveMenu()
         {
             InitializeComponent();
-            BadLoginText = "There was a problem with logging in, check if you typed your username and password correctly";
+            ExecutiveMainFrame.Content = new ExecutiveMainPage();
             this.DataContext = this;
 
         }
 
-        private void HelpButton_Click(object sender, RoutedEventArgs e)
-        {
-            HelpLogIn.Visibility = Visibility.Visible;
-        }
-        private void XHelpButton_Click(object sender, RoutedEventArgs e)
-        {
-            HelpLogIn.Visibility = Visibility.Collapsed;
-        }
-
-        private void LogInButton_Click(object sender, RoutedEventArgs e)
-        {
-            HelpLogIn.Visibility = Visibility.Collapsed;
-            LogInForm.Visibility = Visibility.Visible;
-        }
-
-        private void XLogInButton_Click(object sender, RoutedEventArgs e)
-        {
-            LogInForm.Visibility = Visibility.Collapsed;
-        }
-
-        private void LogInConfirm_Click(object sender, RoutedEventArgs e)
-        {
-            string user = UsernameField.Text;
-            string pw = PasswordField.Password.ToString();
-            if (user != "dandza" || pw != "0904")
-            {
-                ErrorContainer.Visibility = Visibility.Visible;
-            } else
-            {
-                UsernameField.Text = "";
-                PasswordField.Clear();
-                LogInContainer.Visibility = Visibility.Collapsed;
-                ExecutiveMainFrame.Content = new ExecutiveMainPage();
-                ExecutiveMainFrame.Visibility = Visibility.Visible;
-                LogOutButton.Visibility = Visibility.Visible;
-                NotificationsButton.Visibility = Visibility.Visible;
-            }
-        }
-
-        private void OkToError_Click(object sender, RoutedEventArgs e)
-        {
-            ErrorContainer.Visibility=Visibility.Collapsed;
-        }
-
         private void LogOutButton_Click(object sender, RoutedEventArgs e)
         {
-            LogInContainer.Visibility = Visibility.Visible;
-            ExecutiveMainFrame.Visibility = Visibility.Collapsed;
-            LogOutButton.Visibility = Visibility.Collapsed;
-            NotificationsButton.Visibility = Visibility.Collapsed;
+            var app = Application.Current as App;
+            app.Properties["userId"] = 0;
+            app.Properties["userRole"] = "loggedOut";
+            var s = new MainWindow();
+            s.Show();
+            Close();
         }
 
         private void NotificationsButton_Click(object sender, RoutedEventArgs e)
         {
-
         }
     }
 }

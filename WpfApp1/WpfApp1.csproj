@@ -87,6 +87,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Controller\AllergyController.cs" />
     <Compile Include="Controller\DoctorController.cs" />
     <Compile Include="Controller\InventoryController.cs" />
     <Compile Include="Controller\InventoryMovingController.cs" />
@@ -96,6 +97,7 @@
     <Compile Include="Controller\PatientController.cs" />
     <Compile Include="Controller\RenovationController.cs" />
     <Compile Include="Controller\UserController.cs" />
+    <Compile Include="Model\Allergy.cs" />
     <Compile Include="Model\Appointment.cs" />
     <Compile Include="Controller\AppointmentController.cs" />
     <Compile Include="Controller\TherapyController.cs" />
@@ -109,6 +111,7 @@
     <Compile Include="Model\Renovation.cs" />
     <Compile Include="Model\Therapy.cs" />
     <Compile Include="Model\User.cs" />
+    <Compile Include="Repository\AllergyRepository.cs" />
     <Compile Include="Repository\InventoryMovingRepository.cs" />
     <Compile Include="Repository\InventoryRepository.cs" />
     <Compile Include="Repository\MedicalRecordRepository.cs" />
@@ -126,6 +129,8 @@
     <None Include="Resources\Data\notification.csv" />
     <None Include="Resources\Data\user.csv" />
     <Compile Include="Repository\UserRepository.cs" />
+    <None Include="Resources\Data\allergy.csv" />
+    <Compile Include="Service\AllergyService.cs" />
     <Compile Include="Service\InventoryMovingService.cs" />
     <None Include="Resources\Data\medical_record.csv" />
     <Compile Include="Service\InventoryService.cs" />
@@ -142,6 +147,7 @@
     <Compile Include="Service\RenovationService.cs" />
     <Compile Include="Service\UserService.cs" />
     <Compile Include="View\Converter\AbstractConverter.cs" />
+    <Compile Include="View\Converter\AllergyConverter.cs" />
     <Compile Include="View\Converter\AppointmentConverter.cs" />
     <Compile Include="View\Converter\PatientConverter.cs" />
     <Compile Include="View\Dialog\PatientDialog\AddPatientAppointmentDialog.xaml.cs">
@@ -163,6 +169,9 @@
     </Compile>
     <Compile Include="View\Dialog\SecretaryUpdatePatientDialog.xaml.cs">
       <DependentUpon>SecretaryUpdatePatientDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Dialog\SecretaryViewAppointmentsDialog.xaml.cs">
+      <DependentUpon>SecretaryViewAppointmentsDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\DoctorMenu.xaml.cs">
       <DependentUpon>DoctorMenu.xaml</DependentUpon>
@@ -199,6 +208,9 @@
     </Compile>
     <Compile Include="View\Model\SecretaryPatientsView.xaml.cs">
       <DependentUpon>SecretaryPatientsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Model\Secretary\AllergyView.xaml.cs">
+      <DependentUpon>AllergyView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Model\Secretary\SecretaryAppointmentsView.xaml.cs">
       <DependentUpon>SecretaryAppointmentsView.xaml</DependentUpon>
@@ -271,6 +283,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\Dialog\SecretaryViewAppointmentsDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -328,6 +344,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="View\Model\SecretaryPatientsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Model\Secretary\AllergyView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
