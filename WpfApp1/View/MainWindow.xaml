@@ -96,16 +96,6 @@
                                 <RowDefinition Height="*"/>
                                 <RowDefinition Height="*"/>
                             </Grid.RowDefinitions>
-                            <Button x:Name="FakeLogInButton1" Grid.Row="6" Grid.Column="2" Style="{StaticResource ClassicButton}" MouseEnter="FakeLogInButton1_MouseEnter" Visibility="Visible">LOG IN</Button>
-                            <Button x:Name="FakeLogInButton2" Grid.Row="6" Grid.Column="4" Style="{StaticResource ClassicButton}" MouseEnter="FakeLogInButton2_MouseEnter" Visibility="Collapsed">LOG IN</Button>
-                            <Button x:Name="FakeLogInButton3" Grid.Row="4" Grid.Column="4" Style="{StaticResource ClassicButton}" MouseEnter="FakeLogInButton3_MouseEnter" Visibility="Collapsed">LOG IN</Button>
-                            <Button x:Name="FakeLogInButton4" Grid.Row="2" Grid.Column="4" Style="{StaticResource ClassicButton}" MouseEnter="FakeLogInButton4_MouseEnter" Visibility="Collapsed">LOG IN</Button>
-                            <Button x:Name="FakeLogInButton5" Grid.Row="0" Grid.Column="4" Style="{StaticResource ClassicButton}" MouseEnter="FakeLogInButton5_MouseEnter" Visibility="Collapsed">LOG IN</Button>
-                            <Button x:Name="FakeLogInButton6" Grid.Row="0" Grid.Column="2" Style="{StaticResource ClassicButton}" MouseEnter="FakeLogInButton6_MouseEnter" Visibility="Collapsed">LOG IN</Button>
-                            <Button x:Name="FakeLogInButton7" Grid.Row="0" Grid.Column="0" Style="{StaticResource ClassicButton}" MouseEnter="FakeLogInButton7_MouseEnter" Visibility="Collapsed">LOG IN</Button>
-                            <Button x:Name="FakeLogInButton8" Grid.Row="2" Grid.Column="0" Style="{StaticResource ClassicButton}" MouseEnter="FakeLogInButton8_MouseEnter" Visibility="Collapsed">LOG IN</Button>
-                            <Button x:Name="FakeLogInButton9" Grid.Row="4" Grid.Column="0" Style="{StaticResource ClassicButton}" MouseEnter="FakeLogInButton9_MouseEnter" Visibility="Collapsed">LOG IN</Button>
-                            <Button x:Name="FakeLogInButton10" Grid.Row="6" Grid.Column="0" Style="{StaticResource ClassicButton}" MouseEnter="FakeLogInButton10_MouseEnter" Visibility="Collapsed">LOG IN</Button>
                         </Grid>
                     </Grid>
                 </Border>

@@ -40,7 +40,7 @@ namespace WpfApp1.Repository
             return doctors;
         }
 
-        public IEnumerable<Doctor> GetALlGeneralPracticioners()
+        public IEnumerable<Doctor> GetAllGeneralPracticioners()
         {
             List<Doctor> allDoctors = GetAll().ToList();
             List<Doctor> generalPracticioners = new List<Doctor>();

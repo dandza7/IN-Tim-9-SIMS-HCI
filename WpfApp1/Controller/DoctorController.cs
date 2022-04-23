@@ -32,6 +32,11 @@ namespace WpfApp1.Controller
             return _doctorService.GetByUsername(username);
         }
 
+        public IEnumerable<Doctor> GetAllGeneralPracticioners()
+        {
+            return _doctorService.GetAllGeneralPracticioners();
+        }
+
         public Doctor Create(Doctor doctor)
         {
             return _doctorService.Create(doctor);

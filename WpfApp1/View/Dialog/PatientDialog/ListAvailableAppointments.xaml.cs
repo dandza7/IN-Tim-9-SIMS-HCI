@@ -39,13 +39,11 @@ namespace WpfApp1.View.Dialog.PatientDialog
             DateTime endOfInterval = (DateTime)app.Properties["endOfInterval"];
             int doctorId = (int)app.Properties["doctorId"];
             int patientId = (int)app.Properties["userId"];
+            int oldAppointmentId = (int)app.Properties["oldAppointmentId"];
 
             _appointmentController = app.AppointmentController;
-            AvailableAppointments = new ObservableCollection<AppointmentView>(_appointmentController.GetAvailableAppointmentOptions(priority,
-                startOfInterval,
-                endOfInterval,
-                doctorId,
-                patientId).ToList());
+            AvailableAppointments = new ObservableCollection<AppointmentView>(_appointmentController.GetAvailableAppointmentOptions(
+                priority, startOfInterval, endOfInterval, doctorId, patientId, oldAppointmentId).ToList());
         }
         
         private void ChooseAppointment_Click(object sender, RoutedEventArgs e)
@@ -58,8 +56,14 @@ namespace WpfApp1.View.Dialog.PatientDialog
             DateTime appointmentEnding = appointmentBeginning.AddHours(1);
             Doctor doctor = _doctorController.GetByUsername(((AppointmentView)AvailableAppointmentsGrid.SelectedItem).Username);
             int patientId = (int)app.Properties["userId"];
+            int oldAppointmentId = (int)app.Properties["oldAppointmentId"];
 
-            _appointmentController.Create(new Appointment(appointmentBeginning, appointmentEnding, AppointmentType.regular, false, doctor.Id, patientId, doctor.RoomId));
+            if(oldAppointmentId == -1)
+            {
+                _appointmentController.Create(new Appointment(appointmentBeginning, appointmentEnding, AppointmentType.regular, false, doctor.Id, patientId, doctor.RoomId));
+            } else {
+                _appointmentController.Update(new Appointment(oldAppointmentId, appointmentBeginning, appointmentEnding, AppointmentType.regular, false, doctor.Id, patientId, doctor.RoomId));
+            }
 
             DataGrid dataView = (DataGrid)app.Properties["DataView"];
             dataView.ItemsSource = null;

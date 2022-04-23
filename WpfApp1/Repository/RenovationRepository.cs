@@ -33,6 +33,36 @@ namespace WpfApp1.Repository
                 .ToList();
         }
 
+        private IEnumerable<Renovation> GetAllRenovationsForRoom(int roomId)
+        {
+            List<Renovation> allRenovations = GetAll();
+            List<Renovation> roomRenovations = new List<Renovation>();
+
+            foreach (var renovation in allRenovations)
+            {
+                if (renovation.RoomId == roomId)
+                {
+                    roomRenovations.Add(renovation);
+                }
+            }
+
+            return roomRenovations;
+        }
+
+        public bool IsRoomAvailable(int roomId, DateTime startOfInterval, DateTime endOfinterval)
+        {
+            List<Renovation> roomRenovations = GetAllRenovationsForRoom(roomId).ToList();
+
+            foreach(Renovation renovation in roomRenovations)
+            {
+                // Rezervacije mogu biti samo u budućnosti tako da renoviranja u prošlosti nisu relevantna
+                if (renovation.Ending < DateTime.Now) continue;
+                // Može samo ovaj if jer će interval biti uvijek u neko kršteno doba
+                if (startOfInterval > renovation.Beginning && endOfinterval < renovation.Ending) return false;
+            }
+            return true;
+        }
+
         private int GetMaxId(List<Renovation> renovations)
         {
             return renovations.Count() == 0 ? 0 : renovations.Max(renovation => renovation.Id);

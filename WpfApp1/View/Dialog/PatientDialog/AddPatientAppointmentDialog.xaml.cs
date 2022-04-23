@@ -59,12 +59,31 @@ namespace WpfApp1.View.Dialog.PatientDialog
             if (DoctorComboBox.SelectedValue == null) return;
             if (BeginningDTP.Text == null || EndingDTP.Text == null) return;
 
+            if (DateTime.Parse(BeginningDTP.Text).AddHours(1) > DateTime.Parse(EndingDTP.Text))
+            {
+                Console.WriteLine("Morate imati bar jedan sat vremenskog intervala");
+                return;
+            }
+
+            if (DateTime.Parse(BeginningDTP.Text) > DateTime.Parse(EndingDTP.Text))
+            {
+                Console.WriteLine("Vremenski interval mora počinjati prije svoga kraja");
+                return;
+            }
+
+            if (DateTime.Parse(EndingDTP.Text) < DateTime.Now)
+            {
+                Console.WriteLine("Vremenski interval mora biti u budućnosti");
+                return;
+            }
+
             Doctor doctor = _doctorController.GetByUsername(((User)DoctorComboBox.SelectedValue).Username);
 
             app.Properties["priority"] = PriorityComboBox.SelectedValue.ToString().TrimStart("System.Windows.Controls.ComboBoxItem: ".ToCharArray());
             app.Properties["doctorId"] = doctor.Id;
             app.Properties["startOfInterval"] = DateTime.Parse(BeginningDTP.Text);
             app.Properties["endOfInterval"] = DateTime.Parse(EndingDTP.Text);
+            app.Properties["oldAppointmentId"] = -1;
 
             Frame patientFrame = (Frame)app.Properties["PatientFrame"];
             patientFrame.Content = new ListAvailableAppointments();
