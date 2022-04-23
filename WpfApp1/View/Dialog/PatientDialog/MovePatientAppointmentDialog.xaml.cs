@@ -17,7 +17,7 @@ using WpfApp1.Model;
 using WpfApp1.View.Model.Patient;
 using static WpfApp1.Model.Appointment;
 
-namespace WpfApp1.View.Dialog
+namespace WpfApp1.View.Dialog.PatientDialog
 {
     /// <summary>
     /// Interaction logic for MovePatientAppointmentDialog.xaml
@@ -62,7 +62,14 @@ namespace WpfApp1.View.Dialog
                 doctor.RoomId));
             DataGrid dataView = (DataGrid)app.Properties["DataView"];
             dataView.ItemsSource = null;
-            dataView.ItemsSource = _appointmentController.UpdateData();
+            dataView.ItemsSource = _appointmentController.GetPatientsAppointmentsView(3).ToList();
+            Frame patientFrame = (Frame)app.Properties["PatientFrame"];
+            patientFrame.Content = new PatientAppointmentsView();
+        }
+
+        private void DiscardButton_Click(object sender, RoutedEventArgs e)
+        {
+            var app = Application.Current as App;
             Frame patientFrame = (Frame)app.Properties["PatientFrame"];
             patientFrame.Content = new PatientAppointmentsView();
         }

@@ -16,7 +16,7 @@ using System.Windows.Shapes;
 using WpfApp1.Controller;
 using WpfApp1.Model;
 using WpfApp1.View.Converter;
-using WpfApp1.View.Dialog;
+using WpfApp1.View.Dialog.PatientDialog;
 
 namespace WpfApp1.View.Model.Patient
 {
@@ -34,7 +34,7 @@ namespace WpfApp1.View.Model.Patient
             DataContext = this;
             var app = Application.Current as App;
             _appointmentController = app.AppointmentController;
-            Appointments = new ObservableCollection<AppointmentView>(_appointmentController.GetAppointmentViews().ToList());
+            Appointments = new ObservableCollection<AppointmentView>(_appointmentController.GetPatientsAppointmentsView(3).ToList());
         }
 
         private void AddAppointment_Click(object sender, RoutedEventArgs e)
@@ -63,7 +63,7 @@ namespace WpfApp1.View.Model.Patient
 
             _appointmentController.Delete(appointmentId);
             PatientAppointmentsDataGrid.ItemsSource = null;
-            PatientAppointmentsDataGrid.ItemsSource = _appointmentController.UpdateData();
+            PatientAppointmentsDataGrid.ItemsSource = _appointmentController.GetPatientsAppointmentsView(3);
         }
     }
 }

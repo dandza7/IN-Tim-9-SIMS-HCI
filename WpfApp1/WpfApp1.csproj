@@ -150,10 +150,13 @@
     <Compile Include="View\Converter\AllergyConverter.cs" />
     <Compile Include="View\Converter\AppointmentConverter.cs" />
     <Compile Include="View\Converter\PatientConverter.cs" />
-    <Compile Include="View\Dialog\AddPatientAppointmentDialog.xaml.cs">
+    <Compile Include="View\Dialog\PatientDialog\AddPatientAppointmentDialog.xaml.cs">
       <DependentUpon>AddPatientAppointmentDialog.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Dialog\MovePatientAppointmentDialog.xaml.cs">
+    <Compile Include="View\Dialog\PatientDialog\ListAvailableAppointments.xaml.cs">
+      <DependentUpon>ListAvailableAppointments.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Dialog\PatientDialog\MovePatientAppointmentDialog.xaml.cs">
       <DependentUpon>MovePatientAppointmentDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controller\RoomController.cs" />
@@ -256,11 +259,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Dialog\AddPatientAppointmentDialog.xaml">
+    <Page Include="View\Dialog\PatientDialog\AddPatientAppointmentDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Dialog\MovePatientAppointmentDialog.xaml">
+    <Page Include="View\Dialog\PatientDialog\ListAvailableAppointments.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Dialog\PatientDialog\MovePatientAppointmentDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -20,7 +20,7 @@ using WpfApp1.View.Converter;
 using WpfApp1.View.Model.Patient;
 using static WpfApp1.Model.Appointment;
 
-namespace WpfApp1.View.Dialog
+namespace WpfApp1.View.Dialog.PatientDialog
 {
     /// <summary>
     /// Interaction logic for AddPatientAppointmentDialog.xaml
@@ -53,15 +53,23 @@ namespace WpfApp1.View.Dialog
             var app = Application.Current as App;
             _appointmentController = app.AppointmentController;
             _doctorController = app.DoctorController;
+            if (PriorityComboBox.SelectedValue == null) return;
             if (DoctorComboBox.SelectedValue == null) return;
             if (BeginningDTP.Text == null || EndingDTP.Text == null) return;
             Doctor doctor = _doctorController.GetByUsername(((User)DoctorComboBox.SelectedValue).Username);
-            _appointmentController.Create(new Appointment(DateTime.Parse(BeginningDTP.Text), DateTime.Parse(EndingDTP.Text), AppointmentType.regular, false, doctor.Id, 3, doctor.RoomId));
+
+            app.Properties["priority"] = PriorityComboBox.SelectedValue.ToString().TrimStart("System.Windows.Controls.ComboBoxItem: ".ToCharArray());
+            app.Properties["doctorId"] = doctor.Id;
+            app.Properties["startOfInterval"] = DateTime.Parse(BeginningDTP.Text);
+            app.Properties["endOfInterval"] = DateTime.Parse(EndingDTP.Text);
+            app.Properties["patientId"] = 3;
+            /*_appointmentController.Create(new Appointment(DateTime.Parse(BeginningDTP.Text), DateTime.Parse(EndingDTP.Text), AppointmentType.regular, false, doctor.Id, 3, doctor.RoomId));
             DataGrid dataView = (DataGrid)app.Properties["DataView"];
             dataView.ItemsSource = null;
-            dataView.ItemsSource = _appointmentController.UpdateData();
+            dataView.ItemsSource = _appointmentController.UpdateData();*/
             Frame patientFrame = (Frame)app.Properties["PatientFrame"];
-            patientFrame.Content = new PatientAppointmentsView();
+            //patientFrame.Content = new PatientAppointmentsView();
+            patientFrame.Content = new ListAvailableAppointments();
         }
 
         private void DiscardButton_Click(object sender, RoutedEventArgs e)
