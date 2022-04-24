@@ -122,6 +122,8 @@ namespace WpfApp1.Service
                 endOfInterval, 
                 doctorId).ToList();
 
+            //Potrebno ukoliko treba da reaguje da bi se znao originalni početak intervala
+            DateTime originalStartOfInterval = startOfInterval;
             //Ovo je potrebno za converter iz appointmenta u appointment view
             Doctor doctor = _doctorRepo.GetById(doctorId);
             Room room = _roomRepo.Get(doctor.RoomId);
@@ -212,7 +214,7 @@ namespace WpfApp1.Service
             if(appointments.Count == 0)
             {
                 List<Appointment> doctorsAppointments = _appointmentRepo.GetAllAppointmentsForDoctor(doctorId).ToList();
-                DateTime startTime = endOfInterval.AddDays(1);
+                DateTime startTime = originalStartOfInterval.AddDays(1);
                 while (appointments.Count < 5)
                 {
                     foreach(Appointment appointment in doctorsAppointments)
