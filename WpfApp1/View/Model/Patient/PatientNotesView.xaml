@@ -9,7 +9,6 @@
       Title="PatientNotesView">
 
     <Grid>
-        <Button Style="{StaticResource LogoutButton}"/>
         <Label Content="Notes" FontSize="30" FontWeight="ExtraBlack" HorizontalAlignment="Center" VerticalAlignment="Center"/>
     </Grid>
 </Page>

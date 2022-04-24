@@ -15,7 +15,6 @@ using System.Windows.Shapes;
 using WpfApp1.Controller;
 using WpfApp1.Model;
 using WpfApp1.View.Model.Patient;
-using static WpfApp1.Model.Appointment;
 
 namespace WpfApp1.View.Dialog.PatientDialog
 {
@@ -65,6 +64,7 @@ namespace WpfApp1.View.Dialog.PatientDialog
         private void MoveAppointment_Click(object sender, RoutedEventArgs e)
         {
             var app = Application.Current as App;
+            
             _appointmentController = app.AppointmentController;
             _doctorController = app.DoctorController;
 
@@ -123,6 +123,16 @@ namespace WpfApp1.View.Dialog.PatientDialog
 
             Frame patientFrame = (Frame)app.Properties["PatientFrame"];
             patientFrame.Content = new PatientAppointmentsView();
+        }
+
+        private void HelpButton_Click(object sender, RoutedEventArgs e)
+        {
+            const string ADD_APPOINTMENT_HELP_CONTENT = "Upon moving of the appointment choose your priority. " +
+                "In case your priority is 'Time' then you will get options in chosen time interval, if such options exist. " +
+                "On the other hand, if you set your priority to 'Doctor' then options with wanted doctor will be given to you. " +
+                "If by chance, the wanted doctor is free in time interval you specify then you will be given option to choose such appointments.";
+
+            PatientHelp.Show(ADD_APPOINTMENT_HELP_CONTENT);
         }
     }
 }

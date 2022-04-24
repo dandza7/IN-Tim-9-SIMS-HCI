@@ -168,6 +168,12 @@
     <Compile Include="View\Dialog\PatientDialog\PatientErrorMessageBox.Designer.cs">
       <DependentUpon>PatientErrorMessageBox.cs</DependentUpon>
     </Compile>
+    <Compile Include="View\Dialog\PatientDialog\PatientHelp.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\Dialog\PatientDialog\PatientHelp.Designer.cs">
+      <DependentUpon>PatientHelp.cs</DependentUpon>
+    </Compile>
     <Compile Include="View\Dialog\SecretaryAddGuestPatientDialog.xaml.cs">
       <DependentUpon>SecretaryAddGuestPatientDialog.xaml</DependentUpon>
     </Compile>
@@ -403,6 +409,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="View\Dialog\PatientDialog\PatientErrorMessageBox.resx">
       <DependentUpon>PatientErrorMessageBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Dialog\PatientDialog\PatientHelp.resx">
+      <DependentUpon>PatientHelp.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

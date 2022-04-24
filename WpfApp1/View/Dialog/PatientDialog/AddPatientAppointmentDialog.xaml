@@ -7,11 +7,10 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <Button Style="{StaticResource LogoutButton}"/>
         <Rectangle Width="450" Height="600" Fill="{StaticResource LightBlueBrush}" StrokeThickness="0"></Rectangle>
         <WrapPanel  HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0, 80, 0, 0">
             <Label Content="Appointment Addition"  FontSize="24" Foreground="White" FontWeight="Bold"/>
-            <Button Style="{StaticResource HelpButton}"/>
+            <Button Style="{StaticResource HelpButton}" Click="HelpButton_Click"/>
         </WrapPanel>
         <Label Foreground="White" Content="Choose priority:" HorizontalAlignment="Left" Margin="337,175,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
         <Label Foreground="White" Content="Choose time range:" HorizontalAlignment="Left" Margin="337,295,0,0" VerticalAlignment="Top" FontWeight="Bold"/>

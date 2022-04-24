@@ -80,7 +80,7 @@
             this.panel1.Controls.Add(this.OkayButton);
             this.panel1.Location = new System.Drawing.Point(4, 4);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(456, 175);
+            this.panel1.Size = new System.Drawing.Size(456, 176);
             this.panel1.TabIndex = 4;
             // 
             // PatientErrorMessageBox

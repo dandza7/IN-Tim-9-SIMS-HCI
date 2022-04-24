@@ -7,7 +7,6 @@
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <Button Style="{StaticResource LogoutButton}"/>
         <DataGrid x:Name="AvailableAppointmentsGrid" MaxWidth="610" Style="{StaticResource PatientDataGrid}" ItemsSource="{Binding AvailableAppointments, UpdateSourceTrigger=PropertyChanged}">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Room" Binding="{Binding NameTag}" CanUserSort="False" ElementStyle="{StaticResource ColumnElementStyle}" CellStyle="{StaticResource PatientDataGridCell}"/>
