@@ -51,6 +51,16 @@ namespace WpfApp1.View.Model.Patient
         {
             int appointmentId = ((AppointmentView)PatientAppointmentsDataGrid.SelectedItem).Id;
             var app = Application.Current as App;
+
+            _appointmentController = app.AppointmentController;
+
+            Appointment oldAppointment = _appointmentController.GetById(appointmentId);
+            if (DateTime.Now.AddDays(1) > oldAppointment.Beginning)
+            {
+                MessageBox.Show("ERROR: You cannot move the appointment if it's beginning in less than one day!");
+                return;
+            }
+
             app.Properties["appointmentId"] = appointmentId;
             app.Properties["DataView"] = PatientAppointmentsDataGrid;
             Frame patientFrame = (Frame)app.Properties["PatientFrame"];
