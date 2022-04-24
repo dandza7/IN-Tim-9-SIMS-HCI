@@ -16,6 +16,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using WpfApp1.Controller;
 using WpfApp1.Model;
+using WpfApp1.Service;
 using WpfApp1.View.Converter;
 using WpfApp1.View.Model.Patient;
 using static WpfApp1.Model.Appointment;
@@ -61,19 +62,19 @@ namespace WpfApp1.View.Dialog.PatientDialog
 
             if (DateTime.Parse(BeginningDTP.Text).AddHours(1) > DateTime.Parse(EndingDTP.Text))
             {
-                MessageBox.Show("ERROR: Wanted time interval must be at least one hour long!");
+                PatientErrorMessageBox.Show("ERROR: Wanted time interval must be at least one hour long!");
                 return;
             }
 
             if (DateTime.Parse(BeginningDTP.Text) > DateTime.Parse(EndingDTP.Text))
             {
-                MessageBox.Show("ERROR: Start of wanted interval must be before its end!");
+                PatientErrorMessageBox.Show("ERROR: Start of wanted interval must be before its end!");
                 return;
             }
 
             if (DateTime.Parse(EndingDTP.Text) < DateTime.Now)
             {
-                MessageBox.Show("ERROR: You cannot resrve an appointment in the past!");
+                PatientErrorMessageBox.Show("ERROR: You cannot resrve an appointment in the past!");
                 return;
             }
 
@@ -94,6 +95,16 @@ namespace WpfApp1.View.Dialog.PatientDialog
             var app = Application.Current as App;
             Frame patientFrame = (Frame)app.Properties["PatientFrame"];
             patientFrame.Content = new PatientAppointmentsView();
+        }
+
+        private void HelpButton_Click(object sender, RoutedEventArgs e)
+        {
+            const string ADD_APPOINTMENT_HELP_CONTENT = "Upon addition of new appointment choose your priority. " +
+                "In case your priority is 'Time' then you will get options in chosen time interval, if such options exist. " +
+                "On the other hand, if you set your priority to 'Doctor' then options with wanted doctor will be given to you. " +
+                "If by chance, the wanted doctor is free in time interval you specify then you will be given option to choose such appointments.";
+
+            PatientHelp.Show(ADD_APPOINTMENT_HELP_CONTENT);
         }
     }
 }

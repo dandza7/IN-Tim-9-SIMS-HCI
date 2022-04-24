@@ -31,5 +31,16 @@ namespace WpfApp1.Service
             var app = Application.Current as App;
             app.Properties["PatientFrame"] = PatientFrame;
         }
+
+        private void LogoutButton_Click(object sender, RoutedEventArgs e)
+        {
+            var app = Application.Current as App;
+            app.Properties["userId"] = 0;
+            app.Properties["userRole"] = "loggedOut";
+
+            var s = new MainWindow();
+            s.Show();
+            Close();
+        }
     }
 }
