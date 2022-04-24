@@ -61,19 +61,19 @@ namespace WpfApp1.View.Dialog.PatientDialog
 
             if (DateTime.Parse(BeginningDTP.Text).AddHours(1) > DateTime.Parse(EndingDTP.Text))
             {
-                Console.WriteLine("Morate imati bar jedan sat vremenskog intervala");
+                MessageBox.Show("ERROR: Wanted time interval must be at least one hour long!");
                 return;
             }
 
             if (DateTime.Parse(BeginningDTP.Text) > DateTime.Parse(EndingDTP.Text))
             {
-                Console.WriteLine("Vremenski interval mora počinjati prije svoga kraja");
+                MessageBox.Show("ERROR: Start of wanted interval must be before its end!");
                 return;
             }
 
             if (DateTime.Parse(EndingDTP.Text) < DateTime.Now)
             {
-                Console.WriteLine("Vremenski interval mora biti u budućnosti");
+                MessageBox.Show("ERROR: You cannot resrve an appointment in the past!");
                 return;
             }
 

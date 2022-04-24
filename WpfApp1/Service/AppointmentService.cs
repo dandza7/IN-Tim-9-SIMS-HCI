@@ -55,6 +55,8 @@ namespace WpfApp1.Service
             return _appointmentRepo.Delete(id);
         }
 
+        // Ukoliko je riječ o dodavanju novog appointmenta onda pri pozivu funkcije treba proslijediti -1 za oldAppointmentId 
+        // dok se pri pomjeranju postojećeg appointmenta za oldAppointmentId prosleđuje Id appointmenta koji se pomjera
         public List<AppointmentView> GetAvailableAppointmentOptions(string priority, 
             DateTime startOfInterval, DateTime endOfInterval, int doctorId, int patientId, int oldAppointmentId)
         {
@@ -62,6 +64,7 @@ namespace WpfApp1.Service
             return GetAppointmentsWithPriorityOfTime(startOfInterval, endOfInterval, doctorId, patientId, oldAppointmentId);
         }
 
+        // Funkcija koja pomjera interval na početak radnog vremena narednog dana
         private DateTime MoveStartOfIntervalToTheNextDay(DateTime startOfInterval)
         {
             int year = startOfInterval.Year;
@@ -73,22 +76,28 @@ namespace WpfApp1.Service
             return startOfInterval;
         }
 
+        // Funkcija za dobijanje radnog vremena tog dana, radni dan počinje u 7 ujutru a završava se u 8 naveče
+        private DateTime CalculateWorkingHours(string type, DateTime interval)
+        {
+            int year = interval.Year;
+            int month = interval.Month;
+            int day = interval.Day;
+
+            if (type.Equals("start")) return new DateTime(year, month, day, 7, 0, 0);
+
+            return new DateTime(year, month, day, 20, 0, 0);
+        }
+
         private List<AppointmentView> GetAppointmentsWithPriorityOfDoctor(DateTime startOfInterval, DateTime endOfInterval, int doctorId, int patientId, int oldAppointmentId)
         {
-            int yearOfStart = startOfInterval.Year;
-            int monthOfStart = startOfInterval.Month;
-            int dayOfStart = startOfInterval.Day;
-            DateTime startOfWorkingHours = new DateTime(yearOfStart, monthOfStart, dayOfStart, 7, 0, 0);
+            DateTime startOfWorkingHours = CalculateWorkingHours("start", startOfInterval);
             // Kako radno vrijeme počinje u 7 ujutru ukoliko je selektovano ranije treba da se pomjeri
             if (startOfInterval.Hour < 7)
             {
                 startOfInterval = startOfWorkingHours;
             }
 
-            int yearOfEnd = endOfInterval.Year;
-            int monthOfEnd = endOfInterval.Month;
-            int dayOfEnd = endOfInterval.Day;
-            DateTime endOfWorkingHours = new DateTime(yearOfEnd, monthOfEnd, dayOfEnd, 20, 0, 0);
+            DateTime endOfWorkingHours = CalculateWorkingHours("end", startOfInterval);
             // >= je zbog toga što 20.45 počinje u 20 ali je nakon kraja radnog vremena
             if (endOfInterval.Hour >= 20)
             {
@@ -99,7 +108,7 @@ namespace WpfApp1.Service
             {
                 endOfInterval = endOfWorkingHours.AddDays(-1);
             }
-
+            // Ako je pomjeranje postojećeg appointmenta onda treba obezbijediti da se appointmenta ne može pomjeriti više od 4 dana
             if (oldAppointmentId != -1)
             {
                 Appointment oldAppointment = _appointmentRepo.GetById(oldAppointmentId);
@@ -128,7 +137,6 @@ namespace WpfApp1.Service
                         // Pomjera se na 7 ujutru narednog dana
                         startOfInterval = MoveStartOfIntervalToTheNextDay(startOfInterval);
                         // Ako pomjeranje izaziva probijanje intervala onda ne može da se nađe termin
-                        Console.WriteLine("Pomjereno radno vrijeme na " + startOfInterval);
                         if (startOfInterval.AddHours(1) > endOfInterval) break;
                     } 
                     if (appointments.Count == 10) break;
@@ -250,20 +258,14 @@ namespace WpfApp1.Service
 
         private List<AppointmentView> GetAppointmentsWithPriorityOfTime(DateTime startOfInterval, DateTime endOfInterval, int doctorId, int patientId, int oldAppointmentId)
         {
-            int yearOfStart = startOfInterval.Year;
-            int monthOfStart = startOfInterval.Month;
-            int dayOfStart = startOfInterval.Day;
-            DateTime startOfWorkingHours = new DateTime(yearOfStart, monthOfStart, dayOfStart, 7, 0, 0);
+            DateTime startOfWorkingHours = CalculateWorkingHours("start", startOfInterval);
             // Kako radno vrijeme počinje u 7 ujutru ukoliko je selektovano ranije treba da se pomjeri
             if (startOfInterval.Hour < 7)
             {
                 startOfInterval = startOfWorkingHours;
             }
 
-            int yearOfEnd = endOfInterval.Year;
-            int monthOfEnd = endOfInterval.Month;
-            int dayOfEnd = endOfInterval.Day;
-            DateTime endOfWorkingHours = new DateTime(yearOfEnd, monthOfEnd, dayOfEnd, 20, 0, 0);
+            DateTime endOfWorkingHours = CalculateWorkingHours("end", endOfInterval);
             // >= je zbog toga što 20.45 počinje u 20 ali je nakon kraja radnog vremena
             if (endOfInterval.Hour >= 20)
             {
@@ -275,7 +277,7 @@ namespace WpfApp1.Service
                 endOfInterval = endOfWorkingHours.AddDays(-1);
             }
 
-            // U slučaju da je u pitanu pomjeranje treba listati samo opcije koje su u razmaku od 4 dana od starog termina
+            // Ako je pomjeranje postojećeg appointmenta onda treba obezbijediti da se appointmenta ne može pomjeriti više od 4 dana
             if (oldAppointmentId != -1)
             {
                 Appointment oldAppointment = _appointmentRepo.GetById(oldAppointmentId);
@@ -476,7 +478,7 @@ namespace WpfApp1.Service
                     appointmentViews.Add(AppointmentConverter.ConvertAppointmentAndDoctorToAppointmentView(appointment, user, room));
                 }
             }
-            return appointmentViews;
+            return appointmentViews.OrderBy(appointment => appointment.Beginning).ToList(); ;
         }
 
         public List<SecretaryAppointmentView> GetSecretaryAppointmentViews()
