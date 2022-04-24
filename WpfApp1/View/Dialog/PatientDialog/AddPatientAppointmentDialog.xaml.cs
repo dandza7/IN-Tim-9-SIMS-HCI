@@ -68,7 +68,7 @@ namespace WpfApp1.View.Dialog.PatientDialog
 
             if (DateTime.Parse(EndingDTP.Text) < DateTime.Now)
             {
-                PatientErrorMessageBox.Show("ERROR: You cannot resrve an appointment in the past!");
+                PatientErrorMessageBox.Show("ERROR: You cannot reserve an appointment in the past!");
                 return;
             }
 
