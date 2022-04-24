@@ -64,6 +64,7 @@ namespace WpfApp1.Service
             return GetAppointmentsWithPriorityOfTime(startOfInterval, endOfInterval, doctorId, patientId, oldAppointmentId);
         }
 
+
         // Funkcija koja pomjera interval na početak radnog vremena narednog dana
         private DateTime MoveStartOfIntervalToTheNextDay(DateTime startOfInterval)
         {
@@ -108,6 +109,7 @@ namespace WpfApp1.Service
             {
                 endOfInterval = endOfWorkingHours.AddDays(-1);
             }
+
             // Ako je pomjeranje postojećeg appointmenta onda treba obezbijediti da se appointmenta ne može pomjeriti više od 4 dana
             if (oldAppointmentId != -1)
             {
