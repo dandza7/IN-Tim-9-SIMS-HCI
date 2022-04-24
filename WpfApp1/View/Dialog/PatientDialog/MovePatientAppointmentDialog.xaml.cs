@@ -75,12 +75,6 @@ namespace WpfApp1.View.Dialog.PatientDialog
             if (DoctorComboBox.SelectedValue == null) return;
             if (BeginningDTP.Text == null || EndingDTP.Text == null) return;
 
-            if (DateTime.Parse(BeginningDTP.Text).AddHours(1) > DateTime.Parse(EndingDTP.Text))
-            {
-                PatientErrorMessageBox.Show("ERROR: Wanted time interval must be at least one hour long!");
-                return;
-            }
-
             if (DateTime.Parse(BeginningDTP.Text) > DateTime.Parse(EndingDTP.Text))
             {
                 PatientErrorMessageBox.Show("ERROR: Start of wanted interval must be before its end!");
@@ -102,6 +96,12 @@ namespace WpfApp1.View.Dialog.PatientDialog
             if (oldAppointment.Beginning.AddDays(-4) > DateTime.Parse(EndingDTP.Text))
             {
                 PatientErrorMessageBox.Show("ERROR: You cannot move the appointment for more than 4 days!");
+                return;
+            }
+
+            if (DateTime.Parse(BeginningDTP.Text).AddHours(1) > DateTime.Parse(EndingDTP.Text))
+            {
+                PatientErrorMessageBox.Show("ERROR: Wanted time interval must be at least one hour long!");
                 return;
             }
 
