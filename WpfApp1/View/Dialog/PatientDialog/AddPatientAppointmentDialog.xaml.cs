@@ -61,19 +61,19 @@ namespace WpfApp1.View.Dialog.PatientDialog
 
             if (DateTime.Parse(BeginningDTP.Text).AddHours(1) > DateTime.Parse(EndingDTP.Text))
             {
-                MessageBox.Show("ERROR: Wanted time interval must be at least one hour long!");
+                PatientErrorMessageBox.Show("ERROR: Wanted time interval must be at least one hour long!");
                 return;
             }
 
             if (DateTime.Parse(BeginningDTP.Text) > DateTime.Parse(EndingDTP.Text))
             {
-                MessageBox.Show("ERROR: Start of wanted interval must be before its end!");
+                PatientErrorMessageBox.Show("ERROR: Start of wanted interval must be before its end!");
                 return;
             }
 
             if (DateTime.Parse(EndingDTP.Text) < DateTime.Now)
             {
-                MessageBox.Show("ERROR: You cannot resrve an appointment in the past!");
+                PatientErrorMessageBox.Show("ERROR: You cannot resrve an appointment in the past!");
                 return;
             }
 

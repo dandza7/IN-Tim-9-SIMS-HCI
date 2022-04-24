@@ -54,6 +54,7 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -161,6 +162,12 @@
     </Compile>
     <Compile Include="Controller\RoomController.cs" />
     <Compile Include="Repository\RoomRepository.cs" />
+    <Compile Include="View\Dialog\PatientDialog\PatientErrorMessageBox.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\Dialog\PatientDialog\PatientErrorMessageBox.Designer.cs">
+      <DependentUpon>PatientErrorMessageBox.cs</DependentUpon>
+    </Compile>
     <Compile Include="View\Dialog\SecretaryAddGuestPatientDialog.xaml.cs">
       <DependentUpon>SecretaryAddGuestPatientDialog.xaml</DependentUpon>
     </Compile>
@@ -393,6 +400,9 @@
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Dialog\PatientDialog\PatientErrorMessageBox.resx">
+      <DependentUpon>PatientErrorMessageBox.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

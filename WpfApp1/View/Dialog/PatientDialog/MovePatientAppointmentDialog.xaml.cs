@@ -77,31 +77,31 @@ namespace WpfApp1.View.Dialog.PatientDialog
 
             if (DateTime.Parse(BeginningDTP.Text).AddHours(1) > DateTime.Parse(EndingDTP.Text))
             {
-                MessageBox.Show("ERROR: Wanted time interval must be at least one hour long!");
+                PatientErrorMessageBox.Show("ERROR: Wanted time interval must be at least one hour long!");
                 return;
             }
 
             if (DateTime.Parse(BeginningDTP.Text) > DateTime.Parse(EndingDTP.Text))
             {
-                MessageBox.Show("ERROR: Start of wanted interval must be before its end!");
+                PatientErrorMessageBox.Show("ERROR: Start of wanted interval must be before its end!");
                 return;
             }
 
             if (oldAppointment.Ending.AddDays(4) < DateTime.Parse(BeginningDTP.Text))
             {
-                MessageBox.Show("ERROR: You cannot move the appointment for more than 4 days into the future!");
+                PatientErrorMessageBox.Show("ERROR: You cannot move the appointment for more than 4 days into the future!");
                 return;
             }
 
             if (DateTime.Parse(EndingDTP.Text) < DateTime.Now)
             {
-                MessageBox.Show("ERROR: You cannot move the appointment into the past!");
+                PatientErrorMessageBox.Show("ERROR: You cannot move the appointment into the past!");
                 return;
             }
 
             if (oldAppointment.Beginning.AddDays(-4) > DateTime.Parse(EndingDTP.Text))
             {
-                MessageBox.Show("ERROR: You cannot move the appointment for more than 4 days!");
+                PatientErrorMessageBox.Show("ERROR: You cannot move the appointment for more than 4 days!");
                 return;
             }
 
