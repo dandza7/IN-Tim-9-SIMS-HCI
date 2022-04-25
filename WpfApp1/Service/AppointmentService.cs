@@ -92,6 +92,7 @@ namespace WpfApp1.Service
             return new DateTime(year, month, day, 20, 0, 0);
         }
 
+        // Funkcija koja vraća prvih 10 appointmenta za slučaj da je traženi doktor u traženom intervalu slobodan 
         private List<AppointmentView> GetAppointmentsForFreeTimeInterval(DateTime startOfInterval, DateTime endOfInterval,
             List<AppointmentView> appointments, Room room, Doctor doctor, User doctorUser, int patientId)
         {
@@ -119,6 +120,7 @@ namespace WpfApp1.Service
             return appointments;
         }
 
+        // funkcija koja vraća sve appointmente koji upadaju u Happy Case
         private List<AppointmentView> GetAppointmentsHappyCase(DateTime startOfInterval, DateTime endOfInterval,
             List<Appointment> appointmentsOfDoctor, List<AppointmentView> appointments, Room room, Doctor doctor, User doctorUser, int patientId)
         {
