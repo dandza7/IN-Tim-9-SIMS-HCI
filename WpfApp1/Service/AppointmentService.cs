@@ -64,6 +64,9 @@ namespace WpfApp1.Service
             return GetAppointmentsWithPriorityOfTime(startOfInterval, endOfInterval, doctorId, patientId, oldAppointmentId);
         }
 
+        /*----------------------------------------------------------------*/
+        /* POMOĆNE FUNKCIJE ZA DOBIJANJE SLOBODNIH TERMINA SA PRIORITETOM */
+        /*----------------------------------------------------------------*/
 
         // Funkcija koja pomjera interval na početak radnog vremena narednog dana
         private DateTime MoveStartOfIntervalToTheNextDay(DateTime startOfInterval)
@@ -88,6 +91,94 @@ namespace WpfApp1.Service
 
             return new DateTime(year, month, day, 20, 0, 0);
         }
+
+        private List<AppointmentView> GetAppointmentsForFreeTimeInterval(DateTime startOfInterval, DateTime endOfInterval,
+            List<AppointmentView> appointments, Room room, Doctor doctor, User doctorUser, int patientId)
+        {
+            // Provjeravam da li ću dodavanjem novog termina probiti željeni interval
+            while (startOfInterval.AddHours(1) <= endOfInterval)
+            {
+                // Ako bi se termin završio nakon 8 uveče onda ne može da se rezerviše
+                if (startOfInterval.AddHours(1).Hour >= 20)
+                {
+                    // Pomjera se na 7 ujutru narednog dana
+                    startOfInterval = MoveStartOfIntervalToTheNextDay(startOfInterval);
+                    // Ako pomjeranje izaziva probijanje intervala onda ne može da se nađe termin
+                    if (startOfInterval.AddHours(1) > endOfInterval) break;
+                }
+                if (appointments.Count == 10) break;
+                // Provjerava da li se soba renovira
+                bool isRoomAvailable = _renovationRepo.IsRoomAvailable(room.Id, startOfInterval, startOfInterval.AddHours(1));
+                if (isRoomAvailable)
+                {
+                    Appointment freeAppointment = new Appointment(startOfInterval, startOfInterval.AddHours(1), Appointment.AppointmentType.regular, false, doctor.Id, patientId, doctor.RoomId);
+                    appointments.Add(AppointmentConverter.ConvertAppointmentAndDoctorToAppointmentView(freeAppointment, doctorUser, room));
+                }
+                startOfInterval = startOfInterval.AddHours(1);
+            }
+            return appointments;
+        }
+
+        private List<AppointmentView> GetAppointmentsHappyCase(DateTime startOfInterval, DateTime endOfInterval,
+            List<Appointment> appointmentsOfDoctor, List<AppointmentView> appointments, Room room, Doctor doctor, User doctorUser, int patientId)
+        {
+            while (startOfInterval.AddHours(1) <= endOfInterval)
+            {
+                if (startOfInterval.AddHours(1).Hour >= 20)
+                {
+                    startOfInterval = MoveStartOfIntervalToTheNextDay(startOfInterval);
+                    if (startOfInterval.AddHours(1) > endOfInterval) break;
+                }
+                foreach (Appointment appointment in appointmentsOfDoctor)
+                {
+                    // Ako je pocetak appointmenta nakon startOfInterval + 1 sat (trajanje termina je jedan sat)
+                    // onda imamo slobodan termin za novi appointment
+                    while (startOfInterval.AddHours(1) <= appointment.Beginning)
+                    {
+                        if (startOfInterval.AddHours(1).Hour >= 20)
+                        {
+                            startOfInterval = MoveStartOfIntervalToTheNextDay(startOfInterval);
+                            if (startOfInterval.AddHours(1) > endOfInterval) break;
+                        }
+                        if (appointments.Count == 10) break;
+                        bool isRoomAvailable = _renovationRepo.IsRoomAvailable(room.Id, startOfInterval, startOfInterval.AddHours(1));
+                        if (isRoomAvailable)
+                        {
+                            Appointment freeAppointment = new Appointment(startOfInterval, startOfInterval.AddHours(1), Appointment.AppointmentType.regular, false, doctor.Id, patientId, doctor.RoomId);
+                            appointments.Add(AppointmentConverter.ConvertAppointmentAndDoctorToAppointmentView(freeAppointment, doctorUser, room));
+                        }
+                        startOfInterval = startOfInterval.AddHours(1);
+                    }
+                    // Čim smo promašili ili ispali iz while-a došli smo do zauzetog termina željenog doktora
+                    // te dalje možemo krenuti tražiti tek od kraja tog termina
+                    startOfInterval = appointment.Ending;
+
+                }
+                // Prošli smo sve termine željenog doktora koji su zakazani u željenom intervalu,
+                // sada smo opet upali u happy case te pokušavamo da nađemo još slobodnih termina u željenom intervalu
+                while (startOfInterval.AddHours(1) <= endOfInterval)
+                {
+                    if (startOfInterval.AddHours(1).Hour >= 20)
+                    {
+                        startOfInterval = MoveStartOfIntervalToTheNextDay(startOfInterval);
+                        if (startOfInterval.AddHours(1) > endOfInterval) break;
+                    }
+                    if (appointments.Count == 10) break;
+                    bool isRoomAvailable = _renovationRepo.IsRoomAvailable(room.Id, startOfInterval, startOfInterval.AddHours(1));
+                    if (isRoomAvailable)
+                    {
+                        Appointment freeAppointment = new Appointment(startOfInterval, startOfInterval.AddHours(1), Appointment.AppointmentType.regular, false, doctor.Id, patientId, doctor.RoomId);
+                        appointments.Add(AppointmentConverter.ConvertAppointmentAndDoctorToAppointmentView(freeAppointment, doctorUser, room));
+                    }
+                    startOfInterval = startOfInterval.AddHours(1);
+                }
+            }
+            return appointments;
+        }
+
+        /*----------------------------------------------------------------*/
+        /*----------------------------------------------------------------*/
+        /*----------------------------------------------------------------*/
 
         private List<AppointmentView> GetAppointmentsWithPriorityOfDoctor(DateTime startOfInterval, DateTime endOfInterval, int doctorId, int patientId, int oldAppointmentId)
         {
@@ -129,89 +220,17 @@ namespace WpfApp1.Service
             Room room = _roomRepo.Get(doctor.RoomId);
             User doctorUser = _userRepo.GetById(doctorId);
 
-            // Happy Case
+            // Interval je slobodan
             if (appointmentsForDoctor.Count == 0)
             {
-                // Provjeravam da li ću dodavanjem novog termina probiti željeni interval
-                while(startOfInterval.AddHours(1) <= endOfInterval)
-                {
-                    // Ako bi se termin završio nakon 8 uveče onda ne može da se rezerviše
-                    if(startOfInterval.AddHours(1).Hour >= 20)
-                    {
-                        // Pomjera se na 7 ujutru narednog dana
-                        startOfInterval = MoveStartOfIntervalToTheNextDay(startOfInterval);
-                        // Ako pomjeranje izaziva probijanje intervala onda ne može da se nađe termin
-                        if (startOfInterval.AddHours(1) > endOfInterval) break;
-                    } 
-                    if (appointments.Count == 10) break;
-                    // Provjerava da li se soba renovira
-                    bool isRoomAvailable = _renovationRepo.IsRoomAvailable(room.Id, startOfInterval, startOfInterval.AddHours(1));
-                    if (isRoomAvailable)
-                    {
-                        Appointment freeAppointment = new Appointment(startOfInterval, startOfInterval.AddHours(1), Appointment.AppointmentType.regular, false, doctor.Id, patientId, doctor.RoomId);
-                        appointments.Add(AppointmentConverter.ConvertAppointmentAndDoctorToAppointmentView(freeAppointment, doctorUser, room));
-                    }
-                    startOfInterval = startOfInterval.AddHours(1);
-                }
+                appointments = GetAppointmentsForFreeTimeInterval(startOfInterval, endOfInterval, appointments, room, doctor, doctorUser, patientId);
                 return appointments;
             }
-
-            //U Slučaju da u traženom vremenskom intervalu već postoje termini željenog doktora
-            while (startOfInterval.AddHours(1) <= endOfInterval)
-            {
-                if (startOfInterval.AddHours(1).Hour >= 20)
-                {
-                    startOfInterval = MoveStartOfIntervalToTheNextDay(startOfInterval);
-                    if (startOfInterval.AddHours(1) > endOfInterval) break;
-                }
-                foreach (Appointment appointment in appointmentsForDoctor)
-                {
-                        // Ako je pocetak appointmenta nakon startOfInterval + 1 sat (trajanje termina je jedan sat)
-                        // onda imamo slobodan termin za novi appointment
-                        while (startOfInterval.AddHours(1) <= appointment.Beginning)
-                        {
-                            if (startOfInterval.AddHours(1).Hour >= 20)
-                            {
-                                startOfInterval = MoveStartOfIntervalToTheNextDay(startOfInterval);
-                                if (startOfInterval.AddHours(1) > endOfInterval) break;
-                            }
-                            if (appointments.Count == 10) break;
-                            bool isRoomAvailable = _renovationRepo.IsRoomAvailable(room.Id, startOfInterval, startOfInterval.AddHours(1));
-                            if (isRoomAvailable)
-                            {
-                                Appointment freeAppointment = new Appointment(startOfInterval, startOfInterval.AddHours(1), Appointment.AppointmentType.regular, false, doctor.Id, patientId, doctor.RoomId);
-                                appointments.Add(AppointmentConverter.ConvertAppointmentAndDoctorToAppointmentView(freeAppointment, doctorUser, room));
-                            }
-                            startOfInterval = startOfInterval.AddHours(1);
-                        }
-                        // Čim smo promašili ili ispali iz while-a došli smo do zauzetog termina željenog doktora
-                        // te dalje možemo krenuti tražiti tek od kraja tog termina
-                        startOfInterval = appointment.Ending;
-                    
-                }
-                // Prošli smo sve termine željenog doktora koji su zakazani u željenom intervalu,
-                // sada smo opet upali u happy case te pokušavamo da nađemo još slobodnih termina u željenom intervalu
-                while (startOfInterval.AddHours(1) <= endOfInterval)
-                {
-                    if (startOfInterval.AddHours(1).Hour >= 20)
-                    {
-                        startOfInterval = MoveStartOfIntervalToTheNextDay(startOfInterval);
-                        if (startOfInterval.AddHours(1) > endOfInterval) break;
-                    }
-                    if (appointments.Count == 10) break;
-                    bool isRoomAvailable = _renovationRepo.IsRoomAvailable(room.Id, startOfInterval, startOfInterval.AddHours(1));
-                    if (isRoomAvailable)
-                    {
-                        Appointment freeAppointment = new Appointment(startOfInterval, startOfInterval.AddHours(1), Appointment.AppointmentType.regular, false, doctor.Id, patientId, doctor.RoomId);
-                        appointments.Add(AppointmentConverter.ConvertAppointmentAndDoctorToAppointmentView(freeAppointment, doctorUser, room));
-                    }
-                    startOfInterval = startOfInterval.AddHours(1);
-                }
-            }
-            
+            // Happy Case
+            appointments = GetAppointmentsHappyCase(startOfInterval, endOfInterval, appointmentsForDoctor, appointments, room, doctor, doctorUser, patientId);
             // U slučaju da nismo pronašli nijedan slobodan termin u željenom vremenskom intervalu kod željenog doktora
             // onda treba da reaguje prioritet i ponudi pacijentu prvih 5 slobodnih termina kod njega
-            if(appointments.Count == 0)
+            if (appointments.Count == 0)
             {
                 List<Appointment> doctorsAppointments = _appointmentRepo.GetAllAppointmentsForDoctor(doctorId).ToList();
                 DateTime startTime = originalStartOfInterval.AddDays(1);
@@ -240,7 +259,6 @@ namespace WpfApp1.Service
                     }
                     // Ako smo prošli kroz sve appointmente koje je doktor imao i još nismo našli 5 termina onda
                     // možemo da ih dodajemo pod uslovom da je soba u kojoj se termin održava slobodna
-                    // i da tada bolnica radi
                     while (appointments.Count < 5)
                     {
                         if (startTime.AddHours(1).Hour >= 20)
@@ -299,80 +317,15 @@ namespace WpfApp1.Service
             // Ovu promjenljivu čuvam u slučaju da prioritet treba da reaguje pa da znam koji je bio originalni početak intervala
             DateTime originalStartOfInterval = startOfInterval;
 
-            //Happy Case
+            // Interval je slobodan
             if(appointmentsOfDoctor.Count == 0)
             {
-                // Provjeravam da li ću dodavanjem novog termina probiti zadani interval
-                while (startOfInterval.AddHours(1) <= endOfInterval)
-                {
-                    if (startOfInterval.AddHours(1).Hour >= 20)
-                    {
-                        startOfInterval = MoveStartOfIntervalToTheNextDay(startOfInterval);
-                        if (startOfInterval.AddHours(1) > endOfInterval) break;
-                    }
-                    if (appointments.Count == 10) break;
-                    bool isRoomAvailable = _renovationRepo.IsRoomAvailable(room.Id, startOfInterval, startOfInterval.AddHours(1));
-                    if (isRoomAvailable)
-                    {
-                        Appointment freeAppointment = new Appointment(startOfInterval, startOfInterval.AddHours(1), Appointment.AppointmentType.regular, false, doctor.Id, patientId, doctor.RoomId);
-                        appointments.Add(AppointmentConverter.ConvertAppointmentAndDoctorToAppointmentView(freeAppointment, doctorUser, room));
-                    }
-                    startOfInterval = startOfInterval.AddHours(1);
-                }
+                appointments = GetAppointmentsForFreeTimeInterval(startOfInterval, endOfInterval, appointments, room, doctor, doctorUser, patientId);
                 return appointments;
             }
 
-            while (startOfInterval.AddHours(1) <= endOfInterval)
-            {
-                if (startOfInterval.AddHours(1).Hour >= 20)
-                {
-                    startOfInterval = MoveStartOfIntervalToTheNextDay(startOfInterval);
-                    if (startOfInterval.AddHours(1) > endOfInterval) break;
-                }
-                foreach (Appointment appointment in appointmentsOfDoctor)
-                {
-                    // Ako je pocetak appointmenta nakon startOfInterval + 1 sat (trajanje termina je jedan sat)
-                    // onda imamo slobodan termin za novi appointment
-                    while (startOfInterval.AddHours(1) <= appointment.Beginning)
-                    {
-                        if (startOfInterval.AddHours(1).Hour >= 20)
-                        {
-                            startOfInterval = MoveStartOfIntervalToTheNextDay(startOfInterval);
-                            if (startOfInterval.AddHours(1) > endOfInterval) break;
-                        }
-                        if (appointments.Count == 10) break;
-                        bool isRoomAvailable = _renovationRepo.IsRoomAvailable(room.Id, startOfInterval, startOfInterval.AddHours(1));
-                        if (isRoomAvailable)
-                        {
-                            Appointment freeAppointment = new Appointment(startOfInterval, startOfInterval.AddHours(1), Appointment.AppointmentType.regular, false, doctor.Id, patientId, doctor.RoomId);
-                            appointments.Add(AppointmentConverter.ConvertAppointmentAndDoctorToAppointmentView(freeAppointment, doctorUser, room));
-                        }
-                        startOfInterval = startOfInterval.AddHours(1);
-                    }
-                    // Čim smo promašili ili ispali iz while-a došli smo do zauzetog termina željenog doktora
-                    // te dalje možemo krenuti tražiti tek od kraja tog termina
-                    startOfInterval = appointment.Ending;
-
-                }
-                // Prošli smo sve termine željenog doktora koji su zakazani u željenom intervalu,
-                // sada smo opet upali u happy case te pokušavamo da nađemo još slobodnih termina u željenom intervalu
-                while (startOfInterval.AddHours(1) <= endOfInterval)
-                {
-                    if (startOfInterval.AddHours(1).Hour >= 20)
-                    {
-                        startOfInterval = MoveStartOfIntervalToTheNextDay(startOfInterval);
-                        if (startOfInterval.AddHours(1) > endOfInterval) break;
-                    }
-                    if (appointments.Count == 10) break;
-                    bool isRoomAvailable = _renovationRepo.IsRoomAvailable(room.Id, startOfInterval, startOfInterval.AddHours(1));
-                    if (isRoomAvailable)
-                    {
-                        Appointment freeAppointment = new Appointment(startOfInterval, startOfInterval.AddHours(1), Appointment.AppointmentType.regular, false, doctor.Id, patientId, doctor.RoomId);
-                        appointments.Add(AppointmentConverter.ConvertAppointmentAndDoctorToAppointmentView(freeAppointment, doctorUser, room));
-                    }
-                    startOfInterval = startOfInterval.AddHours(1);
-                }
-            }
+            // Provjeravamo Happy Case
+            appointments = GetAppointmentsHappyCase(startOfInterval, endOfInterval, appointmentsOfDoctor, appointments, room, doctor, doctorUser, patientId);
 
             // Ukoliko nije pronađen nijedan slobodan termin kod doktora u željenom vremenskom intervalu
             // treba da reaguje prioritet i ponudi termine u željenom vremenskom intervalu kod bilo kod doktora
