@@ -11,11 +11,9 @@ namespace WpfApp1.Service
     public class UserService
     {
         private readonly UserRepository _userRepository;
-        private readonly NotificationRepository _notificationRepo;
-        public UserService(UserRepository userRepository, NotificationRepository notificationRepo)
+        public UserService(UserRepository userRepository)
         {
             _userRepository = userRepository;
-            _notificationRepo = notificationRepo;
         }
 
         public IEnumerable<User> GetAll()

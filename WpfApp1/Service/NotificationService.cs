@@ -62,7 +62,6 @@ namespace WpfApp1.Service
             string title = "Patient " + patientId + " " + drugName + " Therapy";
             bool isDuplicate = false;
             List<Notification> sentNotifications = _notificationRepo.GetAllForUser(patientId).ToList();
-            Console.WriteLine("Broj notifikacija koje user ima je " + sentNotifications.Count);
             foreach(Notification sentNotification in sentNotifications)
             {
                 if (sentNotification.Date == whenToSend && sentNotification.Content.Equals(content))
@@ -72,7 +71,6 @@ namespace WpfApp1.Service
             }
             if (whenToSend < DateTime.Now && isDuplicate == false)
             {
-                Console.WriteLine("Pravim novu notifikaciju");
                 Notification notification = new Notification(whenToSend, content, title, patientId, false, false);
                 _notificationRepo.Create(notification);
             }
