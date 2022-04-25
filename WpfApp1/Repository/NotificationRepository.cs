@@ -38,6 +38,51 @@ namespace WpfApp1.Repository
             return notifications;
         }
 
+        public IEnumerable<Notification> GetAllForUser(int userId)
+        {
+            List<Notification> notifications = GetAll().ToList();
+            List<Notification> usersNotifications = new List<Notification>();
+
+            foreach (Notification notification in notifications)
+            {
+                if (notification.UserId == userId)
+                {
+                    usersNotifications.Add(notification);
+                }
+            }
+            return usersNotifications;
+        }
+
+        public IEnumerable<Notification> GetAllNotDeletedForUser(int userId)
+        {
+            List<Notification> notifications = GetAll().ToList();
+            List<Notification> notDeletedNotifications = new List<Notification>();
+
+            foreach(Notification notification in notifications)
+            {
+                if(notification.IsDeleted == false && notification.UserId == userId)
+                {
+                    notDeletedNotifications.Add(notification);
+                }
+            }
+            return notDeletedNotifications;
+        }
+
+        public IEnumerable<Notification> GetAllLogicallyDeleted()
+        {
+            List<Notification> notifications = GetAll().ToList();
+            List<Notification> deletedNotifications = new List<Notification>();
+
+            foreach (Notification notification in notifications)
+            {
+                if (notification.IsDeleted)
+                {
+                    deletedNotifications.Add(notification);
+                }
+            }
+            return deletedNotifications;
+        }
+
         public Notification GetById(int id)
         {
             List<Notification> notifications = GetAll().ToList();
@@ -93,6 +138,25 @@ namespace WpfApp1.Repository
             return isDeleted;
         }
 
+        public bool DeleteLogically(int id)
+        {
+            List<Notification> notifications = GetAll().ToList();
+            List<string> newFile = new List<string>();
+            bool isDeleted = false;
+
+            foreach(Notification n in notifications)
+            {
+                if (n.Id == id)
+                {
+                    n.IsDeleted = true;
+                    isDeleted = true;
+                }
+                newFile.Add(ConvertNotificationToCSVFormat(n));
+            }
+            File.WriteAllLines(_path, newFile);
+            return isDeleted;
+        }
+
         private Notification ConvertCSVFormatToNotification(string notificationCSVFormat)
         {
             var tokens = notificationCSVFormat.Split(_delimiter.ToCharArray());
@@ -100,7 +164,9 @@ namespace WpfApp1.Repository
                 DateTime.Parse(tokens[1]),
                 tokens[2],
                 tokens[3],
-                int.Parse(tokens[4]));
+                int.Parse(tokens[4]),
+                bool.Parse(tokens[5]),
+                bool.Parse(tokens[6]));
         }
         private string ConvertNotificationToCSVFormat(Notification notification)
         {
@@ -109,7 +175,9 @@ namespace WpfApp1.Repository
                 notification.Date.ToString(_datetimeFormat),
                 notification.Content,
                 notification.Title,
-                notification.UserId);
+                notification.UserId,
+                notification.IsRead,
+                notification.IsDeleted);
         }
 
         private void AppendLineToFile(string path, string line)

@@ -95,7 +95,7 @@ namespace WpfApp1
             var inventoryMovingService = new InventoryMovingService(inventoryMovingRepository, inventoryRepository);
             InventoryMovingController = new InventoryMovingController(inventoryMovingService);
 
-            var userService = new UserService(userRepository, notificationRepository);
+            var userService = new UserService(userRepository);
             UserController = new UserController(userService);
 
             var medicalRecordService = new MedicalRecordService(medicalRecordRepository);

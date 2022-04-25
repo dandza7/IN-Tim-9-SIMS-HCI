@@ -23,6 +23,8 @@ namespace WpfApp1.Model
         private string _content;
         private string _title;
         private int _userId;
+        private bool _isRead;
+        private bool _isDeleted;
 
         public int Id
         {
@@ -104,21 +106,58 @@ namespace WpfApp1.Model
             }
         }
 
-        public Notification(int id, DateTime date, string content, string title, int userId)
+        public bool IsRead
+        {
+            get
+            {
+                return _isRead;
+            }
+            set
+            {
+                if (value != _isRead)
+                {
+                    _isRead = value;
+                    OnPropertyChanged("IsRead");
+                }
+            }
+        }
+
+        public bool IsDeleted
+        {
+            get
+            {
+                return _isDeleted;
+            }
+            set
+            {
+                if (value != _isDeleted)
+                {
+                    _isDeleted = value;
+                    OnPropertyChanged("IsDeleted");
+                }
+            }
+        }
+
+
+        public Notification(int id, DateTime date, string content, string title, int userId, bool isRead, bool isDeleted)
         {
             Id = id;
             Date = date;
             Content = content;
             Title = title;
             UserId = userId;
+            IsRead = isRead;
+            IsDeleted = isDeleted;
         }
 
-        public Notification(DateTime date, string content, string title, int userId)
+        public Notification(DateTime date, string content, string title, int userId, bool isRead, bool isDeleted)
         {
             Date = date;
             Content = content;
             Title = title;
             UserId = userId;
+            IsRead = isRead;
+            IsDeleted = isDeleted;
         }
     }
 }

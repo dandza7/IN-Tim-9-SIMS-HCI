@@ -22,6 +22,16 @@ namespace WpfApp1.Controller
             return _notificationService.GetAll();
         }
 
+        public IEnumerable<Notification> GetUsersNotDeletedNotifications(int userId)
+        {
+            return _notificationService.GetUsersNotDeletedNotifications(userId);
+        }
+
+        public IEnumerable<Notification> GetUsersNotifications(int userId)
+        {
+            return _notificationService.GetUsersNotifications(userId);
+        }
+
         public Notification Create(Notification notification)
         {
             return _notificationService.Create(notification);
@@ -35,6 +45,16 @@ namespace WpfApp1.Controller
         public bool Delete(int id)
         {
             return _notificationService.Delete(id);
+        }
+
+        public bool DeleteLogically(int id)
+        {
+            return _notificationService.DeleteLogically(id);
+        }
+
+        public void DeleteOldUsersNotifications(int id)
+        {
+            _notificationService.DeleteOldUsersNotifications(id);
         }
 
         public void GetScheduledPatientsNotifications(int patientId)
