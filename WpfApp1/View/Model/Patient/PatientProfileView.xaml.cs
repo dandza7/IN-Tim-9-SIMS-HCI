@@ -40,7 +40,8 @@ namespace WpfApp1.View.Model.Patient
             int patientId = (int)app.Properties["userId"];
 
             _notificationController.GetScheduledPatientsNotifications(patientId);
-            Notifications = new ObservableCollection<Notification>(_userController.GetUsersNotifications(patientId));
+            _notificationController.DeleteOldUsersNotifications(patientId);
+            Notifications = new ObservableCollection<Notification>(_notificationController.GetUsersNotDeletedNotifications(patientId));
         }
 
         private void DeleteNotification_Click(object sender, RoutedEventArgs e)
@@ -52,9 +53,9 @@ namespace WpfApp1.View.Model.Patient
             _notificationController = app.NotificationController;
             _userController = app.UserController;
 
-            _notificationController.Delete(notificationId);
+            _notificationController.DeleteLogically(notificationId);
             PatientNotificationsDataGrid.ItemsSource = null;
-            PatientNotificationsDataGrid.ItemsSource = _userController.GetUsersNotifications(patientId);
+            PatientNotificationsDataGrid.ItemsSource = _notificationController.GetUsersNotDeletedNotifications(patientId);
         }
     }
 }

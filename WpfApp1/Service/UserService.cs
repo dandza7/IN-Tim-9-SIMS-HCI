@@ -48,21 +48,6 @@ namespace WpfApp1.Service
             return _userRepository.GetAllSecretaries();
         }
 
-        public IEnumerable<Notification> GetUsersNotifications(int userId)
-        {
-            List<Notification> notifications = _notificationRepo.GetAll().ToList();
-            List<Notification> usersNotifications = new List<Notification>();
-            foreach (Notification notification in notifications)
-            {
-                if (notification.UserId == userId)
-                {
-                    usersNotifications.Add(notification);
-                }
-            }
-            //sortira userove notifikacije u rastucem redoslijedu vremena kada su poslane (starije notifikacije idu na vrh)
-            return usersNotifications.OrderBy(notification => notification.Date).ToList();
-        }
-
         public User Create(User user)
         {
             return _userRepository.Create(user);

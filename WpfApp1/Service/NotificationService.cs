@@ -30,13 +30,9 @@ namespace WpfApp1.Service
 
         public IEnumerable<Notification> GetAll()
         {
-            List<Notification> ns = _notificationRepo.GetAll().ToList();
-            foreach (var nsItem in ns)
-            {
-                Console.WriteLine(nsItem.Content);
-            }
             return _notificationRepo.GetAll();
         }
+
 
         public Notification GetById(int id)
         {
@@ -48,15 +44,36 @@ namespace WpfApp1.Service
             return _notificationRepo.Create(notification);
         }
 
-        public void CreateNotificationForPatient(int patientId, string drugName, DateTime whenToSend)
+        public IEnumerable<Notification> GetUsersNotifications(int userId)
+        {
+            //sortira userove notifikacije u rastucem redoslijedu vremena kada su poslane (starije notifikacije idu na vrh)
+            return _notificationRepo.GetAllForUser(userId).OrderBy(notification => notification.Date).ToList();
+        }
+
+        public IEnumerable<Notification> GetUsersNotDeletedNotifications(int userId)
+        {
+            return _notificationRepo.GetAllNotDeletedForUser(userId).OrderBy(notification => notification.Date).ToList();
+        }
+
+        private void CreateNotificationForPatient(int patientId, string drugName, DateTime whenToSend)
         {
             
             string content = "Take " + drugName + " in one hour time!";
             string title = "Patient " + patientId + " " + drugName + " Therapy";
-
-            if(whenToSend < DateTime.Now)
+            bool isDuplicate = false;
+            List<Notification> sentNotifications = _notificationRepo.GetAllForUser(patientId).ToList();
+            Console.WriteLine("Broj notifikacija koje user ima je " + sentNotifications.Count);
+            foreach(Notification sentNotification in sentNotifications)
             {
-                Notification notification = new Notification(whenToSend, content, title, patientId);
+                if (sentNotification.Date == whenToSend && sentNotification.Content.Equals(content))
+                {
+                    isDuplicate = true;
+                }
+            }
+            if (whenToSend < DateTime.Now && isDuplicate == false)
+            {
+                Console.WriteLine("Pravim novu notifikaciju");
+                Notification notification = new Notification(whenToSend, content, title, patientId, false, false);
                 _notificationRepo.Create(notification);
             }
         }
@@ -72,13 +89,27 @@ namespace WpfApp1.Service
                 string drugName = _drugRepo.GetById(therapy.DrugId).Name;
                 int howManyTimes = (int)(Math.Ceiling(therapy.Frequency));
                 DateTime startingTime = DateTime.Today.AddHours(7);
-
                 for (int i = 0; i < howManyTimes; i++)
                 {
                     CreateNotificationForPatient(patientId, drugName, startingTime);
                     startingTime = startingTime.AddHours(timeBetweenNotifications);
                 }
             }   
+        }
+        // U ponoć se fizički brišu sve notifikacije pacijenta koje je on obrisao fiziški
+        // Dugi 'if' samo provjerava da li je prošla ponoć i da li je to pacijent koji otvara notifikacije
+        public void DeleteOldUsersNotifications(int patientId)
+        {
+            List<Notification> deletedNotifications = _notificationRepo.GetAllLogicallyDeleted().ToList();
+            DateTime currentTime = DateTime.Now;
+            foreach (Notification notification in deletedNotifications)
+            {
+                if(notification.UserId == patientId && currentTime.Year >= notification.Date.Year &&
+                    currentTime.Month >= notification.Date.Month && currentTime.Day > notification.Date.Day)
+                {
+                    _notificationRepo.Delete(patientId);
+                }
+            }
         }
 
         public Notification Update(Notification notification)
@@ -89,6 +120,11 @@ namespace WpfApp1.Service
         public bool Delete(int id)
         {
             return _notificationRepo.Delete(id);
+        }
+
+        public bool DeleteLogically(int id)
+        {
+            return _notificationRepo.DeleteLogically(id);
         }
     }
 }
