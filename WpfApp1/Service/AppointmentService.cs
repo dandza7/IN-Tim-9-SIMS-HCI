@@ -157,7 +157,8 @@ namespace WpfApp1.Service
 
                 }
                 // Prošli smo sve termine željenog doktora koji su zakazani u željenom intervalu,
-                // sada smo opet upali u happy case te pokušavamo da nađemo još slobodnih termina u željenom intervalu
+                // sada smo opet upali u slobodan vremenski interval te pokušavamo da nađemo
+                // još slobodnih termina u željenom intervalu
                 while (startOfInterval.AddHours(1) <= endOfInterval)
                 {
                     if (startOfInterval.AddHours(1).Hour >= 20)
@@ -191,7 +192,7 @@ namespace WpfApp1.Service
                 startOfInterval = startOfWorkingHours;
             }
 
-            DateTime endOfWorkingHours = CalculateWorkingHours("end", startOfInterval);
+            DateTime endOfWorkingHours = CalculateWorkingHours("end", endOfInterval);
             // >= je zbog toga što 20.45 počinje u 20 ali je nakon kraja radnog vremena
             if (endOfInterval.Hour >= 20)
             {
