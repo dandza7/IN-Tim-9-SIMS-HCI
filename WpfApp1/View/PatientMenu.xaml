@@ -8,9 +8,8 @@
         Title="PatientMenu" Height="768" Width="1024">
     <Grid>
         <util:TabletMenuBar Grid.Column="1"/>
-        <Frame x:Name="PatientFrame" Margin="0, 45, 0, 0" NavigationUIVisibility="Hidden" Background="{StaticResource LightestBlueBrush}">
-            
-        </Frame>
+        <Frame x:Name="PatientFrame" Margin="0, 45, 0, 0" NavigationUIVisibility="Hidden" Background="{StaticResource LightestBlueBrush}"/>
         <Button Style="{StaticResource LogoutButton}" Click="LogoutButton_Click"/>
+        <Border x:Name="Overlay" Style="{StaticResource PatientOverlay}"/>
     </Grid>
 </Window>
