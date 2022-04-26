@@ -30,6 +30,7 @@ namespace WpfApp1.Service
             InitializeComponent();
             var app = Application.Current as App;
             app.Properties["PatientFrame"] = PatientFrame;
+            app.Properties["PatientOverlay"] = Overlay;
         }
 
         private void LogoutButton_Click(object sender, RoutedEventArgs e)
