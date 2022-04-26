@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -27,6 +28,7 @@ namespace WpfApp1.View.Model.Patient
     {
         private AppointmentController _appointmentController;
         public ObservableCollection<AppointmentView> Appointments { get; set; }
+
         public PatientAppointmentsView()
         {
             InitializeComponent();
@@ -35,7 +37,7 @@ namespace WpfApp1.View.Model.Patient
             int patientId = (int)app.Properties["userId"];
             
             _appointmentController = app.AppointmentController;
-            
+
             Appointments = new ObservableCollection<AppointmentView>(_appointmentController.GetPatientsAppointmentsView(patientId).ToList());
         }
 
@@ -57,7 +59,7 @@ namespace WpfApp1.View.Model.Patient
             Appointment oldAppointment = _appointmentController.GetById(appointmentId);
             if (DateTime.Now.AddDays(1) > oldAppointment.Beginning)
             {
-                MessageBox.Show("ERROR: You cannot move the appointment if it's beginning in less than one day!");
+                PatientErrorMessageBox.Show("ERROR: You cannot move the appointment if it's beginning in less than one day!");
                 return;
             }
 
