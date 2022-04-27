@@ -12,18 +12,15 @@ namespace WpfApp1.Service
     {
         private readonly NotificationRepository _notificationRepo;
         private readonly DrugRepository _drugRepo;
-        private readonly PatientRepository _patientRepo;
         private readonly MedicalRecordRepository _medicalRecordRepo;
         private readonly TherapyRepository _therapyRepo;
         public NotificationService(NotificationRepository notificationRepo, 
             DrugRepository drugRepo, 
-            PatientRepository patientRepo, 
             MedicalRecordRepository medicalRecordRepo,
             TherapyRepository therapyRepo)
         {
             _notificationRepo = notificationRepo;
             _drugRepo = drugRepo;
-            _patientRepo = patientRepo;
             _medicalRecordRepo = medicalRecordRepo;
             _therapyRepo = therapyRepo;
         }
