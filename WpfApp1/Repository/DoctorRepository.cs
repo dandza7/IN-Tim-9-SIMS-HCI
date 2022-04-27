@@ -125,20 +125,6 @@ namespace WpfApp1.Repository
             return null;
         }
 
-        public Doctor GetByUsername(string username)
-        {
-            List<Doctor> doctors = GetAll().ToList();
-            foreach (Doctor d in doctors)
-            {
-                if (d.Username == username)
-                {
-                    return d;
-                }
-
-            }
-            return null;
-        }
-
         private Doctor ConvertCSVFormatToDoctor(string doctorCSVFormat)
         {
             var tokens = doctorCSVFormat.Split(_delimiter.ToCharArray());
