@@ -153,7 +153,7 @@ namespace WpfApp1.Service
                     }
                     // Čim smo promašili ili ispali iz while-a došli smo do zauzetog termina željenog doktora
                     // te dalje možemo krenuti tražiti tek od kraja tog termina
-                    startOfInterval = appointment.Ending;
+                    if(appointment.Beginning > startOfInterval) startOfInterval = appointment.Ending;
 
                 }
                 // Prošli smo sve termine željenog doktora koji su zakazani u željenom intervalu,
