@@ -52,11 +52,6 @@ namespace WpfApp1.Controller
             return _notificationService.DeleteLogically(id);
         }
 
-        public void DeleteOldUsersNotifications(int id)
-        {
-            _notificationService.DeleteOldUsersNotifications(id);
-        }
-
         public void GetScheduledPatientsNotifications(int patientId)
         {
             _notificationService.GetScheduledPatientsNotifications(patientId);
