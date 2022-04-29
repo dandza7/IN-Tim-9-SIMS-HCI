@@ -180,6 +180,9 @@
     <Compile Include="View\Dialog\SecretaryAddPatientDialog.xaml.cs">
       <DependentUpon>SecretaryAddPatientDialog.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Dialog\SecretaryManageAllergiesDialog.xaml.cs">
+      <DependentUpon>SecretaryManageAllergiesDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Dialog\SecretaryUpdatePatientDialog.xaml.cs">
       <DependentUpon>SecretaryUpdatePatientDialog.xaml</DependentUpon>
     </Compile>
@@ -293,6 +296,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Dialog\SecretaryAddPatientDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Dialog\SecretaryManageAllergiesDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

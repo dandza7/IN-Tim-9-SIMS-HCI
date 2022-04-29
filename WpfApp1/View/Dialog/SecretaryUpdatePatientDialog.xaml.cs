@@ -15,6 +15,7 @@ using System.Windows.Shapes;
 using WpfApp1.Controller;
 using WpfApp1.Model;
 using WpfApp1.View.Converter;
+using WpfApp1.View.Model.Secretary;
 
 namespace WpfApp1.View.Dialog
 {
@@ -81,5 +82,28 @@ namespace WpfApp1.View.Dialog
             _userController.Update(user);
             Close();
         }
+        private void DeleteAllergy_Click(object sender, RoutedEventArgs e)
+        {
+            int allergyId = ((AllergyView)SecretaryAllergiesDataGrid.SelectedItem).Id;
+            var app = Application.Current as App;
+            _allergyController = app.AllergyController;
+
+            _allergyController.Delete(allergyId);
+            Allergies = new ObservableCollection<UserControl>(
+            AllergyConverter.ConvertAllergyListToAllergyViewList(_allergyController.GetAll().ToList()));
+            SecretaryAllergiesDataGrid.ItemsSource = Allergies;
+            SecretaryAllergiesDataGrid.Items.Refresh();
+        }
+        private void Manage_Allergies_Click(object sender, RoutedEventArgs e)
+        {
+            int patientId = Int32.Parse(updateidTB.Text);
+            SecretaryManageAllergiesDialog s = new SecretaryManageAllergiesDialog(patientId);
+            s.Show();
+        }
+
+
+        
     }
+
+
 }
