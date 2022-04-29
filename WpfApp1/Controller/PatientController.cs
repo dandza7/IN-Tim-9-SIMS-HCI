@@ -48,5 +48,10 @@ namespace WpfApp1.Controller
         {
             return _patientService.GetById(patientId);
         }
+
+        public void DeleteOldPatientsNotifications(int patientId)
+        {
+            _patientService.DeleteOldPatientsNotifications(patientId);
+        }
     }
 }

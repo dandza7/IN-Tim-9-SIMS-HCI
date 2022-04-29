@@ -24,7 +24,7 @@ namespace WpfApp1.View.Model.Patient
     public partial class PatientProfileView : Page
     {
         private NotificationController _notificationController;
-        private UserController _userController;
+        private PatientController _patientController;
 
         public ObservableCollection<Notification> Notifications { get; set; }
         
@@ -34,13 +34,13 @@ namespace WpfApp1.View.Model.Patient
             DataContext = this;
             var app = Application.Current as App;
 
-            _userController = app.UserController;
+            _patientController = app.PatientController;
             _notificationController = app.NotificationController;
             
             int patientId = (int)app.Properties["userId"];
 
             _notificationController.GetScheduledPatientsNotifications(patientId);
-            _notificationController.DeleteOldUsersNotifications(patientId);
+            _patientController.DeleteOldPatientsNotifications(patientId);
             Notifications = new ObservableCollection<Notification>(_notificationController.GetUsersNotDeletedNotifications(patientId));
         }
 
@@ -51,7 +51,6 @@ namespace WpfApp1.View.Model.Patient
             int notificationId = ((Notification)PatientNotificationsDataGrid.SelectedItem).Id;
 
             _notificationController = app.NotificationController;
-            _userController = app.UserController;
 
             _notificationController.DeleteLogically(notificationId);
             PatientNotificationsDataGrid.ItemsSource = null;
