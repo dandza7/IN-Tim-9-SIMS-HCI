@@ -74,5 +74,10 @@ namespace WpfApp1.Model
             MedicalRecordId = medicalRecordId;
             AllergyName = name;
         }
+        public Allergy(int medicalRecordId, string name)
+        {
+            MedicalRecordId = medicalRecordId;
+            AllergyName = name;
+        }
     }
 }

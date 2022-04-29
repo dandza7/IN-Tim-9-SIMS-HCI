@@ -61,7 +61,22 @@ namespace WpfApp1.Repository
             AppendLineToFile(_path, ConvertAllergyToCSVFormat(allergy));
             return allergy;
         }
-
+        public bool Delete(int allergyId)
+        {
+            List<Allergy> allergies = GetAll().ToList();
+            List<string> newFile = new List<string>();
+            bool isDeleted = false;
+            foreach (Allergy a in allergies)
+            {
+                if (a.Id != allergyId)
+                {
+                    newFile.Add(ConvertAllergyToCSVFormat(a));
+                    isDeleted = true;
+                }
+            }
+            File.WriteAllLines(_path, newFile);
+            return isDeleted;
+        }
         private Allergy ConvertCSVFormatToAllergy(string allergyCSVFormat)
         {
             var tokens = allergyCSVFormat.Split(_delimiter.ToCharArray());

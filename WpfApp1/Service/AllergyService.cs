@@ -29,5 +29,9 @@ namespace WpfApp1.Service
         {
             return _allergyRepo.GetPatientsAllergies(medicalRecordId);
         }
+        public bool Delete(int allergyId)
+        {
+            return _allergyRepo.Delete(allergyId);
+        }
     }
 }
