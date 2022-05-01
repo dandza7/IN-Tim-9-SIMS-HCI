@@ -153,7 +153,7 @@ namespace WpfApp1.Service
                     }
                     // Čim smo promašili ili ispali iz while-a došli smo do zauzetog termina željenog doktora
                     // te dalje možemo krenuti tražiti tek od kraja tog termina
-                    startOfInterval = appointment.Ending;
+                    if(appointment.Beginning > startOfInterval) startOfInterval = appointment.Ending;
 
                 }
                 // Prošli smo sve termine željenog doktora koji su zakazani u željenom intervalu,
@@ -217,14 +217,14 @@ namespace WpfApp1.Service
                 doctorId).ToList();
 
             //Potrebno ukoliko treba da reaguje da bi se znao originalni početak intervala
-            DateTime originalStartOfInterval = startOfInterval;
+            DateTime originalEndOfInterval = endOfInterval;
             //Ovo je potrebno za converter iz appointmenta u appointment view
             Doctor doctor = _doctorRepo.GetById(doctorId);
             Room room = _roomRepo.Get(doctor.RoomId);
             User doctorUser = _userRepo.GetById(doctorId);
 
             // Interval je slobodan
-            if (appointmentsForDoctor.Count == 0)
+            if (appointmentsForDoctor.Count == 0 && startOfInterval.AddHours(1) <= endOfInterval)
             {
                 appointments = GetAppointmentsForFreeTimeInterval(startOfInterval, endOfInterval, appointments, room, doctor, doctorUser, patientId);
                 return appointments;
@@ -236,7 +236,7 @@ namespace WpfApp1.Service
             if (appointments.Count == 0)
             {
                 List<Appointment> doctorsAppointments = _appointmentRepo.GetAllAppointmentsForDoctor(doctorId).ToList();
-                DateTime startTime = originalStartOfInterval.AddDays(1);
+                DateTime startTime = MoveStartOfIntervalToTheNextDay(originalEndOfInterval);
                 while (appointments.Count < 5)
                 {
                     foreach(Appointment appointment in doctorsAppointments)
@@ -245,6 +245,7 @@ namespace WpfApp1.Service
                         // traženog doktora možemo dodavati termine
                         while(startTime.AddHours(1) <= appointment.Beginning)
                         {
+                            //Console.WriteLine("Start time je u " + startTime + " a appointment naredni počinje u " + appointment.Beginning);
                             if (startTime.AddHours(1).Hour >= 20)
                             {
                                 startTime = MoveStartOfIntervalToTheNextDay(startTime);
@@ -253,12 +254,14 @@ namespace WpfApp1.Service
                             bool isRoomAvailable = _renovationRepo.IsRoomAvailable(room.Id, startTime, startTime.AddHours(1));
                             if (isRoomAvailable)
                             {
+                                //Console.WriteLine("Dodajem termin od " + startTime + " do " + startTime.AddHours(1));
                                 Appointment freeAppointment = new Appointment(startTime, startTime.AddHours(1), Appointment.AppointmentType.regular, false, doctor.Id, patientId, doctor.RoomId);
                                 appointments.Add(AppointmentConverter.ConvertAppointmentAndDoctorToAppointmentView(freeAppointment, doctorUser, room));
                             }
                             startTime = startTime.AddHours(1);
                         }
-                        startTime = appointment.Ending;
+                        // Pomjeri se na kraj zauzetog termina ukoliko je on nakon početka intervala koji pretražujemo
+                        if (appointment.Beginning > startTime) startTime = appointment.Ending;
                     }
                     // Ako smo prošli kroz sve appointmente koje je doktor imao i još nismo našli 5 termina onda
                     // možemo da ih dodajemo pod uslovom da je soba u kojoj se termin održava slobodna

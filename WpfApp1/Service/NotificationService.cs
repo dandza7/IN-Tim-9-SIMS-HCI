@@ -52,7 +52,7 @@ namespace WpfApp1.Service
             return _notificationRepo.GetAllNotDeletedForUser(userId).OrderBy(notification => notification.Date).ToList();
         }
 
-        private void CreateNotificationForPatient(int patientId, string drugName, DateTime whenToSend)
+        private void CreateNotificationForPatient(int patientId, string drugName, DateTime whenToSend, float frequency)
         {
             
             string content = "Take " + drugName + " in one hour time!";
@@ -64,6 +64,16 @@ namespace WpfApp1.Service
                 if (sentNotification.Date == whenToSend && sentNotification.Content.Equals(content))
                 {
                     isDuplicate = true;
+                }
+                // Ukoliko se terapija pije manje od jednom dnevno onda treba provjeriti koliko je dana prošlo od prethodne notifikacije
+                // za terapiju, ukoliko je prošlo manje nego što treba proći da bi se opet pila onda se ne treba slati nova notifikacija
+                if(frequency < 1)
+                {
+                    int daysToPass = (int)Math.Round(1 / frequency);
+                    if(sentNotification.Content.Equals(content) && sentNotification.Date.AddDays(daysToPass) > whenToSend)
+                    {
+                        isDuplicate = true;
+                    }
                 }
             }
             if (whenToSend < DateTime.Now && isDuplicate == false)
@@ -86,25 +96,10 @@ namespace WpfApp1.Service
                 DateTime startingTime = DateTime.Today.AddHours(7);
                 for (int i = 0; i < howManyTimes; i++)
                 {
-                    CreateNotificationForPatient(patientId, drugName, startingTime);
+                    CreateNotificationForPatient(patientId, drugName, startingTime, therapy.Frequency);
                     startingTime = startingTime.AddHours(timeBetweenNotifications);
                 }
             }   
-        }
-        // U ponoć se fizički brišu sve notifikacije pacijenta koje je on obrisao fiziški
-        // Dugi 'if' samo provjerava da li je prošla ponoć i da li je to pacijent koji otvara notifikacije
-        public void DeleteOldUsersNotifications(int patientId)
-        {
-            List<Notification> deletedNotifications = _notificationRepo.GetAllLogicallyDeleted().ToList();
-            DateTime currentTime = DateTime.Now;
-            foreach (Notification notification in deletedNotifications)
-            {
-                if(notification.UserId == patientId && currentTime.Year >= notification.Date.Year &&
-                    currentTime.Month >= notification.Date.Month && currentTime.Day > notification.Date.Day)
-                {
-                    _notificationRepo.Delete(patientId);
-                }
-            }
         }
 
         public Notification Update(Notification notification)
