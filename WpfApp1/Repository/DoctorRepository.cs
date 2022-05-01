@@ -55,7 +55,21 @@ namespace WpfApp1.Repository
 
             return generalPracticioners;
         }
+        public IEnumerable<Doctor> GetAllDoctorsBySpecialization(SpecType spec)
+        {
+            List<Doctor> allDoctors = GetAll().ToList();
+            List<Doctor> doctors = new List<Doctor>();
 
+            foreach (Doctor doctor in allDoctors)
+            {
+                if (doctor.Specialization == spec && doctor.IsAvailable)
+                {
+                    doctors.Add(doctor);
+                }
+            }
+
+            return doctors;
+        }
         public Doctor Create(Doctor doctor)
         {
             doctor.Id = ++_patientMaxId;
