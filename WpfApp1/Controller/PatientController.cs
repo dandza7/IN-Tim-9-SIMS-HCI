@@ -31,7 +31,10 @@ namespace WpfApp1.Controller
         {
             return _patientService.GetPatientsDrugs(patientId);
         }
-
+        public Patient GetByUsername(string username)
+        {
+            return _patientService.GetByUsername(username);
+        }
         public Patient Create(Patient patient)
         {
             return _patientService.Create(patient);

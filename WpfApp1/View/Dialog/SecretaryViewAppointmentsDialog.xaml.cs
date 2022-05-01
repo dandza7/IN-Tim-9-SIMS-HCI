@@ -35,6 +35,7 @@ namespace WpfApp1.View.Dialog
             _appointmentController = app.AppointmentController;
             _userController = app.UserController;
             Appointment a = this._appointmentController.GetById(appointmentId);
+            idTB.Text = appointmentId.ToString();
             nameTB.Text = this._userController.GetById(a.PatientId).Name;
             surnameTB.Text = this._userController.GetById(a.PatientId).Surname;
             dnameTB.Text = this._userController.GetById(a.DoctorId).Name.ToString();
@@ -45,6 +46,13 @@ namespace WpfApp1.View.Dialog
             urgencyTB.Text = a.IsUrgent.ToString();
             typeTB.Text = a.Type.ToString();
 
+        }
+
+        private void Move_Appointment_Click(object sender, RoutedEventArgs e)
+        {
+            int appointmentId = Int32.Parse(idTB.Text);
+            SecretaryMoveAppointmentDialog s = new SecretaryMoveAppointmentDialog(appointmentId);
+            s.Show();
         }
     }
 }
