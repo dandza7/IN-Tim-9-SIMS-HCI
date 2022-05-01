@@ -42,5 +42,12 @@ namespace WpfApp1.View.Model.Secretary
             var s = new SecretaryViewAppointmentsDialog(appointmentId);
             s.Show();
         }
+        private void Add_New_Appointment_Click(object sender, RoutedEventArgs e)
+        {
+           
+            var s = new SecretaryAddNewAppointmentDialog();
+            s.Show();
+        }
+       
     }
 }

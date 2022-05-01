@@ -75,5 +75,10 @@ namespace WpfApp1.Service
             Patient p1 = new Patient(u.Name, u.Surname, u.Jmbg, u.Username, u.Password, u.PhoneNumber, p.Email);
             return p1;
         }
+        public Patient GetByUsername(string username)
+        {
+            User user = _userRepo.GetByUsername(username);
+            return _patientRepo.GetById(user.Id);
+        }
     }
 }
