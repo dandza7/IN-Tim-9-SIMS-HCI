@@ -68,13 +68,6 @@ namespace WpfApp1.Service
             HelpLogIn.Visibility = Visibility.Collapsed;
         }
 
-        private void LogInButton_Click(object sender, RoutedEventArgs e)
-        {
-            HelpLogIn.Visibility = Visibility.Collapsed;
-            LogInForm.Visibility = Visibility.Visible;
-            LogInConfirm.Visibility = Visibility.Visible;
-        }
-
         private void XLogInButton_Click(object sender, RoutedEventArgs e)
         {
             LogInForm.Visibility = Visibility.Collapsed;
