@@ -35,4 +35,12 @@
             </Setter.Value>
         </Setter>
     </Style>
+
+    <Style x:Key="ProfileLabel" TargetType="Label">
+        <Setter Property="FontSize" Value="24"/>
+        <Setter Property="FontWeight" Value="Bold"/>
+        <Setter Property="Margin" Value="40, 0"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="Foreground" Value="{StaticResource WhiteBrush}"/>
+    </Style>
 </ResourceDictionary>

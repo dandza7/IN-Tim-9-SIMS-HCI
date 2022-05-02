@@ -153,7 +153,7 @@ namespace WpfApp1.Service
                     }
                     // Čim smo promašili ili ispali iz while-a došli smo do zauzetog termina željenog doktora
                     // te dalje možemo krenuti tražiti tek od kraja tog termina
-                    if(appointment.Beginning > startOfInterval) startOfInterval = appointment.Ending;
+                    startOfInterval = appointment.Ending;
 
                 }
                 // Prošli smo sve termine željenog doktora koji su zakazani u željenom intervalu,
@@ -385,7 +385,9 @@ namespace WpfApp1.Service
                             }
                             // Ako bismo time što nađemo appointment probili vremenski interval onda ne možemo da ga nađemo
                             if (startOfInterval.AddHours(1) > endOfInterval) break;
-                            if (startOfInterval >= appointmentInInterval.Ending) continue;
+                            // Ako se termin završio prije nego što počinje naš interval onda se ne treba pozicionirati na njegov kraj
+                            // jer nećemo ništa dobiti pa idemo na naredni termin
+                            if (startOfInterval > appointmentInInterval.Ending) continue;
                             // Pomijeramo početni interval na kraj appointmenta
                             startOfInterval = appointmentInInterval.Ending;
                             foreach (Doctor generalPracticioner in generalPracticioners)
@@ -399,6 +401,7 @@ namespace WpfApp1.Service
                                 if (startOfInterval.AddHours(1) > endOfInterval) break;
 
                                 List<Appointment> generalPracticionersAppointments = _appointmentRepo.GetAllAppointmentsInTimeIntervalForDoctor(startOfInterval, startOfInterval.AddHours(1), generalPracticioner.Id).ToList();
+
                                 // Prioritetni happy case, postoji slobodan termin na početku traženog intervala
                                 if (generalPracticionersAppointments.Count == 0)
                                 {
@@ -442,6 +445,43 @@ namespace WpfApp1.Service
                 }
             }
             return appointmentViews.OrderBy(appointment => appointment.Beginning).ToList(); ;
+        }
+
+        public List<AppointmentView> GetPatientsReportsView(int patientId)
+        {
+            List<AppointmentView> appointmentViews = new List<AppointmentView>();
+            List<Appointment> appointments = _appointmentRepo.GetAll().ToList();
+            foreach (Appointment appointment in appointments)
+            {
+                // Odnosi se na termine koji su rezervisani pa tako termini u prošlosti nisu bitni
+                if (appointment.PatientId == patientId && appointment.Ending < DateTime.Now)
+                {
+                    Doctor doctor = _doctorRepo.GetById(appointment.DoctorId);
+                    User user = _userRepo.GetById(doctor.Id);
+                    Room room = _roomRepo.Get(doctor.RoomId);
+                    appointmentViews.Add(AppointmentConverter.ConvertAppointmentAndDoctorToAppointmentView(appointment, user, room));
+                }
+            }
+            return appointmentViews.OrderBy(appointment => appointment.Beginning).ToList(); 
+        }
+
+        public List<AppointmentView> GetPatientsReportsInTimeInterval(int patientId, DateTime startOfInterval, DateTime endOfInterval)
+        {
+            List<AppointmentView> appointmentViews = new List<AppointmentView>();
+            List<Appointment> appointments = _appointmentRepo.GetAll().ToList();
+            foreach (Appointment appointment in appointments)
+            {
+                // Odnosi se na termine koji su rezervisani pa tako termini u prošlosti nisu bitni
+                if (appointment.PatientId == patientId && appointment.Ending < DateTime.Now 
+                    && appointment.Beginning > startOfInterval && appointment.Ending < endOfInterval)
+                {
+                    Doctor doctor = _doctorRepo.GetById(appointment.DoctorId);
+                    User user = _userRepo.GetById(doctor.Id);
+                    Room room = _roomRepo.Get(doctor.RoomId);
+                    appointmentViews.Add(AppointmentConverter.ConvertAppointmentAndDoctorToAppointmentView(appointment, user, room));
+                }
+            }
+            return appointmentViews.OrderBy(appointment => appointment.Beginning).ToList();
         }
 
         public List<SecretaryAppointmentView> GetSecretaryAppointmentViews()
