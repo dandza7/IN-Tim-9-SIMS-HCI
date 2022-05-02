@@ -183,11 +183,17 @@
     <Compile Include="View\Dialog\SecretaryAddGuestPatientDialog.xaml.cs">
       <DependentUpon>SecretaryAddGuestPatientDialog.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Dialog\SecretaryAddNewAppointmentDialog.xaml.cs">
+      <DependentUpon>SecretaryAddNewAppointmentDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Dialog\SecretaryAddPatientDialog.xaml.cs">
       <DependentUpon>SecretaryAddPatientDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Dialog\SecretaryManageAllergiesDialog.xaml.cs">
       <DependentUpon>SecretaryManageAllergiesDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Dialog\SecretaryMoveAppointmentDialog.xaml.cs">
+      <DependentUpon>SecretaryMoveAppointmentDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Dialog\SecretaryUpdatePatientDialog.xaml.cs">
       <DependentUpon>SecretaryUpdatePatientDialog.xaml</DependentUpon>
@@ -304,11 +310,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\Dialog\SecretaryAddNewAppointmentDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\Dialog\SecretaryAddPatientDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Dialog\SecretaryManageAllergiesDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Dialog\SecretaryMoveAppointmentDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

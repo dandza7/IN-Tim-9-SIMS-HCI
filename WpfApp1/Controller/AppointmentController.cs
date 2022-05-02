@@ -7,6 +7,7 @@ using WpfApp1.Model;
 using WpfApp1.Service;
 using WpfApp1.View.Model.Patient;
 using WpfApp1.View.Model.Secretary;
+using static WpfApp1.Model.Doctor;
 
 namespace WpfApp1.Controller
 {
@@ -65,6 +66,13 @@ namespace WpfApp1.Controller
             return _appointmentService.GetAvailableAppointmentOptions(priority, startOfInterval, endOfInterval, 
                                                                         doctorId, patientId, oldAppointmentId);
         }
+        public List<AppointmentView> SecretaryGetAvailableAppointmentOptions(string priority, DateTime startOfInterval, DateTime endOfInterval,
+                                                            int doctorId, int patientId, int oldAppointmentId, SpecType spec)
+        {
+            return _appointmentService.SecretaryGetAvailableAppointmentOptions(priority, startOfInterval, endOfInterval,
+                                                                        doctorId, patientId, oldAppointmentId, spec);
+        }
+
         public Appointment GetById(int id)
         {
             return _appointmentService.GetById(id);
