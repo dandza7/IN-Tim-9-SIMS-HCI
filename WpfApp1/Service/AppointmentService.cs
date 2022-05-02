@@ -115,9 +115,9 @@ namespace WpfApp1.Service
                     // Pomjera se na 7 ujutru narednog dana
                     startOfInterval = MoveStartOfIntervalToTheNextDay(startOfInterval);
                     // Ako pomjeranje izaziva probijanje intervala onda ne može da se nađe termin
-                    if (startOfInterval.AddHours(1) > endOfInterval) break;
+                    if (startOfInterval.AddHours(1) > endOfInterval) return appointments;
                 }
-                if (appointments.Count == 10) break;
+                if (appointments.Count == 10) return appointments;
                 // Provjerava da li se soba renovira
                 bool isRoomAvailable = _renovationRepo.IsRoomAvailable(room.Id, startOfInterval, startOfInterval.AddHours(1));
                 if (isRoomAvailable)
@@ -141,9 +141,9 @@ namespace WpfApp1.Service
                     // Pomjera se na 7 ujutru narednog dana
                     startOfInterval = MoveStartOfIntervalToTheNextDay(startOfInterval);
                     // Ako pomjeranje izaziva probijanje intervala onda ne može da se nađe termin
-                    if (startOfInterval.AddHours(1) > endOfInterval) break;
+                    if (startOfInterval.AddHours(1) > endOfInterval) return appointments;
                 }
-                if (appointments.Count == 10) break;
+                if (appointments.Count == 10) return appointments;
                 // Provjerava da li se soba renovira
                 bool isRoomAvailable = _renovationRepo.IsRoomAvailable(room.Id, startOfInterval, startOfInterval.AddHours(1));
                 if (isRoomAvailable)
@@ -165,7 +165,7 @@ namespace WpfApp1.Service
                 if (startOfInterval.AddHours(1).Hour >= 20)
                 {
                     startOfInterval = MoveStartOfIntervalToTheNextDay(startOfInterval);
-                    if (startOfInterval.AddHours(1) > endOfInterval) break;
+                    if (startOfInterval.AddHours(1) > endOfInterval) return appointments;
                 }
                 foreach (Appointment appointment in appointmentsOfDoctor)
                 {
@@ -176,9 +176,9 @@ namespace WpfApp1.Service
                         if (startOfInterval.AddHours(1).Hour >= 20)
                         {
                             startOfInterval = MoveStartOfIntervalToTheNextDay(startOfInterval);
-                            if (startOfInterval.AddHours(1) > endOfInterval) break;
+                            if (startOfInterval.AddHours(1) > endOfInterval) return appointments;
                         }
-                        if (appointments.Count == 10) break;
+                        if (appointments.Count == 10) return appointments;
                         bool isRoomAvailable = _renovationRepo.IsRoomAvailable(room.Id, startOfInterval, startOfInterval.AddHours(1));
                         if (isRoomAvailable)
                         {
@@ -200,9 +200,9 @@ namespace WpfApp1.Service
                     if (startOfInterval.AddHours(1).Hour >= 20)
                     {
                         startOfInterval = MoveStartOfIntervalToTheNextDay(startOfInterval);
-                        if (startOfInterval.AddHours(1) > endOfInterval) break;
+                        if (startOfInterval.AddHours(1) > endOfInterval) return appointments;
                     }
-                    if (appointments.Count == 10) break;
+                    if (appointments.Count == 10) return appointments;
                     bool isRoomAvailable = _renovationRepo.IsRoomAvailable(room.Id, startOfInterval, startOfInterval.AddHours(1));
                     if (isRoomAvailable)
                     {
@@ -326,7 +326,7 @@ namespace WpfApp1.Service
                 return appointments;
             }
             // Happy Case
-            appointments = GetAppointmentsHappyCase(startOfInterval, endOfInterval, appointmentsForDoctor, appointments, room, doctor, doctorUser, patientId);
+            appointments = SecretaryGetAppointmentsHappyCase(startOfInterval, endOfInterval, appointmentsForDoctor, appointments, room, doctor, doctorUser, patientId);
             // U slučaju da nismo pronašli nijedan slobodan termin u željenom vremenskom intervalu kod željenog doktora
             // onda treba da reaguje prioritet i ponudi pacijentu prvih 5 slobodnih termina kod njega
             if (appointments.Count == 0)
@@ -346,7 +346,7 @@ namespace WpfApp1.Service
                             {
                                 startTime = MoveStartOfIntervalToTheNextDay(startTime);
                             }
-                            if (appointments.Count == 5) break;
+                            if (appointments.Count == 5) return appointments;
                             bool isRoomAvailable = _renovationRepo.IsRoomAvailable(room.Id, startTime, startTime.AddHours(1));
                             if (isRoomAvailable)
                             {
@@ -405,6 +405,8 @@ namespace WpfApp1.Service
             if (oldAppointmentId != -1)
             {
                 Appointment oldAppointment = _appointmentRepo.GetById(oldAppointmentId);
+                if (oldAppointment.Ending.AddDays(4) < endOfInterval) endOfInterval = oldAppointment.Ending.AddDays(4);
+                if (oldAppointment.Beginning.AddDays(-4) > startOfInterval) startOfInterval = oldAppointment.Beginning.AddDays(-4);
             }
 
             List<AppointmentView> appointments = new List<AppointmentView>();
@@ -425,7 +427,7 @@ namespace WpfApp1.Service
             }
 
             // Provjeravamo Happy Case
-            appointments = GetAppointmentsHappyCase(startOfInterval, endOfInterval, appointmentsOfDoctor, appointments, room, doctor, doctorUser, patientId);
+            appointments = SecretaryGetAppointmentsHappyCase(startOfInterval, endOfInterval, appointmentsOfDoctor, appointments, room, doctor, doctorUser, patientId);
             // Ukoliko nije pronađen nijedan slobodan termin kod doktora u željenom vremenskom intervalu
             // treba da reaguje prioritet i ponudi termine u željenom vremenskom intervalu kod bilo kod doktora
             if (appointments.Count == 0)
@@ -439,17 +441,17 @@ namespace WpfApp1.Service
                     if (startOfInterval.AddHours(1).Hour >= 20)
                     {
                         startOfInterval = MoveStartOfIntervalToTheNextDay(startOfInterval);
-                        if (startOfInterval.AddHours(1) > endOfInterval) break;
+                        if (startOfInterval.AddHours(1) > endOfInterval) return appointments;
                     }
                     foreach (Doctor generalPracticioner in generalPracticioners)
                     {
                         if (startOfInterval.AddHours(1).Hour >= 20)
                         {
                             startOfInterval = MoveStartOfIntervalToTheNextDay(startOfInterval);
-                            if (startOfInterval.AddHours(1) > endOfInterval) break;
+                            if (startOfInterval.AddHours(1) > endOfInterval) return appointments;
                         }
-                        if (startOfInterval.AddHours(1) > endOfInterval) break;
-                        if (appointments.Count == 10) break;
+                        if (startOfInterval.AddHours(1) > endOfInterval) return appointments;
+                        if (appointments.Count == 10) return appointments;
 
                         List<Appointment> generalPracticionersAppointments = _appointmentRepo.GetAllAppointmentsInTimeIntervalForDoctor(startOfInterval, startOfInterval.AddHours(1), generalPracticioner.Id).ToList();
                         // Prioritetni happy case, postoji slobodan termin već na početku traženog intervala
@@ -474,10 +476,10 @@ namespace WpfApp1.Service
                             if (startOfInterval.AddHours(1).Hour >= 20)
                             {
                                 startOfInterval = MoveStartOfIntervalToTheNextDay(startOfInterval);
-                                if (startOfInterval.AddHours(1) > endOfInterval) break;
+                                if (startOfInterval.AddHours(1) > endOfInterval) return appointments;
                             }
                             // Ako bismo time što nađemo appointment probili vremenski interval onda ne možemo da ga nađemo
-                            if (startOfInterval.AddHours(1) > endOfInterval) break;
+                            if (startOfInterval.AddHours(1) > endOfInterval) return appointments;
                             // Ako se termin završio prije nego što počinje naš interval onda se ne treba pozicionirati na njegov kraj
                             // jer nećemo ništa dobiti pa idemo na naredni termin
                             if (startOfInterval > appointmentInInterval.Ending) continue;
@@ -488,10 +490,10 @@ namespace WpfApp1.Service
                                 if (startOfInterval.AddHours(1).Hour >= 20)
                                 {
                                     startOfInterval = MoveStartOfIntervalToTheNextDay(startOfInterval);
-                                    if (startOfInterval.AddHours(1) > endOfInterval) break;
+                                    if (startOfInterval.AddHours(1) > endOfInterval) return appointments;
                                 }
-                                if (appointments.Count == 10) break;
-                                if (startOfInterval.AddHours(1) > endOfInterval) break;
+                                if (appointments.Count == 10) return appointments;
+                                if (startOfInterval.AddHours(1) > endOfInterval) return appointments;
 
                                 List<Appointment> generalPracticionersAppointments = _appointmentRepo.GetAllAppointmentsInTimeIntervalForDoctor(startOfInterval, startOfInterval.AddHours(1), generalPracticioner.Id).ToList();
 
@@ -501,7 +503,7 @@ namespace WpfApp1.Service
                                     if (startOfInterval.AddHours(1).Hour >= 20)
                                     {
                                         startOfInterval = MoveStartOfIntervalToTheNextDay(startOfInterval);
-                                        if (startOfInterval.AddHours(1) > endOfInterval) break;
+                                        if (startOfInterval.AddHours(1) > endOfInterval) return appointments;
                                     }
                                     User generalPracticionerUser = _userRepo.GetById(generalPracticioner.Id);
                                     Room generalPracitionerRoom = _roomRepo.Get(generalPracticioner.RoomId);
