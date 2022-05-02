@@ -50,8 +50,8 @@ namespace WpfApp1.View.Dialog
 
         private void Move_Appointment_Click(object sender, RoutedEventArgs e)
         {
-            int appointmentId = Int32.Parse(idTB.Text);
-            SecretaryMoveAppointmentDialog s = new SecretaryMoveAppointmentDialog(appointmentId);
+            Appointment a = this._appointmentController.GetById(int.Parse(idTB.Text));
+            SecretaryMoveAppointmentDialog s = new SecretaryMoveAppointmentDialog(a);
             s.Show();
         }
     }

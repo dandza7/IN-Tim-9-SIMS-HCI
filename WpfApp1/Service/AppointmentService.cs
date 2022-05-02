@@ -218,6 +218,7 @@ namespace WpfApp1.Service
         private List<AppointmentView> SecretaryGetAppointmentsHappyCase(DateTime startOfInterval, DateTime endOfInterval,
         List<Appointment> appointmentsOfDoctor, List<AppointmentView> appointments, Room room, Doctor doctor, User doctorUser, int patientId)
         {
+            Console.WriteLine("ASD");
             while (startOfInterval.AddHours(1) <= endOfInterval)
             {
                 if (startOfInterval.AddHours(1).Hour >= 20)
@@ -225,6 +226,7 @@ namespace WpfApp1.Service
                     startOfInterval = MoveStartOfIntervalToTheNextDay(startOfInterval);
                     if (startOfInterval.AddHours(1) > endOfInterval) break;
                 }
+                Console.WriteLine("DSD");
                 foreach (Appointment appointment in appointmentsOfDoctor)
                 {
                     // Ako je pocetak appointmenta nakon startOfInterval + 1 sat (trajanje termina je jedan sat)
@@ -250,6 +252,7 @@ namespace WpfApp1.Service
                     if (appointment.Beginning > startOfInterval) startOfInterval = appointment.Ending;
 
                 }
+                Console.WriteLine("gSD");
                 // Prošli smo sve termine željenog doktora koji su zakazani u željenom intervalu,
                 // sada smo opet upali u slobodan vremenski interval te pokušavamo da nađemo
                 // još slobodnih termina u željenom intervalu
@@ -402,8 +405,6 @@ namespace WpfApp1.Service
             if (oldAppointmentId != -1)
             {
                 Appointment oldAppointment = _appointmentRepo.GetById(oldAppointmentId);
-                if (oldAppointment.Ending.AddDays(4) < endOfInterval) endOfInterval = oldAppointment.Ending.AddDays(4);
-                if (oldAppointment.Beginning.AddDays(-4) > startOfInterval) startOfInterval = oldAppointment.Beginning.AddDays(-4);
             }
 
             List<AppointmentView> appointments = new List<AppointmentView>();
@@ -425,7 +426,6 @@ namespace WpfApp1.Service
 
             // Provjeravamo Happy Case
             appointments = GetAppointmentsHappyCase(startOfInterval, endOfInterval, appointmentsOfDoctor, appointments, room, doctor, doctorUser, patientId);
-
             // Ukoliko nije pronađen nijedan slobodan termin kod doktora u željenom vremenskom intervalu
             // treba da reaguje prioritet i ponudi termine u željenom vremenskom intervalu kod bilo kod doktora
             if (appointments.Count == 0)
@@ -618,8 +618,11 @@ namespace WpfApp1.Service
             }
             return appointments;
         }
+
+
         private List<AppointmentView> SecretaryGetAppointmentsWithPriorityOfTime(DateTime startOfInterval, DateTime endOfInterval, int doctorId, int patientId, int oldAppointmentId, SpecType spec)
         {
+            Console.WriteLine("PROSAO ULAZ");
             DateTime startOfWorkingHours = CalculateWorkingHours("start", startOfInterval);
             // Kako radno vrijeme počinje u 7 ujutru ukoliko je selektovano ranije treba da se pomjeri
             if (startOfInterval.Hour < 7)
@@ -643,8 +646,6 @@ namespace WpfApp1.Service
             if (oldAppointmentId != -1)
             {
                 Appointment oldAppointment = _appointmentRepo.GetById(oldAppointmentId);
-                if (oldAppointment.Ending.AddDays(4) < endOfInterval) endOfInterval = oldAppointment.Ending.AddDays(4);
-                if (oldAppointment.Beginning.AddDays(-4) > startOfInterval) startOfInterval = oldAppointment.Beginning.AddDays(-4);
             }
 
             List<AppointmentView> appointments = new List<AppointmentView>();
@@ -666,7 +667,7 @@ namespace WpfApp1.Service
 
             // Provjeravamo Happy Case
             appointments = SecretaryGetAppointmentsHappyCase(startOfInterval, endOfInterval, appointmentsOfDoctor, appointments, room, doctor, doctorUser, patientId);
-
+            Console.WriteLine("PROSAO HAPPY CASE");
             // Ukoliko nije pronađen nijedan slobodan termin kod doktora u željenom vremenskom intervalu
             // treba da reaguje prioritet i ponudi termine u željenom vremenskom intervalu kod bilo kod doktora
             if (appointments.Count == 0)
