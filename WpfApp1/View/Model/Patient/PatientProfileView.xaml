@@ -10,19 +10,76 @@
 
     <Grid>
         <Label Content="MyProfile" FontSize="30" FontWeight="ExtraBlack" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-        <TabControl Style="{StaticResource PatientTabControl}" Height="600" Width="765">
+        <TabControl Style="{StaticResource PatientTabControl}" Height="600" Width="765" Background="{StaticResource DarkBlueBrush}">
             <TabItem Header="Information" Style="{StaticResource PatientTabItem}">
-                <Grid Background="{StaticResource DarkBlueBrush}"/>
+                <Grid Background="{StaticResource DarkBlueBrush}" HorizontalAlignment="Center" VerticalAlignment="Center" Height="500" Width="600">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="79*" />
+                        <ColumnDefinition Width="221*"/>
+                        <ColumnDefinition Width="300*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+
+                    <Label Grid.Column="0" Content="Username:" Style="{StaticResource ProfileLabel}" Grid.ColumnSpan="2" Margin="40,0,40,0"/>
+                    <Label Grid.Row="1" Grid.Column="0" Content="First name:" Style="{StaticResource ProfileLabel}" Grid.ColumnSpan="2" Margin="40,0,40,0"/>
+                    <Label Grid.Row="2" Grid.Column="0" Content="Last name:" Style="{StaticResource ProfileLabel}" Grid.ColumnSpan="2" Margin="40,0,40,0"/>
+                    <Label Grid.Row="3" Grid.Column="0" Content="Number:" Style="{StaticResource ProfileLabel}" Grid.ColumnSpan="2" Margin="40,0,40,0"/>
+                    <Label Grid.Row="4" Grid.Column="0" Content="Password:" Style="{StaticResource ProfileLabel}" Grid.ColumnSpan="2" Margin="40,0,40,0"/>
+                    <Label Grid.Row="5" Grid.Column="0" Content="JMBG:" Style="{StaticResource ProfileLabel}" Grid.ColumnSpan="2" Margin="40,0,40,0"/>
+                    <Label Grid.Column="2" Content="{Binding User.Username}" Style="{StaticResource ProfileLabel}" FontWeight="Normal" Margin="40,0,40,0"/>
+                    <Label Grid.Row="1" Grid.Column="2" Content="{Binding User.Name}" Style="{StaticResource ProfileLabel}" FontWeight="Normal" Margin="40,0,40,0"/>
+                    <Label Grid.Row="2" Grid.Column="2" Content="{Binding User.Surname}" Style="{StaticResource ProfileLabel}" FontWeight="Normal" Margin="40,0,40,0"/>
+                    <Label Grid.Row="3" Grid.Column="2" Content="{Binding User.Phonenumber}" Style="{StaticResource ProfileLabel}" FontWeight="Normal" Margin="40,0,40,0"/>
+                    <Label Grid.Row="4" Grid.Column="2" Content="{Binding User.Password}" Style="{StaticResource ProfileLabel}" FontWeight="Normal" Margin="40,0,40,0"/>
+                    <Label Grid.Row="5" Grid.Column="2" Content="{Binding User.JMBG}" Style="{StaticResource ProfileLabel}" FontWeight="Normal" Margin="40,0,40,0"/>
+                </Grid>
             </TabItem>
             <TabItem Header="Therapies" Style="{StaticResource PatientTabItem}">
-                <Grid Background="{StaticResource DarkBlueBrush}"/>
+                <Grid Background="{StaticResource DarkBlueBrush}">
+                    <DataGrid x:Name="PatientTherapiesDataGrid" MaxWidth="705" Style="{StaticResource PatientProfileDataGrid}" ItemsSource="{Binding Therapies, UpdateSourceTrigger=PropertyChanged}">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Drug Name" Binding="{Binding DrugName}" CanUserSort="False" CellStyle="{StaticResource PatientDataGridCell}"/>
+                            <DataGridTextColumn Header="Administration Frequency" Binding="{Binding Frequency}" CanUserSort="False" CellStyle="{StaticResource PatientDataGridCell}"/>
+                            <DataGridTextColumn Header="Therapy Duration" Binding="{Binding Duration}" CanUserSort="False" CellStyle="{StaticResource PatientDataGridCell}"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
             </TabItem>
             <TabItem Header="Reports" Style="{StaticResource PatientTabItem}">
-                <Grid Background="{StaticResource DarkBlueBrush}"/>
+                <Grid Background="{StaticResource DarkBlueBrush}">
+                    <Label Content="Choose time period:" FontSize="17" FontWeight="Bold" VerticalContentAlignment="Top" HorizontalAlignment="Left" Margin="200,50,0,490" Foreground="White"/>
+                    <Label Content="From:" FontSize="17" FontWeight="Bold" VerticalContentAlignment="Top" HorizontalAlignment="Left" Margin="380, 35, 0, 505" Foreground="White"/>
+                    <Label Content="To:" FontSize="17" FontWeight="Bold" VerticalContentAlignment="Top" HorizontalAlignment="Left" Margin="380, 65, 0, 475" Foreground="White"/>
+                    <DatePicker x:Name="FromDP" VerticalContentAlignment="Top" HorizontalAlignment="Left" Margin="440, 35, 0, 505"/>
+                    <DatePicker x:Name="ToDP" VerticalContentAlignment="Top" HorizontalAlignment="Left" Margin="440, 65, 0, 475"/>
+                    <Button Content="Search" Style="{StaticResource PatientSearchButton}" VerticalContentAlignment="Top" HorizontalAlignment="Left" Margin="600, 50, 0, 495" Click="SearchReports_Click"/>
+                    <DataGrid x:Name="PatientReportsDataGrid" MaxHeight="500" MaxWidth="705" Style="{StaticResource PatientDataGrid}" ItemsSource="{Binding Reports, UpdateSourceTrigger=PropertyChanged}">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Id" Binding="{Binding Id}" CanUserSort="False"  ElementStyle="{StaticResource ColumnElementStyle}" CellStyle="{StaticResource PatientDataGridCell}"/>
+                            <DataGridTextColumn Header="Room" Binding="{Binding NameTag}" CanUserSort="False" ElementStyle="{StaticResource ColumnElementStyle}" CellStyle="{StaticResource PatientDataGridCell}"/>
+                            <DataGridTextColumn Header="Doctor" Binding="{Binding Username}" CanUserSort="False" ElementStyle="{StaticResource ColumnElementStyle}" CellStyle="{StaticResource PatientDataGridCell}"/>
+                            <DataGridTextColumn Header="Beginning" Binding="{Binding Beginning, StringFormat=dd.MM.yyyy. HH:mm:ss}" CanUserSort="False" ElementStyle="{StaticResource ColumnElementStyle}" CellStyle="{StaticResource PatientDataGridCell}"/>
+                            <DataGridTemplateColumn Header="Details" MinWidth="90">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Button Content="Details" Style="{StaticResource PatientDataGridButton}" Click="ShowDetails_Click"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
             </TabItem>
             <TabItem Header="Notifications" Style="{StaticResource PatientTabItem}">
                 <Grid Background="{StaticResource DarkBlueBrush}">
-                    <DataGrid x:Name="PatientNotificationsDataGrid" MaxWidth="707" Style="{StaticResource PatientDataGrid}" ItemsSource="{Binding Notifications, UpdateSourceTrigger=PropertyChanged}">
+                    <DataGrid x:Name="PatientNotificationsDataGrid" MaxHeight="400" MaxWidth="705" Style="{StaticResource PatientDataGrid}" ItemsSource="{Binding Notifications, UpdateSourceTrigger=PropertyChanged}">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Id" Binding="{Binding Id}" CanUserSort="False" ElementStyle="{StaticResource ProfileColumnElementStyle}" CellStyle="{StaticResource PatientDataGridCell}"/>
                             <DataGridTextColumn Header="Date and Time" Binding="{Binding Date}" CanUserSort="False" ElementStyle="{StaticResource ProfileColumnElementStyle}" CellStyle="{StaticResource PatientDataGridCell}"/>

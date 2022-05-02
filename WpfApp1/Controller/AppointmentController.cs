@@ -50,6 +50,16 @@ namespace WpfApp1.Controller
             return _appointmentService.GetPatientsAppointmentsView(patientId);
         }
 
+        public List<AppointmentView> GetPatientsReportsView(int patientId)
+        {
+            return _appointmentService.GetPatientsReportsView(patientId);
+        }
+
+        public List<AppointmentView> GetPatientsReportsInTimeInterval(int patientId, DateTime startOfInterval, DateTime endOfInterval)
+        {
+            return _appointmentService.GetPatientsReportsInTimeInterval(patientId, startOfInterval, endOfInterval);
+        }
+
         public List<AppointmentView> GetAvailableAppointmentOptions(string priority, DateTime startOfInterval, DateTime endOfInterval, 
                                                                     int doctorId, int patientId, int oldAppointmentId)
         {
