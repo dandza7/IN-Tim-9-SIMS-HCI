@@ -62,6 +62,7 @@ namespace WpfApp1.Controller
             return _appointmentService.SecretaryGetAvailableAppointmentOptions(priority, startOfInterval, endOfInterval,
                                                                         doctorId, patientId, oldAppointmentId, spec);
         }
+
         public Appointment GetById(int id)
         {
             return _appointmentService.GetById(id);
