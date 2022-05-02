@@ -326,7 +326,7 @@ namespace WpfApp1.Service
                 return appointments;
             }
             // Happy Case
-            appointments = SecretaryGetAppointmentsHappyCase(startOfInterval, endOfInterval, appointmentsForDoctor, appointments, room, doctor, doctorUser, patientId);
+            appointments = GetAppointmentsHappyCase(startOfInterval, endOfInterval, appointmentsForDoctor, appointments, room, doctor, doctorUser, patientId);
             // U slučaju da nismo pronašli nijedan slobodan termin u željenom vremenskom intervalu kod željenog doktora
             // onda treba da reaguje prioritet i ponudi pacijentu prvih 5 slobodnih termina kod njega
             if (appointments.Count == 0)
@@ -425,7 +425,7 @@ namespace WpfApp1.Service
             }
 
             // Provjeravamo Happy Case
-            appointments = SecretaryGetAppointmentsHappyCase(startOfInterval, endOfInterval, appointmentsOfDoctor, appointments, room, doctor, doctorUser, patientId);
+            appointments = GetAppointmentsHappyCase(startOfInterval, endOfInterval, appointmentsOfDoctor, appointments, room, doctor, doctorUser, patientId);
             // Ukoliko nije pronađen nijedan slobodan termin kod doktora u željenom vremenskom intervalu
             // treba da reaguje prioritet i ponudi termine u željenom vremenskom intervalu kod bilo kod doktora
             if (appointments.Count == 0)
