@@ -4,6 +4,18 @@
              xmlns:local="clr-namespace:WpfApp1"
              StartupUri="View/MainWindow.xaml">
     <Application.Resources>
-         
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <!-- Colors mora biti na vrhu jer je referenciran u drugim stilovima -->
+                <ResourceDictionary Source="Resources/Styles/Colors.xaml"/>
+                <ResourceDictionary Source="Resources/Styles/Patient/PatientButtons.xaml"/>
+                <ResourceDictionary Source="Resources/Styles/Secretary/SecretaryPatientsDataGrid.xaml"/>
+                <ResourceDictionary Source="Resources/Styles/Secretary/SecretaryButtons.xaml"/>
+                <ResourceDictionary Source="Resources/Styles/Patient/PatientDataGrid.xaml"/>
+                <ResourceDictionary Source="Resources/Styles/Executive/ExecutiveStyles.xaml"/>
+                <ResourceDictionary Source="Resources/Styles/Patient/PatientTabControl.xaml"/>
+                <ResourceDictionary Source="Resources/Styles/Patient/PatientOverlay.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
     </Application.Resources>
 </Application>

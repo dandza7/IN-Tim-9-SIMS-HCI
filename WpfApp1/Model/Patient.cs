@@ -6,94 +6,64 @@ using System.Threading.Tasks;
 
 namespace WpfApp1.Model
 {
-    public class Patient
+    public class Patient: User
     {
-        public IEnumerable<Appointment> Appointments { get; set; }
 
-        public int Id { get; set; }
-        public string Name { get; set; }
+        private string _email;
 
-        public string Surname { get; set; }
-
-
-        public string Username { get; set; }
-
-        public string Password { get; set; }
-
-        public string Email { get; set; }
-
-        public string JMBG { get; set; }
-
-        public string PhoneNumber { get; set; }
-
-
+        public string Email
+        {
+            get { return _email; }
+            set
+            {
+                if (value != _email)
+                {
+                    _email = value;
+                    OnPropertyChanged("Email");
+                }
+            }
+        }
         public Patient()
         {
 
         }
 
-        public Patient(int id, string name, string surname)
+        public Patient(int id, string name, string surname): base(id, name, surname, RoleType.patient)
         {
-            Appointments = new List<Appointment>();
-            Id = id;
-            Name = name;
-            Surname = surname;
         }
 
-        public Patient(string name, string surname)
+        public Patient(string name, string surname): base(name, surname, RoleType.patient)
         {
-            Appointments = new List<Appointment>();
-            Name = name;
-            Surname = surname;
         }
 
-
-
-        public Patient(int id, string name, string surname, string jMBG, string username, string password)
+        public Patient(int id, 
+            string name, 
+            string surname, 
+            string jmbg, 
+            string username, 
+            string password, 
+            string phoneNumber, 
+            string email)
+            : base(id, name, surname, jmbg, username, password, phoneNumber, RoleType.patient)
         {
-            Appointments = new List<Appointment>();
-            Id = id;
-            Name = name;
-            Surname = surname;
-            Username = username;
-            Password = password;
-            JMBG = jMBG;
-        }
-
-
-        public Patient(string name, string surname, string jMBG, string username, string password)
-        {
-            Appointments = new List<Appointment>();
-            Name = name;
-            Surname = surname;
-            Username = username;
-            Password = password;
-            JMBG = jMBG;
-        }
-
-        public Patient(int id, string name, string surname, string jMBG, string username, string password,string email, string phoneNumber)
-        {
-            Appointments = new List<Appointment>();
-            Id = id;
-            Name = name;
-            Surname = surname;
-            Username = username;
-            Password = password;
             Email = email;
-            JMBG = jMBG;
-            PhoneNumber = phoneNumber;
         }
 
-        public Patient(string name, string surname, string jMBG, string username, string password, string email, string brojTelefona)
+        public Patient(string name, string surname, string jmbg, string username, string password, string phoneNumber, string email)
+            : base(name, surname, jmbg, username, password, phoneNumber, RoleType.patient)
+
         {
-            Appointments = new List<Appointment>();
-            Name = name;
-            Surname = surname;
-            Username = username;
-            Password = password;
             Email = email;
-            JMBG = jMBG;
-            PhoneNumber = brojTelefona;
+        }
+
+        public Patient(int id, string email)
+        {
+            Id = id;
+            Email = email;
+        }
+        public Patient(string email)
+        {
+            Email = email;
         }
     }
 }

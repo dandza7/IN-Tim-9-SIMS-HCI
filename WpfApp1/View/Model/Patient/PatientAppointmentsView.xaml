@@ -1,0 +1,36 @@
+﻿<Page x:Class="WpfApp1.View.Model.Patient.PatientAppointmentsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:util="clr-namespace:WpfApp1.View.Util"
+             xmlns:model="clr-namespace:WpfApp1.Model" 
+             mc:Ignorable="d" 
+             d:DesignHeight="768" d:DesignWidth="1024">
+    <Grid>
+        <Rectangle Width="850" Height="580" Stroke="{StaticResource LightBlueBrush}" StrokeThickness="3"></Rectangle>
+        <Button Content="Add Appointment" Style="{StaticResource AddAppointmentButton}" Click="AddAppointment_Click"/>
+        <DataGrid x:Name="PatientAppointmentsDataGrid" MaxWidth="785" Style="{StaticResource PatientDataGrid}" ItemsSource="{Binding Appointments, UpdateSourceTrigger=PropertyChanged}">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Id" Binding="{Binding Id}" CanUserSort="False" ElementStyle="{StaticResource ColumnElementStyle}" CellStyle="{StaticResource PatientDataGridCell}"/>
+                <DataGridTextColumn Header="Room" Binding="{Binding NameTag}" CanUserSort="False" ElementStyle="{StaticResource ColumnElementStyle}" CellStyle="{StaticResource PatientDataGridCell}"/>
+                <DataGridTextColumn Header="Doctor" Binding="{Binding Username}" CanUserSort="False" ElementStyle="{StaticResource ColumnElementStyle}" CellStyle="{StaticResource PatientDataGridCell}"/>
+                <DataGridTextColumn Header="Beginning" Binding="{Binding Beginning, StringFormat=dd.MM.yyyy. HH:mm:ss}" CanUserSort="False" ElementStyle="{StaticResource ColumnElementStyle}" CellStyle="{StaticResource PatientDataGridCell}"/>
+                <DataGridTemplateColumn Header="Move" MinWidth="90">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Content="Move" Style="{StaticResource PatientDataGridButton}" Click="OpenMoveAppointmentDialog_Click"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Header="Remove" MinWidth="90">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Content="Remove" Style="{StaticResource PatientDataGridButton}" Click="RemoveAppointment_Click"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</Page>

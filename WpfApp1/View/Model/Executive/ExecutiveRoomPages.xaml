@@ -1,0 +1,197 @@
+﻿<Page x:Class="WpfApp1.View.Model.Executive.ExecutiveRoomPages"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:WpfApp1.View.Model.Executive"
+      mc:Ignorable="d" 
+      d:DesignHeight="570" d:DesignWidth="1280"
+      Title="ExecutiveRoomPages">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="70"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Button x:Name="RenovationButton" Style="{StaticResource ClassicButton}" Margin="40 5" MouseEnter="RenovationButton_MouseEnter">Renovate Room</Button>
+        <Button x:Name="BasicRenovationButton" Style="{StaticResource InvertedButton}" Margin="40 5 158 5" MouseLeave="BARenovationButton_MouseLeave" Click="BasicRenovationButton_Click" Visibility="Collapsed">Basic</Button>
+        <Button x:Name="AdvancedRenovationButton" Style="{StaticResource InvertedButton}" Margin="158 5 40 5" MouseLeave="BARenovationButton_MouseLeave" Click="AdvancedRenovationButton_Click" Visibility="Collapsed">Advanced</Button>
+        <Button x:Name="AddRoomButton" Grid.Column="1" Style="{StaticResource ClassicButton}" Margin="40 5" Click="AddRoomButton_Click">Add New Room</Button>
+        <Button x:Name="EditRoomButton" Grid.Column="2" Style="{StaticResource ClassicButton}" Margin="40 5" Click="EditRoomButton_Click">Edit Selected Room</Button>
+        <Button x:Name="DeleteRoomButton" Grid.Column="3" Style="{StaticResource ClassicButton}" Margin="40 5" Click="DeleteRoomButton_Click">Delete Selected Room</Button>
+        <DataGrid x:Name="RoomsDG" AutoGenerateColumns="False" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="4" Style="{StaticResource ExecutiveDataGrid}" ItemsSource="{Binding Rooms}">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header=" ID" Width="2*"  Binding="{Binding Id}" HeaderStyle="{StaticResource ExecutiveDGHeader}" CellStyle="{StaticResource ExecutiveDGCell}"/>
+                <DataGridTextColumn Header=" NAMETAG" Width="9*" Binding="{Binding Nametag}"  HeaderStyle="{StaticResource ExecutiveDGHeader}" CellStyle="{StaticResource ExecutiveDGCell}"/>
+                <DataGridTextColumn Header=" TYPE" Width="9*" Binding="{Binding Type}"  HeaderStyle="{StaticResource ExecutiveDGHeader}" CellStyle="{StaticResource ExecutiveDGCell}"/>
+            </DataGrid.Columns>
+            <DataGrid.Resources>
+                <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" 
+                   Color="{StaticResource White}"/>
+            </DataGrid.Resources>
+        </DataGrid>
+        <Border x:Name="DialogContainer" Grid.ColumnSpan="4" Grid.RowSpan="2" Style="{StaticResource OverlayModal}" Visibility="Collapsed">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="300"/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="300"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition/>
+                    <RowDefinition Height="80"/>
+                </Grid.RowDefinitions>
+                <Border x:Name="AddContainer" Grid.Column="1" Grid.Row="1" Style="{StaticResource DialogModal}" Visibility="Collapsed">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="100"/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition Width="50"/>
+                            <ColumnDefinition Width="40"/>
+                            <ColumnDefinition Width="10"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="10"/>
+                            <RowDefinition Height="40"/>
+                            <RowDefinition Height="10"/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Label Grid.Row="3" Grid.Column="1" Content="Nametag:" Style="{StaticResource FormLabel}"></Label>
+                        <TextBox x:Name="AddNametag" Grid.Row="4" Grid.Column="1" Style="{StaticResource FormInputBox}"></TextBox>
+                        <Label Grid.Row="5" Grid.Column="1" Content="Type:" Style="{StaticResource FormLabel}"></Label>
+                        <ComboBox Name="AddType" Grid.Row="6" Grid.Column="1" Style="{StaticResource FormInputComboBox}" Height="30" Width="260" ItemsSource="{Binding Path=RoomTypes}"></ComboBox>
+                        <TextBlock Grid.Row="7" Grid.Column="1" Style="{StaticResource SmallText}" Text="{Binding Path=Feedback, UpdateSourceTrigger=PropertyChanged}"></TextBlock>
+                        <Button x:Name="AddConfirm" Grid.Column="1" Grid.Row="8" Style="{StaticResource ClassicButton}" Margin="70 4" Click="AddConfirm_Click">Add Room</Button>
+                        <Button x:Name="XAddButton" Grid.Column="3" Grid.Row="1" Style="{StaticResource ClassicButton}" Click="XAddButton_Click">X</Button>
+                    </Grid>
+                </Border>
+                <Border x:Name="EditContainer" Grid.Column="1" Grid.Row="1" Style="{StaticResource DialogModal}" Visibility="Collapsed">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="100"/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition Width="50"/>
+                            <ColumnDefinition Width="40"/>
+                            <ColumnDefinition Width="10"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="10"/>
+                            <RowDefinition Height="40"/>
+                            <RowDefinition Height="10"/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Label Grid.Row="3" Grid.Column="1" Content="Nametag:" Style="{StaticResource FormLabel}"></Label>
+                        <TextBox x:Name="EditNametag" Grid.Row="4" Grid.Column="1" Style="{StaticResource FormInputBox}" IsEnabled="False"></TextBox>
+                        <Label Grid.Row="5" Grid.Column="1" Content="Type:" Style="{StaticResource FormLabel}"></Label>
+                        <ComboBox Name="EditType" Grid.Row="6" Grid.Column="1" Style="{StaticResource FormInputComboBox}" Height="30" Width="260" ItemsSource="{Binding Path=RoomTypes}"></ComboBox>
+                        <TextBlock Grid.Row="7" Grid.Column="1" Style="{StaticResource SmallText}" Text="{Binding Path=Feedback, UpdateSourceTrigger=PropertyChanged}"></TextBlock>
+                        <Button x:Name="EditConfirm" Grid.Column="1" Grid.Row="8" Style="{StaticResource ClassicButton}" Margin="70 4" Click="EditConfirm_Click">Edit Room</Button>
+                        <Button x:Name="XEditButton" Grid.Column="3" Grid.Row="1" Style="{StaticResource ClassicButton}" Click="XEditButton_Click">X</Button>
+                    </Grid>
+                </Border>
+                <Border x:Name="BasicRenovationContainer" Grid.Column="1" Grid.Row="1" Style="{StaticResource DialogModal}" Margin="100 0 100 -70" Visibility="Collapsed">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="50"/>
+                            <ColumnDefinition Width="150"/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition Width="50"/>
+
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="50"/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Label Grid.Row="1" Grid.Column="1" Content="Nametag:" Style="{StaticResource FormLabel}" HorizontalAlignment="Center"></Label>
+                        <TextBox x:Name="BRNametag" Grid.Row="1" Grid.Column="2" Style="{StaticResource FormInputBox}" IsEnabled="False"></TextBox>
+                        <Label Grid.Row="2" Grid.Column="1" Content="Type:" Style="{StaticResource FormLabel}" HorizontalAlignment="Center"></Label>
+                        <TextBox x:Name="BRType" Grid.Row="2" Grid.Column="2" Style="{StaticResource FormInputBox}" IsEnabled="False"></TextBox>
+                        <Label Grid.Row="3" Grid.Column="1" Content="Beginning:" Style="{StaticResource FormLabel}" HorizontalAlignment="Center"></Label>
+                        <ComboBox x:Name="BRBeginning" Grid.Row="3" Grid.Column="2" Style="{StaticResource FormInputComboBox}" Height="30" Width="200" Text="{Binding SelectedBeginning}"  ItemsSource="{Binding Path=Beginnings}" IsEnabled="False"></ComboBox>
+                        <Label Grid.Row="4" Grid.Column="1" Content="Ending:" Style="{StaticResource FormLabel}" HorizontalAlignment="Center"></Label>
+                        <ComboBox x:Name="BREnding" Grid.Row="4" Grid.Column="2" Style="{StaticResource FormInputComboBox}" Height="30" Width="200" ItemsSource="{Binding Path=Endings}" IsEnabled="False"></ComboBox>
+                        <Label Grid.Row="5" Grid.Column="1" Content="Description:" Style="{StaticResource FormLabel}" HorizontalAlignment="Center"></Label>
+                        <TextBox x:Name="BRDescription" Grid.Row="6" Grid.Column="1" Grid.ColumnSpan="2" Grid.RowSpan="3" Style="{StaticResource DescriptionBox}" Margin="20 5 20 15"></TextBox>
+                        <TextBlock Grid.Row="9" Grid.Column="1" Grid.ColumnSpan="2" Grid.RowSpan="2" Style="{StaticResource SmallText}" Text="{Binding Path=Feedback, UpdateSourceTrigger=PropertyChanged}"></TextBlock>
+                        <Button x:Name="BRConfirm" Grid.Column="1" Grid.Row="11" Grid.ColumnSpan="2" Style="{StaticResource ClassicButton}" Margin="100 0 100 5" Click="BRConfirm_Click">Confirm</Button>
+                        <Button x:Name="XBRButton" Grid.Column="3" Grid.Row="0" Style="{StaticResource ClassicButton}" Height="40" Width="40" Margin="0 10 10 0" HorizontalAlignment="Right" Click="XBRButton_Click">X</Button>
+                    </Grid>
+                </Border>
+                <Border x:Name="NotSelectedContainer" Grid.Column="1" Grid.Row="1"  Margin="70 80 70 0" Visibility="Collapsed">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="60"/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition Width="60"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="2*"/>
+                            <RowDefinition Height="2*"/>
+                        </Grid.RowDefinitions>
+                        <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Text="Problem with starting action." Style="{StaticResource Title}"></TextBlock>
+                        <Button x:Name="NotSelectedOK" Grid.Column="1" Grid.Row="2" Style="{StaticResource ClassicButton}" Margin="120 40 120 40" Click="NotSelectedOK_Click" BorderThickness="3">OK</Button>
+                        <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding Path=SelectionProblem, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource NotificationText}"></TextBlock>
+                    </Grid>
+                </Border>
+                <Border x:Name="DeleteContainer" Grid.Column="1" Grid.Row="1" Style="{StaticResource DialogModal}" Visibility="Collapsed">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="100"/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition Width="50"/>
+                            <ColumnDefinition Width="40"/>
+                            <ColumnDefinition Width="10"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="10"/>
+                            <RowDefinition Height="40"/>
+                            <RowDefinition Height="10"/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <TextBlock Grid.Row="3" Grid.Column="0" Grid.RowSpan="2" Grid.ColumnSpan="3" Padding="50 0 0 0" Style="{StaticResource Title}" TextWrapping="Wrap">Confirm deleting of room:</TextBlock>
+                        <Label Grid.Row="5" Grid.Column="1" Content="Nametag:" Style="{StaticResource FormLabel}"></Label>
+                        <TextBox x:Name="DeleteNametag" Grid.Row="6" Grid.Column="1" Style="{StaticResource FormInputBox}" IsEnabled="False"></TextBox>
+                        <Button x:Name="DeleteConfirm" Grid.Column="1" Grid.Row="8" Style="{StaticResource ClassicButton}" Margin="70 4" Click="DeleteConfirm_Click">Confirm</Button>
+                        <Button x:Name="XDeleteButton" Grid.Column="3" Grid.Row="1" Style="{StaticResource ClassicButton}" Click="XDeleteButton_Click">X</Button>
+                    </Grid>
+                </Border>
+            </Grid>
+        </Border>
+    </Grid>
+</Page>

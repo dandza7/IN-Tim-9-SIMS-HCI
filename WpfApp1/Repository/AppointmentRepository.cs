@@ -5,12 +5,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using WpfApp1.Model;
+using static WpfApp1.Model.Appointment;
 
 namespace WpfApp1.Repository
 {
     public class AppointmentRepository
     {
-        private const string NOT_FOUND_ERROR = "Appointment with {0}:{1} can not be found!";
         private string _path;
         private string _delimiter;
         private readonly string _datetimeFormat;
@@ -29,10 +29,90 @@ namespace WpfApp1.Repository
 
         public IEnumerable<Appointment> GetAll()
         {
-            return File.ReadAllLines(_path)
-                .Select(ConvertCSVFormatToAppointment)
-                .ToList();
+            List<string> lines = File.ReadAllLines(_path).ToList();
+            List<Appointment> appointments = new List<Appointment>();
+            foreach (string line in lines)
+            {
+                if (line == "") continue;
+                appointments.Add(ConvertCSVFormatToAppointment(line));
+            }
+            return appointments;
         }
+
+        public IEnumerable<Appointment> GetAllAppointmentsInTimeInterval(DateTime startOfInterval, DateTime endOfInterval)
+        {
+            List<Appointment> allAppointments = GetAll().ToList();
+            List<Appointment> appointmentsInTimeInterval = new List<Appointment>();
+
+            foreach (Appointment appointment in allAppointments)
+            {
+                // Kraj appointmenta upada u traženi vremenksi interval
+                if (appointment.Beginning < startOfInterval && appointment.Ending > startOfInterval)
+                {
+                    appointmentsInTimeInterval.Add(appointment);
+                }
+                // Početak appointmenta upada u traženi vremenski interval
+                if (appointment.Beginning < endOfInterval && appointment.Ending > endOfInterval)
+                {
+                    appointmentsInTimeInterval.Add(appointment);
+                }
+                // Appointment čitavom dužinom upada u traženi vremenksi interval
+                if(appointment.Beginning > startOfInterval && appointment.Ending < endOfInterval)
+                {
+                    appointmentsInTimeInterval.Add(appointment);
+                }
+                // Appointment počinje kasnije ali se završava baš tad 
+                if(appointment.Beginning > startOfInterval && appointment.Ending == endOfInterval)
+                {
+                    appointmentsInTimeInterval.Add(appointment);
+                }
+                // Appointment počinje baš tad ali se završava ranije
+                if (appointment.Beginning == startOfInterval && appointment.Ending < endOfInterval)
+                {
+                    appointmentsInTimeInterval.Add(appointment);
+                }
+                // Appointment poklapa traženi vremenski interval (neko je izabrao samo jedan sat za interval)
+                if (appointment.Beginning == startOfInterval && appointment.Ending == endOfInterval)
+                {
+                    appointmentsInTimeInterval.Add(appointment);
+                }
+            }
+
+            return appointmentsInTimeInterval.OrderBy(appointment => appointment.Beginning).ToList();
+        }
+
+        public IEnumerable<Appointment> GetAllAppointmentsInTimeIntervalForDoctor(DateTime startOfInterval, DateTime endOfInterval, int doctorId)
+        {
+            List<Appointment> appointmentsInTimeInterval = GetAllAppointmentsInTimeInterval(startOfInterval, endOfInterval).ToList();
+            List<Appointment> doctorsAppointmentsInTimeInterval = new List<Appointment>();
+
+            foreach (Appointment appointment in appointmentsInTimeInterval)
+            {
+                if (appointment.DoctorId == doctorId)
+                {
+                    doctorsAppointmentsInTimeInterval.Add(appointment);
+                }
+            }
+
+            return doctorsAppointmentsInTimeInterval.OrderBy(appointment => appointment.Beginning).ToList();
+        }
+        
+        public IEnumerable<Appointment> GetAllAppointmentsForDoctor(int doctorId)
+        {
+            List<Appointment> allAppointments = GetAll().ToList();
+            List<Appointment> appointmentsForDoctor = new List<Appointment>();
+
+            foreach (Appointment appointment in allAppointments)
+            {
+                if (appointment.DoctorId == doctorId)
+                {
+                    appointmentsForDoctor.Add(appointment);
+                }
+            }
+
+            return appointmentsForDoctor.OrderBy(appointment => appointment.Beginning).ToList();
+        }
+
         public Appointment Create(Appointment appointment)
         {
             int maxId = GetMaxId(GetAll());
@@ -52,6 +132,7 @@ namespace WpfApp1.Repository
                 {
                     a.Beginning = appointment.Beginning;
                     a.Ending = appointment.Ending;
+                    a.DoctorId = appointment.DoctorId;
                 }
                 newFile.Add(ConvertAppointmentToCSVFormat(a));
             }
@@ -75,23 +156,49 @@ namespace WpfApp1.Repository
             File.WriteAllLines(_path, newFile);
             return isDeleted;
         }
+        public Appointment GetById(int appointmentId)
+        {
+            List<Appointment> appointments = GetAll().ToList();
+            foreach (Appointment a in appointments)
+            {
+                if (a.Id == appointmentId)
+                {
+                    return a;
+                }
+
+            }
+            return null;
+        }
 
         private Appointment ConvertCSVFormatToAppointment(string appointmentCSVFormat)
         {
             var tokens = appointmentCSVFormat.Split(_delimiter.ToCharArray());
-            return new Appointment(int.Parse(tokens[0]), DateTime.Parse(tokens[1]), DateTime.Parse(tokens[2]));
+            Enum.TryParse(tokens[3], true, out AppointmentType type);
+            //(int id, DateTime beginning, DateTime ending, AppointmentType type, bool isUrgent, int doctorId, int patientId, int roomId)
+            return new Appointment(int.Parse(tokens[0]), 
+                DateTime.Parse(tokens[1]), 
+                DateTime.Parse(tokens[2]), 
+                type, 
+                bool.Parse(tokens[4]), 
+                int.Parse(tokens[5]), 
+                int.Parse(tokens[6]), 
+                int.Parse(tokens[7]));
         }
         private string ConvertAppointmentToCSVFormat(Appointment appointment)
         {
             return string.Join(_delimiter,
                 appointment.Id,
                 appointment.Beginning.ToString(_datetimeFormat),
-                appointment.Ending.ToString(_datetimeFormat));
+                appointment.Ending.ToString(_datetimeFormat),
+                appointment.Type.ToString(),
+                appointment.IsUrgent.ToString(),
+                appointment.DoctorId.ToString(),
+                appointment.PatientId.ToString(),
+                appointment.RoomId.ToString());
         }
 
         private void AppendLineToFile(string path, string line)
         {
-            Console.WriteLine("Linija koju dodajem je:\n{0}", line);
             File.AppendAllText(path, line + Environment.NewLine);
         }
     }

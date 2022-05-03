@@ -6,17 +6,134 @@
         xmlns:local="clr-namespace:WpfApp1"
         xmlns:model="clr-namespace:WpfApp1.View.Model"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <DockPanel>
-        <Menu DockPanel.Dock ="Top">
-            <MenuItem Header="_Patient" Click="ShowPatientOptions">
-            </MenuItem>
-            <MenuItem Header="_Executive" Click="ShowExecutiveOptions">
-            </MenuItem>
-            <MenuItem Header="_Doctor" Click="ShowDoctorOptions">
-            </MenuItem>
-            <MenuItem Header="_Secretary" Click="ShowSecretaryOptions">
-            </MenuItem>
-        </Menu>
-    </DockPanel>
+        Title="MainWindow" Height="720" Width="1280">
+    
+    <Grid>
+        <Grid.RowDefinitions>
+            <!--<RowDefinition Height="0"/>-->
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <!--<DockPanel Grid.Row="0">
+            <Menu DockPanel.Dock ="Top">
+                <MenuItem Header="_Patient" Click="ShowPatientOptions">
+                </MenuItem>
+                <MenuItem Header="_Executive" Click="ShowExecutiveOptions">
+                </MenuItem>
+                <MenuItem Header="_Doctor" Click="ShowDoctorOptions">
+                </MenuItem>
+                <MenuItem Header="_Secretary" Click="ShowSecretaryOptions">
+                </MenuItem>
+            </Menu>
+        </DockPanel>-->
+        <Border x:Name="LogInContainer" Grid.Row="0">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition Height="100"></RowDefinition>
+                </Grid.RowDefinitions>
+                <StackPanel Height="100" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="4" Orientation="Horizontal" HorizontalAlignment="Right">
+                    <Button Name="HelpButton" Width="1280" Content="Help" Style="{StaticResource NavBarButton}" Click="HelpButton_Click"/>
+                </StackPanel>
+                <Border x:Name="LogInForm" Grid.Column="0" Grid.Row="0" Grid.RowSpan="4" Grid.ColumnSpan="4" Margin="300 100 300 100" Style="{StaticResource DialogModal}">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="60"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="40"/>
+                            <ColumnDefinition Width="20"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="20"/>
+                            <RowDefinition Height="40"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="60"/>
+                        </Grid.RowDefinitions>
+                        <Button x:Name="XLogInButton" Grid.Column="2" Grid.Row="1" Content="X" Style="{StaticResource ClassicButton}" Click="XLogInButton_Click"></Button>
+                        <Grid Grid.Row="2" Grid.Column="1">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="100"/>
+                                <ColumnDefinition/>
+                                <ColumnDefinition Width="100"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <Label Grid.Row="0" Grid.Column="1" Style="{StaticResource FormLabel}">Username:</Label>
+                            <TextBox x:Name="UsernameField" Grid.Row="1" Grid.Column="1" Style="{StaticResource FormInputBox}"></TextBox>
+                            <Label Grid.Row="2" Grid.Column="1" Style="{StaticResource FormLabel}">Password:</Label>
+                            <PasswordBox x:Name="PasswordField" Grid.Row="3" Grid.Column="1" Style="{StaticResource FormInputPassword}"></PasswordBox>
+                            <Button x:Name="LogInConfirm" Grid.Row="5" Grid.Column="1" Style="{StaticResource ClassicButton}" Margin="70 0" Click="LogInConfirm_Click">LOG IN</Button>
+                        </Grid>
+                        <Grid Grid.Row="1" Grid.Column="1" Grid.RowSpan="2">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="100"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="100"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="100"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                        </Grid>
+                    </Grid>
+                </Border>
+                <Border x:Name="HelpLogIn" Grid.Column="0" Grid.Row="0" Grid.RowSpan="5" Grid.ColumnSpan="4" Style="{StaticResource OverlayModal}" Visibility="Collapsed">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="200"/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition Width="200"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="100"/>
+                            <RowDefinition/>
+                            <RowDefinition Height="100"/>
+                        </Grid.RowDefinitions>
+                        <MediaElement Name="HelpVideo" Grid.Column="1" Grid.Row="1" ></MediaElement>
+                        <Button x:Name="XHelpButton" Grid.Column="2" Grid.Row="0" Margin="80 40 80 20" Style="{StaticResource ClassicButton}" Click="XHelpButton_Click">X</Button>
+                    </Grid>
+                </Border>
+            </Grid>
+        </Border>
+        <Border x:Name="ErrorContainer" Grid.ColumnSpan="4" Grid.RowSpan="5" Style="{StaticResource OverlayModal}" Visibility="Collapsed">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="200"/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="200"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="100"/>
+                    <RowDefinition Height="100"/>
+                    <RowDefinition/>
+                    <RowDefinition Height="100"/>
+                    <RowDefinition Height="100"/>
+                </Grid.RowDefinitions>
+                <TextBlock Grid.Row="1" Grid.Column="1" Text="Problem with logging in." Style="{StaticResource Title}"></TextBlock>
+                <TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding Path=BadLoginText}" Style="{StaticResource NotificationText}" Height="300" Margin="150 0 150 50"></TextBlock>
+                <Button x:Name="OkToError" Grid.Column="1" Grid.Row="3" Margin="300 0" Style="{StaticResource ClassicButton}" BorderThickness="3" Click="OkToError_Click">OK</Button>
+            </Grid>
+        </Border>
+    </Grid>
 </Window>

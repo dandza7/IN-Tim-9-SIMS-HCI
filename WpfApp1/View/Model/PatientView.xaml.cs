@@ -33,6 +33,7 @@ namespace WpfApp1.View.Model
         private string _jmbg;
         private string _username;
         private string _password;
+        private string _phonenumber;
         public int Id
         {
             get { return _id; }
@@ -103,6 +104,18 @@ namespace WpfApp1.View.Model
                 if (_password != value)
                 {
                     _password = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        public string Phonenumber
+        {
+            get => _phonenumber;
+            set
+            {
+                if (_phonenumber != value)
+                {
+                    _phonenumber = value;
                     OnPropertyChanged();
                 }
             }

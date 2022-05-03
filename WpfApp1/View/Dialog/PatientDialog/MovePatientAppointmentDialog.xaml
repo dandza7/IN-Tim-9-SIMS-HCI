@@ -1,0 +1,31 @@
+﻿<Page x:Class="WpfApp1.View.Dialog.PatientDialog.MovePatientAppointmentDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+        xmlns:local="clr-namespace:WpfApp1.View.Dialog.PatientDialog"
+        mc:Ignorable="d" 
+        d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+        <Rectangle Width="450" Height="600" Fill="{StaticResource LightBlueBrush}" StrokeThickness="0"></Rectangle>
+        <WrapPanel  HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0, 80, 0, 0">
+            <Label Content="Appointment Moving"  FontSize="24" Foreground="White" FontWeight="Bold"/>
+            <Button Style="{StaticResource HelpButton}" Click="HelpButton_Click"/>
+        </WrapPanel>
+        <Label Foreground="White" Content="Choose priority:" HorizontalAlignment="Left" Margin="337,175,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
+        <Label Foreground="White" Content="Choose time range:" HorizontalAlignment="Left" Margin="337,295,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
+        <Label Foreground="White" Content="From:" HorizontalAlignment="Left" Margin="460,280,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
+        <Label Foreground="White" Content="To:" HorizontalAlignment="Left" Margin="460,310,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
+        <Label Foreground="White" Content="Choose a doctor:" HorizontalAlignment="Left" Margin="337,375,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
+        <Button Style="{StaticResource PatientDataGridButton}" Content="Confirm" HorizontalAlignment="Center" Margin="0,0,0,100" VerticalAlignment="Bottom" Click="MoveAppointment_Click"/>
+        <Button Style="{StaticResource PatientDataGridButton}" Content="Discard" HorizontalAlignment="Center" Margin="210,0,0,100" VerticalAlignment="Bottom" Click="DiscardButton_Click"/>
+        <ComboBox x:Name="PriorityComboBox" HorizontalAlignment="Left" Margin="537,175,0,0" VerticalAlignment="Top" Width="120">
+            <ComboBoxItem Content="Time"/>
+            <ComboBoxItem Content="Doctor"/>
+        </ComboBox>
+        <ComboBox x:Name="DoctorComboBox" HorizontalAlignment="Left" Margin="537,375,0,0" VerticalAlignment="Top" Width="120" ItemsSource="{Binding Doctors}" DisplayMemberPath="Username"/>
+        <xctk:DateTimePicker x:Name="BeginningDTP" HorizontalAlignment="Left" Margin="505,280,0,0" VerticalAlignment="Top"/>
+        <xctk:DateTimePicker x:Name="EndingDTP" HorizontalAlignment="Left" Margin="505,310,0,0" VerticalAlignment="Top"/>
+    </Grid>
+</Page>

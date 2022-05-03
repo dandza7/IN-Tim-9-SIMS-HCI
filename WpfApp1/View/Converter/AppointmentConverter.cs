@@ -4,21 +4,32 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using WpfApp1.Model;
-using WpfApp1.View.Model;
+using WpfApp1.View.Model.Patient;
+using WpfApp1.View.Model.Secretary;
 
 namespace WpfApp1.View.Converter
 {
-    class AppointmentConverter : AbstractConverter
+    internal class AppointmentConverter: AbstractConverter
     {
-        public static AppointmentView ConvertAppointmentToAppointmentView(Appointment appointment)
-            => new AppointmentView
-            {
-                Id = appointment.Id,
-                Beginning = appointment.Beginning,
-                Ending = appointment.Ending
-            };
+        public static AppointmentView ConvertAppointmentAndDoctorToAppointmentView(Appointment appointment, User user, Room room)
+        => new AppointmentView
+        {
+            Id = appointment.Id,
+            Beginning = appointment.Beginning,
+            Username = user.Username,
+            NameTag = room.Nametag
+        };
 
-        public static IList<AppointmentView> ConvertAppointmentListToAppointmentViewList(IList<Appointment> appointments)
-            => ConvertEntityListToViewList(appointments, ConvertAppointmentToAppointmentView);
+        public static SecretaryAppointmentView ConvertSecretaryAppointmentSecretaryAppointmentView(Appointment appointment, User doctor, User patient)
+        => new SecretaryAppointmentView
+        {
+            Id = appointment.Id,
+            Beginning = appointment.Beginning,
+            Patient = patient.Name + " " + patient.Surname,
+            Doctor = doctor.Name + " " + doctor.Surname
+
+        };
+        
+
     }
 }

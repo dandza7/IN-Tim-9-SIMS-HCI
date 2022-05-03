@@ -44,27 +44,16 @@ namespace WpfApp1.Repository
             List<string> newFile = new List<string>();
             foreach (Patient p in patients)
             {
-
                 if (p.Id == patient.Id)
                 {
-                    p.Name = patient.Name;
-                    p.Surname = patient.Surname;
-                    p.JMBG = patient.JMBG;
-                    p.Username = patient.Username;
-                    p.Password = patient.Password;
-
                     p.Email = patient.Email;
-                    p.PhoneNumber = patient.PhoneNumber;
-
-
-
-
                 }
                 newFile.Add(ConvertPatientToCSVFormat(p));
             }
             File.WriteAllLines(_path, newFile);
             return patient;
         }
+
         public bool Delete(int patientId)
         {
             List<Patient> patients = GetAll().ToList();
@@ -81,41 +70,23 @@ namespace WpfApp1.Repository
             File.WriteAllLines(_path, newFile);
             return isDeleted;
         }
-        public Patient Find(int patientId)
-        {
-            List<Patient> patients = GetAll().ToList();
-            List<string> newFile = new List<string>();
-            bool isFound = false;
-            foreach (Patient p in patients)
-            {
-                if (p.Id == patientId)
-                {
-                    isFound = true;
-                    return p;
-                }
-                
-            }
 
-              return null;
-            
+        public Patient GetById(int patientId)
+        {
+            return GetAll().ToList().SingleOrDefault(patient => patient.Id == patientId);
         }
+
         private Patient ConvertCSVFormatToPatient(string patientCSVFormat)
         {
             var tokens = patientCSVFormat.Split(_delimiter.ToCharArray());
-
-            return new Patient(int.Parse(tokens[0]), tokens[1], tokens[2], tokens[3], tokens[4], tokens[5], tokens[6], tokens[7]);
+            return new Patient(int.Parse(tokens[0]), tokens[1]);
         }
+
         private string ConvertPatientToCSVFormat(Patient patient)
         {
             return string.Join(_delimiter,
                 patient.Id,
-                patient.Name.ToString(),
-                patient.Surname.ToString(),
-                patient.JMBG.ToString(),
-                patient.Username.ToString(),
-                patient.Password.ToString(),
-                patient.Email.ToString(),
-                patient.PhoneNumber.ToString());
+                patient.Email.ToString());
         }
 
         private void AppendLineToFile(string path, string line)

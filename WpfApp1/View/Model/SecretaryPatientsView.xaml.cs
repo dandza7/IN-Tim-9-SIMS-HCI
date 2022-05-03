@@ -22,20 +22,24 @@ namespace WpfApp1.View.Model
     /// <summary>
     /// Interaction logic for SecretaryPatientsView.xaml
     /// </summary>
-    public partial class SecretaryPatientsView : UserControl
+    public partial class SecretaryPatientsView : Page
     {
-        private PatientController _patientController;
-        public ObservableCollection<UserControl> Patients { get; set; }
 
+        private PatientController _patientController;
+
+        private UserController _userController;
+
+        public ObservableCollection<UserControl> Patients { get; set; }
         public SecretaryPatientsView()
         {
             InitializeComponent();
             DataContext = this;
             var app = Application.Current as App;
             _patientController = app.PatientController;
+            _userController = app.UserController;
 
             Patients = new ObservableCollection<UserControl>(
-                PatientConverter.ConvertPatientListToPatientViewList(_patientController.GetAll().ToList()));
+                PatientConverter.ConvertPatientListToPatientViewList(_userController.GetAllPatients().ToList()));
         }
         private void AddPatient_Click(object sender, RoutedEventArgs e)
         {
@@ -50,7 +54,7 @@ namespace WpfApp1.View.Model
 
             _patientController.Delete(patientId);
             Patients = new ObservableCollection<UserControl>(
-PatientConverter.ConvertPatientListToPatientViewList(_patientController.GetAll().ToList()));
+            PatientConverter.ConvertPatientListToPatientViewList(_userController.GetAllPatients().ToList()));
             SecretaryPatientsDataGrid.ItemsSource = Patients;
             SecretaryPatientsDataGrid.Items.Refresh();
         }
@@ -71,7 +75,7 @@ PatientConverter.ConvertPatientListToPatientViewList(_patientController.GetAll()
         private void Refresh_Click(object sender, RoutedEventArgs e)
         {
             Patients = new ObservableCollection<UserControl>(
-    PatientConverter.ConvertPatientListToPatientViewList(_patientController.GetAll().ToList()));
+    PatientConverter.ConvertPatientListToPatientViewList(_userController.GetAllPatients().ToList()));
             SecretaryPatientsDataGrid.ItemsSource = Patients;
             SecretaryPatientsDataGrid.Items.Refresh();
         }

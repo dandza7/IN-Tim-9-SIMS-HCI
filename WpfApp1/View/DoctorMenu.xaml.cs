@@ -14,6 +14,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using WpfApp1.Controller;
 using WpfApp1.Model;
+using static WpfApp1.Model.Appointment;
+
 
 namespace WpfApp1.Service
 {
@@ -23,6 +25,7 @@ namespace WpfApp1.Service
     public partial class DoctorMenu : Window
     {
         private AppointmentController _appointmentController;
+        private DoctorController _doctorController;
 
         public IEnumerable<Appointment> appointments { get; set; }
         public List<int> Ids { get; set; }
@@ -71,7 +74,7 @@ namespace WpfApp1.Service
 
         private void AddConfirm_Click(object sender, RoutedEventArgs e)
         {
-            Appointment appointment = new Appointment(Convert.ToDateTime(StartDP.Text), Convert.ToDateTime(EndDP.Text));
+            Appointment appointment = new Appointment(Convert.ToDateTime(StartDP.Text), Convert.ToDateTime(EndDP.Text), AppointmentType.regular, false, 1, 3, 1);
             _appointmentController.Create(appointment);
             AddContainer.Visibility = Visibility.Collapsed;
 
@@ -95,8 +98,7 @@ namespace WpfApp1.Service
 
         private void EditConfirm_Click(object sender, RoutedEventArgs e)
         {
-
-            Appointment appointment = new Appointment(Convert.ToInt32(IdLabel.Content), Convert.ToDateTime(EditStartDP.Text), Convert.ToDateTime(EditEndDP.Text));
+            Appointment appointment = new Appointment(Convert.ToInt32(IdLabel.Content), Convert.ToDateTime(EditStartDP.Text), Convert.ToDateTime(EditEndDP.Text), AppointmentType.regular, false, 1, 3, 1);
             _appointmentController.Update(appointment);
             EditContainer.Visibility = Visibility.Collapsed;
         }

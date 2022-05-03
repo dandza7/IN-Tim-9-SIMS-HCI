@@ -1,0 +1,17 @@
+﻿<UserControl x:Class="WpfApp1.View.Util.TabletMenuBar"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:WpfApp1.View.Util"
+             mc:Ignorable="d" 
+             d:DesignHeight="768" d:DesignWidth="1024">
+    <Grid>
+        <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Height="45">
+            <Button x:Name="MyProfile" Content="My Profile" Style="{StaticResource PatientMenuButton}" Click="MyProfile_Click"/>
+            <Button x:Name="PatientAppointments" Content="Appointments" Style="{StaticResource PatientMenuButton}" Click="ShowAppointments_Click"/>
+            <Button x:Name="PatientNotes" Content="Notes" Style="{StaticResource PatientMenuButton}" Click="PatientNotes_Click"/>
+            <Button x:Name="PatientReports" Content="Reports" Style="{StaticResource PatientMenuButton}" Click="PatientReports_Click"/>
+        </StackPanel>
+    </Grid>
+</UserControl>

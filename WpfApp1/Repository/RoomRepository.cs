@@ -14,18 +14,24 @@ namespace WpfApp1.Repository
         private const string NOT_FOUND_ERROR = "Room with {0}:{1} can not be found!";
         private string _path;
         private string _delimiter;
-        private int _roomMaxId;
 
         public RoomRepository(string path, string delimiter)
         {
             _path = path;
             _delimiter = delimiter;
-            _roomMaxId = GetMaxId(GetAll());
         }
 
         public Room Get(int id)
         {
-            throw new NotImplementedException();
+            List<Room> rooms = File.ReadAllLines(_path)
+                .Select(ConvertCsvFormatToRoom)
+                .ToList();
+            foreach (Room room in rooms)
+            {
+                if (room.Id == id)
+                    return room;
+            }
+            return null;
         }
 
         public List<Room> GetAll()
@@ -35,36 +41,36 @@ namespace WpfApp1.Repository
                 .ToList();
         }
 
-        public int GetMaxId(List<Room> rooms)
+        private int GetMaxId(List<Room> rooms)
         {
             return rooms.Count() == 0 ? 0 : rooms.Max(room => room.Id);
         }
 
         public Room Create(Room room)
         {
-            room.Id = ++_roomMaxId;
+            room.Id = GetMaxId(GetAll()) + 1;
             AppendLineToFile(_path, ConvertRoomToCsvFormat(room));
             return room;
         }
 
-        public Room ConvertCsvFormatToRoom(string roomCsvFormat)
+        private Room ConvertCsvFormatToRoom(string roomCsvFormat)
         {
             var tokens = roomCsvFormat.Split(_delimiter.ToCharArray());
             return new Room(
                 int.Parse(tokens[0]),
                 tokens[1],
-                int.Parse(tokens[2]));
+                tokens[2]);
         }
 
-        public string ConvertRoomToCsvFormat(Room room)
+        private string ConvertRoomToCsvFormat(Room room)
         {
             return string.Join(_delimiter,
                 room.Id,
                 room.Nametag,
-                (int)room.Type);
+                room.Type);
         }
 
-        public void AppendLineToFile(String path, String line)
+        private void AppendLineToFile(String path, String line)
         {
             File.AppendAllText(path, line + Environment.NewLine);
         }
