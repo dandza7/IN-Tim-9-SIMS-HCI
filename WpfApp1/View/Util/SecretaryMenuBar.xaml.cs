@@ -46,5 +46,26 @@ namespace WpfApp1.View.Util
             PatientsColorMark.Background = (SolidColorBrush)new BrushConverter().ConvertFromString("#FF101010");
             Main.Content = new SecretaryAppointmentsView();
         }
+        
+            private void CloseAllWindows()
+        {
+            for (int intCounter = App.Current.Windows.Count - 1; intCounter > -1; intCounter--)
+            {
+                if (intCounter == 0)
+                {
+                    var s = new MainWindow();
+                    s.Show();
+
+                }
+            }
+            App.Current.Windows[0].Close();
+        }
+        private void LogOutButton_Click(object sender, RoutedEventArgs e)
+        {
+            var app = Application.Current as App;
+            app.Properties["userId"] = 0;
+            app.Properties["userRole"] = "loggedOut";
+            CloseAllWindows();
+        }
     }
 }
