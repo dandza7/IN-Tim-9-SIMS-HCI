@@ -87,10 +87,11 @@ namespace WpfApp1.View.Dialog
             int allergyId = ((AllergyView)SecretaryAllergiesDataGrid.SelectedItem).Id;
             var app = Application.Current as App;
             _allergyController = app.AllergyController;
-
+            _mrController = app.MedicalRecordController;
+            int medicalRecordId = _mrController.GetByPatientId(Int32.Parse(updateidTB.Text)).Id;
             _allergyController.Delete(allergyId);
             Allergies = new ObservableCollection<UserControl>(
-            AllergyConverter.ConvertAllergyListToAllergyViewList(_allergyController.GetAllAllergiesForPatient(Int32.Parse(updateidTB.Text)).ToList()));
+            AllergyConverter.ConvertAllergyListToAllergyViewList(_allergyController.GetAllAllergiesForPatient(medicalRecordId).ToList()));
 
             SecretaryAllergiesDataGrid.ItemsSource = Allergies;
             SecretaryAllergiesDataGrid.Items.Refresh();
