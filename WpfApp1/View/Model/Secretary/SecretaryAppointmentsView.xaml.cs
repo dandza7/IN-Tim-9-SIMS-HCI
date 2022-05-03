@@ -48,6 +48,17 @@ namespace WpfApp1.View.Model.Secretary
             var s = new SecretaryAddNewAppointmentDialog();
             s.Show();
         }
-       
+        private void DeleteAppointment(object sender, RoutedEventArgs e)
+        {
+            int appointmentId = ((SecretaryAppointmentView)SecretaryAppointmentsDataGrid.SelectedItem).Id;
+            var app = Application.Current as App;
+
+            _appointmentController = app.AppointmentController;
+            _appointmentController.Delete(appointmentId);
+
+            SecretaryAppointmentsDataGrid.ItemsSource = null;
+            SecretaryAppointmentsDataGrid.ItemsSource = _appointmentController.GetSecretaryAppointmentViews();
+        }
+        
     }
 }
