@@ -46,7 +46,8 @@ namespace WpfApp1.View.Util
             PatientsColorMark.Background = (SolidColorBrush)new BrushConverter().ConvertFromString("#FF101010");
             Main.Content = new SecretaryAppointmentsView();
         }
-        private void CloseAllWindows()
+        
+            private void CloseAllWindows()
         {
             for (int intCounter = App.Current.Windows.Count - 1; intCounter > -1; intCounter--)
             {
