@@ -63,5 +63,9 @@ namespace WpfApp1.Model
             Id = id;
             PatientId = patientId;
         }
+        public MedicalRecord(int patientId)
+        {
+            PatientId = patientId;
+        }
     }
 }

@@ -28,14 +28,15 @@ namespace WpfApp1.View.Dialog
         }
         private PatientController _patientController;
         private UserController _userController;
+        private MedicalRecordController _medicalRecordController;
+
         private void InsertButton_Click(object sender, RoutedEventArgs e)
         {
             var app = Application.Current as App;
             _patientController = app.PatientController;
             _userController = app.UserController;
-            Patient patient = new Patient(
-                emailTB.Text
-                );
+            _medicalRecordController = app.MedicalRecordController;
+
             User user = new User(
 
                 nameTB.Text,
@@ -46,8 +47,12 @@ namespace WpfApp1.View.Dialog
                 brtelTB.Text,
                 User.RoleType.patient
                 );
-
-            _userController.Create(user);
+            User u = _userController.Create(user);
+            Console.WriteLine(u.Id);
+            Patient patient = new Patient(
+                u.Id,
+                emailTB.Text
+            );
             _patientController.Create(patient);
             Close();
 
