@@ -91,6 +91,7 @@ namespace WpfApp1.View.Dialog
             _allergyController.Delete(allergyId);
             Allergies = new ObservableCollection<UserControl>(
             AllergyConverter.ConvertAllergyListToAllergyViewList(_allergyController.GetAllAllergiesForPatient(Int32.Parse(updateidTB.Text)).ToList()));
+
             SecretaryAllergiesDataGrid.ItemsSource = Allergies;
             SecretaryAllergiesDataGrid.Items.Refresh();
         }

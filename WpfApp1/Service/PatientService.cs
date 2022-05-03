@@ -111,6 +111,7 @@ namespace WpfApp1.Service
         {
             MedicalRecord mr = new MedicalRecord(patient.Id);
             _medicalRecordRepo.Create(mr);
+
             return _patientRepo.Create(patient);
         }
 

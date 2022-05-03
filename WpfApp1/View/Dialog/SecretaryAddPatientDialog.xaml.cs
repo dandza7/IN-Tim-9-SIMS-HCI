@@ -29,12 +29,14 @@ namespace WpfApp1.View.Dialog
         private PatientController _patientController;
         private UserController _userController;
         private MedicalRecordController _medicalRecordController;
+
         private void InsertButton_Click(object sender, RoutedEventArgs e)
         {
             var app = Application.Current as App;
             _patientController = app.PatientController;
             _userController = app.UserController;
             _medicalRecordController = app.MedicalRecordController;
+
             User user = new User(
 
                 nameTB.Text,
