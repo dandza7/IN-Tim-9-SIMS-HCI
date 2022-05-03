@@ -122,8 +122,9 @@ namespace WpfApp1.Service
         }
         public bool Delete(int patientId)
         {
-
-
+            MedicalRecord mr = _medicalRecordRepo.GetPatientsMedicalRecord(patientId);
+            _medicalRecordRepo.Delete(mr.Id);
+            _userRepo.Delete(patientId);
             return _patientRepo.Delete(patientId);
         }
         public Patient GetById(int patientId)
