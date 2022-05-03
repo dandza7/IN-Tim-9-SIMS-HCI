@@ -34,7 +34,11 @@ namespace WpfApp1.Repository
         }
         public Patient Create(Patient patient)
         {
-            patient.Id = ++_patientMaxId;
+            if (patient.Id == 0)
+            {
+                patient.Id = ++_patientMaxId;
+            }
+            
             AppendLineToFile(_path, ConvertPatientToCSVFormat(patient));
             return patient;
         }
