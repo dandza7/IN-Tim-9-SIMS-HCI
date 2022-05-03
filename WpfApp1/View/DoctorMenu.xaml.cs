@@ -16,6 +16,7 @@ using WpfApp1.Controller;
 using WpfApp1.Model;
 using static WpfApp1.Model.Appointment;
 
+
 namespace WpfApp1.Service
 {
     /// <summary>
@@ -25,6 +26,7 @@ namespace WpfApp1.Service
     {
         private AppointmentController _appointmentController;
         private DoctorController _doctorController;
+
         public IEnumerable<Appointment> appointments { get; set; }
         public List<int> Ids { get; set; }
         public List<String> Priorities = new List<String>();
