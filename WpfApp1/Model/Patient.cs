@@ -15,6 +15,7 @@ namespace WpfApp1.Model
         private string _country;
         private int _numberOfCancellations;
         private DateTime _lastCancellationDate;
+        
         public string Email
         {
             get { return _email; }
@@ -79,6 +80,7 @@ namespace WpfApp1.Model
                 }
             }
         }
+        
         public DateTime LastCancellationDate
         {
             get { return _lastCancellationDate; }
@@ -130,7 +132,7 @@ namespace WpfApp1.Model
             LastCancellationDate = lastCancellationDate;
         }
 
-        public Patient(int id, string email, string street, string city, string country, int numberOfCancellations, DateTime lastCancellationDate)
+        public Patient(int id, string email, string street, string city, string country, int numberOfCancellations)
         {
             Id = id;
             Email = email;
@@ -140,6 +142,7 @@ namespace WpfApp1.Model
             NumberOfCancellations = numberOfCancellations;
             LastCancellationDate = lastCancellationDate;
         }
+        
         public Patient(string email)
         {
             Email = email;
