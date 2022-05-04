@@ -132,7 +132,7 @@ namespace WpfApp1.Model
             LastCancellationDate = lastCancellationDate;
         }
 
-        public Patient(int id, string email, string street, string city, string country, int numberOfCancellations)
+        public Patient(int id, string email, string street, string city, string country, int numberOfCancellations, DateTime lastCancellationDate)
         {
             Id = id;
             Email = email;
