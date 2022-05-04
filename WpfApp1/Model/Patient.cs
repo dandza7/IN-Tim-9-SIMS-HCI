@@ -10,7 +10,10 @@ namespace WpfApp1.Model
     {
 
         private string _email;
-
+        private string _street;
+        private string _city;
+        private string _country;
+        private int _numberOfCancellations;
         public string Email
         {
             get { return _email; }
@@ -23,6 +26,59 @@ namespace WpfApp1.Model
                 }
             }
         }
+
+        public string Street
+        {
+            get { return _street; }
+            set
+            {
+                if (value != _street)
+                {
+                    _street = value;
+                    OnPropertyChanged("Street");
+                }
+            }
+        }
+
+        public string City
+        {
+            get { return _city; }
+            set
+            {
+                if (value != _city)
+                {
+                    _city = value;
+                    OnPropertyChanged("City");
+                }
+            }
+        }
+
+        public string Country
+        {
+            get { return _country; }
+            set
+            {
+                if (value != _country)
+                {
+                    _country = value;
+                    OnPropertyChanged("Country");
+                }
+            }
+        }
+
+        public int NumberOfCancellations
+        {
+            get { return _numberOfCancellations; }
+            set
+            {
+                if (value != _numberOfCancellations)
+                {
+                    _numberOfCancellations = value;
+                    OnPropertyChanged("NumberOfCancellations");
+                }
+            }
+        }
+
         public Patient()
         {
 
@@ -43,23 +99,40 @@ namespace WpfApp1.Model
             string username, 
             string password, 
             string phoneNumber, 
-            string email)
+            string email,
+            string street,
+            string city,
+            string country,
+            int numberOfCancellations)
             : base(id, name, surname, jmbg, username, password, phoneNumber, RoleType.patient)
         {
             Email = email;
+            Street = street;
+            City = city;
+            Country = country;
+            NumberOfCancellations = numberOfCancellations;
         }
 
-        public Patient(string name, string surname, string jmbg, string username, string password, string phoneNumber, string email)
+        public Patient(string name, string surname, string jmbg, string username, string password, 
+            string phoneNumber, string email, string street, string city, string country, int numberOfCancellations)
             : base(name, surname, jmbg, username, password, phoneNumber, RoleType.patient)
 
         {
             Email = email;
+            Street = street;
+            City = city;
+            Country = country;
+            NumberOfCancellations= numberOfCancellations;
         }
 
-        public Patient(int id, string email)
+        public Patient(int id, string email, string street, string city, string country, int numberOfCancellations)
         {
             Id = id;
             Email = email;
+            Street = street;
+            City = city;
+            Country = country;
+            NumberOfCancellations = numberOfCancellations;
         }
         public Patient(string email)
         {
