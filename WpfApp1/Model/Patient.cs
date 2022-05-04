@@ -14,6 +14,8 @@ namespace WpfApp1.Model
         private string _city;
         private string _country;
         private int _numberOfCancellations;
+        private DateTime _lastCancellationDate;
+        
         public string Email
         {
             get { return _email; }
@@ -78,6 +80,19 @@ namespace WpfApp1.Model
                 }
             }
         }
+        
+        public DateTime LastCancellationDate
+        {
+            get { return _lastCancellationDate; }
+            set
+            {
+                if (value != _lastCancellationDate)
+                {
+                    _lastCancellationDate = value;
+                    OnPropertyChanged("LastCancellationDate");
+                }
+            }
+        }
 
         public Patient()
         {
@@ -92,18 +107,8 @@ namespace WpfApp1.Model
         {
         }
 
-        public Patient(int id, 
-            string name, 
-            string surname, 
-            string jmbg, 
-            string username, 
-            string password, 
-            string phoneNumber, 
-            string email,
-            string street,
-            string city,
-            string country,
-            int numberOfCancellations)
+        public Patient(int id, string name, string surname, string jmbg, string username, string password, string phoneNumber, 
+            string email, string street, string city, string country, int numberOfCancellations, DateTime lastCancellationDate)
             : base(id, name, surname, jmbg, username, password, phoneNumber, RoleType.patient)
         {
             Email = email;
@@ -111,10 +116,11 @@ namespace WpfApp1.Model
             City = city;
             Country = country;
             NumberOfCancellations = numberOfCancellations;
+            LastCancellationDate = lastCancellationDate;
         }
 
-        public Patient(string name, string surname, string jmbg, string username, string password, 
-            string phoneNumber, string email, string street, string city, string country, int numberOfCancellations)
+        public Patient(string name, string surname, string jmbg, string username, string password, string phoneNumber, 
+            string email, string street, string city, string country, int numberOfCancellations, DateTime lastCancellationDate)
             : base(name, surname, jmbg, username, password, phoneNumber, RoleType.patient)
 
         {
@@ -122,7 +128,8 @@ namespace WpfApp1.Model
             Street = street;
             City = city;
             Country = country;
-            NumberOfCancellations= numberOfCancellations;
+            NumberOfCancellations = numberOfCancellations;
+            LastCancellationDate = lastCancellationDate;
         }
 
         public Patient(int id, string email, string street, string city, string country, int numberOfCancellations)
@@ -133,7 +140,9 @@ namespace WpfApp1.Model
             City = city;
             Country = country;
             NumberOfCancellations = numberOfCancellations;
+            LastCancellationDate = lastCancellationDate;
         }
+        
         public Patient(string email)
         {
             Email = email;
