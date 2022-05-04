@@ -56,7 +56,7 @@ namespace WpfApp1
             var notificationRepository = new NotificationRepository(NOTIFICATION_FILE, CSV_DELIMITER, DATETIME_FORMAT);
             var therapyRepository = new TherapyRepository(THERAPY_FILE, CSV_DELIMITER);
             var roomRepository = new RoomRepository(ROOM_FILE, CSV_DELIMITER);
-            var patientRepository = new PatientRepository(PATIENT_FILE, CSV_DELIMITER);
+            var patientRepository = new PatientRepository(PATIENT_FILE, CSV_DELIMITER, DATETIME_FORMAT);
             var doctorRepository = new DoctorRepository(DOCTOR_FILE, CSV_DELIMITER);
             var appointmentRepository = new AppointmentRepository(APPOINTMENT_FILE, CSV_DELIMITER, DATETIME_FORMAT);
             var drugRepository = new DrugRepository(DRUG_FILE, CSV_DELIMITER);

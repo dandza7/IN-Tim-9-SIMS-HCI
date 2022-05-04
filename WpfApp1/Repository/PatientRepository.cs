@@ -12,16 +12,16 @@ namespace WpfApp1.Repository
     {
         private string _path;
         private string _delimiter;
-        private int _patientMaxId;
+        private readonly string _datetimeFormat;
 
-        public PatientRepository(string path, string delimiter)
+        public PatientRepository(string path, string delimiter, string datetimeFormat)
         {
             _path = path;
             _delimiter = delimiter;
-            _patientMaxId = (int)GetMaxId(GetAll());
+            _datetimeFormat = datetimeFormat;
         }
 
-        private long GetMaxId(IEnumerable<Patient> patients)
+        private int GetMaxId(IEnumerable<Patient> patients)
         {
             return patients.Count() == 0 ? 0 : patients.Max(transaction => transaction.Id);
         }
@@ -34,11 +34,8 @@ namespace WpfApp1.Repository
         }
         public Patient Create(Patient patient)
         {
-            if (patient.Id == 0)
-            {
-                patient.Id = ++_patientMaxId;
-            }
-            
+            int maxId = GetMaxId(GetAll());
+            patient.Id = ++maxId;
             AppendLineToFile(_path, ConvertPatientToCSVFormat(patient));
             return patient;
         }
@@ -92,7 +89,8 @@ namespace WpfApp1.Repository
                 tokens[2],
                 tokens[3],
                 tokens[4],
-                int.Parse(tokens[5]));
+                int.Parse(tokens[5]),
+                DateTime.Parse(tokens[6]));
         }
 
         private string ConvertPatientToCSVFormat(Patient patient)
@@ -103,7 +101,8 @@ namespace WpfApp1.Repository
                 patient.Street,
                 patient.City,
                 patient.Country,
-                patient.NumberOfCancellations);
+                patient.NumberOfCancellations,
+                patient.LastCancellationDate.ToString());
         }
 
         private void AppendLineToFile(string path, string line)

@@ -45,7 +45,8 @@ namespace WpfApp1.View.Dialog
                 "",
                 "",
                 "",
-                0
+                0,
+                DateTime.Parse("01.01.2001. 07:00:00")
                 );
 
             _patientController.Create(patient);
