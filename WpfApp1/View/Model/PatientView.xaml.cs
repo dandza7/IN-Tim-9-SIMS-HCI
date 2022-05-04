@@ -28,12 +28,17 @@ namespace WpfApp1.View.Model
             DataContext = this;
         }
         private int _id;
-        private string _name;
+        private string _firstName;
         private string _surname;
         private string _jmbg;
         private string _username;
         private string _password;
-        private string _phonenumber;
+        private string _phoneNumber;
+        private string _email;
+        private string _street;
+        private string _city;
+        private string _country;
+
         public int Id
         {
             get { return _id; }
@@ -42,19 +47,19 @@ namespace WpfApp1.View.Model
                 if (_id != value)
                 {
                     _id = value;
-                    OnPropertyChanged();
+                    OnPropertyChanged("Id");
                 }
             }
         }
-        public string PName
+        public string FirstName
         {
-            get => _name;
+            get => _firstName;
             set
             {
-                if (_name != value)
+                if (_firstName != value)
                 {
-                    _name = value;
-                    OnPropertyChanged();
+                    _firstName = value;
+                    OnPropertyChanged("FirstName");
                 }
             }
         }
@@ -67,12 +72,12 @@ namespace WpfApp1.View.Model
                 if (_surname != value)
                 {
                     _surname = value;
-                    OnPropertyChanged();
+                    OnPropertyChanged("Surname");
                 }
             }
         }
 
-        public string JMBG
+        public string Jmbg
         {
             get => _jmbg;
             set
@@ -80,7 +85,7 @@ namespace WpfApp1.View.Model
                 if (_jmbg != value)
                 {
                     _jmbg = value;
-                    OnPropertyChanged();
+                    OnPropertyChanged("Jmbg");
                 }
             }
         }
@@ -92,7 +97,7 @@ namespace WpfApp1.View.Model
                 if (_username != value)
                 {
                     _username = value;
-                    OnPropertyChanged();
+                    OnPropertyChanged("Username");
                 }
             }
         }
@@ -104,19 +109,71 @@ namespace WpfApp1.View.Model
                 if (_password != value)
                 {
                     _password = value;
-                    OnPropertyChanged();
+                    OnPropertyChanged("Password");
                 }
             }
         }
-        public string Phonenumber
+        public string PhoneNumber
         {
-            get => _phonenumber;
+            get => _phoneNumber;
             set
             {
-                if (_phonenumber != value)
+                if (_phoneNumber != value)
                 {
-                    _phonenumber = value;
-                    OnPropertyChanged();
+                    _phoneNumber = value;
+                    OnPropertyChanged("PhoneNumber");
+                }
+            }
+        }
+
+        public string Email
+        {
+            get => _email;
+            set
+            {
+                if (_email != value)
+                {
+                    _email = value;
+                    OnPropertyChanged("Email");
+                }
+            }
+        }
+
+        public string Street
+        {
+            get => _street;
+            set
+            {
+                if (_street != value)
+                {
+                    _street = value;
+                    OnPropertyChanged("Street");
+                }
+            }
+        }
+
+        public string City
+        {
+            get => _city;
+            set
+            {
+                if (_city != value)
+                {
+                    _city = value;
+                    OnPropertyChanged("City");
+                }
+            }
+        }
+
+        public string Country
+        {
+            get => _country;
+            set
+            {
+                if (_country != value)
+                {
+                    _country = value;
+                    OnPropertyChanged("Country");
                 }
             }
         }

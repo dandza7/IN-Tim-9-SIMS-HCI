@@ -128,13 +128,11 @@ namespace WpfApp1.Service
             _userRepo.Delete(patientId);
             return _patientRepo.Delete(patientId);
         }
-        public Patient GetById(int patientId)
+        public Patient GetById(int id)
         {
-            User u = _userRepo.GetById(patientId);
-            Patient p = _patientRepo.GetById(patientId);
-            Patient p1 = new Patient(u.Name, u.Surname, u.Jmbg, u.Username, u.Password, u.PhoneNumber, p.Email);
-            return p1;
+            return GetAll().ToList().SingleOrDefault(patient => patient.Id == id);
         }
+
         public Patient GetByUsername(string username)
         {
             User user = _userRepo.GetByUsername(username);

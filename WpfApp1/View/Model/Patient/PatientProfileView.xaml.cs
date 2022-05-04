@@ -34,7 +34,7 @@ namespace WpfApp1.View.Model.Patient
         public ObservableCollection<Notification> Notifications { get; set; }
         public ObservableCollection<TherapyView> Therapies { get; set; }
         public ObservableCollection<AppointmentView> Reports { get; set; }
-        public PatientView User { get; set; }
+        public PatientView Patient { get; set; }
 
         public PatientProfileView()
         {
@@ -50,7 +50,7 @@ namespace WpfApp1.View.Model.Patient
 
             int patientId = (int)app.Properties["userId"];
 
-            User = PatientConverter.ConvertPatientToPatientView(_userController.GetById(patientId));
+            Patient = PatientConverter.ConvertPatientToPatientView(_userController.GetById(patientId), _patientController.GetById(patientId));
             _notificationController.GetScheduledPatientsNotifications(patientId);
             _patientController.DeleteOldPatientsNotifications(patientId);
             Notifications = new ObservableCollection<Notification>(_notificationController.GetUsersNotDeletedNotifications(patientId));

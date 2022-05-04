@@ -74,7 +74,11 @@ namespace WpfApp1.View.Dialog
                 );
             Patient patient = new Patient(
                 int.Parse(updateidTB.Text),
-                updateemailTB.Text
+                updateemailTB.Text,
+                "",
+                "",
+                "",
+                0
                 );
 
 

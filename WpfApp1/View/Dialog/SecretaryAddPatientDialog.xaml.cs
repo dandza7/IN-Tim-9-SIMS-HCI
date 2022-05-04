@@ -51,7 +51,11 @@ namespace WpfApp1.View.Dialog
             Console.WriteLine(u.Id);
             Patient patient = new Patient(
                 u.Id,
-                emailTB.Text
+                emailTB.Text,
+                "",
+                "",
+                "",
+                0
             );
             _patientController.Create(patient);
             Close();

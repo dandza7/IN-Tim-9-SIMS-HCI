@@ -14,6 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using WpfApp1.Controller;
+using WpfApp1.Model;
 using WpfApp1.View.Converter;
 using WpfApp1.View.Dialog;
 
@@ -29,7 +30,7 @@ namespace WpfApp1.View.Model
 
         private UserController _userController;
 
-        public ObservableCollection<UserControl> Patients { get; set; }
+        public ObservableCollection<PatientView> Patients { get; set; }
         public SecretaryPatientsView()
         {
             InitializeComponent();
@@ -38,8 +39,15 @@ namespace WpfApp1.View.Model
             _patientController = app.PatientController;
             _userController = app.UserController;
 
-            Patients = new ObservableCollection<UserControl>(
-                PatientConverter.ConvertPatientListToPatientViewList(_userController.GetAllPatients().ToList()));
+            List<User> users = _userController.GetAllPatients().ToList();
+            ObservableCollection<PatientView> views = new ObservableCollection<PatientView>();
+            foreach (User user in users)
+            {
+                var patient = _patientController.GetById(user.Id);
+                views.Add(PatientConverter.ConvertPatientToPatientView(user, patient));
+            }
+
+            Patients = views;
         }
         private void AddPatient_Click(object sender, RoutedEventArgs e)
         {
@@ -53,8 +61,16 @@ namespace WpfApp1.View.Model
             _patientController = app.PatientController;
 
             _patientController.Delete(patientId);
-            Patients = new ObservableCollection<UserControl>(
-            PatientConverter.ConvertPatientListToPatientViewList(_userController.GetAllPatients().ToList()));
+
+            List<User> users = _userController.GetAllPatients().ToList();
+            ObservableCollection<PatientView> views = new ObservableCollection<PatientView>();
+            foreach (User user in users)
+            {
+                var patient = _patientController.GetById(user.Id);
+                views.Add(PatientConverter.ConvertPatientToPatientView(user, patient));
+            }
+
+            Patients = views;
             SecretaryPatientsDataGrid.ItemsSource = Patients;
             SecretaryPatientsDataGrid.Items.Refresh();
         }
@@ -74,8 +90,15 @@ namespace WpfApp1.View.Model
 
         private void Refresh_Click(object sender, RoutedEventArgs e)
         {
-            Patients = new ObservableCollection<UserControl>(
-    PatientConverter.ConvertPatientListToPatientViewList(_userController.GetAllPatients().ToList()));
+            List<User> users = _userController.GetAllPatients().ToList();
+            ObservableCollection<PatientView> views = new ObservableCollection<PatientView>();
+            foreach (User user in users)
+            {
+                var patient = _patientController.GetById(user.Id);
+                views.Add(PatientConverter.ConvertPatientToPatientView(user, patient));
+            }
+
+            Patients = views;
             SecretaryPatientsDataGrid.ItemsSource = Patients;
             SecretaryPatientsDataGrid.Items.Refresh();
         }

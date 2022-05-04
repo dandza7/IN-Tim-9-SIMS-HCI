@@ -41,9 +41,11 @@ namespace WpfApp1.View.Dialog
                 jmbgTB.Text,
                 jmbgTB.Text,
                 "",
-                ""
-
-
+                "",
+                "",
+                "",
+                "",
+                0
                 );
 
             _patientController.Create(patient);

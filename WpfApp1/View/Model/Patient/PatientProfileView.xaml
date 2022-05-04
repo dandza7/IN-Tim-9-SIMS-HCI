@@ -9,16 +9,17 @@
       Title="PatientProfileView">
 
     <Grid>
-        <Label Content="MyProfile" FontSize="30" FontWeight="ExtraBlack" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-        <TabControl Style="{StaticResource PatientTabControl}" Height="600" Width="765" Background="{StaticResource DarkBlueBrush}">
+        <TabControl Style="{StaticResource PatientTabControl}" Height="600" Width="795" Background="{StaticResource DarkBlueBrush}">
             <TabItem Header="Information" Style="{StaticResource PatientTabItem}">
                 <Grid Background="{StaticResource DarkBlueBrush}" HorizontalAlignment="Center" VerticalAlignment="Center" Height="500" Width="600">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="79*" />
                         <ColumnDefinition Width="221*"/>
-                        <ColumnDefinition Width="300*" />
+                        <ColumnDefinition Width="320*" />
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
+                        <RowDefinition />
+                        <RowDefinition />
                         <RowDefinition />
                         <RowDefinition />
                         <RowDefinition />
@@ -31,14 +32,18 @@
                     <Label Grid.Row="1" Grid.Column="0" Content="First name:" Style="{StaticResource ProfileLabel}" Grid.ColumnSpan="2" Margin="40,0,40,0"/>
                     <Label Grid.Row="2" Grid.Column="0" Content="Last name:" Style="{StaticResource ProfileLabel}" Grid.ColumnSpan="2" Margin="40,0,40,0"/>
                     <Label Grid.Row="3" Grid.Column="0" Content="Number:" Style="{StaticResource ProfileLabel}" Grid.ColumnSpan="2" Margin="40,0,40,0"/>
-                    <Label Grid.Row="4" Grid.Column="0" Content="Password:" Style="{StaticResource ProfileLabel}" Grid.ColumnSpan="2" Margin="40,0,40,0"/>
-                    <Label Grid.Row="5" Grid.Column="0" Content="JMBG:" Style="{StaticResource ProfileLabel}" Grid.ColumnSpan="2" Margin="40,0,40,0"/>
-                    <Label Grid.Column="2" Content="{Binding User.Username}" Style="{StaticResource ProfileLabel}" FontWeight="Normal" Margin="40,0,40,0"/>
-                    <Label Grid.Row="1" Grid.Column="2" Content="{Binding User.Name}" Style="{StaticResource ProfileLabel}" FontWeight="Normal" Margin="40,0,40,0"/>
-                    <Label Grid.Row="2" Grid.Column="2" Content="{Binding User.Surname}" Style="{StaticResource ProfileLabel}" FontWeight="Normal" Margin="40,0,40,0"/>
-                    <Label Grid.Row="3" Grid.Column="2" Content="{Binding User.Phonenumber}" Style="{StaticResource ProfileLabel}" FontWeight="Normal" Margin="40,0,40,0"/>
-                    <Label Grid.Row="4" Grid.Column="2" Content="{Binding User.Password}" Style="{StaticResource ProfileLabel}" FontWeight="Normal" Margin="40,0,40,0"/>
-                    <Label Grid.Row="5" Grid.Column="2" Content="{Binding User.JMBG}" Style="{StaticResource ProfileLabel}" FontWeight="Normal" Margin="40,0,40,0"/>
+                    <Label Grid.Row="4" Grid.Column="0" Content="JMBG:" Style="{StaticResource ProfileLabel}" Grid.ColumnSpan="2" Margin="40,0,40,0"/>
+                    <Label Grid.Row="5" Grid.Column="0" Content="Street:" Style="{StaticResource ProfileLabel}" Grid.ColumnSpan="2" Margin="40,0,40,0"/>
+                    <Label Grid.Row="6" Grid.Column="0" Content="City:" Style="{StaticResource ProfileLabel}" Grid.ColumnSpan="2" Margin="40,0,40,0"/>
+                    <Label Grid.Row="7" Grid.Column="0" Content="Country:" Style="{StaticResource ProfileLabel}" Grid.ColumnSpan="2" Margin="40,0,40,0"/>
+                    <Label Grid.Column="2" Content="{Binding Patient.Username}" Style="{StaticResource ProfileLabel}" FontWeight="Normal" Margin="40,0,40,0"/>
+                    <Label Grid.Row="1" Grid.Column="2" Content="{Binding Patient.FirstName}" Style="{StaticResource ProfileLabel}" FontWeight="Normal" Margin="40,0,40,0"/>
+                    <Label Grid.Row="2" Grid.Column="2" Content="{Binding Patient.Surname}" Style="{StaticResource ProfileLabel}" FontWeight="Normal" Margin="40,0,40,0"/>
+                    <Label Grid.Row="3" Grid.Column="2" Content="{Binding Patient.PhoneNumber}" Style="{StaticResource ProfileLabel}" FontWeight="Normal" Margin="40,0,40,0"/>
+                    <Label Grid.Row="4" Grid.Column="2" Content="{Binding Patient.Jmbg}" Style="{StaticResource ProfileLabel}" FontWeight="Normal" Margin="40,0,40,0"/>
+                    <Label Grid.Row="5" Grid.Column="2" Content="{Binding Patient.Street}" Style="{StaticResource ProfileLabel}" FontWeight="Normal" Margin="40,0,40,0"/>
+                    <Label Grid.Row="6" Grid.Column="2" Content="{Binding Patient.City}" Style="{StaticResource ProfileLabel}" FontWeight="Normal" Margin="40,0,40,0"/>
+                    <Label Grid.Row="7" Grid.Column="2" Content="{Binding Patient.Country}" Style="{StaticResource ProfileLabel}" FontWeight="Normal" Margin="40,0,40,0"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Therapies" Style="{StaticResource PatientTabItem}">
