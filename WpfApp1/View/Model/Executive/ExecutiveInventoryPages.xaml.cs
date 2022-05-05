@@ -16,6 +16,7 @@ using System.Windows.Shapes;
 using WpfApp1.Model;
 using WpfApp1.Controller;
 using WpfApp1.Model.Preview;
+using WpfApp1.View.Model.Executive.ExecutiveInventoryDialogs;
 
 namespace WpfApp1.View.Model.Executive
 {
@@ -81,8 +82,11 @@ namespace WpfApp1.View.Model.Executive
         public List<InventoryPreview> Inventory { get; set; }
         public List<string> SOPRooms { get; set; }
         private InventoryController _inventoryController;
+        public InventoryController InventoryController { get { return _inventoryController; } }
         private InventoryMovingController _inventoryMovingController;
+        public InventoryMovingController InventoryMovingController { get { return _inventoryMovingController; } }
         private RoomController _roomController;
+        public RoomController RoomController { get { return _roomController; } }
         public int SelectedId { get; set; }
 
         //--------------------------------------------------------------------------------------------------------
@@ -125,12 +129,14 @@ namespace WpfApp1.View.Model.Executive
 
         private void AddNewStaticEquipment_Click(object sender, RoutedEventArgs e)
         {
-            DialogContainer.Visibility = Visibility.Visible;
+            /*DialogContainer.Visibility = Visibility.Visible;
             AddContainer.Visibility = Visibility.Visible;
             AddRooms.Text = "";
             AddName.Text = "";
             Feedback = "";
-            RefreshRooms();
+            RefreshRooms();*/
+
+            FormFrame.Content = new NewInventory(this);
         }
 
         private void AddConfirm_Click(object sender, RoutedEventArgs e)

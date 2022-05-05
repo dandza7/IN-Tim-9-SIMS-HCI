@@ -128,5 +128,6 @@
                 </Border>
             </Grid>
         </Border>
+        <Frame Name="FormFrame" Grid.ColumnSpan="4" Grid.RowSpan="2"></Frame>
     </Grid>
 </Page>
