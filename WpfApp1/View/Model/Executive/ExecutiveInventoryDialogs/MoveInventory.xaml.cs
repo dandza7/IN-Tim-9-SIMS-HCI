@@ -18,10 +18,9 @@ using WpfApp1.Model;
 namespace WpfApp1.View.Model.Executive.ExecutiveInventoryDialogs
 {
     /// <summary>
-    /// Interaction logic for NewInventory.xaml
+    /// Interaction logic for MoveInventory.xaml
     /// </summary>
-    
-    public partial class NewInventory : Page, INotifyPropertyChanged
+    public partial class MoveInventory : Page, INotifyPropertyChanged
     {
         #region NotifyProperties
         public String _feedback;
@@ -55,44 +54,45 @@ namespace WpfApp1.View.Model.Executive.ExecutiveInventoryDialogs
         #endregion
         public ExecutiveInventoryPages ParentPage { get; set; }
         public List<string> SOPRooms { get; set; }
-        public NewInventory(ExecutiveInventoryPages parent)
+        public MoveInventory(ExecutiveInventoryPages parent)
         {
             InitializeComponent();
             this.DataContext = this;
             this.ParentPage = parent;
             this.SOPRooms = parent.InventoryController.GetSOPRooms();
-            AddRooms.Text = "";
-            AddName.Text = "";
+            InventoryName.Text = ParentPage.SelectedInventoryName;
+            OldRoom.Text = ParentPage.SelectedRoomName;
             Feedback = "";
-            
         }
 
         private void CloseButton_Click(object sender, RoutedEventArgs e)
         {
             ParentPage.FormFrame.Content = null;
-            AddRooms.Text = "";
-            AddName.Text = "";
+            InventoryName.Text = "";
+            OldRoom.Text = "";
+            NewRoom.Text = "";
             Feedback = "";
         }
 
         private void ConfirmButton_Click(object sender, RoutedEventArgs e)
         {
-            if (AddRooms.Text == "" || AddName.Text == "")
+            if (NewRoom.Text == "" || MoveDate.Text == "")
             {
                 Feedback = "*you must fill all fields!";
                 return;
             }
-            if (AddName.Text.Contains(";"))
+            if (DateTime.Compare(DateTime.Parse(MoveDate.Text), DateTime.Today) < 0)
             {
-                Feedback = "*you can't use semicolon (;) in name!";
+                Feedback = "*you must select date that is either today or in future!";
                 return;
             }
-            ParentPage.InventoryController.Create(new Inventory(0, 0, AddName.Text, "S", 1), AddRooms.Text);
+            ParentPage.InventoryMovingController.NewMoving(new InventoryMoving(0, ParentPage.SelectedId, ParentPage.RoomController.GetIdByNametag(NewRoom.Text), DateTime.Parse(MoveDate.Text)));
             ParentPage.FormFrame.Content = null;
-            AddRooms.Text = "";
-            AddName.Text = "";
+            InventoryName.Text = "";
+            OldRoom.Text = "";
+            NewRoom.Text = "";
             Feedback = "";
-            ParentPage.Inventory = ParentPage.InventoryController.GetPreviews(); 
+            ParentPage.Inventory = ParentPage.InventoryController.GetPreviews();
         }
     }
 }

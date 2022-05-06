@@ -21,7 +21,7 @@
         </Grid.RowDefinitions>
         <Button x:Name="MoveStaticInventory" Grid.Column="2"  Style="{StaticResource ClassicButton}" Margin="20 5 20 5" Click="MoveStaticInventory_Click">Move Static Inventory</Button>
         <Button x:Name="AddNewStaticEquipment" Grid.Column="3"  Style="{StaticResource ClassicButton}" Margin="0 5 20 5" Click="AddNewStaticEquipment_Click">Add New Static Inventory</Button>
-        <DataGrid x:Name="InventoryDG" AutoGenerateColumns="False" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="4" Style="{StaticResource ExecutiveDataGrid}" ItemsSource="{Binding Inventory}">
+        <DataGrid x:Name="InventoryDG" AutoGenerateColumns="False" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="4" Style="{StaticResource ExecutiveDataGrid}" ItemsSource="{Binding Inventory}" Margin="20 0 20 40">
             <DataGrid.Columns>
                 <DataGridTextColumn Header=" ID" Width="*"  Binding="{Binding Id}" HeaderStyle="{StaticResource ExecutiveDGHeader}" CellStyle="{StaticResource ExecutiveDGCell}"/>
                 <DataGridTextColumn Header=" TYPE" Width="1.2*"  Binding="{Binding Type}" HeaderStyle="{StaticResource ExecutiveDGHeader}" CellStyle="{StaticResource ExecutiveDGCell}"/>
@@ -34,98 +34,22 @@
                    Color="{StaticResource White}"/>
             </DataGrid.Resources>
         </DataGrid>
-        <Border x:Name="DialogContainer" Grid.ColumnSpan="4" Grid.RowSpan="2" Style="{StaticResource OverlayModal}" Visibility="Collapsed">
+        <Border x:Name="WrongSelectionContainer" Grid.Column="2" Grid.Row="0" Grid.RowSpan="2" Style="{StaticResource ErrorModal}" Margin="15 0 15 350" Visibility="Collapsed">
+            <Border.Effect>
+                <DropShadowEffect BlurRadius="5"/>
+            </Border.Effect>
             <Grid>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="300"/>
                     <ColumnDefinition/>
-                    <ColumnDefinition Width="300"/>
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="50"/>
-                    <RowDefinition/>
-                    <RowDefinition Height="80"/>
+                    <RowDefinition Height="2*"/>
+                    <RowDefinition Height="4*"/>
+                    <RowDefinition Height="2*"/>
                 </Grid.RowDefinitions>
-                <Border x:Name="AddContainer" Grid.Column="1" Grid.Row="1" Style="{StaticResource DialogModal}" Visibility="Collapsed">
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="100"/>
-                            <ColumnDefinition/>
-                            <ColumnDefinition Width="50"/>
-                            <ColumnDefinition Width="40"/>
-                            <ColumnDefinition Width="10"/>
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="10"/>
-                            <RowDefinition Height="40"/>
-                            <RowDefinition Height="10"/>
-                            <RowDefinition/>
-                            <RowDefinition/>
-                            <RowDefinition/>
-                            <RowDefinition/>
-                            <RowDefinition/>
-                            <RowDefinition/>
-                            <RowDefinition/>
-                        </Grid.RowDefinitions>
-                        <Label Grid.Row="3" Grid.Column="1" Content="Name:" Style="{StaticResource FormLabel}"></Label>
-                        <TextBox x:Name="AddName" Grid.Row="4" Grid.Column="1" Style="{StaticResource FormInputBox}"></TextBox>
-                        <Label Grid.Row="5" Grid.Column="1" Content="Room:" Style="{StaticResource FormLabel}"></Label>
-                        <ComboBox Name="AddRooms" Grid.Row="6" Grid.Column="1" Style="{StaticResource FormInputComboBox}" Height="30" Width="260" ItemsSource="{Binding Path=SOPRooms}"></ComboBox>
-                        <TextBlock Grid.Row="7" Grid.Column="1" Style="{StaticResource SmallText}" Text="{Binding Path=Feedback, UpdateSourceTrigger=PropertyChanged}"></TextBlock>
-                        <Button x:Name="AddConfirm" Grid.Column="1" Grid.Row="8" Style="{StaticResource ClassicButton}" Margin="50 4" Click="AddConfirm_Click">Add Equipment</Button>
-                        <Button x:Name="XAddButton" Grid.Column="3" Grid.Row="1" Style="{StaticResource ClassicButton}" Click="XAddButton_Click">X</Button>
-                    </Grid>
-                </Border>
-                <Border x:Name="MoveContainer" Grid.Column="1" Grid.Row="1" Style="{StaticResource DialogModal}" Margin="100 0 100 0" Visibility="Collapsed">
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="100"/>
-                            <ColumnDefinition/>
-                            <ColumnDefinition Width="50"/>
-                            <ColumnDefinition Width="40"/>
-                            <ColumnDefinition Width="10"/>
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="10"/>
-                            <RowDefinition Height="40"/>
-                            <RowDefinition/>
-                            <RowDefinition/>
-                            <RowDefinition/>
-                            <RowDefinition/>
-                            <RowDefinition/>
-                            <RowDefinition/>
-                            <RowDefinition/>
-                            <RowDefinition/>
-                            <RowDefinition/>
-                        </Grid.RowDefinitions>
-                        <Label Grid.Row="2" Grid.Column="1" Content="Current Room:" Style="{StaticResource FormLabel}"></Label>
-                        <TextBox x:Name="MoveOldRoom" Grid.Row="3" Grid.Column="1" Style="{StaticResource FormInputBox}" IsEnabled="False"></TextBox>
-                        <Label Grid.Row="4" Grid.Column="1" Content="New Room:" Style="{StaticResource FormLabel}"></Label>
-                        <ComboBox Name="MoveNewRoom" Grid.Row="5" Grid.Column="1" Style="{StaticResource FormInputComboBox}" Height="30" Width="260" ItemsSource="{Binding Path=SOPRooms}"></ComboBox>
-                        <Label Grid.Row="6" Grid.Column="1" Content="Date of Moving:" Style="{StaticResource FormLabel}"></Label>
-                        <DatePicker Name="MoveDate" Grid.Row="7" Grid.Column="1" Style="{StaticResource DatePickerExecutive}" Height="30" Width="260"></DatePicker>
-                        <TextBlock Grid.Row="8" Grid.Column="1" Style="{StaticResource SmallText}" Text="{Binding Path=Feedback, UpdateSourceTrigger=PropertyChanged}" TextWrapping="Wrap"></TextBlock>
-                        <Button x:Name="MoveConfirm" Grid.Column="1" Grid.Row="9" Style="{StaticResource ClassicButton}" Margin="50 0" Click="MoveConfirm_Click">Schedule</Button>
-                        <Button x:Name="XMoveButton" Grid.Column="3" Grid.Row="1" Style="{StaticResource ClassicButton}" Click="XMoveButton_Click">X</Button>
-                    </Grid>
-                </Border>
-                <Border x:Name="WrongSelectionContainer" Grid.Column="1" Grid.Row="1"  Margin="70 80 70 0" Visibility="Collapsed">
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="60"/>
-                            <ColumnDefinition/>
-                            <ColumnDefinition Width="60"/>
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="*"/>
-                            <RowDefinition Height="2*"/>
-                            <RowDefinition Height="2*"/>
-                        </Grid.RowDefinitions>
-                        <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Text="Problem with starting action." Style="{StaticResource Title}"></TextBlock>
-                        <Button x:Name="WrongSelectionOK" Grid.Column="1" Grid.Row="2" Style="{StaticResource ClassicButton}" Margin="120 40 120 40" Click="WrongSelectionOK_Click" BorderThickness="3">OK</Button>
-                        <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding Path=WrongSelection, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource NotificationText}"></TextBlock>
-                    </Grid>
-                </Border>
+                <TextBlock Grid.Row="0" Text="Problem with starting action:" Style="{StaticResource Title}" FontSize="22"></TextBlock>
+                <TextBlock Grid.Row="1" Text="{Binding Path=WrongSelection, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource NotificationText}" Margin="20 0"></TextBlock>
+                <Button x:Name="WrongSelectionOK" Grid.Row="2" Style="{StaticResource ClassicButton}" Margin="100 5" Click="WrongSelectionOK_Click" FontSize="24">OK</Button>
             </Grid>
         </Border>
         <Frame Name="FormFrame" Grid.ColumnSpan="4" Grid.RowSpan="2"></Frame>
