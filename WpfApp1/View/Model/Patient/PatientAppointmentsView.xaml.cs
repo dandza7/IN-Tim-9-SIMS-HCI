@@ -27,6 +27,8 @@ namespace WpfApp1.View.Model.Patient
     public partial class PatientAppointmentsView : Page
     {
         private AppointmentController _appointmentController;
+        private PatientController _patientController;
+
         public ObservableCollection<AppointmentView> Appointments { get; set; }
 
         public PatientAppointmentsView()
@@ -76,10 +78,14 @@ namespace WpfApp1.View.Model.Patient
             int patientId = (int)app.Properties["userId"];
 
             _appointmentController = app.AppointmentController;
-            _appointmentController.Delete(appointmentId);
+            _patientController = app.PatientController;
 
+            _appointmentController.PatientsAppointmentDelete(patientId, appointmentId);
             PatientAppointmentsDataGrid.ItemsSource = null;
             PatientAppointmentsDataGrid.ItemsSource = _appointmentController.GetPatientsAppointmentsView(patientId);
+
+            var patient = _patientController.GetById(patientId);
+            PatientErrorMessageBox.Show("You have " + (4 - patient.NumberOfCancellations) + " cancellations left in this month");
         }
     }
 }

@@ -35,9 +35,14 @@ namespace WpfApp1.Controller
             return _appointmentService.Update(appointment);
         }
 
-        public bool Delete(int id)
+        public bool Delete(int appointmentId)
         {
-            return  _appointmentService.Delete(id);
+            return  _appointmentService.Delete(appointmentId);
+        }
+
+        public bool PatientsAppointmentDelete(int patientId, int appointmentId)
+        {
+            return _appointmentService.PatientsAppointmentDelete(patientId, appointmentId);
         }
 
         public List<SecretaryAppointmentView> GetSecretaryAppointmentViews()
