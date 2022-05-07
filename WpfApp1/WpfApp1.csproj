@@ -156,6 +156,7 @@
     <Compile Include="View\Converter\AllergyConverter.cs" />
     <Compile Include="View\Converter\AppointmentConverter.cs" />
     <Compile Include="View\Converter\PatientConverter.cs" />
+    <Compile Include="View\Converter\ReportConverter.cs" />
     <Compile Include="View\Converter\TherapyConverter.cs" />
     <Compile Include="View\Dialog\PatientDialog\AddPatientAppointmentDialog.xaml.cs">
       <DependentUpon>AddPatientAppointmentDialog.xaml</DependentUpon>
@@ -179,6 +180,9 @@
     </Compile>
     <Compile Include="View\Dialog\PatientDialog\PatientHelp.Designer.cs">
       <DependentUpon>PatientHelp.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\Dialog\PatientDialog\ShowReportDetails.xaml.cs">
+      <DependentUpon>ShowReportDetails.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Dialog\SecretaryAddGuestPatientDialog.xaml.cs">
       <DependentUpon>SecretaryAddGuestPatientDialog.xaml</DependentUpon>
@@ -249,6 +253,9 @@
     <Compile Include="View\Model\Patient\PatientReportsView.xaml.cs">
       <DependentUpon>PatientReportsView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Model\Patient\ReportDetailsView.xaml.cs">
+      <DependentUpon>ReportDetailsView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Model\Patient\TherapyView.xaml.cs">
       <DependentUpon>TherapyView.xaml</DependentUpon>
     </Compile>
@@ -318,6 +325,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Dialog\PatientDialog\MovePatientAppointmentDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Dialog\PatientDialog\ShowReportDetails.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -424,6 +435,10 @@
     <Page Include="View\Model\Patient\PatientReportsView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\Model\Patient\ReportDetailsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Model\Patient\TherapyView.xaml">
       <SubType>Designer</SubType>

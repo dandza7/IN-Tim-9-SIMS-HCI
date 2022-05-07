@@ -68,7 +68,6 @@ namespace WpfApp1.View.Model.Patient
         private void AddAppointment_Click(object sender, RoutedEventArgs e)
         {
             var app = Application.Current as App;
-            app.Properties["DataView"] = PatientAppointmentsDataGrid;
             Frame patientFrame = (Frame)app.Properties["PatientFrame"];
             patientFrame.Content = new AddPatientAppointmentDialog();
         }
@@ -88,7 +87,6 @@ namespace WpfApp1.View.Model.Patient
             }
 
             app.Properties["appointmentId"] = appointmentId;
-            app.Properties["DataView"] = PatientAppointmentsDataGrid;
             Frame patientFrame = (Frame)app.Properties["PatientFrame"];
             patientFrame.Content = new MovePatientAppointmentDialog();
         }
