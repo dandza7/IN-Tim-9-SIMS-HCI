@@ -117,10 +117,9 @@ namespace WpfApp1.Service
 
         public Patient Update(Patient patient)
         {
-
-
             return _patientRepo.Update(patient);
         }
+
         public bool Delete(int patientId)
         {
             MedicalRecord mr = _medicalRecordRepo.GetPatientsMedicalRecord(patientId);

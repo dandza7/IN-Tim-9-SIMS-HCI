@@ -29,6 +29,7 @@ namespace WpfApp1.Service
         {
             InitializeComponent();
             var app = Application.Current as App;
+            app.Properties["PatientMenu"] = this;
             app.Properties["PatientFrame"] = PatientFrame;
             app.Properties["PatientOverlay"] = Overlay;
         }
