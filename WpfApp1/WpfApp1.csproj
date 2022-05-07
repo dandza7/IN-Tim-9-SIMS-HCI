@@ -91,6 +91,7 @@
     <Compile Include="Controller\AllergyController.cs" />
     <Compile Include="Controller\DoctorController.cs" />
     <Compile Include="Controller\DoctorsReportController.cs" />
+    <Compile Include="Controller\DynamicEquipmentRequestController.cs" />
     <Compile Include="Controller\InventoryController.cs" />
     <Compile Include="Controller\InventoryMovingController.cs" />
     <Compile Include="Controller\MedicalRecordController.cs" />
@@ -106,6 +107,7 @@
     <Compile Include="Model\Doctor.cs" />
     <Compile Include="Model\DoctorsReport.cs" />
     <Compile Include="Model\Drug.cs" />
+    <Compile Include="Model\DynamicEquipmentRequest.cs" />
     <Compile Include="Model\Inventory.cs" />
     <Compile Include="Model\InventoryMoving.cs" />
     <Compile Include="Model\MedicalRecord.cs" />
@@ -116,6 +118,7 @@
     <Compile Include="Model\User.cs" />
     <Compile Include="Repository\AllergyRepository.cs" />
     <Compile Include="Repository\DoctorsReportRepository.cs" />
+    <Compile Include="Repository\DynamicEquipmentRequestRepository.cs" />
     <Compile Include="Repository\InventoryMovingRepository.cs" />
     <Compile Include="Repository\InventoryRepository.cs" />
     <Compile Include="Repository\MedicalRecordRepository.cs" />
@@ -135,8 +138,11 @@
     <Compile Include="Repository\UserRepository.cs" />
     <None Include="Resources\Data\allergy.csv" />
     <None Include="Resources\Data\doctors_report.csv" />
+    <None Include="Resources\Data\dynamic_equipment_requests.csv" />
     <Compile Include="Service\AllergyService.cs" />
     <Compile Include="Service\DoctorsReportService.cs" />
+    <Compile Include="Service\DynamicEquipmentRequestService.cs" />
+    <Compile Include="Service\EquipmentRepository.cs" />
     <Compile Include="Service\InventoryMovingService.cs" />
     <None Include="Resources\Data\medical_record.csv" />
     <Compile Include="Service\InventoryService.cs" />
@@ -155,6 +161,7 @@
     <Compile Include="View\Converter\AbstractConverter.cs" />
     <Compile Include="View\Converter\AllergyConverter.cs" />
     <Compile Include="View\Converter\AppointmentConverter.cs" />
+    <Compile Include="View\Converter\DynamicEquipmentConverter.cs" />
     <Compile Include="View\Converter\PatientConverter.cs" />
     <Compile Include="View\Converter\TherapyConverter.cs" />
     <Compile Include="View\Dialog\PatientDialog\AddPatientAppointmentDialog.xaml.cs">
@@ -179,6 +186,9 @@
     </Compile>
     <Compile Include="View\Dialog\PatientDialog\PatientHelp.Designer.cs">
       <DependentUpon>PatientHelp.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\Dialog\SecretaryAddDynamicEquipmentDialog.xaml.cs">
+      <DependentUpon>SecretaryAddDynamicEquipmentDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Dialog\SecretaryAddGuestPatientDialog.xaml.cs">
       <DependentUpon>SecretaryAddGuestPatientDialog.xaml</DependentUpon>
@@ -243,11 +253,17 @@
     <Compile Include="View\Model\Secretary\AllergyView.xaml.cs">
       <DependentUpon>AllergyView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Model\Secretary\DynamicEquipmentView.xaml.cs">
+      <DependentUpon>DynamicEquipmentView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Model\Secretary\SecretaryAppointmentsView.xaml.cs">
       <DependentUpon>SecretaryAppointmentsView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Model\Secretary\SecretaryAppointmentView.xaml.cs">
       <DependentUpon>SecretaryAppointmentView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Model\Secretary\SecretaryDynamicEquipmentView.xaml.cs">
+      <DependentUpon>SecretaryDynamicEquipmentView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\PatientMenu.xaml.cs">
       <DependentUpon>PatientMenu.xaml</DependentUpon>
@@ -303,6 +319,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Dialog\PatientDialog\MovePatientAppointmentDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Dialog\SecretaryAddDynamicEquipmentDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -402,11 +422,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\Model\Secretary\DynamicEquipmentView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\Model\Secretary\SecretaryAppointmentsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Model\Secretary\SecretaryAppointmentView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Model\Secretary\SecretaryDynamicEquipmentView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

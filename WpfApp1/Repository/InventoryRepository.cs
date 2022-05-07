@@ -40,6 +40,30 @@ namespace WpfApp1.Repository
                 .ToList();
         }
 
+        public Inventory GetById(int id)
+        {
+            return GetAll().ToList().SingleOrDefault(Inventory => Inventory.Id == id);
+        }
+
+        public IEnumerable<Inventory> GetAllDynamic()
+        {
+            List<Inventory> allInventory = GetAll().ToList();
+            List<Inventory> dynamicInventory = new List<Inventory>();
+
+            foreach (Inventory inv in allInventory)
+            {
+                if (inv.Type == "D")
+                {
+                    dynamicInventory.Add(inv);
+                }
+            }
+
+            return dynamicInventory;
+        }
+
+
+
+
         private int GetMaxId(List<Inventory> inventories)
         {
             return inventories.Count() == 0 ? 0 : inventories.Max(inventory => inventory.Id);
@@ -50,6 +74,22 @@ namespace WpfApp1.Repository
             inventory.Id = GetMaxId(GetAll()) + 1;
             AppendLineToFile(_path, ConvertInventoryToCsvFormat(inventory));
             return inventory;
+        }
+        public Inventory AddAmount(int id, int amount)
+        {
+            List<Inventory> dynInv = GetAll().ToList();
+            List<string> newFile = new List<string>();
+            foreach (Inventory inv in dynInv)
+            {
+
+                if (inv.Id == id)
+                {
+                    inv.Amount = inv.Amount + amount;
+                }
+                newFile.Add(ConvertInventoryToCsvFormat(inv));
+            }
+            File.WriteAllLines(_path, newFile);
+            return GetById(id);
         }
 
         private Inventory ConvertCsvFormatToInventory(string inventoryCsvFormat)
