@@ -13,9 +13,9 @@
             <Button Style="{StaticResource HelpButton}" Click="HelpButton_Click"/>
         </WrapPanel>
         <Label Foreground="White" Content="Choose priority:" HorizontalAlignment="Left" Margin="337,175,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
-        <Label Foreground="White" Content="Choose time range:" HorizontalAlignment="Left" Margin="337,295,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
-        <Label Foreground="White" Content="From:" HorizontalAlignment="Left" Margin="460,280,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
-        <Label Foreground="White" Content="To:" HorizontalAlignment="Left" Margin="460,310,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
+        <Label Foreground="White" Content="Choose time range:" HorizontalAlignment="Left" Margin="337,235,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
+        <Label Foreground="White" Content="From:" HorizontalAlignment="Left" Margin="337,280,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
+        <Label Foreground="White" Content="To:" HorizontalAlignment="Left" Margin="337,310,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
         <Label Foreground="White" Content="Choose a doctor:" HorizontalAlignment="Left" Margin="337,375,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
         <Button Style="{StaticResource PatientDataGridButton}" Content="Confirm" HorizontalAlignment="Center" Margin="0,0,0,100" VerticalAlignment="Bottom" Click="ConfirmButton_Click"/>
         <Button Style="{StaticResource PatientDataGridButton}" Content="Discard" HorizontalAlignment="Center" Margin="210,0,0,100" VerticalAlignment="Bottom" Click="DiscardButton_Click"/>
@@ -24,7 +24,7 @@
             <ComboBoxItem Content="Doctor"/>
         </ComboBox>
         <ComboBox x:Name="DoctorComboBox" HorizontalAlignment="Left" Margin="537,375,0,0" VerticalAlignment="Top" Width="120" ItemsSource="{Binding Doctors}" DisplayMemberPath="Username"/>
-        <xctk:DateTimePicker x:Name="BeginningDTP" HorizontalAlignment="Left" Margin="505,280,0,0" VerticalAlignment="Top"/>
-        <xctk:DateTimePicker x:Name="EndingDTP" HorizontalAlignment="Left" Margin="505,310,0,0" VerticalAlignment="Top"/>
+        <xctk:DateTimePicker x:Name="BeginningDTP" HorizontalAlignment="Left" Margin="382,280,0,0" VerticalAlignment="Top"/>
+        <xctk:DateTimePicker x:Name="EndingDTP" HorizontalAlignment="Left" Margin="382,310,0,0" VerticalAlignment="Top"/>
     </Grid>
 </Page>
