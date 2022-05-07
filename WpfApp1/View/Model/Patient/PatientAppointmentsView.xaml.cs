@@ -25,12 +25,33 @@ namespace WpfApp1.View.Model.Patient
     /// <summary>
     /// Interaction logic for PatientAppointmentsView.xaml
     /// </summary>
-    public partial class PatientAppointmentsView : Page
+    public partial class PatientAppointmentsView : Page, INotifyPropertyChanged
     {
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected virtual void OnPropertyChanged(string name)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(name));
+            }
+        }
+
         private AppointmentController _appointmentController;
         private PatientController _patientController;
+        private ObservableCollection<AppointmentView> _appointments;
 
-        public ObservableCollection<AppointmentView> Appointments { get; set; }
+        public ObservableCollection<AppointmentView> Appointments
+        {
+            get { return _appointments; }
+            set
+            {
+                if (value != _appointments)
+                {
+                    _appointments = value;
+                    OnPropertyChanged("Appointments");
+                }
+            }
+        }
 
         public PatientAppointmentsView()
         {
@@ -82,15 +103,16 @@ namespace WpfApp1.View.Model.Patient
             _patientController = app.PatientController;
 
             _appointmentController.PatientsAppointmentDelete(patientId, appointmentId);
+
             PatientAppointmentsDataGrid.ItemsSource = null;
             PatientAppointmentsDataGrid.ItemsSource = _appointmentController.GetPatientsAppointmentsView(patientId);
-
+            
             var patient = _patientController.GetById(patientId);
 
-            if((3 - patient.NumberOfCancellations) > 0)
+            if((4 - patient.NumberOfCancellations) > 0)
             {
-                PatientErrorMessageBox.Show("You have " + (3 - patient.NumberOfCancellations) + " cancellations left in this month");
-            } else if(3 - patient.NumberOfCancellations == 0) {
+                PatientErrorMessageBox.Show("You have " + (4 - patient.NumberOfCancellations) + " cancellations left in this month");
+            } else if(4 - patient.NumberOfCancellations == 0) {
                 PatientErrorMessageBox.Show("WARNING: If you cancel one more appointment in this month you will get banned.");
             } else {
                 Window patientMenu = (Window)app.Properties["PatientMenu"];

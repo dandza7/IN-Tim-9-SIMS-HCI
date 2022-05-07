@@ -57,15 +57,15 @@
                     </DataGrid>
                 </Grid>
             </TabItem>
-            <TabItem Header="Reports" Style="{StaticResource PatientTabItem}">
+            <TabItem Header="Appointment History" Style="{StaticResource PatientTabItem}">
                 <Grid Background="{StaticResource DarkBlueBrush}">
-                    <Label Content="Choose time period:" FontSize="17" FontWeight="Bold" VerticalContentAlignment="Top" HorizontalAlignment="Left" Margin="200,50,0,490" Foreground="White"/>
-                    <Label Content="From:" FontSize="17" FontWeight="Bold" VerticalContentAlignment="Top" HorizontalAlignment="Left" Margin="380, 35, 0, 505" Foreground="White"/>
-                    <Label Content="To:" FontSize="17" FontWeight="Bold" VerticalContentAlignment="Top" HorizontalAlignment="Left" Margin="380, 65, 0, 475" Foreground="White"/>
-                    <DatePicker x:Name="FromDP" VerticalContentAlignment="Top" HorizontalAlignment="Left" Margin="440, 35, 0, 505"/>
-                    <DatePicker x:Name="ToDP" VerticalContentAlignment="Top" HorizontalAlignment="Left" Margin="440, 65, 0, 475"/>
-                    <Button Content="Search" Style="{StaticResource PatientSearchButton}" VerticalContentAlignment="Top" HorizontalAlignment="Left" Margin="600, 50, 0, 495" Click="SearchReports_Click"/>
-                    <DataGrid x:Name="PatientReportsDataGrid" MaxHeight="500" MaxWidth="705" Style="{StaticResource PatientDataGrid}" ItemsSource="{Binding Reports, UpdateSourceTrigger=PropertyChanged}">
+                    <Label Content="Choose time period:" FontSize="17" FontWeight="Bold" VerticalContentAlignment="Top" HorizontalAlignment="Center" Margin="0,20,0,490" Foreground="White"/>
+                    <Label Content="From:" FontSize="17" FontWeight="Bold" VerticalContentAlignment="Top" HorizontalAlignment="Left" Margin="312, 55, 0, 485" Foreground="White"/>
+                    <Label Content="To:" FontSize="17" FontWeight="Bold" VerticalContentAlignment="Top" HorizontalAlignment="Left" Margin="312, 90, 0, 450" Foreground="White"/>
+                    <DatePicker x:Name="FromDP" VerticalContentAlignment="Top" HorizontalAlignment="Left" Margin="380, 55, 0, 485"/>
+                    <DatePicker x:Name="ToDP" VerticalContentAlignment="Top" HorizontalAlignment="Left" Margin="380, 90, 0, 450"/>
+                    <Button Content="Search" Style="{StaticResource PatientSearchButton}" VerticalContentAlignment="Top" HorizontalAlignment="Left" Margin="318, 135, 0, 395" Click="SearchReports_Click"/>
+                    <DataGrid x:Name="PatientReportsDataGrid" MaxHeight="500" MaxWidth="705" Style="{StaticResource PatientDataGrid}" Margin="0,205,0,0" ItemsSource="{Binding Reports, UpdateSourceTrigger=PropertyChanged}">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Id" Binding="{Binding Id}" CanUserSort="False"  ElementStyle="{StaticResource ColumnElementStyle}" CellStyle="{StaticResource PatientDataGridCell}"/>
                             <DataGridTextColumn Header="Room" Binding="{Binding NameTag}" CanUserSort="False" ElementStyle="{StaticResource ColumnElementStyle}" CellStyle="{StaticResource PatientDataGridCell}"/>
