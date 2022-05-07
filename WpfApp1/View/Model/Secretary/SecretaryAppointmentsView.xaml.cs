@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,8 +23,17 @@ namespace WpfApp1.View.Model.Secretary
     /// <summary>
     /// Interaction logic for SecretaryAppointmentsView.xaml
     /// </summary>
-    public partial class SecretaryAppointmentsView : Page
+    public partial class SecretaryAppointmentsView : Page, INotifyPropertyChanged
     {
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected virtual void OnPropertyChanged(string name)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(name));
+            }
+        }
         private AppointmentController _appointmentController;
         public ObservableCollection<SecretaryAppointmentView> Appointments { get; set; }
         public SecretaryAppointmentsView()
