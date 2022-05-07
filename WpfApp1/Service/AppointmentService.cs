@@ -51,9 +51,35 @@ namespace WpfApp1.Service
             return _appointmentRepo.Update(appointment);
         }
 
-        public bool Delete(int id)
+        public bool Delete(int appointmentId)
         {
-            return _appointmentRepo.Delete(id);
+            return _appointmentRepo.Delete(appointmentId);
+        }
+
+        public bool PatientsAppointmentDelete(int patientId, int appointmentId)
+        {
+            Patient patient = _patientRepo.GetById(patientId);
+            DateTime lastCancellationDate = patient.LastCancellationDate;
+
+            DateTime currentDate = DateTime.Now;
+            int month = currentDate.Month;
+            int year = currentDate.Year;
+            DateTime resetDate = new DateTime(year, month, 1, 0, 0, 0);
+
+            if (lastCancellationDate < resetDate)
+            {
+                patient.NumberOfCancellations = 1;
+                patient.LastCancellationDate = currentDate;
+                _patientRepo.Update(patient);
+
+            } else
+            {
+                patient.NumberOfCancellations += 1;
+                patient.LastCancellationDate = currentDate;
+                _patientRepo.Update(patient);
+            }
+
+            return _appointmentRepo.Delete(appointmentId);
         }
 
         public List<AppointmentView> SecretaryGetAvailableAppointmentOptions(string priority,

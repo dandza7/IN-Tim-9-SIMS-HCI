@@ -32,6 +32,12 @@ namespace WpfApp1.Repository
                 .Select(ConvertCSVFormatToPatient)
                 .ToList();
         }
+
+        public Patient GetById(int id)
+        {
+            return GetAll().ToList().SingleOrDefault(patient => patient.Id == id);
+        }
+
         public Patient Create(Patient patient)
         {
             int maxId = GetMaxId(GetAll());
@@ -52,6 +58,7 @@ namespace WpfApp1.Repository
                     p.City = patient.City;
                     p.Country = patient.Country;
                     p.NumberOfCancellations = patient.NumberOfCancellations;
+                    p.LastCancellationDate = patient.LastCancellationDate;
                 }
                 newFile.Add(ConvertPatientToCSVFormat(p));
             }
@@ -74,11 +81,6 @@ namespace WpfApp1.Repository
             }
             File.WriteAllLines(_path, newFile);
             return isDeleted;
-        }
-
-        public Patient GetById(int patientId)
-        {
-            return GetAll().ToList().SingleOrDefault(patient => patient.Id == patientId);
         }
 
         private Patient ConvertCSVFormatToPatient(string patientCSVFormat)
