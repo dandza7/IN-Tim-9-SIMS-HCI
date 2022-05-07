@@ -27,10 +27,22 @@ namespace WpfApp1.Controller
         {
             return _inventoryService.GetSOPRooms();
         }
-
+        public Inventory GetById(int id)
+        {
+            return _inventoryService.GetById(id);
+        }
         public Inventory Create(Inventory inv, string roomName)
         {
             return _inventoryService.Create(inv, roomName);
+        }
+        public IEnumerable<Inventory> GetAllDynamic()
+        {
+            return _inventoryService.GetAllDynamic();
+        }
+
+        public Inventory AddAmount(int id, int amount)
+        {
+            return _inventoryService.AddAmount(id, amount);
         }
     }
 }

@@ -80,9 +80,9 @@ namespace WpfApp1.View.Dialog
             Patient patient = new Patient(
                 int.Parse(updateidTB.Text),
                 updateemailTB.Text,
-                "",
-                "",
-                "",
+                updateaddressTB.Text,
+                updatecityTB.Text,
+                updatecountryTB.Text,
                 0,
                 DateTime.Parse("01.01.2001. 07:00:00")
                 );

@@ -49,6 +49,10 @@ namespace WpfApp1.Service
             }
             return inventoryPreviews;
         }
+        public Inventory GetById(int id)
+        {
+            return _inventoryRepository.GetById(id);
+        }
         public List<string> GetSOPRooms()
         {
             List<Room> rooms = _roomRepository.GetAll();
@@ -76,5 +80,14 @@ namespace WpfApp1.Service
             }
             return _inventoryRepository.Create(newInv);
         }
+        public IEnumerable<Inventory> GetAllDynamic()
+        {
+            return _inventoryRepository.GetAllDynamic();
+        }
+        public Inventory AddAmount(int id, int amount)
+        {
+            return _inventoryRepository.AddAmount(id, amount);
+        }
+
     }
 }

@@ -46,8 +46,14 @@ namespace WpfApp1.View.Util
             PatientsColorMark.Background = (SolidColorBrush)new BrushConverter().ConvertFromString("#FF101010");
             Main.Content = new SecretaryAppointmentsView();
         }
-        
-            private void CloseAllWindows()
+        private void SecretaryDynamicEquipemnt_Click(object sender, RoutedEventArgs e)
+        {
+            PageHeader.Text = "Dynamic Equipment List";
+            AppointmentsColorMark.Background = (SolidColorBrush)new BrushConverter().ConvertFromString("#FFFD8117");
+            PatientsColorMark.Background = (SolidColorBrush)new BrushConverter().ConvertFromString("#FF101010");
+            Main.Content = new SecretaryDynamicEquipmentView();
+        }
+        private void CloseAllWindows()
         {
             for (int intCounter = App.Current.Windows.Count - 1; intCounter > -1; intCounter--)
             {
