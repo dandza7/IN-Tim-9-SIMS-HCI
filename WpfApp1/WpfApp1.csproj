@@ -216,6 +216,12 @@
     <Compile Include="View\Model\Executive\ExecutiveInventoryPages.xaml.cs">
       <DependentUpon>ExecutiveInventoryPages.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Model\Executive\ExecutiveRoomDialogs\EditRoom.xaml.cs">
+      <DependentUpon>EditRoom.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Model\Executive\ExecutiveRoomDialogs\NewRoom.xaml.cs">
+      <DependentUpon>NewRoom.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Model\Patient\AppointmentView.xaml.cs">
       <DependentUpon>AppointmentView.xaml</DependentUpon>
     </Compile>
@@ -372,6 +378,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\Model\Executive\ExecutiveRoomDialogs\EditRoom.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Model\Executive\ExecutiveRoomDialogs\NewRoom.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\Model\Patient\AppointmentView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -492,5 +506,6 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

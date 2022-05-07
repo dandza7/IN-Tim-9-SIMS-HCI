@@ -15,6 +15,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using WpfApp1.Controller;
 using WpfApp1.Model;
+using WpfApp1.View.Model.Executive.ExecutiveRoomDialogs;
 
 namespace WpfApp1.View.Model.Executive
 {
@@ -76,6 +77,22 @@ namespace WpfApp1.View.Model.Executive
                 }
             }
         }
+        private List<Room> _rooms;
+        public List<Room> Rooms
+        {
+            get
+            {
+                return _rooms;
+            }
+            set
+            {
+                if (value != _rooms)
+                {
+                    _rooms = value;
+                    OnPropertyChanged("Rooms");
+                }
+            }
+        }
         #endregion
         #region PropertyChangedNotifier
         protected virtual void OnPropertyChanged(string name)
@@ -94,13 +111,22 @@ namespace WpfApp1.View.Model.Executive
         //--------------------------------------------------------------------------------------------------------
 
         private RoomController _roomController;
+        public RoomController RoomController
+        {
+            get { return _roomController; }
+        }
         private RenovationController _renovationController;
-        public List<Room> Rooms { get; set; }
+        public RenovationController RenovationController
+        {
+            get { return _renovationController; }
+        }
+
         public List<String> RoomTypes { get; set; }
         public List<String> Beginnings { get; set; }
         public List<String> Endings { get; set; }
         public int SelectedId { get; set; }
         public String SelectedNametag { get; set; }
+        public String SelectedType { get; set; }
 
         //--------------------------------------------------------------------------------------------------------
         //          Constructor code:
@@ -120,6 +146,8 @@ namespace WpfApp1.View.Model.Executive
             Feedback = "";
             SelectedBeginning = "";
             SelectedNametag = "";
+            SelectedType = "";
+            SelectedType = "";
             SelectedId = 0;
 
         }
@@ -127,7 +155,15 @@ namespace WpfApp1.View.Model.Executive
         //--------------------------------------------------------------------------------------------------------
         //          Global methods code:
         //--------------------------------------------------------------------------------------------------------
-
+        public void ResetFields()
+        {
+            Feedback = "";
+            SelectedBeginning = "";
+            SelectedNametag = "";
+            SelectedType = "";
+            SelectedType = "";
+            SelectedId = 0;
+        }
         public void RefreshSource()
         {
             this.Rooms = this._roomController.GetAll();
@@ -135,11 +171,6 @@ namespace WpfApp1.View.Model.Executive
             RoomsDG.Items.Refresh();
         }
 
-        private void NotSelectedOK_Click(object sender, RoutedEventArgs e)
-        {
-            NotSelectedContainer.Visibility = Visibility.Collapsed;
-            DialogContainer.Visibility = Visibility.Collapsed;
-        }
 
         //--------------------------------------------------------------------------------------------------------
         //          Room Adding code:
@@ -147,52 +178,7 @@ namespace WpfApp1.View.Model.Executive
 
         private void AddRoomButton_Click(object sender, RoutedEventArgs e)
         {
-            DialogContainer.Visibility = Visibility.Visible;
-            AddContainer.Visibility = Visibility.Visible;
-            Feedback = "";
-            AddNametag.Text = "";
-            AddType.Text = "";
-        }
-        private void XAddButton_Click(object sender, RoutedEventArgs e)
-        {
-            DialogContainer.Visibility = Visibility.Collapsed;
-            AddContainer.Visibility = Visibility.Collapsed;
-            Feedback = "";
-            AddNametag.Text = "";
-            AddType.Text = "";
-        }
-        private void AddConfirm_Click(object sender, RoutedEventArgs e)
-        {
-            if(AddNametag.Text == "" || AddType.Text == "")
-            {
-                
-                Feedback = "*You have to fill all fields!";
-                return;
-            }
-            if(AddNametag.Text.Contains(";"))
-            {
-                Feedback = "*You can't use semicolon (;) in Nametag!";
-                return;
-            }
-            foreach(Room room in Rooms)
-            {
-                if(room.Nametag == AddNametag.Text)
-                {
-                    Feedback = "*Selected Nametag is already in use!";
-                    return;
-                }
-            }
-
-
-            _roomController.Create(new Room(0, AddNametag.Text, AddType.Text));
-            DialogContainer.Visibility = Visibility.Collapsed;
-            AddContainer.Visibility = Visibility.Collapsed;
-            RefreshSource();
-            Feedback = "";
-            AddNametag.Text = "";
-            AddType.Text = "";
-
-
+            FormFrame.Content = new NewRoom(this);
         }
 
         //--------------------------------------------------------------------------------------------------------
@@ -204,51 +190,22 @@ namespace WpfApp1.View.Model.Executive
             if(RoomsDG.SelectedItems.Count == 0)
             {
                 SelectionProblem = "You have to select room for editing first!";
-                NotSelectedContainer.Visibility = Visibility.Visible;
-                DialogContainer.Visibility = Visibility.Visible;
+                WrongSelectionContainer.Visibility = Visibility.Visible;
                 return;
             }
-            Feedback = "";
-            EditType.Text = "";
             Room r = (Room)RoomsDG.SelectedItems[0];
             SelectedId = r.Id;
             if (SelectedId == 1 || SelectedId == 2)
             {
                 SelectionProblem = "You can't edit this room!";
-                NotSelectedContainer.Visibility = Visibility.Visible;
-                DialogContainer.Visibility = Visibility.Visible;
+                WrongSelectionContainer.Visibility = Visibility.Visible;
                 return;
             }
             SelectedNametag = r.Nametag;
-            EditNametag.Text = r.Nametag;
-            DialogContainer.Visibility = Visibility.Visible;
-            EditContainer.Visibility = Visibility.Visible;
+            SelectedType = r.Type;
+            FormFrame.Content = new EditRoom(this);
         }
 
-        private void XEditButton_Click(object sender, RoutedEventArgs e)
-        {
-            Feedback = "";
-            SelectedNametag = "";
-            EditType.Text = "";
-            DialogContainer.Visibility = Visibility.Collapsed;
-            EditContainer.Visibility = Visibility.Collapsed;
-        }
-
-        private void EditConfirm_Click(object sender, RoutedEventArgs e)
-        {
-            if (EditType.Text == "")
-            {
-                Feedback = "*You have to select new type of room!";
-                return;
-            }
-            _roomController.Update(new Room(SelectedId, SelectedNametag, EditType.Text));
-            Feedback = "";
-            SelectedNametag = "";
-            EditType.Text = "";
-            DialogContainer.Visibility = Visibility.Collapsed;
-            EditContainer.Visibility = Visibility.Collapsed;
-            RefreshSource();
-        }
 
 
 
@@ -263,8 +220,7 @@ namespace WpfApp1.View.Model.Executive
             if (RoomsDG.SelectedItems.Count == 0)
             {
                 SelectionProblem = "You have to select room for deleting first!";
-                NotSelectedContainer.Visibility = Visibility.Visible;
-                DialogContainer.Visibility = Visibility.Visible;
+                WrongSelectionContainer.Visibility = Visibility.Visible;
                 return;
             }
             Room r = (Room)RoomsDG.SelectedItems[0];
@@ -272,28 +228,31 @@ namespace WpfApp1.View.Model.Executive
             if (SelectedId == 1 || SelectedId == 2)
             {
                 SelectionProblem = "You can't delete this room!";
-                NotSelectedContainer.Visibility = Visibility.Visible;
-                DialogContainer.Visibility = Visibility.Visible;
+                WrongSelectionContainer.Visibility = Visibility.Visible;
                 return;
             }
-            DeleteNametag.Text = r.Nametag;
-            DialogContainer.Visibility = Visibility.Visible;
-            DeleteContainer.Visibility = Visibility.Visible;
+            DeleteRoomButton.Visibility = Visibility.Collapsed;
+            DeleteConfirmButton.Visibility = Visibility.Visible;
             
         }
-        private void XDeleteButton_Click(object sender, RoutedEventArgs e)
+
+        private void DeleteConfirmButton_Click(object sender, RoutedEventArgs e)
         {
-            DialogContainer.Visibility = Visibility.Collapsed;
-            DeleteContainer.Visibility = Visibility.Collapsed;
+            this.RoomController.Delete(SelectedId);
+            this.Rooms = this.RoomController.GetAll();
+            ResetFields();
+            DeleteRoomButton.Visibility = Visibility.Visible;
+            DeleteConfirmButton.Visibility = Visibility.Collapsed;
+
+
+        }
+        private void DeleteConfirmButton_MouseLeave(object sender, MouseEventArgs e)
+        {
+            ResetFields();
+            DeleteRoomButton.Visibility = Visibility.Visible;
+            DeleteConfirmButton.Visibility = Visibility.Collapsed;
         }
 
-        private void DeleteConfirm_Click(object sender, RoutedEventArgs e)
-        {
-            this._roomController.Delete(SelectedId);
-            RefreshSource();
-            DialogContainer.Visibility = Visibility.Collapsed;
-            DeleteContainer.Visibility = Visibility.Collapsed;
-        }
         //--------------------------------------------------------------------------------------------------------
         //          Renovating button manipulation code:
         //--------------------------------------------------------------------------------------------------------
@@ -319,8 +278,7 @@ namespace WpfApp1.View.Model.Executive
             if (RoomsDG.SelectedItems.Count == 0)
             {
                 SelectionProblem = "You have to select room for renovation first!";
-                NotSelectedContainer.Visibility = Visibility.Visible;
-                DialogContainer.Visibility = Visibility.Visible;
+                WrongSelectionContainer.Visibility = Visibility.Visible;
                 return;
             }
             ResetFieldsBR();
@@ -400,6 +358,10 @@ namespace WpfApp1.View.Model.Executive
         private void AdvancedRenovationButton_Click(object sender, RoutedEventArgs e)
         {
             
+        }
+        private void WrongSelectionOK_Click(object sender, RoutedEventArgs e)
+        {
+            WrongSelectionContainer.Visibility = Visibility.Collapsed;
         }
 
 
