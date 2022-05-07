@@ -132,7 +132,7 @@ namespace WpfApp1.Service
         {
             User u = _userRepo.GetById(id);
             Patient p = _patientRepo.GetById(id);
-            Patient p1 = new Patient(u.Name, u.Surname, u.Jmbg, u.Username, u.Password, p.PhoneNumber,
+            Patient p1 = new Patient(u.Name, u.Surname, u.Jmbg, u.Username, u.Password, u.PhoneNumber,
             p.Email, p.Street, p.City, p.Country, p.NumberOfCancellations, p.LastCancellationDate);
             return p1;
         }

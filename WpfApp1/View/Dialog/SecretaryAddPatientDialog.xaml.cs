@@ -52,9 +52,9 @@ namespace WpfApp1.View.Dialog
             Patient patient = new Patient(
                 u.Id,
                 emailTB.Text,
-                "",
-                "",
-                "",
+                addressTB.Text,
+                cityTB.Text,
+                countryTB.Text,
                 0,
                 DateTime.Parse("01.01.2001. 07:00:00")
             );

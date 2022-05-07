@@ -46,6 +46,8 @@ namespace WpfApp1.View.Dialog
             MedicalRecord r = this._mrController.GetByPatientId(patientId);
             Console.WriteLine(patientId);
             Console.WriteLine(r.Id);
+            Console.WriteLine(p.Username);
+            Console.WriteLine(p.PhoneNumber);
             updateidTB.Text = patientId.ToString();
             updatenameTB.Text = p.Name;
             updatesurnameTB.Text = p.Surname;

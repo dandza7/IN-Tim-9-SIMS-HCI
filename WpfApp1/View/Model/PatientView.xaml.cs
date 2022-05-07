@@ -20,8 +20,9 @@ namespace WpfApp1.View.Model
     /// <summary>
     /// Interaction logic for PatientView.xaml
     /// </summary>
-    public partial class PatientView : UserControl
+    public partial class PatientView : UserControl, INotifyPropertyChanged
     {
+        public event PropertyChangedEventHandler PropertyChanged;
         public PatientView()
         {
             InitializeComponent();
@@ -178,7 +179,6 @@ namespace WpfApp1.View.Model
             }
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
         private void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));

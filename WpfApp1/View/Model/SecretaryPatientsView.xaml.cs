@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,9 +24,17 @@ namespace WpfApp1.View.Model
     /// <summary>
     /// Interaction logic for SecretaryPatientsView.xaml
     /// </summary>
-    public partial class SecretaryPatientsView : Page
+    public partial class SecretaryPatientsView : Page, INotifyPropertyChanged
     {
 
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected virtual void OnPropertyChanged(string name)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(name));
+            }
+        }
         private PatientController _patientController;
 
         private UserController _userController;
