@@ -38,7 +38,7 @@ namespace WpfApp1.View.Dialog
             int mrId = mr.Id;
             Allergy allergy = new Allergy(
                 mrId,
-                nameTB.Text
+                allergynameTB.Text
                 );
 
             _allergyController.Create(allergy);

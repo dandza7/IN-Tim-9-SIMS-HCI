@@ -130,7 +130,11 @@ namespace WpfApp1.Service
         }
         public Patient GetById(int id)
         {
-            return GetAll().ToList().SingleOrDefault(patient => patient.Id == id);
+            User u = _userRepo.GetById(id);
+            Patient p = _patientRepo.GetById(id);
+            Patient p1 = new Patient(u.Name, u.Surname, u.Jmbg, u.Username, u.Password, p.PhoneNumber,
+            p.Email, p.Street, p.City, p.Country, p.NumberOfCancellations, p.LastCancellationDate);
+            return p1;
         }
 
         public Patient GetByUsername(string username)

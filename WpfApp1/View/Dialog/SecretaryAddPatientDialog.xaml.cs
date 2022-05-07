@@ -39,14 +39,14 @@ namespace WpfApp1.View.Dialog
 
             User user = new User(
 
-                nameTB.Text,
-                surnameTB.Text,
-                jmbgTB.Text,
-                usernameTB.Text,
-                passwordTB.Text,
-                brtelTB.Text,
-                User.RoleType.patient
-                );
+               nameTB.Text,
+               surnameTB.Text,
+               jmbgTB.Text,
+               usernameTB.Text,
+               passwordTB.Text,
+               contactTB.Text,
+               User.RoleType.patient
+            );
             User u = _userController.Create(user);
             Console.WriteLine(u.Id);
             Patient patient = new Patient(
