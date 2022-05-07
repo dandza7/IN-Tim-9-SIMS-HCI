@@ -16,6 +16,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using WpfApp1.Controller;
 using WpfApp1.Model;
+using WpfApp1.Service;
 using WpfApp1.View.Converter;
 using WpfApp1.View.Dialog.PatientDialog;
 
@@ -85,7 +86,23 @@ namespace WpfApp1.View.Model.Patient
             PatientAppointmentsDataGrid.ItemsSource = _appointmentController.GetPatientsAppointmentsView(patientId);
 
             var patient = _patientController.GetById(patientId);
-            PatientErrorMessageBox.Show("You have " + (4 - patient.NumberOfCancellations) + " cancellations left in this month");
+
+            if((3 - patient.NumberOfCancellations) > 0)
+            {
+                PatientErrorMessageBox.Show("You have " + (3 - patient.NumberOfCancellations) + " cancellations left in this month");
+            } else if(3 - patient.NumberOfCancellations == 0) {
+                PatientErrorMessageBox.Show("WARNING: If you cancel one more appointment in this month you will get banned.");
+            } else {
+                Window patientMenu = (Window)app.Properties["PatientMenu"];
+                var s = new MainWindow();
+
+                PatientErrorMessageBox.Show("You have been banned because you've cancelled too many appointments in this month!");
+
+                _patientController.Delete(patientId);
+
+                patientMenu.Close();
+                s.Show();
+            }
         }
     }
 }

@@ -59,7 +59,6 @@ namespace WpfApp1.Service
         public bool PatientsAppointmentDelete(int patientId, int appointmentId)
         {
             Patient patient = _patientRepo.GetById(patientId);
-            Console.WriteLine("Broj otkazivanja ovog mjeseca je " + patient.NumberOfCancellations);
             DateTime lastCancellationDate = patient.LastCancellationDate;
 
             DateTime currentDate = DateTime.Now;
@@ -67,8 +66,6 @@ namespace WpfApp1.Service
             int year = currentDate.Year;
             DateTime resetDate = new DateTime(year, month, 1, 0, 0, 0);
 
-            Console.WriteLine("Broj otkazivanja se resetuje " + resetDate);
-            Console.WriteLine("Datum posljednjeg otkazivana je " + lastCancellationDate);
             if (lastCancellationDate < resetDate)
             {
                 patient.NumberOfCancellations = 1;
@@ -78,11 +75,6 @@ namespace WpfApp1.Service
             } else
             {
                 patient.NumberOfCancellations += 1;
-                if(patient.NumberOfCancellations == 4)
-                {
-                    _patientRepo.Delete(patientId);
-                    return false;
-                }
                 patient.LastCancellationDate = currentDate;
                 _patientRepo.Update(patient);
             }
