@@ -207,8 +207,23 @@
     <Compile Include="View\ExecutiveMenu.xaml.cs">
       <DependentUpon>ExecutiveMenu.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Model\Executive\ExecutiveInventoryDialogs\MoveInventory.xaml.cs">
+      <DependentUpon>MoveInventory.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Model\Executive\ExecutiveInventoryDialogs\NewInventory.xaml.cs">
+      <DependentUpon>NewInventory.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Model\Executive\ExecutiveInventoryPages.xaml.cs">
       <DependentUpon>ExecutiveInventoryPages.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Model\Executive\ExecutiveRoomDialogs\BasicRenovation.xaml.cs">
+      <DependentUpon>BasicRenovation.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Model\Executive\ExecutiveRoomDialogs\EditRoom.xaml.cs">
+      <DependentUpon>EditRoom.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Model\Executive\ExecutiveRoomDialogs\NewRoom.xaml.cs">
+      <DependentUpon>NewRoom.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Model\Patient\AppointmentView.xaml.cs">
       <DependentUpon>AppointmentView.xaml</DependentUpon>
@@ -354,7 +369,27 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\Model\Executive\ExecutiveInventoryDialogs\MoveInventory.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Model\Executive\ExecutiveInventoryDialogs\NewInventory.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\Model\Executive\ExecutiveInventoryPages.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Model\Executive\ExecutiveRoomDialogs\BasicRenovation.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Model\Executive\ExecutiveRoomDialogs\EditRoom.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Model\Executive\ExecutiveRoomDialogs\NewRoom.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -478,5 +513,6 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

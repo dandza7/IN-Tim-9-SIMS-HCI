@@ -102,6 +102,7 @@ namespace WpfApp1.Repository
                 if (r.Id == room.Id)
                 {
                     r.Type = room.Type;
+                    r.Nametag = room.Nametag;
 
                 }
                 newFile.Add(ConvertRoomToCsvFormat(r));
