@@ -28,22 +28,7 @@ namespace WpfApp1.View.Model.Executive
         //          INotifyPropertyChanged fields:
         //--------------------------------------------------------------------------------------------------------
         #region NotifyProperties
-        public String _feedback;
-        public string Feedback
-        {
-            get
-            {
-                return _feedback;
-            }
-            set
-            {
-                if (value != _feedback)
-                {
-                    _feedback = value;
-                    OnPropertyChanged("Feedback");
-                }
-            }
-        }
+
         public String _selectionProblem;
         public string SelectionProblem
         {
@@ -60,23 +45,7 @@ namespace WpfApp1.View.Model.Executive
                 }
             }
         }
-        public String _selectedBeginning;
-        public string SelectedBeginning
-        {
-            get
-            {
-                return _selectedBeginning;
-            }
-            set
-            {
-                if (value != _selectedBeginning)
-                {
-                    _selectedBeginning = value;
-                    OnPropertyChanged("SelectedBeginning");
-                    FindPotentialEndings(SelectedBeginning);
-                }
-            }
-        }
+
         private List<Room> _rooms;
         public List<Room> Rooms
         {
@@ -143,8 +112,6 @@ namespace WpfApp1.View.Model.Executive
             this.Beginnings = new List<String>();
             this.Endings = new List<String>();
             this.DataContext = this;
-            Feedback = "";
-            SelectedBeginning = "";
             SelectedNametag = "";
             SelectedType = "";
             SelectedType = "";
@@ -157,18 +124,10 @@ namespace WpfApp1.View.Model.Executive
         //--------------------------------------------------------------------------------------------------------
         public void ResetFields()
         {
-            Feedback = "";
-            SelectedBeginning = "";
             SelectedNametag = "";
             SelectedType = "";
             SelectedType = "";
             SelectedId = 0;
-        }
-        public void RefreshSource()
-        {
-            this.Rooms = this._roomController.GetAll();
-            RoomsDG.ItemsSource = Rooms;
-            RoomsDG.Items.Refresh();
         }
 
 
@@ -281,77 +240,22 @@ namespace WpfApp1.View.Model.Executive
                 WrongSelectionContainer.Visibility = Visibility.Visible;
                 return;
             }
-            ResetFieldsBR();
-            BREnding.IsEnabled = false;
-            BRBeginning.IsEnabled = false;
-            DialogContainer.Visibility = Visibility.Visible;
-            BasicRenovationContainer.Visibility = Visibility.Visible;
             Room r = (Room)RoomsDG.SelectedItems[0];
             SelectedId = r.Id;
             SelectedNametag = r.Nametag;
-            BRNametag.Text = r.Nametag;
-            BRType.Text = r.Type;
+            SelectedType = r.Type;
             this.Beginnings = _renovationController.GetBegginigns(SelectedId);
             if(Beginnings.Count == 0)
             {
-                Feedback = "*there are no free days for renovation for this room in next 14 days!";
-            }
-            else
-            {
-                BRBeginning.ItemsSource = Beginnings;
-                BRBeginning.Items.Refresh();
-                BRBeginning.IsEnabled = true;
-            }
-            
-            
-        }
-        private void FindPotentialEndings(string beginning)
-        {
-            if (beginning.Equals(""))
-            {
+                SelectionProblem = "*there are no free days for renovation for this room in next 14 days!";
+                WrongSelectionContainer.Visibility = Visibility.Visible;
                 return;
             }
-            this.Endings = _renovationController.GetEndings(beginning, SelectedId);
-            BREnding.ItemsSource = Endings;
-            BREnding.Items.Refresh();
-            BREnding.IsEnabled = true;
-            
+            FormFrame.Content = new BasicRenovation(this);
+
         }
 
-        private void BRConfirm_Click(object sender, RoutedEventArgs e)
-        {
-            if(BRBeginning.Text.Equals("") || BREnding.Text.Equals("") || BRDescription.Text.Equals(""))
-            {
-                Feedback = "*you must fill all fields!";
-                return;
-            }
-            if (BRDescription.Text.Contains(";"))
-            {
-                Feedback = "*you can't put semicolon (;) in description!";
-                return;
-            }
-            _renovationController.Create(new Renovation(0, SelectedId, BRDescription.Text, DateTime.Parse(BRBeginning.Text), DateTime.Parse(BREnding.Text)));
 
-            DialogContainer.Visibility = Visibility.Collapsed;
-            BasicRenovationContainer.Visibility = Visibility.Collapsed;
-            ResetFieldsBR();
-        }
-
-        private void XBRButton_Click(object sender, RoutedEventArgs e)
-        {
-            DialogContainer.Visibility = Visibility.Collapsed;
-            BasicRenovationContainer.Visibility = Visibility.Collapsed;
-            ResetFieldsBR();
-        }
-        private void ResetFieldsBR()
-        {
-            Feedback = "";
-            BRNametag.Text = "";
-            BRType.Text = "";
-            BRDescription.Text = "";
-            BREnding.Text = "";
-            BRBeginning.Text = "";
-        }
         //--------------------------------------------------------------------------------------------------------
         //          Advanced Room Renovating code:
         //--------------------------------------------------------------------------------------------------------

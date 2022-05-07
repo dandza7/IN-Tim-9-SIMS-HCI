@@ -216,6 +216,9 @@
     <Compile Include="View\Model\Executive\ExecutiveInventoryPages.xaml.cs">
       <DependentUpon>ExecutiveInventoryPages.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Model\Executive\ExecutiveRoomDialogs\BasicRenovation.xaml.cs">
+      <DependentUpon>BasicRenovation.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Model\Executive\ExecutiveRoomDialogs\EditRoom.xaml.cs">
       <DependentUpon>EditRoom.xaml</DependentUpon>
     </Compile>
@@ -375,6 +378,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Model\Executive\ExecutiveInventoryPages.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Model\Executive\ExecutiveRoomDialogs\BasicRenovation.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
