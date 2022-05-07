@@ -18,6 +18,11 @@
     <Style x:Key="OverlayModal" TargetType="Border">
         <Setter Property="Background" Value="#CF0082F0"></Setter>
     </Style>
+    <Style x:Key="ErrorModal" TargetType="Border">
+        <Setter Property="Background" Value="{StaticResource LightestBlueBrush}"></Setter>
+        <Setter Property="BorderBrush" Value="{StaticResource AccentBlueBrush}"></Setter>
+        <Setter Property="BorderThickness" Value="5"/>
+    </Style>
     <Style x:Key="FormLabel" TargetType="Label">
         <Setter Property="FontSize" Value="24"></Setter>
         <Setter Property="FontFamily" Value="Impact"></Setter>
@@ -89,23 +94,25 @@
     </Style>
     <Style x:Key="NotificationText" TargetType="TextBlock">
         <Setter Property="Background" Value="{StaticResource WhiteBrush}"></Setter>
-        <Setter Property="FontSize" Value="30"></Setter>
+        <Setter Property="FontSize" Value="18"></Setter>
         <Setter Property="FontFamily" Value="Impact"></Setter>
         <Setter Property="Foreground" Value="{StaticResource AccentBlueBrush}"></Setter>
         <Setter Property="TextWrapping" Value="Wrap"></Setter>
-        <Setter Property="Padding" Value="10"></Setter>
+        <Setter Property="Padding" Value="5"></Setter>
 
     </Style>
     <Style x:Key="ExecutiveDataGrid" TargetType="DataGrid">
-        <Setter Property="Background" Value="{StaticResource AccentBlueBrush}"/>
+        <Setter Property="Background" Value="{StaticResource WhiteBrush}"/>
         <Setter Property="RowBackground" Value="{StaticResource LightestBlueBrush}"/>
         <Setter Property="AlternatingRowBackground" Value="{StaticResource LightBlueBrush}"/>
         <Setter Property="AlternationCount" Value="2"/>
         <Setter Property="FontSize" Value="30"></Setter>
         <Setter Property="FontFamily" Value="Impact"></Setter>
         <Setter Property="BorderThickness" Value="0"></Setter>
+        <Setter Property="BorderBrush" Value="{StaticResource AccentBlueBrush}"/>
         <Setter Property="VerticalGridLinesBrush" Value="{StaticResource AccentBlueBrush}"></Setter>
         <Setter Property="HorizontalGridLinesBrush" Value="{StaticResource AccentBlueBrush}"></Setter>
+        <Setter Property="VerticalScrollBarVisibility" Value="Hidden"/>
     </Style>
     <Style x:Key="ExecutiveDGHeader" TargetType="DataGridColumnHeader">
         <Setter Property="BorderBrush" Value="{StaticResource AccentBlueBrush}"></Setter>

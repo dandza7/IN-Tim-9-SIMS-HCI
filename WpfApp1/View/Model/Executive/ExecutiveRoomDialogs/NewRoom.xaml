@@ -1,0 +1,45 @@
+﻿<Page x:Class="WpfApp1.View.Model.Executive.ExecutiveRoomDialogs.NewRoom"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:WpfApp1.View.Model.Executive.ExecutiveRoomDialogs"
+      mc:Ignorable="d" 
+      d:DesignHeight="570" d:DesignWidth="1280"
+      Title="NewRoom">
+
+    <Grid>
+        <Border Style="{StaticResource OverlayModal}">
+            <Border Style="{StaticResource DialogModal}" Margin="380 20">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="100"/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="50"/>
+                        <ColumnDefinition Width="40"/>
+                        <ColumnDefinition Width="10"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="10"/>
+                        <RowDefinition Height="40"/>
+                        <RowDefinition Height="10"/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Label Grid.Row="3" Grid.Column="1" Content="Nametag:" Style="{StaticResource FormLabel}"></Label>
+                    <TextBox x:Name="RoomNametag" Grid.Row="4" Grid.Column="1" Style="{StaticResource FormInputBox}"></TextBox>
+                    <Label Grid.Row="5" Grid.Column="1" Content="Room type:" Style="{StaticResource FormLabel}"></Label>
+                    <ComboBox Name="RoomType" Grid.Row="6" Grid.Column="1" Style="{StaticResource FormInputComboBox}" Height="30" Width="300" ItemsSource="{Binding Path=RoomTypes}"></ComboBox>
+                    <TextBlock Grid.Row="7" Grid.Column="1" Style="{StaticResource SmallText}" Text="{Binding Path=Feedback, UpdateSourceTrigger=PropertyChanged}"></TextBlock>
+                    <Button x:Name="ConfirmButton" Grid.Column="1" Grid.Row="8" Style="{StaticResource ClassicButton}" Margin="50 4" Click="ConfirmButton_Click">Add Room</Button>
+                    <Button x:Name="CloseButton" Grid.Column="3" Grid.Row="1" Style="{StaticResource ClassicButton}" Click="CloseButton_Click">X</Button>
+                </Grid>
+            </Border>
+        </Border>
+    </Grid>
+</Page>

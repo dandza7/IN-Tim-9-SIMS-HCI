@@ -16,6 +16,7 @@ using System.Windows.Shapes;
 using WpfApp1.Model;
 using WpfApp1.Controller;
 using WpfApp1.Model.Preview;
+using WpfApp1.View.Model.Executive.ExecutiveInventoryDialogs;
 
 namespace WpfApp1.View.Model.Executive
 {
@@ -61,6 +62,22 @@ namespace WpfApp1.View.Model.Executive
                 }
             }
         }
+        private List<InventoryPreview> _inventory;
+        public List<InventoryPreview> Inventory
+        {
+            get
+            {
+                return _inventory;
+            }
+            set
+            {
+                if (value != _inventory)
+                {
+                    _inventory = value;
+                    OnPropertyChanged("Inventory");
+                }
+            }
+        }
 
         #endregion
         #region PropertyChangedNotifier
@@ -78,12 +95,17 @@ namespace WpfApp1.View.Model.Executive
         //--------------------------------------------------------------------------------------------------------
         //          Basic fields
         //--------------------------------------------------------------------------------------------------------
-        public List<InventoryPreview> Inventory { get; set; }
+        
         public List<string> SOPRooms { get; set; }
         private InventoryController _inventoryController;
+        public InventoryController InventoryController { get { return _inventoryController; } }
         private InventoryMovingController _inventoryMovingController;
+        public InventoryMovingController InventoryMovingController { get { return _inventoryMovingController; } }
         private RoomController _roomController;
+        public RoomController RoomController { get { return _roomController; } }
         public int SelectedId { get; set; }
+        public string SelectedRoomName { get; set; }
+        public string SelectedInventoryName { get; set; }
 
         //--------------------------------------------------------------------------------------------------------
         //          Constructor code:
@@ -101,67 +123,16 @@ namespace WpfApp1.View.Model.Executive
             this.Feedback = "";
             this.WrongSelection = "";
             SelectedId = -1;
+            SelectedRoomName = "";
+            SelectedInventoryName = "";
         }
-        //--------------------------------------------------------------------------------------------------------
-        //          Global methods code:
-        //--------------------------------------------------------------------------------------------------------
-        public void RefreshRooms()
-        {
-            this.SOPRooms = _inventoryController.GetSOPRooms();
-            AddRooms.ItemsSource = SOPRooms;
-            AddRooms.Items.Refresh();
-            MoveNewRoom.ItemsSource = SOPRooms;
-            MoveNewRoom.Items.Refresh();
-        }
-        public void RefreshInventory()
-        {
-            this.Inventory = _inventoryController.GetPreviews();
-            InventoryDG.ItemsSource = Inventory;
-            InventoryDG.Items.Refresh();
-        }
-        //--------------------------------------------------------------------------------------------------------
-        //          Static Equipment Adding code:
-        //--------------------------------------------------------------------------------------------------------
+
 
         private void AddNewStaticEquipment_Click(object sender, RoutedEventArgs e)
         {
-            DialogContainer.Visibility = Visibility.Visible;
-            AddContainer.Visibility = Visibility.Visible;
-            AddRooms.Text = "";
-            AddName.Text = "";
-            Feedback = "";
-            RefreshRooms();
+            FormFrame.Content = new NewInventory(this);
         }
 
-        private void AddConfirm_Click(object sender, RoutedEventArgs e)
-        {
-            if(AddRooms.Text == "" || AddName.Text == "")
-            {
-                Feedback = "*you must fill all fields!";
-                return;
-            }
-            if (AddName.Text.Contains(";"))
-            {
-                Feedback = "*you can't use semicolon (;) in name!";
-                return;
-            }
-            _inventoryController.Create(new Inventory(0, 0, AddName.Text, "S", 1), AddRooms.Text);
-            DialogContainer.Visibility = Visibility.Collapsed;
-            AddContainer.Visibility = Visibility.Collapsed;
-            AddRooms.Text = "";
-            AddName.Text = "";
-            Feedback = "";
-            RefreshInventory();
-        }
-
-        private void XAddButton_Click(object sender, RoutedEventArgs e)
-        {
-            DialogContainer.Visibility = Visibility.Collapsed;
-            AddContainer.Visibility = Visibility.Collapsed;
-            AddRooms.Text = "";
-            AddName.Text = "";
-            Feedback = "";
-        }
 
         //--------------------------------------------------------------------------------------------------------
         //          Static Equipment Moving code:
@@ -173,7 +144,6 @@ namespace WpfApp1.View.Model.Executive
             {
                 WrongSelection = "You must select inventory for moving first!";
                 WrongSelectionContainer.Visibility = Visibility.Visible;
-                DialogContainer.Visibility = Visibility.Visible;
                 return;
             }
             InventoryPreview i = (InventoryPreview)InventoryDG.SelectedItems[0];
@@ -181,49 +151,16 @@ namespace WpfApp1.View.Model.Executive
             {
                 WrongSelection = "You can only move static inventory!";
                 WrongSelectionContainer.Visibility = Visibility.Visible;
-                DialogContainer.Visibility = Visibility.Visible;
                 return;
             }
-            MoveOldRoom.Text = i.Room;
+            SelectedRoomName = i.Room;
+            SelectedInventoryName = i.Name;
             SelectedId = i.Id;
-            RefreshRooms();
-            DialogContainer.Visibility = Visibility.Visible;
-            MoveContainer.Visibility = Visibility.Visible;
-        }
-
-        private void MoveConfirm_Click(object sender, RoutedEventArgs e)
-        {
-            if (MoveNewRoom.Text == "" || MoveDate.Text == "")
-            {
-                Feedback = "*you must fill all fields!";
-                return;
-            }
-            if (DateTime.Compare(DateTime.Parse(MoveDate.Text), DateTime.Today) < 0)
-            {
-                Feedback = "*you must select date that is either today or in future!";
-                return;
-            }
-            DialogContainer.Visibility = Visibility.Collapsed;
-            MoveContainer.Visibility = Visibility.Collapsed;
-            MoveOldRoom.Text = "";
-            _inventoryMovingController.NewMoving(new InventoryMoving(0, SelectedId, _roomController.GetIdByNametag(MoveNewRoom.Text), DateTime.Parse(MoveDate.Text)));
-            RefreshInventory();
+            FormFrame.Content = new MoveInventory(this);
 
         }
-
-        private void XMoveButton_Click(object sender, RoutedEventArgs e)
-        {
-            DialogContainer.Visibility = Visibility.Collapsed;
-            MoveContainer.Visibility = Visibility.Collapsed;
-            MoveOldRoom.Text = "";
-        }
-
-        //--------------------------------------------------------------------------------------------------------
-        //          Wrong selection code:
-        //--------------------------------------------------------------------------------------------------------
         private void WrongSelectionOK_Click(object sender, RoutedEventArgs e)
         {
-            DialogContainer.Visibility = Visibility.Collapsed;
             WrongSelectionContainer.Visibility = Visibility.Collapsed;
         }
     }

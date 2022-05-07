@@ -127,12 +127,9 @@ namespace WpfApp1.View.Model.Patient
             var app = Application.Current as App;
             int appointmentId = ((AppointmentView)PatientReportsDataGrid.SelectedItem).Id;
 
-            _doctorsReportController = app.DoctorsReportController;
-
-            /*Console.WriteLine("------------------------------");
-            Console.WriteLine("Izvještaj doktora za pregled:");
-            Console.WriteLine(_doctorsReportController.GetByAppointmentId(appointmentId).Description);
-            Console.WriteLine("------------------------------");*/
+            app.Properties["appointmentId"] = appointmentId;
+            Frame patientFrame = (Frame)app.Properties["PatientFrame"];
+            patientFrame.Content = new ShowReportDetails();
         }
     }
 }

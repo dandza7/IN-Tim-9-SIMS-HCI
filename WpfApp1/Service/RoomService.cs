@@ -36,6 +36,11 @@ namespace WpfApp1.Service
             return _roomRepository.GetAll();
         }
 
+        public Room GetById(int id)
+        {
+            return _roomRepository.Get(id);
+        }
+
         public Room Create(Room room)
         {
             return _roomRepository.Create(room);

@@ -22,6 +22,11 @@ namespace WpfApp1.Controller
             return _roomService.GetAll();
         }
 
+        public Room GetById(int id)
+        {
+            return _roomService.GetById(id);
+        }
+
         public Room Create(Room room)
         {
             return _roomService.Create(room);
