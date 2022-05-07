@@ -17,6 +17,7 @@ using WpfApp1.Model;
 using WpfApp1.Controller;
 using WpfApp1.Model.Preview;
 using WpfApp1.View.Model.Executive.ExecutiveInventoryDialogs;
+using System.Windows.Media.Animation;
 
 namespace WpfApp1.View.Model.Executive
 {
@@ -106,7 +107,8 @@ namespace WpfApp1.View.Model.Executive
         public int SelectedId { get; set; }
         public string SelectedRoomName { get; set; }
         public string SelectedInventoryName { get; set; }
-
+        public Storyboard FrameAnimation { get; set; }
+        public Storyboard CloseFrame { get; set; }
         //--------------------------------------------------------------------------------------------------------
         //          Constructor code:
         //--------------------------------------------------------------------------------------------------------
@@ -125,12 +127,15 @@ namespace WpfApp1.View.Model.Executive
             SelectedId = -1;
             SelectedRoomName = "";
             SelectedInventoryName = "";
+            this.FrameAnimation = FindResource("FormFrameAnimation") as Storyboard;
+            CloseFrame = FindResource("CloseFrame") as Storyboard;
         }
 
 
         private void AddNewStaticEquipment_Click(object sender, RoutedEventArgs e)
         {
             FormFrame.Content = new NewInventory(this);
+            FrameAnimation.Begin();
         }
 
 
@@ -157,11 +162,17 @@ namespace WpfApp1.View.Model.Executive
             SelectedInventoryName = i.Name;
             SelectedId = i.Id;
             FormFrame.Content = new MoveInventory(this);
+            FrameAnimation.Begin();
 
         }
         private void WrongSelectionOK_Click(object sender, RoutedEventArgs e)
         {
             WrongSelectionContainer.Visibility = Visibility.Collapsed;
+        }
+        private void CloseFrame_Completed(object sender, EventArgs e)
+        {
+            FormFrame.Content = null;
+            FormFrame.Opacity = 1;
         }
     }
 }

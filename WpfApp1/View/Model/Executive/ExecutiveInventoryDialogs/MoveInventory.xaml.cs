@@ -67,7 +67,7 @@ namespace WpfApp1.View.Model.Executive.ExecutiveInventoryDialogs
 
         private void CloseButton_Click(object sender, RoutedEventArgs e)
         {
-            ParentPage.FormFrame.Content = null;
+            ParentPage.CloseFrame.Begin();
             InventoryName.Text = "";
             OldRoom.Text = "";
             NewRoom.Text = "";
@@ -87,7 +87,7 @@ namespace WpfApp1.View.Model.Executive.ExecutiveInventoryDialogs
                 return;
             }
             ParentPage.InventoryMovingController.NewMoving(new InventoryMoving(0, ParentPage.SelectedId, ParentPage.RoomController.GetIdByNametag(NewRoom.Text), DateTime.Parse(MoveDate.Text)));
-            ParentPage.FormFrame.Content = null;
+            ParentPage.CloseFrame.Begin();
             InventoryName.Text = "";
             OldRoom.Text = "";
             NewRoom.Text = "";

@@ -7,6 +7,26 @@
       mc:Ignorable="d" 
       d:DesignHeight="570" d:DesignWidth="1280"
       Title="ExecutiveInventoryPages">
+    <Page.Resources>
+        <Storyboard x:Name="FormFrameAnimation" x:Key="FormFrameAnimation">
+            <DoubleAnimationUsingKeyFrames
+                       Storyboard.TargetName="FormFrame"
+                       Storyboard.TargetProperty="Opacity"
+                       Duration="0:0:0.3">
+                <LinearDoubleKeyFrame Value="0" KeyTime="0:0:0" />
+                <LinearDoubleKeyFrame Value="1.0" KeyTime="0:0:0.3" />
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Name="CloseFrame" x:Key="CloseFrame" Completed="CloseFrame_Completed">
+            <DoubleAnimationUsingKeyFrames
+                       Storyboard.TargetName="FormFrame"
+                       Storyboard.TargetProperty="Opacity"
+                       Duration="0:0:0.3">
+                <LinearDoubleKeyFrame Value="1.0" KeyTime="0:0:0" />
+                <LinearDoubleKeyFrame Value="0" KeyTime="0:0:0.3" />
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+    </Page.Resources>
 
     <Grid>
         <Grid.ColumnDefinitions>
@@ -21,7 +41,7 @@
         </Grid.RowDefinitions>
         <Button x:Name="MoveStaticInventory" Grid.Column="2"  Style="{StaticResource ClassicButton}" Margin="20 5 20 5" Click="MoveStaticInventory_Click">Move Static Inventory</Button>
         <Button x:Name="AddNewStaticEquipment" Grid.Column="3"  Style="{StaticResource ClassicButton}" Margin="0 5 20 5" Click="AddNewStaticEquipment_Click">Add New Static Inventory</Button>
-        <DataGrid x:Name="InventoryDG" AutoGenerateColumns="False" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="4" Style="{StaticResource ExecutiveDataGrid}" ItemsSource="{Binding Inventory}" Margin="20 0 20 40">
+        <DataGrid x:Name="InventoryDG" AutoGenerateColumns="False" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="4" Style="{StaticResource ExecutiveDataGrid}" ItemsSource="{Binding Inventory}" Margin="20 0 20 0">
             <DataGrid.Columns>
                 <DataGridTextColumn Header=" ID" Width="*"  Binding="{Binding Id}" HeaderStyle="{StaticResource ExecutiveDGHeader}" CellStyle="{StaticResource ExecutiveDGCell}"/>
                 <DataGridTextColumn Header=" TYPE" Width="1.2*"  Binding="{Binding Type}" HeaderStyle="{StaticResource ExecutiveDGHeader}" CellStyle="{StaticResource ExecutiveDGCell}"/>
@@ -52,6 +72,10 @@
                 <Button x:Name="WrongSelectionOK" Grid.Row="2" Style="{StaticResource ClassicButton}" Margin="100 5" Click="WrongSelectionOK_Click" FontSize="24">OK</Button>
             </Grid>
         </Border>
-        <Frame Name="FormFrame" Grid.ColumnSpan="4" Grid.RowSpan="2"></Frame>
+        <Frame Name="FormFrame" Grid.ColumnSpan="4" Grid.RowSpan="2">
+            <Frame.Effect>
+                <DropShadowEffect BlurRadius="5"/>
+            </Frame.Effect>
+        </Frame>
     </Grid>
 </Page>

@@ -139,7 +139,7 @@ namespace WpfApp1.View.Model.Executive.ExecutiveRoomDialogs
         }
         private void CloseButton_Click(object sender, RoutedEventArgs e)
         {
-            ParentPage.FormFrame.Content = null;
+            ParentPage.CloseFrame.Begin();
             ResetFields();
         }
 
@@ -156,7 +156,7 @@ namespace WpfApp1.View.Model.Executive.ExecutiveRoomDialogs
                 return;
             }
             ParentPage.RenovationController.Create(new Renovation(0, ParentPage.SelectedId, Description.Text, DateTime.Parse(Beginning.Text), DateTime.Parse(Ending.Text)));
-            ParentPage.FormFrame.Content = null;
+            ParentPage.CloseFrame.Begin();
             ResetFields();
         }
 

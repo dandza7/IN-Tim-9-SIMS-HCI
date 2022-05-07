@@ -90,14 +90,14 @@ namespace WpfApp1.View.Model.Executive.ExecutiveRoomDialogs
 
             ParentPage.RoomController.Update(new Room(ParentPage.SelectedId, RoomNametag.Text, RoomType.Text));
             ParentPage.Rooms = ParentPage.RoomController.GetAll();
-            ParentPage.FormFrame.Content = null;
+            ParentPage.CloseFrame.Begin();
             RoomType.Text = "";
             RoomNametag.Text = "";
         }
 
         private void CloseButton_Click(object sender, RoutedEventArgs e)
         {
-            ParentPage.FormFrame.Content = null;
+            ParentPage.CloseFrame.Begin();
             RoomType.Text = "";
             RoomNametag.Text = "";
         }
