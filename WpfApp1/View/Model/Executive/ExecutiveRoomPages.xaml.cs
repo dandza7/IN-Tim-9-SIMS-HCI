@@ -10,6 +10,7 @@ using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
@@ -96,6 +97,13 @@ namespace WpfApp1.View.Model.Executive
         public int SelectedId { get; set; }
         public String SelectedNametag { get; set; }
         public String SelectedType { get; set; }
+        public Storyboard FrameAnimation { get; set; }
+        public Storyboard CloseFrame { get; set; }
+        public Storyboard HideDelete { get; set; }
+        public Storyboard ShowDelete { get; set; }
+        public Storyboard ShowRenovationPicker { get; set; }
+        public Storyboard HideRenovationPicker { get; set; }
+
 
         //--------------------------------------------------------------------------------------------------------
         //          Constructor code:
@@ -116,6 +124,18 @@ namespace WpfApp1.View.Model.Executive
             SelectedType = "";
             SelectedType = "";
             SelectedId = 0;
+            LoadAnimations();
+            
+
+        }
+        public void LoadAnimations()
+        {
+            FrameAnimation = FindResource("FormFrameAnimation") as Storyboard;
+            CloseFrame = FindResource("CloseFrame") as Storyboard;
+            HideDelete = FindResource("DeleteButtonHide") as Storyboard;
+            ShowDelete = FindResource("DeleteButtonShow") as Storyboard;
+            ShowRenovationPicker = FindResource("ShowRenovationPicker") as Storyboard;
+            HideRenovationPicker = FindResource("HideRenovationPicker") as Storyboard;
 
         }
 
@@ -138,6 +158,7 @@ namespace WpfApp1.View.Model.Executive
         private void AddRoomButton_Click(object sender, RoutedEventArgs e)
         {
             FormFrame.Content = new NewRoom(this);
+            FrameAnimation.Begin();
         }
 
         //--------------------------------------------------------------------------------------------------------
@@ -163,6 +184,7 @@ namespace WpfApp1.View.Model.Executive
             SelectedNametag = r.Nametag;
             SelectedType = r.Type;
             FormFrame.Content = new EditRoom(this);
+            FrameAnimation.Begin();
         }
 
 
@@ -190,8 +212,8 @@ namespace WpfApp1.View.Model.Executive
                 WrongSelectionContainer.Visibility = Visibility.Visible;
                 return;
             }
-            DeleteRoomButton.Visibility = Visibility.Collapsed;
             DeleteConfirmButton.Visibility = Visibility.Visible;
+            HideDelete.Begin();
             
         }
 
@@ -201,7 +223,7 @@ namespace WpfApp1.View.Model.Executive
             this.Rooms = this.RoomController.GetAll();
             ResetFields();
             DeleteRoomButton.Visibility = Visibility.Visible;
-            DeleteConfirmButton.Visibility = Visibility.Collapsed;
+            ShowDelete.Begin();
 
 
         }
@@ -209,7 +231,17 @@ namespace WpfApp1.View.Model.Executive
         {
             ResetFields();
             DeleteRoomButton.Visibility = Visibility.Visible;
+            ShowDelete.Begin();
+        }
+        private void DeleteButtonHide_Completed(object sender, EventArgs e)
+        {
+            DeleteRoomButton.Visibility = Visibility.Collapsed;
+            DeleteRoomButton.Opacity = 1;
+        }
+        private void DeleteButtonShow_Completed(object sender, EventArgs e)
+        {
             DeleteConfirmButton.Visibility = Visibility.Collapsed;
+            DeleteRoomButton.Opacity = 1;
         }
 
         //--------------------------------------------------------------------------------------------------------
@@ -220,10 +252,22 @@ namespace WpfApp1.View.Model.Executive
         {
             BasicRenovationButton.Visibility = Visibility.Visible;
             AdvancedRenovationButton.Visibility = Visibility.Visible;
+            ShowRenovationPicker.Begin();
+
         }
 
 
         private void BARenovationButton_MouseLeave(object sender, MouseEventArgs e)
+        {
+            HideRenovationPicker.Begin();
+
+        }
+        private void ShowRenovationPicker_Completed(object sender, EventArgs e)
+        {
+
+        }
+
+        private void HideRenovationPicker_Completed(object sender, EventArgs e)
         {
             BasicRenovationButton.Visibility = Visibility.Collapsed;
             AdvancedRenovationButton.Visibility = Visibility.Collapsed;
@@ -252,6 +296,7 @@ namespace WpfApp1.View.Model.Executive
                 return;
             }
             FormFrame.Content = new BasicRenovation(this);
+            FrameAnimation.Begin();
 
         }
 
@@ -266,6 +311,12 @@ namespace WpfApp1.View.Model.Executive
         private void WrongSelectionOK_Click(object sender, RoutedEventArgs e)
         {
             WrongSelectionContainer.Visibility = Visibility.Collapsed;
+        }
+
+        private void CloseFrame_Completed(object sender, EventArgs e)
+        {
+            FormFrame.Content = null;
+            FormFrame.Opacity = 1;
         }
 
 

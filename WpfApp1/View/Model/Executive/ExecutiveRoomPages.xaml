@@ -7,7 +7,62 @@
       mc:Ignorable="d" 
       d:DesignHeight="570" d:DesignWidth="1280"
       Title="ExecutiveRoomPages">
-
+    <Page.Resources>
+        <Storyboard x:Name="FormFrameAnimation" x:Key="FormFrameAnimation">
+            <DoubleAnimationUsingKeyFrames
+                       Storyboard.TargetName="FormFrame"
+                       Storyboard.TargetProperty="Opacity"
+                       Duration="0:0:0.3">
+                <LinearDoubleKeyFrame Value="0" KeyTime="0:0:0" />
+                <LinearDoubleKeyFrame Value="1.0" KeyTime="0:0:0.3" />
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Name="CloseFrame" x:Key="CloseFrame" Completed="CloseFrame_Completed">
+            <DoubleAnimationUsingKeyFrames
+                       Storyboard.TargetName="FormFrame"
+                       Storyboard.TargetProperty="Opacity"
+                       Duration="0:0:0.3">
+                <LinearDoubleKeyFrame Value="1.0" KeyTime="0:0:0" />
+                <LinearDoubleKeyFrame Value="0" KeyTime="0:0:0.3" />
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Name="DeleteButtonHide" x:Key="DeleteButtonHide" Completed="DeleteButtonHide_Completed">
+            <DoubleAnimationUsingKeyFrames
+                       Storyboard.TargetName="DeleteRoomButton"
+                       Storyboard.TargetProperty="Opacity"
+                       Duration="0:0:0.2">
+                <LinearDoubleKeyFrame Value="1.0" KeyTime="0:0:0" />
+                <LinearDoubleKeyFrame Value="0" KeyTime="0:0:0.2" />
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Name="DeleteButtonShow" x:Key="DeleteButtonShow" Completed="DeleteButtonShow_Completed">
+            <DoubleAnimationUsingKeyFrames
+                       Storyboard.TargetName="DeleteRoomButton"
+                       Storyboard.TargetProperty="Opacity"
+                       Duration="0:0:0.2">
+                <LinearDoubleKeyFrame Value="0" KeyTime="0:0:0" />
+                <LinearDoubleKeyFrame Value="1.0" KeyTime="0:0:0.2" />
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Name="ShowRenovationPicker" x:Key="ShowRenovationPicker" Completed="ShowRenovationPicker_Completed">
+            <DoubleAnimationUsingKeyFrames
+                       Storyboard.TargetName="RenovationPicker"
+                       Storyboard.TargetProperty="Opacity"
+                       Duration="0:0:0.2">
+                <LinearDoubleKeyFrame Value="0" KeyTime="0:0:0" />
+                <LinearDoubleKeyFrame Value="1.0" KeyTime="0:0:0.2" />
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Name="HideRenovationPicker" x:Key="HideRenovationPicker" Completed="HideRenovationPicker_Completed">
+            <DoubleAnimationUsingKeyFrames
+                       Storyboard.TargetName="RenovationPicker"
+                       Storyboard.TargetProperty="Opacity"
+                       Duration="0:0:0.2">
+                <LinearDoubleKeyFrame Value="1.0" KeyTime="0:0:0" />
+                <LinearDoubleKeyFrame Value="0" KeyTime="0:0:0.2" />
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+    </Page.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
@@ -20,13 +75,21 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
         <Button x:Name="RenovationButton" Style="{StaticResource ClassicButton}" Margin="40 5" MouseEnter="RenovationButton_MouseEnter">Renovate Room</Button>
-        <Button x:Name="BasicRenovationButton" Style="{StaticResource InvertedButton}" Margin="40 5 158 5" MouseLeave="BARenovationButton_MouseLeave" Click="BasicRenovationButton_Click" Visibility="Collapsed">Basic</Button>
-        <Button x:Name="AdvancedRenovationButton" Style="{StaticResource InvertedButton}" Margin="158 5 40 5" MouseLeave="BARenovationButton_MouseLeave" Click="AdvancedRenovationButton_Click" Visibility="Collapsed">Advanced</Button>
+        <Border x:Name="RenovationPicker" MouseLeave="BARenovationButton_MouseLeave">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Button x:Name="BasicRenovationButton" Grid.Column="0" Style="{StaticResource InvertedButton}" Margin="40 5 0 5" Click="BasicRenovationButton_Click" Visibility="Collapsed">Basic</Button>
+                <Button x:Name="AdvancedRenovationButton" Grid.Column="1" Style="{StaticResource InvertedButton}" Margin="0 5 40 5" Click="AdvancedRenovationButton_Click" Visibility="Collapsed">Advanced</Button>
+            </Grid>
+        </Border>
         <Button x:Name="AddRoomButton" Grid.Column="1" Style="{StaticResource ClassicButton}" Margin="40 5" Click="AddRoomButton_Click">Add New Room</Button>
         <Button x:Name="EditRoomButton" Grid.Column="2" Style="{StaticResource ClassicButton}" Margin="40 5" Click="EditRoomButton_Click">Edit Selected Room</Button>
         <Button x:Name="DeleteConfirmButton" Grid.Column="3" Style="{StaticResource InvertedButton}" Margin="40 5" Click="DeleteConfirmButton_Click" MouseLeave="DeleteConfirmButton_MouseLeave"> CONFIRM DELETING</Button>
         <Button x:Name="DeleteRoomButton" Grid.Column="3" Style="{StaticResource ClassicButton}" Margin="40 5" Click="DeleteRoomButton_Click">Delete Selected Room</Button>
-        <DataGrid x:Name="RoomsDG" AutoGenerateColumns="False" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="4" Style="{StaticResource ExecutiveDataGrid}" ItemsSource="{Binding Rooms}" Margin="20 0 20 40">
+        <DataGrid x:Name="RoomsDG" AutoGenerateColumns="False" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="4" Style="{StaticResource ExecutiveDataGrid}" ItemsSource="{Binding Rooms}" Margin="20 0 20 0">
             <DataGrid.Columns>
                 <DataGridTextColumn Header=" ID" Width="2*"  Binding="{Binding Id}" HeaderStyle="{StaticResource ExecutiveDGHeader}" CellStyle="{StaticResource ExecutiveDGCell}"/>
                 <DataGridTextColumn Header=" NAMETAG" Width="9*" Binding="{Binding Nametag}"  HeaderStyle="{StaticResource ExecutiveDGHeader}" CellStyle="{StaticResource ExecutiveDGCell}"/>
@@ -55,6 +118,10 @@
                 <Button x:Name="WrongSelectionOK" Grid.Row="2" Style="{StaticResource ClassicButton}" Margin="100 5" Click="WrongSelectionOK_Click" FontSize="24">OK</Button>
             </Grid>
         </Border>
-        <Frame Name="FormFrame" Grid.ColumnSpan="4" Grid.RowSpan="2"></Frame>
+        <Frame Name="FormFrame" Grid.ColumnSpan="4" Grid.RowSpan="2">
+            <Frame.Effect>
+                <DropShadowEffect BlurRadius="5"/>
+            </Frame.Effect>
+        </Frame>
     </Grid>
 </Page>

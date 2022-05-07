@@ -69,7 +69,7 @@ namespace WpfApp1.View.Model.Executive.ExecutiveInventoryDialogs
 
         private void CloseButton_Click(object sender, RoutedEventArgs e)
         {
-            ParentPage.FormFrame.Content = null;
+            ParentPage.CloseFrame.Begin();
             AddRooms.Text = "";
             AddName.Text = "";
             Feedback = "";
@@ -88,7 +88,7 @@ namespace WpfApp1.View.Model.Executive.ExecutiveInventoryDialogs
                 return;
             }
             ParentPage.InventoryController.Create(new Inventory(0, 0, AddName.Text, "S", 1), AddRooms.Text);
-            ParentPage.FormFrame.Content = null;
+            ParentPage.CloseFrame.Begin();
             AddRooms.Text = "";
             AddName.Text = "";
             Feedback = "";

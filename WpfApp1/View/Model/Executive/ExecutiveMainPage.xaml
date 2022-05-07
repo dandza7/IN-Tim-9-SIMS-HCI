@@ -7,6 +7,17 @@
       mc:Ignorable="d" 
       d:DesignHeight="720" d:DesignWidth="1280"
       Title="ExecutiveMainPage">
+    <Page.Resources>
+        <Storyboard x:Name="myStoryboard" x:Key="myStoryboard">
+            <DoubleAnimationUsingKeyFrames
+                       Storyboard.TargetName="ExecutivePagesFrame"
+                       Storyboard.TargetProperty="Opacity"
+                       Duration="0:0:1">
+                <LinearDoubleKeyFrame Value="0" KeyTime="0:0:0" />
+                <LinearDoubleKeyFrame Value="1.0" KeyTime="0:0:1" />
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+    </Page.Resources>
 
     <Grid>
         <Grid.ColumnDefinitions>
