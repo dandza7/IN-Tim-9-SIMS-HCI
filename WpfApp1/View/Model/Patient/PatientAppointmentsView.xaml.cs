@@ -100,7 +100,7 @@ namespace WpfApp1.View.Model.Patient
             _appointmentController = app.AppointmentController;
             _patientController = app.PatientController;
 
-            _appointmentController.PatientsAppointmentDelete(patientId, appointmentId);
+            _appointmentController.AppointmentCancellationByPatient(patientId, appointmentId);
 
             PatientAppointmentsDataGrid.ItemsSource = null;
             PatientAppointmentsDataGrid.ItemsSource = _appointmentController.GetPatientsAppointmentsView(patientId);

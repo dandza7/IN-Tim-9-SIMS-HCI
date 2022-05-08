@@ -44,8 +44,25 @@
         <Setter Property="Foreground" Value="{StaticResource WhiteBrush}"/>
     </Style>
 
+    <Style x:Key="SmallProfileLabel" TargetType="Label">
+        <Setter Property="FontSize" Value="20"/>
+        <Setter Property="FontWeight" Value="Bold"/>
+        <Setter Property="Margin" Value="40, 0"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="Foreground" Value="{StaticResource WhiteBrush}"/>
+    </Style>
+
     <Style x:Key="ProfileTextBlock" TargetType="TextBlock">
         <Setter Property="FontSize" Value="24"/>
+        <Setter Property="FontWeight" Value="Normal"/>
+        <Setter Property="Margin" Value="40, 0"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="Foreground" Value="{StaticResource WhiteBrush}"/>
+        <Setter Property="TextWrapping" Value="Wrap"/>
+    </Style>
+
+    <Style x:Key="SmallProfileTextBlock" TargetType="TextBlock">
+        <Setter Property="FontSize" Value="20"/>
         <Setter Property="FontWeight" Value="Normal"/>
         <Setter Property="Margin" Value="40, 0"/>
         <Setter Property="VerticalAlignment" Value="Center"/>

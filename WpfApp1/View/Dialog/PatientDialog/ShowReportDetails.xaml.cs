@@ -40,6 +40,7 @@ namespace WpfApp1.View.Dialog.PatientDialog
         private AppointmentController _appointmentController;
         private UserController _userController;
         private RoomController _roomController;
+        private SurveyController _surveyController;
 
         public ShowReportDetails()
         {
@@ -81,10 +82,32 @@ namespace WpfApp1.View.Dialog.PatientDialog
             NavigationService.GoBack();
         }
 
-        /*private void GoBack_Click(object sender, RoutedEventArgs e)
+        private void Grade_Click(object sender, RoutedEventArgs e)
         {
+            var app = Application.Current as App;
+
+            _surveyController = app.SurveyController;
+
+            int appointmentId = (int)app.Properties["appointmentId"];
+            int patientId = (int)app.Properties["userId"];
+
+            if(_surveyController.CheckIfAlreadyGraded(patientId, appointmentId))
+            {
+                PatientErrorMessageBox.Show("ERROR: You have already graded this appointment");
+                return;
+            }
+
             Frame patientFrame = (Frame)app.Properties["PatientFrame"];
-            patientFrame.Content = new PatientAppointmentsView();
-        }*/
+            patientFrame.Content = new PatientSurveyDialog();
+        }
+
+        private void HelpButton_Click(object sender, RoutedEventArgs e)
+        {
+            const string REPORT_DETAILS_HELP = "Here you can see the detailed review of the appointment." +
+                "In doctors report you can find his diagnosis for the appointment. If you are willing to give us feedback about your " +
+                "experience you are welcomed to do so by clicking on the button grade. If you wish to print this information you " +
+                "can click on the button to easily convert it to PDF format.";
+            PatientHelp.Show(REPORT_DETAILS_HELP);
+        }
     }
 }

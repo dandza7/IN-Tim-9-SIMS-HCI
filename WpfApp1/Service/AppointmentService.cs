@@ -56,26 +56,20 @@ namespace WpfApp1.Service
             return _appointmentRepo.Delete(appointmentId);
         }
 
-        public bool PatientsAppointmentDelete(int patientId, int appointmentId)
+        public bool AppointmentCancellationByPatient(int patientId, int appointmentId)
         {
             Patient patient = _patientRepo.GetById(patientId);
             DateTime lastCancellationDate = patient.LastCancellationDate;
 
-            DateTime currentDate = DateTime.Now;
-            int month = currentDate.Month;
-            int year = currentDate.Year;
-            DateTime resetDate = new DateTime(year, month, 1, 0, 0, 0);
-
-            if (lastCancellationDate < resetDate)
+            if (lastCancellationDate.AddMonths(1) < DateTime.Now)
             {
                 patient.NumberOfCancellations = 1;
-                patient.LastCancellationDate = currentDate;
+                patient.LastCancellationDate = DateTime.Now;
                 _patientRepo.Update(patient);
 
-            } else
-            {
+            } else {
                 patient.NumberOfCancellations += 1;
-                patient.LastCancellationDate = currentDate;
+                patient.LastCancellationDate = DateTime.Now;
                 _patientRepo.Update(patient);
             }
 

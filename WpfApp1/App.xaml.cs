@@ -33,7 +33,9 @@ namespace WpfApp1
         private string MEDICAL_RECORD_FILE = _projectPath + "\\Resources\\Data\\medical_record.csv";
         private string ALLERGY_FILE = _projectPath + "\\Resources\\Data\\allergy.csv";
         private string DOCTORS_REPORT_FILE = _projectPath + "\\Resources\\Data\\doctors_report.csv";
+        private string SURVEY_FILE = _projectPath + "\\Resources\\Data\\survey.csv";
         private string DYNAMIC_EQ_REQUEST_FILE = _projectPath + "\\Resources\\Data\\dynamic_equipment_requests.csv";
+        
         private const string CSV_DELIMITER = ";";
         private const string DATETIME_FORMAT = "dd.MM.yyyy. HH:mm:ss";
 
@@ -51,6 +53,7 @@ namespace WpfApp1
         public MedicalRecordController MedicalRecordController { get; set; }
         public AllergyController AllergyController { get; set; }
         public DoctorsReportController DoctorsReportController { get; set; }
+        public SurveyController SurveyController { get; set; }
         public DynamicEquipmentRequestController DynamicEquipmentReqeustController { get;  set; }
 
         public App()
@@ -69,8 +72,8 @@ namespace WpfApp1
             var medicalRecordRepository = new MedicalRecordRepository(MEDICAL_RECORD_FILE, CSV_DELIMITER);
             var allergyRepository = new AllergyRepository(ALLERGY_FILE, CSV_DELIMITER);
             var doctorsReportRepository = new DoctorsReportRepository(DOCTORS_REPORT_FILE, CSV_DELIMITER);
+            var surveyRepository = new SurveyRepository(SURVEY_FILE, CSV_DELIMITER);
             var dynamicEqRequestRepository = new DynamicEquipmentRequestRepository(DYNAMIC_EQ_REQUEST_FILE, CSV_DELIMITER);
-
 
             var notificationService = new NotificationService(notificationRepository, drugRepository, medicalRecordRepository, therapyRepository);
             NotificationController = new NotificationController(notificationService);
@@ -115,9 +118,11 @@ namespace WpfApp1
             var doctorsReportService = new DoctorsReportService(doctorsReportRepository);
             DoctorsReportController = new DoctorsReportController(doctorsReportService);
 
+            var surveyService = new SurveyService(surveyRepository);
+            SurveyController = new SurveyController(surveyService);
+
             var dynamicEquipmentRequestService = new DynamicEquipmentRequestService(dynamicEqRequestRepository, inventoryRepository);
             DynamicEquipmentReqeustController = new DynamicEquipmentRequestController(dynamicEquipmentRequestService);
-
         }
     }
 }

@@ -24,21 +24,24 @@
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="auto"/>
             </Grid.RowDefinitions>
-
-            <Label Grid.Column="0" Content="Report Details" Grid.ColumnSpan="4" HorizontalAlignment="Center" Foreground="White" FontSize="24" FontWeight="Bold" Margin="0, 15, 0, 15"/>
-            <Label Grid.Row="1" Grid.Column="0" Content="Beginning:" Style="{StaticResource ProfileLabel}" Grid.ColumnSpan="2" Margin="40,10,40,10"/>
-            <Label Grid.Row="2" Grid.Column="0" Content="Ending:" Style="{StaticResource ProfileLabel}" Grid.ColumnSpan="2" Margin="40,10,40,10"/>
-            <Label Grid.Row="3" Grid.Column="0" Content="Doctor:" Style="{StaticResource ProfileLabel}" Grid.ColumnSpan="2" Margin="40,10,40,10"/>
-            <Label Grid.Row="4" Grid.Column="0" Content="Room:" Style="{StaticResource ProfileLabel}" Grid.ColumnSpan="2" Margin="40,10,40,10"/>
-            <Label Grid.Row="5" Grid.Column="0" Content="Report details:" Style="{StaticResource ProfileLabel}" Grid.ColumnSpan="2" Margin="40,10,40,10"/>
-            <TextBlock Grid.Row="1" Grid.Column="2" Text="{Binding ReportDetails.Beginning, StringFormat=dd.MM.yyyy. HH:mm:ss}" Style="{StaticResource ProfileTextBlock}" FontWeight="Normal" Margin="0,0,40,0"/>
-            <TextBlock Grid.Row="2" Grid.Column="2" Text="{Binding ReportDetails.Ending, StringFormat=dd.MM.yyyy. HH:mm:ss}" Style="{StaticResource ProfileTextBlock}" FontWeight="Normal" Margin="0,0,40,0"/>
-            <TextBlock Grid.Row="3" Grid.Column="2" Text="{Binding ReportDetails.Username}" Style="{StaticResource ProfileTextBlock}" FontWeight="Normal" Margin="0,0,40,0"/>
-            <TextBlock Grid.Row="4" Grid.Column="2" Text="{Binding ReportDetails.Nametag}" Style="{StaticResource ProfileTextBlock}" FontWeight="Normal" Margin="0,0,40,0"/>
-            <TextBlock Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="4" Style="{StaticResource ProfileTextBlock}" Margin="40,10,40,0" Text="{Binding ReportDetails.ReportContent}"/>
+          
+            <WrapPanel Grid.Column="0" Grid.ColumnSpan="4" HorizontalAlignment="Center"  Margin="0, 15, 0, 15">
+                <Label Content="Report Details" Foreground="White" FontSize="24" FontWeight="Bold"/>
+                <Button Style="{StaticResource HelpButton}" Click="HelpButton_Click"/>
+            </WrapPanel>
+            <Label Grid.Row="1" Grid.Column="0" Content="Beginning:" Style="{StaticResource SmallProfileLabel}" Grid.ColumnSpan="2" Margin="40,10,40,10"/>
+            <Label Grid.Row="2" Grid.Column="0" Content="Ending:" Style="{StaticResource SmallProfileLabel}" Grid.ColumnSpan="2" Margin="40,10,40,10"/>
+            <Label Grid.Row="3" Grid.Column="0" Content="Doctor:" Style="{StaticResource SmallProfileLabel}" Grid.ColumnSpan="2" Margin="40,10,40,10"/>
+            <Label Grid.Row="4" Grid.Column="0" Content="Room:" Style="{StaticResource SmallProfileLabel}" Grid.ColumnSpan="2" Margin="40,10,40,10"/>
+            <Label Grid.Row="5" Grid.Column="0" Content="Report details:" Style="{StaticResource SmallProfileLabel}" Grid.ColumnSpan="2" Margin="40,10,40,10"/>
+            <TextBlock Grid.Row="1" Grid.Column="2" Text="{Binding ReportDetails.Beginning, StringFormat=dd.MM.yyyy. HH:mm:ss}" Style="{StaticResource SmallProfileTextBlock}" FontWeight="Normal" Margin="0,0,40,0"/>
+            <TextBlock Grid.Row="2" Grid.Column="2" Text="{Binding ReportDetails.Ending, StringFormat=dd.MM.yyyy. HH:mm:ss}" Style="{StaticResource SmallProfileTextBlock}" FontWeight="Normal" Margin="0,0,40,0"/>
+            <TextBlock Grid.Row="3" Grid.Column="2" Text="{Binding ReportDetails.Username}" Style="{StaticResource SmallProfileTextBlock}" FontWeight="Normal" Margin="0,0,40,0"/>
+            <TextBlock Grid.Row="4" Grid.Column="2" Text="{Binding ReportDetails.Nametag}" Style="{StaticResource SmallProfileTextBlock}" FontWeight="Normal" Margin="0,0,40,0"/>
+            <TextBlock Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="4" Style="{StaticResource SmallProfileTextBlock}" Margin="40,10,40,0" Text="{Binding ReportDetails.ReportContent}"/>
         </Grid>
         <WrapPanel HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="250,0,0,55">
-            <Button Content="Grade" Style="{StaticResource PatientDataGridButton}" FontSize="17" Margin="5"/>
+            <Button Content="Grade" Style="{StaticResource PatientDataGridButton}" FontSize="17" Margin="5" Click="Grade_Click"/>
             <Button Content="Convert to PDF" Style="{StaticResource PatientDataGridButton}" FontSize="17" Margin="5"/>
             <Button Content="Go Back" Style="{StaticResource PatientDataGridButton}" FontSize="17" Click="GoBack_Click" Margin="5"/>
         </WrapPanel>
