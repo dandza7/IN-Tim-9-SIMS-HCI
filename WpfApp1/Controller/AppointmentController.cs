@@ -40,9 +40,9 @@ namespace WpfApp1.Controller
             return  _appointmentService.Delete(appointmentId);
         }
 
-        public bool PatientsAppointmentDelete(int patientId, int appointmentId)
+        public bool AppointmentCancellationByPatient(int patientId, int appointmentId)
         {
-            return _appointmentService.PatientsAppointmentDelete(patientId, appointmentId);
+            return _appointmentService.AppointmentCancellationByPatient(patientId, appointmentId);
         }
 
         public List<SecretaryAppointmentView> GetSecretaryAppointmentViews()
