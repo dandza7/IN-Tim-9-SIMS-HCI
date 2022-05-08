@@ -17,35 +17,50 @@
         </LinearGradientBrush>
     </Window.Background>
     <Window.Resources>
-        <Storyboard x:Name="Open" x:Key="Open" Duration="0:0:0.5" Completed="Open_Completed">
+        <Storyboard x:Name="Open" x:Key="Open" Duration="0:0:0.3" Completed="Open_Completed">
             <DoubleAnimation
                 Storyboard.TargetName="ButtonContainer"
                 Storyboard.TargetProperty="(Border.Width)"
-                To="180" Duration="0:0:0.5" AutoReverse="True" 
+                To="190" Duration="0:0:0.3" AutoReverse="True" 
                 RepeatBehavior="Forever" />
         </Storyboard>
         <Storyboard x:Name="Close" x:Key="Close" Duration="0:0:0.5" Completed="Close_Completed">
             <DoubleAnimation
                 Storyboard.TargetName="ButtonContainer"
                 Storyboard.TargetProperty="(Border.Width)"
-                To="40" Duration="0:0:0.5" AutoReverse="True" 
+                To="42" Duration="0:0:0.5" AutoReverse="True" 
+                RepeatBehavior="Forever" />
+        </Storyboard>
+        <Storyboard x:Name="SlowLogout" x:Key="SlowLogout" Duration="0:0:0.5" Completed="SlowLogout_Completed">
+            <DoubleAnimation
+                Storyboard.TargetName="ExecutiveMainFrame"
+                Storyboard.TargetProperty="Opacity"
+                From="1" To="0" Duration="0:0:0.5"/>
+            <DoubleAnimation
+                Storyboard.TargetName="ButtonContainer"
+                Storyboard.TargetProperty="Opacity"
+                From="1" To="0" Duration="0:0:0.5"/>
+            <DoubleAnimation
+                Storyboard.TargetName="ButtonContainer"
+                Storyboard.TargetProperty="(Border.Width)"
+                To="42" Duration="0:0:0.5" AutoReverse="True" 
                 RepeatBehavior="Forever" />
         </Storyboard>
     </Window.Resources>
     <Grid>
         <Frame Name="ExecutiveMainFrame" Visibility="Visible" NavigationUIVisibility="Hidden"></Frame>
         
-        <Border Name="ButtonContainer" Width="40" Height="40" Background="{StaticResource LightBlueBrush}" BorderBrush="{StaticResource AccentBlueBrush}"
-                BorderThickness="0 3 0 3" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0 105 0 0" Padding="0">
+        <Border Name="ButtonContainer" Width="42" Height="40" Background="{StaticResource AccentBlueBrush}" BorderBrush="{StaticResource AccentBlueBrush}"
+                BorderThickness="3 3 0 3" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0 105 0 0" Padding="0">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="50"/>
                     <ColumnDefinition Width="50"/>
                     <ColumnDefinition Width="100"/>
                 </Grid.ColumnDefinitions>
-                <Button x:Name="ManipulationButton" Grid.Column="0" Style="{StaticResource ClassicButton}" Width="40" Height="40" Click="ManipulationButton_Click" Margin="-10 -3 0 0" Content=""></Button>
-                <Button x:Name="NotificationsButton" Grid.Column="1" Style="{StaticResource InvertedButton}" Width="40" Height="40" Click="NotificationsButton_Click" Margin="-30 -3 0 0">i</Button>
-                <Button x:Name="LogOutButton" Grid.Column="2" Style="{StaticResource InvertedButton}" Width="100" Height="40" Click="LogOutButton_Click" Margin="-40 -3 0 0">Log out</Button>
+                <Button x:Name="ManipulationButton" Grid.Column="0" Style="{StaticResource LOIButton}" Width="40" Height="40" Click="ManipulationButton_Click" Margin="-10 -3 0 0" Content=""></Button>
+                <Button x:Name="NotificationsButton" Grid.Column="1" Style="{StaticResource LOIButton}" Width="40" Height="40" Click="NotificationsButton_Click" Margin="-25 -3 0 0">i</Button>
+                <Button x:Name="LogOutButton" Grid.Column="2" Style="{StaticResource LOIButton}" Width="100" Height="40" Click="LogOutButton_Click" Margin="-30 -3 0 0">Log out</Button>
             </Grid>
         </Border>
     </Grid>

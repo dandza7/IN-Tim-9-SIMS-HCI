@@ -28,6 +28,7 @@ namespace WpfApp1.Service
 
         public Storyboard Open { get; set; }
         public Storyboard Close { get; set; }
+        public Storyboard LogOut { get; set; }
         private bool isOpen;
         public ExecutiveMenu()
         {
@@ -36,18 +37,14 @@ namespace WpfApp1.Service
             this.DataContext = this;
             this.Open = FindResource("Open") as Storyboard;
             this.Close = FindResource("Close") as Storyboard;
+            this.LogOut = FindResource("SlowLogout") as Storyboard;
             this.isOpen = false;
             ManipulationButton.Content = "<";
         }
 
         private void LogOutButton_Click(object sender, RoutedEventArgs e)
         {
-            var app = Application.Current as App;
-            app.Properties["userId"] = 0;
-            app.Properties["userRole"] = "loggedOut";
-            var s = new MainWindow();
-            s.Show();
-            Close();
+            LogOut.Begin();
         }
 
         private void NotificationsButton_Click(object sender, RoutedEventArgs e)
@@ -78,6 +75,16 @@ namespace WpfApp1.Service
         private void Close_Completed(object sender, EventArgs e)
         {
             ManipulationButton.Content = "<";
+        }
+
+        private void SlowLogout_Completed(object sender, EventArgs e)
+        {
+            var app = Application.Current as App;
+            app.Properties["userId"] = 0;
+            app.Properties["userRole"] = "loggedOut";
+            var s = new MainWindow();
+            s.Show();
+            Close();
         }
     }
 }
