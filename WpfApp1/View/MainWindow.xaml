@@ -7,7 +7,15 @@
         xmlns:model="clr-namespace:WpfApp1.View.Model"
         mc:Ignorable="d"
         Title="MainWindow" Height="720" Width="1280">
-    
+    <Window.Background>
+        <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+            <LinearGradientBrush.GradientStops>
+                <GradientStop Color="{StaticResource Blue}" Offset="0"/>
+                <GradientStop Color="{StaticResource White}" Offset="1"/>
+            </LinearGradientBrush.GradientStops>
+        </LinearGradientBrush>
+    </Window.Background>
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition/>
@@ -29,7 +37,7 @@
                     <RowDefinition Height="100"></RowDefinition>
                 </Grid.RowDefinitions>
                 <StackPanel Height="100" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="4" Orientation="Horizontal" HorizontalAlignment="Right">
-                    <Button Name="HelpButton" Width="1280" Content="Help" Style="{StaticResource NavBarButton}" Click="HelpButton_Click"/>
+                    <Button Name="HelpButton" Width="1280" Content="Help" Style="{StaticResource NavBarButton}" BorderThickness="5" Click="HelpButton_Click"/>
                 </StackPanel>
                 <Border x:Name="LogInForm" Grid.Column="0" Grid.Row="0" Grid.RowSpan="4" Grid.ColumnSpan="4" Margin="300 50 300 100" Style="{StaticResource DialogModal}">
                     <Grid>
@@ -86,6 +94,9 @@
                             </Grid.RowDefinitions>
                         </Grid>
                     </Grid>
+                    <Border.Effect>
+                        <DropShadowEffect BlurRadius="5"/>
+                    </Border.Effect>
                 </Border>
                 <Border x:Name="HelpLogIn" Grid.Column="0" Grid.Row="0" Grid.RowSpan="5" Grid.ColumnSpan="4" Style="{StaticResource OverlayModal}" Visibility="Collapsed">
                     <Grid>

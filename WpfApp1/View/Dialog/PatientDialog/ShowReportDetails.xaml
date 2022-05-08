@@ -24,6 +24,7 @@
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="auto"/>
             </Grid.RowDefinitions>
+          
             <WrapPanel Grid.Column="0" Grid.ColumnSpan="4" HorizontalAlignment="Center"  Margin="0, 15, 0, 15">
                 <Label Content="Report Details" Foreground="White" FontSize="24" FontWeight="Bold"/>
                 <Button Style="{StaticResource HelpButton}" Click="HelpButton_Click"/>

@@ -6,11 +6,15 @@
         xmlns:local="clr-namespace:WpfApp1.Service"
         mc:Ignorable="d"
         Title="ExecutiveMenu" Height="720" Width="1280"
-        Background="{StaticResource WhiteBrush}"
         ResizeMode="NoResize">
-    <Window.Resources>
-
-    </Window.Resources>
+    <Window.Background>
+        <LinearGradientBrush StartPoint="0,0" EndPoint="0,1.5">
+            <LinearGradientBrush.GradientStops>
+                <GradientStop Color="{StaticResource White}" Offset="0"/>
+                <GradientStop Color="{StaticResource Blue}" Offset="1"/>
+            </LinearGradientBrush.GradientStops>
+        </LinearGradientBrush>
+    </Window.Background>
     <Grid>
         <Frame Name="ExecutiveMainFrame" Visibility="Visible" NavigationUIVisibility="Hidden"></Frame>
         <Button x:Name="LogOutButton" Style="{StaticResource ClassicButton}" Width="100" Height="40" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5 105 0 0" Click="LogOutButton_Click" Visibility="Visible">Log out</Button>

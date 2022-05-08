@@ -36,12 +36,10 @@ namespace WpfApp1.View.Dialog
             _userController = app.UserController;
             Appointment a = this._appointmentController.GetById(appointmentId);
             idTB.Text = appointmentId.ToString();
-            nameTB.Text = this._userController.GetById(a.PatientId).Name;
-            surnameTB.Text = this._userController.GetById(a.PatientId).Surname;
-            dnameTB.Text = this._userController.GetById(a.DoctorId).Name.ToString();
-            dsurnameTB.Text = this._userController.GetById(a.DoctorId).Surname.ToString();
-            bdateTB.Text = a.Beginning.ToString();
-            edateTB.Text = a.Ending.ToString();
+            patientTB.Text = this._userController.GetById(a.PatientId).Name + " " + this._userController.GetById(a.PatientId).Surname;
+            doctorTB.Text = this._userController.GetById(a.DoctorId).Name + " " + this._userController.GetById(a.DoctorId).Surname;
+            startingDTB.Text = a.Beginning.ToString();
+            endingDTB.Text = a.Ending.ToString();
             roomTB.Text = a.RoomId.ToString();
             urgencyTB.Text = a.IsUrgent.ToString();
             typeTB.Text = a.Type.ToString();
@@ -53,6 +51,11 @@ namespace WpfApp1.View.Dialog
             Appointment a = this._appointmentController.GetById(int.Parse(idTB.Text));
             SecretaryMoveAppointmentDialog s = new SecretaryMoveAppointmentDialog(a);
             s.Show();
+        }
+
+        private void Close_Button_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
         }
     }
 }

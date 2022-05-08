@@ -17,6 +17,7 @@ using WpfApp1.View.Model;
 using WpfApp1.Service;
 using WpfApp1.Controller;
 using WpfApp1.Model;
+using System.Windows.Media.Animation;
 
 namespace WpfApp1.Service
 {
