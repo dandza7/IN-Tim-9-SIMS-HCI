@@ -98,6 +98,7 @@
     <Compile Include="Controller\NotificationController.cs" />
     <Compile Include="Controller\PatientController.cs" />
     <Compile Include="Controller\RenovationController.cs" />
+    <Compile Include="Controller\SurveyController.cs" />
     <Compile Include="Controller\UserController.cs" />
     <Compile Include="Model\Allergy.cs" />
     <Compile Include="Model\Appointment.cs" />
@@ -112,6 +113,7 @@
     <Compile Include="Model\Notification.cs" />
     <Compile Include="Model\Preview\InventoryPreview.cs" />
     <Compile Include="Model\Renovation.cs" />
+    <Compile Include="Model\Survey.cs" />
     <Compile Include="Model\Therapy.cs" />
     <Compile Include="Model\User.cs" />
     <Compile Include="Repository\AllergyRepository.cs" />
@@ -119,6 +121,7 @@
     <Compile Include="Repository\InventoryMovingRepository.cs" />
     <Compile Include="Repository\InventoryRepository.cs" />
     <Compile Include="Repository\MedicalRecordRepository.cs" />
+    <Compile Include="Repository\SurveyRepository.cs" />
     <Compile Include="Repository\TherapyRepository.cs" />
     <Compile Include="Repository\DoctorRepository.cs" />
     <Compile Include="Repository\DrugRepository.cs" />
@@ -135,12 +138,14 @@
     <Compile Include="Repository\UserRepository.cs" />
     <None Include="Resources\Data\allergy.csv" />
     <None Include="Resources\Data\doctors_report.csv" />
+    <None Include="Resources\Data\survey.csv" />
     <Compile Include="Service\AllergyService.cs" />
     <Compile Include="Service\DoctorsReportService.cs" />
     <Compile Include="Service\InventoryMovingService.cs" />
     <None Include="Resources\Data\medical_record.csv" />
     <Compile Include="Service\InventoryService.cs" />
     <Compile Include="Service\MedicalRecordService.cs" />
+    <Compile Include="Service\SurveyService.cs" />
     <Compile Include="Service\TherapyService.cs" />
     <Compile Include="Service\AppointmentService.cs" />
     <Compile Include="Model\Patient.cs" />
@@ -160,6 +165,9 @@
     <Compile Include="View\Converter\TherapyConverter.cs" />
     <Compile Include="View\Dialog\PatientDialog\AddPatientAppointmentDialog.xaml.cs">
       <DependentUpon>AddPatientAppointmentDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Dialog\PatientDialog\PatientSurveyDialog.xaml.cs">
+      <DependentUpon>PatientSurveyDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Dialog\PatientDialog\ListAvailableAppointments.xaml.cs">
       <DependentUpon>ListAvailableAppointments.xaml</DependentUpon>
@@ -302,6 +310,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Dialog\PatientDialog\AddPatientAppointmentDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Dialog\PatientDialog\PatientSurveyDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

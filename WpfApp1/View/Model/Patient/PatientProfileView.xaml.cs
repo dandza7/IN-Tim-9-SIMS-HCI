@@ -131,5 +131,14 @@ namespace WpfApp1.View.Model.Patient
             Frame patientFrame = (Frame)app.Properties["PatientFrame"];
             patientFrame.Content = new ShowReportDetails();
         }
+
+        private void HelpButton_Click(object sender, RoutedEventArgs e)
+        {
+            const string APPOINTMENT_HISTORY_HELP = "Here you can see all the appointments you've been to. " +
+                "If you are interested about appointments in certain time interval you can select the time interval and then press the " +
+                "search button. If you are interested in a more detailed view of appointment click on the button for details. " +
+                "After reading the details you are welcome to grade the appointment.";
+            PatientHelp.Show(APPOINTMENT_HISTORY_HELP);
+        }
     }
 }
