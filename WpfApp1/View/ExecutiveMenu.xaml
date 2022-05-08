@@ -3,6 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:PresentationOptions="http://schemas.microsoft.com/winfx/2006/xaml/presentation/options"
         xmlns:local="clr-namespace:WpfApp1.Service"
         mc:Ignorable="d"
         Title="ExecutiveMenu" Height="720" Width="1280"
@@ -15,9 +16,37 @@
             </LinearGradientBrush.GradientStops>
         </LinearGradientBrush>
     </Window.Background>
+    <Window.Resources>
+        <Storyboard x:Name="Open" x:Key="Open" Duration="0:0:0.5" Completed="Open_Completed">
+            <DoubleAnimation
+                Storyboard.TargetName="ButtonContainer"
+                Storyboard.TargetProperty="(Border.Width)"
+                To="180" Duration="0:0:0.5" AutoReverse="True" 
+                RepeatBehavior="Forever" />
+        </Storyboard>
+        <Storyboard x:Name="Close" x:Key="Close" Duration="0:0:0.5" Completed="Close_Completed">
+            <DoubleAnimation
+                Storyboard.TargetName="ButtonContainer"
+                Storyboard.TargetProperty="(Border.Width)"
+                To="40" Duration="0:0:0.5" AutoReverse="True" 
+                RepeatBehavior="Forever" />
+        </Storyboard>
+    </Window.Resources>
     <Grid>
         <Frame Name="ExecutiveMainFrame" Visibility="Visible" NavigationUIVisibility="Hidden"></Frame>
-        <Button x:Name="LogOutButton" Style="{StaticResource ClassicButton}" Width="100" Height="40" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5 105 0 0" Click="LogOutButton_Click" Visibility="Visible">Log out</Button>
-        <Button x:Name="NotificationsButton" Style="{StaticResource ClassicButton}" Width="40" Height="40" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0 105 5 0" Click="NotificationsButton_Click" Visibility="Visible">i</Button>
+        
+        <Border Name="ButtonContainer" Width="40" Height="40" Background="{StaticResource LightBlueBrush}" BorderBrush="{StaticResource AccentBlueBrush}"
+                BorderThickness="0 3 0 3" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0 105 0 0" Padding="0">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="50"/>
+                    <ColumnDefinition Width="50"/>
+                    <ColumnDefinition Width="100"/>
+                </Grid.ColumnDefinitions>
+                <Button x:Name="ManipulationButton" Grid.Column="0" Style="{StaticResource ClassicButton}" Width="40" Height="40" Click="ManipulationButton_Click" Margin="-10 -3 0 0" Content=""></Button>
+                <Button x:Name="NotificationsButton" Grid.Column="1" Style="{StaticResource InvertedButton}" Width="40" Height="40" Click="NotificationsButton_Click" Margin="-30 -3 0 0">i</Button>
+                <Button x:Name="LogOutButton" Grid.Column="2" Style="{StaticResource InvertedButton}" Width="100" Height="40" Click="LogOutButton_Click" Margin="-40 -3 0 0">Log out</Button>
+            </Grid>
+        </Border>
     </Grid>
 </Window>

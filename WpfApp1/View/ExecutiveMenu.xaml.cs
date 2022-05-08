@@ -11,6 +11,7 @@ using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using WpfApp1.Controller;
@@ -25,13 +26,18 @@ namespace WpfApp1.Service
     public partial class ExecutiveMenu : Window
     {
 
-
+        public Storyboard Open { get; set; }
+        public Storyboard Close { get; set; }
+        private bool isOpen;
         public ExecutiveMenu()
         {
             InitializeComponent();
             ExecutiveMainFrame.Content = new ExecutiveMainPage();
             this.DataContext = this;
-
+            this.Open = FindResource("Open") as Storyboard;
+            this.Close = FindResource("Close") as Storyboard;
+            this.isOpen = false;
+            ManipulationButton.Content = "<";
         }
 
         private void LogOutButton_Click(object sender, RoutedEventArgs e)
@@ -46,6 +52,32 @@ namespace WpfApp1.Service
 
         private void NotificationsButton_Click(object sender, RoutedEventArgs e)
         {
+            
+        }
+
+        private void ManipulationButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (isOpen)
+            {
+                Close.Begin();
+                isOpen = false;
+            }
+            else
+            {
+                Open.Begin();
+                isOpen = true;
+            }
+            
+        }
+
+        private void Open_Completed(object sender, EventArgs e)
+        {
+            ManipulationButton.Content = ">";
+        }
+
+        private void Close_Completed(object sender, EventArgs e)
+        {
+            ManipulationButton.Content = "<";
         }
     }
 }
