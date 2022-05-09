@@ -98,7 +98,7 @@ namespace WpfApp1.View.Dialog.PatientDialog
             }
 
             Frame patientFrame = (Frame)app.Properties["PatientFrame"];
-            patientFrame.Content = new PatientSurveyDialog();
+            patientFrame.Content = new DoctorSurveyDialog();
         }
 
         private void HelpButton_Click(object sender, RoutedEventArgs e)
