@@ -173,8 +173,11 @@
     <Compile Include="View\Dialog\PatientDialog\AddPatientAppointmentDialog.xaml.cs">
       <DependentUpon>AddPatientAppointmentDialog.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Dialog\PatientDialog\PatientSurveyDialog.xaml.cs">
-      <DependentUpon>PatientSurveyDialog.xaml</DependentUpon>
+    <Compile Include="View\Dialog\PatientDialog\DoctorSurveyDialog.xaml.cs">
+      <DependentUpon>DoctorSurveyDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Dialog\PatientDialog\HospitalSurveyDialog.xaml.cs">
+      <DependentUpon>HospitalSurveyDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Dialog\PatientDialog\ListAvailableAppointments.xaml.cs">
       <DependentUpon>ListAvailableAppointments.xaml</DependentUpon>
@@ -344,7 +347,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Dialog\PatientDialog\PatientSurveyDialog.xaml">
+    <Page Include="View\Dialog\PatientDialog\DoctorSurveyDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Dialog\PatientDialog\HospitalSurveyDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

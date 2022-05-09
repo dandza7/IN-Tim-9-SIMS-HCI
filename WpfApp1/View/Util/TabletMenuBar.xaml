@@ -11,7 +11,7 @@
             <Button x:Name="MyProfile" Content="My Profile" Style="{StaticResource PatientMenuButton}" Click="MyProfile_Click"/>
             <Button x:Name="PatientAppointments" Content="Appointments" Style="{StaticResource PatientMenuButton}" Click="ShowAppointments_Click"/>
             <Button x:Name="PatientNotes" Content="Notes" Style="{StaticResource PatientMenuButton}" Click="PatientNotes_Click"/>
-            <Button x:Name="PatientReports" Content="Reports" Style="{StaticResource PatientMenuButton}" Click="PatientReports_Click"/>
+            <Button x:Name="HospitalSurvey" Content="Survey" Style="{StaticResource PatientMenuButton}" Click="HospitalSurvey_Click"/>
         </StackPanel>
     </Grid>
 </UserControl>
