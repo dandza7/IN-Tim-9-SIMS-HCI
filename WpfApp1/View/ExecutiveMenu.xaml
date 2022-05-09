@@ -21,14 +21,14 @@
             <DoubleAnimation
                 Storyboard.TargetName="ButtonContainer"
                 Storyboard.TargetProperty="(Border.Width)"
-                To="190" Duration="0:0:0.3" AutoReverse="True" 
+                To="140" Duration="0:0:0.3" AutoReverse="True" 
                 RepeatBehavior="Forever" />
         </Storyboard>
         <Storyboard x:Name="Close" x:Key="Close" Duration="0:0:0.5" Completed="Close_Completed">
             <DoubleAnimation
                 Storyboard.TargetName="ButtonContainer"
                 Storyboard.TargetProperty="(Border.Width)"
-                To="42" Duration="0:0:0.5" AutoReverse="True" 
+                To="45" Duration="0:0:0.5" AutoReverse="True" 
                 RepeatBehavior="Forever" />
         </Storyboard>
         <Storyboard x:Name="SlowLogout" x:Key="SlowLogout" Duration="0:0:0.5" Completed="SlowLogout_Completed">
@@ -43,27 +43,42 @@
             <DoubleAnimation
                 Storyboard.TargetName="ButtonContainer"
                 Storyboard.TargetProperty="(Border.Width)"
-                To="42" Duration="0:0:0.5" AutoReverse="True" 
+                To="45" Duration="0:0:0.5" AutoReverse="True" 
                 RepeatBehavior="Forever" />
         </Storyboard>
     </Window.Resources>
     <Grid>
         
         
-        <Border Name="ButtonContainer" Width="42" Height="40" Background="{StaticResource AccentBlueBrush}" BorderBrush="{StaticResource AccentBlueBrush}"
-                BorderThickness="3 3 0 3" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0 105 0 0" Padding="0"
+        <Border Name="ButtonContainer" Width="45" Height="50" Background="{StaticResource AccentBlueBrush}" BorderBrush="{StaticResource AccentBlueBrush}"
+                BorderThickness="3 3 0 3" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0 102.5 0 0" Padding="2 0 0 0"
                 MouseEnter="ButtonContainer_MouseEnter" MouseLeave="ButtonContainer_MouseLeave">
             <Grid>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="50"/>
-                    <ColumnDefinition Width="50"/>
-                    <ColumnDefinition Width="100"/>
+                    <ColumnDefinition Width="40"/>
+                    <ColumnDefinition Width="5"/>
+                    <ColumnDefinition Width="40"/>
+                    <ColumnDefinition Width="5"/>
+                    <ColumnDefinition Width="40"/>
                 </Grid.ColumnDefinitions>
-                <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Column="0" Width="40" Height="40" Margin="-10 -3 0 0" Background="{StaticResource WhiteBrush}">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="5"/>
+                    <RowDefinition Height="40"/>
+                    <RowDefinition Height="5"/>
+                </Grid.RowDefinitions>
+                <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Column="0" Grid.Row="1" Width="40" Height="40" Margin="0 -6 0 0" Background="{StaticResource WhiteBrush}">
                         <Image x:Name="LIImage" Source="/Resources/Icons/portrait-free-icon-font.png" Width="20" Margin="0 10 0 0"></Image>
                     </StackPanel>
-                    <Button x:Name="NotificationsButton" Grid.Column="1" Style="{StaticResource LOIButton}" Width="40" Height="40" Click="NotificationsButton_Click" Margin="-25 -3 0 0">i</Button>
-                <Button x:Name="LogOutButton" Grid.Column="2" Style="{StaticResource LOIButton}" Width="100" Height="40" Click="LogOutButton_Click" Margin="-30 -3 0 0">Log out</Button>
+                <Button x:Name="NotificationsButton" Grid.Column="2" Grid.Row="1" Style="{StaticResource LOIButton}" Width="40" Height="40" Click="NotificationsButton_Click" Margin="0 -6 0 0">
+                    <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="40" Height="40" Margin="0 0 0 0">
+                        <Image Source="/Resources/Icons/bell-free-icon-font.png" Width="20" Margin="0 10 0 0"></Image>
+                    </StackPanel>
+                </Button>
+                <Button x:Name="LogOutButton" Grid.Column="4" Grid.Row="1" Style="{StaticResource LOIButton}" Width="40" Height="40" Click="LogOutButton_Click" Margin="0 -6 0 0">
+                    <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="40" Height="40" Margin="-3 -5 0 0">
+                        <Image Source="/Resources/Icons/sign-out-free-icon-font.png" Width="20" Margin="5 13 0 0"></Image>
+                    </StackPanel>
+                </Button>
             </Grid>
         </Border>
         <Frame Name="ExecutiveMainFrame" Visibility="Visible" NavigationUIVisibility="Hidden"></Frame>
