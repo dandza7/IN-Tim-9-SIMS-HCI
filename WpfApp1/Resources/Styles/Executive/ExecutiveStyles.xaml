@@ -83,6 +83,7 @@
         <Setter Property="VerticalContentAlignment" Value="Center"/>
         <Setter Property="HorizontalContentAlignment" Value="Left"/>
         <Setter Property="Height" Value="50"></Setter>
+        <Setter Property="Padding" Value="5 0"></Setter>
     </Style>
     <Style TargetType="ComboBoxItem">
         <Setter Property="HorizontalContentAlignment" Value="Left" />

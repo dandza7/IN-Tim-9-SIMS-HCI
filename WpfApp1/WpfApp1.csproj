@@ -596,5 +596,11 @@
   <ItemGroup>
     <Resource Include="Resources\Icons\truck-loading-free-icon-font.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\bell-free-icon-font.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\sign-out-free-icon-font.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
