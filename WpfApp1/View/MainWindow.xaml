@@ -37,7 +37,12 @@
                     <RowDefinition Height="100"></RowDefinition>
                 </Grid.RowDefinitions>
                 <StackPanel Height="100" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="4" Orientation="Horizontal" HorizontalAlignment="Right">
-                    <Button Name="HelpButton" Width="1280" Content="Help" Style="{StaticResource NavBarButton}" BorderThickness="5" Click="HelpButton_Click"/>
+                    <Button Name="HelpButton" Width="1280" Style="{StaticResource NavBarButton}" Click="HelpButton_Click">
+                        <StackPanel Orientation="Vertical" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                            <Image Source="\Resources\Icons\interrogation-free-icon-font.png" Width="50" Margin="0 20 0 30"></Image>
+                            <TextBlock Text="Help" FontSize="55"></TextBlock>
+                        </StackPanel>
+                    </Button>
                 </StackPanel>
                 <Border x:Name="LogInForm" Grid.Column="0" Grid.Row="0" Grid.RowSpan="4" Grid.ColumnSpan="4" Margin="300 50 300 100" Style="{StaticResource DialogModal}">
                     <Grid>

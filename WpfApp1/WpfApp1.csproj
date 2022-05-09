@@ -568,6 +568,26 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Resources\Icons\angle-right-free-icon-font.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\cube-free-icon-font.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\interrogation-free-icon-font.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\medicine-free-icon-font.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\portrait-free-icon-font.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\stats-free-icon-font.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\truck-loading-free-icon-font.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
