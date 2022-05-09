@@ -21,6 +21,7 @@
                 <BeginStoryboard>
                     <Storyboard>
                         <ColorAnimation Storyboard.TargetProperty="Background.Color" Duration="0:0:0.3" To="{StaticResource Blue}"></ColorAnimation>
+                        <ThicknessAnimation Duration="0:0:0.3" To="0, -100, 0, 0" Storyboard.TargetProperty="Margin" />
                     </Storyboard>
                 </BeginStoryboard>
             </EventTrigger>
@@ -28,6 +29,7 @@
                 <BeginStoryboard>
                     <Storyboard>
                         <ColorAnimation Storyboard.TargetProperty="Background.Color" Duration="0:0:0.3" To="{StaticResource LightBlue}"></ColorAnimation>
+                        <ThicknessAnimation Duration="0:0:0.3" To="0, 0, 0, 0" Storyboard.TargetProperty="Margin" />
                     </Storyboard>
                 </BeginStoryboard>
             </EventTrigger>

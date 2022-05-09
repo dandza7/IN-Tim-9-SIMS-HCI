@@ -48,20 +48,24 @@
         </Storyboard>
     </Window.Resources>
     <Grid>
-        <Frame Name="ExecutiveMainFrame" Visibility="Visible" NavigationUIVisibility="Hidden"></Frame>
+        
         
         <Border Name="ButtonContainer" Width="42" Height="40" Background="{StaticResource AccentBlueBrush}" BorderBrush="{StaticResource AccentBlueBrush}"
-                BorderThickness="3 3 0 3" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0 105 0 0" Padding="0">
+                BorderThickness="3 3 0 3" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0 105 0 0" Padding="0"
+                MouseEnter="ButtonContainer_MouseEnter" MouseLeave="ButtonContainer_MouseLeave">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="50"/>
                     <ColumnDefinition Width="50"/>
                     <ColumnDefinition Width="100"/>
                 </Grid.ColumnDefinitions>
-                <Button x:Name="ManipulationButton" Grid.Column="0" Style="{StaticResource LOIButton}" Width="40" Height="40" Click="ManipulationButton_Click" Margin="-10 -3 0 0" Content=""></Button>
-                <Button x:Name="NotificationsButton" Grid.Column="1" Style="{StaticResource LOIButton}" Width="40" Height="40" Click="NotificationsButton_Click" Margin="-25 -3 0 0">i</Button>
+                <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Column="0" Width="40" Height="40" Margin="-10 -3 0 0" Background="{StaticResource WhiteBrush}">
+                        <Image x:Name="LIImage" Source="/Resources/Icons/portrait-free-icon-font.png" Width="20" Margin="0 10 0 0"></Image>
+                    </StackPanel>
+                    <Button x:Name="NotificationsButton" Grid.Column="1" Style="{StaticResource LOIButton}" Width="40" Height="40" Click="NotificationsButton_Click" Margin="-25 -3 0 0">i</Button>
                 <Button x:Name="LogOutButton" Grid.Column="2" Style="{StaticResource LOIButton}" Width="100" Height="40" Click="LogOutButton_Click" Margin="-30 -3 0 0">Log out</Button>
             </Grid>
         </Border>
+        <Frame Name="ExecutiveMainFrame" Visibility="Visible" NavigationUIVisibility="Hidden"></Frame>
     </Grid>
 </Window>

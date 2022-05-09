@@ -39,7 +39,7 @@ namespace WpfApp1.Service
             this.Close = FindResource("Close") as Storyboard;
             this.LogOut = FindResource("SlowLogout") as Storyboard;
             this.isOpen = false;
-            ManipulationButton.Content = "<";
+
         }
 
         private void LogOutButton_Click(object sender, RoutedEventArgs e)
@@ -52,29 +52,12 @@ namespace WpfApp1.Service
             
         }
 
-        private void ManipulationButton_Click(object sender, RoutedEventArgs e)
-        {
-            if (isOpen)
-            {
-                Close.Begin();
-                isOpen = false;
-            }
-            else
-            {
-                Open.Begin();
-                isOpen = true;
-            }
-            
-        }
-
         private void Open_Completed(object sender, EventArgs e)
         {
-            ManipulationButton.Content = ">";
         }
 
         private void Close_Completed(object sender, EventArgs e)
         {
-            ManipulationButton.Content = "<";
         }
 
         private void SlowLogout_Completed(object sender, EventArgs e)
@@ -85,6 +68,16 @@ namespace WpfApp1.Service
             var s = new MainWindow();
             s.Show();
             Close();
+        }
+
+        private void ButtonContainer_MouseEnter(object sender, MouseEventArgs e)
+        {
+            Open.Begin();
+        }
+
+        private void ButtonContainer_MouseLeave(object sender, MouseEventArgs e)
+        {
+            Close.Begin();
         }
     }
 }
