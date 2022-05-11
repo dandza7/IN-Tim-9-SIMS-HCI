@@ -118,6 +118,45 @@
             </EventTrigger>
         </Style.Triggers>
     </Style>
+    <Style x:Key="ClassicStaticButton" TargetType="Button">
+        <Setter Property="Background" Value="{StaticResource AccentBlueBrush}"></Setter>
+        <Setter Property="FontSize" Value="25"></Setter>
+        <Setter Property="FontFamily" Value="Impact"></Setter>
+        <Setter Property="Foreground" Value="{StaticResource WhiteBrush}"></Setter>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border Background="{TemplateBinding Background}" BorderBrush="{StaticResource AccentBlueBrush}" BorderThickness="2">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <EventTrigger RoutedEvent="MouseEnter">
+                <BeginStoryboard>
+                    <Storyboard>
+                        <ColorAnimationUsingKeyFrames 
+                        Storyboard.TargetProperty="Foreground.Color"
+                        Duration="0:0:0.1">
+                            <LinearColorKeyFrame Value="{StaticResource LightBlue}" KeyTime="0:0:0.1" />
+                        </ColorAnimationUsingKeyFrames>
+                    </Storyboard>
+                </BeginStoryboard>
+            </EventTrigger>
+            <EventTrigger RoutedEvent="MouseLeave">
+                <BeginStoryboard>
+                    <Storyboard>
+                        <ColorAnimationUsingKeyFrames 
+                        Storyboard.TargetProperty="Foreground.Color"
+                        Duration="0:0:0.1">
+                            <LinearColorKeyFrame Value="{StaticResource White}" KeyTime="0:0:0.1" />
+                        </ColorAnimationUsingKeyFrames>
+                    </Storyboard>
+                </BeginStoryboard>
+            </EventTrigger>
+        </Style.Triggers>
+    </Style>
     <Style x:Key="LOIButton" TargetType="Button">
         <Setter Property="Background" Value="{StaticResource WhiteBrush}"></Setter>
         <Setter Property="FontSize" Value="25"></Setter>
