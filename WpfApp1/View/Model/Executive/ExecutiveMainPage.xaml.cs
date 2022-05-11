@@ -29,7 +29,9 @@ namespace WpfApp1.View.Model.Executive
 
         private void DrugsButton_Click(object sender, RoutedEventArgs e)
         {
-
+            ExecutivePagesFrame.Content = new ExecutiveDrugsPages();
+            Storyboard sb1 = FindResource("myStoryboard") as Storyboard;
+            sb1.Begin();
         }
 
         private void RoomsButton_Click(object sender, RoutedEventArgs e)

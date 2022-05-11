@@ -232,6 +232,12 @@
     <Compile Include="View\ExecutiveMenu.xaml.cs">
       <DependentUpon>ExecutiveMenu.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Model\Executive\ExecutiveDrugsDialogs\DrugsInfo.xaml.cs">
+      <DependentUpon>DrugsInfo.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Model\Executive\ExecutiveDrugsPages.xaml.cs">
+      <DependentUpon>ExecutiveDrugsPages.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Model\Executive\ExecutiveInventoryDialogs\MoveInventory.xaml.cs">
       <DependentUpon>MoveInventory.xaml</DependentUpon>
     </Compile>
@@ -416,6 +422,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\ExecutiveMenu.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Model\Executive\ExecutiveDrugsDialogs\DrugsInfo.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Model\Executive\ExecutiveDrugsPages.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
