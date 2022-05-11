@@ -26,6 +26,14 @@
                 <LinearDoubleKeyFrame Value="0" KeyTime="0:0:0.3" />
             </DoubleAnimationUsingKeyFrames>
         </Storyboard>
+        <Storyboard x:Name="CloseDG" x:Key="CloseDG" Completed="CloseDG_Completed">
+            <DoubleAnimationUsingKeyFrames
+                       Storyboard.TargetName="DrugsDG"
+                       Storyboard.TargetProperty="Opacity"
+                       Duration="0:0:0.2">
+                <LinearDoubleKeyFrame Value="0" KeyTime="0:0:0.2" />
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
         <Storyboard x:Name="MoveButtonMiddle" x:Key="MoveButtonMiddle">
             <ThicknessAnimation Storyboard.TargetName="ChangeShowTypeButton" Duration="0:0:0.3" To="150, 0, 150, 0" Storyboard.TargetProperty="Margin" />
             <DoubleAnimationUsingKeyFrames
@@ -34,6 +42,12 @@
                        Duration="0:0:0.5">
                 <LinearDoubleKeyFrame Value="0" KeyTime="0:0:0" />
                 <LinearDoubleKeyFrame Value="1" KeyTime="0:0:0.5" />
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames
+                       Storyboard.TargetName="DrugsDG"
+                       Storyboard.TargetProperty="Opacity"
+                       Duration="0:0:0.3">
+                <LinearDoubleKeyFrame Value="1" KeyTime="0:0:0.3" />
             </DoubleAnimationUsingKeyFrames>
         </Storyboard>
         <Storyboard x:Name="MoveButtonRight" x:Key="MoveButtonRight">
@@ -45,15 +59,27 @@
                 <LinearDoubleKeyFrame Value="0" KeyTime="0:0:0" />
                 <LinearDoubleKeyFrame Value="1" KeyTime="0:0:0.5" />
             </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames
+                       Storyboard.TargetName="DrugsDG"
+                       Storyboard.TargetProperty="Opacity"
+                       Duration="0:0:0.3">
+                <LinearDoubleKeyFrame Value="1" KeyTime="0:0:0.3" />
+            </DoubleAnimationUsingKeyFrames>
         </Storyboard>
         <Storyboard x:Name="MoveButtonLeft" x:Key="MoveButtonLeft">
-            <ThicknessAnimation Storyboard.TargetName="ChangeShowTypeButton" Duration="0:0:0.6" To="0, 0, 300, 0" Storyboard.TargetProperty="Margin" />
+            <ThicknessAnimation Storyboard.TargetName="ChangeShowTypeButton" Duration="0:0:0.3" To="0, 0, 300, 0" Storyboard.TargetProperty="Margin" />
             <DoubleAnimationUsingKeyFrames
                        Storyboard.TargetName="TypeRight"
                        Storyboard.TargetProperty="Opacity"
                        Duration="0:0:0.5">
                 <LinearDoubleKeyFrame Value="0" KeyTime="0:0:0" />
                 <LinearDoubleKeyFrame Value="1" KeyTime="0:0:0.5" />
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames
+                       Storyboard.TargetName="DrugsDG"
+                       Storyboard.TargetProperty="Opacity"
+                       Duration="0:0:0.3">
+                <LinearDoubleKeyFrame Value="1" KeyTime="0:0:0.3" />
             </DoubleAnimationUsingKeyFrames>
         </Storyboard>
     </Page.Resources>
@@ -84,7 +110,7 @@
         </Border>
         <Button x:Name="EditRejectedDrugButton" Grid.Column="2"  Style="{StaticResource ClassicButton}" Margin="20 5 20 5" Click="EditRejectedDrugButton_Click">Edit Rejected Drug</Button>
         <Button x:Name="AddNewDrugButton" Grid.Column="3"  Style="{StaticResource ClassicButton}" Margin="0 5 20 5" Click="AddNewDrugButton_Click">Add New Drug</Button>
-        <DataGrid x:Name="DrugsDG" AutoGenerateColumns="False" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="4" Style="{StaticResource ExecutiveDataGrid}" ItemsSource="{Binding ValidatedDrugs}" Margin="20 0 20 0">
+        <DataGrid x:Name="DrugsDG" AutoGenerateColumns="False" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="4" Style="{StaticResource ExecutiveDataGrid}" ItemsSource="{Binding VerifiedDrugs}" Margin="20 0 20 0" HorizontalAlignment="Left">
             <DataGrid.Columns>
                 <DataGridTextColumn Header=" ID" Width="*"  Binding="{Binding Id}" HeaderStyle="{StaticResource ExecutiveDGHeader}" CellStyle="{StaticResource ExecutiveDGCell}"/>
                 <DataGridTextColumn Header=" NAME" Width="9.8*" Binding="{Binding Name}"  HeaderStyle="{StaticResource ExecutiveDGHeader}" CellStyle="{StaticResource ExecutiveDGCell}"/>

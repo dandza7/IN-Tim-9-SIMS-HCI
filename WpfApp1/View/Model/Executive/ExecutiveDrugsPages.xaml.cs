@@ -62,35 +62,35 @@ namespace WpfApp1.View.Model.Executive
                 }
             }
         }
-        private List<Drug> _validatedDrugs;
-        public List<Drug> ValidatedDrugs
+        private List<Drug> _verifiedDrugs;
+        public List<Drug> VerifiedDrugs
         {
             get
             {
-                return _validatedDrugs;
+                return _verifiedDrugs;
             }
             set
             {
-                if (value != _validatedDrugs)
+                if (value != _verifiedDrugs)
                 {
-                    _validatedDrugs = value;
-                    OnPropertyChanged("ValidatedDrugs");
+                    _verifiedDrugs = value;
+                    OnPropertyChanged("VerifiedDrugs");
                 }
             }
         }
-        private List<Drug> _unvalidatedDrugs;
-        public List<Drug> UnvalidatedDrugs
+        private List<Drug> _unverifiedDrugs;
+        public List<Drug> UnverifiedDrugs
         {
             get
             {
-                return _unvalidatedDrugs;
+                return _unverifiedDrugs;
             }
             set
             {
-                if (value != _unvalidatedDrugs)
+                if (value != _unverifiedDrugs)
                 {
-                    _unvalidatedDrugs = value;
-                    OnPropertyChanged("UnvalidatedDrugs");
+                    _unverifiedDrugs = value;
+                    OnPropertyChanged("UnverifiedDrugs");
                 }
             }
         }
@@ -134,6 +134,7 @@ namespace WpfApp1.View.Model.Executive
         public Storyboard MR { get; set; }
         public Storyboard MM { get; set; }
         public Storyboard ML { get; set; }
+        public Storyboard CloseDG { get; set; }
         public int TypeIndicator;
         public Drug SelectedDrug { get; set; }
         public ExecutiveDrugsPages()
@@ -142,8 +143,8 @@ namespace WpfApp1.View.Model.Executive
             this.DataContext = this;
             var app = Application.Current as App;
             _drugController = app.DrugController;
-            ValidatedDrugs = new List<Drug>();
-            UnvalidatedDrugs = new List<Drug>();
+            VerifiedDrugs = new List<Drug>();
+            UnverifiedDrugs = new List<Drug>();
             RejectedDrugs = new List<Drug>();
             TypeIndicator = 0;
             GetDrugs();
@@ -153,14 +154,14 @@ namespace WpfApp1.View.Model.Executive
         public void GetDrugs()
         {
             List<Drug> drugs = this.DrugController.GetAll().ToList();
-            ValidatedDrugs.Clear();
-            UnvalidatedDrugs.Clear();
+            VerifiedDrugs.Clear();
+            UnverifiedDrugs.Clear();
             RejectedDrugs.Clear();
             foreach (Drug drug in drugs)
             {
                 if (drug.IsVerified)
                 {
-                    ValidatedDrugs.Add(drug);
+                    VerifiedDrugs.Add(drug);
                 }
                 else if (drug.IsRejected)
                 {
@@ -168,7 +169,7 @@ namespace WpfApp1.View.Model.Executive
                 }
                 else
                 {
-                    UnvalidatedDrugs.Add(drug);
+                    UnverifiedDrugs.Add(drug);
                 }
             }
         }
@@ -179,12 +180,14 @@ namespace WpfApp1.View.Model.Executive
             ML = FindResource("MoveButtonLeft") as Storyboard;
             CloseFrame = FindResource("CloseFrame") as Storyboard;
             OpenFrame = FindResource("FormFrameAnimation") as Storyboard;
+            CloseDG = FindResource("CloseDG") as Storyboard;
         }
 
         private void ShowMoreInfoButton_Click(object sender, RoutedEventArgs e)
         {
             SelectedDrug = (Drug)DrugsDG.SelectedItems[0];
             FormFrame.Content = new DrugsInfo(this);
+            OpenFrame.Begin();
         }
 
         private void CloseFrame_Completed(object sender, EventArgs e)
@@ -223,30 +226,36 @@ namespace WpfApp1.View.Model.Executive
 
         private void ChangeShowTypeButton_Click(object sender, RoutedEventArgs e)
         {
-            if(TypeIndicator == 0)
+            CloseDG.Begin();
+        }
+
+        private void CloseDG_Completed(object sender, EventArgs e)
+        {
+            if (TypeIndicator == 0)
             {
                 MM.Begin();
                 TypeIndicator = 1;
                 ChangeShowTypeButton.Content = "Unvalidated";
-                DrugsDG.ItemsSource = UnvalidatedDrugs;
+                DrugsDG.ItemsSource = UnverifiedDrugs;
                 return;
-            } else if(TypeIndicator == 1)
+            }
+            else if (TypeIndicator == 1)
             {
                 MR.Begin();
                 TypeIndicator = 2;
                 ChangeShowTypeButton.Content = "Rejected";
                 DrugsDG.ItemsSource = RejectedDrugs;
                 return;
-            } else
+            }
+            else
             {
 
                 ML.Begin();
                 TypeIndicator = 0;
                 ChangeShowTypeButton.Content = "Validated";
-                DrugsDG.ItemsSource = ValidatedDrugs;
+                DrugsDG.ItemsSource = VerifiedDrugs;
                 return;
             }
         }
-
     }
 }
