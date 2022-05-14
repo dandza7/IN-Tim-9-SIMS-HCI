@@ -59,7 +59,7 @@ namespace WpfApp1.Service
             List<string> sopRooms = new List<string>();
             foreach(Room room in rooms)
             {
-                if(room.Type.Equals("Storage") || room.Type.Equals("Operating"))
+                if((room.Type.Equals("Storage") || room.Type.Equals("Operating")) && room.IsActive)
                 {
                     sopRooms.Add(room.Nametag);
                 }

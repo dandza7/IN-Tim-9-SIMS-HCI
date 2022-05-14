@@ -11,11 +11,13 @@ namespace WpfApp1.Model
         public int Id { get; set; }
         public string Nametag { get; set; }
         public String Type { get; set; }
-        public Room(int id, string nametag, String type)
+        public bool IsActive { get; set; }
+        public Room(int id, string nametag, String type, bool isActive)
         {
             Id = id;
             Nametag = nametag;
             Type = type;
+            IsActive = isActive;
         }
 
     }

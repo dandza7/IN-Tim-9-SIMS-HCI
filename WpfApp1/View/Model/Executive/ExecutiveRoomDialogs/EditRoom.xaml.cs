@@ -80,7 +80,7 @@ namespace WpfApp1.View.Model.Executive.ExecutiveRoomDialogs
             List<Room> Rooms = ParentPage.Rooms;
             foreach (Room room in Rooms)
             {
-                if (room.Nametag == RoomNametag.Text)
+                if (room.Nametag == RoomNametag.Text && RoomNametag.Text != ParentPage.SelectedNametag)
                 {
                     Feedback = "*Selected Nametag is already in use!";
                     return;
@@ -88,7 +88,7 @@ namespace WpfApp1.View.Model.Executive.ExecutiveRoomDialogs
             }
 
 
-            ParentPage.RoomController.Update(new Room(ParentPage.SelectedId, RoomNametag.Text, RoomType.Text));
+            ParentPage.RoomController.Update(new Room(ParentPage.SelectedId, RoomNametag.Text, RoomType.Text, true));
             ParentPage.Rooms = ParentPage.RoomController.GetAll();
             ParentPage.CloseFrame.Begin();
             RoomType.Text = "";
