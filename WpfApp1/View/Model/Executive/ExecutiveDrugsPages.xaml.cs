@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
@@ -62,8 +63,8 @@ namespace WpfApp1.View.Model.Executive
                 }
             }
         }
-        private List<Drug> _verifiedDrugs;
-        public List<Drug> VerifiedDrugs
+        private ObservableCollection<Drug> _verifiedDrugs;
+        public ObservableCollection<Drug> VerifiedDrugs
         {
             get
             {
@@ -78,8 +79,8 @@ namespace WpfApp1.View.Model.Executive
                 }
             }
         }
-        private List<Drug> _unverifiedDrugs;
-        public List<Drug> UnverifiedDrugs
+        private ObservableCollection<Drug> _unverifiedDrugs;
+        public ObservableCollection<Drug> UnverifiedDrugs
         {
             get
             {
@@ -94,8 +95,8 @@ namespace WpfApp1.View.Model.Executive
                 }
             }
         }
-        private List<Drug> _rejectedDrugs;
-        public List<Drug> RejectedDrugs
+        private ObservableCollection<Drug> _rejectedDrugs;
+        public ObservableCollection<Drug> RejectedDrugs
         {
             get
             {
@@ -143,9 +144,9 @@ namespace WpfApp1.View.Model.Executive
             this.DataContext = this;
             var app = Application.Current as App;
             _drugController = app.DrugController;
-            VerifiedDrugs = new List<Drug>();
-            UnverifiedDrugs = new List<Drug>();
-            RejectedDrugs = new List<Drug>();
+            VerifiedDrugs = new ObservableCollection<Drug>();
+            UnverifiedDrugs = new ObservableCollection<Drug>();
+            RejectedDrugs = new ObservableCollection<Drug>();
             TypeIndicator = 0;
             GetDrugs();
             SetAnimations();
@@ -218,6 +219,8 @@ namespace WpfApp1.View.Model.Executive
                 WrongSelectionContainer.Visibility = Visibility.Visible;
                 return;
             }
+            FormFrame.Content = new EditDrug(this);
+            OpenFrame.Begin();
 
         }
 

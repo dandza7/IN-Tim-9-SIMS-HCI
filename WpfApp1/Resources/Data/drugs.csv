@@ -1,10 +1,10 @@
-﻿1;Bromazepam;neki info 1;true;false;neki komentar
-2;Xanax;neki info 2;true;false;neki komentar
-3;Adderall;neki info 3;true;false;neki komentar
-4;Ritalin;neki info 4;true;false;neki komentar
-5;Paracetamol;neki info 5;true;false;neki komentar
-6;OdbijeniLek1;neki info 5;false;true;neki komentar
-7;OdbijeniLek2;neki info 5;false;true;neki komentar
-8;NeodobreniLek1;neki info 5;false;false;neki komentar
-9;NeodobreniLek2;neki info 5;false;false;neki komentar
-10;NeodobreniLek3;neki info 5;false;false;neki komentar
+1;Bromazepam;neki info 1;True;False;
+2;Xanax;neki info 2;True;False;
+3;Adderall;neki info 3;True;False;
+4;Ritalin;neki info 4;True;False;
+5;Paracetamol;neki info 5;True;False;
+6;OdbijeniLek1;neki info;False;True;neki komentar
+7;OdbijeniLek2;neki info 5;False;True;neki komentar
+8;NeodobreniLek1;neki info 5;False;False;
+9;NeodobreniLek2;neki info 5;False;False;
+10;NeodobreniLek3;neki info 5;False;False;
