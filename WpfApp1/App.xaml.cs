@@ -118,7 +118,7 @@ namespace WpfApp1
             var doctorsReportService = new DoctorsReportService(doctorsReportRepository);
             DoctorsReportController = new DoctorsReportController(doctorsReportService);
 
-            var surveyService = new SurveyService(surveyRepository);
+            var surveyService = new SurveyService(surveyRepository, appointmentRepository, doctorRepository);
             SurveyController = new SurveyController(surveyService);
 
             var dynamicEquipmentRequestService = new DynamicEquipmentRequestService(dynamicEqRequestRepository, inventoryRepository);

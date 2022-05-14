@@ -32,9 +32,9 @@ namespace WpfApp1.Controller
             return _surveyService.CheckIfAlreadyGraded(patientId, appointmentId);
         }
 
-        public Survey Create(Survey survey)
+        public Survey Create(List<int> grades, int appointmentId, int patientId)
         {
-            return _surveyService.Create(survey);
+            return _surveyService.Create(grades, appointmentId, patientId);
         }
 
         public bool Delete(int id)

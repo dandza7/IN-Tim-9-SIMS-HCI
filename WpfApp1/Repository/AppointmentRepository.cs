@@ -46,36 +46,8 @@ namespace WpfApp1.Repository
 
             foreach (Appointment appointment in allAppointments)
             {
-                // Kraj appointmenta upada u traženi vremenksi interval
-                if (appointment.Beginning < startOfInterval && appointment.Ending > startOfInterval)
-                {
-                    appointmentsInTimeInterval.Add(appointment);
-                }
-                // Početak appointmenta upada u traženi vremenski interval
-                if (appointment.Beginning < endOfInterval && appointment.Ending > endOfInterval)
-                {
-                    appointmentsInTimeInterval.Add(appointment);
-                }
-                // Appointment čitavom dužinom upada u traženi vremenksi interval
-                if(appointment.Beginning > startOfInterval && appointment.Ending < endOfInterval)
-                {
-                    appointmentsInTimeInterval.Add(appointment);
-                }
-                // Appointment počinje kasnije ali se završava baš tad 
-                if(appointment.Beginning > startOfInterval && appointment.Ending == endOfInterval)
-                {
-                    appointmentsInTimeInterval.Add(appointment);
-                }
-                // Appointment počinje baš tad ali se završava ranije
-                if (appointment.Beginning == startOfInterval && appointment.Ending < endOfInterval)
-                {
-                    appointmentsInTimeInterval.Add(appointment);
-                }
-                // Appointment poklapa traženi vremenski interval (neko je izabrao samo jedan sat za interval)
-                if (appointment.Beginning == startOfInterval && appointment.Ending == endOfInterval)
-                {
-                    appointmentsInTimeInterval.Add(appointment);
-                }
+                if (appointment.Ending < startOfInterval || appointment.Beginning > endOfInterval) continue;
+                appointmentsInTimeInterval.Add(appointment);
             }
 
             return appointmentsInTimeInterval.OrderBy(appointment => appointment.Beginning).ToList();

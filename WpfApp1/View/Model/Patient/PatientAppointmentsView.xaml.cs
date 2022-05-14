@@ -106,13 +106,25 @@ namespace WpfApp1.View.Model.Patient
             PatientAppointmentsDataGrid.ItemsSource = _appointmentController.GetPatientsAppointmentsView(patientId);
             
             var patient = _patientController.GetById(patientId);
+            AppointmentCancellationFeedback(patient.NumberOfCancellations);
+        }
 
-            if((4 - patient.NumberOfCancellations) > 0)
+        private void AppointmentCancellationFeedback(int numberOfcancellations) 
+        {
+            var app = Application.Current as App;
+            _patientController = app.PatientController;
+            int patientId = (int)app.Properties["userId"];
+
+            if ((4 - numberOfcancellations) > 0)
             {
-                PatientErrorMessageBox.Show("You have " + (4 - patient.NumberOfCancellations) + " cancellations left in this month");
-            } else if(4 - patient.NumberOfCancellations == 0) {
+                PatientErrorMessageBox.Show("You have " + (4 - numberOfcancellations) + " cancellations left in this month");
+            }
+            else if (4 - numberOfcancellations == 0)
+            {
                 PatientErrorMessageBox.Show("WARNING: If you cancel one more appointment in this month you will get banned.");
-            } else {
+            }
+            else
+            {
                 Window patientMenu = (Window)app.Properties["PatientMenu"];
                 var s = new MainWindow();
 

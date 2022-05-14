@@ -11,10 +11,14 @@ namespace WpfApp1.Service
     public class SurveyService
     {
         private readonly SurveyRepository _surveyRepository;
+        private readonly AppointmentRepository _appointmentRepository;
+        private readonly DoctorRepository _doctorRepository; 
 
-        public SurveyService(SurveyRepository surveyRepository)
+        public SurveyService(SurveyRepository surveyRepository, AppointmentRepository appointmentRepository, DoctorRepository doctorRepository)
         {
             _surveyRepository = surveyRepository;
+            _appointmentRepository = appointmentRepository;
+            _doctorRepository = doctorRepository;
         }
 
         public IEnumerable<Survey> GetAll()
@@ -41,9 +45,12 @@ namespace WpfApp1.Service
             return isGraded;
         }
 
-        public Survey Create(Survey survey)
+        public Survey Create(List<int> grades, int appointmentId, int patientId)
         {
-            return _surveyRepository.Create(survey);
+            Appointment appointment = _appointmentRepository.GetById(appointmentId);
+            Doctor doctor = _doctorRepository.GetById(appointment.DoctorId);
+            Survey completedSurvey = new Survey(patientId, doctor.Id, appointmentId, grades);
+            return _surveyRepository.Create(completedSurvey);
         }
 
         public bool Delete(int id)
