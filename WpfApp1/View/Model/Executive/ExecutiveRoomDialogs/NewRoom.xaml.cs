@@ -88,7 +88,7 @@ namespace WpfApp1.View.Model.Executive.ExecutiveRoomDialogs
             }
 
 
-            ParentPage.RoomController.Create(new Room(0, RoomNametag.Text, RoomType.Text));
+            ParentPage.RoomController.Create(new Room(0, RoomNametag.Text, RoomType.Text, true));
             ParentPage.Rooms = ParentPage.RoomController.GetAll();
             ParentPage.CloseFrame.Begin();
             RoomType.Text = "";

@@ -86,7 +86,9 @@ namespace WpfApp1.Repository
                 DateTime.ParseExact(tokens[3], format,
                 CultureInfo.InvariantCulture),
                 DateTime.ParseExact(tokens[4], format,
-                CultureInfo.InvariantCulture));
+                CultureInfo.InvariantCulture),
+                tokens[5],
+                tokens[6]);
         }
 
         private string ConvertRenovationToCsvFormat(Renovation renovation)
@@ -96,7 +98,9 @@ namespace WpfApp1.Repository
                 renovation.RoomId,
                 renovation.Description,
                 renovation.Beginning,
-                renovation.Ending);
+                renovation.Ending,
+                renovation.Type,
+                renovation.Rooms);
         }
 
         private void AppendLineToFile(String path, String line)

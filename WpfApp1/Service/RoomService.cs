@@ -33,7 +33,16 @@ namespace WpfApp1.Service
         }
         public List<Room> GetAll()
         {
-            return _roomRepository.GetAll();
+            List<Room> allRooms = _roomRepository.GetAll();
+            List<Room> activeRooms = new List<Room>();
+            foreach (Room room in allRooms)
+            {
+                if (room.IsActive)
+                {
+                    activeRooms.Add(room);
+                }
+            }
+            return activeRooms;
         }
 
         public Room GetById(int id)
@@ -171,7 +180,7 @@ namespace WpfApp1.Service
             List<Room> rooms = _roomRepository.GetAll();
             foreach(Room room in rooms)
             {
-                if (room.Nametag.Equals(nametag))
+                if (room.Nametag.Equals(nametag) && room.IsActive)
                 {
                     return room.Id;
                 }

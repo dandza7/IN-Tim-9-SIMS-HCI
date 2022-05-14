@@ -155,7 +155,7 @@ namespace WpfApp1.View.Model.Executive.ExecutiveRoomDialogs
                 Feedback = "*you can't put semicolon (;) in description!";
                 return;
             }
-            ParentPage.RenovationController.Create(new Renovation(0, ParentPage.SelectedId, Description.Text, DateTime.Parse(Beginning.Text), DateTime.Parse(Ending.Text)));
+            ParentPage.RenovationController.Create(new Renovation(0, ParentPage.SelectedId, Description.Text, DateTime.Parse(Beginning.Text), DateTime.Parse(Ending.Text), "B", ""));
             ParentPage.CloseFrame.Begin();
             ResetFields();
         }
