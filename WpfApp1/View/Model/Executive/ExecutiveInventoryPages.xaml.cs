@@ -109,6 +109,10 @@ namespace WpfApp1.View.Model.Executive
         public string SelectedInventoryName { get; set; }
         public Storyboard FrameAnimation { get; set; }
         public Storyboard CloseFrame { get; set; }
+        public Storyboard ShowFilter { get; set; }
+        public Storyboard HideFilter { get; set; }
+        public Storyboard CloseDG { get; set; }
+        public Storyboard OpenDG { get; set; }
         //--------------------------------------------------------------------------------------------------------
         //          Constructor code:
         //--------------------------------------------------------------------------------------------------------
@@ -129,6 +133,10 @@ namespace WpfApp1.View.Model.Executive
             SelectedInventoryName = "";
             this.FrameAnimation = FindResource("FormFrameAnimation") as Storyboard;
             CloseFrame = FindResource("CloseFrame") as Storyboard;
+            ShowFilter = FindResource("ShowFilter") as Storyboard;
+            HideFilter = FindResource("HideFilter") as Storyboard;
+            CloseDG = FindResource("CloseDG") as Storyboard;
+            OpenDG = FindResource("OpenDG") as Storyboard;
         }
 
 
@@ -173,6 +181,40 @@ namespace WpfApp1.View.Model.Executive
         {
             FormFrame.Content = null;
             FormFrame.Opacity = 1;
+        }
+
+        private void FilterInventory_Click(object sender, RoutedEventArgs e)
+        {
+            FilterContainer.Visibility=Visibility.Visible;
+            ShowFilter.Begin();
+        }
+
+        private void FilterContainer_MouseLeave(object sender, MouseEventArgs e)
+        {
+            HideFilter.Begin();
+        }
+        private void HideFilter_Completed(object sender, EventArgs e)
+        {
+            FilterContainer.Visibility = Visibility.Collapsed;
+        }
+        private void Filter_Click(object sender, RoutedEventArgs e)
+        {
+            CloseDG.Begin();
+        }
+
+        private void CloseDG_Completed(object sender, EventArgs e)
+        {
+            List<InventoryPreview> preFiltered = _inventoryController.GetPreviews();
+            List<InventoryPreview> Filtered = new List<InventoryPreview>();
+            foreach (InventoryPreview p in preFiltered)
+            {
+                if ((p.Type.Equals("D") && DynamicCB.IsChecked == true) || (p.Type.Equals("S") && StaticCB.IsChecked == true))
+                {
+                    Filtered.Add(p);
+                }
+            }
+            this.Inventory = Filtered;
+            OpenDG.Begin();
         }
     }
 }

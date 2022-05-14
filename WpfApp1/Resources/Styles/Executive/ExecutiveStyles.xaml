@@ -281,4 +281,10 @@
         <Setter Property="BorderBrush" Value="{StaticResource AccentBlueBrush}"/>
         <Setter Property="BorderThickness" Value="2"/>
     </Style>
+    <Style x:Key="CheckBoxExecutive" TargetType="CheckBox">
+        <Setter Property="FontFamily" Value="Impact"/>
+        <Setter Property="FontSize" Value="15"/>
+        <Setter Property="Foreground" Value="{StaticResource AccentBlueBrush}"/>
+        <Setter Property="Margin" Value="35 0 20 0"/>
+    </Style>
 </ResourceDictionary>
