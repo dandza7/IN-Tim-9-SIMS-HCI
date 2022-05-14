@@ -199,7 +199,8 @@ namespace WpfApp1.View.Model.Executive
 
         private void AddNewDrugButton_Click(object sender, RoutedEventArgs e)
         {
-
+            FormFrame.Content = new NewDrug(this);
+            OpenFrame.Begin();
         }
 
         private void EditRejectedDrugButton_Click(object sender, RoutedEventArgs e)
@@ -217,6 +218,7 @@ namespace WpfApp1.View.Model.Executive
                 WrongSelectionContainer.Visibility = Visibility.Visible;
                 return;
             }
+
         }
 
         private void WrongSelectionOK_Click(object sender, RoutedEventArgs e)
@@ -237,6 +239,7 @@ namespace WpfApp1.View.Model.Executive
                 TypeIndicator = 1;
                 ChangeShowTypeButton.Content = "Unvalidated";
                 DrugsDG.ItemsSource = UnverifiedDrugs;
+                EditRejectedDrugButton.IsEnabled = false;
                 return;
             }
             else if (TypeIndicator == 1)
@@ -245,6 +248,7 @@ namespace WpfApp1.View.Model.Executive
                 TypeIndicator = 2;
                 ChangeShowTypeButton.Content = "Rejected";
                 DrugsDG.ItemsSource = RejectedDrugs;
+                EditRejectedDrugButton.IsEnabled = true;
                 return;
             }
             else
@@ -254,6 +258,7 @@ namespace WpfApp1.View.Model.Executive
                 TypeIndicator = 0;
                 ChangeShowTypeButton.Content = "Validated";
                 DrugsDG.ItemsSource = VerifiedDrugs;
+                EditRejectedDrugButton.IsEnabled = false;
                 return;
             }
         }

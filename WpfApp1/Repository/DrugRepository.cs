@@ -92,7 +92,7 @@ namespace WpfApp1.Repository
             var tokens = drugCSVFormat.Split(_delimiter.ToCharArray());
             return new Drug(int.Parse(tokens[0]),
                 tokens[1],
-                tokens[2],
+                tokens[2].Replace("|", "\r\n"),
                 bool.Parse(tokens[3]),
                 bool.Parse(tokens[4]),
                 tokens[5]);
@@ -102,8 +102,9 @@ namespace WpfApp1.Repository
             return string.Join(_delimiter,
                 drug.Id,
                 drug.Name,
-                drug.Info,
+                drug.Info.Replace("\r\n", "|"),
                 drug.IsVerified.ToString(),
+                drug.IsRejected.ToString(),
                 drug.Comment);
         }
 
