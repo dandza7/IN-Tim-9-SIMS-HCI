@@ -235,6 +235,12 @@
     <Compile Include="View\Model\Executive\ExecutiveDrugsDialogs\DrugsInfo.xaml.cs">
       <DependentUpon>DrugsInfo.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Model\Executive\ExecutiveDrugsDialogs\EditDrug.xaml.cs">
+      <DependentUpon>EditDrug.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Model\Executive\ExecutiveDrugsDialogs\NewDrug.xaml.cs">
+      <DependentUpon>NewDrug.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Model\Executive\ExecutiveDrugsPages.xaml.cs">
       <DependentUpon>ExecutiveDrugsPages.xaml</DependentUpon>
     </Compile>
@@ -426,6 +432,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Model\Executive\ExecutiveDrugsDialogs\DrugsInfo.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Model\Executive\ExecutiveDrugsDialogs\EditDrug.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Model\Executive\ExecutiveDrugsDialogs\NewDrug.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

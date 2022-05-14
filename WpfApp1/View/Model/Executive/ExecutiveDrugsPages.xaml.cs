@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
@@ -62,8 +63,8 @@ namespace WpfApp1.View.Model.Executive
                 }
             }
         }
-        private List<Drug> _verifiedDrugs;
-        public List<Drug> VerifiedDrugs
+        private ObservableCollection<Drug> _verifiedDrugs;
+        public ObservableCollection<Drug> VerifiedDrugs
         {
             get
             {
@@ -78,8 +79,8 @@ namespace WpfApp1.View.Model.Executive
                 }
             }
         }
-        private List<Drug> _unverifiedDrugs;
-        public List<Drug> UnverifiedDrugs
+        private ObservableCollection<Drug> _unverifiedDrugs;
+        public ObservableCollection<Drug> UnverifiedDrugs
         {
             get
             {
@@ -94,8 +95,8 @@ namespace WpfApp1.View.Model.Executive
                 }
             }
         }
-        private List<Drug> _rejectedDrugs;
-        public List<Drug> RejectedDrugs
+        private ObservableCollection<Drug> _rejectedDrugs;
+        public ObservableCollection<Drug> RejectedDrugs
         {
             get
             {
@@ -143,9 +144,9 @@ namespace WpfApp1.View.Model.Executive
             this.DataContext = this;
             var app = Application.Current as App;
             _drugController = app.DrugController;
-            VerifiedDrugs = new List<Drug>();
-            UnverifiedDrugs = new List<Drug>();
-            RejectedDrugs = new List<Drug>();
+            VerifiedDrugs = new ObservableCollection<Drug>();
+            UnverifiedDrugs = new ObservableCollection<Drug>();
+            RejectedDrugs = new ObservableCollection<Drug>();
             TypeIndicator = 0;
             GetDrugs();
             SetAnimations();
@@ -199,7 +200,8 @@ namespace WpfApp1.View.Model.Executive
 
         private void AddNewDrugButton_Click(object sender, RoutedEventArgs e)
         {
-
+            FormFrame.Content = new NewDrug(this);
+            OpenFrame.Begin();
         }
 
         private void EditRejectedDrugButton_Click(object sender, RoutedEventArgs e)
@@ -217,6 +219,9 @@ namespace WpfApp1.View.Model.Executive
                 WrongSelectionContainer.Visibility = Visibility.Visible;
                 return;
             }
+            FormFrame.Content = new EditDrug(this);
+            OpenFrame.Begin();
+
         }
 
         private void WrongSelectionOK_Click(object sender, RoutedEventArgs e)
@@ -237,6 +242,7 @@ namespace WpfApp1.View.Model.Executive
                 TypeIndicator = 1;
                 ChangeShowTypeButton.Content = "Unvalidated";
                 DrugsDG.ItemsSource = UnverifiedDrugs;
+                EditRejectedDrugButton.IsEnabled = false;
                 return;
             }
             else if (TypeIndicator == 1)
@@ -245,6 +251,7 @@ namespace WpfApp1.View.Model.Executive
                 TypeIndicator = 2;
                 ChangeShowTypeButton.Content = "Rejected";
                 DrugsDG.ItemsSource = RejectedDrugs;
+                EditRejectedDrugButton.IsEnabled = true;
                 return;
             }
             else
@@ -254,6 +261,7 @@ namespace WpfApp1.View.Model.Executive
                 TypeIndicator = 0;
                 ChangeShowTypeButton.Content = "Validated";
                 DrugsDG.ItemsSource = VerifiedDrugs;
+                EditRejectedDrugButton.IsEnabled = false;
                 return;
             }
         }

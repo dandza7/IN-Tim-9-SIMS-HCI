@@ -43,6 +43,7 @@
                 <LinearDoubleKeyFrame Value="0" KeyTime="0:0:0" />
                 <LinearDoubleKeyFrame Value="1" KeyTime="0:0:0.5" />
             </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimation Storyboard.TargetName="EditRejectedDrugButton" Duration="0:0:0.3" To="0" Storyboard.TargetProperty="Opacity"/>
             <DoubleAnimationUsingKeyFrames
                        Storyboard.TargetName="DrugsDG"
                        Storyboard.TargetProperty="Opacity"
@@ -59,6 +60,7 @@
                 <LinearDoubleKeyFrame Value="0" KeyTime="0:0:0" />
                 <LinearDoubleKeyFrame Value="1" KeyTime="0:0:0.5" />
             </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimation Storyboard.TargetName="EditRejectedDrugButton" Duration="0:0:0.3" To="1" Storyboard.TargetProperty="Opacity"/>
             <DoubleAnimationUsingKeyFrames
                        Storyboard.TargetName="DrugsDG"
                        Storyboard.TargetProperty="Opacity"
@@ -75,6 +77,7 @@
                 <LinearDoubleKeyFrame Value="0" KeyTime="0:0:0" />
                 <LinearDoubleKeyFrame Value="1" KeyTime="0:0:0.5" />
             </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimation Storyboard.TargetName="EditRejectedDrugButton" Duration="0:0:0.3" To="0" Storyboard.TargetProperty="Opacity"/>
             <DoubleAnimationUsingKeyFrames
                        Storyboard.TargetName="DrugsDG"
                        Storyboard.TargetProperty="Opacity"
@@ -108,7 +111,7 @@
                 <Button x:Name="ChangeShowTypeButton" Grid.ColumnSpan="3" Width="150" Style="{StaticResource ClassicStaticButton}" Content="Validated" Margin="0 0 300 0" BorderThickness="0" Click="ChangeShowTypeButton_Click"></Button>
             </Grid>
         </Border>
-        <Button x:Name="EditRejectedDrugButton" Grid.Column="2"  Style="{StaticResource ClassicButton}" Margin="20 5 20 5" Click="EditRejectedDrugButton_Click">Edit Rejected Drug</Button>
+        <Button x:Name="EditRejectedDrugButton" Grid.Column="2"  Style="{StaticResource ClassicButton}" Margin="20 5 20 5" Click="EditRejectedDrugButton_Click" IsEnabled="False" Opacity="0">Edit Rejected Drug</Button>
         <Button x:Name="AddNewDrugButton" Grid.Column="3"  Style="{StaticResource ClassicButton}" Margin="0 5 20 5" Click="AddNewDrugButton_Click">Add New Drug</Button>
         <DataGrid x:Name="DrugsDG" AutoGenerateColumns="False" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="4" Style="{StaticResource ExecutiveDataGrid}" ItemsSource="{Binding VerifiedDrugs}" Margin="20 0 20 0" HorizontalAlignment="Left">
             <DataGrid.Columns>
