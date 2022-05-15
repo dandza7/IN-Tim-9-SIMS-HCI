@@ -44,5 +44,13 @@ namespace WpfApp1.Controller
         {
             return _roomService.GetIdByNametag(nametag);
         }
+        public Room GetByNametag(string nametag)
+        {
+            return _roomService.GetByNametag(nametag);
+        }
+        public List<string> GetEditableNametags()
+        {
+            return _roomService.GetEditableNametags();
+        }
     }
 }

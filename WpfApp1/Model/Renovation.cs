@@ -10,22 +10,20 @@ namespace WpfApp1.Model
     public class Renovation
     {
         public int Id { get; set; }
-        public int RoomId { get; set; }
+        public List<int> RoomsIds { get; set; }
         public string Description { get; set; }
         public DateTime Beginning { get; set; }
         public DateTime Ending { get; set; }
         public string Type { get; set; }
-        public string Rooms { get; set; }
 
-        public Renovation(int id, int roomId, string description, DateTime beginning, DateTime ending, string type, string rooms)
+        public Renovation(int id, List<int> roomsIds, string description, DateTime beginning, DateTime ending, string type)
         {
             Id = id;
-            RoomId = roomId;
+            RoomsIds = roomsIds;
             Description = description;
             Beginning = beginning;
             Ending = ending;
             Type = type;
-            Rooms = rooms;
         }
     }
 }
