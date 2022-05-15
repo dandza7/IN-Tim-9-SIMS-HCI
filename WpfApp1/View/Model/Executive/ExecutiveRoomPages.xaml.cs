@@ -287,7 +287,7 @@ namespace WpfApp1.View.Model.Executive
             SelectedId = r.Id;
             SelectedNametag = r.Nametag;
             SelectedType = r.Type;
-            this.Beginnings = _renovationController.GetBegginigns(SelectedId);
+            this.Beginnings = _renovationController.GetBegginigns(new List<int>() { SelectedId });
             if(Beginnings.Count == 0)
             {
                 SelectionProblem = "*there are no free days for renovation for this room in next 14 days!";
@@ -321,7 +321,7 @@ namespace WpfApp1.View.Model.Executive
                 WrongSelectionContainer.Visibility = Visibility.Visible;
                 return;
             }
-            this.Beginnings = _renovationController.GetBegginigns(SelectedId);
+            this.Beginnings = _renovationController.GetBegginigns(new List<int>() { SelectedId });
             if (Beginnings.Count == 0)
             {
                 SelectionProblem = "*there are no free days for renovation for this room in next 14 days!";

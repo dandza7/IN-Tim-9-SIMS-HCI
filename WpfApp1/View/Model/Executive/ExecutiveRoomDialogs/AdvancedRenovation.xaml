@@ -7,6 +7,22 @@
       mc:Ignorable="d" 
       d:DesignHeight="570" d:DesignWidth="1280"
       Title="AdvancedRenovation">
+    <Page.Resources>
+        <Storyboard x:Name="HideRoomsLock" x:Key="HideRoomsLock" Completed="HideRoomsLock_Completed">
+            <DoubleAnimation
+                Storyboard.TargetName="ConfirmRooms"
+                Storyboard.TargetProperty="Opacity"
+                To="0"
+                Duration="0:0:0.3"/>
+        </Storyboard>
+        <Storyboard x:Name="ShowRoomsLock" x:Key="ShowRoomsLock">
+            <DoubleAnimation
+                Storyboard.TargetName="ConfirmRooms"
+                Storyboard.TargetProperty="Opacity"
+                To="1"
+                Duration="0:0:0.3"/>
+        </Storyboard>
+    </Page.Resources>
 
     <Grid>
         <Border Style="{StaticResource OverlayModal}">
@@ -103,13 +119,13 @@
                             <RowDefinition/>
                             <RowDefinition/>
                             <RowDefinition Height="2*"/>
-                            <RowDefinition Height="50"/>
+                            <RowDefinition Height="60"/>
                             <RowDefinition/>
                             <RowDefinition Height="20"/>
                         </Grid.RowDefinitions>
                         <TextBlock Grid.Column="1" Text="Details" Style="{StaticResource Title}"></TextBlock>
-                        <Button Grid.Column="1" Grid.Row="1" Style="{StaticResource InvertedButton}" Margin="0 0 150 0">Confirm Rooms</Button>
-                        <Button Grid.Column="1" Grid.Row="1" Style="{StaticResource InvertedButton}" Margin="0 0 150 0" Visibility="Collapsed">Change Rooms</Button>
+                        <Button Name="ChangeRooms" Grid.Column="1" Grid.Row="1" Style="{StaticResource InvertedButton}" Margin="0 0 150 0" Click="ChangeRooms_Click">Change Rooms</Button>
+                        <Button Name="ConfirmRooms" Grid.Column="1" Grid.Row="1" Style="{StaticResource InvertedButton}" Margin="0 0 150 0" Click="ConfirmRooms_Click">Confirm Rooms</Button>
                         <Label Grid.Row="2" Grid.Column="1" Content="Beginning:" Style="{StaticResource FormLabel}" HorizontalAlignment="Left"></Label>
                         <ComboBox x:Name="Beginning" Grid.Row="3" Grid.Column="2" Style="{StaticResource FormInputComboBox}" Height="30" Width="250" Text="{Binding SelectedBeginning}"  ItemsSource="{Binding Path=Beginnings}" IsEnabled="False"></ComboBox>
                         <Label Grid.Row="4" Grid.Column="1" Content="Ending:" Style="{StaticResource FormLabel}" HorizontalAlignment="Left"></Label>
@@ -118,6 +134,7 @@
                         <TextBox x:Name="Description" Grid.Row="7" Grid.Column="1" Grid.ColumnSpan="1" Grid.RowSpan="1" Style="{StaticResource DescriptionBox}" Margin="0 0 20 5"></TextBox>
                         <TextBlock Grid.Row="8" Grid.Column="1" Style="{StaticResource SmallText}" Text="{Binding Path=Feedback, UpdateSourceTrigger=PropertyChanged}" TextWrapping="Wrap"></TextBlock>
                         <Border Width="2" Grid.RowSpan="11" Grid.Column="0" BorderBrush="{StaticResource AccentBlueBrush}" BorderThickness="1" HorizontalAlignment="Left"></Border>
+                        <Button Name="Confirm" Grid.Column="1" Grid.Row="9" Style="{StaticResource ClassicButton}" Margin="90 0 110 0" Click="Confirm_Click">Confirm</Button>
                     </Grid>
                 </Grid>
             </Border>

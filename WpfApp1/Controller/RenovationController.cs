@@ -22,18 +22,18 @@ namespace WpfApp1.Controller
             return _renovationService.Create(renovation);
         }
 
-        public void PrintAll()
+        /*public void PrintAll()
         {
             _renovationService.PrintAll();
-        }
+        }*/
 
-        public List<String> GetBegginigns(int roomId)
+        public List<String> GetBegginigns(List<int> roomsIds)
         {
-            return _renovationService.GetBeginnings(roomId);
+            return _renovationService.GetBeginnings(roomsIds);
         }
-        public List<String> GetEndings(string beginning, int roomId)
+        public List<String> GetEndings(string beginning, List<int> roomsIds)
         {
-            return _renovationService.GetEndings(beginning, roomId);
+            return _renovationService.GetEndings(beginning, roomsIds);
         }
     }
 }

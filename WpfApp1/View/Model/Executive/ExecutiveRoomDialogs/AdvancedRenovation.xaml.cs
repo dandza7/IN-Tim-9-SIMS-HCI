@@ -11,6 +11,7 @@ using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
@@ -140,6 +141,22 @@ namespace WpfApp1.View.Model.Executive.ExecutiveRoomDialogs
                 }
             }
         }
+        private List<string> _beginnings { get; set; }
+        public List<string> Beginnings 
+        {
+            get
+            {
+                return _beginnings;
+            }
+            set
+            {
+                if (value != _beginnings)
+                {
+                    _beginnings = value;
+                    OnPropertyChanged("Beginnings");
+                }
+            }
+        }
         #endregion
         #region PropertyChangedNotifier
         protected virtual void OnPropertyChanged(string name)
@@ -154,9 +171,12 @@ namespace WpfApp1.View.Model.Executive.ExecutiveRoomDialogs
         #endregion
 
         public ExecutiveRoomPages ParentPage;
-        public List<string> Beginnings { get; set; }
+
         public List<string> NewNametags { get; set; }
         public List<string> Types { get; set; }
+        public Storyboard ShowRL { get; set; }
+        public Storyboard HideRL { get; set; }
+        public bool AreRoomsConfirmed { get; set; }
 
 
         public AdvancedRenovation(ExecutiveRoomPages parent)
@@ -172,6 +192,10 @@ namespace WpfApp1.View.Model.Executive.ExecutiveRoomDialogs
             Types = new List<string>() { "Operating", "Meeting", "Office", "Storage"};
             Rooms.Remove(ParentPage.SelectedNametag);
             this.TRooms.Add(ParentPage.RoomController.GetById(ParentPage.SelectedId));
+            ShowRL = FindResource("ShowRoomsLock") as Storyboard;
+            HideRL = FindResource("HideRoomsLock") as Storyboard;
+            AreRoomsConfirmed = false;
+            Confirm.IsEnabled = false;
         }
 
         private void FindPotentialEndings(string beginning)
@@ -180,7 +204,13 @@ namespace WpfApp1.View.Model.Executive.ExecutiveRoomDialogs
             {
                 return;
             }
-            this.Endings = ParentPage.RenovationController.GetEndings(beginning, ParentPage.SelectedId);
+            List<int> ids = new List<int>();
+            foreach (Room r in TRooms)
+            {
+                ids.Add(r.Id);
+            }
+            Beginnings = ParentPage.RenovationController.GetBegginigns(ids);
+            this.Endings = ParentPage.RenovationController.GetEndings(beginning, ids);
             Ending.IsEnabled = true;
 
         }
@@ -192,6 +222,11 @@ namespace WpfApp1.View.Model.Executive.ExecutiveRoomDialogs
 
         private void AddRoom_Click(object sender, RoutedEventArgs e)
         {
+            if(OldRooms.Text == "")
+            {
+                Feedback = "You need to select rooms nametag if you want to add it!";
+                return;
+            }
             TRooms.Add(ParentPage.RoomController.GetByNametag(OldRooms.Text));
             Rooms.Remove(OldRooms.Text);
             Feedback = "";
@@ -199,6 +234,11 @@ namespace WpfApp1.View.Model.Executive.ExecutiveRoomDialogs
         
         private void RemoveFromTRoomsButton_Click(object sender, RoutedEventArgs e)
         {
+            if (AreRoomsConfirmed)
+            {
+                Feedback = "You can't edit lists of rooms unless you press button CHANGE ROOMS on top of page!";
+                return;
+            }
             Room r = (Room)TargetedRooms.SelectedItems[0];
             TRooms.Remove(r);
             Rooms.Add(r.Nametag);
@@ -229,6 +269,11 @@ namespace WpfApp1.View.Model.Executive.ExecutiveRoomDialogs
         }
         private void RemoveFromCRoomsButton_Click(object sender, RoutedEventArgs e)
         {
+            if (AreRoomsConfirmed)
+            {
+                Feedback = "You can't edit lists of rooms unless you press button CHANGE ROOMS on top of page!";
+                return;
+            }
             Room r = (Room)CreatedRooms.SelectedItems[0];
             CRooms.Remove(r);
             NewNametags.Remove(r.Nametag);
@@ -237,15 +282,102 @@ namespace WpfApp1.View.Model.Executive.ExecutiveRoomDialogs
 
         private void AddNewRoom_Click(object sender, RoutedEventArgs e)
         {
+            if (NewNametag.Text == "" || NewType.Text == "")
+            {
+                Feedback = "You need to fill all fields when adding room!";
+                return;
+            }
             if (Rooms.Contains(NewNametag.Text) || NewNametags.Contains(NewNametag.Text))
             {
                 Feedback = "Nametag of new room is already in use!";
+                return;
+            }
+            if (NewNametag.Text.Contains(";"))
+            {
+                Feedback = "You can't use semicolon in room's nametag!";
                 return;
             }
             Room nr = new Room(0, NewNametag.Text, NewType.Text, false);
             CRooms.Add(nr);
             NewNametags.Add(nr.Nametag);
             Feedback = "";
+            NewNametag.Text = "";
+            NewType.Text = "";
+        }
+
+        private void ConfirmRooms_Click(object sender, RoutedEventArgs e)
+        {
+            if(CRooms.Count() == 0 || TRooms.Count() == 0)
+            {
+                Feedback = "You need to select/add at least one room in both lists!";
+                return;
+            }
+            List<int> ids = new List<int>();
+            foreach(Room r in TRooms)
+            {
+                ids.Add(r.Id);
+            }
+            Beginnings = ParentPage.RenovationController.GetBegginigns(ids);
+            Beginning.IsEnabled = true;
+            OldRooms.IsEnabled = false;
+            AddRoom.IsEnabled = false;
+            NewNametag.IsEnabled = false;
+            NewType.IsEnabled = false;
+            AddNewRoom.IsEnabled = false;
+            AreRoomsConfirmed = true;
+            Confirm.IsEnabled = true;
+            HideRL.Begin();
+            Feedback = "";
+
+        }
+
+        private void ChangeRooms_Click(object sender, RoutedEventArgs e)
+        {
+            ConfirmRooms.Visibility = Visibility.Visible;
+            Beginning.IsEnabled = false;
+            Ending.IsEnabled = false;
+            OldRooms.IsEnabled = true;
+            AddRoom.IsEnabled = true;
+            NewNametag.IsEnabled = true;
+            NewType.IsEnabled = true;
+            AddNewRoom.IsEnabled = true;
+            Beginning.SelectedValue = "";
+            Ending.SelectedValue = "";
+            AreRoomsConfirmed = false;
+            Confirm.IsEnabled = false;
+            ShowRL.Begin();
+            Feedback = "";
+        }
+
+        private void HideRoomsLock_Completed(object sender, EventArgs e)
+        {
+            ConfirmRooms.Visibility = Visibility.Collapsed;
+        }
+
+        private void Confirm_Click(object sender, RoutedEventArgs e)
+        {
+            if (Beginning.Text == "" || Beginning.Text == "" || Description.Text == "")
+            {
+                Feedback = "You need to fill all fields!";
+                return;
+            }
+            if (Description.Text.Contains(";"))
+            {
+                Feedback = "You can't use semicolon in renovation description!";
+                return;
+            }
+            List<int> ids = new List<int>();
+            foreach(Room r in CRooms)
+            {
+                Room nr = ParentPage.RoomController.Create(r);
+                ids.Add(nr.Id);
+            }
+            foreach (Room r in TRooms)
+            {
+                ids.Add(r.Id);
+            }
+            ParentPage.RenovationController.Create(new Renovation(0, ids, Description.Text, DateTime.Parse(Beginning.Text), DateTime.Parse(Ending.Text), "A"));
+            ParentPage.CloseFrame.Begin();
         }
     }
 }
