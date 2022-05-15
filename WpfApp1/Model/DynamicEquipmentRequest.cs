@@ -9,22 +9,22 @@ namespace WpfApp1.Model
     public class DynamicEquipmentRequest
     {
         public int Id { get; set; }
-        public int InventoryId { get; set; }
+        public string Name { get; set; }
         public int Amount { get; set; }
-        public DateTime MovingDate { get; set; }
+        public DateTime RequestDate { get; set; }
 
-        public DynamicEquipmentRequest(int id, int inventoryId, int amount, DateTime requestDate)
+        public DynamicEquipmentRequest(int id, string name, int amount, DateTime requestDate)
         {
             Id = id;
-            InventoryId = inventoryId;
-            Amount = amount;    
-            MovingDate = requestDate;
-        }
-        public DynamicEquipmentRequest(int inventoryId, int amount, DateTime requestDate)
-        {
-            InventoryId = inventoryId;
+            Name = name;
             Amount = amount;
-            MovingDate = requestDate;
+            RequestDate = requestDate;
+        }
+        public DynamicEquipmentRequest(string name, int amount, DateTime requestDate)
+        {
+            Name = name;
+            Amount = amount;
+            RequestDate = requestDate;
         }
     }
 }

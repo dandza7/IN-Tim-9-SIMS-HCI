@@ -43,25 +43,17 @@ namespace WpfApp1.View.Model.Secretary
         {
             InitializeComponent();
             DataContext = this;
+
             var app = Application.Current as App;
             InventoryController _inventoryController = app.InventoryController;
             DynamicEquipmentRequestController _dynamicEquipmentRequestController = app.DynamicEquipmentReqeustController;
-            List<DynamicEquipmentRequest> dynEqRequests = _dynamicEquipmentRequestController.GetAll().ToList();
-            ObservableCollection<DynamicEquipmentView> views = new ObservableCollection<DynamicEquipmentView>();
-            foreach(DynamicEquipmentRequest dynreq in dynEqRequests)
-            {
-                if (dynreq.MovingDate <= DateTime.Now)
-                {
-                    _inventoryController.AddAmount(dynreq.InventoryId,dynreq.Amount);
-                    _dynamicEquipmentRequestController.Delete(dynreq.Id);
 
-                }
-            }
+            _dynamicEquipmentRequestController.UpdateDynamicEquipment();
             List<Inventory> dynamicInventory = _inventoryController.GetAllDynamic().ToList();
+            ObservableCollection<DynamicEquipmentView> views = new ObservableCollection<DynamicEquipmentView>();
+
             foreach (Inventory inv in dynamicInventory)
             {
-                Console.WriteLine(inv.Name);
-                
                 views.Add(DynamicEquipmentConverter.ConvertDynEqToDynEqView(inv));
             }
 
@@ -73,6 +65,13 @@ namespace WpfApp1.View.Model.Secretary
             var s = new SecretaryAddDynamicEquipmentDialog(invId);
             s.Show();
         }
+
+        private void Add_New_Dynamic_Equipment_Click(object sender, RoutedEventArgs e)
+        {
+            var s = new SecretaryAddNewDynamicEquipmentDialog();
+            s.Show();
+        }
+
     }
+
 }
-//            _inventoryMovingController.NewMoving(new InventoryMoving(0, SelectedId, _roomController.GetIdByNametag(MoveNewRoom.Text), DateTime.Parse(MoveDate.Text)));
