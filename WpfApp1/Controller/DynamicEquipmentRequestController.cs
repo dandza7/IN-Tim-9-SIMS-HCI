@@ -29,5 +29,9 @@ namespace WpfApp1.Controller
         {
             return _dynReqService.Delete(id);
         }
+        public List<DynamicEquipmentRequest> UpdateDynamicEquipment()
+        {
+            return _dynReqService.UpdateDynamicEquipment();
+        }
     }
 }

@@ -22,5 +22,12 @@ namespace WpfApp1.Model
             Type = type;
             Amount = amount;
         }
+        public Inventory(int roomId, string name, string type, int amount)
+        {
+            RoomId = roomId;
+            Name = name;
+            Type = type;
+            Amount = amount;
+        }
     }
 }

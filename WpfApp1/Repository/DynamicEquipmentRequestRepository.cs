@@ -34,6 +34,22 @@ namespace WpfApp1.Repository
             return null;
         }
 
+        public List<DynamicEquipmentRequest> GetAllForUpdating()
+        {
+            List<DynamicEquipmentRequest> dyneqRequests = File.ReadAllLines(_path)
+                .Select(ConvertCsvFormatToDynamicEquipmentRequest)
+                .ToList();
+            List<DynamicEquipmentRequest> dyneqRequestForMoving = new List<DynamicEquipmentRequest>();
+            foreach (DynamicEquipmentRequest dynreq in dyneqRequests)
+            {
+                if (dynreq.RequestDate <= DateTime.Now)
+                {
+                    dyneqRequestForMoving.Add(dynreq);
+                }   
+            }
+            return dyneqRequestForMoving;
+        }
+
         public List<DynamicEquipmentRequest> GetAll()
         {
             return File.ReadAllLines(_path)
@@ -60,7 +76,7 @@ namespace WpfApp1.Repository
             string format = "dd/MM/yyyy H:mm:ss";
             return new DynamicEquipmentRequest(
                 int.Parse(tokens[0]),
-                int.Parse(tokens[1]),
+                tokens[1],
                 int.Parse(tokens[2]),
                 DateTime.Parse(tokens[3]));
         }
@@ -69,9 +85,9 @@ namespace WpfApp1.Repository
         {
             return string.Join(_delimiter,
                 dynReq.Id,
-                dynReq.InventoryId,
+                dynReq.Name,
                 dynReq.Amount,
-                dynReq.MovingDate);
+                dynReq.RequestDate);
         }
 
         private void AppendLineToFile(String path, String line)

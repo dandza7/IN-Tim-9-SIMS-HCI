@@ -40,9 +40,9 @@ namespace WpfApp1.Controller
             return _inventoryService.GetAllDynamic();
         }
 
-        public Inventory AddAmount(int id, int amount)
+        public Inventory AddAmount(string name, int amount)
         {
-            return _inventoryService.AddAmount(id, amount);
+            return _inventoryService.AddAmount(name, amount);
         }
     }
 }

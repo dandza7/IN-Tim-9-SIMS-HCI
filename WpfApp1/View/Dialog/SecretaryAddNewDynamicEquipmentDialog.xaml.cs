@@ -17,25 +17,14 @@ using WpfApp1.Model;
 namespace WpfApp1.View.Dialog
 {
     /// <summary>
-    /// Interaction logic for SecretaryAddDynamicEquipmentDialog.xaml
+    /// Interaction logic for SecretaryAddNewDynamicEquipmentDialog.xaml
     /// </summary>
-    public partial class SecretaryAddDynamicEquipmentDialog : Window
+    public partial class SecretaryAddNewDynamicEquipmentDialog : Window
     {
-        private InventoryController _inventoryController;
-
-        private DynamicEquipmentRequestController _dynamicEquipmentRequestController;
-        public SecretaryAddDynamicEquipmentDialog(int dynEqId)
+        public SecretaryAddNewDynamicEquipmentDialog()
         {
             InitializeComponent();
-            DataContext = this;
-
-            var app = Application.Current as App;
-            InventoryController _inventoryController = app.InventoryController;
-
-            idTB.Text = dynEqId.ToString();
-            nameTB.Text = _inventoryController.GetById(dynEqId).Name;
         }
-
         private void Add_DynamicEquipment_Click(object sender, RoutedEventArgs e)
         {
             var app = Application.Current as App;
