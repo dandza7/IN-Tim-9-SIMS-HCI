@@ -10,11 +10,11 @@
 
     <Grid>
         <Border Style="{StaticResource OverlayModal}">
-            <Border x:Name="BasicRenovationContainer" Style="{StaticResource DialogModal}" Margin="150 20 150 20">
+            <Border x:Name="BasicRenovationContainer" Style="{StaticResource DialogModal}" VerticalAlignment="Center" HorizontalAlignment="Center" Width="1080" MinHeight="490">
                 <Grid>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="3*"/>
-                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition Width="600"/>
+                        <ColumnDefinition Width="400"/>
                         <ColumnDefinition Width="80"/>
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
@@ -55,7 +55,40 @@
                             </DataGrid.Resources>
                         </DataGrid>
                     </Grid>
-                    <Grid Grid.Row="1" Grid.Column="0"></Grid>
+                    <Grid Grid.Row="1" Grid.Column="0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition Width="100"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="50"/>
+                            <RowDefinition Height="50"/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <TextBlock Grid.Column="0" Grid.ColumnSpan="3" Text="New Rooms" Style="{StaticResource Title}"></TextBlock>
+                        <Label Grid.Row="1" Grid.Column="0" Content="Nametag:" Style="{StaticResource FormLabel}" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="20 0 0 0"></Label>
+                        <TextBox x:Name="NewNametag" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="1" Grid.RowSpan="1" Style="{StaticResource FormInputBox}" HorizontalAlignment="Right" Width="115" Margin="0 0 10 0"></TextBox>
+                        <Label Grid.Row="1" Grid.Column="1" Content="Type:" Style="{StaticResource FormLabel}" VerticalAlignment="Center" HorizontalAlignment="Left"></Label>
+                        <ComboBox Name="NewType" Grid.Row="1" Grid.Column="1" Style="{StaticResource FormInputComboBox}" Height="30" Width="165" Margin="0 0 10 0" ItemsSource="{Binding Path=Types}" HorizontalAlignment="Right"></ComboBox>
+                        <Button x:Name="AddNewRoom" Grid.Column="2" Grid.Row="1" Style="{StaticResource ClassicButton}" Height="40" Width="70" VerticalAlignment="Center" Click="AddNewRoom_Click">Add</Button>
+                        <DataGrid x:Name="CreatedRooms" AutoGenerateColumns="False" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" Style="{StaticResource ExecutiveDataGrid}" ItemsSource="{Binding CRooms}" Margin="20 0 20 0">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header=" NAMETAG" Width="3*" Binding="{Binding Nametag}"  HeaderStyle="{StaticResource ExecutiveDGHeader}" CellStyle="{StaticResource ExecutiveDGCell}"/>
+                                <DataGridTextColumn Header=" TYPE" Width="3*" Binding="{Binding Type}"  HeaderStyle="{StaticResource ExecutiveDGHeader}" CellStyle="{StaticResource ExecutiveDGCell}"/>
+                                <DataGridTemplateColumn Header=" REMOVE" Width="2*" HeaderStyle="{StaticResource ExecutiveDGHeader}" CellStyle="{StaticResource ExecutiveDGCell}">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <Button Content="x" Style="{StaticResource ClassicButton}" Width="30" Height="30" Padding="0" FontSize="20" Click="RemoveFromCRoomsButton_Click"/>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                            </DataGrid.Columns>
+                            <DataGrid.Resources>
+                                <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="{StaticResource White}"/>
+                            </DataGrid.Resources>
+                        </DataGrid>
+                    </Grid>
                     <Grid Grid.RowSpan="2" Grid.Column="1">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="50"/>
@@ -68,19 +101,23 @@
                             <RowDefinition/>
                             <RowDefinition/>
                             <RowDefinition/>
+                            <RowDefinition/>
                             <RowDefinition Height="2*"/>
                             <RowDefinition Height="50"/>
+                            <RowDefinition/>
                             <RowDefinition Height="20"/>
                         </Grid.RowDefinitions>
                         <TextBlock Grid.Column="1" Text="Details" Style="{StaticResource Title}"></TextBlock>
-                        <Label Grid.Row="1" Grid.Column="1" Content="Beginning:" Style="{StaticResource FormLabel}" HorizontalAlignment="Left"></Label>
-                        <ComboBox x:Name="Beginning" Grid.Row="2" Grid.Column="2" Style="{StaticResource FormInputComboBox}" Height="30" Width="250" Text="{Binding SelectedBeginning}"  ItemsSource="{Binding Path=Beginnings}" IsEnabled="True"></ComboBox>
-                        <Label Grid.Row="3" Grid.Column="1" Content="Ending:" Style="{StaticResource FormLabel}" HorizontalAlignment="Left"></Label>
-                        <ComboBox x:Name="Ending" Grid.Row="4" Grid.Column="2" Style="{StaticResource FormInputComboBox}" Height="30" Width="250" ItemsSource="{Binding Path=Endings, UpdateSourceTrigger=PropertyChanged}" IsEnabled="False"></ComboBox>
-                        <Label Grid.Row="5" Grid.Column="1" Content="Description:" Style="{StaticResource FormLabel}" HorizontalAlignment="Left"></Label>
-                        <TextBox x:Name="Description" Grid.Row="6" Grid.Column="1" Grid.ColumnSpan="1" Grid.RowSpan="1" Style="{StaticResource DescriptionBox}" Margin="0 0 20 5"></TextBox>
-                        <TextBlock Grid.Row="7" Grid.Column="1" Style="{StaticResource SmallText}" Text="{Binding Path=Feedback, UpdateSourceTrigger=PropertyChanged}"></TextBlock>
-                        <Border Width="2" Grid.RowSpan="9" Grid.Column="0" BorderBrush="{StaticResource AccentBlueBrush}" BorderThickness="1" HorizontalAlignment="Left"></Border>
+                        <Button Grid.Column="1" Grid.Row="1" Style="{StaticResource InvertedButton}" Margin="0 0 150 0">Confirm Rooms</Button>
+                        <Button Grid.Column="1" Grid.Row="1" Style="{StaticResource InvertedButton}" Margin="0 0 150 0" Visibility="Collapsed">Change Rooms</Button>
+                        <Label Grid.Row="2" Grid.Column="1" Content="Beginning:" Style="{StaticResource FormLabel}" HorizontalAlignment="Left"></Label>
+                        <ComboBox x:Name="Beginning" Grid.Row="3" Grid.Column="2" Style="{StaticResource FormInputComboBox}" Height="30" Width="250" Text="{Binding SelectedBeginning}"  ItemsSource="{Binding Path=Beginnings}" IsEnabled="False"></ComboBox>
+                        <Label Grid.Row="4" Grid.Column="1" Content="Ending:" Style="{StaticResource FormLabel}" HorizontalAlignment="Left"></Label>
+                        <ComboBox x:Name="Ending" Grid.Row="5" Grid.Column="2" Style="{StaticResource FormInputComboBox}" Height="30" Width="250" ItemsSource="{Binding Path=Endings, UpdateSourceTrigger=PropertyChanged}" IsEnabled="False"></ComboBox>
+                        <Label Grid.Row="6" Grid.Column="1" Content="Description:" Style="{StaticResource FormLabel}" HorizontalAlignment="Left"></Label>
+                        <TextBox x:Name="Description" Grid.Row="7" Grid.Column="1" Grid.ColumnSpan="1" Grid.RowSpan="1" Style="{StaticResource DescriptionBox}" Margin="0 0 20 5"></TextBox>
+                        <TextBlock Grid.Row="8" Grid.Column="1" Style="{StaticResource SmallText}" Text="{Binding Path=Feedback, UpdateSourceTrigger=PropertyChanged}" TextWrapping="Wrap"></TextBlock>
+                        <Border Width="2" Grid.RowSpan="11" Grid.Column="0" BorderBrush="{StaticResource AccentBlueBrush}" BorderThickness="1" HorizontalAlignment="Left"></Border>
                     </Grid>
                 </Grid>
             </Border>

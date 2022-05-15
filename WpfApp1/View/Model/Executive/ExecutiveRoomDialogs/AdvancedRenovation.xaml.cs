@@ -108,6 +108,22 @@ namespace WpfApp1.View.Model.Executive.ExecutiveRoomDialogs
                 }
             }
         }
+        private ObservableCollection<Room> _cRooms;
+        public ObservableCollection<Room> CRooms
+        {
+            get
+            {
+                return _cRooms;
+            }
+            set
+            {
+                if (value != _cRooms)
+                {
+                    _cRooms = value;
+                    OnPropertyChanged("CRooms");
+                }
+            }
+        }
         private ObservableCollection<string> _rooms;
         public ObservableCollection<string> Rooms
         {
@@ -139,6 +155,8 @@ namespace WpfApp1.View.Model.Executive.ExecutiveRoomDialogs
 
         public ExecutiveRoomPages ParentPage;
         public List<string> Beginnings { get; set; }
+        public List<string> NewNametags { get; set; }
+        public List<string> Types { get; set; }
 
 
         public AdvancedRenovation(ExecutiveRoomPages parent)
@@ -148,7 +166,10 @@ namespace WpfApp1.View.Model.Executive.ExecutiveRoomDialogs
             this.DataContext = this;
             Beginnings = ParentPage.Beginnings;
             TRooms = new ObservableCollection<Room>();
+            CRooms = new ObservableCollection<Room>();
             Rooms = new ObservableCollection<string>(ParentPage.RoomController.GetEditableNametags());
+            NewNametags = new List<string>();
+            Types = new List<string>() { "Operating", "Meeting", "Office", "Storage"};
             Rooms.Remove(ParentPage.SelectedNametag);
             this.TRooms.Add(ParentPage.RoomController.GetById(ParentPage.SelectedId));
         }
@@ -173,6 +194,7 @@ namespace WpfApp1.View.Model.Executive.ExecutiveRoomDialogs
         {
             TRooms.Add(ParentPage.RoomController.GetByNametag(OldRooms.Text));
             Rooms.Remove(OldRooms.Text);
+            Feedback = "";
         }
         
         private void RemoveFromTRoomsButton_Click(object sender, RoutedEventArgs e)
@@ -180,6 +202,50 @@ namespace WpfApp1.View.Model.Executive.ExecutiveRoomDialogs
             Room r = (Room)TargetedRooms.SelectedItems[0];
             TRooms.Remove(r);
             Rooms.Add(r.Nametag);
+            if (NewNametags.Contains(r.Nametag))
+            {
+                Room dr = null;
+                foreach (Room room in CRooms)
+                {
+                    if (room.Nametag.Equals(r.Nametag))
+                    {
+                        dr = room;
+                    }
+                }
+                if (dr != null)
+                {
+                    CRooms.Remove(dr);
+                    Feedback = "Room is removed from New Room list because its nametag is used in Old Room you just removed from renovation!";
+                }
+                else
+                {
+                    Feedback = "";
+                }
+            }
+            else
+            {
+                Feedback = "";
+            }
+        }
+        private void RemoveFromCRoomsButton_Click(object sender, RoutedEventArgs e)
+        {
+            Room r = (Room)CreatedRooms.SelectedItems[0];
+            CRooms.Remove(r);
+            NewNametags.Remove(r.Nametag);
+            Feedback = "";
+        }
+
+        private void AddNewRoom_Click(object sender, RoutedEventArgs e)
+        {
+            if (Rooms.Contains(NewNametag.Text) || NewNametags.Contains(NewNametag.Text))
+            {
+                Feedback = "Nametag of new room is already in use!";
+                return;
+            }
+            Room nr = new Room(0, NewNametag.Text, NewType.Text, false);
+            CRooms.Add(nr);
+            NewNametags.Add(nr.Nametag);
+            Feedback = "";
         }
     }
 }
