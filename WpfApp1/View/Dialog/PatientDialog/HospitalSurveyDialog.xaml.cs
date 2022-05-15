@@ -58,11 +58,8 @@ namespace WpfApp1.View.Dialog.PatientDialog
 
             var app = Application.Current as App;
             _surveyController = app.SurveyController;
-
-            int patientId = (int)app.Properties["userId"];
             
-            Survey completedSurvey = new Survey(patientId, -1, -1, grades);
-            _surveyController.Create(completedSurvey);
+            _surveyController.Create(grades, -1, -1);
             PatientErrorMessageBox.Show("Thank you for completing the survey!");
             Frame patientFrame = (Frame)app.Properties["PatientFrame"];
             patientFrame.Content = new PatientProfileView();

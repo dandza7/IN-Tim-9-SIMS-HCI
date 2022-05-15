@@ -64,16 +64,13 @@ namespace WpfApp1.View.Dialog.PatientDialog
             int appointmentId = (int)app.Properties["appointmentId"];
             int patientId = (int)app.Properties["userId"];
 
-            if(appointmentId != -1)
-            {
-                Appointment appointment = _appointmentController.GetById(appointmentId);
-                User doctorUser = _userController.GetById(appointment.DoctorId);
-                Doctor doctor = _doctorController.GetById(appointment.DoctorId);
-                Room room = _roomController.GetById(doctor.RoomId);
+            Appointment appointment = _appointmentController.GetById(appointmentId);
+            User doctorUser = _userController.GetById(appointment.DoctorId);
+            Doctor doctor = _doctorController.GetById(appointment.DoctorId);
+            Room room = _roomController.GetById(doctor.RoomId);
 
-                AppointmentView appointmentView = AppointmentConverter.ConvertAppointmentAndDoctorToAppointmentView(appointment, doctorUser, room);
-                AppointmentView = appointmentView;
-            }
+            AppointmentView appointmentView = AppointmentConverter.ConvertAppointmentAndDoctorToAppointmentView(appointment, doctorUser, room);
+            AppointmentView = appointmentView;
 
             Questions = GetDoctorSurvey();
         }
@@ -81,26 +78,25 @@ namespace WpfApp1.View.Dialog.PatientDialog
         private void GradeButton_Click(object sender, RoutedEventArgs e)
         {
             List<int> grades = GetGrades();
-            if (grades.Count < 5)
+            if (IsEveryQuestionsAnswered(grades) == false)
             {
                 PatientErrorMessageBox.Show("ERROR: You did not answer all of the questions!");
-                return;
             }
 
             var app = Application.Current as App;
             _surveyController = app.SurveyController;
-            _appointmentController = app.AppointmentController;
-            _doctorController = app.DoctorController;
 
             int appointmentId = (int)app.Properties["appointmentId"];
             int patientId = (int)app.Properties["userId"];
 
-            Appointment appointment = _appointmentController.GetById(appointmentId);
-            Doctor doctor = _doctorController.GetById(appointment.DoctorId);
-            Survey completedSurvey = new Survey(patientId, doctor.Id, appointmentId, grades);
-            _surveyController.Create(completedSurvey);
+            _surveyController.Create(grades, appointmentId, patientId);
             PatientErrorMessageBox.Show("Thank you for completing the survey!");
             NavigationService.GoBack();
+        }
+
+        private bool IsEveryQuestionsAnswered(List<int> grades)
+        {
+            return (grades.Count < 5 ? false : true);
         }
 
         private void GoBack_Click(object sender, RoutedEventArgs e)
