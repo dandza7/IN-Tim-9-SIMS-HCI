@@ -187,6 +187,31 @@ namespace WpfApp1.Service
             }
             return -1;
         }
+        public Room GetByNametag(string nametag)
+        {
+            List<Room> rooms = _roomRepository.GetAll();
+            foreach (Room room in rooms)
+            {
+                if (room.Nametag.Equals(nametag) && room.IsActive)
+                {
+                    return room;
+                }
+            }
+            return null;
+        }
+        public List<string> GetEditableNametags()
+        {
+            List<Room> rooms = _roomRepository.GetAll();
+            List<string> nametags = new List<string>();
+            foreach(Room room in rooms)
+            {
+                if(room.IsActive && room.Id != 1 && room.Id != 2)
+                {
+                    nametags.Add(room.Nametag);
+                }
+            }
+            return nametags;
+        }
 
     }
 }

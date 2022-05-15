@@ -315,6 +315,12 @@ namespace WpfApp1.View.Model.Executive
             SelectedId = r.Id;
             SelectedNametag = r.Nametag;
             SelectedType = r.Type;
+            if (SelectedId == 1 || SelectedId == 2)
+            {
+                SelectionProblem = "You can't do advanced renovation in this room!";
+                WrongSelectionContainer.Visibility = Visibility.Visible;
+                return;
+            }
             this.Beginnings = _renovationController.GetBegginigns(SelectedId);
             if (Beginnings.Count == 0)
             {
