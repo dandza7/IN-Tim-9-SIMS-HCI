@@ -122,7 +122,6 @@ namespace WpfApp1.View.Model.Executive
             this.DataContext = this;
             SelectedNametag = "";
             SelectedType = "";
-            SelectedType = "";
             SelectedId = 0;
             LoadAnimations();
             
@@ -306,7 +305,25 @@ namespace WpfApp1.View.Model.Executive
         //--------------------------------------------------------------------------------------------------------
         private void AdvancedRenovationButton_Click(object sender, RoutedEventArgs e)
         {
-            
+            if (RoomsDG.SelectedItems.Count == 0)
+            {
+                SelectionProblem = "You have to select room for renovation first!";
+                WrongSelectionContainer.Visibility = Visibility.Visible;
+                return;
+            }
+            Room r = (Room)RoomsDG.SelectedItems[0];
+            SelectedId = r.Id;
+            SelectedNametag = r.Nametag;
+            SelectedType = r.Type;
+            this.Beginnings = _renovationController.GetBegginigns(SelectedId);
+            if (Beginnings.Count == 0)
+            {
+                SelectionProblem = "*there are no free days for renovation for this room in next 14 days!";
+                WrongSelectionContainer.Visibility = Visibility.Visible;
+                return;
+            }
+            FormFrame.Content = new AdvancedRenovation(this);
+            FrameAnimation.Begin();
         }
         private void WrongSelectionOK_Click(object sender, RoutedEventArgs e)
         {

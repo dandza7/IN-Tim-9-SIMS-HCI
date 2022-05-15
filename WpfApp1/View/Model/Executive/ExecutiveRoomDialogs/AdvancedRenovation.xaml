@@ -1,0 +1,56 @@
+﻿<Page x:Class="WpfApp1.View.Model.Executive.ExecutiveRoomDialogs.AdvancedRenovation"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:WpfApp1.View.Model.Executive.ExecutiveRoomDialogs"
+      mc:Ignorable="d" 
+      d:DesignHeight="570" d:DesignWidth="1280"
+      Title="AdvancedRenovation">
+
+    <Grid>
+        <Border Style="{StaticResource OverlayModal}">
+            <Border x:Name="BasicRenovationContainer" Style="{StaticResource DialogModal}" Margin="150 20 150 20">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="80"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Button x:Name="CloseButton" Grid.Column="2" Style="{StaticResource ClassicButton}" Height="40" Width="40" Margin="0 20 20 0" HorizontalAlignment="Right" VerticalAlignment="Top" Click="CloseButton_Click">X</Button>
+                    <Grid Grid.RowSpan="2">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="50"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="50"/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition Height="2*"/>
+                            <RowDefinition Height="50"/>
+                            <RowDefinition Height="20"/>
+                        </Grid.RowDefinitions>
+                        <Label Grid.Row="1" Grid.Column="1" Content="Beginning:" Style="{StaticResource FormLabel}" HorizontalAlignment="Left"></Label>
+                        <ComboBox x:Name="Beginning" Grid.Row="2" Grid.Column="2" Style="{StaticResource FormInputComboBox}" Height="30" Width="300" Text="{Binding SelectedBeginning}"  ItemsSource="{Binding Path=Beginnings}" IsEnabled="True"></ComboBox>
+                        <Label Grid.Row="3" Grid.Column="1" Content="Ending:" Style="{StaticResource FormLabel}" HorizontalAlignment="Left"></Label>
+                        <ComboBox x:Name="Ending" Grid.Row="4" Grid.Column="2" Style="{StaticResource FormInputComboBox}" Height="30" Width="300" ItemsSource="{Binding Path=Endings, UpdateSourceTrigger=PropertyChanged}" IsEnabled="False"></ComboBox>
+                        <Label Grid.Row="5" Grid.Column="1" Content="Description:" Style="{StaticResource FormLabel}" HorizontalAlignment="Left"></Label>
+                        <TextBox x:Name="Description" Grid.Row="6" Grid.Column="1" Grid.ColumnSpan="1" Grid.RowSpan="1" Style="{StaticResource DescriptionBox}" Margin="0 0 20 5"></TextBox>
+                        <TextBlock Grid.Row="7" Grid.Column="1" Style="{StaticResource SmallText}" Text="{Binding Path=Feedback, UpdateSourceTrigger=PropertyChanged}"></TextBlock>
+                        <Border Width="2" Grid.RowSpan="9" Grid.Column="1" BorderBrush="{StaticResource AccentBlueBrush}" BorderThickness="1" HorizontalAlignment="Right"></Border>
+                    </Grid>
+                    <Grid Grid.Row="0" Grid.Column="1"></Grid>
+                    <Grid Grid.Row="1" Grid.Column="1"></Grid>
+                </Grid>
+            </Border>
+        </Border>
+    </Grid>
+</Page>
