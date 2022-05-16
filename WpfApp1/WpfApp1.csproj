@@ -214,6 +214,9 @@
     <Compile Include="View\Dialog\SecretaryAddNewDynamicEquipmentDialog.xaml.cs">
       <DependentUpon>SecretaryAddNewDynamicEquipmentDialog.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Dialog\SecretaryAddNewUrgentAppointmentDialog.xaml.cs">
+      <DependentUpon>SecretaryAddNewUrgentAppointmentDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Dialog\SecretaryAddPatientDialog.xaml.cs">
       <DependentUpon>SecretaryAddPatientDialog.xaml</DependentUpon>
     </Compile>
@@ -395,6 +398,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Dialog\SecretaryAddNewDynamicEquipmentDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Dialog\SecretaryAddNewUrgentAppointmentDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

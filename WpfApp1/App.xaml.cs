@@ -88,7 +88,7 @@ namespace WpfApp1
             DoctorController = new DoctorController(doctorService);
 
             var appointmentService = new AppointmentService(appointmentRepository, doctorRepository, patientRepository, 
-                                                            roomRepository, userRepository, renovationRepository);
+                                                            roomRepository, userRepository, renovationRepository, notificationRepository);
             AppointmentController = new AppointmentController(appointmentService);
 
             var drugService = new DrugService(drugRepository);

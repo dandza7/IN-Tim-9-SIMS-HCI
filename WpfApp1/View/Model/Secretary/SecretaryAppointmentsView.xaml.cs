@@ -69,6 +69,11 @@ namespace WpfApp1.View.Model.Secretary
             SecretaryAppointmentsDataGrid.ItemsSource = null;
             SecretaryAppointmentsDataGrid.ItemsSource = _appointmentController.GetSecretaryAppointmentViews();
         }
-        
+
+        private void Add_New_Urgent_Appointment_Click(object sender, RoutedEventArgs e)
+        {
+            var s = new SecretaryAddNewUrgentAppointmentDialog();
+            s.Show();
+        }
     }
 }
