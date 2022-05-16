@@ -91,5 +91,11 @@ namespace WpfApp1.Controller
         {
             return _appointmentService.GetNearestMoving(appointmentId);
         }
+
+        public List<Appointment> GetAllByDoctorId(int id)
+        {
+            return _appointmentService.GetAllByDoctorId(id);
+        }
+
     }
 }

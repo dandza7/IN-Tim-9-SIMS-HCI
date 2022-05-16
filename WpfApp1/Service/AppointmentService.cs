@@ -105,6 +105,11 @@ namespace WpfApp1.Service
             return startOfInterval;
         }
 
+        internal List<Appointment> GetAllByDoctorId(int id)
+        {
+            return _appointmentRepo.GetAllByDoctorId(id);
+        }
+
         // Funkcija za dobijanje radnog vremena tog dana, radni dan počinje u 7 ujutru a završava se u 8 naveče
         private DateTime CalculateWorkingHours(string type, DateTime interval)
         {
