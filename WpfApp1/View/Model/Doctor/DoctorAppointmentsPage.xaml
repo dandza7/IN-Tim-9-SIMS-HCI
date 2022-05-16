@@ -1,0 +1,25 @@
+﻿<Page x:Class="WpfApp1.View.Model.Doctor.DoctorAppointmentsPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:WpfApp1.View.Model.Doctor"
+      mc:Ignorable="d" 
+      d:DesignHeight="839" d:DesignWidth="1700"
+      Title="DoctorAppointmentsPage">
+
+    <Grid >
+
+        <Label HorizontalContentAlignment="Center" Content="Appointments" Margin="350,20,350,750" FontSize="50" BorderThickness="0,0,0,5" BorderBrush="{DynamicResource MedicalGreenBrush}" Foreground="{DynamicResource MedicalGreenBrush}" FontFamily="Trajan Pro 3" FontWeight="Bold"/>
+
+
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="220,152,0,0">
+            <Button x:Name="MyAppointmentsBT" Content="My Appointments" Width="228" Height="48" BorderThickness="2" BorderBrush="{DynamicResource MedicalGreenBrush}" FontSize="20" Background="{DynamicResource GrayBrush}" Foreground="{DynamicResource MedicalGreenBrush}" FontFamily="Trajan Pro 3 " Click="MyAppointmentsBT_Click"/>
+            <Button x:Name="RefferalsBT"       Content="Refferals"       Width="227" Height="48" BorderThickness="2" BorderBrush="{DynamicResource MedicalGreenBrush}" FontSize="20" Background="{DynamicResource GrayBrush}" Foreground="{DynamicResource MedicalGreenBrush}" FontFamily="Trajan Pro 3 " Click="RefferalsBT_Click" />
+        </StackPanel>
+        <Border BorderBrush="{DynamicResource MedicalGreenBrush}" BorderThickness="5" Margin="197,200,203,0" Height="587"  Width="1300" VerticalAlignment="Top">
+            <Frame x:Name="AppointmentFrame"  NavigationUIVisibility="Hidden" HorizontalAlignment="Left" VerticalAlignment="Top"  Height="587" Width="1300" Margin="-2,-2,-2,0"/>
+        </Border>
+
+    </Grid>
+</Page>

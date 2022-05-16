@@ -1,0 +1,68 @@
+﻿<Page x:Class="WpfApp1.View.Model.Doctor.DoctorMedicalRecordsPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+      xmlns:local="clr-namespace:WpfApp1.View.Model.Doctor"
+      mc:Ignorable="d" 
+      d:DesignHeight="839" d:DesignWidth="1700"
+      Title="DoctorMedicalRecordsPage">
+    <Grid>
+        <Label HorizontalContentAlignment="Center" Content="Medical Records" Margin="350,20,350,750" FontSize="50" BorderThickness="0,0,0,5" BorderBrush="{DynamicResource MedicalGreenBrush}" Height="Auto" VerticalAlignment="Stretch" Foreground="{DynamicResource MedicalGreenBrush}" FontFamily="Trajan Pro 3" FontWeight="Bold"/>
+
+        <GroupBox Header="Current Appointment View" HorizontalAlignment="Left" Height="626" Margin="36,150,0,0" VerticalAlignment="Top" Width="1050" Foreground="{DynamicResource WhiteBrush}" FontSize="20" FontFamily="Trajan Pro 3">
+            <Grid>
+                <Rectangle Fill="{StaticResource GrayBrush}" StrokeThickness="0" Grid.ColumnSpan="2"/>
+                <Label Content="Patient:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="47,26,0,0" Foreground="{DynamicResource WhiteBrush}"/>
+                <TextBlock x:Name="PatientTextBlock"  HorizontalAlignment="Left" Margin="158,28,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="207"/>
+                <Label Content="From:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="390,4,0,0" RenderTransformOrigin="1.245,-0.088" Foreground="{DynamicResource WhiteBrush}"/>
+                <Label x:Name="FromLabel" Content="dd/mm/yyyy" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="470,6,0,0" RenderTransformOrigin="1.245,-0.088" Foreground="{DynamicResource WhiteBrush}"/>
+                <Label Content="To:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="420,48,0,0" Foreground="{DynamicResource WhiteBrush}"/>
+                <Label x:Name="ToLabel" Content="dd/mm/yyyy" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="470,48,0,0" Foreground="{DynamicResource WhiteBrush}"/>
+                <Button Content="Skip" HorizontalAlignment="Left" Margin="849,17,0,0" VerticalAlignment="Top" Width="153" Height="43" Foreground="{DynamicResource WhiteBrush}" BorderBrush="{DynamicResource WhiteBrush}" Background="{DynamicResource GrayBrush}" BorderThickness="2"/>
+                <GroupBox Header="Medical Record" Margin="0,77,0,0" Foreground="{DynamicResource MedicalGreenBrush}" BorderBrush="{DynamicResource MedicalGreenBrush}" FontSize="30" FontFamily="Trajan Pro 3 Bold" BorderThickness="2">
+                    <Grid>
+
+                        <StackPanel HorizontalAlignment="Left" Margin="32,30,0,0" VerticalAlignment="Top" >
+                            <Button  x:Name="InfoBT"  Content="Info"   Height="39" Width="127" FontSize="16" FontFamily="Trajan Pro 3 " Foreground="{DynamicResource MedicalGreenBrush}" BorderBrush="{DynamicResource MedicalGreenBrush}" Background="{DynamicResource GrayBrush}" BorderThickness="2" Click="InfoBT_Click"/>
+                            <Button  x:Name="ReportsBT" Content="Reports" Height="39" Width="127" FontSize="16" FontFamily="Trajan Pro 3 " Foreground="{DynamicResource WhiteBrush}" BorderBrush="{DynamicResource WhiteBrush}" Background="{DynamicResource GrayBrush}" BorderThickness="2" Click="ReportsBT_Click"/>
+                            <Button x:Name="TherapiesBT" Content="Therapies" Height="39" Width="127" FontSize="16" FontFamily="Trajan Pro 3 " Foreground="{DynamicResource WhiteBrush}" BorderBrush="{DynamicResource WhiteBrush}" Background="{DynamicResource GrayBrush}" BorderThickness="2" Click="TherapiesBT_Click"/>
+                        </StackPanel>
+                        <Border BorderBrush="{DynamicResource MedicalGreenBrush}" BorderThickness="2" Margin="159,30,345,10">
+                            <Grid>
+
+                                <Frame x:Name="MedicalRecordFrame" Content="" HorizontalAlignment="Left" Height="431" VerticalAlignment="Top" Width="518"/>
+
+                            </Grid>
+                        </Border>
+                        <GroupBox Header="Appointment Report" Margin="686,30,8,10" FontSize="20" FontFamily="Trajan Pro 3" Foreground="{DynamicResource WhiteBrush}">
+                            <Grid>
+
+
+                            </Grid>
+                        </GroupBox>
+                    </Grid>
+                </GroupBox>
+            </Grid>
+        </GroupBox>
+        <GroupBox Header="Upcoming Appointments" HorizontalAlignment="Left" Height="626" Margin="1112,150,0,0" VerticalAlignment="Top" Width="578" Foreground="{DynamicResource WhiteBrush}" FontSize="20" FontFamily="Trajan Pro 3">
+            <DataGrid x:Name="UpcomingAppointmentsGrid" Margin="12,30,12,12"
+                      AutoGenerateColumns="False" Style="{StaticResource ExecutiveDataGrid}" 
+                      ItemsSource="{Binding upcomingAppointments}" SelectionChanged="FutureAppointmentsGrid_SelectionChanged" >
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header=" Patient" Width="150"  Binding="{Binding Patient}" HeaderStyle="{StaticResource ExecutiveDGHeader}" CellStyle="{StaticResource ExecutiveDGCell}"/>
+                    <DataGridTextColumn Header=" Beginning" Width="150" Binding="{Binding Beginning}"  HeaderStyle="{StaticResource ExecutiveDGHeader}" CellStyle="{StaticResource ExecutiveDGCell}"/>
+                    <DataGridTemplateColumn Header=" Medical Record" Width="2*"  HeaderStyle="{StaticResource ExecutiveDGHeader}" CellStyle="{StaticResource ExecutiveDGCell}">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Content="View" Style="{StaticResource DoctorStandardButton}"  />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+        </GroupBox>
+
+    </Grid>
+</Page>

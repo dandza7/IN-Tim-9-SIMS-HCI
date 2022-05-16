@@ -1,0 +1,36 @@
+﻿<Page x:Class="WpfApp1.View.Model.Doctor.DoctorNotificationsPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:WpfApp1.View.Model.Doctor"
+      mc:Ignorable="d" 
+      d:DesignHeight="839" d:DesignWidth="1700"
+      xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+      Title="DoctorNotificationsPage">
+    <Grid>
+
+        <Label HorizontalContentAlignment="Center" Content="Notifications" Margin="350,20,350,750" FontSize="50" BorderThickness="0,0,0,5" BorderBrush="{DynamicResource MedicalGreenBrush}" Height="Auto" VerticalAlignment="Stretch" Foreground="{DynamicResource MedicalGreenBrush}" FontFamily="Trajan Pro 3" FontWeight="Bold"/>
+        <GroupBox Header="Notification List" HorizontalAlignment="Left" Height="586" Margin="260,142,0,0" VerticalAlignment="Top" Width="596" BorderBrush="{DynamicResource MedicalGreenBrush}" Foreground="{DynamicResource MedicalGreenBrush}" FontSize="30" FontFamily="Trajan Pro 3 Bold" FontWeight="Bold">
+
+            <DataGrid x:Name="RequestViewGrid" Margin="10,50,16,18"
+                      AutoGenerateColumns="False" Style="{StaticResource ExecutiveDataGrid}" 
+                      ItemsSource="{Binding Notifications}"  >
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header=" Date" Width="150"  Binding="{Binding Date}" HeaderStyle="{StaticResource ExecutiveDGHeader}" CellStyle="{StaticResource ExecutiveDGCell}"/>
+                    <DataGridTextColumn Header=" Subject" Width="3*" Binding="{Binding Subject}"  HeaderStyle="{StaticResource ExecutiveDGHeader}" CellStyle="{StaticResource ExecutiveDGCell}"/>
+                    <DataGridTemplateColumn Header="Delete" Width="2*"  HeaderStyle="{StaticResource ExecutiveDGHeader}" CellStyle="{StaticResource ExecutiveDGCell}">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Content="Update" Style="{StaticResource DoctorStandardButton}"  />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+        </GroupBox>
+        <GroupBox Header="Notification View" HorizontalAlignment="Left" Height="586" Margin="892,142,0,0" VerticalAlignment="Top" Width="530" BorderBrush="{DynamicResource MedicalGreenBrush}" Foreground="{DynamicResource MedicalGreenBrush}" FontSize="30" FontFamily="Trajan Pro 3 Bold" FontWeight="Bold">
+        </GroupBox>
+
+    </Grid>
+</Page>
