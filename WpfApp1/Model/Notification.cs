@@ -159,5 +159,6 @@ namespace WpfApp1.Model
             IsRead = isRead;
             IsDeleted = isDeleted;
         }
+
     }
 }

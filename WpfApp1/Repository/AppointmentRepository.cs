@@ -105,6 +105,8 @@ namespace WpfApp1.Repository
                     a.Beginning = appointment.Beginning;
                     a.Ending = appointment.Ending;
                     a.DoctorId = appointment.DoctorId;
+                    a.PatientId = appointment.PatientId;
+                    a.IsUrgent = appointment.IsUrgent;
                 }
                 newFile.Add(ConvertAppointmentToCSVFormat(a));
             }
