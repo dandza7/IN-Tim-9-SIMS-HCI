@@ -84,10 +84,7 @@ namespace WpfApp1.Service
         {
             return _inventoryRepository.GetAllDynamic();
         }
-        public Inventory AddAmount(string name, int amount)
-        {
-            return _inventoryRepository.AddAmount(name, amount);
-        }
+
 
     }
 }
