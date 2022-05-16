@@ -59,7 +59,7 @@ namespace WpfApp1.View.Dialog
             SpecType specialization = (SpecType)SpecializationComboBox.SelectedValue;
             Patient patient = _patientController.GetByUsername(((User)PatientComboBox.SelectedValue).Username);
             int patientId = patient.Id;
-            List<AppointmentView> avApps = _appointmentController.MakeUrgent(patientId, specialization, DateTime.Now).ToList();
+            List<AppointmentView> avApps = _appointmentController.CreateUrgentAppointement(patientId, specialization, DateTime.Now).ToList();
             AvailableAppointments = new ObservableCollection<AppointmentView>(avApps);
 
             AvailableAppointmentsGrid.ItemsSource = AvailableAppointments;
