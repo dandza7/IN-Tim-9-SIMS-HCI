@@ -40,6 +40,38 @@ namespace WpfApp1.Repository
                 .ToList();
         }
 
+        public Inventory GetById(int id)
+        {
+            return GetAll().ToList().SingleOrDefault(Inventory => Inventory.Id == id);
+        }
+
+        public Inventory GetByName(string name)
+        {
+            Inventory inv =  GetAll().ToList().SingleOrDefault(Inventory => Inventory.Name == name);
+            if(inv == null)
+            {
+                return null;
+            }
+            else return inv;
+        }
+
+        public IEnumerable<Inventory> GetAllDynamic()
+        {
+            List<Inventory> allInventory = GetAll().ToList();
+            List<Inventory> dynamicInventory = new List<Inventory>();
+
+            foreach (Inventory inv in allInventory)
+            {
+                if (inv.Type == "D")
+                {
+                    dynamicInventory.Add(inv);
+                }
+            }
+
+            return dynamicInventory;
+        }
+
+
         private int GetMaxId(List<Inventory> inventories)
         {
             return inventories.Count() == 0 ? 0 : inventories.Max(inventory => inventory.Id);
@@ -50,6 +82,21 @@ namespace WpfApp1.Repository
             inventory.Id = GetMaxId(GetAll()) + 1;
             AppendLineToFile(_path, ConvertInventoryToCsvFormat(inventory));
             return inventory;
+        }
+        public Inventory AddAmount(string name, int amount)
+        {
+            List<Inventory> dynInv = GetAll().ToList();
+            List<string> newFile = new List<string>();
+            foreach (Inventory inv in dynInv)
+            {
+                if (inv.Name == name)
+                {
+                    inv.Amount = inv.Amount + amount;
+                }
+                newFile.Add(ConvertInventoryToCsvFormat(inv));
+            }
+            File.WriteAllLines(_path, newFile);
+            return GetByName(name);
         }
 
         private Inventory ConvertCsvFormatToInventory(string inventoryCsvFormat)
@@ -107,6 +154,7 @@ namespace WpfApp1.Repository
                     i.Name = inventory.Name;
                     i.RoomId = inventory.RoomId;
                     i.Amount = inventory.Amount;
+                    i.Type = inventory.Type;
                 }
                 newFile.Add(ConvertInventoryToCsvFormat(i));
             }

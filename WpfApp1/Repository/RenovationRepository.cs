@@ -40,7 +40,7 @@ namespace WpfApp1.Repository
 
             foreach (var renovation in allRenovations)
             {
-                if (renovation.RoomId == roomId)
+                if (renovation.RoomsIds.Contains(roomId))
                 {
                     roomRenovations.Add(renovation);
                 }
@@ -79,24 +79,45 @@ namespace WpfApp1.Repository
         {
             var tokens = renovationCsvFormat.Split(_delimiter.ToCharArray());
             string format = "dd/MM/yyyy H:mm:ss";
+            var roomsIds = tokens[1].Split("|".ToCharArray());
+            List<int> intIds = new List<int>();
+            foreach(var roomId in roomsIds)
+            {
+                intIds.Add(int.Parse(roomId));
+            }
             return new Renovation(
                 int.Parse(tokens[0]),
-                int.Parse(tokens[1]),
+                intIds,
                 tokens[2],
                 DateTime.ParseExact(tokens[3], format,
                 CultureInfo.InvariantCulture),
                 DateTime.ParseExact(tokens[4], format,
-                CultureInfo.InvariantCulture));
+                CultureInfo.InvariantCulture),
+                tokens[5]);
         }
 
         private string ConvertRenovationToCsvFormat(Renovation renovation)
         {
+            string ids = "";
+            int count = 0;
+            //Console.WriteLine("BROJ SOBA: {0}", renovation.RoomsIds.Count());
+            foreach(int id in renovation.RoomsIds)
+            {
+                count++;
+                ids += id.ToString();
+                if(count < renovation.RoomsIds.Count)
+                {
+                    ids += "|";
+                }
+            }
+            //Console.WriteLine("A: {0}", ids);
             return string.Join(_delimiter,
                 renovation.Id,
-                renovation.RoomId,
+                ids,
                 renovation.Description,
                 renovation.Beginning,
-                renovation.Ending);
+                renovation.Ending,
+                renovation.Type);
         }
 
         private void AppendLineToFile(String path, String line)

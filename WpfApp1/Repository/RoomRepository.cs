@@ -59,7 +59,9 @@ namespace WpfApp1.Repository
             return new Room(
                 int.Parse(tokens[0]),
                 tokens[1],
-                tokens[2]);
+                tokens[2],
+                bool.Parse(tokens[3])
+                );
         }
 
         private string ConvertRoomToCsvFormat(Room room)
@@ -67,7 +69,9 @@ namespace WpfApp1.Repository
             return string.Join(_delimiter,
                 room.Id,
                 room.Nametag,
-                room.Type);
+                room.Type,
+                room.IsActive
+                );
         }
 
         private void AppendLineToFile(String path, String line)
@@ -102,6 +106,8 @@ namespace WpfApp1.Repository
                 if (r.Id == room.Id)
                 {
                     r.Type = room.Type;
+                    r.Nametag = room.Nametag;
+                    r.IsActive = room.IsActive;
 
                 }
                 newFile.Add(ConvertRoomToCsvFormat(r));

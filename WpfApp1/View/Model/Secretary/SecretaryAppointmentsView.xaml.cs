@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,8 +23,17 @@ namespace WpfApp1.View.Model.Secretary
     /// <summary>
     /// Interaction logic for SecretaryAppointmentsView.xaml
     /// </summary>
-    public partial class SecretaryAppointmentsView : Page
+    public partial class SecretaryAppointmentsView : Page, INotifyPropertyChanged
     {
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected virtual void OnPropertyChanged(string name)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(name));
+            }
+        }
         private AppointmentController _appointmentController;
         public ObservableCollection<SecretaryAppointmentView> Appointments { get; set; }
         public SecretaryAppointmentsView()
@@ -48,6 +58,22 @@ namespace WpfApp1.View.Model.Secretary
             var s = new SecretaryAddNewAppointmentDialog();
             s.Show();
         }
-       
+        private void DeleteAppointment(object sender, RoutedEventArgs e)
+        {
+            int appointmentId = ((SecretaryAppointmentView)SecretaryAppointmentsDataGrid.SelectedItem).Id;
+            var app = Application.Current as App;
+
+            _appointmentController = app.AppointmentController;
+            _appointmentController.Delete(appointmentId);
+
+            SecretaryAppointmentsDataGrid.ItemsSource = null;
+            SecretaryAppointmentsDataGrid.ItemsSource = _appointmentController.GetSecretaryAppointmentViews();
+        }
+
+        private void Add_New_Urgent_Appointment_Click(object sender, RoutedEventArgs e)
+        {
+            var s = new SecretaryAddNewUrgentAppointmentDialog();
+            s.Show();
+        }
     }
 }

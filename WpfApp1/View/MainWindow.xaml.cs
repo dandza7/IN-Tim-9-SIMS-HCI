@@ -17,6 +17,7 @@ using WpfApp1.View.Model;
 using WpfApp1.Service;
 using WpfApp1.Controller;
 using WpfApp1.Model;
+using System.Windows.Media.Animation;
 
 namespace WpfApp1.Service
 {
@@ -32,33 +33,15 @@ namespace WpfApp1.Service
             InitializeComponent();
             var app = Application.Current as App;
             _userController = app.UserController;
-            BadLoginText = "There was a problem with logging in, check if you typed your username and password correctly";
+            BadLoginText = "*there was a problem with logging in, check if you typed your credentials correctly";
             this.DataContext = this;
         }
 
-        private void ShowPatientOptions(object sender, RoutedEventArgs e)
-        {
-            var s = new PatientMenu();
-            s.Show();
-        }
 
-        private void ShowExecutiveOptions(object sender, RoutedEventArgs e)
-        {
-            var s = new ExecutiveMenu();
-            s.Show();
-        }
-        private void ShowDoctorOptions(object sender, RoutedEventArgs e)
-        {
-            var s = new DoctorMenu();
-            s.Show();
-        }
-        private void ShowSecretaryOptions(object sender, RoutedEventArgs e)
-        {
-            var s = new SecretaryMenu();
-            s.Show();
-        }
 
         //---------------------------------------------------------------------------
+
+
         private void HelpButton_Click(object sender, RoutedEventArgs e)
         {
             HelpLogIn.Visibility = Visibility.Visible;
@@ -68,10 +51,6 @@ namespace WpfApp1.Service
             HelpLogIn.Visibility = Visibility.Collapsed;
         }
 
-        private void XLogInButton_Click(object sender, RoutedEventArgs e)
-        {
-            LogInForm.Visibility = Visibility.Collapsed;
-        }
 
         private void LogInConfirm_Click(object sender, RoutedEventArgs e)
         {
@@ -80,9 +59,8 @@ namespace WpfApp1.Service
             User logged = this._userController.CheckLogIn(user, pw);
             if(logged == null)
             {
-                ErrorContainer.Visibility = Visibility.Visible;
-                UsernameField.Text = "";
                 PasswordField.Password = "";
+                ErrorText.Text = BadLoginText;
                 return;
             }
             var app = Application.Current as App;
@@ -113,11 +91,6 @@ namespace WpfApp1.Service
                 Close();
             }
             Console.WriteLine("Logged in user with ID: {0} and ROLE: {1}", app.Properties["userId"], app.Properties["userRole"]);
-        }
-
-        private void OkToError_Click(object sender, RoutedEventArgs e)
-        {
-            ErrorContainer.Visibility = Visibility.Collapsed;
         }
 
     }

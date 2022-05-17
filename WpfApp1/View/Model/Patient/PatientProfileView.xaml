@@ -9,16 +9,17 @@
       Title="PatientProfileView">
 
     <Grid>
-        <Label Content="MyProfile" FontSize="30" FontWeight="ExtraBlack" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-        <TabControl Style="{StaticResource PatientTabControl}" Height="600" Width="765" Background="{StaticResource DarkBlueBrush}">
+        <TabControl Style="{StaticResource PatientTabControl}" Height="600" Width="795" Background="{StaticResource DarkBlueBrush}">
             <TabItem Header="Information" Style="{StaticResource PatientTabItem}">
                 <Grid Background="{StaticResource DarkBlueBrush}" HorizontalAlignment="Center" VerticalAlignment="Center" Height="500" Width="600">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="79*" />
                         <ColumnDefinition Width="221*"/>
-                        <ColumnDefinition Width="300*" />
+                        <ColumnDefinition Width="320*" />
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
+                        <RowDefinition />
+                        <RowDefinition />
                         <RowDefinition />
                         <RowDefinition />
                         <RowDefinition />
@@ -31,14 +32,18 @@
                     <Label Grid.Row="1" Grid.Column="0" Content="First name:" Style="{StaticResource ProfileLabel}" Grid.ColumnSpan="2" Margin="40,0,40,0"/>
                     <Label Grid.Row="2" Grid.Column="0" Content="Last name:" Style="{StaticResource ProfileLabel}" Grid.ColumnSpan="2" Margin="40,0,40,0"/>
                     <Label Grid.Row="3" Grid.Column="0" Content="Number:" Style="{StaticResource ProfileLabel}" Grid.ColumnSpan="2" Margin="40,0,40,0"/>
-                    <Label Grid.Row="4" Grid.Column="0" Content="Password:" Style="{StaticResource ProfileLabel}" Grid.ColumnSpan="2" Margin="40,0,40,0"/>
-                    <Label Grid.Row="5" Grid.Column="0" Content="JMBG:" Style="{StaticResource ProfileLabel}" Grid.ColumnSpan="2" Margin="40,0,40,0"/>
-                    <Label Grid.Column="2" Content="{Binding User.Username}" Style="{StaticResource ProfileLabel}" FontWeight="Normal" Margin="40,0,40,0"/>
-                    <Label Grid.Row="1" Grid.Column="2" Content="{Binding User.Name}" Style="{StaticResource ProfileLabel}" FontWeight="Normal" Margin="40,0,40,0"/>
-                    <Label Grid.Row="2" Grid.Column="2" Content="{Binding User.Surname}" Style="{StaticResource ProfileLabel}" FontWeight="Normal" Margin="40,0,40,0"/>
-                    <Label Grid.Row="3" Grid.Column="2" Content="{Binding User.Phonenumber}" Style="{StaticResource ProfileLabel}" FontWeight="Normal" Margin="40,0,40,0"/>
-                    <Label Grid.Row="4" Grid.Column="2" Content="{Binding User.Password}" Style="{StaticResource ProfileLabel}" FontWeight="Normal" Margin="40,0,40,0"/>
-                    <Label Grid.Row="5" Grid.Column="2" Content="{Binding User.JMBG}" Style="{StaticResource ProfileLabel}" FontWeight="Normal" Margin="40,0,40,0"/>
+                    <Label Grid.Row="4" Grid.Column="0" Content="JMBG:" Style="{StaticResource ProfileLabel}" Grid.ColumnSpan="2" Margin="40,0,40,0"/>
+                    <Label Grid.Row="5" Grid.Column="0" Content="Street:" Style="{StaticResource ProfileLabel}" Grid.ColumnSpan="2" Margin="40,0,40,0"/>
+                    <Label Grid.Row="6" Grid.Column="0" Content="City:" Style="{StaticResource ProfileLabel}" Grid.ColumnSpan="2" Margin="40,0,40,0"/>
+                    <Label Grid.Row="7" Grid.Column="0" Content="Country:" Style="{StaticResource ProfileLabel}" Grid.ColumnSpan="2" Margin="40,0,40,0"/>
+                    <Label Grid.Column="2" Content="{Binding Patient.Username}" Style="{StaticResource ProfileLabel}" FontWeight="Normal" Margin="40,0,40,0"/>
+                    <Label Grid.Row="1" Grid.Column="2" Content="{Binding Patient.FirstName}" Style="{StaticResource ProfileLabel}" FontWeight="Normal" Margin="40,0,40,0"/>
+                    <Label Grid.Row="2" Grid.Column="2" Content="{Binding Patient.Surname}" Style="{StaticResource ProfileLabel}" FontWeight="Normal" Margin="40,0,40,0"/>
+                    <Label Grid.Row="3" Grid.Column="2" Content="{Binding Patient.PhoneNumber}" Style="{StaticResource ProfileLabel}" FontWeight="Normal" Margin="40,0,40,0"/>
+                    <Label Grid.Row="4" Grid.Column="2" Content="{Binding Patient.Jmbg}" Style="{StaticResource ProfileLabel}" FontWeight="Normal" Margin="40,0,40,0"/>
+                    <Label Grid.Row="5" Grid.Column="2" Content="{Binding Patient.Street}" Style="{StaticResource ProfileLabel}" FontWeight="Normal" Margin="40,0,40,0"/>
+                    <Label Grid.Row="6" Grid.Column="2" Content="{Binding Patient.City}" Style="{StaticResource ProfileLabel}" FontWeight="Normal" Margin="40,0,40,0"/>
+                    <Label Grid.Row="7" Grid.Column="2" Content="{Binding Patient.Country}" Style="{StaticResource ProfileLabel}" FontWeight="Normal" Margin="40,0,40,0"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Therapies" Style="{StaticResource PatientTabItem}">
@@ -52,15 +57,21 @@
                     </DataGrid>
                 </Grid>
             </TabItem>
-            <TabItem Header="Reports" Style="{StaticResource PatientTabItem}">
+            <TabItem Header="Appointment History" Style="{StaticResource PatientTabItem}">
                 <Grid Background="{StaticResource DarkBlueBrush}">
-                    <Label Content="Choose time period:" FontSize="17" FontWeight="Bold" VerticalContentAlignment="Top" HorizontalAlignment="Left" Margin="200,50,0,490" Foreground="White"/>
-                    <Label Content="From:" FontSize="17" FontWeight="Bold" VerticalContentAlignment="Top" HorizontalAlignment="Left" Margin="380, 35, 0, 505" Foreground="White"/>
-                    <Label Content="To:" FontSize="17" FontWeight="Bold" VerticalContentAlignment="Top" HorizontalAlignment="Left" Margin="380, 65, 0, 475" Foreground="White"/>
-                    <DatePicker x:Name="FromDP" VerticalContentAlignment="Top" HorizontalAlignment="Left" Margin="440, 35, 0, 505"/>
-                    <DatePicker x:Name="ToDP" VerticalContentAlignment="Top" HorizontalAlignment="Left" Margin="440, 65, 0, 475"/>
-                    <Button Content="Search" Style="{StaticResource PatientSearchButton}" VerticalContentAlignment="Top" HorizontalAlignment="Left" Margin="600, 50, 0, 495" Click="SearchReports_Click"/>
-                    <DataGrid x:Name="PatientReportsDataGrid" MaxHeight="500" MaxWidth="705" Style="{StaticResource PatientDataGrid}" ItemsSource="{Binding Reports, UpdateSourceTrigger=PropertyChanged}">
+                    <WrapPanel HorizontalAlignment="Center" Margin="0,20,0,510">
+                        <Label Content="Appointment History" FontSize="24" FontWeight="Bold" Foreground="White"/>
+                        <Button Style="{StaticResource HelpButton}" Click="HelpButton_Click"/>
+                    </WrapPanel>
+                    <StackPanel Orientation="Horizontal" Margin="50,100,50,440">
+                        <Label Content="Choose time period:" FontSize="17" FontWeight="Bold" Foreground="White" Margin="0,0,50,0"/>
+                        <Label Content="From:" FontSize="17" Foreground="White"/>
+                        <DatePicker x:Name="FromDP" Margin="0,0,20,0"/>
+                        <Label Content="To:" FontSize="17" Foreground="White"/>
+                        <DatePicker x:Name="ToDP" Margin="0,0,20,0"/>
+                        <Button Content="Search" Style="{StaticResource PatientSearchButton}" Click="SearchReports_Click"/>
+                    </StackPanel>
+                    <DataGrid x:Name="PatientReportsDataGrid" MaxHeight="500" MaxWidth="705" Style="{StaticResource PatientDataGrid}" Margin="0,145,0,0" ItemsSource="{Binding Reports, UpdateSourceTrigger=PropertyChanged}">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Id" Binding="{Binding Id}" CanUserSort="False"  ElementStyle="{StaticResource ColumnElementStyle}" CellStyle="{StaticResource PatientDataGridCell}"/>
                             <DataGridTextColumn Header="Room" Binding="{Binding NameTag}" CanUserSort="False" ElementStyle="{StaticResource ColumnElementStyle}" CellStyle="{StaticResource PatientDataGridCell}"/>
@@ -79,7 +90,7 @@
             </TabItem>
             <TabItem Header="Notifications" Style="{StaticResource PatientTabItem}">
                 <Grid Background="{StaticResource DarkBlueBrush}">
-                    <DataGrid x:Name="PatientNotificationsDataGrid" MaxHeight="400" MaxWidth="705" Style="{StaticResource PatientDataGrid}" ItemsSource="{Binding Notifications, UpdateSourceTrigger=PropertyChanged}">
+                    <DataGrid x:Name="PatientNotificationsDataGrid" MaxHeight="400" MaxWidth="705" Style="{StaticResource PatientDataGrid}" ItemsSource="{Binding Notifications, UpdateSourceTrigger=PropertyChanged}" HorizontalScrollBarVisibility="Disabled">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Id" Binding="{Binding Id}" CanUserSort="False" ElementStyle="{StaticResource ProfileColumnElementStyle}" CellStyle="{StaticResource PatientDataGridCell}"/>
                             <DataGridTextColumn Header="Date and Time" Binding="{Binding Date}" CanUserSort="False" ElementStyle="{StaticResource ProfileColumnElementStyle}" CellStyle="{StaticResource PatientDataGridCell}"/>

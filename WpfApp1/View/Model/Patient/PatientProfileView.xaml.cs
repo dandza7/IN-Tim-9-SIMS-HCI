@@ -34,7 +34,7 @@ namespace WpfApp1.View.Model.Patient
         public ObservableCollection<Notification> Notifications { get; set; }
         public ObservableCollection<TherapyView> Therapies { get; set; }
         public ObservableCollection<AppointmentView> Reports { get; set; }
-        public PatientView User { get; set; }
+        public PatientView Patient { get; set; }
 
         public PatientProfileView()
         {
@@ -50,8 +50,8 @@ namespace WpfApp1.View.Model.Patient
 
             int patientId = (int)app.Properties["userId"];
 
-            User = PatientConverter.ConvertPatientToPatientView(_userController.GetById(patientId));
-            _notificationController.GetScheduledPatientsNotifications(patientId);
+            Patient = PatientConverter.ConvertPatientToPatientView(_userController.GetById(patientId), _patientController.GetById(patientId));
+            _notificationController.GetScheduledTherapyNotifications(patientId);
             _patientController.DeleteOldPatientsNotifications(patientId);
             Notifications = new ObservableCollection<Notification>(_notificationController.GetUsersNotDeletedNotifications(patientId));
 
@@ -127,12 +127,18 @@ namespace WpfApp1.View.Model.Patient
             var app = Application.Current as App;
             int appointmentId = ((AppointmentView)PatientReportsDataGrid.SelectedItem).Id;
 
-            _doctorsReportController = app.DoctorsReportController;
+            app.Properties["appointmentId"] = appointmentId;
+            Frame patientFrame = (Frame)app.Properties["PatientFrame"];
+            patientFrame.Content = new ShowReportDetails();
+        }
 
-            /*Console.WriteLine("------------------------------");
-            Console.WriteLine("Izvještaj doktora za pregled:");
-            Console.WriteLine(_doctorsReportController.GetByAppointmentId(appointmentId).Description);
-            Console.WriteLine("------------------------------");*/
+        private void HelpButton_Click(object sender, RoutedEventArgs e)
+        {
+            const string APPOINTMENT_HISTORY_HELP = "Here you can see all the appointments you've been to. " +
+                "If you are interested about appointments in certain time interval you can select the time interval and then press the " +
+                "search button. If you are interested in a more detailed view of appointment click on the button for details. " +
+                "After reading the details you are welcome to grade the appointment.";
+            PatientHelp.Show(APPOINTMENT_HISTORY_HELP);
         }
     }
 }

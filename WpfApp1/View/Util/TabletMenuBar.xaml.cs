@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using WpfApp1.Controller;
+using WpfApp1.View.Dialog.PatientDialog;
 using WpfApp1.View.Model.Patient;
 
 namespace WpfApp1.View.Util
@@ -21,6 +23,7 @@ namespace WpfApp1.View.Util
     /// </summary>
     public partial class TabletMenuBar : UserControl
     {
+        private SurveyController _surveyController;
         public TabletMenuBar()
         {
             InitializeComponent();
@@ -31,7 +34,7 @@ namespace WpfApp1.View.Util
             PatientAppointments.Background = (Brush)(new BrushConverter().ConvertFrom("#0082F0"));
             MyProfile.Background = (Brush)(new BrushConverter().ConvertFrom("#199EF3"));
             PatientNotes.Background = (Brush)(new BrushConverter().ConvertFrom("#199EF3"));
-            PatientReports.Background = (Brush)(new BrushConverter().ConvertFrom("#199EF3"));
+            HospitalSurvey.Background = (Brush)(new BrushConverter().ConvertFrom("#199EF3"));
             var app = Application.Current as App;
             Frame patientFrame = (Frame)app.Properties["PatientFrame"];
             patientFrame.Content = new PatientAppointmentsView();
@@ -43,7 +46,7 @@ namespace WpfApp1.View.Util
             PatientAppointments.Background = (Brush)(new BrushConverter().ConvertFrom("#199EF3"));
             MyProfile.Background = (Brush)(new BrushConverter().ConvertFrom("#0082F0"));
             PatientNotes.Background = (Brush)(new BrushConverter().ConvertFrom("#199EF3"));
-            PatientReports.Background = (Brush)(new BrushConverter().ConvertFrom("#199EF3"));
+            HospitalSurvey.Background = (Brush)(new BrushConverter().ConvertFrom("#199EF3"));
             var app = Application.Current as App;
             Frame patientFrame = (Frame)app.Properties["PatientFrame"];
             patientFrame.Content = new PatientProfileView();
@@ -54,21 +57,32 @@ namespace WpfApp1.View.Util
             PatientAppointments.Background = (Brush)(new BrushConverter().ConvertFrom("#199EF3"));
             MyProfile.Background = (Brush)(new BrushConverter().ConvertFrom("#199EF3"));
             PatientNotes.Background = (Brush)(new BrushConverter().ConvertFrom("#0082F0"));
-            PatientReports.Background = (Brush)(new BrushConverter().ConvertFrom("#199EF3"));
+            HospitalSurvey.Background = (Brush)(new BrushConverter().ConvertFrom("#199EF3"));
             var app = Application.Current as App;
             Frame patientFrame = (Frame)app.Properties["PatientFrame"];
             patientFrame.Content = new PatientNotesView();
         }
 
-        private void PatientReports_Click(object sender, RoutedEventArgs e)
+        private void HospitalSurvey_Click(object sender, RoutedEventArgs e)
         {
+            var app = Application.Current as App;
+            _surveyController = app.SurveyController;
+
+            app.Properties["appointmentId"] = -1;
+            int patientId = (int)app.Properties["userId"];
+
+            if(_surveyController.CheckIfAlreadyGraded(patientId, -1))
+            {
+                PatientErrorMessageBox.Show("You have already graded our hospital!");
+                return;
+            }
+
             PatientAppointments.Background = (Brush)(new BrushConverter().ConvertFrom("#199EF3"));
             MyProfile.Background = (Brush)(new BrushConverter().ConvertFrom("#199EF3"));
             PatientNotes.Background = (Brush)(new BrushConverter().ConvertFrom("#199EF3"));
-            PatientReports.Background = (Brush)(new BrushConverter().ConvertFrom("#0082F0"));
-            var app = Application.Current as App;
+            HospitalSurvey.Background = (Brush)(new BrushConverter().ConvertFrom("#0082F0"));
             Frame patientFrame = (Frame)app.Properties["PatientFrame"];
-            patientFrame.Content = new PatientReportsView();
+            patientFrame.Content = new HospitalSurveyDialog();
         }
     }
 }

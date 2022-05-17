@@ -26,26 +26,39 @@ namespace WpfApp1.View.Dialog
             InitializeComponent();
             DataContext = this;
         }
-
         private PatientController _patientController;
+        private UserController _userController;
+        private MedicalRecordController _medicalRecordController;
 
         private void AddGuestPatient_Click(object sender, RoutedEventArgs e)
         {
             var app = Application.Current as App;
             _patientController = app.PatientController;
+            _userController = app.UserController;
+            _medicalRecordController = app.MedicalRecordController;
+
+            User user = new User(
+
+               nameTB.Text,
+               surnameTB.Text,
+               jmbgTB.Text,
+               jmbgTB.Text,
+               jmbgTB.Text,
+               "",
+               User.RoleType.patient
+
+            );
+            User u = _userController.Create(user);
+            Console.WriteLine(u.Id);
             Patient patient = new Patient(
-
-                nameTB.Text,
-                surnameTB.Text,
-                jmbgTB.Text,
-                jmbgTB.Text,
-                jmbgTB.Text,
+                u.Id,
                 "",
-                ""
-
-
-                );
-
+                "",
+                "",
+                "",
+                0,
+                DateTime.Parse("01.01.2001. 07:00:00")
+            );
             _patientController.Create(patient);
             Close();
         }

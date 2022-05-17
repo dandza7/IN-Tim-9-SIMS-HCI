@@ -35,9 +35,14 @@ namespace WpfApp1.Controller
             return _appointmentService.Update(appointment);
         }
 
-        public bool Delete(int id)
+        public bool Delete(int appointmentId)
         {
-            return  _appointmentService.Delete(id);
+            return  _appointmentService.Delete(appointmentId);
+        }
+
+        public bool AppointmentCancellationByPatient(int patientId, int appointmentId)
+        {
+            return _appointmentService.AppointmentCancellationByPatient(patientId, appointmentId);
         }
 
         public List<SecretaryAppointmentView> GetSecretaryAppointmentViews()
@@ -77,5 +82,20 @@ namespace WpfApp1.Controller
         {
             return _appointmentService.GetById(id);
         }
+        public List<AppointmentView> CreateUrgentAppointement(int patienId, SpecType spec, DateTime start)
+        {
+            return _appointmentService.CreateUrgentAppointement(patienId, spec, start);
+        }
+
+        public DateTime GetNearestMoving(int appointmentId)
+        {
+            return _appointmentService.GetNearestMoving(appointmentId);
+        }
+
+        public List<Appointment> GetAllByDoctorId(int id)
+        {
+            return _appointmentService.GetAllByDoctorId(id);
+        }
+
     }
 }

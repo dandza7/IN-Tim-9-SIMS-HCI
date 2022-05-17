@@ -12,16 +12,16 @@ namespace WpfApp1.Repository
     {
         private string _path;
         private string _delimiter;
-        private int _patientMaxId;
+        private readonly string _datetimeFormat;
 
-        public PatientRepository(string path, string delimiter)
+        public PatientRepository(string path, string delimiter, string datetimeFormat)
         {
             _path = path;
             _delimiter = delimiter;
-            _patientMaxId = (int)GetMaxId(GetAll());
+            _datetimeFormat = datetimeFormat;
         }
 
-        private long GetMaxId(IEnumerable<Patient> patients)
+        private int GetMaxId(IEnumerable<Patient> patients)
         {
             return patients.Count() == 0 ? 0 : patients.Max(transaction => transaction.Id);
         }
@@ -32,13 +32,16 @@ namespace WpfApp1.Repository
                 .Select(ConvertCSVFormatToPatient)
                 .ToList();
         }
+
+        public Patient GetById(int id)
+        {
+            return GetAll().ToList().SingleOrDefault(patient => patient.Id == id);
+        }
+
         public Patient Create(Patient patient)
         {
-            if (patient.Id == 0)
-            {
-                patient.Id = ++_patientMaxId;
-            }
-            
+            int maxId = GetMaxId(GetAll());
+            patient.Id = ++maxId;
             AppendLineToFile(_path, ConvertPatientToCSVFormat(patient));
             return patient;
         }
@@ -51,6 +54,11 @@ namespace WpfApp1.Repository
                 if (p.Id == patient.Id)
                 {
                     p.Email = patient.Email;
+                    p.Street = patient.Street;
+                    p.City = patient.City;
+                    p.Country = patient.Country;
+                    p.NumberOfCancellations = patient.NumberOfCancellations;
+                    p.LastCancellationDate = patient.LastCancellationDate;
                 }
                 newFile.Add(ConvertPatientToCSVFormat(p));
             }
@@ -75,22 +83,28 @@ namespace WpfApp1.Repository
             return isDeleted;
         }
 
-        public Patient GetById(int patientId)
-        {
-            return GetAll().ToList().SingleOrDefault(patient => patient.Id == patientId);
-        }
-
         private Patient ConvertCSVFormatToPatient(string patientCSVFormat)
         {
             var tokens = patientCSVFormat.Split(_delimiter.ToCharArray());
-            return new Patient(int.Parse(tokens[0]), tokens[1]);
+            return new Patient(int.Parse(tokens[0]), 
+                tokens[1],
+                tokens[2],
+                tokens[3],
+                tokens[4],
+                int.Parse(tokens[5]),
+                DateTime.Parse(tokens[6]));
         }
 
         private string ConvertPatientToCSVFormat(Patient patient)
         {
             return string.Join(_delimiter,
                 patient.Id,
-                patient.Email.ToString());
+                patient.Email,
+                patient.Street,
+                patient.City,
+                patient.Country,
+                patient.NumberOfCancellations,
+                patient.LastCancellationDate.ToString());
         }
 
         private void AppendLineToFile(string path, string line)

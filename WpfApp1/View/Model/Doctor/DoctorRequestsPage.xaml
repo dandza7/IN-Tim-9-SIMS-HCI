@@ -1,0 +1,43 @@
+﻿<Page x:Class="WpfApp1.View.Model.Doctor.DoctorRequestsPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:WpfApp1.View.Model.Doctor"
+      xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+      mc:Ignorable="d" 
+      d:DesignHeight="839" d:DesignWidth="1700"
+      Title="DoctorRequestsPage">
+
+    <Grid>
+        <Label HorizontalContentAlignment="Center" Content="Requests" Margin="350,20,350,750" FontSize="50" BorderThickness="0,0,0,5" BorderBrush="{DynamicResource MedicalGreenBrush}" Foreground="{DynamicResource MedicalGreenBrush}" FontFamily="Trajan Pro 3" FontWeight="Bold"/>
+
+        <GroupBox Header="Create a Request" HorizontalAlignment="Left" Height="586" Margin="264,165,0,0" VerticalAlignment="Top" Width="530" BorderBrush="{DynamicResource MedicalGreenBrush}" Foreground="{DynamicResource MedicalGreenBrush}" FontSize="30" FontFamily="Trajan Pro 3 Bold">
+            <Grid>
+                <TextBox HorizontalAlignment="Left" Height="32" Margin="38,156,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="440" />
+                <TextBox HorizontalAlignment="Left" Height="156" Margin="38,260,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="440"/>
+                <Label Content="Start:" HorizontalAlignment="Left" Margin="38,38,0,0" VerticalAlignment="Top" Foreground="{DynamicResource WhiteBrush}" FontWeight="Bold" FontSize="20"/>
+                <Label Content="End:" Margin="303,38,163,0" VerticalAlignment="Top" Foreground="{DynamicResource WhiteBrush}" FontWeight="Bold" FontSize="20" RenderTransformOrigin="2.212,0.554"/>
+                <Label Content="Subject:" HorizontalAlignment="Left" Margin="38,119,0,0" VerticalAlignment="Top" Foreground="{DynamicResource WhiteBrush}" FontWeight="Bold" FontSize="20"/>
+                <Label Content="Description:" HorizontalAlignment="Left" Margin="38,224,0,0" VerticalAlignment="Top" Foreground="{DynamicResource WhiteBrush}" FontWeight="Bold" FontSize="20"/>
+                <Button Style="{StaticResource DoctorYesButton }" Content="Save" HorizontalAlignment="Left" Margin="333,460,0,40" Width="145"/>
+
+            </Grid>
+        </GroupBox>
+        <GroupBox Header="Request View" HorizontalAlignment="Left" Height="586" Margin="826,165,0,0" VerticalAlignment="Top" Width="596" BorderBrush="{DynamicResource MedicalGreenBrush}" Foreground="{DynamicResource MedicalGreenBrush}" FontSize="30" FontFamily="Trajan Pro 3 Bold"/>
+        <xctk:DateTimePicker x:Name="BeginningDTP" Margin="304,280,1222,527"/>
+        <xctk:DateTimePicker x:Name="BeginningDTP_Copy" Margin="568,280,956,527"/>
+        <DataGrid x:Name="RequestViewGrid" Margin="838,259,296,101"
+                      AutoGenerateColumns="False" Style="{StaticResource ExecutiveDataGrid}" 
+                      ItemsSource="{Binding Requests}"  >
+            <DataGrid.Columns>
+                <DataGridTextColumn Header=" Subject" Width="150"  Binding="{Binding Subject}" HeaderStyle="{StaticResource ExecutiveDGHeader}" CellStyle="{StaticResource ExecutiveDGCell}"/>
+                <DataGridTextColumn Header=" Start" Width="3*" Binding="{Binding Start}"  HeaderStyle="{StaticResource ExecutiveDGHeader}" CellStyle="{StaticResource ExecutiveDGCell}"/>
+                <DataGridTextColumn Header=" End" Width="3*" Binding="{Binding End}"  HeaderStyle="{StaticResource ExecutiveDGHeader}" CellStyle="{StaticResource ExecutiveDGCell}"/>
+                <DataGridTextColumn Header=" Status" Width="2*" Binding="{Binding Status}"   HeaderStyle="{StaticResource ExecutiveDGHeader}" CellStyle="{StaticResource ExecutiveDGCell}"/>
+
+            </DataGrid.Columns>
+        </DataGrid>
+
+    </Grid>
+</Page>

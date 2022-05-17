@@ -33,7 +33,23 @@ namespace WpfApp1.Service
         }
         public List<Room> GetAll()
         {
-            return _roomRepository.GetAll();
+            ExecuteFinishedAdvancedRenovations();
+            List<Room> allRooms = _roomRepository.GetAll();
+            List<Room> activeRooms = new List<Room>();
+            foreach (Room room in allRooms)
+            {
+                if (room.IsActive)
+                {
+                    activeRooms.Add(room);
+                }
+            }
+            return activeRooms;
+        }
+
+        public Room GetById(int id)
+        {
+            ExecuteFinishedAdvancedRenovations();
+            return _roomRepository.Get(id);
         }
 
         public Room Create(Room room)
@@ -112,7 +128,7 @@ namespace WpfApp1.Service
             List<Renovation> renovations = this._renovationRepository.GetAll().ToList();
             foreach (Renovation renovation in renovations)
             {
-                if (renovation.RoomId == id)
+                if (renovation.RoomsIds.Contains(id))
                     DeletingQueue.Add(renovation.Id);
             }
             foreach (int del in DeletingQueue)
@@ -163,15 +179,66 @@ namespace WpfApp1.Service
         }
         public int GetIdByNametag(string nametag)
         {
+            ExecuteFinishedAdvancedRenovations();
             List<Room> rooms = _roomRepository.GetAll();
             foreach(Room room in rooms)
             {
-                if (room.Nametag.Equals(nametag))
+                if (room.Nametag.Equals(nametag) && room.IsActive)
                 {
                     return room.Id;
                 }
             }
             return -1;
+        }
+        public Room GetByNametag(string nametag)
+        {
+            ExecuteFinishedAdvancedRenovations();
+            List<Room> rooms = _roomRepository.GetAll();
+            foreach (Room room in rooms)
+            {
+                if (room.Nametag.Equals(nametag) && room.IsActive)
+                {
+                    return room;
+                }
+            }
+            return null;
+        }
+        public List<string> GetEditableNametags()
+        {
+            ExecuteFinishedAdvancedRenovations();
+            List<Room> rooms = _roomRepository.GetAll();
+            List<string> nametags = new List<string>();
+            foreach(Room room in rooms)
+            {
+                if(room.IsActive && room.Id != 1 && room.Id != 2)
+                {
+                    nametags.Add(room.Nametag);
+                }
+            }
+            return nametags;
+        }
+        public void ExecuteFinishedAdvancedRenovations()
+        {
+            List<Renovation> renovations = _renovationRepository.GetAll();
+            foreach(Renovation renovation in renovations)
+            {
+                if(renovation.Type == "A" && DateTime.Compare(DateTime.Today, DateTime.Parse(renovation.Ending.ToShortDateString())) >= 0)
+                {
+                    foreach(int id in renovation.RoomsIds)
+                    {
+                        Room r = _roomRepository.Get(id);
+                        if (!r.IsActive)
+                        {
+                            r.IsActive = true;
+                            _roomRepository.Update(r);
+                        } else
+                        {
+                            _roomRepository.Delete(r.Id);
+                        }
+                    }
+                    _renovationRepository.Delete(renovation.Id);
+                }
+            }
         }
 
     }

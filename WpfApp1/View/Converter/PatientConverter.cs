@@ -10,19 +10,20 @@ namespace WpfApp1.View.Converter
 {
     internal class PatientConverter : AbstractConverter
     {
-        public static PatientView ConvertPatientToPatientView(User patient)
-    => new PatientView
-    {
-        Id = patient.Id,
-        Name = patient.Name,
-        Surname = patient.Surname,
-        JMBG = patient.Jmbg,
-        Username = patient.Username,
-        Password = patient.Password,
-        Phonenumber = patient.PhoneNumber
-    };
-
-        public static IList<PatientView> ConvertPatientListToPatientViewList(IList<User> patients)
-            => ConvertEntityListToViewList(patients, ConvertPatientToPatientView);
+        public static PatientView ConvertPatientToPatientView(User user, Patient patient)
+        => new PatientView
+        {
+            Id = user.Id,
+            FirstName = user.Name,
+            Surname = user.Surname,
+            Jmbg = user.Jmbg,
+            Username = user.Username,
+            Password = user.Password,
+            PhoneNumber = user.PhoneNumber,
+            Email = patient.Email,
+            Street = patient.Street,
+            City = patient.City,
+            Country = patient.Country
+        };
     }
 }

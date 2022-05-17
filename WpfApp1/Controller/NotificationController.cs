@@ -52,9 +52,9 @@ namespace WpfApp1.Controller
             return _notificationService.DeleteLogically(id);
         }
 
-        public void GetScheduledPatientsNotifications(int patientId)
+        public void GetScheduledTherapyNotifications(int patientId)
         {
-            _notificationService.GetScheduledPatientsNotifications(patientId);
+            _notificationService.GetScheduledTherapyNotifications(patientId);
         }
     }
 }

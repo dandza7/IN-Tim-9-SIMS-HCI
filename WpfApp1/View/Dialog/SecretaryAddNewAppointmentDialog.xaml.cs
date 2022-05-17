@@ -120,10 +120,11 @@ namespace WpfApp1.View.Dialog
             this.Close();
 
         }
-        private void Move_Appointment_Click(object sender, RoutedEventArgs e)
+        private void Close_Appointments_Click(object sender, RoutedEventArgs e)
         {
-
+            Close();
         }
-        
+
+
     }
 }

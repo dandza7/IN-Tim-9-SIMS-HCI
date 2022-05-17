@@ -1,0 +1,76 @@
+﻿<Page x:Class="WpfApp1.View.Model.Doctor.Doctor_MyAppointments"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:WpfApp1.View.Model.Doctor"
+      xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+      mc:Ignorable="d"  Height="587" Width="1300" 
+      Title="Doctor_MyAppointments" >
+
+    <Grid>
+        <GroupBox Header="Create Appointment" HorizontalAlignment="Left" Height="538" Margin="51,20,0,0" VerticalAlignment="Top" Width="341" Foreground="{DynamicResource WhiteBrush}" FontSize="20" FontFamily="Trajan Pro 3">
+            <Grid>
+
+                <Label x:Name="labela" FontSize="15" Foreground="White" Content="Priority:" HorizontalAlignment="Left" Margin="22,115,0,364" />
+                <Label FontSize="15" Foreground="White" Content="From:" HorizontalAlignment="Left" Margin="48,164,0,315" />
+                <Label FontSize="15" Foreground="White" Content="To:" Margin="72,211,222,268" />
+                <CheckBox FontSize="15"  Content="Urgent" HorizontalAlignment="Left" Margin="203,258,0,231" Foreground="{DynamicResource WhiteBrush}"/>
+                <ComboBox FontSize="15"   x:Name="PriorityComboBox"  HorizontalAlignment="Left" Margin="112,115,0,0" VerticalAlignment="Top" Width="175" SelectedIndex="0" Height="28">
+                    <ComboBoxItem Content="Time"/>
+                    <ComboBoxItem Content="Doctor"/>
+                </ComboBox>
+                <xctk:DateTimePicker x:Name="BeginningDTP" Margin="112,164,42,315"/>
+                <xctk:DateTimePicker x:Name="EndingDTP" Margin="112,211,42,0" VerticalAlignment="Top"/>
+                <Button Style="{StaticResource DoctorYesButton}" Content="Confirm" Margin="0,0,30,20" Width="100" VerticalAlignment="Bottom" HorizontalAlignment="Right" Height="31"/>
+                <Button Style="{StaticResource DoctorNoButton}" Content="Discard" HorizontalAlignment="Left" Margin="30,0,0,20" Width="100" VerticalAlignment="Bottom" Height="31" />
+            </Grid>
+        </GroupBox>
+        <GroupBox Header="Future Appointments" HorizontalAlignment="Left" Height="300" Margin="430,20,0,0" VerticalAlignment="Top" Width="830" Foreground="{DynamicResource WhiteBrush}" FontSize="20" FontFamily="Trajan Pro 3">
+            <DataGrid x:Name="FutureAppointmentsGrid" Margin="12,30,12,12" Width="794"
+                      AutoGenerateColumns="False" Style="{StaticResource ExecutiveDataGrid}" 
+                      ItemsSource="{Binding appointments}" >
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header=" Patient" Width="150"  Binding="{Binding Patient}" HeaderStyle="{StaticResource ExecutiveDGHeader}" CellStyle="{StaticResource ExecutiveDGCell}"/>
+                    <DataGridTextColumn Header=" Beginning" Width="3*" Binding="{Binding Beginning}"  HeaderStyle="{StaticResource ExecutiveDGHeader}" CellStyle="{StaticResource ExecutiveDGCell}"/>
+                    <DataGridTextColumn Header=" Type" Width="2*" Binding="{Binding Type}"  HeaderStyle="{StaticResource ExecutiveDGHeader}" CellStyle="{StaticResource ExecutiveDGCell}"/>
+                    <DataGridTextColumn Header=" Urgent" Width="2*" Binding="{Binding Urgent}"  HeaderStyle="{StaticResource ExecutiveDGHeader}" CellStyle="{StaticResource ExecutiveDGCell}"/>
+                    <DataGridTemplateColumn Header=" Update" Width="2*"  HeaderStyle="{StaticResource ExecutiveDGHeader}" CellStyle="{StaticResource ExecutiveDGCell}">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Content="Update" Style="{StaticResource DoctorStandardButton}"  />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn Header=" Delete" Width="2*"  HeaderStyle="{StaticResource ExecutiveDGHeader}" CellStyle="{StaticResource ExecutiveDGCell}">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Content="Delete"  Style="{StaticResource DoctorNoButton}"  />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+        </GroupBox>
+        <GroupBox Header="Past Appointments" HorizontalAlignment="Left" Height="233" Margin="430,325,0,0" VerticalAlignment="Top" Width="830" Foreground="{DynamicResource WhiteBrush}" FontSize="20" FontFamily="Trajan Pro 3">
+            <DataGrid x:Name="PastAppointmentsGrid" Height="199" Margin="12,12,12,12" Width="794"
+                      AutoGenerateColumns="False" Style="{StaticResource ExecutiveDataGrid}" 
+                      ItemsSource="{Binding pastAppointments}"  >
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header=" Patient" Width="150"  Binding="{Binding Patient}" HeaderStyle="{StaticResource ExecutiveDGHeader}" CellStyle="{StaticResource ExecutiveDGCell}"/>
+                    <DataGridTextColumn Header=" Beginning" Width="3*" Binding="{Binding Beginning}"  HeaderStyle="{StaticResource ExecutiveDGHeader}" CellStyle="{StaticResource ExecutiveDGCell}"/>
+                    <DataGridTextColumn Header=" Type" Width="3*" Binding="{Binding Type}"  HeaderStyle="{StaticResource ExecutiveDGHeader}" CellStyle="{StaticResource ExecutiveDGCell}"/>
+                    <DataGridTemplateColumn Header=" Report" Width="2*"   HeaderStyle="{StaticResource ExecutiveDGHeader}" CellStyle="{StaticResource ExecutiveDGCell}">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Content="View"  Style="{StaticResource DoctorStandardButton}"  />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+
+                </DataGrid.Columns>
+            </DataGrid>
+        </GroupBox>
+
+    </Grid>
+</Page>

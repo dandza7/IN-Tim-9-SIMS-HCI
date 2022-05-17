@@ -46,6 +46,8 @@ namespace WpfApp1.View.Dialog
             MedicalRecord r = this._mrController.GetByPatientId(patientId);
             Console.WriteLine(patientId);
             Console.WriteLine(r.Id);
+            Console.WriteLine(p.Username);
+            Console.WriteLine(p.PhoneNumber);
             updateidTB.Text = patientId.ToString();
             updatenameTB.Text = p.Name;
             updatesurnameTB.Text = p.Surname;
@@ -53,7 +55,10 @@ namespace WpfApp1.View.Dialog
             updateusernameTB.Text = p.Username;
             updatepasswordTB.Text = p.Password;
             updateemailTB.Text = p.Email;
-            updatebrtelTB.Text = p.PhoneNumber;
+            updatecontactTB.Text = p.PhoneNumber;
+            updateaddressTB.Text = p.Street;
+            updatecityTB.Text = p.City;
+            updatecountryTB.Text = p.Country;
             Allergies = new ObservableCollection<UserControl>(
                 AllergyConverter.ConvertAllergyListToAllergyViewList(_allergyController.GetAllAllergiesForPatient(r.Id).ToList()));
         }
@@ -68,13 +73,18 @@ namespace WpfApp1.View.Dialog
                 updatesurnameTB.Text,
                 updateusernameTB.Text,
                 updatepasswordTB.Text,
-                updatebrtelTB.Text,
+                updatecontactTB.Text,
                 updatejmbgTB.Text,
                 User.RoleType.patient
                 );
             Patient patient = new Patient(
                 int.Parse(updateidTB.Text),
-                updateemailTB.Text
+                updateemailTB.Text,
+                updateaddressTB.Text,
+                updatecityTB.Text,
+                updatecountryTB.Text,
+                0,
+                DateTime.Parse("01.01.2001. 07:00:00")
                 );
 
 
@@ -87,10 +97,11 @@ namespace WpfApp1.View.Dialog
             int allergyId = ((AllergyView)SecretaryAllergiesDataGrid.SelectedItem).Id;
             var app = Application.Current as App;
             _allergyController = app.AllergyController;
-
+            _mrController = app.MedicalRecordController;
+            int medicalRecordId = _mrController.GetByPatientId(Int32.Parse(updateidTB.Text)).Id;
             _allergyController.Delete(allergyId);
             Allergies = new ObservableCollection<UserControl>(
-            AllergyConverter.ConvertAllergyListToAllergyViewList(_allergyController.GetAllAllergiesForPatient(Int32.Parse(updateidTB.Text)).ToList()));
+            AllergyConverter.ConvertAllergyListToAllergyViewList(_allergyController.GetAllAllergiesForPatient(medicalRecordId).ToList()));
 
             SecretaryAllergiesDataGrid.ItemsSource = Allergies;
             SecretaryAllergiesDataGrid.Items.Refresh();
@@ -102,8 +113,48 @@ namespace WpfApp1.View.Dialog
             s.Show();
         }
 
+        private void Edit_Click(object sender, RoutedEventArgs e)
+        {
+            UpdateButton.Visibility = Visibility.Visible;
+            CloseButton.IsEnabled = false;
+            EditButton.IsEnabled = false;
+            ViewButton.IsEnabled = true;
+            AllergyButton.Visibility = Visibility.Visible;
+            CloseButton.Visibility = Visibility.Hidden;
+            updatenameTB.IsEnabled = true;
+            updatesurnameTB.IsEnabled = true;
+            updateaddressTB.IsEnabled = true;
+            updatecityTB.IsEnabled = true;
+            updatecountryTB.IsEnabled = true;
+            updatejmbgTB.IsEnabled = true;
+            updateusernameTB.IsEnabled = true;
+            updatecontactTB.IsEnabled = true;
+            updateemailTB.IsEnabled = true;
+        }
 
-        
+        private void View_Click(object sender, RoutedEventArgs e)
+        {
+            UpdateButton.Visibility = Visibility.Hidden;
+            CloseButton.IsEnabled = true;
+            ViewButton.IsEnabled = false;
+            EditButton.IsEnabled = true;
+            AllergyButton.Visibility = Visibility.Hidden;
+            CloseButton.Visibility = Visibility.Visible;
+            updatenameTB.IsEnabled = false;
+            updatesurnameTB.IsEnabled = false;
+            updateaddressTB.IsEnabled = false;
+            updatecityTB.IsEnabled = false;
+            updatecountryTB.IsEnabled = false;
+            updatejmbgTB.IsEnabled = false;
+            updateusernameTB.IsEnabled = false;
+            updatecontactTB.IsEnabled = false;
+            updateemailTB.IsEnabled = false;
+        }
+
+        private void CloseButton_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
     }
 
 

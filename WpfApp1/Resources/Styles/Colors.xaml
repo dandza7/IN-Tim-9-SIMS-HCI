@@ -19,4 +19,23 @@
     <Color x:Key="DarkBlue">#00316E</Color>
     <SolidColorBrush x:Key="DarkBlueBrush" Color="{StaticResource DarkBlue}"/>
 
+
+
+
+
+    <Color x:Key="Gray">#7F8387</Color>
+    <SolidColorBrush x:Key="GrayBrush" Color="{StaticResource Gray}"/>
+
+    <Color x:Key="MedicalBlue">#A2CBEF</Color>
+    <SolidColorBrush x:Key="MedicalBlueBrush" Color="{StaticResource MedicalBlue}"/>
+
+    <Color x:Key="MedicalGreen">#00FFE9</Color>
+    <SolidColorBrush x:Key="MedicalGreenBrush" Color="{StaticResource MedicalGreen}"/>
+
+    <Color x:Key="YesGreen">#009180</Color>
+    <SolidColorBrush x:Key="YesGreenBrush" Color="{StaticResource YesGreen}"/>
+
+    <Color x:Key="NoRed">#F21000</Color>
+    <SolidColorBrush x:Key="NoRedBrush" Color="{StaticResource NoRed}"/>
+
 </ResourceDictionary>

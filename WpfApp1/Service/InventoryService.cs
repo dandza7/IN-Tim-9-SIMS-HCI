@@ -49,13 +49,17 @@ namespace WpfApp1.Service
             }
             return inventoryPreviews;
         }
+        public Inventory GetById(int id)
+        {
+            return _inventoryRepository.GetById(id);
+        }
         public List<string> GetSOPRooms()
         {
             List<Room> rooms = _roomRepository.GetAll();
             List<string> sopRooms = new List<string>();
             foreach(Room room in rooms)
             {
-                if(room.Type.Equals("Storage") || room.Type.Equals("Operating"))
+                if((room.Type.Equals("Storage") || room.Type.Equals("Operating")) && room.IsActive)
                 {
                     sopRooms.Add(room.Nametag);
                 }
@@ -76,5 +80,11 @@ namespace WpfApp1.Service
             }
             return _inventoryRepository.Create(newInv);
         }
+        public IEnumerable<Inventory> GetAllDynamic()
+        {
+            return _inventoryRepository.GetAllDynamic();
+        }
+
+
     }
 }

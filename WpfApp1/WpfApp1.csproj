@@ -91,6 +91,7 @@
     <Compile Include="Controller\AllergyController.cs" />
     <Compile Include="Controller\DoctorController.cs" />
     <Compile Include="Controller\DoctorsReportController.cs" />
+    <Compile Include="Controller\DynamicEquipmentRequestController.cs" />
     <Compile Include="Controller\InventoryController.cs" />
     <Compile Include="Controller\InventoryMovingController.cs" />
     <Compile Include="Controller\MedicalRecordController.cs" />
@@ -98,6 +99,7 @@
     <Compile Include="Controller\NotificationController.cs" />
     <Compile Include="Controller\PatientController.cs" />
     <Compile Include="Controller\RenovationController.cs" />
+    <Compile Include="Controller\SurveyController.cs" />
     <Compile Include="Controller\UserController.cs" />
     <Compile Include="Model\Allergy.cs" />
     <Compile Include="Model\Appointment.cs" />
@@ -106,19 +108,23 @@
     <Compile Include="Model\Doctor.cs" />
     <Compile Include="Model\DoctorsReport.cs" />
     <Compile Include="Model\Drug.cs" />
+    <Compile Include="Model\DynamicEquipmentRequest.cs" />
     <Compile Include="Model\Inventory.cs" />
     <Compile Include="Model\InventoryMoving.cs" />
     <Compile Include="Model\MedicalRecord.cs" />
     <Compile Include="Model\Notification.cs" />
     <Compile Include="Model\Preview\InventoryPreview.cs" />
     <Compile Include="Model\Renovation.cs" />
+    <Compile Include="Model\Survey.cs" />
     <Compile Include="Model\Therapy.cs" />
     <Compile Include="Model\User.cs" />
     <Compile Include="Repository\AllergyRepository.cs" />
     <Compile Include="Repository\DoctorsReportRepository.cs" />
+    <Compile Include="Repository\DynamicEquipmentRequestRepository.cs" />
     <Compile Include="Repository\InventoryMovingRepository.cs" />
     <Compile Include="Repository\InventoryRepository.cs" />
     <Compile Include="Repository\MedicalRecordRepository.cs" />
+    <Compile Include="Repository\SurveyRepository.cs" />
     <Compile Include="Repository\TherapyRepository.cs" />
     <Compile Include="Repository\DoctorRepository.cs" />
     <Compile Include="Repository\DrugRepository.cs" />
@@ -135,12 +141,17 @@
     <Compile Include="Repository\UserRepository.cs" />
     <None Include="Resources\Data\allergy.csv" />
     <None Include="Resources\Data\doctors_report.csv" />
+    <None Include="Resources\Data\survey.csv" />
+    <None Include="Resources\Data\dynamic_equipment_requests.csv" />
     <Compile Include="Service\AllergyService.cs" />
     <Compile Include="Service\DoctorsReportService.cs" />
+    <Compile Include="Service\DynamicEquipmentRequestService.cs" />
+    <Compile Include="Service\EquipmentRepository.cs" />
     <Compile Include="Service\InventoryMovingService.cs" />
     <None Include="Resources\Data\medical_record.csv" />
     <Compile Include="Service\InventoryService.cs" />
     <Compile Include="Service\MedicalRecordService.cs" />
+    <Compile Include="Service\SurveyService.cs" />
     <Compile Include="Service\TherapyService.cs" />
     <Compile Include="Service\AppointmentService.cs" />
     <Compile Include="Model\Patient.cs" />
@@ -155,10 +166,18 @@
     <Compile Include="View\Converter\AbstractConverter.cs" />
     <Compile Include="View\Converter\AllergyConverter.cs" />
     <Compile Include="View\Converter\AppointmentConverter.cs" />
+    <Compile Include="View\Converter\DynamicEquipmentConverter.cs" />
     <Compile Include="View\Converter\PatientConverter.cs" />
+    <Compile Include="View\Converter\ReportConverter.cs" />
     <Compile Include="View\Converter\TherapyConverter.cs" />
     <Compile Include="View\Dialog\PatientDialog\AddPatientAppointmentDialog.xaml.cs">
       <DependentUpon>AddPatientAppointmentDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Dialog\PatientDialog\DoctorSurveyDialog.xaml.cs">
+      <DependentUpon>DoctorSurveyDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Dialog\PatientDialog\HospitalSurveyDialog.xaml.cs">
+      <DependentUpon>HospitalSurveyDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Dialog\PatientDialog\ListAvailableAppointments.xaml.cs">
       <DependentUpon>ListAvailableAppointments.xaml</DependentUpon>
@@ -180,11 +199,23 @@
     <Compile Include="View\Dialog\PatientDialog\PatientHelp.Designer.cs">
       <DependentUpon>PatientHelp.cs</DependentUpon>
     </Compile>
+    <Compile Include="View\Dialog\SecretaryAddDynamicEquipmentDialog.xaml.cs">
+      <DependentUpon>SecretaryAddDynamicEquipmentDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Dialog\PatientDialog\ShowReportDetails.xaml.cs">
+      <DependentUpon>ShowReportDetails.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Dialog\SecretaryAddGuestPatientDialog.xaml.cs">
       <DependentUpon>SecretaryAddGuestPatientDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Dialog\SecretaryAddNewAppointmentDialog.xaml.cs">
       <DependentUpon>SecretaryAddNewAppointmentDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Dialog\SecretaryAddNewDynamicEquipmentDialog.xaml.cs">
+      <DependentUpon>SecretaryAddNewDynamicEquipmentDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Dialog\SecretaryAddNewUrgentAppointmentDialog.xaml.cs">
+      <DependentUpon>SecretaryAddNewUrgentAppointmentDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Dialog\SecretaryAddPatientDialog.xaml.cs">
       <DependentUpon>SecretaryAddPatientDialog.xaml</DependentUpon>
@@ -207,8 +238,74 @@
     <Compile Include="View\ExecutiveMenu.xaml.cs">
       <DependentUpon>ExecutiveMenu.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Model\Doctor\DoctorAppointmentsPage.xaml.cs">
+      <DependentUpon>DoctorAppointmentsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Model\Doctor\DoctorAppointmentView.xaml.cs">
+      <DependentUpon>DoctorAppointmentView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Model\Doctor\DoctorDrugValidationPage.xaml.cs">
+      <DependentUpon>DoctorDrugValidationPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Model\Doctor\DoctorMedicalRecordsPage.xaml.cs">
+      <DependentUpon>DoctorMedicalRecordsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Model\Doctor\DoctorNotificationsPage.xaml.cs">
+      <DependentUpon>DoctorNotificationsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Model\Doctor\DoctorProfilePage.xaml.cs">
+      <DependentUpon>DoctorProfilePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Model\Doctor\DoctorRequestsPage.xaml.cs">
+      <DependentUpon>DoctorRequestsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Model\Doctor\Doctor_MedicalRecord_Info.xaml.cs">
+      <DependentUpon>Doctor_MedicalRecord_Info.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Model\Doctor\Doctor_MedicalRecord_Reports.xaml.cs">
+      <DependentUpon>Doctor_MedicalRecord_Reports.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Model\Doctor\Doctor_MedicalRecord_Therapies.xaml.cs">
+      <DependentUpon>Doctor_MedicalRecord_Therapies.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Model\Doctor\Doctor_MyAppointments.xaml.cs">
+      <DependentUpon>Doctor_MyAppointments.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Model\Doctor\Doctor_Refferals.xaml.cs">
+      <DependentUpon>Doctor_Refferals.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Model\Executive\ExecutiveDrugsDialogs\DrugsInfo.xaml.cs">
+      <DependentUpon>DrugsInfo.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Model\Executive\ExecutiveDrugsDialogs\EditDrug.xaml.cs">
+      <DependentUpon>EditDrug.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Model\Executive\ExecutiveDrugsDialogs\NewDrug.xaml.cs">
+      <DependentUpon>NewDrug.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Model\Executive\ExecutiveDrugsPages.xaml.cs">
+      <DependentUpon>ExecutiveDrugsPages.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Model\Executive\ExecutiveInventoryDialogs\MoveInventory.xaml.cs">
+      <DependentUpon>MoveInventory.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Model\Executive\ExecutiveInventoryDialogs\NewInventory.xaml.cs">
+      <DependentUpon>NewInventory.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Model\Executive\ExecutiveInventoryPages.xaml.cs">
       <DependentUpon>ExecutiveInventoryPages.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Model\Executive\ExecutiveRoomDialogs\AdvancedRenovation.xaml.cs">
+      <DependentUpon>AdvancedRenovation.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Model\Executive\ExecutiveRoomDialogs\BasicRenovation.xaml.cs">
+      <DependentUpon>BasicRenovation.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Model\Executive\ExecutiveRoomDialogs\EditRoom.xaml.cs">
+      <DependentUpon>EditRoom.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Model\Executive\ExecutiveRoomDialogs\NewRoom.xaml.cs">
+      <DependentUpon>NewRoom.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Model\Patient\AppointmentView.xaml.cs">
       <DependentUpon>AppointmentView.xaml</DependentUpon>
@@ -234,6 +331,9 @@
     <Compile Include="View\Model\Patient\PatientReportsView.xaml.cs">
       <DependentUpon>PatientReportsView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Model\Patient\ReportDetailsView.xaml.cs">
+      <DependentUpon>ReportDetailsView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Model\Patient\TherapyView.xaml.cs">
       <DependentUpon>TherapyView.xaml</DependentUpon>
     </Compile>
@@ -243,11 +343,17 @@
     <Compile Include="View\Model\Secretary\AllergyView.xaml.cs">
       <DependentUpon>AllergyView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Model\Secretary\DynamicEquipmentView.xaml.cs">
+      <DependentUpon>DynamicEquipmentView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Model\Secretary\SecretaryAppointmentsView.xaml.cs">
       <DependentUpon>SecretaryAppointmentsView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Model\Secretary\SecretaryAppointmentView.xaml.cs">
       <DependentUpon>SecretaryAppointmentView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Model\Secretary\SecretaryDynamicEquipmentView.xaml.cs">
+      <DependentUpon>SecretaryDynamicEquipmentView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\PatientMenu.xaml.cs">
       <DependentUpon>PatientMenu.xaml</DependentUpon>
@@ -263,6 +369,10 @@
       <DependentUpon>TabletMenuBar.xaml</DependentUpon>
     </Compile>
     <Page Include="Resources\Styles\Colors.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\Styles\Doctor\DoctorButtonStyles.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -298,6 +408,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\Dialog\PatientDialog\DoctorSurveyDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Dialog\PatientDialog\HospitalSurveyDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\Dialog\PatientDialog\ListAvailableAppointments.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -306,11 +424,27 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\Dialog\SecretaryAddDynamicEquipmentDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Dialog\PatientDialog\ShowReportDetails.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\Dialog\SecretaryAddGuestPatientDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Dialog\SecretaryAddNewAppointmentDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Dialog\SecretaryAddNewDynamicEquipmentDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Dialog\SecretaryAddNewUrgentAppointmentDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -354,7 +488,95 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\Model\Doctor\DoctorAppointmentsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Model\Doctor\DoctorAppointmentView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Model\Doctor\DoctorDrugValidationPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Model\Doctor\DoctorMedicalRecordsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Model\Doctor\DoctorNotificationsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Model\Doctor\DoctorProfilePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Model\Doctor\DoctorRequestsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Model\Doctor\Doctor_MedicalRecord_Info.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Model\Doctor\Doctor_MedicalRecord_Reports.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Model\Doctor\Doctor_MedicalRecord_Therapies.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Model\Doctor\Doctor_MyAppointments.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Model\Doctor\Doctor_Refferals.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Model\Executive\ExecutiveDrugsDialogs\DrugsInfo.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Model\Executive\ExecutiveDrugsDialogs\EditDrug.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Model\Executive\ExecutiveDrugsDialogs\NewDrug.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Model\Executive\ExecutiveDrugsPages.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Model\Executive\ExecutiveInventoryDialogs\MoveInventory.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Model\Executive\ExecutiveInventoryDialogs\NewInventory.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\Model\Executive\ExecutiveInventoryPages.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Model\Executive\ExecutiveRoomDialogs\AdvancedRenovation.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Model\Executive\ExecutiveRoomDialogs\BasicRenovation.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Model\Executive\ExecutiveRoomDialogs\EditRoom.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Model\Executive\ExecutiveRoomDialogs\NewRoom.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -390,6 +612,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="View\Model\Patient\ReportDetailsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\Model\Patient\TherapyView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -402,11 +628,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\Model\Secretary\DynamicEquipmentView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\Model\Secretary\SecretaryAppointmentsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Model\Secretary\SecretaryAppointmentView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Model\Secretary\SecretaryDynamicEquipmentView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -477,6 +711,36 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\angle-right-free-icon-font.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\cube-free-icon-font.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\interrogation-free-icon-font.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\medicine-free-icon-font.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\portrait-free-icon-font.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\stats-free-icon-font.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\truck-loading-free-icon-font.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\bell-free-icon-font.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\sign-out-free-icon-font.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\logo.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

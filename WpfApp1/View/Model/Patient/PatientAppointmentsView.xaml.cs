@@ -16,6 +16,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using WpfApp1.Controller;
 using WpfApp1.Model;
+using WpfApp1.Service;
 using WpfApp1.View.Converter;
 using WpfApp1.View.Dialog.PatientDialog;
 
@@ -24,10 +25,33 @@ namespace WpfApp1.View.Model.Patient
     /// <summary>
     /// Interaction logic for PatientAppointmentsView.xaml
     /// </summary>
-    public partial class PatientAppointmentsView : Page
+    public partial class PatientAppointmentsView : Page, INotifyPropertyChanged
     {
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected virtual void OnPropertyChanged(string name)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(name));
+            }
+        }
+
         private AppointmentController _appointmentController;
-        public ObservableCollection<AppointmentView> Appointments { get; set; }
+        private PatientController _patientController;
+        private ObservableCollection<AppointmentView> _appointments;
+
+        public ObservableCollection<AppointmentView> Appointments
+        {
+            get { return _appointments; }
+            set
+            {
+                if (value != _appointments)
+                {
+                    _appointments = value;
+                    OnPropertyChanged("Appointments");
+                }
+            }
+        }
 
         public PatientAppointmentsView()
         {
@@ -44,7 +68,6 @@ namespace WpfApp1.View.Model.Patient
         private void AddAppointment_Click(object sender, RoutedEventArgs e)
         {
             var app = Application.Current as App;
-            app.Properties["DataView"] = PatientAppointmentsDataGrid;
             Frame patientFrame = (Frame)app.Properties["PatientFrame"];
             patientFrame.Content = new AddPatientAppointmentDialog();
         }
@@ -64,7 +87,6 @@ namespace WpfApp1.View.Model.Patient
             }
 
             app.Properties["appointmentId"] = appointmentId;
-            app.Properties["DataView"] = PatientAppointmentsDataGrid;
             Frame patientFrame = (Frame)app.Properties["PatientFrame"];
             patientFrame.Content = new MovePatientAppointmentDialog();
         }
@@ -76,10 +98,43 @@ namespace WpfApp1.View.Model.Patient
             int patientId = (int)app.Properties["userId"];
 
             _appointmentController = app.AppointmentController;
-            _appointmentController.Delete(appointmentId);
+            _patientController = app.PatientController;
+
+            _appointmentController.AppointmentCancellationByPatient(patientId, appointmentId);
 
             PatientAppointmentsDataGrid.ItemsSource = null;
             PatientAppointmentsDataGrid.ItemsSource = _appointmentController.GetPatientsAppointmentsView(patientId);
+            
+            var patient = _patientController.GetById(patientId);
+            AppointmentCancellationFeedback(patient.NumberOfCancellations);
+        }
+
+        private void AppointmentCancellationFeedback(int numberOfcancellations) 
+        {
+            var app = Application.Current as App;
+            _patientController = app.PatientController;
+            int patientId = (int)app.Properties["userId"];
+
+            if ((4 - numberOfcancellations) > 0)
+            {
+                PatientErrorMessageBox.Show("You have " + (4 - numberOfcancellations) + " cancellations left in this month");
+            }
+            else if (4 - numberOfcancellations == 0)
+            {
+                PatientErrorMessageBox.Show("WARNING: If you cancel one more appointment in this month you will get banned.");
+            }
+            else
+            {
+                Window patientMenu = (Window)app.Properties["PatientMenu"];
+                var s = new MainWindow();
+
+                PatientErrorMessageBox.Show("You have been banned because you've cancelled too many appointments in this month!");
+
+                _patientController.Delete(patientId);
+
+                patientMenu.Close();
+                s.Show();
+            }
         }
     }
 }
