@@ -79,5 +79,9 @@ namespace WpfApp1.Model
             IsAvailable = isAvailable;
             RoomId = roomId;
         }
+
+        public Doctor()
+        {
+        }
     }
 }

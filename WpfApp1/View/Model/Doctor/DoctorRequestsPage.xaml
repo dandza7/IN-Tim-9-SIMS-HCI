@@ -14,30 +14,34 @@
 
         <GroupBox Header="Create a Request" HorizontalAlignment="Left" Height="586" Margin="264,165,0,0" VerticalAlignment="Top" Width="530" BorderBrush="{DynamicResource MedicalGreenBrush}" Foreground="{DynamicResource MedicalGreenBrush}" FontSize="30" FontFamily="Trajan Pro 3 Bold">
             <Grid>
-                <TextBox HorizontalAlignment="Left" Height="32" Margin="38,156,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="440" />
-                <TextBox HorizontalAlignment="Left" Height="156" Margin="38,260,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="440"/>
+                <TextBox x:Name="TitleTB" HorizontalAlignment="Left" Height="32" Margin="38,156,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="440" />
+                <TextBox x:Name="ContentTB" HorizontalAlignment="Left" Height="156" Margin="38,260,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="440"/>
                 <Label Content="Start:" HorizontalAlignment="Left" Margin="38,38,0,0" VerticalAlignment="Top" Foreground="{DynamicResource WhiteBrush}" FontWeight="Bold" FontSize="20"/>
-                <Label Content="End:" Margin="303,38,163,0" VerticalAlignment="Top" Foreground="{DynamicResource WhiteBrush}" FontWeight="Bold" FontSize="20" RenderTransformOrigin="2.212,0.554"/>
+                <Label Content="End:" Margin="303,38,146,0" VerticalAlignment="Top" Foreground="{DynamicResource WhiteBrush}" FontWeight="Bold" FontSize="20" RenderTransformOrigin="2.212,0.554"/>
                 <Label Content="Subject:" HorizontalAlignment="Left" Margin="38,119,0,0" VerticalAlignment="Top" Foreground="{DynamicResource WhiteBrush}" FontWeight="Bold" FontSize="20"/>
                 <Label Content="Description:" HorizontalAlignment="Left" Margin="38,224,0,0" VerticalAlignment="Top" Foreground="{DynamicResource WhiteBrush}" FontWeight="Bold" FontSize="20"/>
-                <Button Style="{StaticResource DoctorYesButton }" Content="Save" HorizontalAlignment="Left" Margin="333,460,0,40" Width="145"/>
+                <Button x:Name="SaveBT" Style="{StaticResource DoctorYesButton }" Content="Send" HorizontalAlignment="Left" Margin="333,460,0,40" Width="145" Click="SaveBT_Click"/>
+                <Label Name="exceptionLabel" Visibility="Collapsed" Content="Selected dates are unavailable. Try different ones." HorizontalAlignment="Left" Margin="11,0,0,0" VerticalAlignment="Top" Foreground="{DynamicResource NoRedBrush}" FontSize="16" FontFamily="Trajan Pro 3 "/>
 
             </Grid>
         </GroupBox>
-        <GroupBox Header="Request View" HorizontalAlignment="Left" Height="586" Margin="826,165,0,0" VerticalAlignment="Top" Width="596" BorderBrush="{DynamicResource MedicalGreenBrush}" Foreground="{DynamicResource MedicalGreenBrush}" FontSize="30" FontFamily="Trajan Pro 3 Bold"/>
-        <xctk:DateTimePicker x:Name="BeginningDTP" Margin="304,280,1222,527"/>
-        <xctk:DateTimePicker x:Name="BeginningDTP_Copy" Margin="568,280,956,527"/>
-        <DataGrid x:Name="RequestViewGrid" Margin="838,259,296,101"
-                      AutoGenerateColumns="False" Style="{StaticResource ExecutiveDataGrid}" 
-                      ItemsSource="{Binding Requests}"  >
-            <DataGrid.Columns>
-                <DataGridTextColumn Header=" Subject" Width="150"  Binding="{Binding Subject}" HeaderStyle="{StaticResource ExecutiveDGHeader}" CellStyle="{StaticResource ExecutiveDGCell}"/>
-                <DataGridTextColumn Header=" Start" Width="3*" Binding="{Binding Start}"  HeaderStyle="{StaticResource ExecutiveDGHeader}" CellStyle="{StaticResource ExecutiveDGCell}"/>
-                <DataGridTextColumn Header=" End" Width="3*" Binding="{Binding End}"  HeaderStyle="{StaticResource ExecutiveDGHeader}" CellStyle="{StaticResource ExecutiveDGCell}"/>
-                <DataGridTextColumn Header=" Status" Width="2*" Binding="{Binding Status}"   HeaderStyle="{StaticResource ExecutiveDGHeader}" CellStyle="{StaticResource ExecutiveDGCell}"/>
 
-            </DataGrid.Columns>
-        </DataGrid>
+        <xctk:DateTimePicker x:Name="BeginningDTP" Margin="304,280,1222,527"/>
+        <xctk:DateTimePicker x:Name="EndingDTP" Margin="568,280,956,527"/>
+        <GroupBox Header="Request View" HorizontalAlignment="Left" Height="586" Margin="826,165,0,0" VerticalAlignment="Top" Width="596" BorderBrush="{DynamicResource MedicalGreenBrush}" Foreground="{DynamicResource MedicalGreenBrush}" FontSize="30" FontFamily="Trajan Pro 3 Bold">
+
+            <DataGrid x:Name="RequestViewGrid" Margin="20,0,20,20"
+                      AutoGenerateColumns="False" Style="{StaticResource ExecutiveDataGrid}" 
+                      ItemsSource="{Binding Requests}" Height="469" VerticalAlignment="Bottom"  >
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header=" Subject" Width="150"  Binding="{Binding Title}" HeaderStyle="{StaticResource ExecutiveDGHeader}" CellStyle="{StaticResource ExecutiveDGCell}"/>
+                    <DataGridTextColumn Header=" Start" Width="3*" Binding="{Binding Beginning}"  HeaderStyle="{StaticResource ExecutiveDGHeader}" CellStyle="{StaticResource ExecutiveDGCell}"/>
+                    <DataGridTextColumn Header=" End" Width="3*" Binding="{Binding Ending}"  HeaderStyle="{StaticResource ExecutiveDGHeader}" CellStyle="{StaticResource ExecutiveDGCell}"/>
+                    <DataGridTextColumn Header=" Status" Width="2*" Binding="{Binding Status}"   HeaderStyle="{StaticResource ExecutiveDGHeader}" CellStyle="{StaticResource ExecutiveDGCell}"/>
+
+                </DataGrid.Columns>
+            </DataGrid>
+        </GroupBox>
 
     </Grid>
 </Page>
