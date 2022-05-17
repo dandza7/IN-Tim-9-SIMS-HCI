@@ -92,7 +92,8 @@ namespace WpfApp1.View.Model.Executive.ExecutiveInventoryDialogs
             AddRooms.Text = "";
             AddName.Text = "";
             Feedback = "";
-            ParentPage.Inventory = ParentPage.InventoryController.GetPreviews(); 
+            ParentPage.InventorySource = ParentPage.InventoryController.GetPreviews();
+            ParentPage.FilterInventory();
         }
     }
 }

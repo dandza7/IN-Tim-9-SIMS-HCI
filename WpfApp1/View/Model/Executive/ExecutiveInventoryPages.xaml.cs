@@ -18,6 +18,7 @@ using WpfApp1.Controller;
 using WpfApp1.Model.Preview;
 using WpfApp1.View.Model.Executive.ExecutiveInventoryDialogs;
 using System.Windows.Media.Animation;
+using System.Collections.ObjectModel;
 
 namespace WpfApp1.View.Model.Executive
 {
@@ -63,8 +64,24 @@ namespace WpfApp1.View.Model.Executive
                 }
             }
         }
-        private List<InventoryPreview> _inventory;
-        public List<InventoryPreview> Inventory
+        private List<InventoryPreview> _inventorySource;
+        public List<InventoryPreview> InventorySource
+        {
+            get
+            {
+                return _inventorySource;
+            }
+            set
+            {
+                if (value != _inventorySource)
+                {
+                    _inventorySource = value;
+                    OnPropertyChanged("InventorySource");
+                }
+            }
+        }
+        private ObservableCollection<InventoryPreview> _inventory;
+        public ObservableCollection<InventoryPreview> Inventory
         {
             get
             {
@@ -76,6 +93,20 @@ namespace WpfApp1.View.Model.Executive
                 {
                     _inventory = value;
                     OnPropertyChanged("Inventory");
+                }
+            }
+        }
+        private string _searchToken;
+        public string SearchToken
+        {
+            get { return _searchToken; }
+            set
+            {
+                if (value != _searchToken)
+                {
+                    _searchToken = value;
+                    OnPropertyChanged("SearchToken");
+                    FilterInventory();
                 }
             }
         }
@@ -125,7 +156,6 @@ namespace WpfApp1.View.Model.Executive
             _inventoryMovingController = app.InventoryMovingController;
             _roomController = app.RoomController;
             this.SOPRooms = new List<string>();
-            this.Inventory = _inventoryController.GetPreviews();
             this.Feedback = "";
             this.WrongSelection = "";
             SelectedId = -1;
@@ -133,10 +163,12 @@ namespace WpfApp1.View.Model.Executive
             SelectedInventoryName = "";
             this.FrameAnimation = FindResource("FormFrameAnimation") as Storyboard;
             CloseFrame = FindResource("CloseFrame") as Storyboard;
-            ShowFilter = FindResource("ShowFilter") as Storyboard;
-            HideFilter = FindResource("HideFilter") as Storyboard;
             CloseDG = FindResource("CloseDG") as Storyboard;
             OpenDG = FindResource("OpenDG") as Storyboard;
+            this.InventorySource = _inventoryController.GetPreviews();
+            this.Inventory = new ObservableCollection<InventoryPreview>();
+            FilterInventory();
+            this.SearchToken = "";
         }
 
 
@@ -183,37 +215,25 @@ namespace WpfApp1.View.Model.Executive
             FormFrame.Opacity = 1;
         }
 
-        private void FilterInventory_Click(object sender, RoutedEventArgs e)
-        {
-            FilterContainer.Visibility=Visibility.Visible;
-            ShowFilter.Begin();
-        }
-
-        private void FilterContainer_MouseLeave(object sender, MouseEventArgs e)
-        {
-            HideFilter.Begin();
-        }
-        private void HideFilter_Completed(object sender, EventArgs e)
-        {
-            FilterContainer.Visibility = Visibility.Collapsed;
-        }
         private void Filter_Click(object sender, RoutedEventArgs e)
         {
             CloseDG.Begin();
         }
-
+        public void FilterInventory()
+        {
+            CloseDG.Begin();
+        }
         private void CloseDG_Completed(object sender, EventArgs e)
         {
-            List<InventoryPreview> preFiltered = _inventoryController.GetPreviews();
-            List<InventoryPreview> Filtered = new List<InventoryPreview>();
-            foreach (InventoryPreview p in preFiltered)
+            Inventory.Clear();
+            foreach (InventoryPreview p in InventorySource)
             {
                 if ((p.Type.Equals("D") && DynamicCB.IsChecked == true) || (p.Type.Equals("S") && StaticCB.IsChecked == true))
                 {
-                    Filtered.Add(p);
+                    if(SearchToken == "" || (p.Name.ToLower()).Contains(SearchToken.ToLower()))
+                        Inventory.Add(p);
                 }
             }
-            this.Inventory = Filtered;
             OpenDG.Begin();
         }
     }
