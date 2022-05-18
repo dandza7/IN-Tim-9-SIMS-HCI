@@ -32,7 +32,7 @@ namespace WpfApp1.View.Dialog
         private NotificationController _notificationController;
         public ObservableCollection<User> Doctors { get; set; }
         public ObservableCollection<User> Patients { get; set; }
-        public ObservableCollection<AppointmentView> AvailableAppointments { get; set; }
+        public ObservableCollection<AppointmentView> MovableAppointments { get; set; }
         public SecretaryAddNewUrgentAppointmentDialog()
         {
             InitializeComponent();
@@ -70,11 +70,11 @@ namespace WpfApp1.View.Dialog
             }
             else
             {
-                List<AppointmentView> possibleOptions = _appointmentController.GetPossibleOptionsForMoving(patientId, specialization, DateTime.Now).ToList();
+                List<AppointmentView> movableAppointments = _appointmentController.GetSortedMovableAppointments(specialization, DateTime.Now).ToList();
 
-                AvailableAppointments = new ObservableCollection<AppointmentView>(possibleOptions);
-                AvailableAppointmentsGrid.ItemsSource = AvailableAppointments;
-                AvailableAppointmentsGrid.Items.Refresh();
+                MovableAppointments = new ObservableCollection<AppointmentView>(movableAppointments);
+                MovableAppointmentsGrid.ItemsSource = MovableAppointments;
+                MovableAppointmentsGrid.Items.Refresh();
             }
 
         }
@@ -87,10 +87,10 @@ namespace WpfApp1.View.Dialog
             _patientController = app.PatientController;
             _notificationController = app.NotificationController;
 
-            int appointmentForMovingId = ((AppointmentView)AvailableAppointmentsGrid.SelectedItem).Id;
+            int appointmentForMovingId = ((AppointmentView)MovableAppointmentsGrid.SelectedItem).Id;
             Appointment appointmentForMoving = _appointmentController.GetById(appointmentForMovingId);
             Patient patient = _patientController.GetByUsername(((User)PatientComboBox.SelectedValue).Username);
-            DateTime nearestMoving = _appointmentController.GetNearestMoving(appointmentForMovingId);
+            DateTime nearestMoving = _appointmentController.GetNearestFreeTerm(appointmentForMovingId);
 
             Appointment movedAppointment = new Appointment(nearestMoving, nearestMoving.AddHours(1), AppointmentType.regular, 
                 false, appointmentForMoving.DoctorId, appointmentForMoving.PatientId, appointmentForMoving.RoomId);
