@@ -50,7 +50,7 @@ namespace WpfApp1.View.Dialog.PatientDialog
         private void GradeButton_Click(object sender, RoutedEventArgs e)
         {
             List<int> grades = GetGrades();
-            if (grades.Count < 5)
+            if (IsEveryQuestionsAnswered(grades) == false)
             {
                 PatientErrorMessageBox.Show("ERROR: You did not answer all of the questions!");
                 return;
@@ -63,6 +63,11 @@ namespace WpfApp1.View.Dialog.PatientDialog
             PatientErrorMessageBox.Show("Thank you for completing the survey!");
             Frame patientFrame = (Frame)app.Properties["PatientFrame"];
             patientFrame.Content = new PatientProfileView();
+        }
+
+        private bool IsEveryQuestionsAnswered(List<int> grades)
+        {
+            return (grades.Count < 5 ? false : true);
         }
 
         private void GoBack_Click(object sender, RoutedEventArgs e)
