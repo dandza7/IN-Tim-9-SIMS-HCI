@@ -8,6 +8,7 @@ using WpfApp1.Repository;
 using WpfApp1.View.Converter;
 using WpfApp1.View.Model.Patient;
 using WpfApp1.View.Model.Secretary;
+using static WpfApp1.Model.Appointment;
 using static WpfApp1.Model.Doctor;
 
 namespace WpfApp1.Service
@@ -814,7 +815,6 @@ namespace WpfApp1.Service
                 {
                     freedoctorId = doctor.Id;
                 }
-
             }
 
             if (freedoctorId != -1)
@@ -823,56 +823,52 @@ namespace WpfApp1.Service
                     freedoctorId, patientId, _doctorRepo.GetById(freedoctorId).RoomId);
                 _appointmentRepo.Create(a);
 
-                string title = "You have new urgent appointment";
-                string content = "You have new urgent appointment on  " + " " + startOfInterval;
+                string notificationTitle = "You have new urgent appointment";
+                string notificationContent = "You have new urgent appointment on  " + " " + startOfInterval;
 
-                Notification notification = new Notification(DateTime.Now, content, title, freedoctorId, false, false);
+                Notification notification = new Notification(DateTime.Now, notificationContent, notificationTitle, freedoctorId, false, false);
                 _notificationRepo.Create(notification);
 
                 return true;
             }
-            else
-            {
-                return false;
-            }
-
+            else return false;
         }
 
-        public List<Appointment> GetAllMovableAppointmentsInTimeInterval(DateTime startOfInterval, DateTime endOfInterval, SpecType spec)
+
+        public List<Appointment> GetMovableAppointments(DateTime startOfInterval, DateTime endOfInterval, SpecType specialization)
         {
-            List<Appointment> appointmentsOfDoctors = new List<Appointment>();
-            List<Doctor> doctors = (List<Doctor>)_doctorRepo.GetAllDoctorsBySpecialization(spec);
+            List<Appointment> movableAppointments = new List<Appointment>();
+            List<Doctor> doctors = (List<Doctor>)_doctorRepo.GetAllDoctorsBySpecialization(specialization);
 
-            foreach (Doctor d in doctors)
+            foreach (Doctor doctor in doctors)
             {
-                List<Appointment> appointmentsOfDoctor = _appointmentRepo.GetAllMovableAppointmentsInTimeIntervalForDoctor(startOfInterval,
-                    endOfInterval, d.Id).ToList();
+                List<Appointment> movableAppointmentsOfDoctor = _appointmentRepo.GetDoctorsMovableAppointments(startOfInterval,
+                    endOfInterval, doctor.Id).ToList();
 
-                appointmentsOfDoctors.AddRange(appointmentsOfDoctor);
+                movableAppointments.AddRange(movableAppointmentsOfDoctor);
 
             }
 
-            return appointmentsOfDoctors;
-
+            return movableAppointments;
         } 
 
-        public List<AppointmentView> SortOptionsForMoving(List<Appointment> possibleOptionsForMoving)
+        public List<AppointmentView> SortMovableAppointments(List<Appointment> movableAppointments)
         {
             List<AppointmentView> appointmentViews = new List<AppointmentView>();
-            Dictionary<int, DateTime> nearestMovingDictionary = new Dictionary<int, DateTime>();
+            Dictionary<int, DateTime> nearestFreeTermDictionary = new Dictionary<int, DateTime>();
 
-            foreach (Appointment possibleMovingOption in possibleOptionsForMoving)
+            foreach (Appointment appointment in movableAppointments)
             {
-                    DateTime nearestMoving = GetNearestMoving(possibleMovingOption.Id);
-                nearestMovingDictionary.Add(possibleMovingOption.Id, nearestMoving);
+                    DateTime nearestFreeTerm = GetNearestFreeTerm(appointment.Id);
+                nearestFreeTermDictionary.Add(appointment.Id, nearestFreeTerm);
             }
 
-            List<KeyValuePair<int, DateTime>> nearestMovingList = nearestMovingDictionary.ToList();
-            nearestMovingList.Sort((x, y) => x.Value.CompareTo(y.Value));
+            List<KeyValuePair<int, DateTime>> nearestFreeTermList = nearestFreeTermDictionary.ToList();
+            nearestFreeTermList.Sort((x, y) => x.Value.CompareTo(y.Value));
 
-            foreach (KeyValuePair<int, DateTime> nearestMoving in nearestMovingList)
+            foreach (KeyValuePair<int, DateTime> nearestFreeTerm in nearestFreeTermList)
             {
-                Appointment appointmentForMoving = _appointmentRepo.GetById(nearestMoving.Key);
+                Appointment appointmentForMoving = _appointmentRepo.GetById(nearestFreeTerm.Key);
                 appointmentViews.Add(AppointmentConverter.ConvertAppointmentAndDoctorToAppointmentView(appointmentForMoving,
                     _userRepo.GetById(appointmentForMoving.DoctorId), _roomRepo.Get(appointmentForMoving.RoomId)));
             }
@@ -880,8 +876,7 @@ namespace WpfApp1.Service
             return appointmentViews;
         }
 
-
-        public DateTime GetNearestMoving(int appId)
+        public DateTime GetNearestFreeTerm(int appId)
         {
             Appointment appointment = _appointmentRepo.GetById(appId);
 
@@ -892,16 +887,14 @@ namespace WpfApp1.Service
             return MoveAppointmentOptions[0].Beginning;
         }
 
-        public List<AppointmentView> GetPossibleOptionsForMoving(int patientId, SpecType spec, DateTime startOfInterval)
+        public List<AppointmentView> GetSortedMovableAppointments(SpecType specialization, DateTime startOfInterval)
         {
             DateTime endOfInterval = startOfInterval.AddHours(1);
-
-            List<Doctor> doctors = (List<Doctor>)_doctorRepo.GetAllDoctorsBySpecialization(spec);
             List<AppointmentView> appointmentViews = new List<AppointmentView>();
 
-            List<Appointment> possibleOptionsForMoving = GetAllMovableAppointmentsInTimeInterval(startOfInterval, endOfInterval, spec);
+            List<Appointment> possibleOptionsForMoving = GetMovableAppointments(startOfInterval, endOfInterval, specialization);
 
-            appointmentViews = SortOptionsForMoving(possibleOptionsForMoving);
+            appointmentViews = SortMovableAppointments(possibleOptionsForMoving);
 
             return appointmentViews;
 

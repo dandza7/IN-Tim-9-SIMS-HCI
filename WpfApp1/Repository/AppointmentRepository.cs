@@ -68,7 +68,7 @@ namespace WpfApp1.Repository
 
             return doctorsAppointmentsInTimeInterval.OrderBy(appointment => appointment.Beginning).ToList();
         }
-        public IEnumerable<Appointment> GetAllMovableAppointmentsInTimeIntervalForDoctor(DateTime startOfInterval, DateTime endOfInterval, int doctorId)
+        public IEnumerable<Appointment> GetDoctorsMovableAppointments(DateTime startOfInterval, DateTime endOfInterval, int doctorId)
         {
             List<Appointment> appointmentsInTimeInterval = GetAllAppointmentsInTimeInterval(startOfInterval, endOfInterval).ToList();
             List<Appointment> doctorsAppointmentsInTimeInterval = new List<Appointment>();
@@ -81,7 +81,7 @@ namespace WpfApp1.Repository
                 }
             }
 
-            return doctorsAppointmentsInTimeInterval.OrderBy(appointment => appointment.Beginning).ToList();
+            return doctorsAppointmentsInTimeInterval.ToList();
         }
 
         public IEnumerable<Appointment> GetAllAppointmentsForDoctor(int doctorId)
