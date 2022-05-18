@@ -39,10 +39,12 @@ namespace WpfApp1.Repository
             List<DynamicEquipmentRequest> dyneqRequests = File.ReadAllLines(_path)
                 .Select(ConvertCsvFormatToDynamicEquipmentRequest)
                 .ToList();
+
             List<DynamicEquipmentRequest> dyneqRequestForMoving = new List<DynamicEquipmentRequest>();
+
             foreach (DynamicEquipmentRequest dynreq in dyneqRequests)
             {
-                if (dynreq.RequestDate <= DateTime.Now)
+                if (dynreq.ArrivalDate <= DateTime.Now)
                 {
                     dyneqRequestForMoving.Add(dynreq);
                 }   
@@ -64,7 +66,6 @@ namespace WpfApp1.Repository
 
         public DynamicEquipmentRequest Create(DynamicEquipmentRequest dynReq)
         {
-            Console.WriteLine("KREIRANJE");
             dynReq.Id = GetMaxId(GetAll()) + 1;
             AppendLineToFile(_path, ConvertDynamicEquipmentRequestToCsvFormat(dynReq));
             return dynReq;
@@ -87,7 +88,7 @@ namespace WpfApp1.Repository
                 dynReq.Id,
                 dynReq.Name,
                 dynReq.Amount,
-                dynReq.RequestDate);
+                dynReq.ArrivalDate);
         }
 
         private void AppendLineToFile(String path, String line)
