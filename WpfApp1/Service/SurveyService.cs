@@ -31,7 +31,7 @@ namespace WpfApp1.Service
             return _surveyRepository.GetById(id);
         }
 
-        public bool CheckIfAlreadyGraded(int patientId, int appointmentId)
+        public bool IsAlreadyGraded(int patientId, int appointmentId)
         {
             bool isGraded = false;
             List<Survey> allSurveys = _surveyRepository.GetAll().ToList();
@@ -47,10 +47,17 @@ namespace WpfApp1.Service
 
         public Survey Create(List<int> grades, int appointmentId, int patientId)
         {
+            if (appointmentId == -1)
+            {
+                Survey completedHospitalSurvey = new Survey(patientId, -1, -1, grades);
+                return _surveyRepository.Create(completedHospitalSurvey);
+            }
+
             Appointment appointment = _appointmentRepository.GetById(appointmentId);
             Doctor doctor = _doctorRepository.GetById(appointment.DoctorId);
-            Survey completedSurvey = new Survey(patientId, doctor.Id, appointmentId, grades);
-            return _surveyRepository.Create(completedSurvey);
+            Survey completedDoctorSurvey = new Survey(patientId, doctor.Id, appointmentId, grades);
+            return _surveyRepository.Create(completedDoctorSurvey);
+            
         }
 
         public bool Delete(int id)
