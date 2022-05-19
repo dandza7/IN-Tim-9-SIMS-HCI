@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,6 +16,7 @@ using System.Windows.Shapes;
 using WpfApp1.Controller;
 using WpfApp1.Model;
 using WpfApp1.View.Converter;
+using WpfApp1.View.Model;
 using WpfApp1.View.Model.Secretary;
 
 namespace WpfApp1.View.Dialog
@@ -22,8 +24,18 @@ namespace WpfApp1.View.Dialog
     /// <summary>
     /// Interaction logic for SecretaryUpdatePatientDialog.xaml
     /// </summary>
-    public partial class SecretaryUpdatePatientDialog : Window
+    public partial class SecretaryUpdatePatientDialog : Window, INotifyPropertyChanged
     {
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected virtual void OnPropertyChanged(string name)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(name));
+            }
+        }
+
         private PatientController _patientController;
 
         private UserController _userController;
@@ -32,7 +44,21 @@ namespace WpfApp1.View.Dialog
 
         private AllergyController _allergyController;
 
-        public ObservableCollection<UserControl> Allergies { get; set; }
+        private ObservableCollection<AllergyView> _allergies;
+
+        private ObservableCollection<PatientView> Patients;
+        public ObservableCollection<AllergyView> Allergies
+        {
+            get { return _allergies; }
+            set
+            {
+                if (value != _allergies)
+                {
+                    _allergies = value;
+                    OnPropertyChanged("Allergies");
+                }
+            }
+        }
         public SecretaryUpdatePatientDialog(int patientId)
         {
             InitializeComponent();
@@ -59,8 +85,9 @@ namespace WpfApp1.View.Dialog
             updateaddressTB.Text = p.Street;
             updatecityTB.Text = p.City;
             updatecountryTB.Text = p.Country;
-            Allergies = new ObservableCollection<UserControl>(
+            Allergies = new ObservableCollection<AllergyView>(
                 AllergyConverter.ConvertAllergyListToAllergyViewList(_allergyController.GetAllAllergiesForPatient(r.Id).ToList()));
+
         }
         private void UpdateButton_Click(object sender, RoutedEventArgs e)
         {
@@ -90,6 +117,14 @@ namespace WpfApp1.View.Dialog
 
             _patientController.Update(patient);
             _userController.Update(user);
+            DataGrid PatientsDataGrid = (DataGrid)app.Properties["PatientsDataGrid"];
+            
+            Patients = new ObservableCollection<PatientView>(
+            PatientConverter.ConvertPatientListToPatientViewList(_userController.GetAllPatients().ToList()));
+
+
+            PatientsDataGrid.ItemsSource = Patients;
+            PatientsDataGrid.Items.Refresh();
             Close();
         }
         private void DeleteAllergy_Click(object sender, RoutedEventArgs e)
@@ -100,11 +135,7 @@ namespace WpfApp1.View.Dialog
             _mrController = app.MedicalRecordController;
             int medicalRecordId = _mrController.GetByPatientId(Int32.Parse(updateidTB.Text)).Id;
             _allergyController.Delete(allergyId);
-            Allergies = new ObservableCollection<UserControl>(
-            AllergyConverter.ConvertAllergyListToAllergyViewList(_allergyController.GetAllAllergiesForPatient(medicalRecordId).ToList()));
 
-            SecretaryAllergiesDataGrid.ItemsSource = Allergies;
-            SecretaryAllergiesDataGrid.Items.Refresh();
         }
         private void Manage_Allergies_Click(object sender, RoutedEventArgs e)
         {
@@ -130,6 +161,7 @@ namespace WpfApp1.View.Dialog
             updateusernameTB.IsEnabled = true;
             updatecontactTB.IsEnabled = true;
             updateemailTB.IsEnabled = true;
+            
         }
 
         private void View_Click(object sender, RoutedEventArgs e)
@@ -154,6 +186,11 @@ namespace WpfApp1.View.Dialog
         private void CloseButton_Click(object sender, RoutedEventArgs e)
         {
             Close();
+        }
+
+        private void SecretaryAllergiesDataGrid_Scroll(object sender, System.Windows.Controls.Primitives.ScrollEventArgs e)
+        {
+
         }
     }
 
