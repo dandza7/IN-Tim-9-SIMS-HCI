@@ -10,20 +10,19 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
-using WpfApp1.View.Model.Secretary;
 
-namespace WpfApp1.Service
+namespace WpfApp1.View.Model.Secretary
 {
     /// <summary>
-    /// Interaction logic for SecretaryMenu.xaml
+    /// Interaction logic for SecretaryDashboard.xaml
     /// </summary>
-    public partial class SecretaryMenu : Window
+    public partial class SecretaryDashboard : Page
     {
-        public SecretaryMenu()
+        public SecretaryDashboard()
         {
             InitializeComponent();
-            Main.Content = new SecretaryDashboard();
         }
     }
 }

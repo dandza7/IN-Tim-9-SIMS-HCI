@@ -20,15 +20,24 @@ namespace WpfApp1.View.Model.Secretary
     /// <summary>
     /// Interaction logic for AllergyView.xaml
     /// </summary>
-    public partial class AllergyView : UserControl
+    public partial class AllergyView : UserControl, INotifyPropertyChanged
     {
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected virtual void OnPropertyChanged(string name)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(name));
+            }
+        }
+
+        private int _id;
+        private string _name;
         public AllergyView()
         {
             InitializeComponent();
             DataContext = this;
         }
-        private int _id;
-        private string _name;
         public int Id
         {
             get { return _id; }
@@ -37,15 +46,9 @@ namespace WpfApp1.View.Model.Secretary
                 if (_id != value)
                 {
                     _id = value;
-                    OnPropertyChanged();
+                    OnPropertyChanged("Id");
                 }
             }
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-        private void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
         public string AllergyName
@@ -56,7 +59,7 @@ namespace WpfApp1.View.Model.Secretary
                 if (_name != value)
                 {
                     _name = value;
-                    OnPropertyChanged();
+                    OnPropertyChanged("AllergyName");
                 }
             }
         }

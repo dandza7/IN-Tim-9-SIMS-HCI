@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using WpfApp1.Controller;
 using WpfApp1.Service;
 using WpfApp1.View.Model;
 using WpfApp1.View.Model.Secretary;
@@ -23,34 +24,53 @@ namespace WpfApp1.View.Util
     /// </summary>
     public partial class SecretaryMenuBar : UserControl
     {
+        private UserController _userController;
         public SecretaryMenuBar()
         {
             InitializeComponent();
+            var app = Application.Current as App;
+            _userController = app.UserController;
+            int loggedId = (int)app.Properties["userId"];
+            Name.Text = _userController.GetById(loggedId).Name + " " + _userController.GetById(loggedId).Surname;
+
         }
 
         private void SecretaryDashboard_Click(object sender, RoutedEventArgs e)
         {
             PageHeader.Text = "Dashboard";
+            DashboardColorMark.Background = (SolidColorBrush)new BrushConverter().ConvertFromString("#FF7153C7");
+            PatientsColorMark.Background = (SolidColorBrush)new BrushConverter().ConvertFromString("#FF130A38");
+            AppointmentsColorMark.Background = (SolidColorBrush)new BrushConverter().ConvertFromString("#FF130A38");
+            DynamicEquipmentColorMark.Background = (SolidColorBrush)new BrushConverter().ConvertFromString("#FF130A38");
+            Main.Content = new SecretaryDashboard();
         }
+
+
         private void SecretaryPatients_Click(object sender, RoutedEventArgs e)
         {
             PageHeader.Text = "Patient List";
-            PatientsColorMark.Background = (SolidColorBrush)new BrushConverter().ConvertFromString("#FFFD8117");
-            AppointmentsColorMark.Background = (SolidColorBrush)new BrushConverter().ConvertFromString("#FF101010");
+            PatientsColorMark.Background = (SolidColorBrush)new BrushConverter().ConvertFromString("#FF7153C7");
+            AppointmentsColorMark.Background = (SolidColorBrush)new BrushConverter().ConvertFromString("#FF130A38");
+            DynamicEquipmentColorMark.Background = (SolidColorBrush)new BrushConverter().ConvertFromString("#FF130A38");
+            DashboardColorMark.Background = (SolidColorBrush)new BrushConverter().ConvertFromString("#FF130A38");
             Main.Content = new SecretaryPatientsView();
         }
         private void SecretaryAppointments_Click(object sender, RoutedEventArgs e)
         {
             PageHeader.Text = "Appointment List";
-            AppointmentsColorMark.Background = (SolidColorBrush)new BrushConverter().ConvertFromString("#FFFD8117");
-            PatientsColorMark.Background = (SolidColorBrush)new BrushConverter().ConvertFromString("#FF101010");
+            AppointmentsColorMark.Background = (SolidColorBrush)new BrushConverter().ConvertFromString("#FF7153C7");
+            PatientsColorMark.Background = (SolidColorBrush)new BrushConverter().ConvertFromString("#FF130A38");
+            DynamicEquipmentColorMark.Background = (SolidColorBrush)new BrushConverter().ConvertFromString("#FF130A38");
+            DashboardColorMark.Background = (SolidColorBrush)new BrushConverter().ConvertFromString("#FF130A38");
             Main.Content = new SecretaryAppointmentsView();
         }
         private void SecretaryDynamicEquipemnt_Click(object sender, RoutedEventArgs e)
         {
             PageHeader.Text = "Dynamic Equipment List";
-            AppointmentsColorMark.Background = (SolidColorBrush)new BrushConverter().ConvertFromString("#FFFD8117");
-            PatientsColorMark.Background = (SolidColorBrush)new BrushConverter().ConvertFromString("#FF101010");
+            DynamicEquipmentColorMark.Background = (SolidColorBrush)new BrushConverter().ConvertFromString("#FF7153C7");
+            PatientsColorMark.Background = (SolidColorBrush)new BrushConverter().ConvertFromString("#FF130A38");
+            AppointmentsColorMark.Background = (SolidColorBrush)new BrushConverter().ConvertFromString("#FF130A38");
+            DashboardColorMark.Background = (SolidColorBrush)new BrushConverter().ConvertFromString("#FF130A38");
             Main.Content = new SecretaryDynamicEquipmentView();
         }
         private void CloseAllWindows()

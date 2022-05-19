@@ -357,6 +357,9 @@
     <Compile Include="View\Model\Secretary\SecretaryAppointmentView.xaml.cs">
       <DependentUpon>SecretaryAppointmentView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Model\Secretary\SecretaryDashboard.xaml.cs">
+      <DependentUpon>SecretaryDashboard.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Model\Secretary\SecretaryDynamicEquipmentView.xaml.cs">
       <DependentUpon>SecretaryDynamicEquipmentView.xaml</DependentUpon>
     </Compile>
@@ -645,6 +648,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\Model\Secretary\SecretaryDashboard.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\Model\Secretary\SecretaryDynamicEquipmentView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -746,6 +753,36 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Images\logo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\icons8-home-24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\icons8-medical-bag-50.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\icons8-logout-48.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\icons8-notification-32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\icons8-calendar-50.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\icons8-user-30.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\icons8-calendar-16-50.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\icons8-meeting-32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\logged-user.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\avatar.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

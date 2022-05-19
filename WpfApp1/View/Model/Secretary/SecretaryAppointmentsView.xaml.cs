@@ -43,6 +43,7 @@ namespace WpfApp1.View.Model.Secretary
             var app = Application.Current as App;
             _appointmentController = app.AppointmentController;
             Appointments = new ObservableCollection<SecretaryAppointmentView>(_appointmentController.GetSecretaryAppointmentViews().ToList());
+            app.Properties["SecretaryAppointmentsDataGrid"] = SecretaryAppointmentsDataGrid;
         }
        
         private void ViewAppointmentDetails(object sender, RoutedEventArgs e)
