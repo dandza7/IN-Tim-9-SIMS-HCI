@@ -11,20 +11,20 @@ namespace WpfApp1.Model
         public int Id { get; set; }
         public string Name { get; set; }
         public int Amount { get; set; }
-        public DateTime RequestDate { get; set; }
+        public DateTime ArrivalDate { get; set; }
 
-        public DynamicEquipmentRequest(int id, string name, int amount, DateTime requestDate)
+        public DynamicEquipmentRequest(int id, string name, int amount, DateTime arrivalDate)
         {
             Id = id;
             Name = name;
             Amount = amount;
-            RequestDate = requestDate;
+            ArrivalDate = arrivalDate;
         }
-        public DynamicEquipmentRequest(string name, int amount, DateTime requestDate)
+        public DynamicEquipmentRequest(string name, int amount, DateTime arrivalDate)
         {
             Name = name;
             Amount = amount;
-            RequestDate = requestDate;
+            ArrivalDate = arrivalDate;
         }
     }
 }

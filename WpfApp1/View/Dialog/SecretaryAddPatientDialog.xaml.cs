@@ -47,6 +47,7 @@ namespace WpfApp1.View.Dialog
                contactTB.Text,
                User.RoleType.patient
             );
+            
             User u = _userController.Create(user);
             Console.WriteLine(u.Id);
             Patient patient = new Patient(

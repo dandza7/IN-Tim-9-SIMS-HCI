@@ -99,6 +99,7 @@
     <Compile Include="Controller\NotificationController.cs" />
     <Compile Include="Controller\PatientController.cs" />
     <Compile Include="Controller\RenovationController.cs" />
+    <Compile Include="Controller\RequestController.cs" />
     <Compile Include="Controller\SurveyController.cs" />
     <Compile Include="Controller\UserController.cs" />
     <Compile Include="Model\Allergy.cs" />
@@ -115,6 +116,7 @@
     <Compile Include="Model\Notification.cs" />
     <Compile Include="Model\Preview\InventoryPreview.cs" />
     <Compile Include="Model\Renovation.cs" />
+    <Compile Include="Model\Request.cs" />
     <Compile Include="Model\Survey.cs" />
     <Compile Include="Model\Therapy.cs" />
     <Compile Include="Model\User.cs" />
@@ -124,6 +126,7 @@
     <Compile Include="Repository\InventoryMovingRepository.cs" />
     <Compile Include="Repository\InventoryRepository.cs" />
     <Compile Include="Repository\MedicalRecordRepository.cs" />
+    <Compile Include="Repository\RequestRepository.cs" />
     <Compile Include="Repository\SurveyRepository.cs" />
     <Compile Include="Repository\TherapyRepository.cs" />
     <Compile Include="Repository\DoctorRepository.cs" />
@@ -133,6 +136,7 @@
     <None Include="packages.config" />
     <None Include="Resources\Data\doctors.csv" />
     <Compile Include="Repository\RenovationRepository.cs" />
+    <None Include="Resources\Data\doctors_requests.csv" />
     <None Include="Resources\Data\inventory.csv" />
     <None Include="Resources\Data\inventoryMoving.csv" />
     <None Include="Resources\Data\therapy.csv" />
@@ -151,6 +155,7 @@
     <None Include="Resources\Data\medical_record.csv" />
     <Compile Include="Service\InventoryService.cs" />
     <Compile Include="Service\MedicalRecordService.cs" />
+    <Compile Include="Service\RequestService.cs" />
     <Compile Include="Service\SurveyService.cs" />
     <Compile Include="Service\TherapyService.cs" />
     <Compile Include="Service\AppointmentService.cs" />

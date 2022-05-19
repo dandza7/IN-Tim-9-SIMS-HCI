@@ -26,12 +26,6 @@
                 <LinearDoubleKeyFrame Value="0" KeyTime="0:0:0.3" />
             </DoubleAnimationUsingKeyFrames>
         </Storyboard>
-        <Storyboard x:Name="ShowFilter" x:Key="ShowFilter">
-            <DoubleAnimation Storyboard.TargetName="FilterContainer" Storyboard.TargetProperty="Opacity" Duration="0:0:0.3" To="1"/>
-        </Storyboard>
-        <Storyboard x:Name="HideFilter" x:Key="HideFilter" Completed="HideFilter_Completed">
-            <DoubleAnimation Storyboard.TargetName="FilterContainer" Storyboard.TargetProperty="Opacity" Duration="0:0:0.3" To="0"/>
-        </Storyboard>
         <Storyboard x:Name="CloseDG" x:Key="CloseDG" Completed="CloseDG_Completed">
             <DoubleAnimationUsingKeyFrames
                        Storyboard.TargetName="InventoryDG"
@@ -44,8 +38,8 @@
             <DoubleAnimationUsingKeyFrames
                        Storyboard.TargetName="InventoryDG"
                        Storyboard.TargetProperty="Opacity"
-                       Duration="0:0:0.3">
-                <LinearDoubleKeyFrame Value="1" KeyTime="0:0:0.3" />
+                       Duration="0:0:0.2">
+                <LinearDoubleKeyFrame Value="1" KeyTime="0:0:0.2" />
             </DoubleAnimationUsingKeyFrames>
         </Storyboard>
     </Page.Resources>
@@ -59,18 +53,21 @@
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="70"/>
+            <RowDefinition Height="44"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <Button x:Name="FilterInventory" Grid.Column="1"  Style="{StaticResource ClassicButton}" Margin="20 5 20 5" Click="FilterInventory_Click">Filter Inventory</Button>
-        <Border x:Name="FilterContainer" Grid.Column="1"  Style="{StaticResource ErrorModal}" Margin="20 5 20 5" MouseLeave="FilterContainer_MouseLeave" Visibility="Collapsed">
+        <Border x:Name="FilterContainer" Grid.ColumnSpan="4" Grid.Row="1"  Style="{StaticResource ErrorModal}" Margin="20 5 20 0" Visibility="Visible" BorderThickness="2" VerticalAlignment="Bottom">
             <StackPanel VerticalAlignment="Center" Orientation="Horizontal">
-                <CheckBox Name="StaticCB" IsChecked="True" Content="Static" Click="Filter_Click" Style="{StaticResource CheckBoxExecutive}"></CheckBox>
-                <CheckBox Name="DynamicCB" IsChecked="True" Content="Dynamic" Click="Filter_Click" Style="{StaticResource CheckBoxExecutive}"></CheckBox>
+                <TextBlock FontSize="20" FontFamily="Impact" Foreground="{StaticResource AccentBlueBrush}" Margin="35 0 40 0" VerticalAlignment="Center">SEARCH</TextBlock>
+                <TextBlock FontSize="18" FontFamily="Impact" Foreground="{StaticResource AccentBlueBrush}" Margin="35 0 10 0" VerticalAlignment="Center">Name:</TextBlock>
+                <TextBox x:Name="SearchTokenInput" Style="{StaticResource FormInputBox}" Width="200" FontSize="15" Margin="0 0 50 0" Text="{Binding SearchToken, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+                <CheckBox Name="StaticCB" IsChecked="True" Content="Display Static Inventory" Click="Filter_Click" Style="{StaticResource CheckBoxExecutive}" VerticalAlignment="Center"></CheckBox>
+                <CheckBox Name="DynamicCB" IsChecked="True" Content="Display Dynamic Inventory" Click="Filter_Click" Style="{StaticResource CheckBoxExecutive}" VerticalAlignment="Center"></CheckBox>
             </StackPanel>
         </Border>
         <Button x:Name="MoveStaticInventory" Grid.Column="2"  Style="{StaticResource ClassicButton}" Margin="20 5 20 5" Click="MoveStaticInventory_Click">Move Static Inventory</Button>
         <Button x:Name="AddNewStaticEquipment" Grid.Column="3"  Style="{StaticResource ClassicButton}" Margin="0 5 20 5" Click="AddNewStaticEquipment_Click">Add New Static Inventory</Button>
-        <DataGrid x:Name="InventoryDG" AutoGenerateColumns="False" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="4" Style="{StaticResource ExecutiveDataGrid}" ItemsSource="{Binding Inventory}" Margin="20 0 20 0">
+        <DataGrid x:Name="InventoryDG" AutoGenerateColumns="False" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="4" Style="{StaticResource ExecutiveDataGrid}" ItemsSource="{Binding Inventory}" Margin="20 0 20 0">
             <DataGrid.Columns>
                 <DataGridTextColumn Header=" ID" Width="*"  Binding="{Binding Id}" HeaderStyle="{StaticResource ExecutiveDGHeader}" CellStyle="{StaticResource ExecutiveDGCell}"/>
                 <DataGridTextColumn Header=" TYPE" Width="1.2*"  Binding="{Binding Type}" HeaderStyle="{StaticResource ExecutiveDGHeader}" CellStyle="{StaticResource ExecutiveDGCell}"/>
@@ -101,7 +98,7 @@
                 <Button x:Name="WrongSelectionOK" Grid.Row="2" Style="{StaticResource ClassicButton}" Margin="100 5" Click="WrongSelectionOK_Click" FontSize="24">OK</Button>
             </Grid>
         </Border>
-        <Frame Name="FormFrame" Grid.ColumnSpan="4" Grid.RowSpan="2">
+        <Frame Name="FormFrame" Grid.ColumnSpan="4" Grid.RowSpan="3">
             <Frame.Effect>
                 <DropShadowEffect BlurRadius="5"/>
             </Frame.Effect>

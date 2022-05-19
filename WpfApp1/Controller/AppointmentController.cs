@@ -82,20 +82,26 @@ namespace WpfApp1.Controller
         {
             return _appointmentService.GetById(id);
         }
-        public List<AppointmentView> CreateUrgentAppointement(int patienId, SpecType spec, DateTime start)
+        public List<AppointmentView> GetSortedMovableAppointments(SpecType specialization, DateTime start)
         {
-            return _appointmentService.CreateUrgentAppointement(patienId, spec, start);
+            return _appointmentService.GetSortedMovableAppointments(specialization, start);
         }
 
-        public DateTime GetNearestMoving(int appointmentId)
+        public DateTime GetNearestFreeTerm(int appointmentId)
         {
-            return _appointmentService.GetNearestMoving(appointmentId);
+            return _appointmentService.GetNearestFreeTerm(appointmentId);
         }
 
         public List<Appointment> GetAllByDoctorId(int id)
         {
             return _appointmentService.GetAllByDoctorId(id);
         }
+
+        public bool CreateUrgentAppointment(int patientId, SpecType spec, DateTime startOfInterval)
+        {
+            return _appointmentService.CreateUrgentAppointment(patientId, spec, startOfInterval);
+        }
+
 
     }
 }
