@@ -31,7 +31,7 @@ namespace WpfApp1.Service
             return _surveyRepository.GetById(id);
         }
 
-        public bool CheckIfAlreadyGraded(int patientId, int appointmentId)
+        public bool IsAlreadyGraded(int patientId, int appointmentId)
         {
             bool isGraded = false;
             List<Survey> allSurveys = _surveyRepository.GetAll().ToList();

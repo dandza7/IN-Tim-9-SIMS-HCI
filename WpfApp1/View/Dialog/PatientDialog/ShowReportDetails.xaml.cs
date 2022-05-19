@@ -91,7 +91,7 @@ namespace WpfApp1.View.Dialog.PatientDialog
             int appointmentId = (int)app.Properties["appointmentId"];
             int patientId = (int)app.Properties["userId"];
 
-            if(_surveyController.CheckIfAlreadyGraded(patientId, appointmentId))
+            if(_surveyController.IsAlreadyGraded(patientId, appointmentId))
             {
                 PatientErrorMessageBox.Show("ERROR: You have already graded this appointment");
                 return;

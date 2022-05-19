@@ -27,9 +27,9 @@ namespace WpfApp1.Controller
             return _surveyService.GetById(id);
         }
 
-        public bool CheckIfAlreadyGraded(int patientId, int appointmentId)
+        public bool IsAlreadyGraded(int patientId, int appointmentId)
         {
-            return _surveyService.CheckIfAlreadyGraded(patientId, appointmentId);
+            return _surveyService.IsAlreadyGraded(patientId, appointmentId);
         }
 
         public Survey Create(List<int> grades, int appointmentId, int patientId)

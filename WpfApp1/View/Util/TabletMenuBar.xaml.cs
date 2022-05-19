@@ -71,7 +71,7 @@ namespace WpfApp1.View.Util
             app.Properties["appointmentId"] = -1;
             int patientId = (int)app.Properties["userId"];
 
-            if(_surveyController.CheckIfAlreadyGraded(patientId, -1))
+            if(_surveyController.IsAlreadyGraded(patientId, -1))
             {
                 PatientErrorMessageBox.Show("You have already graded our hospital!");
                 return;
