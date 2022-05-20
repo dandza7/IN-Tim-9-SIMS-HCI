@@ -58,5 +58,21 @@ namespace WpfApp1.Model
 
             return new DateTime(Ending.Year, Ending.Month, Ending.Day, 20, 0, 0);
         }
+
+        public void TrimExcessiveTime()
+        {
+            if (Beginning.Hour < 7)
+            {
+                Beginning = CalculateWorkingHours("start");
+            }
+            if (Ending.Hour >= 20)
+            {
+                Ending = CalculateWorkingHours("end");
+            }
+            if (Ending.Hour < 8)
+            {
+                Ending = CalculateWorkingHours("end").AddDays(-1);
+            }
+        }
     }
 }
