@@ -209,8 +209,8 @@ namespace WpfApp1.View.Model.Executive.ExecutiveRoomDialogs
             {
                 ids.Add(r.Id);
             }
-            Beginnings = ParentPage.RenovationController.GetBegginigns(ids);
-            this.Endings = ParentPage.RenovationController.GetEndings(beginning, ids);
+            Beginnings = ParentPage.RenovationController.GetDaysAvailableForRenovation(ids);
+            this.Endings = ParentPage.RenovationController.GetDaysAvailableForRenovation(ids, beginning);
             Ending.IsEnabled = true;
 
         }
@@ -317,8 +317,7 @@ namespace WpfApp1.View.Model.Executive.ExecutiveRoomDialogs
             {
                 ids.Add(r.Id);
             }
-            Beginnings = ParentPage.RenovationController.GetBegginigns(ids);
-            Beginning.IsEnabled = true;
+            Beginnings = ParentPage.RenovationController.GetDaysAvailableForRenovation(ids);
             OldRooms.IsEnabled = false;
             AddRoom.IsEnabled = false;
             NewNametag.IsEnabled = false;
@@ -326,6 +325,7 @@ namespace WpfApp1.View.Model.Executive.ExecutiveRoomDialogs
             AddNewRoom.IsEnabled = false;
             AreRoomsConfirmed = true;
             Confirm.IsEnabled = true;
+            Beginning.IsEnabled = true;
             HideRL.Begin();
             Feedback = "";
 

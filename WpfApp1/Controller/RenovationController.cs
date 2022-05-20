@@ -27,13 +27,10 @@ namespace WpfApp1.Controller
             _renovationService.PrintAll();
         }*/
 
-        public List<String> GetBegginigns(List<int> roomsIds)
+
+        public List<String> GetDaysAvailableForRenovation(List<int> ids, string beginning = "")
         {
-            return _renovationService.GetBeginnings(roomsIds);
-        }
-        public List<String> GetEndings(string beginning, List<int> roomsIds)
-        {
-            return _renovationService.GetEndings(beginning, roomsIds);
+            return _renovationService.GetDaysAvailableForRenovation(ids, beginning);
         }
     }
 }
