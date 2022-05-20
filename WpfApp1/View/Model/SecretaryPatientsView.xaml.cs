@@ -60,6 +60,7 @@ namespace WpfApp1.View.Model
             var app = Application.Current as App;
             _patientController = app.PatientController;
             _userController = app.UserController;
+            Add_Patient_Button.Focus();
             app.Properties["PatientsDataGrid"] = SecretaryPatientsDataGrid;
             List<User> users = _userController.GetAllPatients().ToList();
             ObservableCollection<PatientView> views = new ObservableCollection<PatientView>();

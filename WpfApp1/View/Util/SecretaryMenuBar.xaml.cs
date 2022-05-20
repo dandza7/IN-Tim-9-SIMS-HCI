@@ -32,7 +32,8 @@ namespace WpfApp1.View.Util
             _userController = app.UserController;
             int loggedId = (int)app.Properties["userId"];
             Name.Text = _userController.GetById(loggedId).Name + " " + _userController.GetById(loggedId).Surname;
-
+            Main.Content = new SecretaryDashboard();
+            PageHeader.Text = "Dashboard";
         }
 
         private void SecretaryDashboard_Click(object sender, RoutedEventArgs e)

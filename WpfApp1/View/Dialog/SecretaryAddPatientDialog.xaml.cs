@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -24,8 +25,17 @@ namespace WpfApp1.View.Dialog
     /// <summary>
     /// Interaction logic for SecretaryAddPatientDialog.xaml
     /// </summary>
-    public partial class SecretaryAddPatientDialog : Window
+    public partial class SecretaryAddPatientDialog : Window, INotifyPropertyChanged
     {
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected virtual void OnPropertyChanged(string name)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(name));
+            }
+        }
+    
         public SecretaryAddPatientDialog()
         {
             InitializeComponent();
@@ -35,6 +45,38 @@ namespace WpfApp1.View.Dialog
         private UserController _userController;
         private MedicalRecordController _medicalRecordController;
         private ObservableCollection<PatientView> Patients;
+        private string _emailValidation;
+        private double _jmbgValidation;
+        public string Email_Validation
+        {
+            get
+            {
+                return _emailValidation;
+            }
+            set
+            {
+                if (value != _emailValidation)
+                {
+                    _emailValidation = value;
+                    OnPropertyChanged("Email_Validation");
+                }
+            }
+        }
+        public double Jmbg_Validation
+        {
+            get
+            {
+                return _jmbgValidation;
+            }
+            set
+            {
+                if (value != _jmbgValidation)
+                {
+                    _jmbgValidation = value;
+                    OnPropertyChanged("Jmbg_Validation");
+                }
+            }
+        }
         private void InsertButton_Click(object sender, RoutedEventArgs e)
         {
             var app = Application.Current as App;
