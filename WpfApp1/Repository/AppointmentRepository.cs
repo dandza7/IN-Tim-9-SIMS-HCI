@@ -46,7 +46,7 @@ namespace WpfApp1.Repository
 
             foreach (Appointment appointment in allAppointments)
             {
-                if (appointment.Ending < startOfInterval || appointment.Beginning > endOfInterval) continue;
+                if (appointment.Ending <= startOfInterval || appointment.Beginning >= endOfInterval) continue;
                 appointmentsInTimeInterval.Add(appointment);
             }
 
@@ -83,6 +83,22 @@ namespace WpfApp1.Repository
             }
 
             return appointmentsForDoctor.OrderBy(appointment => appointment.Beginning).ToList();
+        }
+
+        public IEnumerable<Appointment> GetAllAppointmentsForPatient(int patientId)
+        {
+            List<Appointment> allAppointments = GetAll().ToList();
+            List<Appointment> appointmentsForPatient = new List<Appointment>();
+
+            foreach (Appointment appointment in allAppointments)
+            {
+                if (appointment.PatientId == patientId)
+                {
+                    appointmentsForPatient.Add(appointment);
+                }
+            }
+
+            return appointmentsForPatient.OrderBy(appointment => appointment.Beginning).ToList();
         }
 
         public Appointment Create(Appointment appointment)
@@ -159,7 +175,6 @@ namespace WpfApp1.Repository
         {
             var tokens = appointmentCSVFormat.Split(_delimiter.ToCharArray());
             Enum.TryParse(tokens[3], true, out AppointmentType type);
-            //(int id, DateTime beginning, DateTime ending, AppointmentType type, bool isUrgent, int doctorId, int patientId, int roomId)
             return new Appointment(int.Parse(tokens[0]), 
                 DateTime.Parse(tokens[1]), 
                 DateTime.Parse(tokens[2]), 

@@ -117,6 +117,7 @@
     <Compile Include="Model\Renovation.cs" />
     <Compile Include="Model\Survey.cs" />
     <Compile Include="Model\Therapy.cs" />
+    <Compile Include="Model\TimeMenager.cs" />
     <Compile Include="Model\User.cs" />
     <Compile Include="Repository\AllergyRepository.cs" />
     <Compile Include="Repository\DoctorsReportRepository.cs" />

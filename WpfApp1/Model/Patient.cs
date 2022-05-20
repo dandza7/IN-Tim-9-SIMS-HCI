@@ -118,6 +118,10 @@ namespace WpfApp1.Model
             NumberOfCancellations = numberOfCancellations;
             LastCancellationDate = lastCancellationDate;
         }
+        public Patient(string email)
+        {
+            Email = email;
+        }
 
         public Patient(string name, string surname, string jmbg, string username, string password, string phoneNumber, 
             string email, string street, string city, string country, int numberOfCancellations, DateTime lastCancellationDate)
@@ -143,9 +147,5 @@ namespace WpfApp1.Model
             LastCancellationDate = lastCancellationDate;
         }
         
-        public Patient(string email)
-        {
-            Email = email;
-        }
     }
 }

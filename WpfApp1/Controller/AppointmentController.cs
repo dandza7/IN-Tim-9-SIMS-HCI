@@ -66,16 +66,10 @@ namespace WpfApp1.Controller
         }
 
         public List<AppointmentView> GetAvailableAppointmentOptions(string priority, DateTime startOfInterval, DateTime endOfInterval, 
-                                                                    int doctorId, int patientId, int oldAppointmentId)
+                                                                    int doctorId, SpecType specialization, int patientId, int oldAppointmentId)
         {
             return _appointmentService.GetAvailableAppointmentOptions(priority, startOfInterval, endOfInterval, 
-                                                                        doctorId, patientId, oldAppointmentId);
-        }
-        public List<AppointmentView> SecretaryGetAvailableAppointmentOptions(string priority, DateTime startOfInterval, DateTime endOfInterval,
-                                                            int doctorId, int patientId, int oldAppointmentId, SpecType spec)
-        {
-            return _appointmentService.SecretaryGetAvailableAppointmentOptions(priority, startOfInterval, endOfInterval,
-                                                                        doctorId, patientId, oldAppointmentId, spec);
+                                                                        doctorId, specialization, patientId, oldAppointmentId);
         }
 
         public Appointment GetById(int id)
