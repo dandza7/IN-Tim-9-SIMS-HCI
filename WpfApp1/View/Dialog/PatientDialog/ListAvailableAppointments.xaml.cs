@@ -33,6 +33,8 @@ namespace WpfApp1.View.Dialog.PatientDialog
             InitializeComponent();
             DataContext = this;
             var app = Application.Current as App;
+            _doctorController = app.DoctorController;
+            _appointmentController = app.AppointmentController;
 
             string priority = (string)app.Properties["priority"];
             DateTime startOfInterval = (DateTime)app.Properties["startOfInterval"];
@@ -40,10 +42,9 @@ namespace WpfApp1.View.Dialog.PatientDialog
             int doctorId = (int)app.Properties["doctorId"];
             int patientId = (int)app.Properties["userId"];
             int oldAppointmentId = (int)app.Properties["oldAppointmentId"];
-
-            _appointmentController = app.AppointmentController;
+            Doctor doctor = _doctorController.GetById(doctorId);
             AvailableAppointments = new ObservableCollection<AppointmentView>(_appointmentController.GetAvailableAppointmentOptions(
-                priority, startOfInterval, endOfInterval, doctorId, patientId, oldAppointmentId).ToList());
+                priority, startOfInterval, endOfInterval, doctorId, doctor.Specialization, patientId, oldAppointmentId).ToList());
         }
         
         private void ChooseAppointment_Click(object sender, RoutedEventArgs e)

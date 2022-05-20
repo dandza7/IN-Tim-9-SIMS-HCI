@@ -57,8 +57,8 @@ namespace WpfApp1.View.Dialog
 
             TB.Text = appointment.Id.ToString();
 
-            AvailableAppointments = new ObservableCollection<AppointmentView>(_appointmentController.SecretaryGetAvailableAppointmentOptions(
-                priority, startOfInterval, endOfInterval, doctorId, patientId, oldAppointmentId, spec).ToList());
+            AvailableAppointments = new ObservableCollection<AppointmentView>(_appointmentController.GetAvailableAppointmentOptions(
+                priority, startOfInterval, endOfInterval, doctorId, spec, patientId, oldAppointmentId).ToList());
 
             tt.ItemsSource = AvailableAppointments;
             tt.Items.Refresh();

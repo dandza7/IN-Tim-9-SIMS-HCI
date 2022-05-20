@@ -16,20 +16,23 @@ namespace WpfApp1.Service
         private readonly MedicalRecordRepository _medicalRecordRepo;
         private readonly DrugRepository _drugRepo;
         private readonly NotificationRepository _notificationRepo;
+        private readonly AppointmentRepository _appointmentRepo;
 
-        public PatientService(UserRepository userRepo, 
-            PatientRepository patientRepo, 
+        public PatientService(UserRepository userRepository, 
+            PatientRepository patientRepository, 
             TherapyRepository therapyRepository, 
             MedicalRecordRepository medicalRecordRepository,
             DrugRepository drugRepository,
-            NotificationRepository notificationRepository) 
+            NotificationRepository notificationRepository,
+            AppointmentRepository appointmentRepository) 
         {
-            _patientRepo = patientRepo;
+            _patientRepo = patientRepository;
             _therapyRepo = therapyRepository;
-            _userRepo = userRepo;
+            _userRepo = userRepository;
             _medicalRecordRepo = medicalRecordRepository;
             _drugRepo = drugRepository;
             _notificationRepo = notificationRepository;
+            _appointmentRepo = appointmentRepository;
         }
 
         public IEnumerable<Patient> GetAll()
@@ -119,6 +122,8 @@ namespace WpfApp1.Service
         public bool Delete(int patientId)
         {
             MedicalRecord mr = _medicalRecordRepo.GetPatientsMedicalRecord(patientId);
+            List<Appointment> patientsAppointments = _appointmentRepo.GetAllAppointmentsForPatient(patientId).ToList();
+            patientsAppointments.ForEach(appointment => _appointmentRepo.Delete(appointment.Id));
             _medicalRecordRepo.Delete(mr.Id);
             _userRepo.Delete(patientId);
             return _patientRepo.Delete(patientId);

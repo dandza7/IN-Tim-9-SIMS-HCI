@@ -92,8 +92,8 @@ namespace WpfApp1.View.Dialog
             DateTime endOfInterval = DateTime.Parse(EndingDTP.Text);
             SpecType spec = (SpecType)SpecializationComboBox.SelectedValue;
 
-            AvailableAppointments = new ObservableCollection<AppointmentView>(_appointmentController.SecretaryGetAvailableAppointmentOptions(
-                priority, startOfInterval, endOfInterval, doctorId, patientId, oldAppointmentId, spec).ToList());
+            AvailableAppointments = new ObservableCollection<AppointmentView>(_appointmentController.GetAvailableAppointmentOptions(
+                priority, startOfInterval, endOfInterval, doctorId, spec, patientId, oldAppointmentId).ToList());
 
             AvailableAppointmentsGrid.ItemsSource = AvailableAppointments;
             AvailableAppointmentsGrid.Items.Refresh();
