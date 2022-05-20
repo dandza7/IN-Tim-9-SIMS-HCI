@@ -134,6 +134,8 @@
     <Compile Include="Repository\DrugRepository.cs" />
     <Compile Include="Repository\NotificationRepository.cs" />
     <Compile Include="Repository\PatientRepository.cs" />
+    <Compile Include="View\Validation\EmailValidation.cs" />
+    <Compile Include="View\Validation\JmbgValidation.cs" />
     <None Include="packages.config" />
     <None Include="Resources\Data\doctors.csv" />
     <Compile Include="Repository\RenovationRepository.cs" />

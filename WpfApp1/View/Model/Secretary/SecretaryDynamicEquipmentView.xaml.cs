@@ -47,7 +47,7 @@ namespace WpfApp1.View.Model.Secretary
             var app = Application.Current as App;
             InventoryController _inventoryController = app.InventoryController;
             DynamicEquipmentRequestController _dynamicEquipmentRequestController = app.DynamicEquipmentReqeustController;
-
+            Add_New_Dynamic_Equipment.Focus();
             _dynamicEquipmentRequestController.UpdateDynamicEquipment();
             List<Inventory> dynamicInventory = _inventoryController.GetAllDynamic().ToList();
             ObservableCollection<DynamicEquipmentView> views = new ObservableCollection<DynamicEquipmentView>();

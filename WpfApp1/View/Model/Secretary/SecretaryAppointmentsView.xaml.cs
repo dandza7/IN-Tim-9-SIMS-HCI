@@ -42,6 +42,7 @@ namespace WpfApp1.View.Model.Secretary
             DataContext = this;
             var app = Application.Current as App;
             _appointmentController = app.AppointmentController;
+            Add_New_Appointment.Focus();
             Appointments = new ObservableCollection<SecretaryAppointmentView>(_appointmentController.GetSecretaryAppointmentViews().ToList());
             app.Properties["SecretaryAppointmentsDataGrid"] = SecretaryAppointmentsDataGrid;
         }
@@ -55,7 +56,7 @@ namespace WpfApp1.View.Model.Secretary
         }
         private void Add_New_Appointment_Click(object sender, RoutedEventArgs e)
         {
-           
+ 
             var s = new SecretaryAddNewAppointmentDialog();
             s.Show();
         }

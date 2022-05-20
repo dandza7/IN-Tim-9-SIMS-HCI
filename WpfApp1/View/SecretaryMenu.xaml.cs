@@ -24,6 +24,7 @@ namespace WpfApp1.Service
         {
             InitializeComponent();
             Main.Content = new SecretaryDashboard();
+           
         }
     }
 }
