@@ -55,13 +55,13 @@
                         <Button x:Name="AddRoom" Grid.Column="2" Grid.Row="1" Style="{StaticResource ClassicButton}" Height="40" Width="70" VerticalAlignment="Center" Click="AddRoom_Click">Add</Button>
                         <DataGrid x:Name="TargetedRooms" AutoGenerateColumns="False" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" Style="{StaticResource ExecutiveDataGrid}" ItemsSource="{Binding TRooms}" Margin="20 0 20 0">
                             <DataGrid.Columns>
-                                <DataGridTextColumn Header=" ID" Width="*"  Binding="{Binding Id}" HeaderStyle="{StaticResource ExecutiveDGHeader}" CellStyle="{StaticResource ExecutiveDGCell}"/>
-                                <DataGridTextColumn Header=" NAMETAG" Width="3*" Binding="{Binding Nametag}"  HeaderStyle="{StaticResource ExecutiveDGHeader}" CellStyle="{StaticResource ExecutiveDGCell}"/>
-                                <DataGridTextColumn Header=" TYPE" Width="3*" Binding="{Binding Type}"  HeaderStyle="{StaticResource ExecutiveDGHeader}" CellStyle="{StaticResource ExecutiveDGCell}"/>
-                                <DataGridTemplateColumn Header=" REMOVE" Width="2.5*" HeaderStyle="{StaticResource ExecutiveDGHeader}" CellStyle="{StaticResource ExecutiveDGCell}">
+                                <DataGridTextColumn Header=" ID" Width="*"  Binding="{Binding Id}" HeaderStyle="{StaticResource ExecutiveDGHeader}" CellStyle="{StaticResource ExecutiveDGCellSmall}"/>
+                                <DataGridTextColumn Header=" NAMETAG" Width="3*" Binding="{Binding Nametag}"  HeaderStyle="{StaticResource ExecutiveDGHeader}" CellStyle="{StaticResource ExecutiveDGCellSmall}"/>
+                                <DataGridTextColumn Header=" TYPE" Width="3*" Binding="{Binding Type}"  HeaderStyle="{StaticResource ExecutiveDGHeader}" CellStyle="{StaticResource ExecutiveDGCellSmall}"/>
+                                <DataGridTemplateColumn Header=" REMOVE" Width="2.5*" HeaderStyle="{StaticResource ExecutiveDGHeader}" CellStyle="{StaticResource ExecutiveDGCellSmall}">
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
-                                            <Button Content="x" Style="{StaticResource ClassicButton}" Width="30" Height="30" Padding="0" FontSize="20" Click="RemoveFromTRoomsButton_Click"/>
+                                            <Button Content="x" Style="{StaticResource ClassicButton}" Width="20" Height="20" Padding="0" Margin="2" FontSize="12" BorderThickness="0" Click="RemoveFromTRoomsButton_Click"/>
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
@@ -90,12 +90,12 @@
                         <Button x:Name="AddNewRoom" Grid.Column="2" Grid.Row="1" Style="{StaticResource ClassicButton}" Height="40" Width="70" VerticalAlignment="Center" Click="AddNewRoom_Click">Add</Button>
                         <DataGrid x:Name="CreatedRooms" AutoGenerateColumns="False" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" Style="{StaticResource ExecutiveDataGrid}" ItemsSource="{Binding CRooms}" Margin="20 0 20 0">
                             <DataGrid.Columns>
-                                <DataGridTextColumn Header=" NAMETAG" Width="3*" Binding="{Binding Nametag}"  HeaderStyle="{StaticResource ExecutiveDGHeader}" CellStyle="{StaticResource ExecutiveDGCell}"/>
-                                <DataGridTextColumn Header=" TYPE" Width="3*" Binding="{Binding Type}"  HeaderStyle="{StaticResource ExecutiveDGHeader}" CellStyle="{StaticResource ExecutiveDGCell}"/>
-                                <DataGridTemplateColumn Header=" REMOVE" Width="2*" HeaderStyle="{StaticResource ExecutiveDGHeader}" CellStyle="{StaticResource ExecutiveDGCell}">
+                                <DataGridTextColumn Header=" NAMETAG" Width="3*" Binding="{Binding Nametag}"  HeaderStyle="{StaticResource ExecutiveDGHeader}" CellStyle="{StaticResource ExecutiveDGCellSmall}"/>
+                                <DataGridTextColumn Header=" TYPE" Width="3*" Binding="{Binding Type}"  HeaderStyle="{StaticResource ExecutiveDGHeader}" CellStyle="{StaticResource ExecutiveDGCellSmall}"/>
+                                <DataGridTemplateColumn Header=" REMOVE" Width="2*" HeaderStyle="{StaticResource ExecutiveDGHeader}" CellStyle="{StaticResource ExecutiveDGCellSmall}">
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
-                                            <Button Content="x" Style="{StaticResource ClassicButton}" Width="30" Height="30" Padding="0" FontSize="20" Click="RemoveFromCRoomsButton_Click"/>
+                                            <Button Content="x" Style="{StaticResource ClassicButton}"  Width="20" Height="20" Padding="0" Margin="2" FontSize="12" BorderThickness="0"  Click="RemoveFromCRoomsButton_Click"/>
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>

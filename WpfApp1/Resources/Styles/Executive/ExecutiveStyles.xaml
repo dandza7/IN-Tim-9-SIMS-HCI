@@ -263,6 +263,12 @@
         <Setter Property="BorderBrush" Value="{StaticResource AccentBlueBrush}"></Setter>
         <Setter Property="BorderThickness" Value="2"></Setter>
     </Style>
+    <Style x:Key="ExecutiveDGCellSmall" TargetType="DataGridCell">
+        <Setter Property="Foreground" Value="{StaticResource AccentBlueBrush}"></Setter>
+        <Setter Property="BorderBrush" Value="{StaticResource AccentBlueBrush}"></Setter>
+        <Setter Property="BorderThickness" Value="2"></Setter>
+        <Setter Property="FontSize" Value="20"></Setter>
+    </Style>
     <Style x:Key="DatePickerExecutive" TargetType="DatePicker">
         <Setter Property="FontFamily" Value="Impact"/>
         <Setter Property="Background" Value="{StaticResource WhiteBrush}"></Setter>
