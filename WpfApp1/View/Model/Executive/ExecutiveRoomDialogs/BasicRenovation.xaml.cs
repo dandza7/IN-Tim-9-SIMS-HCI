@@ -133,7 +133,7 @@ namespace WpfApp1.View.Model.Executive.ExecutiveRoomDialogs
             {
                 return;
             }
-            this.Endings = ParentPage.RenovationController.GetEndings(beginning, new List<int>() { ParentPage.SelectedId });
+            this.Endings = ParentPage.RenovationController.GetDaysAvailableForRenovation(new List<int>() { ParentPage.SelectedId }, beginning);
             Ending.IsEnabled = true;
 
         }
