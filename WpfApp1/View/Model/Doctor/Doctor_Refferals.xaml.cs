@@ -24,5 +24,9 @@ namespace WpfApp1.View.Model.Doctor
         {
             InitializeComponent();
         }
+
+        private void ConfirmBT_Click(object sender, RoutedEventArgs e)
+        {
+        }
     }
 }

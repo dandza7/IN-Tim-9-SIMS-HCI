@@ -8,6 +8,7 @@ using WpfApp1.Repository;
 using WpfApp1.View.Converter;
 using WpfApp1.View.Model.Patient;
 using WpfApp1.View.Model.Secretary;
+using static WpfApp1.Model.Appointment;
 using static WpfApp1.Model.Doctor;
 
 namespace WpfApp1.Service
@@ -398,69 +399,86 @@ namespace WpfApp1.Service
             return _appointmentRepo.GetById(appointmentId);
         }
 
-        public List<AppointmentView> CreateUrgentAppointement(int patientId, SpecType spec, DateTime startOfInterval)
+        public bool CreateUrgentAppointment(int patientId, SpecType spec, DateTime startOfInterval)
         {
-            DateTime endOfInterval = startOfInterval.AddHours(1);
 
             List<Doctor> doctors = (List<Doctor>)_doctorRepo.GetAllDoctorsBySpecialization(spec);
-            List<AppointmentView> appointmentViews = new List<AppointmentView>();
-            List<AppointmentView> emptylist = new List<AppointmentView>();
-            List<Appointment> appointmentsOfDoctors = new List<Appointment>();
+            DateTime endOfInterval = startOfInterval.AddHours(1);
             int freedoctorId = -1;
 
-            foreach (Doctor d in doctors)
+            foreach (Doctor doctor in doctors)
             {
                 List<Appointment> appointmentsOfDoctor = _appointmentRepo.GetAllAppointmentsInTimeIntervalForDoctor(startOfInterval,
-                    endOfInterval,d.Id).ToList();
+                    endOfInterval, doctor.Id).ToList();
 
-                if (appointmentsOfDoctor.Count() == 0) { 
-                    freedoctorId = d.Id;
+                if (appointmentsOfDoctor.Count() == 0)
+                {
+                    freedoctorId = doctor.Id;
                 }
-
-                appointmentsOfDoctors.AddRange(appointmentsOfDoctor);
-
             }
 
             if (freedoctorId != -1)
             {
-                Appointment a = new Appointment(startOfInterval, endOfInterval, Appointment.AppointmentType.regular, true, 
+                Appointment a = new Appointment(startOfInterval, endOfInterval, Appointment.AppointmentType.regular, true,
                     freedoctorId, patientId, _doctorRepo.GetById(freedoctorId).RoomId);
                 _appointmentRepo.Create(a);
 
+                string notificationTitle = "You have new urgent appointment";
+                string notificationContent = "You have new urgent appointment on  " + " " + startOfInterval;
 
-                string title = "You have new urgent appointment";
-                string content = "You have new urgent appointment on  " + " " + startOfInterval;
-
-                Notification notification = new Notification(DateTime.Now, content, title, freedoctorId, false, false);
+                Notification notification = new Notification(DateTime.Now, notificationContent, notificationTitle, freedoctorId, false, false);
                 _notificationRepo.Create(notification);
-                return emptylist;
+
+                return true;
             }
-            else
-            {
-                Dictionary<int, DateTime> sortedList = new Dictionary<int, DateTime>();
-                for (int i = 0; i < appointmentsOfDoctors.Count(); i++)
-                {
-                    if (appointmentsOfDoctors[i].Type != Appointment.AppointmentType.surgery && appointmentsOfDoctors[i].IsUrgent != true)
-                    {
-                        DateTime nearestMoving = GetNearestMoving(appointmentsOfDoctors[i].Id);
-                        sortedList.Add(i, nearestMoving);
-                    }
-                }
-
-                List<KeyValuePair<int, DateTime>> myList = sortedList.ToList();
-                myList.Sort((x, y) => x.Value.CompareTo(y.Value));
-
-                foreach (KeyValuePair<int, DateTime> app in myList)
-                {
-                    appointmentViews.Add(AppointmentConverter.ConvertAppointmentAndDoctorToAppointmentView(appointmentsOfDoctors[app.Key], 
-                        _userRepo.GetById(appointmentsOfDoctors[app.Key].DoctorId), _roomRepo.Get(appointmentsOfDoctors[app.Key].RoomId)));
-                }
-
-                return appointmentViews;
-            }
+            else return false;
         }
 
-        public DateTime GetNearestMoving(int appId)
+
+        public List<Appointment> GetMovableAppointments(DateTime startOfInterval, DateTime endOfInterval, SpecType specialization)
+        {
+            List<Appointment> movableAppointments = new List<Appointment>();
+            List<Doctor> doctors = (List<Doctor>)_doctorRepo.GetAllDoctorsBySpecialization(specialization);
+
+            foreach (Doctor doctor in doctors)
+            {
+                List<Appointment> movableAppointmentsOfDoctor = _appointmentRepo.GetDoctorsMovableAppointments(startOfInterval,
+                    endOfInterval, doctor.Id).ToList();
+
+                movableAppointments.AddRange(movableAppointmentsOfDoctor);
+
+            }
+
+            return movableAppointments;
+        } 
+
+        public List<AppointmentView> SortMovableAppointments(List<Appointment> movableAppointments)
+        {
+            List<AppointmentView> appointmentViews = new List<AppointmentView>();
+            Dictionary<int, DateTime> nearestFreeTermDictionary = new Dictionary<int, DateTime>();
+
+            foreach (Appointment appointment in movableAppointments)
+            {
+                    DateTime nearestFreeTerm = GetNearestFreeTerm(appointment.Id);
+                nearestFreeTermDictionary.Add(appointment.Id, nearestFreeTerm);
+            }
+
+            List<KeyValuePair<int, DateTime>> nearestFreeTermList = nearestFreeTermDictionary.ToList();
+            nearestFreeTermList.Sort((x, y) => x.Value.CompareTo(y.Value));
+
+            foreach (KeyValuePair<int, DateTime> nearestFreeTerm in nearestFreeTermList)
+            {
+                Appointment appointmentForMoving = _appointmentRepo.GetById(nearestFreeTerm.Key);
+                appointmentViews.Add(AppointmentConverter.ConvertAppointmentAndDoctorToAppointmentView(appointmentForMoving,
+                    _userRepo.GetById(appointmentForMoving.DoctorId), _roomRepo.Get(appointmentForMoving.RoomId)));
+            }
+
+            return appointmentViews;
+        }
+
+
+
+        public DateTime GetNearestFreeTerm(int appId)
         {
             Appointment appointment = _appointmentRepo.GetById(appId);
             Doctor doctor = _doctorRepo.GetById(appointment.DoctorId);
@@ -468,8 +486,23 @@ namespace WpfApp1.Service
                  appointment.Beginning, appointment.Ending.AddDays(4), appointment.DoctorId, doctor.Specialization, appointment.PatientId, -1).ToList();
             
             // Vraca prvi moguci termin za pomeranje
-            Console.WriteLine(MoveAppointmentOptions[0].Beginning);
             return MoveAppointmentOptions[0].Beginning;
         }
+
+        public List<AppointmentView> GetSortedMovableAppointments(SpecType specialization, DateTime startOfInterval)
+        {
+            DateTime endOfInterval = startOfInterval.AddHours(1);
+            List<AppointmentView> appointmentViews = new List<AppointmentView>();
+
+            List<Appointment> possibleOptionsForMoving = GetMovableAppointments(startOfInterval, endOfInterval, specialization);
+
+            appointmentViews = SortMovableAppointments(possibleOptionsForMoving);
+
+            return appointmentViews;
+
+        }
+
+
+
     }
 }

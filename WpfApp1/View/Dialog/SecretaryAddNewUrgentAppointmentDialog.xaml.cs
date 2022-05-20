@@ -32,7 +32,7 @@ namespace WpfApp1.View.Dialog
         private NotificationController _notificationController;
         public ObservableCollection<User> Doctors { get; set; }
         public ObservableCollection<User> Patients { get; set; }
-        public ObservableCollection<AppointmentView> AvailableAppointments { get; set; }
+        public ObservableCollection<AppointmentView> MovableAppointments { get; set; }
         public SecretaryAddNewUrgentAppointmentDialog()
         {
             InitializeComponent();
@@ -51,7 +51,8 @@ namespace WpfApp1.View.Dialog
 
             });
         }
-        private void Make_Appointment_Click(object sender, RoutedEventArgs e)
+
+        private void Find_Appointment_Click(object sender, RoutedEventArgs e)
         {
             var app = Application.Current as App;
 
@@ -59,48 +60,70 @@ namespace WpfApp1.View.Dialog
             SpecType specialization = (SpecType)SpecializationComboBox.SelectedValue;
             Patient patient = _patientController.GetByUsername(((User)PatientComboBox.SelectedValue).Username);
             int patientId = patient.Id;
-            List<AppointmentView> avApps = _appointmentController.CreateUrgentAppointement(patientId, specialization, DateTime.Now).ToList();
-            AvailableAppointments = new ObservableCollection<AppointmentView>(avApps);
+            bool isCreated = false;
 
-            AvailableAppointmentsGrid.ItemsSource = AvailableAppointments;
-            AvailableAppointmentsGrid.Items.Refresh();
+            isCreated = _appointmentController.CreateUrgentAppointment(patientId, specialization, DateTime.Now);
+
+            if(isCreated == true)
+            {
+                Console.WriteLine("Zakazan hitni termin.");
+            }
+            else
+            {
+                List<AppointmentView> movableAppointments = _appointmentController.GetSortedMovableAppointments(specialization, DateTime.Now).ToList();
+
+                MovableAppointments = new ObservableCollection<AppointmentView>(movableAppointments);
+                MovableAppointmentsGrid.ItemsSource = MovableAppointments;
+                MovableAppointmentsGrid.Items.Refresh();
+            }
+
         }
+
         private void Move_Appointment_Click(object sender, RoutedEventArgs e)
         {
-            int appointmentId = ((AppointmentView)AvailableAppointmentsGrid.SelectedItem).Id;
-            Appointment oldAppointment = _appointmentController.GetById(appointmentId);
-            Console.WriteLine(appointmentId);
             var app = Application.Current as App;
             _appointmentController = app.AppointmentController;
             _doctorController = app.DoctorController;
             _patientController = app.PatientController;
             _notificationController = app.NotificationController;
 
-            DateTime appointmentBeginning = ((AppointmentView)AvailableAppointmentsGrid.SelectedItem).Beginning;
-            string doctor_username = ((AppointmentView)AvailableAppointmentsGrid.SelectedItem).Username;
-            Doctor doctor = _doctorController.GetByUsername(doctor_username);
+            int appointmentForMovingId = ((AppointmentView)MovableAppointmentsGrid.SelectedItem).Id;
+            Appointment appointmentForMoving = _appointmentController.GetById(appointmentForMovingId);
             Patient patient = _patientController.GetByUsername(((User)PatientComboBox.SelectedValue).Username);
-            DateTime nearestMoving = _appointmentController.GetNearestMoving(appointmentId);
+            DateTime nearestMoving = _appointmentController.GetNearestFreeTerm(appointmentForMovingId);
 
             Appointment movedAppointment = new Appointment(nearestMoving, nearestMoving.AddHours(1), AppointmentType.regular, 
-                false, oldAppointment.DoctorId, oldAppointment.PatientId, oldAppointment.RoomId);
+                false, appointmentForMoving.DoctorId, appointmentForMoving.PatientId, appointmentForMoving.RoomId);
             
             _appointmentController.Create(movedAppointment);
 
-            Appointment newAppointment = new Appointment(appointmentId, appointmentBeginning, appointmentBeginning.AddHours(1), AppointmentType.regular, true, doctor.Id, patient.Id, doctor.RoomId);
-            _appointmentController.Update(newAppointment);
+            Appointment urgentAppointment = new Appointment(appointmentForMovingId, appointmentForMoving.Beginning, 
+                appointmentForMoving.Beginning.AddHours(1), AppointmentType.regular, true, appointmentForMoving.DoctorId, patient.Id, appointmentForMoving.RoomId);
             
+            _appointmentController.Update(urgentAppointment);
+
+            NotifyPatient(appointmentForMoving, nearestMoving);
+
+            NotifyDoctor(urgentAppointment);
+        }
+
+        private void NotifyPatient(Appointment oldAppointment, DateTime nearestMoving)
+        {
             string titleForPatient = "Your appointment has been moved";
             string contentForPatient = "Your appointement on " + " " + oldAppointment.Beginning + " " + "is moved to" + " " + nearestMoving;
 
             Notification notification = new Notification(DateTime.Now, contentForPatient, titleForPatient, oldAppointment.PatientId, false, false);
             _notificationController.Create(notification);
+        }
 
+        private void NotifyDoctor(Appointment newAppointemnt)
+        {
             string titleForDoctor = "You have new urgent appointment";
-            string contentForDoctor = "You have new urgent appointment on  " + " " + appointmentBeginning;
+            string contentForDoctor = "You have new urgent appointment on  " + " " + newAppointemnt.Beginning;
 
-            Notification notificationForDoctor = new Notification(DateTime.Now, contentForDoctor, titleForDoctor, doctor.Id, false, false);
+            Notification notificationForDoctor = new Notification(DateTime.Now, contentForDoctor, titleForDoctor, newAppointemnt.DoctorId, false, false);
             _notificationController.Create(notificationForDoctor);
+
         }
 
         private void MakeGuest_Click(object sender, RoutedEventArgs e)
