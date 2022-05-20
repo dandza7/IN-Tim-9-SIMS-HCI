@@ -14,7 +14,10 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using WpfApp1.Controller;
 using WpfApp1.Model;
+using WpfApp1.View.Converter;
+using WpfApp1.View.Model;
 using WpfApp1.View.Model.Patient;
+using WpfApp1.View.Model.Secretary;
 using static WpfApp1.Model.Appointment;
 using static WpfApp1.Model.Doctor;
 
@@ -34,6 +37,7 @@ namespace WpfApp1.View.Dialog
         public ObservableCollection<User> Doctors { get; set; }
         public ObservableCollection<User> Patients { get; set; }
         public ObservableCollection<AppointmentView> AvailableAppointments { get; set; }
+        private ObservableCollection<SecretaryAppointmentView> Appointments { get; set; }
         public SecretaryMoveAppointmentDialog(Appointment appointment)
         {
             InitializeComponent();
@@ -73,6 +77,12 @@ namespace WpfApp1.View.Dialog
             int patientId = old.PatientId;
             _appointmentController.Update(new Appointment(oldAppointmentId, appointmentBeginning, appointmentEnding, AppointmentType.regular, false, doctor.Id, patientId, doctor.RoomId));
 
+            DataGrid SecretaryAppointmentsDataGrid = (DataGrid)app.Properties["SecretaryAppointmentsDataGrid"];
+
+            Appointments = new ObservableCollection<SecretaryAppointmentView>(_appointmentController.GetSecretaryAppointmentViews().ToList());
+
+            SecretaryAppointmentsDataGrid.ItemsSource = Appointments;
+            SecretaryAppointmentsDataGrid.Items.Refresh();
 
             this.Close();
 

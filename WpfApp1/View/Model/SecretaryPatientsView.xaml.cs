@@ -39,7 +39,20 @@ namespace WpfApp1.View.Model
 
         private UserController _userController;
 
-        public ObservableCollection<PatientView> Patients { get; set; }
+        private ObservableCollection<PatientView> _patients;
+
+        public ObservableCollection<PatientView> Patients
+        {
+            get { return _patients; }
+            set
+            {
+                if (value != _patients)
+                {
+                    _patients = value;
+                    OnPropertyChanged("Patients");
+                }
+            }
+        }
         public SecretaryPatientsView()
         {
             InitializeComponent();
@@ -47,16 +60,12 @@ namespace WpfApp1.View.Model
             var app = Application.Current as App;
             _patientController = app.PatientController;
             _userController = app.UserController;
-
+            app.Properties["PatientsDataGrid"] = SecretaryPatientsDataGrid;
             List<User> users = _userController.GetAllPatients().ToList();
             ObservableCollection<PatientView> views = new ObservableCollection<PatientView>();
-            foreach (User user in users)
-            {
-                var patient = _patientController.GetById(user.Id);
-                views.Add(PatientConverter.ConvertPatientToPatientView(user, patient));
-            }
 
-            Patients = views;
+            Patients = new ObservableCollection<PatientView>(
+                PatientConverter.ConvertPatientListToPatientViewList(_userController.GetAllPatients().ToList()));
         }
         private void AddPatient_Click(object sender, RoutedEventArgs e)
         {
@@ -70,23 +79,17 @@ namespace WpfApp1.View.Model
             _patientController = app.PatientController;
 
             _patientController.Delete(patientId);
-
-            List<User> users = _userController.GetAllPatients().ToList();
-            ObservableCollection<PatientView> views = new ObservableCollection<PatientView>();
-            foreach (User user in users)
-            {
-                var patient = _patientController.GetById(user.Id);
-                views.Add(PatientConverter.ConvertPatientToPatientView(user, patient));
-            }
-
-            Patients = views;
+            
+             Patients = new ObservableCollection<PatientView>(
+            PatientConverter.ConvertPatientListToPatientViewList(_userController.GetAllPatients().ToList()));
+       
             SecretaryPatientsDataGrid.ItemsSource = Patients;
             SecretaryPatientsDataGrid.Items.Refresh();
+
         }
         private void UpdatePatient_Click(object sender, RoutedEventArgs e)
         {
             int patientId = ((PatientView)SecretaryPatientsDataGrid.SelectedItem).Id;
-
             SecretaryUpdatePatientDialog s = new SecretaryUpdatePatientDialog(patientId);
             s.Show();
         }
@@ -97,19 +100,6 @@ namespace WpfApp1.View.Model
             s.Show();
         }
 
-        private void Refresh_Click(object sender, RoutedEventArgs e)
-        {
-            List<User> users = _userController.GetAllPatients().ToList();
-            ObservableCollection<PatientView> views = new ObservableCollection<PatientView>();
-            foreach (User user in users)
-            {
-                var patient = _patientController.GetById(user.Id);
-                views.Add(PatientConverter.ConvertPatientToPatientView(user, patient));
-            }
 
-            Patients = views;
-            SecretaryPatientsDataGrid.ItemsSource = Patients;
-            SecretaryPatientsDataGrid.Items.Refresh();
-        }
     }
 }
