@@ -99,6 +99,7 @@ namespace WpfApp1.Service
             {
                 interval.MoveStartOfIntervalIfNeeded();
                 if (interval.IncrementBeginning() > interval.Ending) return appointments;
+
                 if (appointments.Count == 10) return appointments;
                 bool isRoomAvailable = _renovationRepo.IsRoomAvailable(room.Id, interval.Beginning, interval.GetIncrementedBeginning());
                 if (isRoomAvailable)
@@ -115,9 +116,10 @@ namespace WpfApp1.Service
             List<Appointment> appointmentsOfDoctor, List<AppointmentView> appointments, Room room, Doctor doctor, User doctorUser, int patientId)
         {
             TimeMenager interval = new TimeMenager(startOfInterval, endOfInterval);
+          
             interval.MoveStartOfIntervalIfNeeded();
             if (interval.GetIncrementedBeginning() > interval.Ending) return appointments;
-
+          
             foreach (Appointment appointment in appointmentsOfDoctor)
             {
                 while (interval.GetIncrementedBeginning() <= appointment.Beginning)
@@ -438,6 +440,8 @@ namespace WpfApp1.Service
 
             return appointmentViews;
         }
+
+
 
         public DateTime GetNearestFreeTerm(int appId)
         {
