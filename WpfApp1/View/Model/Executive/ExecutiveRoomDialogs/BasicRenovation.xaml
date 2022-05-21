@@ -21,19 +21,20 @@
 
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
+                        <RowDefinition Height="70"/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
                         <RowDefinition Height="50"/>
-                        <RowDefinition/>
-                        <RowDefinition/>
-                        <RowDefinition/>
-                        <RowDefinition/>
-                        <RowDefinition/>
-                        <RowDefinition/>
-                        <RowDefinition/>
-                        <RowDefinition/>
-                        <RowDefinition/>
-                        <RowDefinition/>
-                        <RowDefinition/>
                     </Grid.RowDefinitions>
+                    <TextBlock Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" Style="{StaticResource Title}">BASIC RENOVATION</TextBlock>
                     <Label Grid.Row="1" Grid.Column="1" Content="Nametag:" Style="{StaticResource FormLabel}" HorizontalAlignment="Left"></Label>
                     <TextBox x:Name="Nametag" Grid.Row="1" Grid.Column="2" Style="{StaticResource FormInputBox}" IsEnabled="False"></TextBox>
                     <Label Grid.Row="2" Grid.Column="1" Content="Type:" Style="{StaticResource FormLabel}" HorizontalAlignment="Left"></Label>
