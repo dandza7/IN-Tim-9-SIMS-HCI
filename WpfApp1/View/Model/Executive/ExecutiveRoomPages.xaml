@@ -97,7 +97,7 @@
             </DataGrid.Columns>
             <DataGrid.Resources>
                 <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" 
-                   Color="{StaticResource White}"/>
+                   Color="{StaticResource Elm}"/>
             </DataGrid.Resources>
         </DataGrid>
         <Border x:Name="WrongSelectionContainer" Grid.Column="2" Grid.Row="0" Grid.RowSpan="2" Style="{StaticResource ErrorModal}" Margin="15 0 15 350" Visibility="Collapsed">

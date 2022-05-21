@@ -71,8 +71,8 @@
             <RowDefinition Height="70"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <Border Name="SelectionContainer" Grid.ColumnSpan="2" Width="450" Height="60" Background="{StaticResource LightBlueBrush}" 
-                BorderBrush="{StaticResource AccentBlueBrush}" BorderThickness="2">
+        <Border Name="SelectionContainer" Grid.ColumnSpan="2" Width="450" Height="60" Background="{StaticResource LinkWaterBrush}" 
+                BorderBrush="{StaticResource ElmBrush}" BorderThickness="2">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>
@@ -82,7 +82,7 @@
                 <Button Name="TypeLeft" Grid.Column="0" Style="{StaticResource SliderButton}" Click="TypeLeft_Click">Validated</Button>
                 <Button Name="TypeMiddle" Grid.Column="1" Style="{StaticResource SliderButton}" Click="TypeMiddle_Click">Unalidated</Button>
                 <Button Name="TypeRight" Grid.Column="2" Style="{StaticResource SliderButton}" Click="TypeRight_Click">Rejected</Button>
-                <TextBlock x:Name="ChangeShowTypeButton" Grid.ColumnSpan="3" Width="150" FontFamily="Impact" FontSize="25" Foreground="{StaticResource WhiteBrush}" HorizontalAlignment="Center" TextAlignment="Center" Background="{StaticResource AccentBlueBrush}" Text="Validated" Margin="0 0 300 0" Padding="0 12 0 0"></TextBlock>
+                <TextBlock x:Name="ChangeShowTypeButton" Grid.ColumnSpan="3" Width="150" FontFamily="Impact" FontSize="25" Foreground="{StaticResource WhiteBrush}" HorizontalAlignment="Center" TextAlignment="Center" Background="{StaticResource ElmBrush}" Text="Validated" Margin="0 0 300 0" Padding="0 12 0 0"></TextBlock>
             </Grid>
         </Border>
         <Button x:Name="EditRejectedDrugButton" Grid.Column="2"  Style="{StaticResource ClassicButton}" Margin="20 5 20 5" Click="EditRejectedDrugButton_Click" IsEnabled="False" Opacity="0">Edit Rejected Drug</Button>
@@ -101,7 +101,7 @@
             </DataGrid.Columns>
             <DataGrid.Resources>
                 <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" 
-                       Color="{StaticResource White}"/>
+                       Color="{StaticResource Elm}"/>
             </DataGrid.Resources>
         </DataGrid>
         <Border x:Name="WrongSelectionContainer" Grid.Column="2" Grid.Row="0" Grid.RowSpan="2" Style="{StaticResource ErrorModal}" Margin="15 0 15 350" Visibility="Collapsed">

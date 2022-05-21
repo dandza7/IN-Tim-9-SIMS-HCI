@@ -6,12 +6,13 @@
         xmlns:local="clr-namespace:WpfApp1"
         xmlns:model="clr-namespace:WpfApp1.View.Model"
         mc:Ignorable="d"
-        Title="MainWindow" Height="720" Width="1280">
+        Title="Log In" Height="720" Width="1280"
+        Icon="\Resources\Icons\asterik-free-icon-font.png">
     <Window.Background>
         <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
             <LinearGradientBrush.GradientStops>
-                <GradientStop Color="{StaticResource Blue}" Offset="0"/>
-                <GradientStop Color="{StaticResource White}" Offset="1"/>
+                <GradientStop Color="{StaticResource BrickRed}" Offset="0"/>
+                <GradientStop Color="{StaticResource PureWhite}" Offset="1"/>
             </LinearGradientBrush.GradientStops>
         </LinearGradientBrush>
     </Window.Background>
