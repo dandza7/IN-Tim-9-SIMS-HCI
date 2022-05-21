@@ -293,4 +293,43 @@
         <Setter Property="Foreground" Value="{StaticResource AccentBlueBrush}"/>
         <Setter Property="Margin" Value="35 0 20 0"/>
     </Style>
+    <Style x:Key="SliderButton" TargetType="Button">
+        <Setter Property="Background" Value="Transparent"></Setter>
+        <Setter Property="FontSize" Value="25"></Setter>
+        <Setter Property="FontFamily" Value="Impact"></Setter>
+        <Setter Property="Foreground" Value="{StaticResource AccentBlueBrush}"></Setter>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border Background="{TemplateBinding Background}" BorderThickness="0">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <EventTrigger RoutedEvent="MouseEnter">
+                <BeginStoryboard>
+                    <Storyboard>
+                        <ColorAnimationUsingKeyFrames 
+                        Storyboard.TargetProperty="Foreground.Color"
+                        Duration="0:0:0.2">
+                            <LinearColorKeyFrame Value="{StaticResource White}" KeyTime="0:0:0.2" />
+                        </ColorAnimationUsingKeyFrames>
+                    </Storyboard>
+                </BeginStoryboard>
+            </EventTrigger>
+            <EventTrigger RoutedEvent="MouseLeave">
+                <BeginStoryboard>
+                    <Storyboard>
+                        <ColorAnimationUsingKeyFrames 
+                        Storyboard.TargetProperty="Foreground.Color"
+                        Duration="0:0:0.2">
+                            <LinearColorKeyFrame Value="{StaticResource AccentBlue}" KeyTime="0:0:0.2" />
+                        </ColorAnimationUsingKeyFrames>
+                    </Storyboard>
+                </BeginStoryboard>
+            </EventTrigger>
+        </Style.Triggers>
+    </Style>
 </ResourceDictionary>

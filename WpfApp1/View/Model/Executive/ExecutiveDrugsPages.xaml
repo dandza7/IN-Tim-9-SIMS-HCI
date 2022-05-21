@@ -26,62 +26,36 @@
                 <LinearDoubleKeyFrame Value="0" KeyTime="0:0:0.3" />
             </DoubleAnimationUsingKeyFrames>
         </Storyboard>
-        <Storyboard x:Name="CloseDG" x:Key="CloseDG" Completed="CloseDG_Completed">
-            <DoubleAnimationUsingKeyFrames
-                       Storyboard.TargetName="DrugsDG"
-                       Storyboard.TargetProperty="Opacity"
-                       Duration="0:0:0.2">
-                <LinearDoubleKeyFrame Value="0" KeyTime="0:0:0.2" />
-            </DoubleAnimationUsingKeyFrames>
-        </Storyboard>
         <Storyboard x:Name="MoveButtonMiddle" x:Key="MoveButtonMiddle">
             <ThicknessAnimation Storyboard.TargetName="ChangeShowTypeButton" Duration="0:0:0.3" To="150, 0, 150, 0" Storyboard.TargetProperty="Margin" />
-            <DoubleAnimationUsingKeyFrames
-                       Storyboard.TargetName="TypeLeft"
-                       Storyboard.TargetProperty="Opacity"
-                       Duration="0:0:0.5">
-                <LinearDoubleKeyFrame Value="0" KeyTime="0:0:0" />
-                <LinearDoubleKeyFrame Value="1" KeyTime="0:0:0.5" />
-            </DoubleAnimationUsingKeyFrames>
             <DoubleAnimation Storyboard.TargetName="EditRejectedDrugButton" Duration="0:0:0.3" To="0" Storyboard.TargetProperty="Opacity"/>
             <DoubleAnimationUsingKeyFrames
                        Storyboard.TargetName="DrugsDG"
                        Storyboard.TargetProperty="Opacity"
                        Duration="0:0:0.3">
+                <LinearDoubleKeyFrame Value="0" KeyTime="0:0:0" />
                 <LinearDoubleKeyFrame Value="1" KeyTime="0:0:0.3" />
             </DoubleAnimationUsingKeyFrames>
         </Storyboard>
         <Storyboard x:Name="MoveButtonRight" x:Key="MoveButtonRight">
             <ThicknessAnimation Storyboard.TargetName="ChangeShowTypeButton" Duration="0:0:0.3" To="300, 0, 0, 0" Storyboard.TargetProperty="Margin" />
-            <DoubleAnimationUsingKeyFrames
-                       Storyboard.TargetName="TypeMiddle"
-                       Storyboard.TargetProperty="Opacity"
-                       Duration="0:0:0.5">
-                <LinearDoubleKeyFrame Value="0" KeyTime="0:0:0" />
-                <LinearDoubleKeyFrame Value="1" KeyTime="0:0:0.5" />
-            </DoubleAnimationUsingKeyFrames>
             <DoubleAnimation Storyboard.TargetName="EditRejectedDrugButton" Duration="0:0:0.3" To="1" Storyboard.TargetProperty="Opacity"/>
             <DoubleAnimationUsingKeyFrames
                        Storyboard.TargetName="DrugsDG"
                        Storyboard.TargetProperty="Opacity"
                        Duration="0:0:0.3">
+                <LinearDoubleKeyFrame Value="0" KeyTime="0:0:0" />
                 <LinearDoubleKeyFrame Value="1" KeyTime="0:0:0.3" />
             </DoubleAnimationUsingKeyFrames>
         </Storyboard>
         <Storyboard x:Name="MoveButtonLeft" x:Key="MoveButtonLeft">
             <ThicknessAnimation Storyboard.TargetName="ChangeShowTypeButton" Duration="0:0:0.3" To="0, 0, 300, 0" Storyboard.TargetProperty="Margin" />
-            <DoubleAnimationUsingKeyFrames
-                       Storyboard.TargetName="TypeRight"
-                       Storyboard.TargetProperty="Opacity"
-                       Duration="0:0:0.5">
-                <LinearDoubleKeyFrame Value="0" KeyTime="0:0:0" />
-                <LinearDoubleKeyFrame Value="1" KeyTime="0:0:0.5" />
-            </DoubleAnimationUsingKeyFrames>
             <DoubleAnimation Storyboard.TargetName="EditRejectedDrugButton" Duration="0:0:0.3" To="0" Storyboard.TargetProperty="Opacity"/>
             <DoubleAnimationUsingKeyFrames
                        Storyboard.TargetName="DrugsDG"
                        Storyboard.TargetProperty="Opacity"
                        Duration="0:0:0.3">
+                <LinearDoubleKeyFrame Value="0" KeyTime="0:0:0" />
                 <LinearDoubleKeyFrame Value="1" KeyTime="0:0:0.3" />
             </DoubleAnimationUsingKeyFrames>
         </Storyboard>
@@ -105,10 +79,10 @@
                     <ColumnDefinition/>
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
-                <TextBlock Name="TypeLeft" Grid.Column="0" FontFamily="Impact" FontSize="25" Foreground="{StaticResource AccentBlueBrush}" HorizontalAlignment="Center" VerticalAlignment="Center">Validated</TextBlock>
-                <TextBlock Name="TypeMiddle" Grid.Column="1" FontFamily="Impact" FontSize="25" Foreground="{StaticResource AccentBlueBrush}" HorizontalAlignment="Center" VerticalAlignment="Center">Unalidated</TextBlock>
-                <TextBlock Name="TypeRight" Grid.Column="2" FontFamily="Impact" FontSize="25" Foreground="{StaticResource AccentBlueBrush}" HorizontalAlignment="Center" VerticalAlignment="Center">Rejected</TextBlock>
-                <Button x:Name="ChangeShowTypeButton" Grid.ColumnSpan="3" Width="150" Style="{StaticResource ClassicStaticButton}" Content="Validated" Margin="0 0 300 0" BorderThickness="0" Click="ChangeShowTypeButton_Click"></Button>
+                <Button Name="TypeLeft" Grid.Column="0" Style="{StaticResource SliderButton}" Click="TypeLeft_Click">Validated</Button>
+                <Button Name="TypeMiddle" Grid.Column="1" Style="{StaticResource SliderButton}" Click="TypeMiddle_Click">Unalidated</Button>
+                <Button Name="TypeRight" Grid.Column="2" Style="{StaticResource SliderButton}" Click="TypeRight_Click">Rejected</Button>
+                <TextBlock x:Name="ChangeShowTypeButton" Grid.ColumnSpan="3" Width="150" FontFamily="Impact" FontSize="25" Foreground="{StaticResource WhiteBrush}" HorizontalAlignment="Center" TextAlignment="Center" Background="{StaticResource AccentBlueBrush}" Text="Validated" Margin="0 0 300 0" Padding="0 12 0 0"></TextBlock>
             </Grid>
         </Border>
         <Button x:Name="EditRejectedDrugButton" Grid.Column="2"  Style="{StaticResource ClassicButton}" Margin="20 5 20 5" Click="EditRejectedDrugButton_Click" IsEnabled="False" Opacity="0">Edit Rejected Drug</Button>

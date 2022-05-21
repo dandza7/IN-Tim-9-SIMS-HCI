@@ -80,7 +80,7 @@
                    Color="{StaticResource White}"/>
             </DataGrid.Resources>
         </DataGrid>
-        <Border x:Name="WrongSelectionContainer" Grid.Column="2" Grid.Row="0" Grid.RowSpan="3" Style="{StaticResource ErrorModal}" Margin="15 0 15 350" Visibility="Visible">
+        <Border x:Name="WrongSelectionContainer" Grid.Column="2" Grid.Row="0" Grid.RowSpan="3" Style="{StaticResource ErrorModal}" Margin="15 0 15 350" Visibility="Collapsed">
             <Border.Effect>
                 <DropShadowEffect BlurRadius="5"/>
             </Border.Effect>
