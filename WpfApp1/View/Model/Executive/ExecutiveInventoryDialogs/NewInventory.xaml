@@ -31,6 +31,7 @@
                         <RowDefinition/>
                         <RowDefinition/>
                     </Grid.RowDefinitions>
+                    <TextBlock Grid.Row="1" Grid.RowSpan="2" Grid.Column="1" Style="{StaticResource Title}">NEW INVENTORY</TextBlock>
                     <Label Grid.Row="3" Grid.Column="1" Content="Name:" Style="{StaticResource FormLabel}"></Label>
                     <TextBox x:Name="AddName" Grid.Row="4" Grid.Column="1" Style="{StaticResource FormInputBox}"></TextBox>
                     <Label Grid.Row="5" Grid.Column="1" Content="Room:" Style="{StaticResource FormLabel}"></Label>

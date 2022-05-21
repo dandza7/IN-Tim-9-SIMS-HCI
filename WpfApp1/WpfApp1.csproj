@@ -787,5 +787,8 @@
   <ItemGroup>
     <Resource Include="Resources\Images\avatar.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\asterik-free-icon-font.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
