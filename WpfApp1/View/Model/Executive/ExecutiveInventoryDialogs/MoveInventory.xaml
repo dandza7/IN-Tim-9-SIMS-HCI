@@ -35,6 +35,7 @@
                         <RowDefinition Height="50"/>
                         <RowDefinition Height="30"/>
                     </Grid.RowDefinitions>
+                    <TextBlock Grid.Row="1" Grid.RowSpan="2" Grid.Column="1" Style="{StaticResource Title}">INVENTORY MOVING</TextBlock>
                     <Label Grid.Row="3" Grid.Column="1" Content="Inventory:" Style="{StaticResource FormLabel}"></Label>
                     <TextBox x:Name="InventoryName" Grid.Row="4" Grid.Column="1" Style="{StaticResource FormInputBox}" IsEnabled="False"></TextBox>
                     <Label Grid.Row="5" Grid.Column="1" Content="Current Room:" Style="{StaticResource FormLabel}"></Label>
