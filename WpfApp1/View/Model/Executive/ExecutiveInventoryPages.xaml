@@ -58,8 +58,8 @@
         </Grid.RowDefinitions>
         <Border x:Name="FilterContainer" Grid.ColumnSpan="4" Grid.Row="1"  Style="{StaticResource ErrorModal}" Margin="26 5 20 0" Visibility="Visible" BorderThickness="2" VerticalAlignment="Bottom">
             <StackPanel VerticalAlignment="Center" Orientation="Horizontal">
-                <TextBlock FontSize="20" FontFamily="Impact" Foreground="{StaticResource ElmBrush}" Margin="35 0 40 0" VerticalAlignment="Center">SEARCH</TextBlock>
-                <TextBlock FontSize="18" FontFamily="Impact" Foreground="{StaticResource ElmBrush}" Margin="35 0 10 0" VerticalAlignment="Center">Name:</TextBlock>
+                <TextBlock FontSize="20" FontFamily="Impact" Foreground="{StaticResource DarkestBlueBrush}" Margin="35 0 40 0" VerticalAlignment="Center">SEARCH</TextBlock>
+                <TextBlock FontSize="18" FontFamily="Impact" Foreground="{StaticResource DarkestBlueBrush}" Margin="35 0 10 0" VerticalAlignment="Center">Name:</TextBlock>
                 <TextBox x:Name="SearchTokenInput" Style="{StaticResource FormInputBox}" Width="200" FontSize="15" Margin="0 0 50 0" Text="{Binding SearchToken, UpdateSourceTrigger=PropertyChanged}"></TextBox>
                 <CheckBox Name="StaticCB" IsChecked="True" Content="Display Static Inventory" Click="Filter_Click" Style="{StaticResource CheckBoxExecutive}" VerticalAlignment="Center"></CheckBox>
                 <CheckBox Name="DynamicCB" IsChecked="True" Content="Display Dynamic Inventory" Click="Filter_Click" Style="{StaticResource CheckBoxExecutive}" VerticalAlignment="Center"></CheckBox>
@@ -77,7 +77,7 @@
             </DataGrid.Columns>
             <DataGrid.Resources>
                 <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" 
-                   Color="{StaticResource Elm}"/>
+                   Color="{StaticResource Orange}"/>
             </DataGrid.Resources>
         </DataGrid>
         <Border x:Name="WrongSelectionContainer" Grid.Column="2" Grid.Row="0" Grid.RowSpan="3" Style="{StaticResource ErrorModal}" Margin="15 0 15 350" Visibility="Collapsed">

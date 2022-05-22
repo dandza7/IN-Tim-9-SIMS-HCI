@@ -11,8 +11,8 @@
     <Window.Background>
         <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
             <LinearGradientBrush.GradientStops>
-                <GradientStop Color="{StaticResource BrickRed}" Offset="0"/>
-                <GradientStop Color="{StaticResource PureWhite}" Offset="1"/>
+                <GradientStop Color="{StaticResource LightYellow}" Offset="0"/>
+                <GradientStop Color="{StaticResource BasicRed}" Offset="1"/>
             </LinearGradientBrush.GradientStops>
         </LinearGradientBrush>
     </Window.Background>

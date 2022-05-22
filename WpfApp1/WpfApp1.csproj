@@ -790,5 +790,8 @@
   <ItemGroup>
     <Resource Include="Resources\Icons\asterik-free-icon-font.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\VeryInterestingLogo.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

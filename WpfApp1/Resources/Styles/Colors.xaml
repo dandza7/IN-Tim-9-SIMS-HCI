@@ -39,19 +39,22 @@
     <SolidColorBrush x:Key="NoRedBrush" Color="{StaticResource NoRed}"/>
     
 
-    <Color x:Key="Firefly">#091F26</Color>
-    <SolidColorBrush x:Key="FireflyBrush" Color="{StaticResource Firefly}"/>
+    <Color x:Key="DarkestBlue">#003049</Color>
+    <SolidColorBrush x:Key="DarkestBlueBrush" Color="{StaticResource DarkestBlue}"/>
 
-    <Color x:Key="Elm">#1D738B</Color>
-    <SolidColorBrush x:Key="ElmBrush" Color="{StaticResource Elm}"/>
+    <Color x:Key="BasicRed">#D62828</Color>
+    <SolidColorBrush x:Key="BasicRedBrush" Color="{StaticResource BasicRed}"/>
 
-    <Color x:Key="LinkWater">#D0E0EF</Color>
-    <SolidColorBrush x:Key="LinkWaterBrush" Color="{StaticResource LinkWater}"/>
+    <Color x:Key="Orange">#F77F00</Color>
+    <SolidColorBrush x:Key="OrangeBrush" Color="{StaticResource Orange}"/>
+
+    <Color x:Key="LightYellow">#FCBF49</Color>
+    <SolidColorBrush x:Key="LightYellowBrush" Color="{StaticResource LightYellow}"/>
+
+    <Color x:Key="SkinTone">#EAE2B7</Color>
+    <SolidColorBrush x:Key="SkinToneBrush" Color="{StaticResource SkinTone}"/>
 
     <Color x:Key="PureWhite">#FFFFFF</Color>
     <SolidColorBrush x:Key="PureWhiteBrush" Color="{StaticResource PureWhite}"/>
-
-    <Color x:Key="BrickRed">#D33B52</Color>
-    <SolidColorBrush x:Key="BrickRedBrush" Color="{StaticResource BrickRed}"/>
 
 </ResourceDictionary>
