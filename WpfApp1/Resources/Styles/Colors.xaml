@@ -51,7 +51,7 @@
     <Color x:Key="LightYellow">#FCBF49</Color>
     <SolidColorBrush x:Key="LightYellowBrush" Color="{StaticResource LightYellow}"/>
 
-    <Color x:Key="SkinTone">#EAE2B7</Color>
+    <Color x:Key="SkinTone">#FFDBAC</Color>
     <SolidColorBrush x:Key="SkinToneBrush" Color="{StaticResource SkinTone}"/>
 
     <Color x:Key="PureWhite">#FFFFFF</Color>
