@@ -4,13 +4,13 @@
     <Style x:Key="NavBarButton" TargetType="Button">
         <Setter Property="Margin" Value="1"></Setter>
         <Setter Property="FontFamily" Value="Impact"></Setter>
-        <Setter Property="Foreground" Value="{StaticResource PureWhiteBrush}"></Setter>
+        <Setter Property="Foreground" Value="{StaticResource DarkestBlueBrush}"></Setter>
         <Setter Property="FontSize" Value="40"></Setter>
-        <Setter Property="Background" Value="{StaticResource ElmBrush}"/>
+        <Setter Property="Background" Value="{StaticResource OrangeBrush}"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Button}">
-                    <Border Background="{TemplateBinding Background}" BorderBrush="{StaticResource FireflyBrush}" BorderThickness="2 0 2 2">
+                    <Border Background="{TemplateBinding Background}" BorderBrush="{StaticResource DarkestBlueBrush}" BorderThickness="2 2 2 2">
                         <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                     </Border>
                 </ControlTemplate>
@@ -20,7 +20,7 @@
             <EventTrigger RoutedEvent="MouseEnter">
                 <BeginStoryboard>
                     <Storyboard>
-                        <ColorAnimation Storyboard.TargetProperty="Background.Color" Duration="0:0:0.3" To="{StaticResource LinkWater}"></ColorAnimation>
+                        <ColorAnimation Storyboard.TargetProperty="Background.Color" Duration="0:0:0.3" To="{StaticResource LightYellow}"></ColorAnimation>
                         <ThicknessAnimation Duration="0:0:0.3" To="1, -100, 1, 1" Storyboard.TargetProperty="Margin" />
                     </Storyboard>
                 </BeginStoryboard>
@@ -28,7 +28,7 @@
             <EventTrigger RoutedEvent="MouseLeave">
                 <BeginStoryboard>
                     <Storyboard>
-                        <ColorAnimation Storyboard.TargetProperty="Background.Color" Duration="0:0:0.3" To="{StaticResource Elm}"></ColorAnimation>
+                        <ColorAnimation Storyboard.TargetProperty="Background.Color" Duration="0:0:0.3" To="{StaticResource Orange}"></ColorAnimation>
                         <ThicknessAnimation Duration="0:0:0.3" To="1" Storyboard.TargetProperty="Margin" />
                     </Storyboard>
                 </BeginStoryboard>
@@ -36,23 +36,23 @@
         </Style.Triggers>
     </Style>
     <Style x:Key="DialogModal" TargetType="Border">
-        <Setter Property="Background" Value="{StaticResource PureWhiteBrush}"></Setter>
-        <Setter Property="BorderBrush" Value="{StaticResource FireflyBrush}"></Setter>
+        <Setter Property="Background" Value="{StaticResource SkinToneBrush}"></Setter>
+        <Setter Property="BorderBrush" Value="{StaticResource BasicRedBrush}"></Setter>
         <Setter Property="BorderThickness" Value="2"></Setter>
         <Setter Property="Margin" Value="100 20"></Setter>
     </Style>
     <Style x:Key="OverlayModal" TargetType="Border">
-        <Setter Property="Background" Value="#CFD33B52"></Setter>
+        <Setter Property="Background" Value="#CFF77F00"></Setter>
     </Style>
     <Style x:Key="ErrorModal" TargetType="Border">
-        <Setter Property="Background" Value="{StaticResource PureWhiteBrush}"></Setter>
-        <Setter Property="BorderBrush" Value="{StaticResource FireflyBrush}"></Setter>
+        <Setter Property="Background" Value="{StaticResource LightYellowBrush}"></Setter>
+        <Setter Property="BorderBrush" Value="{StaticResource BasicRedBrush}"></Setter>
         <Setter Property="BorderThickness" Value="5"/>
     </Style>
     <Style x:Key="FormLabel" TargetType="Label">
         <Setter Property="FontSize" Value="24"></Setter>
         <Setter Property="FontFamily" Value="Impact"></Setter>
-        <Setter Property="Foreground" Value="{StaticResource ElmBrush}"></Setter>
+        <Setter Property="Foreground" Value="{StaticResource DarkestBlueBrush}"></Setter>
         <Setter Property="HorizontalAlignment" Value="Left"></Setter>
         <Setter Property="VerticalAlignment" Value="Bottom"></Setter>
     </Style>
@@ -60,24 +60,24 @@
         <Setter Property="Background" Value="{StaticResource PureWhiteBrush}"></Setter>
         <Setter Property="FontSize" Value="24"></Setter>
         <Setter Property="FontFamily" Value="Impact"></Setter>
-        <Setter Property="Foreground" Value="{StaticResource FireflyBrush}"></Setter>
-        <Setter Property="BorderBrush" Value="{StaticResource FireflyBrush}"></Setter>
+        <Setter Property="Foreground" Value="{StaticResource DarkestBlueBrush}"></Setter>
+        <Setter Property="BorderBrush" Value="{StaticResource OrangeBrush}"></Setter>
         <Setter Property="VerticalAlignment" Value="Center"></Setter>
     </Style>
     <Style x:Key="FormInputPassword" TargetType="PasswordBox">
         <Setter Property="Background" Value="{StaticResource PureWhiteBrush}"></Setter>
         <Setter Property="FontSize" Value="24"></Setter>
         <Setter Property="FontFamily" Value="Impact"></Setter>
-        <Setter Property="Foreground" Value="{StaticResource FireflyBrush}"></Setter>
-        <Setter Property="BorderBrush" Value="{StaticResource FireflyBrush}"></Setter>
+        <Setter Property="Foreground" Value="{StaticResource DarkestBlueBrush}"></Setter>
+        <Setter Property="BorderBrush" Value="{StaticResource OrangeBrush}"></Setter>
         <Setter Property="VerticalAlignment" Value="Center"></Setter>
     </Style>
     <Style x:Key="FormInputComboBox" TargetType="ComboBox">
         <Setter Property="Background" Value="{StaticResource PureWhiteBrush}"></Setter>
         <Setter Property="FontSize" Value="24"></Setter>
         <Setter Property="FontFamily" Value="Impact"></Setter>
-        <Setter Property="Foreground" Value="{StaticResource FireflyBrush}"></Setter>
-        <Setter Property="BorderBrush" Value="{StaticResource FireflyBrush}"></Setter>
+        <Setter Property="Foreground" Value="{StaticResource DarkestBlueBrush}"></Setter>
+        <Setter Property="BorderBrush" Value="{StaticResource OrangeBrush}"></Setter>
         <Setter Property="VerticalAlignment" Value="Center"></Setter>
         <Setter Property="HorizontalAlignment" Value="Left"></Setter>
         <Setter Property="VerticalContentAlignment" Value="Center"/>
@@ -90,14 +90,14 @@
         <Setter Property="VerticalContentAlignment" Value="Center" />
     </Style>
     <Style x:Key="ClassicButton" TargetType="Button">
-        <Setter Property="Background" Value="{StaticResource ElmBrush}"></Setter>
+        <Setter Property="Background" Value="{StaticResource OrangeBrush}"></Setter>
         <Setter Property="FontSize" Value="25"></Setter>
         <Setter Property="FontFamily" Value="Impact"></Setter>
         <Setter Property="Foreground" Value="{StaticResource PureWhiteBrush}"></Setter>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Button}">
-                    <Border Background="{TemplateBinding Background}" BorderBrush="{StaticResource ElmBrush}" BorderThickness="2">
+                    <Border Background="{TemplateBinding Background}" BorderBrush="{StaticResource OrangeBrush}" BorderThickness="2">
                         <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                     </Border>
                 </ControlTemplate>
@@ -110,8 +110,8 @@
                         <ColorAnimationUsingKeyFrames 
                         Storyboard.TargetProperty="Background.Color"
                         Duration="0:0:0.8">
-                            <LinearColorKeyFrame Value="{StaticResource LinkWater}" KeyTime="0:0:0.3" />
-                            <LinearColorKeyFrame Value="{StaticResource Elm}" KeyTime="0:0:0.8" />
+                            <LinearColorKeyFrame Value="{StaticResource SkinTone}" KeyTime="0:0:0.3" />
+                            <LinearColorKeyFrame Value="{StaticResource Orange}" KeyTime="0:0:0.8" />
                         </ColorAnimationUsingKeyFrames>
                     </Storyboard>
                 </BeginStoryboard>
@@ -119,14 +119,14 @@
         </Style.Triggers>
     </Style>
     <Style x:Key="ClassicStaticButton" TargetType="Button">
-        <Setter Property="Background" Value="{StaticResource ElmBrush}"></Setter>
+        <Setter Property="Background" Value="{StaticResource OrangeBrush}"></Setter>
         <Setter Property="FontSize" Value="25"></Setter>
         <Setter Property="FontFamily" Value="Impact"></Setter>
         <Setter Property="Foreground" Value="{StaticResource PureWhiteBrush}"></Setter>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Button}">
-                    <Border Background="{TemplateBinding Background}" BorderBrush="{StaticResource ElmBrush}" BorderThickness="2">
+                    <Border Background="{TemplateBinding Background}" BorderBrush="{StaticResource OrangeBrush}" BorderThickness="2">
                         <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                     </Border>
                 </ControlTemplate>
@@ -139,7 +139,7 @@
                         <ColorAnimationUsingKeyFrames 
                         Storyboard.TargetProperty="Foreground.Color"
                         Duration="0:0:0.1">
-                            <LinearColorKeyFrame Value="{StaticResource LinkWater}" KeyTime="0:0:0.1" />
+                            <LinearColorKeyFrame Value="{StaticResource DarkestBlue}" KeyTime="0:0:0.1" />
                         </ColorAnimationUsingKeyFrames>
                     </Storyboard>
                 </BeginStoryboard>
@@ -161,7 +161,7 @@
         <Setter Property="Background" Value="{StaticResource PureWhiteBrush}"></Setter>
         <Setter Property="FontSize" Value="25"></Setter>
         <Setter Property="FontFamily" Value="Impact"></Setter>
-        <Setter Property="Foreground" Value="{StaticResource FireflyBrush}"></Setter>
+        <Setter Property="Foreground" Value="{StaticResource DarkestBlueBrush}"></Setter>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Button}">
@@ -178,12 +178,7 @@
                         <ColorAnimationUsingKeyFrames 
                         Storyboard.TargetProperty="Background.Color"
                         Duration="0:0:0.2">
-                            <LinearColorKeyFrame Value="{StaticResource LinkWater}" KeyTime="0:0:0.2" />
-                        </ColorAnimationUsingKeyFrames>
-                        <ColorAnimationUsingKeyFrames 
-                        Storyboard.TargetProperty="Foreground.Color"
-                        Duration="0:0:0.2">
-                            <LinearColorKeyFrame Value="{StaticResource PureWhite}" KeyTime="0:0:0.2" />
+                            <LinearColorKeyFrame Value="{StaticResource SkinTone}" KeyTime="0:0:0.2" />
                         </ColorAnimationUsingKeyFrames>
                     </Storyboard>
                 </BeginStoryboard>
@@ -196,43 +191,71 @@
                         Duration="0:0:0.8">
                             <LinearColorKeyFrame Value="{StaticResource PureWhite}" KeyTime="0:0:0.8" />
                         </ColorAnimationUsingKeyFrames>
-                        <ColorAnimationUsingKeyFrames 
-                        Storyboard.TargetProperty="Foreground.Color"
-                        Duration="0:0:0.2">
-                            <LinearColorKeyFrame Value="{StaticResource LinkWater}" KeyTime="0:0:0.2" />
-                        </ColorAnimationUsingKeyFrames>
                     </Storyboard>
                 </BeginStoryboard>
             </EventTrigger>
         </Style.Triggers>
     </Style>
     <Style x:Key="InvertedButton" TargetType="Button">
-        <Setter Property="Background" Value="{StaticResource LinkWaterBrush}"></Setter>
-        <Setter Property="BorderBrush" Value="{StaticResource FireflyBrush}"></Setter>
+        <Setter Property="Background" Value="{StaticResource OrangeBrush}"></Setter>
+        <Setter Property="BorderBrush" Value="{StaticResource DarkestBlueBrush}"></Setter>
         <Setter Property="FontSize" Value="25"></Setter>
         <Setter Property="FontFamily" Value="Impact"></Setter>
-        <Setter Property="Foreground" Value="{StaticResource FireflyBrush}"></Setter>
+        <Setter Property="Foreground" Value="{StaticResource DarkestBlueBrush}"></Setter>
         <Setter Property="BorderThickness" Value="3"></Setter>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border Background="{TemplateBinding Background}" BorderBrush="{StaticResource OrangeBrush}" BorderThickness="2">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <EventTrigger RoutedEvent="MouseEnter">
+                <BeginStoryboard>
+                    <Storyboard>
+                        <ColorAnimationUsingKeyFrames 
+                        Storyboard.TargetProperty="Background.Color"
+                        Duration="0:0:0.1">
+                            <LinearColorKeyFrame Value="{StaticResource SkinTone}" KeyTime="0:0:0.1" />
+                        </ColorAnimationUsingKeyFrames>
+                    </Storyboard>
+                </BeginStoryboard>
+            </EventTrigger>
+            <EventTrigger RoutedEvent="MouseLeave">
+                <BeginStoryboard>
+                    <Storyboard>
+                        <ColorAnimationUsingKeyFrames 
+                        Storyboard.TargetProperty="Background.Color"
+                        Duration="0:0:0.1">
+                            <LinearColorKeyFrame Value="{StaticResource Orange}" KeyTime="0:0:0.1" />
+                        </ColorAnimationUsingKeyFrames>
+                    </Storyboard>
+                </BeginStoryboard>
+            </EventTrigger>
+        </Style.Triggers>
     </Style>
     <Style x:Key="Title" TargetType="TextBlock">
         <Setter Property="VerticalAlignment" Value="Center"></Setter>
         <Setter Property="HorizontalAlignment" Value="Center"></Setter>
         <Setter Property="FontSize" Value="40"></Setter>
         <Setter Property="FontFamily" Value="Impact"></Setter>
-        <Setter Property="Foreground" Value="{StaticResource FireflyBrush}"></Setter>
+        <Setter Property="Foreground" Value="{StaticResource DarkestBlueBrush}"></Setter>
     </Style>
     <Style x:Key="SmallText" TargetType="TextBlock">
         <Setter Property="VerticalAlignment" Value="Top"></Setter>
         <Setter Property="HorizontalAlignment" Value="Left"></Setter>
         <Setter Property="FontSize" Value="15"></Setter>
         <Setter Property="FontFamily" Value="Impact"></Setter>
-        <Setter Property="Foreground" Value="{StaticResource ElmBrush}"></Setter>
+        <Setter Property="Foreground" Value="{StaticResource DarkestBlueBrush}"></Setter>
     </Style>
     <Style x:Key="NotificationText" TargetType="TextBlock">
         <Setter Property="Background" Value="{StaticResource PureWhiteBrush}"></Setter>
         <Setter Property="FontSize" Value="18"></Setter>
         <Setter Property="FontFamily" Value="Impact"></Setter>
-        <Setter Property="Foreground" Value="{StaticResource FireflyBrush}"></Setter>
+        <Setter Property="Foreground" Value="{StaticResource DarkestBlueBrush}"></Setter>
         <Setter Property="TextWrapping" Value="Wrap"></Setter>
         <Setter Property="Padding" Value="5"></Setter>
 
@@ -240,39 +263,39 @@
     <Style x:Key="ExecutiveDataGrid" TargetType="DataGrid">
         <Setter Property="Background" Value="Transparent"/>
         <Setter Property="RowBackground" Value="{StaticResource PureWhiteBrush}"/>
-        <Setter Property="AlternatingRowBackground" Value="{StaticResource LinkWaterBrush}"/>
+        <Setter Property="AlternatingRowBackground" Value="{StaticResource SkinToneBrush}"/>
         <Setter Property="AlternationCount" Value="2"/>
         <Setter Property="FontSize" Value="30"></Setter>
         <Setter Property="FontFamily" Value="Impact"></Setter>
         <Setter Property="BorderThickness" Value="0"></Setter>
-        <Setter Property="BorderBrush" Value="{StaticResource ElmBrush}"/>
-        <Setter Property="VerticalGridLinesBrush" Value="{StaticResource ElmBrush}"></Setter>
-        <Setter Property="HorizontalGridLinesBrush" Value="{StaticResource ElmBrush}"></Setter>
+        <Setter Property="BorderBrush" Value="{StaticResource DarkestBlueBrush}"/>
+        <Setter Property="VerticalGridLinesBrush" Value="{StaticResource DarkestBlueBrush}"></Setter>
+        <Setter Property="HorizontalGridLinesBrush" Value="{StaticResource DarkestBlueBrush}"></Setter>
         <Setter Property="VerticalScrollBarVisibility" Value="Hidden"/>
     </Style>
     <Style x:Key="ExecutiveDGHeader" TargetType="DataGridColumnHeader">
-        <Setter Property="BorderBrush" Value="{StaticResource ElmBrush}"></Setter>
+        <Setter Property="BorderBrush" Value="{StaticResource DarkestBlueBrush}"></Setter>
         <Setter Property="BorderThickness" Value="2"></Setter>
-        <Setter Property="Background" Value="{StaticResource BrickRedBrush}"></Setter>
+        <Setter Property="Background" Value="{StaticResource DarkestBlueBrush}"></Setter>
         <Setter Property="Foreground" Value="{StaticResource PureWhiteBrush}"></Setter>
         <Setter Property="FontSize" Value="30"></Setter>
         <Setter Property="FontFamily" Value="Impact"></Setter>
     </Style>
     <Style x:Key="ExecutiveDGCell" TargetType="DataGridCell">
-        <Setter Property="Foreground" Value="{StaticResource FireflyBrush}"></Setter>
-        <Setter Property="BorderBrush" Value="{StaticResource FireflyBrush}"></Setter>
+        <Setter Property="Foreground" Value="{StaticResource DarkestBlueBrush}"></Setter>
+        <Setter Property="BorderBrush" Value="{StaticResource DarkestBlueBrush}"></Setter>
         <Setter Property="BorderThickness" Value="2"></Setter>
     </Style>
     <Style x:Key="ExecutiveDGCellSmall" TargetType="DataGridCell">
-        <Setter Property="Foreground" Value="{StaticResource FireflyBrush}"></Setter>
-        <Setter Property="BorderBrush" Value="{StaticResource FireflyBrush}"></Setter>
+        <Setter Property="Foreground" Value="{StaticResource DarkestBlueBrush}"></Setter>
+        <Setter Property="BorderBrush" Value="{StaticResource DarkestBlueBrush}"></Setter>
         <Setter Property="BorderThickness" Value="2"></Setter>
         <Setter Property="FontSize" Value="20"></Setter>
     </Style>
     <Style x:Key="DatePickerExecutive" TargetType="DatePicker">
         <Setter Property="FontFamily" Value="Impact"/>
         <Setter Property="Background" Value="{StaticResource PureWhiteBrush}"></Setter>
-        <Setter Property="Foreground" Value="{StaticResource FireflyBrush}"></Setter>
+        <Setter Property="Foreground" Value="{StaticResource DarkestBlueBrush}"></Setter>
         <Setter Property="VerticalAlignment" Value="Center"></Setter>
         <Setter Property="HorizontalAlignment" Value="Left"></Setter>
         <Setter Property="FontSize" Value="20"/>
@@ -281,23 +304,23 @@
         <Setter Property="Background" Value="{StaticResource PureWhiteBrush}"></Setter>
         <Setter Property="FontSize" Value="16"></Setter>
         <Setter Property="FontFamily" Value="Impact"></Setter>
-        <Setter Property="Foreground" Value="{StaticResource FireflyBrush}"></Setter>
+        <Setter Property="Foreground" Value="{StaticResource DarkestBlueBrush}"></Setter>
         <Setter Property="TextWrapping" Value="Wrap"></Setter>
         <Setter Property="Padding" Value="10"></Setter>
-        <Setter Property="BorderBrush" Value="{StaticResource FireflyBrush}"/>
+        <Setter Property="BorderBrush" Value="{StaticResource OrangeBrush}"/>
         <Setter Property="BorderThickness" Value="2"/>
     </Style>
     <Style x:Key="CheckBoxExecutive" TargetType="CheckBox">
         <Setter Property="FontFamily" Value="Impact"/>
         <Setter Property="FontSize" Value="15"/>
-        <Setter Property="Foreground" Value="{StaticResource ElmBrush}"/>
+        <Setter Property="Foreground" Value="{StaticResource DarkestBlueBrush}"/>
         <Setter Property="Margin" Value="35 0 20 0"/>
     </Style>
     <Style x:Key="SliderButton" TargetType="Button">
         <Setter Property="Background" Value="Transparent"></Setter>
         <Setter Property="FontSize" Value="25"></Setter>
         <Setter Property="FontFamily" Value="Impact"></Setter>
-        <Setter Property="Foreground" Value="{StaticResource ElmBrush}"></Setter>
+        <Setter Property="Foreground" Value="{StaticResource DarkestBlueBrush}"></Setter>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Button}">
@@ -325,7 +348,7 @@
                         <ColorAnimationUsingKeyFrames 
                         Storyboard.TargetProperty="Foreground.Color"
                         Duration="0:0:0.2">
-                            <LinearColorKeyFrame Value="{StaticResource Elm}" KeyTime="0:0:0.2" />
+                            <LinearColorKeyFrame Value="{StaticResource DarkestBlue}" KeyTime="0:0:0.2" />
                         </ColorAnimationUsingKeyFrames>
                     </Storyboard>
                 </BeginStoryboard>
