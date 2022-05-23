@@ -38,10 +38,37 @@ namespace WpfApp1.View.Model.Doctor
         private int _id;
         private string _patient;
         private string _doctor;
+        private int _patientId;
+        private int _doctorId;
         private DateTime _beginning;
+        private DateTime _ending;
         private string _type;
         private string _urgent;
 
+        public int DoctorId
+        {
+            get { return _doctorId; }
+            set
+            {
+                if (value != _doctorId)
+                {
+                    _doctorId = value;
+                    OnPropertyChanged("DoctorId");
+                }
+            }
+        }
+        public int PatientId
+        {
+            get { return _patientId; }
+            set
+            {
+                if (value != _patientId)
+                {
+                    _patientId = value;
+                    OnPropertyChanged("PatientId");
+                }
+            }
+        }
         public string Doctor
         {
             get { return _doctor; }
@@ -92,6 +119,22 @@ namespace WpfApp1.View.Model.Doctor
                 {
                     _beginning = value;
                     OnPropertyChanged("Beginning");
+                }
+            }
+        }
+
+        public DateTime Ending
+        {
+            get
+            {
+                return _ending;
+            }
+            set
+            {
+                if (value != _ending)
+                {
+                    _ending = value;
+                    OnPropertyChanged("Ending");
                 }
             }
         }

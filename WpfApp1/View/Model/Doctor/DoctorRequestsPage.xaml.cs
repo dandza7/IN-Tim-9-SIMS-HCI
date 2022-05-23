@@ -26,8 +26,8 @@ namespace WpfApp1.View.Model.Doctor
         RequestController _requestController;
         public ObservableCollection<Request> Requests;
 
-    public DoctorRequestsPage()
-    {
+        public DoctorRequestsPage()
+        {
             InitializeComponent();
             var app = Application.Current as App;
             _requestController = app.RequestController;
@@ -39,18 +39,22 @@ namespace WpfApp1.View.Model.Doctor
 
         private void SaveBT_Click(object sender, RoutedEventArgs e)
         {
-            if (_requestController.Create(
+            if (Convert.ToDateTime(BeginningDTP.Text).Date <= DateTime.Today.Add(new TimeSpan(TimeSpan.TicksPerDay * 2))) exceptionLabel.Visibility = Visibility.Visible;
+            else if
+                (_requestController.Create(
                 new Request(
                     Convert.ToDateTime(BeginningDTP.Text),
                     Convert.ToDateTime(EndingDTP.Text),
                     Request.RequestStatusType.Pending,
                     1,//DODATI ID ULOGOVANOG
                     TitleTB.Text,
-                    ContentTB.Text
-                    )) == null) exceptionLabel.Visibility = Visibility.Visible;
+                    ContentTB.Text,
+                    (bool)UrgentCBX.IsChecked
+                    )) == null
+                    ) exceptionLabel.Visibility = Visibility.Visible;
             else exceptionLabel.Visibility = Visibility.Hidden;
 
-            BeginningDTP.Text="";
+            BeginningDTP.Text = "";
             EndingDTP.Text = "";
             TitleTB.Clear();
             ContentTB.Clear();

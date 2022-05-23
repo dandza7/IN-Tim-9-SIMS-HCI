@@ -34,7 +34,8 @@ namespace WpfApp1.Repository
                 type,
                 int.Parse(tokens[4]),
                 tokens[5],
-                tokens[6]);
+                tokens[6],
+                bool.Parse(tokens[7]));
         }
         private string ConvertRequestToCSVFormat(Request request)
         {

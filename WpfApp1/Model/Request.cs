@@ -25,10 +25,10 @@ namespace WpfApp1.Model
                 PropertyChanged(this, new PropertyChangedEventArgs(name));
             }
         }
-        
+
         public Request() { }
 
-        public Request(int v1, DateTime dateTime1, DateTime dateTime2, RequestStatusType type, int v2, string v3, string v4)
+        public Request(int v1, DateTime dateTime1, DateTime dateTime2, RequestStatusType type, int v2, string v3, string v4, bool v5)
         {
             _id = v1;
             _beginning = dateTime1;
@@ -37,8 +37,9 @@ namespace WpfApp1.Model
             _doctorId = v2;
             _title = v3;
             _content = v4;
+            _urgent = v5;
         }
-        public Request( DateTime dateTime1, DateTime dateTime2, RequestStatusType type, int v2, string v3, string v4)
+        public Request(DateTime dateTime1, DateTime dateTime2, RequestStatusType type, int v2, string v3, string v4, bool v5)
         {
 
             _beginning = dateTime1;
@@ -47,6 +48,7 @@ namespace WpfApp1.Model
             _doctorId = v2;
             _title = v3;
             _content = v4;
+            _urgent = v5;
         }
 
         private int _id;
@@ -56,7 +58,23 @@ namespace WpfApp1.Model
         private DateTime _beginning;
         private DateTime _ending;
         private RequestStatusType _status;
+        private bool _urgent;
 
+        public bool Urgnet
+        {
+            get
+            {
+                return _urgent;
+            }
+            set
+            {
+                if (value != _urgent)
+                {
+                    _urgent = value;
+                    OnPropertyChanged("Urgnet");
+                }
+            }
+        }
         public string Content
         {
             get

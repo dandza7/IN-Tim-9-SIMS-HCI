@@ -116,6 +116,21 @@ namespace WpfApp1.Repository
             return appointmentsForPatient.OrderBy(appointment => appointment.Beginning).ToList();
         }
 
+        public IEnumerable<Appointment> GetAllByPatientId(int patientId)
+        {
+            List<Appointment> appointmentsForDoctor = new List<Appointment>();
+
+            foreach (Appointment appointment in GetAll().ToList())
+            {
+                if (appointment.PatientId == patientId)
+                {
+                    appointmentsForDoctor.Add(appointment);
+                }
+            }
+
+            return (IEnumerable<Appointment>)appointmentsForDoctor;
+        }
+
         public Appointment Create(Appointment appointment)
         {
             int maxId = GetMaxId(GetAll());

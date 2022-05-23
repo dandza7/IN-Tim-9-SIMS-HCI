@@ -30,15 +30,17 @@ namespace WpfApp1.View.Model.Doctor
         public ObservableCollection<DoctorAppointmentView> futureAppointments = new ObservableCollection<DoctorAppointmentView>();
         public ObservableCollection<DoctorAppointmentView> pastAppointments = new ObservableCollection<DoctorAppointmentView>();
 
+        public int userId = -1;
         public Doctor_MyAppointments()
         {
             InitializeComponent();
             this.DataContext = this;
             var app = Application.Current as App;
+            userId = int.Parse(app.Properties["userId"].ToString());
             _appointmentController = app.AppointmentController;
             _doctorController = app.DoctorController;
             _patientController = app.PatientController;
-            foreach (Appointment a in _appointmentController.GetAllByDoctorId(1))
+            foreach (Appointment a in _appointmentController.GetAllByDoctorId(userId))
             {//ID DOKTORA
 
 
