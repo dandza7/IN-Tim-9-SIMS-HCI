@@ -267,15 +267,6 @@
     <Compile Include="View\Model\Doctor\DoctorRequestsPage.xaml.cs">
       <DependentUpon>DoctorRequestsPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Model\Doctor\Doctor_MedicalRecord_Info.xaml.cs">
-      <DependentUpon>Doctor_MedicalRecord_Info.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\Model\Doctor\Doctor_MedicalRecord_Reports.xaml.cs">
-      <DependentUpon>Doctor_MedicalRecord_Reports.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\Model\Doctor\Doctor_MedicalRecord_Therapies.xaml.cs">
-      <DependentUpon>Doctor_MedicalRecord_Therapies.xaml</DependentUpon>
-    </Compile>
     <Compile Include="View\Model\Doctor\Doctor_MyAppointments.xaml.cs">
       <DependentUpon>Doctor_MyAppointments.xaml</DependentUpon>
     </Compile>
@@ -524,18 +515,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Model\Doctor\DoctorRequestsPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\Model\Doctor\Doctor_MedicalRecord_Info.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\Model\Doctor\Doctor_MedicalRecord_Reports.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\Model\Doctor\Doctor_MedicalRecord_Therapies.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

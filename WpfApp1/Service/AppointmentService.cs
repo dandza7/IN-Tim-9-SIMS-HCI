@@ -112,6 +112,12 @@ namespace WpfApp1.Service
             return appointments;
         }
 
+        internal IEnumerable<Appointment> GetAllByPatientId(int patientId)
+        {
+            return _appointmentRepo.GetAllByPatientId(patientId);
+        }
+
+
         private List<AppointmentView> GetAppointmentsHappyCase(DateTime startOfInterval, DateTime endOfInterval,
             List<Appointment> appointmentsOfDoctor, List<AppointmentView> appointments, Room room, Doctor doctor, User doctorUser, int patientId)
         {

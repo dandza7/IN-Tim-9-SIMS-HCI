@@ -36,5 +36,9 @@ namespace WpfApp1.Controller
         {
             return _therapyService.Delete(id);
         }
+        public IEnumerable<Therapy> GetByMedicalRecordId(int medicalRecordId)
+        {
+            return _therapyService.GetByMedicalRecordId(medicalRecordId);
+        }
     }
 }

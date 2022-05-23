@@ -174,4 +174,31 @@
         </Style.Triggers>
         -->
     </Style>
+    <Style x:Key="DoctorDataGrid" TargetType="DataGrid">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="RowBackground" Value="{StaticResource GrayBrush}"/>
+        <Setter Property="AlternatingRowBackground" Value="{StaticResource GrayBrush}"/>
+        <Setter Property="AlternationCount" Value="2"/>
+        <Setter Property="FontSize" Value="20"></Setter>
+        <Setter Property="FontFamily" Value="Trajan Pro 3"></Setter>
+        <Setter Property="BorderThickness" Value="0"></Setter>
+        <Setter Property="BorderBrush" Value="{StaticResource MedicalGreenBrush}"/>
+        <Setter Property="VerticalGridLinesBrush" Value="{StaticResource MedicalGreenBrush}"></Setter>
+        <Setter Property="HorizontalGridLinesBrush" Value="{StaticResource MedicalGreenBrush}"></Setter>
+        <Setter Property="VerticalScrollBarVisibility" Value="Hidden"/>
+    </Style>
+    <Style x:Key="DoctorDGHeader" TargetType="DataGridColumnHeader">
+        <Setter Property="BorderBrush" Value="{StaticResource MedicalGreenBrush}"></Setter>
+        <Setter Property="BorderThickness" Value="2"></Setter>
+        <Setter Property="Background" Value="{StaticResource MedicalGreenBrush}"></Setter>
+        <Setter Property="Foreground" Value="{StaticResource GrayBrush}"></Setter>
+        <Setter Property="FontSize" Value="20"></Setter>
+        <Setter Property="FontFamily" Value="Trajan Pro 3 Bold"></Setter>
+    </Style>
+    <Style x:Key="DoctorDGCell" TargetType="DataGridCell">
+        <Setter Property="Foreground" Value="{StaticResource MedicalGreenBrush}"></Setter>
+        <Setter Property="BorderBrush" Value="{StaticResource MedicalBlueBrush}"></Setter>
+        <Setter Property="Foreground" Value="{StaticResource WhiteBrush}"></Setter>
+        <Setter Property="BorderThickness" Value="2"></Setter>
+    </Style>
 </ResourceDictionary>

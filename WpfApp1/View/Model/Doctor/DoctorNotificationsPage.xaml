@@ -14,12 +14,12 @@
         <GroupBox Header="Notification List" HorizontalAlignment="Left" Height="586" Margin="260,142,0,0" VerticalAlignment="Top" Width="596" BorderBrush="{DynamicResource MedicalGreenBrush}" Foreground="{DynamicResource MedicalGreenBrush}" FontSize="30" FontFamily="Trajan Pro 3 Bold" FontWeight="Bold">
 
             <DataGrid x:Name="NotificationsGrid" Margin="10,50,16,18"
-                      AutoGenerateColumns="False" Style="{StaticResource ExecutiveDataGrid}" 
+                      AutoGenerateColumns="False" Style="{StaticResource DoctorDataGrid}" 
                       ItemsSource="{Binding Notifications}"  >
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header=" Date" Width="150"  Binding="{Binding Date}" HeaderStyle="{StaticResource ExecutiveDGHeader}" CellStyle="{StaticResource ExecutiveDGCell}"/>
-                    <DataGridTextColumn Header=" Title" Width="3*" Binding="{Binding Title}"  HeaderStyle="{StaticResource ExecutiveDGHeader}" CellStyle="{StaticResource ExecutiveDGCell}"/>
-                    <DataGridTemplateColumn Header="Delete" Width="2*"  HeaderStyle="{StaticResource ExecutiveDGHeader}" CellStyle="{StaticResource ExecutiveDGCell}">
+                    <DataGridTextColumn Header=" Date" Width="150"  Binding="{Binding Date}" HeaderStyle="{StaticResource DoctorDGHeader}" CellStyle="{StaticResource DoctorDGCell}"/>
+                    <DataGridTextColumn Header=" Title" Width="3*" Binding="{Binding Title}"  HeaderStyle="{StaticResource DoctorDGHeader}" CellStyle="{StaticResource DoctorDGCell}"/>
+                    <DataGridTemplateColumn Header="Delete" Width="2*"  HeaderStyle="{StaticResource DoctorDGHeader}" CellStyle="{StaticResource DoctorDGCell}">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <Button Content="Delete" Style="{StaticResource DoctorNoButton}"  />
@@ -30,7 +30,7 @@
             </DataGrid>
         </GroupBox>
         <GroupBox Header="Notification View" HorizontalAlignment="Left" Height="586" Margin="892,142,0,0" VerticalAlignment="Top" Width="530" BorderBrush="{DynamicResource MedicalGreenBrush}" Foreground="{DynamicResource MedicalGreenBrush}" FontSize="30" FontFamily="Trajan Pro 3 Bold" FontWeight="Bold">
-          
+
         </GroupBox>
 
     </Grid>

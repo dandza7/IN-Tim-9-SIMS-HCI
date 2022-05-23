@@ -86,6 +86,11 @@ namespace WpfApp1.Controller
             return _appointmentService.GetNearestFreeTerm(appointmentId);
         }
 
+
+        public IEnumerable<Appointment> GetAllByPatientId(int patientId)
+        {
+            return _appointmentService.GetAllByPatientId(patientId);
+        }
         public List<Appointment> GetAllByDoctorId(int id)
         {
             return _appointmentService.GetAllByDoctorId(id);

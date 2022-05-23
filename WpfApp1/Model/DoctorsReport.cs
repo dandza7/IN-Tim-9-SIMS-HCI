@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace WpfApp1.Model
 {
-    public class DoctorsReport: INotifyPropertyChanged
+    public class DoctorsReport : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
         protected virtual void OnPropertyChanged(string name)
@@ -77,6 +77,11 @@ namespace WpfApp1.Model
         public DoctorsReport(int id, int appointmentId, string description)
         {
             Id = id;
+            AppointmentId = appointmentId;
+            Description = description;
+        }
+        public DoctorsReport(int appointmentId, string description)
+        {
             AppointmentId = appointmentId;
             Description = description;
         }
