@@ -31,6 +31,10 @@ namespace WpfApp1.Controller
         {
             return _doctorsReportService.GetByAppointmentId(appointmentId);
         }
+        public List<DoctorsReport> GetByPatientId(int patientId)
+        {
+            return _doctorsReportService.GetByPatientId(patientId);
+        }
 
         public DoctorsReport Create(DoctorsReport doctorsReport)
         {

@@ -118,7 +118,7 @@ namespace WpfApp1
             var allergyService = new AllergyService(allergyRepository);
             AllergyController = new AllergyController(allergyService);
 
-            var doctorsReportService = new DoctorsReportService(doctorsReportRepository);
+            var doctorsReportService = new DoctorsReportService(doctorsReportRepository,appointmentRepository);
             DoctorsReportController = new DoctorsReportController(doctorsReportService);
 
             var surveyService = new SurveyService(surveyRepository, appointmentRepository, doctorRepository);

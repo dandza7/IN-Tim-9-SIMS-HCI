@@ -42,7 +42,7 @@ namespace WpfApp1.View.Model.Doctor
         public DoctorAppointmentView currentAppointment = new DoctorAppointmentView();
 
         public int userId = -1;
-        public int trenutniTerminIndex = 0;
+        public static int trenutniTerminIndex = 0;
 
 
         public DoctorMedicalRecordsPage()
@@ -61,25 +61,36 @@ namespace WpfApp1.View.Model.Doctor
                 _drugController = app.DrugController;
             }//controller initialization
 
-            //upcoming appointments
             foreach (Appointment a in _appointmentController.GetAllByDoctorId(userId))
                 if (a.Beginning >= DateTime.Now)
                     this.upcomingAppointments.Add(
                         AppointmentConverter.ConvertAppointmentToDoctorAppointmentView(
                             a,
                             _doctorController.GetById(a.DoctorId),
-                            _patientController.GetById(a.PatientId)//nema id(id je 0 uvek), a kad ima izbija exception
+                            _patientController.GetById(a.PatientId)
                             )
                         );
-            //current appointment
-            currentAppointment = upcomingAppointments[trenutniTerminIndex];//uzima najskoriji
 
-            //patients reports
-            foreach (Appointment a in _appointmentController.GetAllByPatientId(currentAppointment.PatientId)) patientReports.Add(_doctorsReportController.GetByAppointmentId(a.Id));
+            FillMedicalRecord(upcomingAppointments[trenutniTerminIndex]);
+        }
+        public void RefreshMedicalRecordForms()
+        {
 
+            DescriptionLabel.Content = "New Description";
+            ReportsGrid.SelectedIndex = -1;
+            DescriptionTB.Clear();
 
-            //patient therapies
-            patientTherapies = (List<Therapy>)_therapyController.GetByMedicalRecordId(_medicalRecordController.GetByPatientId(3/*currentAppointment.PatientId*/).Id);
+            TherapyIdLabel.Content = "New Therapy:";
+            TherapiesGrid.SelectedIndex = -1;
+            DrugCB.SelectedIndex = -1;
+            FrequencyTB.Clear();
+            DurationTB.Clear();
+        }
+        public void FillMedicalRecord(DoctorAppointmentView appointment)
+        {
+            currentAppointment = appointment;
+            patientReports = _doctorsReportController.GetByPatientId(currentAppointment.PatientId);
+            patientTherapies = (List<Therapy>)_therapyController.GetByMedicalRecordId(_medicalRecordController.GetByPatientId(currentAppointment.PatientId).Id);
 
             UpcomingAppointmentsGrid.ItemsSource = upcomingAppointments;
             ReportsGrid.ItemsSource = patientReports;
@@ -89,15 +100,13 @@ namespace WpfApp1.View.Model.Doctor
             ToLabel.Content = currentAppointment.Ending;
             PatientTextBlock.Text = currentAppointment.PatientId.ToString();
 
+            RefreshMedicalRecordForms();
         }
-
         private void FutureAppointmentsGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             Appointment a = _appointmentController.GetById(((DoctorAppointmentView)UpcomingAppointmentsGrid.SelectedItems[0]).Id);
-            currentAppointment = AppointmentConverter.ConvertAppointmentToDoctorAppointmentView(a, _doctorController.GetById(a.DoctorId), _patientController.GetById(a.PatientId));
-            FromLabel.Content = currentAppointment.Beginning;
-            ToLabel.Content = currentAppointment.Ending;
-            PatientTextBlock.Text = currentAppointment.PatientId.ToString();
+            FillMedicalRecord( AppointmentConverter.ConvertAppointmentToDoctorAppointmentView(a, _doctorController.GetById(a.DoctorId), _patientController.GetById(a.PatientId)));
+            
         }
 
         private void InfoBT_Click(object sender, RoutedEventArgs e)
@@ -125,61 +134,69 @@ namespace WpfApp1.View.Model.Doctor
 
         private void ClearTherapyBT_Click(object sender, RoutedEventArgs e)
         {
-            TherapyIdLabel.Content = "New Therapy:";
-            FrequencyTB.Clear();
-            DurationTB.Clear();
+            RefreshMedicalRecordForms();
         }
 
         private void SaveTherapyBT_Click(object sender, RoutedEventArgs e)
         {
             if ((string)TherapyIdLabel.Content == "New Therapy:")
                 _therapyController.Create(new Therapy(
-                    _medicalRecordController.GetByPatientId(2).Id,
+                    _medicalRecordController.GetByPatientId(currentAppointment.PatientId).Id,
                     DrugCB.SelectedIndex,
                     float.Parse(FrequencyTB.Text),
                     int.Parse(DurationTB.Text)
                     ));
             else _therapyController.Update(new Therapy(
                 int.Parse((string)TherapyIdLabel.Content),
-                _medicalRecordController.GetByPatientId(2).Id,
+                _medicalRecordController.GetByPatientId(currentAppointment.PatientId).Id,
                 DrugCB.SelectedIndex,
                 float.Parse(FrequencyTB.Text),
                 int.Parse(DurationTB.Text)
                 ));
-            TherapyIdLabel.Content = "New Therapy:";
-            FrequencyTB.Clear();
-            DurationTB.Clear();
+
+            RefreshMedicalRecordForms();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void SaveDescriptionBT_Click(object sender, RoutedEventArgs e)
         {
-            _doctorsReportController.Create(new DoctorsReport(
-                currentAppointment.Id,
-                DescriptionTB.Text
-                ));
-            DescriptionTB.Clear();
+            if ((string)DescriptionLabel.Content == "New Description") _doctorsReportController.Create(new DoctorsReport(currentAppointment.Id, DescriptionTB.Text));
+            else {
+                DoctorsReport dr=  _doctorsReportController.GetById(((DoctorsReport)ReportsGrid.SelectedItems[0]).Id);
+                dr.Description = DescriptionTB.Text;
+                _doctorsReportController.Update(dr);
+            }
+            RefreshMedicalRecordForms();
         }
 
-        private void Button_Click_1(object sender, RoutedEventArgs e)
+        private void ClearDescriptionBT_Click(object sender, RoutedEventArgs e)
         {
-            DescriptionTB.Clear();
+            RefreshMedicalRecordForms();
         }
 
         private void ReportsGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
+            if (ReportsGrid.SelectedIndex != -1) { 
+            DescriptionLabel.Content = "Update Description";
+            DescriptionTB.Text = ((DoctorsReport)ReportsGrid.SelectedItems[0]).Description;
+            }
         }
 
         private void Button_Click_2(object sender, RoutedEventArgs e)
         {
             if (upcomingAppointments.Count < trenutniTerminIndex) trenutniTerminIndex++;//ne radi (ostaje 0 uvek)
             else trenutniTerminIndex = 0;
-            currentAppointment = upcomingAppointments[trenutniTerminIndex];
+            FillMedicalRecord(upcomingAppointments[trenutniTerminIndex]);
+        }
 
-
-            FromLabel.Content = currentAppointment.Beginning;
-            ToLabel.Content = currentAppointment.Ending;
-            PatientTextBlock.Text = currentAppointment.PatientId.ToString();
+        private void TherapiesGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (TherapiesGrid.SelectedIndex != -1) { 
+            Therapy t = (Therapy)TherapiesGrid.SelectedItems[0];
+            TherapyIdLabel.Content = "Update Therapy";
+            DrugCB.SelectedIndex = t.DrugId;
+            FrequencyTB.Text = t.Frequency.ToString();
+            DurationTB.Text = t.Duration.ToString();
+            }
         }
     }
 }
