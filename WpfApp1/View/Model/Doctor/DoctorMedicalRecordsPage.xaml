@@ -34,12 +34,12 @@
 
                             <Grid>
                                 <Grid x:Name="ReportsView" Visibility="Hidden">
-                                    <Label Content="Description:" HorizontalAlignment="Left" VerticalAlignment="Top" FontFamily="Trajan Pro 3 " FontSize="20" Foreground="{DynamicResource WhiteBrush}" RenderTransformOrigin="0.817,2.044" Width="156" Margin="520,26,0,0"/>
+                                    <Label x:Name="DescriptionLabel" Content="Description:" HorizontalAlignment="Left" VerticalAlignment="Top" FontFamily="Trajan Pro 3 " FontSize="20" Foreground="{DynamicResource WhiteBrush}" RenderTransformOrigin="0.817,2.044" Width="251" Margin="520,26,0,0"/>
                                     <TextBox x:Name="DescriptionTB" HorizontalAlignment="Left" Height="186" TextWrapping="Wrap" VerticalAlignment="Top" Width="320" Margin="520,60,0,0" FontFamily="Trajan Pro 3 " FontSize="20"/>
-                                    <Button Content="Clear" Style="{StaticResource DoctorNoButton}" HorizontalAlignment="Left" Margin="520,341,0,0" VerticalAlignment="Top" Width="115" Height="28" FontFamily="Trajan Pro 3 " FontSize="20" Click="Button_Click_1"/>
-                                    <Button Content="Save" Style="{StaticResource DoctorYesButton}" HorizontalAlignment="Left" Margin="715,341,0,0" VerticalAlignment="Top" Width="125" Height="28" FontFamily="Trajan Pro 3 " FontSize="20" Click="Button_Click"/>
+                                    <Button x:Name="ClearDescriptionBT" Content="Clear" Style="{StaticResource DoctorNoButton}" HorizontalAlignment="Left" Margin="520,286,0,0" VerticalAlignment="Top" Width="115" Height="28" FontFamily="Trajan Pro 3 " FontSize="20" Click="ClearDescriptionBT_Click"/>
+                                    <Button x:Name="SaveDescriptionBT" Content="Save" Style="{StaticResource DoctorYesButton}" HorizontalAlignment="Left" Margin="718,286,0,0" VerticalAlignment="Top" Width="125" Height="28" FontFamily="Trajan Pro 3 " FontSize="20" Click="SaveDescriptionBT_Click" RenderTransformOrigin="0.48,-0.821"/>
 
-                                    <DataGrid  x:Name="ReportsGrid" Margin="10,10,351,10"
+                                    <DataGrid  x:Name="ReportsGrid" Margin="10,10,366,10"
                                      AutoGenerateColumns="False" Style="{StaticResource DoctorDataGrid}" 
                                      ItemsSource="{Binding patientReports}" SelectionChanged="ReportsGrid_SelectionChanged"  >
                                         <DataGrid.Columns>
@@ -51,23 +51,23 @@
 
                                 </Grid>
                                 <Grid x:Name="TherapiesView" Visibility="Hidden">
-                                    <Label Name="TherapyIdLabel" Content="New Therapy:" HorizontalAlignment="Left" Margin="635,66,0,0" VerticalAlignment="Top" FontFamily="Trajan Pro 3 " FontSize="20" Foreground="{DynamicResource WhiteBrush}"/>
-                                    <Label Content="Frequency:" HorizontalAlignment="Left" Margin="516,102,0,0" VerticalAlignment="Top" FontFamily="Trajan Pro 3 " FontSize="20" Foreground="{DynamicResource WhiteBrush}" Width="139"/>
-                                    <TextBox x:Name="FrequencyTB" HorizontalAlignment="Left" Height="24" TextWrapping="Wrap" VerticalAlignment="Top" Width="171" Margin="659,108,0,0" FontFamily="Trajan Pro 3 " FontSize="20"/>
-                                    <Label Content="Duration:" HorizontalAlignment="Left" Margin="526,146,0,0" VerticalAlignment="Top" FontFamily="Trajan Pro 3 " FontSize="20" Foreground="{DynamicResource WhiteBrush}" RenderTransformOrigin="0.817,2.044" Width="129"/>
-                                    <TextBox x:Name="DurationTB" HorizontalAlignment="Left" Height="24" TextWrapping="Wrap" VerticalAlignment="Top" Width="171" Margin="661,152,0,0" FontFamily="Trajan Pro 3 " FontSize="20"/>
-                                    <Label Content="Drug Id:" HorizontalAlignment="Left" Margin="544,198,0,0" VerticalAlignment="Top" FontFamily="Trajan Pro 3 " FontSize="20" Foreground="{DynamicResource WhiteBrush}" RenderTransformOrigin="0.817,2.044" Width="111"/>
-                                    <ComboBox x:Name="DrugCB" Margin="659,198,23,203">
+                                    <Label Name="TherapyIdLabel" Content="New Therapy:" HorizontalAlignment="Left" Margin="517,42,0,0" VerticalAlignment="Top" FontFamily="Trajan Pro 3 " FontSize="20" Foreground="{DynamicResource WhiteBrush}"/>
+                                    <Label Content="Frequency:" HorizontalAlignment="Left" Margin="517,112,0,0" VerticalAlignment="Top" FontFamily="Trajan Pro 3 " FontSize="20" Foreground="{DynamicResource WhiteBrush}" Width="139"/>
+                                    <TextBox x:Name="FrequencyTB" HorizontalAlignment="Left" Height="24" TextWrapping="Wrap" VerticalAlignment="Top" Width="171" Margin="672,112,0,0" FontFamily="Trajan Pro 3 " FontSize="20"/>
+                                    <Label Content="Duration:" HorizontalAlignment="Left" Margin="517,152,0,0" VerticalAlignment="Top" FontFamily="Trajan Pro 3 " FontSize="20" Foreground="{DynamicResource WhiteBrush}" RenderTransformOrigin="0.817,2.044" Width="129"/>
+                                    <TextBox x:Name="DurationTB" HorizontalAlignment="Left" Height="24" TextWrapping="Wrap" VerticalAlignment="Top" Width="171" Margin="672,152,0,0" FontFamily="Trajan Pro 3 " FontSize="20"/>
+                                    <Label Content="Drug Id:" HorizontalAlignment="Left" Margin="517,194,0,0" VerticalAlignment="Top" FontFamily="Trajan Pro 3 " FontSize="20" Foreground="{DynamicResource WhiteBrush}" RenderTransformOrigin="0.817,2.044" Width="111"/>
+                                    <ComboBox x:Name="DrugCB" Margin="672,194,10,213" FontSize="20" FontFamily="Trajan Pro 3">
                                         <ComboBoxItem>1</ComboBoxItem>
                                         <ComboBoxItem>2</ComboBoxItem>
                                         <ComboBoxItem>3</ComboBoxItem>
                                     </ComboBox>
-                                    <Button x:Name="ClearTherapyBT" Content="Clear" Style="{StaticResource DoctorNoButton}" HorizontalAlignment="Left" Margin="516,335,0,0" VerticalAlignment="Top" Width="123" Height="28" FontFamily="Trajan Pro 3 " FontSize="20" Click="ClearTherapyBT_Click"/>
-                                    <Button x:Name="SaveTherapyBT" Content="Save" Style="{StaticResource DoctorYesButton}" HorizontalAlignment="Left" Margin="717,335,0,0" VerticalAlignment="Top" Width="126" Height="28" FontFamily="Trajan Pro 3 " FontSize="20" Click="SaveTherapyBT_Click"/>
+                                    <Button x:Name="ClearTherapyBT" Content="Clear" Style="{StaticResource DoctorNoButton}" HorizontalAlignment="Left" Margin="517,283,0,0" VerticalAlignment="Top" Width="123" Height="28" FontFamily="Trajan Pro 3 " FontSize="20" Click="ClearTherapyBT_Click" RenderTransformOrigin="0.699,0.071"/>
+                                    <Button x:Name="SaveTherapyBT" Content="Save" Style="{StaticResource DoctorYesButton}" HorizontalAlignment="Left" Margin="717,283,0,0" VerticalAlignment="Top" Width="126" Height="28" FontFamily="Trajan Pro 3 " FontSize="20" Click="SaveTherapyBT_Click"/>
 
-                                    <DataGrid x:Name="TherapiesGrid" Margin="10,18,347,10"
+                                    <DataGrid x:Name="TherapiesGrid" Margin="10,18,362,10"
                                      AutoGenerateColumns="False" Style="{StaticResource DoctorDataGrid}" 
-                                     ItemsSource="{Binding patientTherapies}"  >
+                                     ItemsSource="{Binding patientTherapies}" SelectionChanged="TherapiesGrid_SelectionChanged"  >
                                         <DataGrid.Columns>
                                             <DataGridTextColumn Header=" Id" Width="1*"  Binding="{Binding Id}" HeaderStyle="{StaticResource DoctorDGHeader}" CellStyle="{StaticResource DoctorDGCell}"/>
                                             <DataGridTextColumn Header=" DrugId" Width="2*"  Binding="{Binding DrugId}" HeaderStyle="{StaticResource DoctorDGHeader}" CellStyle="{StaticResource DoctorDGCell}"/>
@@ -79,25 +79,24 @@
                                     </DataGrid>
                                 </Grid>
                                 <Grid x:Name="ReferalView" Visibility="Hidden">
-
-                                    <Label x:Name="labela" FontSize="15" Foreground="White" Content="Priority:" HorizontalAlignment="Left" Margin="238,98,0,305" Width="102" />
-                                    <Label  FontSize="15" Foreground="White" Content="Specialist:" HorizontalAlignment="Left" Margin="228,64,0,339" Width="112" />
-                                    <Label FontSize="15" Foreground="White" Content="From:" HorizontalAlignment="Left" Margin="268,144,0,259" RenderTransformOrigin="0.429,0.464" Width="66" />
-                                    <Label FontSize="15" Foreground="White" Content="To:" Margin="300,192,-5,201" />
-                                    <CheckBox FontSize="15"  Content="Urgent" HorizontalAlignment="Left" Margin="432,238,0,171" Foreground="{DynamicResource WhiteBrush}"/>
-                                    <ComboBox FontSize="15"   x:Name="PriorityComboBox"  HorizontalAlignment="Left" Margin="350,98,0,0" VerticalAlignment="Top" Width="208" SelectedIndex="0" Height="28">
-                                        <ComboBoxItem Content="Time"/>
-                                        <ComboBoxItem Content="Doctor"/>
-                                    </ComboBox>
-                                    <ComboBox FontSize="15"   x:Name="SpecialistComboBox"  HorizontalAlignment="Left" Margin="350,64,0,0" VerticalAlignment="Top" Width="208" SelectedIndex="0" Height="28">
+                                    <Label  FontSize="15" Foreground="White" Content="Specialist:" HorizontalAlignment="Left" Margin="210,67,0,336" Width="141" />
+                                    <ComboBox FontSize="15"   x:Name="SpecialistComboBox2"  HorizontalAlignment="Left" Margin="364,67,0,0" VerticalAlignment="Top" Width="262" SelectedIndex="0" Height="28">
                                         <ComboBoxItem Content="anesthesiologist"/>
                                         <ComboBoxItem Content="cardiologist"/>
                                         <ComboBoxItem Content="generalPracticioner"/>
                                     </ComboBox>
-                                    <xctk:DateTimePicker x:Name="BeginningDTP" Margin="340,144,295,259"/>
-                                    <xctk:DateTimePicker x:Name="EndingDTP" Margin="346,192,295,0" VerticalAlignment="Top" Height="28"/>
-                                    <Button x:Name="ConfirmBT" Style="{StaticResource DoctorYesButton}" Content="Confirm" Margin="0,0,295,119" Width="100" VerticalAlignment="Bottom" HorizontalAlignment="Right" Height="30"/>
-                                    <Button Style="{StaticResource DoctorNoButton}" Content="Discard" HorizontalAlignment="Left" Margin="228,0,0,119" Width="100" VerticalAlignment="Bottom" Height="30" />
+                                    <Label  FontSize="15" Foreground="White" Content="Type:" HorizontalAlignment="Left" Margin="210,110,0,293" Width="141" />
+                                    <ComboBox FontSize="15"   x:Name="SpecialistComboBox"  HorizontalAlignment="Left" Margin="364,110,0,0" VerticalAlignment="Top" Width="262" SelectedIndex="0" Height="28">
+                                        <ComboBoxItem Content="surgery"/>
+                                        <ComboBoxItem Content="regular"/>
+                                    </ComboBox>
+                                    <Label FontSize="15" Foreground="White" Content="From:" HorizontalAlignment="Left" Margin="210,152,0,251" RenderTransformOrigin="-0.212,0.179" Width="83" />
+                                    <Label FontSize="15" Foreground="White" Content="To:" Margin="210,196,560,197" />
+                                    <CheckBox FontSize="15"  Content="Urgent" HorizontalAlignment="Left" Margin="515,243,0,166" Foreground="{DynamicResource WhiteBrush}" Width="111"/>
+                                    <xctk:DateTimePicker x:Name="BeginningDTP" Margin="364,152,227,253"/>
+                                    <xctk:DateTimePicker x:Name="EndingDTP" Margin="364,196,227,0" VerticalAlignment="Top" Height="26"/>
+                                    <Button x:Name="ConfirmBT" Style="{StaticResource DoctorYesButton}" Content="Confirm" Margin="0,0,227,117" Width="126" VerticalAlignment="Bottom" HorizontalAlignment="Right" Height="30"/>
+                                    <Button Style="{StaticResource DoctorNoButton}" Content="Discard" HorizontalAlignment="Left" Margin="210,0,0,117" Width="126" VerticalAlignment="Bottom" Height="30" />
 
 
                                 </Grid>

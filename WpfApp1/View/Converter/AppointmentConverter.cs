@@ -35,10 +35,13 @@ namespace WpfApp1.View.Converter
         {
             Id = appointment.Id,
             Beginning = appointment.Beginning,
+            Ending = appointment.Ending,
             Type = appointment.Type.ToString(),
             Urgent = appointment.IsUrgent.ToString(),
             Patient = patient.Name + " " + patient.Surname,
-            Doctor = doctor.Name + " " + doctor.Surname
+            Doctor = doctor.Name + " " + doctor.Surname,
+            PatientId = appointment.PatientId,
+            DoctorId = appointment.DoctorId
 
         };
 

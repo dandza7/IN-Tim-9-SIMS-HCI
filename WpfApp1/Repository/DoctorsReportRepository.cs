@@ -43,7 +43,16 @@ namespace WpfApp1.Repository
 
         public DoctorsReport GetByAppointmentId(int appointmentId)
         {
-            return GetAll().ToList().SingleOrDefault(doctorsReport => doctorsReport.AppointmentId == appointmentId);
+
+            return GetAll().ToList().SingleOrDefault(doctorsReport => doctorsReport.AppointmentId== appointmentId);
+        }
+
+        public DoctorsReport GetByAppointmentId2(int appointmentId)
+        {
+
+            foreach (DoctorsReport dr in GetAll())
+                if (dr.AppointmentId == appointmentId) return dr;
+            return new DoctorsReport();
         }
 
         public DoctorsReport Create(DoctorsReport doctorsReport)
