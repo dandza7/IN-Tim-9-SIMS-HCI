@@ -34,41 +34,44 @@ namespace WpfApp1.Service
             DateTime checker = beginning == "" ? DateTime.Today : DateTime.Parse(beginning);
             for (int i = 0; i < 14; i++)
             {
-                bool isFree = true;
-                foreach (Appointment appointment in appointments)
+                if (CheckForOverlapingForAppointments(appointments, checker) && CheckForOverlapingForRenovations(renovations, checker))
                 {
-                    if (checker.ToShortDateString().Equals(appointment.Beginning.ToShortDateString()))
-                    {
-                        isFree = false;
-                        break;
-                    }
-
-
-                }
-                foreach (Renovation renovation in renovations)
-                {
-                    if (DateTime.Compare(DateTime.Parse(checker.ToShortDateString()), DateTime.Parse(renovation.Beginning.ToShortDateString())) >= 0
-                        && DateTime.Compare(DateTime.Parse(checker.ToShortDateString()), DateTime.Parse(renovation.Ending.ToShortDateString())) <= 0)
-                    {
-                        isFree = false;
-                        break;
-                    }
-                }
-                Console.WriteLine("Is {0} free? [{1}] (Search mode: {2})", checker.ToString(), isFree, beginning == "" ? "Beginning" : "Ending");
-                if (isFree)
-                {
-
                     days.Add(checker.ToShortDateString());
                 }
                 else if (beginning != "")
                 {
-                    
                     break;
                 }
 
                 checker = checker.AddDays(1);
             }
             return days;
+        }
+        public bool CheckForOverlapingForAppointments(List<Appointment> appointments, DateTime day)
+        {
+            foreach(Appointment a in appointments)
+            {
+                DateTime beginning = DateTime.Parse(a.Beginning.ToShortDateString());
+                if (DateTime.Compare(beginning, day) == 0)
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+        public bool CheckForOverlapingForRenovations(List<Renovation> renovations, DateTime day)
+        {
+            foreach (Renovation r in renovations)
+            {
+                DateTime beginning = DateTime.Parse(r.Beginning.ToShortDateString());
+                DateTime ending = DateTime.Parse(r.Ending.ToShortDateString());
+                if (DateTime.Compare(day, beginning) >= 0
+                    && DateTime.Compare(day, ending) <= 0)
+                {
+                    return false;
+                }
+            }
+            return true;
         }
         private List<Renovation> FilterRenovationsByRooms(List<Renovation> list, List<int> ids)
         {
