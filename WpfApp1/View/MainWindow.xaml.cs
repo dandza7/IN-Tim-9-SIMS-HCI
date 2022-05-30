@@ -54,8 +54,10 @@ namespace WpfApp1.Service
 
         private void LogInConfirm_Click(object sender, RoutedEventArgs e)
         {
+            
             string user = UsernameField.Text;
             string pw = PasswordField.Password.ToString();
+
             User logged = this._userController.CheckLogIn(user, pw);
             if(logged == null)
             {

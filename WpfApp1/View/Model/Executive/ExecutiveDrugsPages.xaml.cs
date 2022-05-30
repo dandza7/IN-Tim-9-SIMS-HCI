@@ -135,8 +135,6 @@ namespace WpfApp1.View.Model.Executive
         public Storyboard MR { get; set; }
         public Storyboard MM { get; set; }
         public Storyboard ML { get; set; }
-        public Storyboard CloseDG { get; set; }
-        public int TypeIndicator;
         public Drug SelectedDrug { get; set; }
         public ExecutiveDrugsPages()
         {
@@ -147,7 +145,6 @@ namespace WpfApp1.View.Model.Executive
             VerifiedDrugs = new ObservableCollection<Drug>();
             UnverifiedDrugs = new ObservableCollection<Drug>();
             RejectedDrugs = new ObservableCollection<Drug>();
-            TypeIndicator = 0;
             GetDrugs();
             SetAnimations();
 
@@ -181,7 +178,6 @@ namespace WpfApp1.View.Model.Executive
             ML = FindResource("MoveButtonLeft") as Storyboard;
             CloseFrame = FindResource("CloseFrame") as Storyboard;
             OpenFrame = FindResource("FormFrameAnimation") as Storyboard;
-            CloseDG = FindResource("CloseDG") as Storyboard;
         }
 
         private void ShowMoreInfoButton_Click(object sender, RoutedEventArgs e)
@@ -229,41 +225,30 @@ namespace WpfApp1.View.Model.Executive
             WrongSelectionContainer.Visibility = Visibility.Collapsed;
         }
 
-        private void ChangeShowTypeButton_Click(object sender, RoutedEventArgs e)
+
+
+        private void TypeLeft_Click(object sender, RoutedEventArgs e)
         {
-            CloseDG.Begin();
+            ML.Begin();
+            ChangeShowTypeButton.Text = "Validated";
+            DrugsDG.ItemsSource = VerifiedDrugs;
+            EditRejectedDrugButton.IsEnabled = false;
         }
 
-        private void CloseDG_Completed(object sender, EventArgs e)
+        private void TypeMiddle_Click(object sender, RoutedEventArgs e)
         {
-            if (TypeIndicator == 0)
-            {
-                MM.Begin();
-                TypeIndicator = 1;
-                ChangeShowTypeButton.Content = "Unvalidated";
-                DrugsDG.ItemsSource = UnverifiedDrugs;
-                EditRejectedDrugButton.IsEnabled = false;
-                return;
-            }
-            else if (TypeIndicator == 1)
-            {
-                MR.Begin();
-                TypeIndicator = 2;
-                ChangeShowTypeButton.Content = "Rejected";
-                DrugsDG.ItemsSource = RejectedDrugs;
-                EditRejectedDrugButton.IsEnabled = true;
-                return;
-            }
-            else
-            {
+            MM.Begin();
+            ChangeShowTypeButton.Text = "Unvalidated";
+            DrugsDG.ItemsSource = UnverifiedDrugs;
+            EditRejectedDrugButton.IsEnabled = false;
+        }
 
-                ML.Begin();
-                TypeIndicator = 0;
-                ChangeShowTypeButton.Content = "Validated";
-                DrugsDG.ItemsSource = VerifiedDrugs;
-                EditRejectedDrugButton.IsEnabled = false;
-                return;
-            }
+        private void TypeRight_Click(object sender, RoutedEventArgs e)
+        {
+            MR.Begin();
+            ChangeShowTypeButton.Text = "Rejected";
+            DrugsDG.ItemsSource = RejectedDrugs;
+            EditRejectedDrugButton.IsEnabled = true;
         }
     }
 }

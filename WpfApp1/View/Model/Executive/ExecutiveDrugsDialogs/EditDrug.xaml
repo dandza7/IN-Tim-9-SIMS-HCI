@@ -36,6 +36,7 @@
                         <RowDefinition Height="50"/>
                         <RowDefinition Height="30"/>
                     </Grid.RowDefinitions>
+                    <TextBlock Grid.Row="1" Grid.RowSpan="2" Grid.Column="1" Style="{StaticResource Title}">EDIT DRUG</TextBlock>
                     <Label Grid.Row="3" Grid.Column="1" Content="Name:" Style="{StaticResource FormLabel}"></Label>
                     <TextBox x:Name="DrugName" Grid.Row="4" Grid.Column="1" Style="{StaticResource FormInputBox}" IsEnabled="True"></TextBox>
                     <Label Grid.Row="5" Grid.Column="1" Content="Drug info:" Style="{StaticResource FormLabel}"></Label>

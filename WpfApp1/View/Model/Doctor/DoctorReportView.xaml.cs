@@ -4,11 +4,24 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
+using System.Windows.Shapes;
 
-namespace WpfApp1.Model
+namespace WpfApp1.View.Model.Doctor
 {
-    public class DoctorsReport : INotifyPropertyChanged
+    /// <summary>
+    /// Interaction logic for DoctorReportView.xaml
+    /// </summary>
+    public partial class DoctorReportView : UserControl, INotifyPropertyChanged
     {
+
         public event PropertyChangedEventHandler PropertyChanged;
         protected virtual void OnPropertyChanged(string name)
         {
@@ -17,7 +30,11 @@ namespace WpfApp1.Model
                 PropertyChanged(this, new PropertyChangedEventArgs(name));
             }
         }
-
+        public DoctorReportView()
+        {
+            InitializeComponent();
+            DataContext = this;
+        }
         private int _id;
         private int _appointmentId;
         private string _description;
@@ -70,20 +87,6 @@ namespace WpfApp1.Model
             }
         }
 
-        public DoctorsReport()
-        {
-        }
 
-        public DoctorsReport(int id, int appointmentId, string description)
-        {
-            Id = id;
-            AppointmentId = appointmentId;
-            Description = description;
-        }
-        public DoctorsReport(int appointmentId, string description)
-        {
-            AppointmentId = appointmentId;
-            Description = description;
-        }
     }
 }

@@ -151,6 +151,8 @@
     </Compile>
     <Compile Include="View\Dialog\PatientDialog\UpdateNoteDialog.xaml.cs">
       <DependentUpon>UpdateNoteDialog.xaml</DependentUpon>
+    <Compile Include="View\Model\Doctor\DoctorReportView.xaml.cs">
+      <DependentUpon>DoctorReportView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Validation\EmailValidation.cs" />
     <Compile Include="View\Validation\JmbgValidation.cs" />
@@ -284,15 +286,6 @@
     </Compile>
     <Compile Include="View\Model\Doctor\DoctorRequestsPage.xaml.cs">
       <DependentUpon>DoctorRequestsPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\Model\Doctor\Doctor_MedicalRecord_Info.xaml.cs">
-      <DependentUpon>Doctor_MedicalRecord_Info.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\Model\Doctor\Doctor_MedicalRecord_Reports.xaml.cs">
-      <DependentUpon>Doctor_MedicalRecord_Reports.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\Model\Doctor\Doctor_MedicalRecord_Therapies.xaml.cs">
-      <DependentUpon>Doctor_MedicalRecord_Therapies.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Model\Doctor\Doctor_MyAppointments.xaml.cs">
       <DependentUpon>Doctor_MyAppointments.xaml</DependentUpon>
@@ -549,19 +542,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\Model\Doctor\DoctorReportView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\Model\Doctor\DoctorRequestsPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\Model\Doctor\Doctor_MedicalRecord_Info.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\Model\Doctor\Doctor_MedicalRecord_Reports.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\Model\Doctor\Doctor_MedicalRecord_Therapies.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -813,6 +798,11 @@
   <ItemGroup>
     <Resource Include="Resources\Images\avatar.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Resources\Icons\asterik-free-icon-font.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\VeryInterestingLogo.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

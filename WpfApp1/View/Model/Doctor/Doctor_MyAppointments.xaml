@@ -28,21 +28,21 @@
         </GroupBox>
         <GroupBox Header="Future Appointments" HorizontalAlignment="Left" Height="300" Margin="430,20,0,0" VerticalAlignment="Top" Width="830" Foreground="{DynamicResource WhiteBrush}" FontSize="20" FontFamily="Trajan Pro 3">
             <DataGrid x:Name="FutureAppointmentsGrid" Margin="12,30,12,12" Width="794"
-                      AutoGenerateColumns="False" Style="{StaticResource ExecutiveDataGrid}" 
+                      AutoGenerateColumns="False" Style="{StaticResource DoctorDataGrid}" 
                       ItemsSource="{Binding appointments}" >
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header=" Patient" Width="150"  Binding="{Binding Patient}" HeaderStyle="{StaticResource ExecutiveDGHeader}" CellStyle="{StaticResource ExecutiveDGCell}"/>
-                    <DataGridTextColumn Header=" Beginning" Width="3*" Binding="{Binding Beginning}"  HeaderStyle="{StaticResource ExecutiveDGHeader}" CellStyle="{StaticResource ExecutiveDGCell}"/>
-                    <DataGridTextColumn Header=" Type" Width="2*" Binding="{Binding Type}"  HeaderStyle="{StaticResource ExecutiveDGHeader}" CellStyle="{StaticResource ExecutiveDGCell}"/>
-                    <DataGridTextColumn Header=" Urgent" Width="2*" Binding="{Binding Urgent}"  HeaderStyle="{StaticResource ExecutiveDGHeader}" CellStyle="{StaticResource ExecutiveDGCell}"/>
-                    <DataGridTemplateColumn Header=" Update" Width="2*"  HeaderStyle="{StaticResource ExecutiveDGHeader}" CellStyle="{StaticResource ExecutiveDGCell}">
+                    <DataGridTextColumn Header=" Patient" Width="150"  Binding="{Binding Patient}" HeaderStyle="{StaticResource DoctorDGHeader}" CellStyle="{StaticResource DoctorDGCell}"/>
+                    <DataGridTextColumn Header=" Beginning" Width="3*" Binding="{Binding Beginning}"  HeaderStyle="{StaticResource DoctorDGHeader}" CellStyle="{StaticResource DoctorDGCell}"/>
+                    <DataGridTextColumn Header=" Type" Width="2*" Binding="{Binding Type}"  HeaderStyle="{StaticResource DoctorDGHeader}" CellStyle="{StaticResource DoctorDGCell}"/>
+                    <DataGridTextColumn Header=" Urgent" Width="2*" Binding="{Binding Urgent}"  HeaderStyle="{StaticResource DoctorDGHeader}" CellStyle="{StaticResource DoctorDGCell}"/>
+                    <DataGridTemplateColumn Header=" Update" Width="2*"  HeaderStyle="{StaticResource DoctorDGHeader}" CellStyle="{StaticResource DoctorDGCell}">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <Button Content="Update" Style="{StaticResource DoctorStandardButton}"  />
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
-                    <DataGridTemplateColumn Header=" Delete" Width="2*"  HeaderStyle="{StaticResource ExecutiveDGHeader}" CellStyle="{StaticResource ExecutiveDGCell}">
+                    <DataGridTemplateColumn Header=" Delete" Width="2*"  HeaderStyle="{StaticResource DoctorDGHeader}" CellStyle="{StaticResource DoctorDGCell}">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <Button Content="Delete"  Style="{StaticResource DoctorNoButton}"  />
@@ -53,14 +53,14 @@
             </DataGrid>
         </GroupBox>
         <GroupBox Header="Past Appointments" HorizontalAlignment="Left" Height="233" Margin="430,325,0,0" VerticalAlignment="Top" Width="830" Foreground="{DynamicResource WhiteBrush}" FontSize="20" FontFamily="Trajan Pro 3">
-            <DataGrid x:Name="PastAppointmentsGrid" Height="199" Margin="12,12,12,12" Width="794"
-                      AutoGenerateColumns="False" Style="{StaticResource ExecutiveDataGrid}" 
+            <DataGrid x:Name="PastAppointmentsGrid" Margin="12,12,12,9" Width="794"
+                      AutoGenerateColumns="False" Style="{StaticResource DoctorDataGrid}" 
                       ItemsSource="{Binding pastAppointments}"  >
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header=" Patient" Width="150"  Binding="{Binding Patient}" HeaderStyle="{StaticResource ExecutiveDGHeader}" CellStyle="{StaticResource ExecutiveDGCell}"/>
-                    <DataGridTextColumn Header=" Beginning" Width="3*" Binding="{Binding Beginning}"  HeaderStyle="{StaticResource ExecutiveDGHeader}" CellStyle="{StaticResource ExecutiveDGCell}"/>
-                    <DataGridTextColumn Header=" Type" Width="3*" Binding="{Binding Type}"  HeaderStyle="{StaticResource ExecutiveDGHeader}" CellStyle="{StaticResource ExecutiveDGCell}"/>
-                    <DataGridTemplateColumn Header=" Report" Width="2*"   HeaderStyle="{StaticResource ExecutiveDGHeader}" CellStyle="{StaticResource ExecutiveDGCell}">
+                    <DataGridTextColumn Header=" Patient" Width="150"  Binding="{Binding Patient}" HeaderStyle="{StaticResource DoctorDGHeader}" CellStyle="{StaticResource DoctorDGCell}"/>
+                    <DataGridTextColumn Header=" Beginning" Width="3*" Binding="{Binding Beginning}"  HeaderStyle="{StaticResource DoctorDGHeader}" CellStyle="{StaticResource DoctorDGCell}"/>
+                    <DataGridTextColumn Header=" Type" Width="3*" Binding="{Binding Type}"  HeaderStyle="{StaticResource DoctorDGHeader}" CellStyle="{StaticResource DoctorDGCell}"/>
+                    <DataGridTemplateColumn Header=" Report" Width="2*"   HeaderStyle="{StaticResource DoctorDGHeader}" CellStyle="{StaticResource DoctorDGCell}">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <Button Content="View"  Style="{StaticResource DoctorStandardButton}"  />

@@ -6,13 +6,14 @@
         xmlns:PresentationOptions="http://schemas.microsoft.com/winfx/2006/xaml/presentation/options"
         xmlns:local="clr-namespace:WpfApp1.Service"
         mc:Ignorable="d"
-        Title="ExecutiveMenu" Height="720" Width="1280"
+        Title="Executive" Height="720" Width="1280"
+        Icon="\Resources\Icons\asterik-free-icon-font.png"
         ResizeMode="NoResize">
     <Window.Background>
-        <LinearGradientBrush StartPoint="0,0" EndPoint="0,1.5">
+        <LinearGradientBrush StartPoint="0,0" EndPoint="0,1.2">
             <LinearGradientBrush.GradientStops>
-                <GradientStop Color="{StaticResource White}" Offset="0"/>
-                <GradientStop Color="{StaticResource Blue}" Offset="1"/>
+                <GradientStop Color="{StaticResource PureWhite}" Offset="0"/>
+                <GradientStop Color="{StaticResource Orange}" Offset="1"/>
             </LinearGradientBrush.GradientStops>
         </LinearGradientBrush>
     </Window.Background>
@@ -48,9 +49,9 @@
         </Storyboard>
     </Window.Resources>
     <Grid>
-        
-        
-        <Border Name="ButtonContainer" Width="45" Height="50" Background="{StaticResource AccentBlueBrush}" BorderBrush="{StaticResource AccentBlueBrush}"
+
+
+        <Border Name="ButtonContainer" Width="45" Height="50" Background="{StaticResource OrangeBrush}" BorderBrush="{StaticResource DarkestBlueBrush}"
                 BorderThickness="3 3 0 3" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0 102.5 0 0" Padding="2 0 0 0"
                 MouseEnter="ButtonContainer_MouseEnter" MouseLeave="ButtonContainer_MouseLeave">
             <Grid>
@@ -66,9 +67,9 @@
                     <RowDefinition Height="40"/>
                     <RowDefinition Height="5"/>
                 </Grid.RowDefinitions>
-                <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Column="0" Grid.Row="1" Width="40" Height="40" Margin="0 -6 0 0" Background="{StaticResource WhiteBrush}">
+                <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Column="0" Grid.Row="1" Width="40" Height="40" Margin="0 -6 0 0" Background="{StaticResource DarkestBlueBrush}">
                         <Image x:Name="LIImage" Source="/Resources/Icons/portrait-free-icon-font.png" Width="20" Margin="0 10 0 0"></Image>
-                    </StackPanel>
+                </StackPanel>
                 <Button x:Name="NotificationsButton" Grid.Column="2" Grid.Row="1" Style="{StaticResource LOIButton}" Width="40" Height="40" Click="NotificationsButton_Click" Margin="0 -6 0 0">
                     <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="40" Height="40" Margin="0 0 0 0">
                         <Image Source="/Resources/Icons/bell-free-icon-font.png" Width="20" Margin="0 10 0 0"></Image>

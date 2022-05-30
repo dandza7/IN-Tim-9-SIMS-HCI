@@ -68,6 +68,12 @@ namespace WpfApp1.Service
 
         public bool AppointmentCancellationByPatient(int patientId, int appointmentId)
         {
+            UpdateCancellationCounter(patientId);
+            return _appointmentRepo.Delete(appointmentId);
+        }
+
+        private void UpdateCancellationCounter(int patientId)
+        {
             Patient patient = _patientRepo.GetById(patientId);
             DateTime lastCancellationDate = patient.LastCancellationDate;
 
@@ -77,13 +83,13 @@ namespace WpfApp1.Service
                 patient.LastCancellationDate = DateTime.Now;
                 _patientRepo.Update(patient);
 
-            } else {
+            }
+            else
+            {
                 patient.NumberOfCancellations += 1;
                 patient.LastCancellationDate = DateTime.Now;
                 _patientRepo.Update(patient);
             }
-
-            return _appointmentRepo.Delete(appointmentId);
         }
 
         internal List<Appointment> GetAllByDoctorId(int id)
@@ -111,6 +117,12 @@ namespace WpfApp1.Service
             }
             return appointments;
         }
+
+        internal IEnumerable<Appointment> GetAllByPatientId(int patientId)
+        {
+            return _appointmentRepo.GetAllByPatientId(patientId);
+        }
+
 
         private List<AppointmentView> GetAppointmentsHappyCase(DateTime startOfInterval, DateTime endOfInterval,
             List<Appointment> appointmentsOfDoctor, List<AppointmentView> appointments, Room room, Doctor doctor, User doctorUser, int patientId)

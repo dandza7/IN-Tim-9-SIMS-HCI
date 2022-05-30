@@ -14,13 +14,13 @@
         <GroupBox Header="Current Appointment View" HorizontalAlignment="Left" Height="626" Margin="36,150,0,0" VerticalAlignment="Top" Width="1050" Foreground="{DynamicResource WhiteBrush}" FontSize="20" FontFamily="Trajan Pro 3">
             <Grid>
                 <Rectangle Fill="{StaticResource GrayBrush}" StrokeThickness="0" Grid.ColumnSpan="2"/>
-                <Label Content="Patient:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="47,26,0,0" Foreground="{DynamicResource WhiteBrush}"/>
+                <Label  Content="Patient:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="47,26,0,0" Foreground="{DynamicResource WhiteBrush}"/>
                 <TextBlock x:Name="PatientTextBlock"  HorizontalAlignment="Left" Margin="158,28,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="207"/>
                 <Label Content="From:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="390,4,0,0" RenderTransformOrigin="1.245,-0.088" Foreground="{DynamicResource WhiteBrush}"/>
                 <Label x:Name="FromLabel" Content="dd/mm/yyyy" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="470,6,0,0" RenderTransformOrigin="1.245,-0.088" Foreground="{DynamicResource WhiteBrush}"/>
                 <Label Content="To:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="420,48,0,0" Foreground="{DynamicResource WhiteBrush}"/>
                 <Label x:Name="ToLabel" Content="dd/mm/yyyy" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="470,48,0,0" Foreground="{DynamicResource WhiteBrush}"/>
-                <Button Content="Skip" HorizontalAlignment="Left" Margin="849,17,0,0" VerticalAlignment="Top" Width="153" Height="43" Foreground="{DynamicResource WhiteBrush}" BorderBrush="{DynamicResource WhiteBrush}" Background="{DynamicResource GrayBrush}" BorderThickness="2"/>
+                <Button Content="Skip" HorizontalAlignment="Left" Margin="849,17,0,0" VerticalAlignment="Top" Width="153" Height="43" Foreground="{DynamicResource WhiteBrush}" BorderBrush="{DynamicResource WhiteBrush}" Background="{DynamicResource GrayBrush}" BorderThickness="2" Click="Button_Click_2"/>
                 <GroupBox Header="Medical Record" Margin="0,77,0,0" Foreground="{DynamicResource MedicalGreenBrush}" BorderBrush="{DynamicResource MedicalGreenBrush}" FontSize="30" FontFamily="Trajan Pro 3 Bold" BorderThickness="2">
                     <Grid>
 
@@ -28,32 +28,93 @@
                             <Button  x:Name="InfoBT"  Content="Info"   Height="39" Width="127" FontSize="16" FontFamily="Trajan Pro 3 " Foreground="{DynamicResource MedicalGreenBrush}" BorderBrush="{DynamicResource MedicalGreenBrush}" Background="{DynamicResource GrayBrush}" BorderThickness="2" Click="InfoBT_Click"/>
                             <Button  x:Name="ReportsBT" Content="Reports" Height="39" Width="127" FontSize="16" FontFamily="Trajan Pro 3 " Foreground="{DynamicResource WhiteBrush}" BorderBrush="{DynamicResource WhiteBrush}" Background="{DynamicResource GrayBrush}" BorderThickness="2" Click="ReportsBT_Click"/>
                             <Button x:Name="TherapiesBT" Content="Therapies" Height="39" Width="127" FontSize="16" FontFamily="Trajan Pro 3 " Foreground="{DynamicResource WhiteBrush}" BorderBrush="{DynamicResource WhiteBrush}" Background="{DynamicResource GrayBrush}" BorderThickness="2" Click="TherapiesBT_Click"/>
+                            <Button x:Name="ReferalBT" Content="Referal" Height="39" Width="127" FontSize="16" FontFamily="Trajan Pro 3 " Foreground="{DynamicResource WhiteBrush}" BorderBrush="{DynamicResource WhiteBrush}" Background="{DynamicResource GrayBrush}" BorderThickness="2" Click="ReferalBT_Click" />
                         </StackPanel>
-                        <Border BorderBrush="{DynamicResource MedicalGreenBrush}" BorderThickness="2" Margin="159,30,345,10">
+                        <Border BorderBrush="{DynamicResource MedicalGreenBrush}" BorderThickness="2" Margin="159,30,10,10">
+
                             <Grid>
+                                <Grid x:Name="ReportsView" Visibility="Hidden">
+                                    <Label x:Name="DescriptionLabel" Content="Description:" HorizontalAlignment="Left" VerticalAlignment="Top" FontFamily="Trajan Pro 3 " FontSize="20" Foreground="{DynamicResource WhiteBrush}" RenderTransformOrigin="0.817,2.044" Width="251" Margin="520,26,0,0"/>
+                                    <TextBox x:Name="DescriptionTB" HorizontalAlignment="Left" Height="186" TextWrapping="Wrap" VerticalAlignment="Top" Width="320" Margin="520,60,0,0" FontFamily="Trajan Pro 3 " FontSize="20"/>
+                                    <Button x:Name="ClearDescriptionBT" Content="Clear" Style="{StaticResource DoctorNoButton}" HorizontalAlignment="Left" Margin="520,286,0,0" VerticalAlignment="Top" Width="115" Height="28" FontFamily="Trajan Pro 3 " FontSize="20" Click="ClearDescriptionBT_Click"/>
+                                    <Button x:Name="SaveDescriptionBT" Content="Save" Style="{StaticResource DoctorYesButton}" HorizontalAlignment="Left" Margin="718,286,0,0" VerticalAlignment="Top" Width="125" Height="28" FontFamily="Trajan Pro 3 " FontSize="20" Click="SaveDescriptionBT_Click" RenderTransformOrigin="0.48,-0.821"/>
 
-                                <Frame x:Name="MedicalRecordFrame" Content="" HorizontalAlignment="Left" Height="431" VerticalAlignment="Top" Width="518"/>
+                                    <DataGrid  x:Name="ReportsGrid" Margin="10,10,366,10"
+                                     AutoGenerateColumns="False" Style="{StaticResource DoctorDataGrid}" 
+                                     ItemsSource="{Binding patientReports}" SelectionChanged="ReportsGrid_SelectionChanged"  >
+                                        <DataGrid.Columns>
+                                            <DataGridTextColumn Header=" Id" Width="1*"  Binding="{Binding Id}" HeaderStyle="{StaticResource DoctorDGHeader}" CellStyle="{StaticResource DoctorDGCell}"/>
+                                            <DataGridTextColumn Header=" Appointment" Width="2*" Binding="{Binding AppointmentId}"  HeaderStyle="{StaticResource DoctorDGHeader}" CellStyle="{StaticResource DoctorDGCell}"/>
 
+                                        </DataGrid.Columns>
+                                    </DataGrid>
+
+                                </Grid>
+                                <Grid x:Name="TherapiesView" Visibility="Hidden">
+                                    <Label Name="TherapyIdLabel" Content="New Therapy:" HorizontalAlignment="Left" Margin="517,42,0,0" VerticalAlignment="Top" FontFamily="Trajan Pro 3 " FontSize="20" Foreground="{DynamicResource WhiteBrush}"/>
+                                    <Label Content="Frequency:" HorizontalAlignment="Left" Margin="517,112,0,0" VerticalAlignment="Top" FontFamily="Trajan Pro 3 " FontSize="20" Foreground="{DynamicResource WhiteBrush}" Width="139"/>
+                                    <TextBox x:Name="FrequencyTB" HorizontalAlignment="Left" Height="24" TextWrapping="Wrap" VerticalAlignment="Top" Width="171" Margin="672,112,0,0" FontFamily="Trajan Pro 3 " FontSize="20"/>
+                                    <Label Content="Duration:" HorizontalAlignment="Left" Margin="517,152,0,0" VerticalAlignment="Top" FontFamily="Trajan Pro 3 " FontSize="20" Foreground="{DynamicResource WhiteBrush}" RenderTransformOrigin="0.817,2.044" Width="129"/>
+                                    <TextBox x:Name="DurationTB" HorizontalAlignment="Left" Height="24" TextWrapping="Wrap" VerticalAlignment="Top" Width="171" Margin="672,152,0,0" FontFamily="Trajan Pro 3 " FontSize="20"/>
+                                    <Label Content="Drug Id:" HorizontalAlignment="Left" Margin="517,194,0,0" VerticalAlignment="Top" FontFamily="Trajan Pro 3 " FontSize="20" Foreground="{DynamicResource WhiteBrush}" RenderTransformOrigin="0.817,2.044" Width="111"/>
+                                    <ComboBox x:Name="DrugCB" Margin="672,194,10,213" FontSize="20" FontFamily="Trajan Pro 3">
+                                        <ComboBoxItem>1</ComboBoxItem>
+                                        <ComboBoxItem>2</ComboBoxItem>
+                                        <ComboBoxItem>3</ComboBoxItem>
+                                    </ComboBox>
+                                    <Button x:Name="ClearTherapyBT" Content="Clear" Style="{StaticResource DoctorNoButton}" HorizontalAlignment="Left" Margin="517,283,0,0" VerticalAlignment="Top" Width="123" Height="28" FontFamily="Trajan Pro 3 " FontSize="20" Click="ClearTherapyBT_Click" RenderTransformOrigin="0.699,0.071"/>
+                                    <Button x:Name="SaveTherapyBT" Content="Save" Style="{StaticResource DoctorYesButton}" HorizontalAlignment="Left" Margin="717,283,0,0" VerticalAlignment="Top" Width="126" Height="28" FontFamily="Trajan Pro 3 " FontSize="20" Click="SaveTherapyBT_Click"/>
+
+                                    <DataGrid x:Name="TherapiesGrid" Margin="10,18,362,10"
+                                     AutoGenerateColumns="False" Style="{StaticResource DoctorDataGrid}" 
+                                     ItemsSource="{Binding patientTherapies}" SelectionChanged="TherapiesGrid_SelectionChanged"  >
+                                        <DataGrid.Columns>
+                                            <DataGridTextColumn Header=" Id" Width="1*"  Binding="{Binding Id}" HeaderStyle="{StaticResource DoctorDGHeader}" CellStyle="{StaticResource DoctorDGCell}"/>
+                                            <DataGridTextColumn Header=" DrugId" Width="2*"  Binding="{Binding DrugId}" HeaderStyle="{StaticResource DoctorDGHeader}" CellStyle="{StaticResource DoctorDGCell}"/>
+                                            <DataGridTextColumn Header=" Freqency" Width="2.5*" Binding="{Binding Frequency}"  HeaderStyle="{StaticResource DoctorDGHeader}" CellStyle="{StaticResource DoctorDGCell }"/>
+                                            <DataGridTextColumn Header=" Duration" Width="2.6*" Binding="{Binding Duration}"  HeaderStyle="{StaticResource DoctorDGHeader}" CellStyle="{StaticResource DoctorDGCell}"/>
+
+
+                                        </DataGrid.Columns>
+                                    </DataGrid>
+                                </Grid>
+                                <Grid x:Name="ReferalView" Visibility="Hidden">
+                                    <Label  FontSize="15" Foreground="White" Content="Specialist:" HorizontalAlignment="Left" Margin="210,67,0,336" Width="141" />
+                                    <ComboBox FontSize="15"   x:Name="SpecialistComboBox2"  HorizontalAlignment="Left" Margin="364,67,0,0" VerticalAlignment="Top" Width="262" SelectedIndex="0" Height="28">
+                                        <ComboBoxItem Content="anesthesiologist"/>
+                                        <ComboBoxItem Content="cardiologist"/>
+                                        <ComboBoxItem Content="generalPracticioner"/>
+                                    </ComboBox>
+                                    <Label  FontSize="15" Foreground="White" Content="Type:" HorizontalAlignment="Left" Margin="210,110,0,293" Width="141" />
+                                    <ComboBox FontSize="15"   x:Name="SpecialistComboBox"  HorizontalAlignment="Left" Margin="364,110,0,0" VerticalAlignment="Top" Width="262" SelectedIndex="0" Height="28">
+                                        <ComboBoxItem Content="surgery"/>
+                                        <ComboBoxItem Content="regular"/>
+                                    </ComboBox>
+                                    <Label FontSize="15" Foreground="White" Content="From:" HorizontalAlignment="Left" Margin="210,152,0,251" RenderTransformOrigin="-0.212,0.179" Width="83" />
+                                    <Label FontSize="15" Foreground="White" Content="To:" Margin="210,196,560,197" />
+                                    <CheckBox FontSize="15"  Content="Urgent" HorizontalAlignment="Left" Margin="515,243,0,166" Foreground="{DynamicResource WhiteBrush}" Width="111"/>
+                                    <xctk:DateTimePicker x:Name="BeginningDTP" Margin="364,152,227,253"/>
+                                    <xctk:DateTimePicker x:Name="EndingDTP" Margin="364,196,227,0" VerticalAlignment="Top" Height="26"/>
+                                    <Button x:Name="ConfirmBT" Style="{StaticResource DoctorYesButton}" Content="Confirm" Margin="0,0,227,117" Width="126" VerticalAlignment="Bottom" HorizontalAlignment="Right" Height="30"/>
+                                    <Button Style="{StaticResource DoctorNoButton}" Content="Discard" HorizontalAlignment="Left" Margin="210,0,0,117" Width="126" VerticalAlignment="Bottom" Height="30" />
+
+
+                                </Grid>
                             </Grid>
+
                         </Border>
-                        <GroupBox Header="Appointment Report" Margin="686,30,8,10" FontSize="20" FontFamily="Trajan Pro 3" Foreground="{DynamicResource WhiteBrush}">
-                            <Grid>
-
-
-                            </Grid>
-                        </GroupBox>
                     </Grid>
                 </GroupBox>
             </Grid>
         </GroupBox>
         <GroupBox Header="Upcoming Appointments" HorizontalAlignment="Left" Height="626" Margin="1112,150,0,0" VerticalAlignment="Top" Width="578" Foreground="{DynamicResource WhiteBrush}" FontSize="20" FontFamily="Trajan Pro 3">
             <DataGrid x:Name="UpcomingAppointmentsGrid" Margin="12,30,12,12"
-                      AutoGenerateColumns="False" Style="{StaticResource ExecutiveDataGrid}" 
+                      AutoGenerateColumns="False" Style="{StaticResource DoctorDataGrid}" 
                       ItemsSource="{Binding upcomingAppointments}" SelectionChanged="FutureAppointmentsGrid_SelectionChanged" >
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header=" Patient" Width="150"  Binding="{Binding Patient}" HeaderStyle="{StaticResource ExecutiveDGHeader}" CellStyle="{StaticResource ExecutiveDGCell}"/>
-                    <DataGridTextColumn Header=" Beginning" Width="150" Binding="{Binding Beginning}"  HeaderStyle="{StaticResource ExecutiveDGHeader}" CellStyle="{StaticResource ExecutiveDGCell}"/>
-                    <DataGridTemplateColumn Header=" Medical Record" Width="2*"  HeaderStyle="{StaticResource ExecutiveDGHeader}" CellStyle="{StaticResource ExecutiveDGCell}">
+                    <DataGridTextColumn Header=" Patient" Width="150"  Binding="{Binding Patient}" HeaderStyle="{StaticResource DoctorDGHeader}" CellStyle="{StaticResource DoctorDGCell}"/>
+                    <DataGridTextColumn Header=" Beginning" Width="150" Binding="{Binding Beginning}"  HeaderStyle="{StaticResource DoctorDGHeader}" CellStyle="{StaticResource DoctorDGCell}"/>
+                    <DataGridTemplateColumn Header=" Medical Record" Width="2*"  HeaderStyle="{StaticResource DoctorDGHeader}" CellStyle="{StaticResource DoctorDGCell}">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <Button Content="View" Style="{StaticResource DoctorStandardButton}"  />

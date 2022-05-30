@@ -27,7 +27,7 @@ namespace WpfApp1.View.Model.Doctor
 
     public partial class DoctorDrugValidationPage : Page
     {
-    public DrugController _drugController;
+        public DrugController _drugController;
         public ObservableCollection<Drug> DrugsToValidate;
         public DoctorDrugValidationPage()
         {
@@ -35,10 +35,35 @@ namespace WpfApp1.View.Model.Doctor
             var app = Application.Current as App;
             _drugController = app.DrugController;
             DrugsToValidate = new ObservableCollection<Drug>();
-            foreach (Drug drug in _drugController.GetAll()) if (!drug.IsVerified && !drug.IsRejected)DrugsToValidate.Add(drug);
+            foreach (Drug drug in _drugController.GetAll()) if (!drug.IsVerified && !drug.IsRejected) DrugsToValidate.Add(drug);
             DrugValidationGrid.ItemsSource = DrugsToValidate;
             this.DataContext = this;
         }
 
+        private void DeclineBT_Click(object sender, RoutedEventArgs e)
+        {
+            CommentLabel.Visibility = Visibility.Visible;
+            CommentExceptionLabel.Visibility = Visibility.Hidden;
+            if (CommentTB.Text == "")
+            {
+                CommentLabel.Visibility = Visibility.Hidden;
+                CommentExceptionLabel.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                Drug drug = _drugController.GetById(((Drug)DrugValidationGrid.SelectedItems[0]).Id);
+                drug.IsRejected = true;
+                drug.Comment = CommentTB.Text;
+                _drugController.Update(drug);
+            }
+        }
+        private void VerifyBT_Click(object sender, RoutedEventArgs e)
+        {
+
+            Drug drug = _drugController.GetById(((Drug)DrugValidationGrid.SelectedItems[0]).Id);
+            drug.IsVerified = true;
+            _drugController.Update(drug);
+
+        }
     }
 }

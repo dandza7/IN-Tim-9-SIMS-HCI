@@ -37,5 +37,24 @@
 
     <Color x:Key="NoRed">#F21000</Color>
     <SolidColorBrush x:Key="NoRedBrush" Color="{StaticResource NoRed}"/>
+    
+
+    <Color x:Key="DarkestBlue">#003049</Color>
+    <SolidColorBrush x:Key="DarkestBlueBrush" Color="{StaticResource DarkestBlue}"/>
+
+    <Color x:Key="BasicRed">#D62828</Color>
+    <SolidColorBrush x:Key="BasicRedBrush" Color="{StaticResource BasicRed}"/>
+
+    <Color x:Key="Orange">#F77F00</Color>
+    <SolidColorBrush x:Key="OrangeBrush" Color="{StaticResource Orange}"/>
+
+    <Color x:Key="LightYellow">#FCBF49</Color>
+    <SolidColorBrush x:Key="LightYellowBrush" Color="{StaticResource LightYellow}"/>
+
+    <Color x:Key="SkinTone">#FFDBAC</Color>
+    <SolidColorBrush x:Key="SkinToneBrush" Color="{StaticResource SkinTone}"/>
+
+    <Color x:Key="PureWhite">#FFFFFF</Color>
+    <SolidColorBrush x:Key="PureWhiteBrush" Color="{StaticResource PureWhite}"/>
 
 </ResourceDictionary>

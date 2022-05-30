@@ -178,7 +178,9 @@ namespace WpfApp1.Model
             PatientId = patientId;
             RoomId = roomId;
         }
+        public Appointment()
+        {
+        }
 
-        
     }
 }
