@@ -151,6 +151,7 @@
     </Compile>
     <Compile Include="View\Dialog\PatientDialog\UpdateNoteDialog.xaml.cs">
       <DependentUpon>UpdateNoteDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Model\Doctor\DoctorReportView.xaml.cs">
       <DependentUpon>DoctorReportView.xaml</DependentUpon>
     </Compile>
