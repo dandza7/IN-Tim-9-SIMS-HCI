@@ -174,16 +174,7 @@ namespace WpfApp1.Repository
         }
         public Appointment GetById(int appointmentId)
         {
-            List<Appointment> appointments = GetAll().ToList();
-            foreach (Appointment a in appointments)
-            {
-                if (a.Id == appointmentId)
-                {
-                    return a;
-                }
-
-            }
-            return null;
+            return GetAll().ToList().SingleOrDefault(appointment => appointment.Id == appointmentId);
         }
 
         private Appointment ConvertCSVFormatToAppointment(string appointmentCSVFormat)
