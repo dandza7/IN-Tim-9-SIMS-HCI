@@ -12,22 +12,24 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using WpfApp1.View.Dialog.PatientDialog;
 using WpfApp1.ViewModel;
 
-namespace WpfApp1.View.Model.Patient
+namespace WpfApp1.View.Dialog.PatientDialog
 {
     /// <summary>
-    /// Interaction logic for PatientNotesView.xaml
+    /// Interaction logic for UpdateNoteDialog.xaml
     /// </summary>
-    public partial class PatientNotesView : Page
+    public partial class UpdateNoteDialog : Page
     {
-        public PatientNotesView()
+        public UpdateNoteDialog()
         {
             InitializeComponent();
-            this.DataContext = new NotesViewModel();
+            DataContext = new NotesViewModel();
+        }
+
+        private void SetAlarmButton_Click(object sender, RoutedEventArgs e)
+        {
+            AlarmPanel.Visibility = Visibility.Visible;
         }
     }
-
-    
 }

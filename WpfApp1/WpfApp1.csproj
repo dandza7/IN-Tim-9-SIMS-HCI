@@ -96,6 +96,7 @@
     <Compile Include="Controller\InventoryMovingController.cs" />
     <Compile Include="Controller\MedicalRecordController.cs" />
     <Compile Include="Controller\DrugController.cs" />
+    <Compile Include="Controller\NoteController.cs" />
     <Compile Include="Controller\NotificationController.cs" />
     <Compile Include="Controller\PatientController.cs" />
     <Compile Include="Controller\RenovationController.cs" />
@@ -113,6 +114,7 @@
     <Compile Include="Model\Inventory.cs" />
     <Compile Include="Model\InventoryMoving.cs" />
     <Compile Include="Model\MedicalRecord.cs" />
+    <Compile Include="Model\Note.cs" />
     <Compile Include="Model\Notification.cs" />
     <Compile Include="Model\Preview\InventoryPreview.cs" />
     <Compile Include="Model\Renovation.cs" />
@@ -127,6 +129,7 @@
     <Compile Include="Repository\InventoryMovingRepository.cs" />
     <Compile Include="Repository\InventoryRepository.cs" />
     <Compile Include="Repository\MedicalRecordRepository.cs" />
+    <Compile Include="Repository\NoteRepository.cs" />
     <Compile Include="Repository\RequestRepository.cs" />
     <Compile Include="Repository\SurveyRepository.cs" />
     <Compile Include="Repository\TherapyRepository.cs" />
@@ -134,6 +137,20 @@
     <Compile Include="Repository\DrugRepository.cs" />
     <Compile Include="Repository\NotificationRepository.cs" />
     <Compile Include="Repository\PatientRepository.cs" />
+    <None Include="Resources\Data\note.csv" />
+    <Compile Include="Service\NoteService.cs" />
+    <Compile Include="ViewModel\Commands\AddNewNote.cs" />
+    <Compile Include="ViewModel\Commands\DeleteNote.cs" />
+    <Compile Include="ViewModel\Commands\OpenAddNoteDialog.cs" />
+    <Compile Include="ViewModel\Commands\OpenAlarmField.cs" />
+    <Compile Include="ViewModel\Commands\OpenUpdateNoteDialog.cs" />
+    <Compile Include="ViewModel\Commands\UpdateNote.cs" />
+    <Compile Include="ViewModel\NotesViewModel.cs" />
+    <Compile Include="View\Dialog\PatientDialog\AddNoteDialog.xaml.cs">
+      <DependentUpon>AddNoteDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Dialog\PatientDialog\UpdateNoteDialog.xaml.cs">
+      <DependentUpon>UpdateNoteDialog.xaml</DependentUpon>
     <Compile Include="View\Model\Doctor\DoctorReportView.xaml.cs">
       <DependentUpon>DoctorReportView.xaml</DependentUpon>
     </Compile>
@@ -409,6 +426,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\Dialog\PatientDialog\AddNoteDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\Dialog\PatientDialog\AddPatientAppointmentDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -426,6 +447,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Dialog\PatientDialog\MovePatientAppointmentDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Dialog\PatientDialog\UpdateNoteDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
