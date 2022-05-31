@@ -34,26 +34,26 @@ namespace WpfApp1.Service
         }
         public List<DynamicEquipmentRequest> UpdateDynamicEquipment()
         {
-            List<DynamicEquipmentRequest> dynamicEquipmentRequestsForUpdating = _dynamicEquipmentRequestRepository.GetAllForUpdating();
+            List<DynamicEquipmentRequest> requests = _dynamicEquipmentRequestRepository.GetAllForUpdating();
 
-            foreach (DynamicEquipmentRequest dynamicEqRequest in dynamicEquipmentRequestsForUpdating)
+            foreach (DynamicEquipmentRequest request in requests)
             {
-                Inventory inventoryForUpdating = _inventoryRepository.GetByName(dynamicEqRequest.Name);
+                Inventory inventory = _inventoryRepository.GetByName(request.Name);
 
-                    if (inventoryForUpdating != null)
+                    if (inventory != null)
                     {
-                        _inventoryRepository.Update(new Inventory(inventoryForUpdating.Id, 0, dynamicEqRequest.Name, "D", inventoryForUpdating.Amount + dynamicEqRequest.Amount));
+                        _inventoryRepository.Update(new Inventory(inventory.Id, 0, request.Name, "D", inventory.Amount + request.Amount));
                     }
                     else
                     {
-                        Inventory newDynamicEquipment = new Inventory(0, dynamicEqRequest.Name, "D", dynamicEqRequest.Amount);
+                        Inventory newDynamicEquipment = new Inventory(0, request.Name, "D", request.Amount);
                         _inventoryRepository.Create(newDynamicEquipment);
                     }
 
-                _dynamicEquipmentRequestRepository.Delete(dynamicEqRequest.Id);
+                _dynamicEquipmentRequestRepository.Delete(request.Id);
 
             }
-            return dynamicEquipmentRequestsForUpdating;
+            return requests;
         }
 
     }
