@@ -137,6 +137,7 @@
     <Compile Include="Repository\DrugRepository.cs" />
     <Compile Include="Repository\NotificationRepository.cs" />
     <Compile Include="Repository\PatientRepository.cs" />
+    <None Include="packages.config" />
     <None Include="Resources\Data\note.csv" />
     <Compile Include="Service\NoteService.cs" />
     <Compile Include="ViewModel\Commands\AddNewNote.cs" />
@@ -157,7 +158,6 @@
     </Compile>
     <Compile Include="View\Validation\EmailValidation.cs" />
     <Compile Include="View\Validation\JmbgValidation.cs" />
-    <None Include="packages.config" />
     <None Include="Resources\Data\doctors.csv" />
     <Compile Include="Repository\RenovationRepository.cs" />
     <None Include="Resources\Data\doctors_requests.csv" />

@@ -40,6 +40,7 @@ namespace WpfApp1.View.Model.Doctor
         public List<DoctorsReport> patientReports = new List<DoctorsReport>();
         public ObservableCollection<DoctorAppointmentView> upcomingAppointments = new ObservableCollection<DoctorAppointmentView>();
         public DoctorAppointmentView currentAppointment = new DoctorAppointmentView();
+            public List<int> DrugIds = new List<int>();
 
         public int userId = -1;
         public static int trenutniTerminIndex = 0;
@@ -61,6 +62,8 @@ namespace WpfApp1.View.Model.Doctor
                 _drugController = app.DrugController;
             }//controller initialization
 
+
+            foreach (Drug d in _drugController.GetAll()) DrugIds.Add(d.Id);
             foreach (Appointment a in _appointmentController.GetAllByDoctorId(userId))
                 if (a.Beginning >= DateTime.Now)
                     this.upcomingAppointments.Add(
@@ -95,6 +98,7 @@ namespace WpfApp1.View.Model.Doctor
             UpcomingAppointmentsGrid.ItemsSource = upcomingAppointments;
             ReportsGrid.ItemsSource = patientReports;
             TherapiesGrid.ItemsSource = patientTherapies;
+            DrugCB.ItemsSource = DrugIds;
 
             FromLabel.Content = currentAppointment.Beginning;
             ToLabel.Content = currentAppointment.Ending;
@@ -193,7 +197,7 @@ namespace WpfApp1.View.Model.Doctor
             if (TherapiesGrid.SelectedIndex != -1) { 
             Therapy t = (Therapy)TherapiesGrid.SelectedItems[0];
             TherapyIdLabel.Content = "Update Therapy";
-            DrugCB.SelectedIndex = t.DrugId;
+            DrugCB.SelectedItem = t.DrugId;
             FrequencyTB.Text = t.Frequency.ToString();
             DurationTB.Text = t.Duration.ToString();
             }

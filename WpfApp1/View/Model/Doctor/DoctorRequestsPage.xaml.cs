@@ -25,14 +25,16 @@ namespace WpfApp1.View.Model.Doctor
     {
         RequestController _requestController;
         public ObservableCollection<Request> Requests;
+        public int userId = -1;
 
         public DoctorRequestsPage()
         {
             InitializeComponent();
             var app = Application.Current as App;
+            userId = int.Parse(app.Properties["userId"].ToString());
             _requestController = app.RequestController;
             Requests = new ObservableCollection<Request>();
-            Requests = (ObservableCollection<Request>)_requestController.GetAllByDoctorId(1);//DODATI ID ULOGOVANOG
+            Requests = (ObservableCollection<Request>)_requestController.GetAllByDoctorId(userId);
             RequestViewGrid.ItemsSource = Requests;
             this.DataContext = this;
         }
@@ -46,7 +48,7 @@ namespace WpfApp1.View.Model.Doctor
                     Convert.ToDateTime(BeginningDTP.Text),
                     Convert.ToDateTime(EndingDTP.Text),
                     Request.RequestStatusType.Pending,
-                    1,//DODATI ID ULOGOVANOG
+                    userId,
                     TitleTB.Text,
                     ContentTB.Text,
                     (bool)UrgentCBX.IsChecked

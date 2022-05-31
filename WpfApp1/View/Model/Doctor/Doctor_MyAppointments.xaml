@@ -9,27 +9,31 @@
       Title="Doctor_MyAppointments" >
 
     <Grid>
-        <GroupBox Header="Create Appointment" HorizontalAlignment="Left" Height="538" Margin="51,20,0,0" VerticalAlignment="Top" Width="341" Foreground="{DynamicResource WhiteBrush}" FontSize="20" FontFamily="Trajan Pro 3">
+        <GroupBox x:Name="FormGB" Header="Create Appointment" HorizontalAlignment="Left" Height="538" Margin="51,20,0,0" VerticalAlignment="Top" Width="341" Foreground="{DynamicResource WhiteBrush}" FontSize="20" FontFamily="Trajan Pro 3">
             <Grid>
 
-                <Label x:Name="labela" FontSize="15" Foreground="White" Content="Priority:" HorizontalAlignment="Left" Margin="22,115,0,364" />
-                <Label FontSize="15" Foreground="White" Content="From:" HorizontalAlignment="Left" Margin="48,164,0,315" />
-                <Label FontSize="15" Foreground="White" Content="To:" Margin="72,211,222,268" />
-                <CheckBox FontSize="15"  Content="Urgent" HorizontalAlignment="Left" Margin="203,258,0,231" Foreground="{DynamicResource WhiteBrush}"/>
-                <ComboBox FontSize="15"   x:Name="PriorityComboBox"  HorizontalAlignment="Left" Margin="112,115,0,0" VerticalAlignment="Top" Width="175" SelectedIndex="0" Height="28">
-                    <ComboBoxItem Content="Time"/>
-                    <ComboBoxItem Content="Doctor"/>
+                <Label x:Name="PatientLabel" FontSize="15" Foreground="White" Content="Patient:" HorizontalAlignment="Left" Margin="30,65,0,414" />
+                <ComboBox FontSize="15"   x:Name="PatientCB" DataContext="{Binding PatientIds}" HorizontalAlignment="Left" Margin="112,65,0,0" VerticalAlignment="Top" Width="175" SelectedIndex="0" Height="28">
+
                 </ComboBox>
-                <xctk:DateTimePicker x:Name="BeginningDTP" Margin="112,164,42,315"/>
-                <xctk:DateTimePicker x:Name="EndingDTP" Margin="112,211,42,0" VerticalAlignment="Top"/>
-                <Button Style="{StaticResource DoctorYesButton}" Content="Confirm" Margin="0,0,30,20" Width="100" VerticalAlignment="Bottom" HorizontalAlignment="Right" Height="31"/>
-                <Button Style="{StaticResource DoctorNoButton}" Content="Discard" HorizontalAlignment="Left" Margin="30,0,0,20" Width="100" VerticalAlignment="Bottom" Height="31" />
+                <Label FontSize="15" Foreground="White" Content="Type:" HorizontalAlignment="Left" Margin="30,122,0,357" />
+                <ComboBox FontSize="15"   x:Name="TypeCB"  HorizontalAlignment="Left" Margin="112,122,0,0" VerticalAlignment="Top" Width="175" SelectedIndex="0" Height="28">
+                    <ComboBoxItem Content="regular"/>
+                    <ComboBoxItem Content="surgery"/>
+                </ComboBox>
+                <Label FontSize="15" Foreground="White" Content="From:" HorizontalAlignment="Left" Margin="30,175,0,304" RenderTransformOrigin="-0.034,0.25" />
+                <Label FontSize="15" Foreground="White" Content="To:" Margin="30,233,264,246" />
+                <CheckBox x:Name="UrgentCB" FontSize="15"  Content="Urgent" HorizontalAlignment="Left" Margin="203,290,0,199" Foreground="{DynamicResource WhiteBrush}"/>
+                <xctk:DateTimePicker x:Name="BeginningDTP" Margin="112,175,42,304" FontSize="15"/>
+                <xctk:DateTimePicker x:Name="EndingDTP" Margin="112,233,42,0" VerticalAlignment="Top" FontSize="15" Height="28"/>
+                <Button x:Name="ConfirmBT" Style="{StaticResource DoctorYesButton}" Content="Confirm" Margin="0,0,42,55" Width="100" VerticalAlignment="Bottom" HorizontalAlignment="Right" Height="31" Click="ConfirmBT_Click"/>
+                <Button x:Name="Discard" Style="{StaticResource DoctorNoButton}" Content="Discard" HorizontalAlignment="Left" Margin="30,0,0,55" Width="100" VerticalAlignment="Bottom" Height="31" Click="Discard_Click" />
             </Grid>
         </GroupBox>
         <GroupBox Header="Future Appointments" HorizontalAlignment="Left" Height="300" Margin="430,20,0,0" VerticalAlignment="Top" Width="830" Foreground="{DynamicResource WhiteBrush}" FontSize="20" FontFamily="Trajan Pro 3">
             <DataGrid x:Name="FutureAppointmentsGrid" Margin="12,30,12,12" Width="794"
                       AutoGenerateColumns="False" Style="{StaticResource DoctorDataGrid}" 
-                      ItemsSource="{Binding appointments}" >
+                      ItemsSource="{Binding appointments}" SelectionChanged="FutureAppointmentsGrid_SelectionChanged" >
                 <DataGrid.Columns>
                     <DataGridTextColumn Header=" Patient" Width="150"  Binding="{Binding Patient}" HeaderStyle="{StaticResource DoctorDGHeader}" CellStyle="{StaticResource DoctorDGCell}"/>
                     <DataGridTextColumn Header=" Beginning" Width="3*" Binding="{Binding Beginning}"  HeaderStyle="{StaticResource DoctorDGHeader}" CellStyle="{StaticResource DoctorDGCell}"/>
