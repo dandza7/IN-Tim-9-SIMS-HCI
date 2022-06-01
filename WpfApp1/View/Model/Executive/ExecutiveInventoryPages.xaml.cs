@@ -167,8 +167,8 @@ namespace WpfApp1.View.Model.Executive
             OpenDG = FindResource("OpenDG") as Storyboard;
             this.InventorySource = _inventoryController.GetPreviews();
             this.Inventory = new ObservableCollection<InventoryPreview>();
-            FilterInventory();
             this.SearchToken = "";
+            FilterInventory();
         }
 
 
