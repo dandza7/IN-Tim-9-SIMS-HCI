@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using WpfApp1.Model;
+using WpfApp1.Model.Preview;
 using WpfApp1.Service;
 
 namespace WpfApp1.Controller
@@ -20,6 +21,11 @@ namespace WpfApp1.Controller
         public IEnumerable<Doctor> GetAll()
         {
             return _doctorService.GetAll();
+        }
+        //DANETOVA FUNKCIJA ISPOD
+        public IEnumerable<DoctorPreview> GetAllPreviews()
+        {
+            return _doctorService.GetAllPreviews();
         }
 
         public Doctor GetById(int id)

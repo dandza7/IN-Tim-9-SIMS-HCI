@@ -12,19 +12,21 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using WpfApp1.Controller;
+using WpfApp1.Model.Preview;
 using WpfApp1.ViewModel;
 
-namespace WpfApp1.View.Model.Executive
+namespace WpfApp1.View.Model.Executive.ExecutiveStatisticsDialogs
 {
     /// <summary>
-    /// Interaction logic for ExecutiveStatisticsPage.xaml
+    /// Interaction logic for DoctorStatistics.xaml
     /// </summary>
-    public partial class ExecutiveStatisticsPages : Page
+    public partial class DoctorStatistics : Page
     {
-        public ExecutiveStatisticsPages()
+        public DoctorStatistics(DoctorPreview doc, SurveyController surCon)
         {
             InitializeComponent();
-            this.DataContext = new StatisticsViewModel(this);
+            this.DataContext = new DoctorStatisticsViewModel(doc, surCon);
         }
     }
 }

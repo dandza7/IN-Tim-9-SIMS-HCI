@@ -30,6 +30,17 @@ namespace WpfApp1.Service
         {
             return _surveyRepository.GetById(id);
         }
+        public List<Survey> GetAllByDoctorsId(int docId)
+        {
+            List<Survey> raw = _surveyRepository.GetAll().ToList();
+            List<Survey> retVal = new List<Survey>();
+            foreach(Survey survey in raw)
+            {
+                if (survey.DoctorId == docId)
+                    retVal.Add(survey);
+            }
+            return retVal;
+        }
 
         public bool IsAlreadyGraded(int patientId, int appointmentId)
         {
