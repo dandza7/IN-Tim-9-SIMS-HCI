@@ -50,7 +50,9 @@ namespace WpfApp1.View.Model.Executive
 
         private void StatisticsButton_Click(object sender, RoutedEventArgs e)
         {
-
+            ExecutivePagesFrame.Content = new ExecutiveStatisticsPages();
+            Storyboard sb1 = FindResource("myStoryboard") as Storyboard;
+            sb1.Begin();
         }
 
         private void HelpButton_Click(object sender, RoutedEventArgs e)

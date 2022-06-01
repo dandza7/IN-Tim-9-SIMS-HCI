@@ -156,6 +156,9 @@
     <Compile Include="View\Model\Doctor\DoctorReportView.xaml.cs">
       <DependentUpon>DoctorReportView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Model\Executive\ExecutiveStatisticsPages.xaml.cs">
+      <DependentUpon>ExecutiveStatisticsPages.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Validation\EmailValidation.cs" />
     <Compile Include="View\Validation\JmbgValidation.cs" />
     <None Include="Resources\Data\doctors.csv" />
@@ -600,6 +603,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Model\Executive\ExecutiveRoomDialogs\NewRoom.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Model\Executive\ExecutiveStatisticsPages.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

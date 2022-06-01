@@ -84,7 +84,7 @@ namespace WpfApp1
             var notificationService = new NotificationService(notificationRepository, drugRepository, medicalRecordRepository, therapyRepository);
             NotificationController = new NotificationController(notificationService);
 
-            var roomService = new RoomService(roomRepository, doctorRepository, inventoryMovingRepository, inventoryRepository, renovationRepository, notificationRepository, appointmentRepository);
+            var roomService = new RoomService(roomRepository, doctorRepository, inventoryMovingRepository, inventoryRepository, renovationRepository, appointmentRepository);
             RoomController = new RoomController(roomService);
 
             var patientService = new PatientService(userRepository, patientRepository, therapyRepository, medicalRecordRepository, drugRepository, notificationRepository, appointmentRepository);
