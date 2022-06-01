@@ -15,21 +15,17 @@ namespace WpfApp1.Service
         public readonly InventoryMovingRepository _inventoryMovingRepository;
         public readonly InventoryRepository _inventoryRepository;
         public readonly RenovationRepository _renovationRepository;
-        public readonly NotificationRepository _notificationRepository;
         public readonly AppointmentRepository _appointmentRepository;
 
         public RoomService(RoomRepository roomRepository, DoctorRepository doctorRepository, InventoryMovingRepository inventoryMovingRepository, 
-                            InventoryRepository inventoryRepository, RenovationRepository renovationRepository,
-                            NotificationRepository notificationRepository, AppointmentRepository appointmentRepository)
+                            InventoryRepository inventoryRepository, RenovationRepository renovationRepository, AppointmentRepository appointmentRepository)
         {
             _roomRepository = roomRepository;
             _doctorRepository = doctorRepository;
             _inventoryMovingRepository = inventoryMovingRepository;
             _inventoryRepository = inventoryRepository;
             _renovationRepository = renovationRepository;
-            _notificationRepository = notificationRepository;
             _appointmentRepository = appointmentRepository;
-
         }
         public List<Room> GetAll()
         {
