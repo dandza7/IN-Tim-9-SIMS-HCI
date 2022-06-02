@@ -41,6 +41,8 @@ namespace WpfApp1.Model
             }
         }
 
+
+
         public string Name
         {
             get
