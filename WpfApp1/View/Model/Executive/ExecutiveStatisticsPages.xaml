@@ -18,6 +18,7 @@
             </DoubleAnimationUsingKeyFrames>
         </Storyboard>
     </Page.Resources>
+
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
@@ -29,8 +30,10 @@
             <RowDefinition Height="70"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
+
         <Button x:Name="DoctorStatistics" Grid.Column="0" Grid.ColumnSpan="2"  Style="{StaticResource ClassicButton}" Margin="0 5 0 0" Command="{Binding NavigateDoctorsList}">Doctor Statistics</Button>
         <Button x:Name="HospitalStatistics" Grid.Column="2" Grid.ColumnSpan="2"  Style="{StaticResource ClassicButton}" Margin="0 5 0 0" Command="{Binding NavigateHospitalStats}">Hospital Statistics</Button>
         <Frame x:Name="ListFrame" Grid.Column="0" Grid.ColumnSpan="4" Grid.Row="1" Grid.RowSpan="2"/>
+
     </Grid>
 </Page>

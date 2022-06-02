@@ -15,6 +15,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using WpfApp1.ViewModel;
 
+
 namespace WpfApp1.View.Model.Executive
 {
     /// <summary>
@@ -28,6 +29,7 @@ namespace WpfApp1.View.Model.Executive
             InitializeComponent();
             this.sb1 = FindResource("myStoryboard") as Storyboard;
             this.DataContext = new StatisticsViewModel(this);
+
 
         }
     }
