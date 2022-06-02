@@ -21,16 +21,20 @@ namespace WpfApp1.ViewModel
         }
         public ExecutiveStatisticsPages ParentPage { get; set; }
         public NavigateDoctorsList NavigateDoctorsList { get; set; }
+        public NavigateHospitalStats NavigateHospitalStats { get; set; }
         public StatisticsViewModel(ExecutiveStatisticsPages parentPage)
         {
             this.ParentPage = parentPage;
             this.NavigateDoctorsList = new NavigateDoctorsList(this);
+            this.NavigateHospitalStats = new NavigateHospitalStats(this);
         }
 
-        public void NavigateList(string path)
+        public void NavigateFrame(string path)
         {
             this.ParentPage.ListFrame.NavigationService.Navigate(new Uri(path, UriKind.Relative));
+            this.ParentPage.sb1.Begin();
         }
+
     }
 
 }

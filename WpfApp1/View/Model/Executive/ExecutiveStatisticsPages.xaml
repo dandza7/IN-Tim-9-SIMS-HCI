@@ -7,7 +7,17 @@
       mc:Ignorable="d" 
       d:DesignHeight="570" d:DesignWidth="1280"
       Title="ExecutiveStatisticsPage">
-
+    <Page.Resources>
+        <Storyboard x:Name="myStoryboard" x:Key="myStoryboard">
+            <DoubleAnimationUsingKeyFrames
+                       Storyboard.TargetName="ListFrame"
+                       Storyboard.TargetProperty="Opacity"
+                       Duration="0:0:1">
+                <LinearDoubleKeyFrame Value="0" KeyTime="0:0:0" />
+                <LinearDoubleKeyFrame Value="1.0" KeyTime="0:0:1" />
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+    </Page.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
@@ -20,7 +30,7 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
         <Button x:Name="DoctorStatistics" Grid.Column="0" Grid.ColumnSpan="2"  Style="{StaticResource ClassicButton}" Margin="0 5 0 0" Command="{Binding NavigateDoctorsList}">Doctor Statistics</Button>
-        <Button x:Name="HospitalStatistics" Grid.Column="2" Grid.ColumnSpan="2"  Style="{StaticResource ClassicButton}" Margin="0 5 0 0">Hospital Statistics</Button>
+        <Button x:Name="HospitalStatistics" Grid.Column="2" Grid.ColumnSpan="2"  Style="{StaticResource ClassicButton}" Margin="0 5 0 0" Command="{Binding NavigateHospitalStats}">Hospital Statistics</Button>
         <Frame x:Name="ListFrame" Grid.Column="0" Grid.ColumnSpan="4" Grid.Row="1" Grid.RowSpan="2"/>
     </Grid>
 </Page>

@@ -9,26 +9,25 @@ using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using WpfApp1.Controller;
+using WpfApp1.Model.Preview;
 using WpfApp1.ViewModel;
 
-namespace WpfApp1.View.Model.Executive
+namespace WpfApp1.View.Model.Executive.ExecutiveStatisticsDialogs
 {
     /// <summary>
-    /// Interaction logic for ExecutiveStatisticsPage.xaml
+    /// Interaction logic for HospitalStatistics.xaml
     /// </summary>
-    public partial class ExecutiveStatisticsPages : Page
+    public partial class HospitalStatistics : Page
     {
-        public Storyboard sb1 { get; set; }
-        public ExecutiveStatisticsPages()
+        public HospitalStatistics()
         {
             InitializeComponent();
-            this.sb1 = FindResource("myStoryboard") as Storyboard;
-            this.DataContext = new StatisticsViewModel(this);
-
+            var app = Application.Current as App;
+            this.DataContext = new DoctorStatisticsViewModel(new DoctorPreview(-1, "", ""), app.SurveyController);
         }
     }
 }

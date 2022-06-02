@@ -44,10 +44,13 @@ namespace WpfApp1.ViewModel
             doctorController = docCon;
             surveyController = surCon;
             this.Doctors = doctorController.GetAllPreviews().ToList();
+            if(Doctors.Count > 0)
+                SelectedDoctor = Doctors[0];
         }
         public void ShowStatistics()
         {
             ParentPage.StatsFrame.Content = new DoctorStatistics(SelectedDoctor, surveyController);
+            ParentPage.sb1.Begin();
         }
     }
 }

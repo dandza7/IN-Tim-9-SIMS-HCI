@@ -72,12 +72,12 @@ namespace WpfApp1.ViewModel
             }
             if(count > 0)
             {
-                Math.Round(Grade1 /= count, 2);
-                Math.Round(Grade2 /= count, 2);
-                Math.Round(Grade3 /= count, 2);
-                Math.Round(Grade4 /= count, 2);
-                Math.Round(Grade5 /= count, 2);
-                Math.Round(AvgGrade /= count*5, 2);
+                Grade1 = Math.Round(Grade1 / count, 2);
+                Grade2 = Math.Round(Grade2 / count, 2);
+                Grade3 = Math.Round(Grade3 / count, 2);
+                Grade4 = Math.Round(Grade4 / count, 2);
+                Grade5 = Math.Round(Grade5 / count, 2);
+                AvgGrade = Math.Round(AvgGrade / (count*5), 2);
             }
             else
             {

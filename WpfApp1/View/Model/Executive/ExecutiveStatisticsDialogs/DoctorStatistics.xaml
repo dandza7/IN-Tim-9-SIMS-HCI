@@ -5,7 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:WpfApp1.View.Model.Executive.ExecutiveStatisticsDialogs"
       mc:Ignorable="d" 
-      d:DesignHeight="500" d:DesignWidth="640"
+      d:DesignHeight="480" d:DesignWidth="620"
       Title="DoctorStatistics">
 
     <Grid>
@@ -26,17 +26,17 @@
                     <RowDefinition/>
                 </Grid.RowDefinitions>
                 <TextBlock Text="{Binding DoctorsName}" Style="{StaticResource Title}" FontSize="64" Grid.ColumnSpan="2"></TextBlock>
-                <TextBlock Text="Average Grade:" Style="{StaticResource Title}" Grid.Column="0" Grid.Row="2" HorizontalAlignment="Left" Margin="140 0 0 0"></TextBlock>
+                <TextBlock Text="Average Grade:" Style="{StaticResource Title}" Grid.Column="0" Grid.Row="2" HorizontalAlignment="Left" Margin="130 0 0 0"></TextBlock>
                 <TextBlock Text="{Binding AvgGrade}" Style="{StaticResource Title}" Grid.Column="1" Grid.Row="2" HorizontalAlignment="Left"></TextBlock>
-                <TextBlock Text="Ability:" Style="{StaticResource Title}" Grid.Column="0" Grid.Row="3" HorizontalAlignment="Left" Margin="140 0 0 0"></TextBlock>
+                <TextBlock Text="Ability:" Style="{StaticResource Title}" Grid.Column="0" Grid.Row="3" HorizontalAlignment="Left" Margin="130 0 0 0"></TextBlock>
                 <TextBlock Text="{Binding Grade1}" Style="{StaticResource Title}" Grid.Column="2" Grid.Row="3" HorizontalAlignment="Left"></TextBlock>
-                <TextBlock Text="Professionalism:" Style="{StaticResource Title}" Grid.Column="0" Grid.Row="4" HorizontalAlignment="Left" Margin="140 0 0 0"></TextBlock>
+                <TextBlock Text="Professionalism:" Style="{StaticResource Title}" Grid.Column="0" Grid.Row="4" HorizontalAlignment="Left" Margin="130 0 0 0"></TextBlock>
                 <TextBlock Text="{Binding Grade2}" Style="{StaticResource Title}" Grid.Column="3" Grid.Row="4" HorizontalAlignment="Left"></TextBlock>
-                <TextBlock Text="Availability:" Style="{StaticResource Title}" Grid.Column="0" Grid.Row="5" HorizontalAlignment="Left" Margin="140 0 0 0"></TextBlock>
+                <TextBlock Text="Availability:" Style="{StaticResource Title}" Grid.Column="0" Grid.Row="5" HorizontalAlignment="Left" Margin="130 0 0 0"></TextBlock>
                 <TextBlock Text="{Binding Grade3}" Style="{StaticResource Title}" Grid.Column="4" Grid.Row="5" HorizontalAlignment="Left"></TextBlock>
-                <TextBlock Text="Treatment:" Style="{StaticResource Title}" Grid.Column="0" Grid.Row="6" HorizontalAlignment="Left" Margin="140 0 0 0"></TextBlock>
+                <TextBlock Text="Treatment:" Style="{StaticResource Title}" Grid.Column="0" Grid.Row="6" HorizontalAlignment="Left" Margin="130 0 0 0"></TextBlock>
                 <TextBlock Text="{Binding Grade4}" Style="{StaticResource Title}" Grid.Column="5" Grid.Row="6" HorizontalAlignment="Left"></TextBlock>
-                <TextBlock Text="Selection:" Style="{StaticResource Title}" Grid.Column="0" Grid.Row="7" HorizontalAlignment="Left" Margin="140 0 0 0"></TextBlock>
+                <TextBlock Text="Selection:" Style="{StaticResource Title}" Grid.Column="0" Grid.Row="7" HorizontalAlignment="Left" Margin="130 0 0 0"></TextBlock>
                 <TextBlock Text="{Binding Grade5}" Style="{StaticResource Title}" Grid.Column="5" Grid.Row="7" HorizontalAlignment="Left"></TextBlock>
             </Grid>
         </Border>

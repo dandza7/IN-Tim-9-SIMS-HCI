@@ -7,12 +7,12 @@ using System.Windows.Input;
 
 namespace WpfApp1.ViewModel.Commands.Executive
 {
-    internal class NavigateDoctorsList : ICommand
+    internal class NavigateHospitalStats : ICommand
     {
         public StatisticsViewModel StatisticsViewModel { get; set; }
 
 
-        public NavigateDoctorsList(StatisticsViewModel statisticsViewModel)
+        public NavigateHospitalStats(StatisticsViewModel statisticsViewModel)
         {
             this.StatisticsViewModel = statisticsViewModel;
         }
@@ -26,8 +26,7 @@ namespace WpfApp1.ViewModel.Commands.Executive
 
         public void Execute(object parameter)
         {
-            StatisticsViewModel.NavigateFrame("View/Model/Executive/ExecutiveStatisticsDialogs/DoctorsList.xaml");
+            StatisticsViewModel.NavigateFrame("View/Model/Executive/ExecutiveStatisticsDialogs/HospitalStatistics.xaml");
         }
     }
 }
-

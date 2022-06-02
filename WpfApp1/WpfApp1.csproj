@@ -143,6 +143,7 @@
     <Compile Include="Service\NoteService.cs" />
     <Compile Include="ViewModel\Commands\AddNewNote.cs" />
     <Compile Include="ViewModel\Commands\DeleteNote.cs" />
+    <Compile Include="ViewModel\Commands\Executive\NavigateHospitalStats.cs" />
     <Compile Include="ViewModel\DoctorStatisticsViewModel.cs" />
     <Compile Include="ViewModel\Commands\Executive\NavigateDoctorsList.cs" />
     <Compile Include="ViewModel\Commands\OpenAddNoteDialog.cs" />
@@ -166,6 +167,9 @@
     </Compile>
     <Compile Include="View\Model\Executive\ExecutiveStatisticsDialogs\DoctorStatistics.xaml.cs">
       <DependentUpon>DoctorStatistics.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Model\Executive\ExecutiveStatisticsDialogs\HospitalStatistics.xaml.cs">
+      <DependentUpon>HospitalStatistics.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Model\Executive\ExecutiveStatisticsPages.xaml.cs">
       <DependentUpon>ExecutiveStatisticsPages.xaml</DependentUpon>
@@ -622,6 +626,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Model\Executive\ExecutiveStatisticsDialogs\DoctorStatistics.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Model\Executive\ExecutiveStatisticsDialogs\HospitalStatistics.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

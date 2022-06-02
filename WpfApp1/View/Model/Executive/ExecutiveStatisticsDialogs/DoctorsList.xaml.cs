@@ -9,6 +9,7 @@ using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
@@ -23,11 +24,12 @@ namespace WpfApp1.View.Model.Executive.ExecutiveStatisticsDialogs
     /// </summary>
     public partial class DoctorsList : Page
     {
-
+        public Storyboard sb1 { get; set; }
         public DoctorsList()
         {
             InitializeComponent();
             var app = Application.Current as App;
+            this.sb1 = FindResource("myStoryboard") as Storyboard;
             this.DataContext = new DoctorsListViewModel(this, app.DoctorController, app.SurveyController);
         }
     }
