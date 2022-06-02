@@ -81,7 +81,7 @@ namespace WpfApp1
             var requestRepository = new RequestRepository(REQUEST_FILE, CSV_DELIMITER, DATETIME_FORMAT);
             var noteRepository = new NoteRepository(NOTE_FILE, CSV_DELIMITER, DATETIME_FORMAT);
 
-            var notificationService = new NotificationService(notificationRepository, drugRepository, medicalRecordRepository, therapyRepository);
+            var notificationService = new NotificationService(notificationRepository, drugRepository, medicalRecordRepository, therapyRepository, noteRepository);
             NotificationController = new NotificationController(notificationService);
 
             var roomService = new RoomService(roomRepository, doctorRepository, inventoryMovingRepository, inventoryRepository, renovationRepository, notificationRepository, appointmentRepository);

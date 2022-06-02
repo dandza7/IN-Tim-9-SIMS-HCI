@@ -7,25 +7,40 @@
         xmlns:local="clr-namespace:WpfApp1.View.Dialog.PatientDialog"
         mc:Ignorable="d" 
         d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-        <Rectangle Width="450" Height="600" Fill="{StaticResource LightBlueBrush}" StrokeThickness="0"></Rectangle>
-        <WrapPanel  HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0, 80, 0, 0">
+    <Grid Width="660" Height="450" Background="{StaticResource LightBlueBrush}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="220"/>
+            <ColumnDefinition Width="60"/>
+            <ColumnDefinition Width="160"/>
+            <ColumnDefinition Width="40"/>
+            <ColumnDefinition Width="180"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="120"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+        <WrapPanel Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="5" HorizontalAlignment="Center" Margin="0, 30">
             <Label Content="Appointment Moving"  FontSize="24" Foreground="White" FontWeight="Bold"/>
             <Button Style="{StaticResource HelpButton}" Click="HelpButton_Click"/>
         </WrapPanel>
-        <Label Foreground="White" Content="Choose priority:" HorizontalAlignment="Left" Margin="337,175,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
-        <Label Foreground="White" Content="Choose time range:" HorizontalAlignment="Left" Margin="337,235,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
-        <Label Foreground="White" Content="From:" HorizontalAlignment="Left" Margin="337,280,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
-        <Label Foreground="White" Content="To:" HorizontalAlignment="Left" Margin="337,310,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
-        <Label Foreground="White" Content="Choose a doctor:" HorizontalAlignment="Left" Margin="337,375,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
-        <Button Style="{StaticResource PatientDataGridButton}" Content="Confirm" HorizontalAlignment="Center" Margin="0,0,0,100" VerticalAlignment="Bottom" Click="MoveAppointment_Click"/>
-        <Button Style="{StaticResource PatientDataGridButton}" Content="Discard" HorizontalAlignment="Center" Margin="210,0,0,100" VerticalAlignment="Bottom" Click="DiscardButton_Click"/>
-        <ComboBox x:Name="PriorityComboBox" HorizontalAlignment="Left" Margin="537,175,0,0" VerticalAlignment="Top" Width="120">
+        <Label Grid.Row="1" Style="{StaticResource SmallProfileLabel}" Margin="30, 0, 0, 0" FontSize="17" Content="Choose priority:"/>
+        <ComboBox Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="4" x:Name="PriorityComboBox" Margin="0, 30" Width="200" Height="30">
             <ComboBoxItem Content="Time"/>
             <ComboBoxItem Content="Doctor"/>
         </ComboBox>
-        <ComboBox x:Name="DoctorComboBox" HorizontalAlignment="Left" Margin="537,375,0,0" VerticalAlignment="Top" Width="120" ItemsSource="{Binding Doctors}" DisplayMemberPath="Username"/>
-        <xctk:DateTimePicker x:Name="BeginningDTP" HorizontalAlignment="Left" Margin="382,280,0,0" VerticalAlignment="Top"/>
-        <xctk:DateTimePicker x:Name="EndingDTP" HorizontalAlignment="Left" Margin="382,310,0,0" VerticalAlignment="Top"/>
+        <Label Grid.Row="2" Style="{StaticResource SmallProfileLabel}" Margin="30, 0, 0, 0" FontSize="17" Content="Choose time range:"/>
+        <Label Grid.Row="2" Grid.Column="1" Style="{StaticResource SmallProfileLabel}" Margin="0" FontSize="17" Content="From:"/>
+        <xctk:DateTimePicker x:Name="BeginningDTP" Grid.Row="2" Grid.Column="2" Margin="0, 5" Height="30"/>
+        <Label Grid.Row="2" Grid.Column="3" Style="{StaticResource SmallProfileLabel}" FontSize="17" Margin="0, 30" Content="To:"/>
+        <xctk:DateTimePicker x:Name="EndingDTP" Grid.Row="2" Grid.Column="4" Margin="0, 0, 20, 0" Height="30"/>
+        <Label Grid.Row="3" Grid.Column="0" Style="{StaticResource SmallProfileLabel}" Margin="30, 0, 0, 0" FontSize="17" Content="Choose a doctor:"/>
+        <ComboBox x:Name="DoctorComboBox" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="4" Margin="0, 30" Width="200" Height="30" ItemsSource="{Binding Doctors}" DisplayMemberPath="Username"/>
+        <WrapPanel Grid.Row="4" Grid.Column="3" Grid.ColumnSpan="2" Margin="20">
+            <Button Style="{StaticResource PatientDataGridButton}" Content="Confirm" Click="MoveAppointment_Click"/>
+            <Button Style="{StaticResource PatientDataGridButton}" Content="Discard" Click="DiscardButton_Click"/>
+        </WrapPanel>
     </Grid>
 </Page>

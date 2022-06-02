@@ -139,12 +139,12 @@
     <Compile Include="Repository\PatientRepository.cs" />
     <None Include="Resources\Data\note.csv" />
     <Compile Include="Service\NoteService.cs" />
-    <Compile Include="ViewModel\Commands\AddNewNote.cs" />
-    <Compile Include="ViewModel\Commands\DeleteNote.cs" />
-    <Compile Include="ViewModel\Commands\OpenAddNoteDialog.cs" />
-    <Compile Include="ViewModel\Commands\OpenAlarmField.cs" />
-    <Compile Include="ViewModel\Commands\OpenUpdateNoteDialog.cs" />
-    <Compile Include="ViewModel\Commands\UpdateNote.cs" />
+    <Compile Include="ViewModel\Commands\Patient\AddNewNote.cs" />
+    <Compile Include="ViewModel\Commands\Patient\DeleteNote.cs" />
+    <Compile Include="ViewModel\Commands\Patient\OpenAddNoteDialog.cs" />
+    <Compile Include="ViewModel\Commands\Patient\OpenAlarmField.cs" />
+    <Compile Include="ViewModel\Commands\Patient\OpenUpdateNoteDialog.cs" />
+    <Compile Include="ViewModel\Commands\Patient\UpdateNote.cs" />
     <Compile Include="ViewModel\NotesViewModel.cs" />
     <Compile Include="View\Dialog\PatientDialog\AddNoteDialog.xaml.cs">
       <DependentUpon>AddNoteDialog.xaml</DependentUpon>

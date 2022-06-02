@@ -22,8 +22,6 @@ namespace WpfApp1.Model
         private int _patientId;
         private string _content;
         private DateTime _alarmTime;
-        private bool _isDeleted;
-        private DateTime _deletedTime;
 
         public int Id
         {
@@ -89,55 +87,19 @@ namespace WpfApp1.Model
             }
         }
 
-        public bool IsDeleted
-        {
-            get
-            {
-                return _isDeleted;
-            }
-            set
-            {
-                if (value != _isDeleted)
-                {
-                    _isDeleted = value;
-                    OnPropertyChanged("IsDeleted");
-                }
-            }
-        }
-
-        public DateTime DeletedTime
-        {
-            get
-            {
-                return _deletedTime;
-            }
-            set
-            {
-                if (value != _deletedTime)
-                {
-                    _deletedTime = value;
-                    OnPropertyChanged("DeletedTime");
-                }
-            }
-        }
-
-        public Note(int id, int patientId, string content, DateTime alarmTime, bool isDeleted, DateTime deletedTime)
+        public Note(int id, int patientId, string content, DateTime alarmTime)
         {
             Id = id;
             PatientId = patientId;
             Content = content;
             AlarmTime = alarmTime;
-            IsDeleted = isDeleted;
-            DeletedTime = deletedTime;
         }
 
-        public Note(int patientId, string content, DateTime time, bool isDeleted, DateTime deletedTime)
+        public Note(int patientId, string content, DateTime time)
         {
             PatientId = patientId;
             Content = content;
             AlarmTime = time;
-            IsDeleted = isDeleted;
-            DeletedTime = deletedTime;
         }
     }
 }

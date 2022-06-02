@@ -22,6 +22,11 @@ namespace WpfApp1.Controller
             return _notificationService.GetAll();
         }
 
+        public Notification GetById(int id)
+        {
+            return _notificationService.GetById(id);
+        }
+
         public IEnumerable<Notification> GetUsersNotDeletedNotifications(int userId)
         {
             return _notificationService.GetUsersNotDeletedNotifications(userId);
@@ -55,6 +60,11 @@ namespace WpfApp1.Controller
         public void GetScheduledTherapyNotifications(int patientId)
         {
             _notificationService.GetScheduledTherapyNotifications(patientId);
+        }
+
+        public void GetScheduledAlarmsForPatient(int patientId)
+        {
+            _notificationService.GetScheduledAlarmsForPatient(patientId);
         }
     }
 }

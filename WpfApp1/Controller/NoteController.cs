@@ -27,9 +27,9 @@ namespace WpfApp1.Controller
             return _noteService.GetById(id);
         }
 
-        public IEnumerable<Note> GetPatientsNotDeletedNotes(int patientId)
+        public IEnumerable<Note> GetPatientsNotes(int patientId)
         {
-            return _noteService.GetPatientsNotDeletedNotes(patientId);
+            return _noteService.GetPatientsNotes(patientId);
         }
 
         public Note Create(Note note)
@@ -42,14 +42,9 @@ namespace WpfApp1.Controller
             return _noteService.Update(note);
         }
 
-        public void DeleteOldLogicallyDeletedNotes(int patientId)
+        public bool Delete(int id)
         {
-            _noteService.DeleteOldLogicallyDeletedNotes(patientId);
-        }
-
-        public bool DeleteLogically(int id)
-        {
-            return _noteService.DeleteLogically(id);
+            return _noteService.Delete(id);
         }
     }
 }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using WpfApp1.Model;
 
-namespace WpfApp1.ViewModel.Commands
+namespace WpfApp1.ViewModel.Commands.Patient
 {
     public class DeleteNote : ICommand
     {

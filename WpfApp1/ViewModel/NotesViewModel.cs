@@ -11,7 +11,7 @@ using WpfApp1.Controller;
 using WpfApp1.Model;
 using WpfApp1.View.Dialog.PatientDialog;
 using WpfApp1.View.Model.Patient;
-using WpfApp1.ViewModel.Commands;
+using WpfApp1.ViewModel.Commands.Patient;
 
 namespace WpfApp1.ViewModel
 {
@@ -103,8 +103,7 @@ namespace WpfApp1.ViewModel
             int patientId = (int)app.Properties["userId"];
             _noteController = app.NoteController;
 
-            _noteController.DeleteOldLogicallyDeletedNotes(patientId);
-            Notes = new ObservableCollection<Note>(_noteController.GetPatientsNotDeletedNotes(patientId));
+            Notes = new ObservableCollection<Note>(_noteController.GetPatientsNotes(patientId));
         }
 
         public void OpenAddNoteDialog()
@@ -137,10 +136,9 @@ namespace WpfApp1.ViewModel
                 alarmTime = DateTime.Parse(alarm.ToString());
             } else
             {
-                alarmTime = new DateTime(2001, 1, 1, 0, 0, 0);
+                alarmTime = new DateTime(2030, 1, 1, 0, 0, 0);
             }
-            DateTime deletedTime = new DateTime(2030, 1, 1, 0, 0, 0);
-            Note note = new Note(patientId, content, alarmTime, false, deletedTime);
+            Note note = new Note(patientId, content, alarmTime);
 
             _noteController = app.NoteController;
             _noteController.Create(note);
@@ -167,7 +165,7 @@ namespace WpfApp1.ViewModel
                 alarmTime = new DateTime(2001, 1, 1, 0, 0, 0);
             }
             DateTime deletedTime = new DateTime(2030, 1, 1, 0, 0, 0);
-            Note note = new Note(noteId, patientId, content, alarmTime, false, deletedTime);
+            Note note = new Note(noteId, patientId, content, alarmTime);
 
             _noteController = app.NoteController;
             _noteController.Update(note);
@@ -181,7 +179,7 @@ namespace WpfApp1.ViewModel
             var app = Application.Current as App;
             _noteController = app.NoteController;
 
-            _noteController.DeleteLogically(noteId);
+            _noteController.Delete(noteId);
             LoadPatientsNotes();
         }
 

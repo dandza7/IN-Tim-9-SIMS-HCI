@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
-namespace WpfApp1.ViewModel.Commands
+namespace WpfApp1.ViewModel.Commands.Patient
 {
     public class OpenAddNoteDialog : ICommand
     {

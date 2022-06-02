@@ -4,15 +4,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using WpfApp1.Model;
 
-namespace WpfApp1.ViewModel.Commands
+namespace WpfApp1.ViewModel.Commands.Patient
 {
-
-    public class AddNewNote : ICommand
+    public class OpenUpdateNoteDialog : ICommand
     {
         public NotesViewModel NotesViewModel { get; set; }
 
-        public AddNewNote(NotesViewModel notesViewModel)
+        public OpenUpdateNoteDialog(NotesViewModel notesViewModel)
         {
             NotesViewModel = notesViewModel;
         }
@@ -26,7 +26,9 @@ namespace WpfApp1.ViewModel.Commands
 
         public void Execute(object parameter)
         {
-            NotesViewModel.AddNewNote();
+            Note note = (Note)parameter;
+            int noteId = note.Id;
+            NotesViewModel.OpenUpdateNoteDialog(noteId);
         }
     }
 }

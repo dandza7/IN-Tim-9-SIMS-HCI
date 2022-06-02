@@ -36,7 +36,7 @@
         </WrapPanel>
         <Label Grid.Row="1" Grid.Column="0" Content="Hospital:" Style="{StaticResource SmallProfileLabel}" Grid.ColumnSpan="1" Margin="40,10"/>
         <TextBlock Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Text="Zdravo-Korporacija" Style="{StaticResource ProfileTextBlock}" FontWeight="Normal" Margin="0,0,40,0"/>
-        <TextBlock Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" Text="{Binding AppointmentView.Beginning, StringFormat=dd.MM.yyyy. HH:mm:ss}" Style="{StaticResource ProfileTextBlock}" FontWeight="Normal" Margin="0,0,40,0"/>
+        <TextBlock Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" Text="" Style="{StaticResource ProfileTextBlock}" FontWeight="Normal" Margin="0,0,40,0"/>
         <Label Grid.Row="4" Grid.Column="2" Content=" 5 - best grade" Style="{StaticResource SmallProfileLabel}" FontSize="20" FontWeight="Normal" Margin="20,0"/>
         <Label Grid.Row="5" Grid.Column="2" Content=" 1 - worst grade" Style="{StaticResource SmallProfileLabel}" FontSize="20" FontWeight="Normal" Margin="20,0"/>
         <Label Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2" Style="{StaticResource SmallProfileLabel}" Margin="40,0" Content="Questions:"/>

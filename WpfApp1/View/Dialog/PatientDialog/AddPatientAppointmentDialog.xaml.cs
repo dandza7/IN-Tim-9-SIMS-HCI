@@ -19,7 +19,6 @@ using WpfApp1.Model;
 using WpfApp1.Service;
 using WpfApp1.View.Converter;
 using WpfApp1.View.Model.Patient;
-using static WpfApp1.Model.Appointment;
 
 namespace WpfApp1.View.Dialog.PatientDialog
 {
@@ -58,8 +57,17 @@ namespace WpfApp1.View.Dialog.PatientDialog
 
             if (PriorityComboBox.SelectedValue == null) return;
             if (DoctorComboBox.SelectedValue == null) return;
-            if (BeginningDTP.Text == null || EndingDTP.Text == null) return;
 
+            if (BeginningDTP.Text == null)
+            {
+                PatientErrorMessageBox.Show("ERROR: Beginning of searching interval not specified!");
+                return;
+            }
+            if (EndingDTP.Text == null)
+            {
+                PatientErrorMessageBox.Show("ERROR: Ending of searching interval not specified!");
+                return;
+            }
             if (DateTime.Parse(BeginningDTP.Text) > DateTime.Parse(EndingDTP.Text))
             {
                 PatientErrorMessageBox.Show("ERROR: Start of wanted interval must be before its end!");

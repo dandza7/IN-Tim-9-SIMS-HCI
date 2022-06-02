@@ -5,12 +5,14 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
-namespace WpfApp1.ViewModel.Commands
+namespace WpfApp1.ViewModel.Commands.Patient
 {
-    public class OpenAlarmField : ICommand
+
+    public class AddNewNote : ICommand
     {
-        public NotesViewModel NotesViewModel { get; set; }  
-        public OpenAlarmField(NotesViewModel notesViewModel)
+        public NotesViewModel NotesViewModel { get; set; }
+
+        public AddNewNote(NotesViewModel notesViewModel)
         {
             NotesViewModel = notesViewModel;
         }
@@ -24,8 +26,7 @@ namespace WpfApp1.ViewModel.Commands
 
         public void Execute(object parameter)
         {
-            Console.WriteLine("Parametar koji je poslan je " + parameter);
-            NotesViewModel.OpenAlarmField();
+            NotesViewModel.AddNewNote();
         }
     }
 }

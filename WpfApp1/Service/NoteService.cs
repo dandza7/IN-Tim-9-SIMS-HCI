@@ -27,21 +27,11 @@ namespace WpfApp1.Service
             return _noteRepository.GetById(id); 
         }
 
-        public IEnumerable<Note> GetPatientsNotDeletedNotes(int patientId)
+        public IEnumerable<Note> GetPatientsNotes(int patientId)
         {
-            List<Note> allPatientsNotes = _noteRepository.GetPatientsNotes(patientId).ToList();
-            List<Note> notDeleted = new List<Note>();
-
-            foreach (Note note in allPatientsNotes)
-            {
-                if (!note.IsDeleted)
-                {
-                    notDeleted.Add(note);
-                }
-            }
-
-            return notDeleted;
+            return _noteRepository.GetPatientsNotes(patientId).ToList();
         }
+
         public Note Create(Note note)
         {
             return _noteRepository.Create(note);
@@ -50,28 +40,11 @@ namespace WpfApp1.Service
         public Note Update(Note note)
         {
             return _noteRepository.Update(note);
-        } 
-
-        public void DeleteOldLogicallyDeletedNotes(int patientId)
-        {
-            List<Note> allPatientsNotes = _noteRepository.GetPatientsNotes(patientId).ToList();
-
-            foreach (Note note in allPatientsNotes)
-            {
-                if (note.IsDeleted && note.DeletedTime.AddDays(1) < DateTime.Now)
-                {
-                    _noteRepository.Delete(note.Id);
-                }
-            }
         }
 
-        public bool DeleteLogically(int id)
+        public bool Delete(int id)
         {
-            Note note = _noteRepository.GetById(id);
-            note.IsDeleted = true;
-            note.DeletedTime = DateTime.Now;
-            _noteRepository.Update(note);
-            return true;
+            return _noteRepository.Delete(id);
         }
     }
 }
