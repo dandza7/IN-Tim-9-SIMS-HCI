@@ -19,6 +19,7 @@ namespace WpfApp1.Model
         }
         private int _id;
         private int _medicalRecordId;
+        private int _drugId;
         private string _allergyName;
 
         public int Id
@@ -36,6 +37,23 @@ namespace WpfApp1.Model
                 }
             }
         }
+
+        public int DrugId
+        {
+            get
+            {
+                return _drugId;
+            }
+            set
+            {
+                if (value != _drugId)
+                {
+                    _drugId = value;
+                    OnPropertyChanged("DrugId");
+                }
+            }
+        }
+
 
         public int MedicalRecordId
         {
@@ -68,16 +86,24 @@ namespace WpfApp1.Model
                 }
             }
         }
-        public Allergy(int id, int medicalRecordId, string name)
+        public Allergy(int id, int medicalRecordId, string name,int drugId)
         {
             Id = id;
             MedicalRecordId = medicalRecordId;
             AllergyName = name;
+            DrugId = drugId;
         }
-        public Allergy(int medicalRecordId, string name)
+        public Allergy(int medicalRecordId, string name, int drugId)
         {
             MedicalRecordId = medicalRecordId;
             AllergyName = name;
+            DrugId = drugId;
+        }
+        public Allergy(int medicalRecordId, string name)//nepotreban(da bi sekretarovo radilo)
+        {
+            MedicalRecordId = medicalRecordId;
+            AllergyName = name;
+            DrugId = 3;
         }
     }
 }

@@ -82,7 +82,9 @@ namespace WpfApp1.Repository
             var tokens = allergyCSVFormat.Split(_delimiter.ToCharArray());
             return new Allergy(int.Parse(tokens[0]),
                 int.Parse(tokens[1]),
-                tokens[2]);
+                tokens[2],
+                int.Parse(tokens[3])
+                );
         }
 
         private string ConvertAllergyToCSVFormat(Allergy allergy)
@@ -90,7 +92,8 @@ namespace WpfApp1.Repository
             return string.Join(_delimiter,
                 allergy.Id,
                 allergy.MedicalRecordId,
-                allergy.AllergyName);
+                allergy.AllergyName,
+                allergy.DrugId);
 
         }
 
