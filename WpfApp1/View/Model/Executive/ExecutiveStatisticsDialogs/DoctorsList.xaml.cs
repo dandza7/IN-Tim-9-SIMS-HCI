@@ -13,24 +13,24 @@ using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using WpfApp1.Controller;
+using WpfApp1.Model.Preview;
 using WpfApp1.ViewModel;
 
-
-namespace WpfApp1.View.Model.Executive
+namespace WpfApp1.View.Model.Executive.ExecutiveStatisticsDialogs
 {
     /// <summary>
-    /// Interaction logic for ExecutiveStatisticsPage.xaml
+    /// Interaction logic for Page1.xaml
     /// </summary>
-    public partial class ExecutiveStatisticsPages : Page
+    public partial class DoctorsList : Page
     {
         public Storyboard sb1 { get; set; }
-        public ExecutiveStatisticsPages()
+        public DoctorsList()
         {
             InitializeComponent();
+            var app = Application.Current as App;
             this.sb1 = FindResource("myStoryboard") as Storyboard;
-            this.DataContext = new StatisticsViewModel(this);
-
-
+            this.DataContext = new DoctorsListViewModel(this, app.DoctorController, app.SurveyController);
         }
     }
 }
