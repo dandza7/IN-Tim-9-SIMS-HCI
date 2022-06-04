@@ -33,5 +33,10 @@ namespace WpfApp1.Controller
         {
             return _allergyService.Delete(allergyId);
         }
+
+        public Allergy GetById(int allergyId)
+        {
+            return _allergyService.GetById(allergyId);
+        }
     }
 }

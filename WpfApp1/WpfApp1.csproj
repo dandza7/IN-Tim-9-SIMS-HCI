@@ -116,6 +116,7 @@
     <Compile Include="Model\MedicalRecord.cs" />
     <Compile Include="Model\Note.cs" />
     <Compile Include="Model\Notification.cs" />
+    <Compile Include="Model\Preview\DoctorPreview.cs" />
     <Compile Include="Model\Preview\InventoryPreview.cs" />
     <Compile Include="Model\Renovation.cs" />
     <Compile Include="Model\Request.cs" />
@@ -137,6 +138,7 @@
     <Compile Include="Repository\DrugRepository.cs" />
     <Compile Include="Repository\NotificationRepository.cs" />
     <Compile Include="Repository\PatientRepository.cs" />
+    <None Include="packages.config" />
     <None Include="Resources\Data\note.csv" />
     <Compile Include="Service\NoteService.cs" />
     <Compile Include="ViewModel\AppointmentViewModel.cs" />
@@ -150,7 +152,12 @@
     <Compile Include="ViewModel\Commands\Patient\OpenMoveAppointmentDialog.cs" />
     <Compile Include="ViewModel\Commands\Patient\OpenUpdateNoteDialog.cs" />
     <Compile Include="ViewModel\Commands\Patient\UpdateNote.cs" />
+    <Compile Include="ViewModel\Commands\Executive\NavigateHospitalStats.cs" />
+    <Compile Include="ViewModel\DoctorStatisticsViewModel.cs" />
+    <Compile Include="ViewModel\Commands\Executive\NavigateDoctorsList.cs" />
+    <Compile Include="ViewModel\DoctorsListViewModel.cs" />
     <Compile Include="ViewModel\NotesViewModel.cs" />
+    <Compile Include="ViewModel\StatisticsViewModel.cs" />
     <Compile Include="View\Dialog\PatientDialog\AddNoteDialog.xaml.cs">
       <DependentUpon>AddNoteDialog.xaml</DependentUpon>
     </Compile>
@@ -160,9 +167,20 @@
     <Compile Include="View\Model\Doctor\DoctorReportView.xaml.cs">
       <DependentUpon>DoctorReportView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Model\Executive\ExecutiveStatisticsDialogs\DoctorsList.xaml.cs">
+      <DependentUpon>DoctorsList.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Model\Executive\ExecutiveStatisticsDialogs\DoctorStatistics.xaml.cs">
+      <DependentUpon>DoctorStatistics.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Model\Executive\ExecutiveStatisticsDialogs\HospitalStatistics.xaml.cs">
+      <DependentUpon>HospitalStatistics.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Model\Executive\ExecutiveStatisticsPages.xaml.cs">
+      <DependentUpon>ExecutiveStatisticsPages.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Validation\EmailValidation.cs" />
     <Compile Include="View\Validation\JmbgValidation.cs" />
-    <None Include="packages.config" />
     <None Include="Resources\Data\doctors.csv" />
     <Compile Include="Repository\RenovationRepository.cs" />
     <None Include="Resources\Data\doctors_requests.csv" />
@@ -605,6 +623,22 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Model\Executive\ExecutiveRoomDialogs\NewRoom.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Model\Executive\ExecutiveStatisticsDialogs\DoctorsList.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Model\Executive\ExecutiveStatisticsDialogs\DoctorStatistics.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Model\Executive\ExecutiveStatisticsDialogs\HospitalStatistics.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Model\Executive\ExecutiveStatisticsPages.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

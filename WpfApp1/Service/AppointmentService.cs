@@ -361,11 +361,11 @@ namespace WpfApp1.Service
             return appointmentViews;
         }
 
-        public bool CreateUrgentAppointment(int patientId, SpecType spec, DateTime startOfInterval)
-        {
 
+
+        public int FindFreeDoctor(SpecType spec, DateTime startOfInterval, DateTime endOfInterval)
+        {
             List<Doctor> doctors = (List<Doctor>)_doctorRepo.GetAllDoctorsBySpecialization(spec);
-            DateTime endOfInterval = startOfInterval.AddHours(1);
             int freedoctorId = -1;
 
             foreach (Doctor doctor in doctors)
@@ -379,16 +379,29 @@ namespace WpfApp1.Service
                 }
             }
 
-            if (freedoctorId != -1)
+            return freedoctorId;    
+        }
+
+
+
+
+        public bool CreateUrgentAppointment(int patientId, SpecType spec, DateTime startOfInterval)
+        {
+
+            DateTime endOfInterval = startOfInterval.AddHours(1);
+
+            int freeDoctorId = FindFreeDoctor(spec, startOfInterval, endOfInterval);
+
+            if (freeDoctorId != -1)
             {
                 Appointment a = new Appointment(startOfInterval, endOfInterval, Appointment.AppointmentType.regular, true,
-                    freedoctorId, patientId, _doctorRepo.GetById(freedoctorId).RoomId);
+                    freeDoctorId, patientId, _doctorRepo.GetById(freeDoctorId).RoomId);
                 _appointmentRepo.Create(a);
 
                 string notificationTitle = "You have new urgent appointment";
                 string notificationContent = "You have new urgent appointment on  " + " " + startOfInterval;
 
-                Notification notification = new Notification(DateTime.Now, notificationContent, notificationTitle, freedoctorId, false, false);
+                Notification notification = new Notification(DateTime.Now, notificationContent, notificationTitle, freeDoctorId, false, false);
                 _notificationRepo.Create(notification);
 
                 return true;
@@ -416,15 +429,15 @@ namespace WpfApp1.Service
         public List<AppointmentView> SortMovableAppointments(List<Appointment> movableAppointments)
         {
             List<AppointmentView> appointmentViews = new List<AppointmentView>();
-            Dictionary<int, DateTime> nearestFreeTermDictionary = new Dictionary<int, DateTime>();
+            Dictionary<int, DateTime> nearestFreeTerms = new Dictionary<int, DateTime>();
 
             foreach (Appointment appointment in movableAppointments)
             {
                     DateTime nearestFreeTerm = GetNearestFreeTerm(appointment.Id);
-                nearestFreeTermDictionary.Add(appointment.Id, nearestFreeTerm);
+                nearestFreeTerms.Add(appointment.Id, nearestFreeTerm);
             }
 
-            List<KeyValuePair<int, DateTime>> nearestFreeTermList = nearestFreeTermDictionary.ToList();
+            List<KeyValuePair<int, DateTime>> nearestFreeTermList = nearestFreeTerms.ToList();
             nearestFreeTermList.Sort((x, y) => x.Value.CompareTo(y.Value));
 
             foreach (KeyValuePair<int, DateTime> nearestFreeTerm in nearestFreeTermList)

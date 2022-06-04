@@ -35,11 +35,14 @@ namespace WpfApp1.View.Model.Doctor
         DoctorsReportController _doctorsReportController;
         MedicalRecordController _medicalRecordController;
         DrugController _drugController;
-
+        AllergyController _allergyController;
         public List<Therapy> patientTherapies = new List<Therapy>();
         public List<DoctorsReport> patientReports = new List<DoctorsReport>();
+        public List<int> allergiesDrugIds= new List<int>();
         public ObservableCollection<DoctorAppointmentView> upcomingAppointments = new ObservableCollection<DoctorAppointmentView>();
         public DoctorAppointmentView currentAppointment = new DoctorAppointmentView();
+
+            public List<int> DrugIds = new List<int>();
 
         public int userId = -1;
         public static int trenutniTerminIndex = 0;
@@ -59,8 +62,11 @@ namespace WpfApp1.View.Model.Doctor
                 _doctorsReportController = app.DoctorsReportController;
                 _medicalRecordController = app.MedicalRecordController;
                 _drugController = app.DrugController;
+                _allergyController = app.AllergyController;
             }//controller initialization
 
+
+            foreach (Drug d in _drugController.GetAll()) DrugIds.Add(d.Id);
             foreach (Appointment a in _appointmentController.GetAllByDoctorId(userId))
                 if (a.Beginning >= DateTime.Now)
                     this.upcomingAppointments.Add(
@@ -85,16 +91,22 @@ namespace WpfApp1.View.Model.Doctor
             DrugCB.SelectedIndex = -1;
             FrequencyTB.Clear();
             DurationTB.Clear();
+
+            AllergyWarningLabel.Visibility = Visibility.Hidden;
+            DrugIdLabel.Foreground = Brushes.White;
+            SaveTherapyBT.IsEnabled = true;
         }
         public void FillMedicalRecord(DoctorAppointmentView appointment)
         {
             currentAppointment = appointment;
             patientReports = _doctorsReportController.GetByPatientId(currentAppointment.PatientId);
             patientTherapies = (List<Therapy>)_therapyController.GetByMedicalRecordId(_medicalRecordController.GetByPatientId(currentAppointment.PatientId).Id);
+            foreach(Allergy a in _allergyController.GetAllAllergiesForPatient(_medicalRecordController.GetByPatientId(currentAppointment.PatientId).Id)) allergiesDrugIds.Add(a.DrugId);
 
             UpcomingAppointmentsGrid.ItemsSource = upcomingAppointments;
             ReportsGrid.ItemsSource = patientReports;
             TherapiesGrid.ItemsSource = patientTherapies;
+            DrugCB.ItemsSource = DrugIds;
 
             FromLabel.Content = currentAppointment.Beginning;
             ToLabel.Content = currentAppointment.Ending;
@@ -123,6 +135,8 @@ namespace WpfApp1.View.Model.Doctor
         {
             ReportsView.Visibility = ReferalView.Visibility = Visibility.Hidden;
             TherapiesView.Visibility = Visibility.Visible;
+
+
         }
 
         private void ReferalBT_Click(object sender, RoutedEventArgs e)
@@ -193,10 +207,28 @@ namespace WpfApp1.View.Model.Doctor
             if (TherapiesGrid.SelectedIndex != -1) { 
             Therapy t = (Therapy)TherapiesGrid.SelectedItems[0];
             TherapyIdLabel.Content = "Update Therapy";
-            DrugCB.SelectedIndex = t.DrugId;
+            DrugCB.SelectedItem = t.DrugId;
             FrequencyTB.Text = t.Frequency.ToString();
             DurationTB.Text = t.Duration.ToString();
             }
+        }
+
+        private void DrugCB_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+            if (DrugCB.SelectedIndex!=-1&& allergiesDrugIds.Contains(int.Parse(DrugCB.SelectedItem.ToString())))
+            {
+                AllergyWarningLabel.Visibility = Visibility.Visible;
+                DrugIdLabel.Foreground = AllergyWarningLabel.Foreground;
+                SaveTherapyBT.IsEnabled=false;
+            }
+            else
+            {
+                AllergyWarningLabel.Visibility = Visibility.Hidden;
+                DrugIdLabel.Foreground = Brushes.White;
+                SaveTherapyBT.IsEnabled = true ;
+            }
+            
         }
     }
 }

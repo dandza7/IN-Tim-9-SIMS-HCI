@@ -1,9 +1,9 @@
-1;3;Pantoprazol
-2;1;Penicilin
-3;1;Kantarion
-4;1;Soja
-5;2;Alkohol
-6;2;Esomeprazol
-7;1;Glicerin
-8;1;voda
-9;1;Alkohol
+1;3;Pantoprazol	;3
+2;1;Penicilin	;4
+3;1;Kantarion	;2
+4;1;Soja		;5
+5;2;Alkohol		;7
+6;2;Esomeprazol	;4
+7;1;Glicerin	;3
+8;1;voda		;3
+9;1;Alkohol		;4

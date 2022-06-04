@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using WpfApp1.Model;
+using WpfApp1.Model.Preview;
 using WpfApp1.Repository;
 
 namespace WpfApp1.Service
@@ -21,6 +22,16 @@ namespace WpfApp1.Service
         {
             var doctors = _doctorRepo.GetAll();
             return doctors;
+        }
+        internal IEnumerable<DoctorPreview> GetAllPreviews()
+        {
+            var doctors = _userRepo.GetAllDoctors();
+            List<DoctorPreview> retVal = new List<DoctorPreview>();
+            foreach(User doc in doctors)
+            {
+                retVal.Add(new DoctorPreview(doc.Id, doc.Name, doc.Surname));
+            }
+            return retVal;
         }
         public Doctor GetById(int id)
         {

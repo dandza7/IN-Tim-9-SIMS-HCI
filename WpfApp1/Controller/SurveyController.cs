@@ -21,7 +21,10 @@ namespace WpfApp1.Controller
         {
             return _surveyService.GetAll();
         }
-
+        public List<Survey> GetAllByDoctorsId(int docId)
+        {
+            return _surveyService.GetAllByDoctorsId(docId);
+        }
         public Survey GetById(int id)
         {
             return _surveyService.GetById(id);

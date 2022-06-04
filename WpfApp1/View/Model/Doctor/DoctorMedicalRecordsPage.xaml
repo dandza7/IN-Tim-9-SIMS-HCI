@@ -56,11 +56,9 @@
                                     <TextBox x:Name="FrequencyTB" HorizontalAlignment="Left" Height="24" TextWrapping="Wrap" VerticalAlignment="Top" Width="171" Margin="672,112,0,0" FontFamily="Trajan Pro 3 " FontSize="20"/>
                                     <Label Content="Duration:" HorizontalAlignment="Left" Margin="517,152,0,0" VerticalAlignment="Top" FontFamily="Trajan Pro 3 " FontSize="20" Foreground="{DynamicResource WhiteBrush}" RenderTransformOrigin="0.817,2.044" Width="129"/>
                                     <TextBox x:Name="DurationTB" HorizontalAlignment="Left" Height="24" TextWrapping="Wrap" VerticalAlignment="Top" Width="171" Margin="672,152,0,0" FontFamily="Trajan Pro 3 " FontSize="20"/>
-                                    <Label Content="Drug Id:" HorizontalAlignment="Left" Margin="517,194,0,0" VerticalAlignment="Top" FontFamily="Trajan Pro 3 " FontSize="20" Foreground="{DynamicResource WhiteBrush}" RenderTransformOrigin="0.817,2.044" Width="111"/>
-                                    <ComboBox x:Name="DrugCB" Margin="672,194,10,213" FontSize="20" FontFamily="Trajan Pro 3">
-                                        <ComboBoxItem>1</ComboBoxItem>
-                                        <ComboBoxItem>2</ComboBoxItem>
-                                        <ComboBoxItem>3</ComboBoxItem>
+                                    <Label x:Name="DrugIdLabel" Content="Drug Id:" HorizontalAlignment="Left" Margin="517,194,0,0" VerticalAlignment="Top" FontFamily="Trajan Pro 3 " FontSize="20" Foreground="{DynamicResource WhiteBrush}" RenderTransformOrigin="0.817,2.044" Width="111"/>
+                                    <Label Name = "AllergyWarningLabel" Visibility = "Hidden" VerticalContentAlignment="Center"  HorizontalContentAlignment="Center" Content = "Patient is allergic &#xD;&#xA;to selected drug!" HorizontalAlignment = "Left" Margin = "517,223,0,0" VerticalAlignment = "Top" FontFamily = "Trajan Pro 3 " FontSize = "20" Foreground = "{DynamicResource NoRedBrush}" FontWeight = "Bold" Width="326" Height="55" />
+                                    <ComboBox x:Name="DrugCB" Margin="672,194,10,213" FontSize="20" FontFamily="Trajan Pro 3" SelectionChanged="DrugCB_SelectionChanged">
                                     </ComboBox>
                                     <Button x:Name="ClearTherapyBT" Content="Clear" Style="{StaticResource DoctorNoButton}" HorizontalAlignment="Left" Margin="517,283,0,0" VerticalAlignment="Top" Width="123" Height="28" FontFamily="Trajan Pro 3 " FontSize="20" Click="ClearTherapyBT_Click" RenderTransformOrigin="0.699,0.071"/>
                                     <Button x:Name="SaveTherapyBT" Content="Save" Style="{StaticResource DoctorYesButton}" HorizontalAlignment="Left" Margin="717,283,0,0" VerticalAlignment="Top" Width="126" Height="28" FontFamily="Trajan Pro 3 " FontSize="20" Click="SaveTherapyBT_Click"/>
