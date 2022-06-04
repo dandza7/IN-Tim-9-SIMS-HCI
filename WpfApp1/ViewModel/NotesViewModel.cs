@@ -28,6 +28,7 @@ namespace WpfApp1.ViewModel
 
         private NoteController _noteController;
         private ObservableCollection<Note> _notes;
+        private Note _note;
         private string _content;
         private string _alarmTime;
 
@@ -36,7 +37,7 @@ namespace WpfApp1.ViewModel
         public DeleteNote Delete { get; set; }
         public OpenUpdateNoteDialog UpdateDialog { get; set; }
         public UpdateNote Update { get; set; }
-        public OpenAlarmField OpenAlarm { get; set; }
+        public DiscardNote Discard { get; set; }
 
         public NotesViewModel()
         {
@@ -46,7 +47,7 @@ namespace WpfApp1.ViewModel
             Delete = new DeleteNote(this);
             UpdateDialog = new OpenUpdateNoteDialog(this);
             Update = new UpdateNote(this);
-            OpenAlarm = new OpenAlarmField(this);
+            Discard = new DiscardNote(this);
         }
 
         public ObservableCollection<Note> Notes
@@ -61,6 +62,22 @@ namespace WpfApp1.ViewModel
                 {
                     _notes = value;
                     OnPropertyChanged("Notes");
+                }
+            }
+        }
+
+        public Note Note
+        {
+            get
+            {
+                return _note;
+            }
+            set
+            {
+                if (value != _note)
+                {
+                    _note = value;
+                    OnPropertyChanged("Note");
                 }
             }
         }
@@ -152,7 +169,7 @@ namespace WpfApp1.ViewModel
             var app = Application.Current as App;
 
             int patientId = (int)app.Properties["userId"];
-            int noteId = (int)app.Properties["noteId"];
+            int noteId = Note.Id;
             string content = Content;
             string alarm = AlarmTime;
             DateTime alarmTime;
@@ -164,7 +181,6 @@ namespace WpfApp1.ViewModel
             {
                 alarmTime = new DateTime(2001, 1, 1, 0, 0, 0);
             }
-            DateTime deletedTime = new DateTime(2030, 1, 1, 0, 0, 0);
             Note note = new Note(noteId, patientId, content, alarmTime);
 
             _noteController = app.NoteController;
@@ -174,18 +190,20 @@ namespace WpfApp1.ViewModel
             patientFrame.Content = new PatientNotesView();
         }
 
-        public void DeleteNote(int noteId)
+        public void DeleteNote()
         {
             var app = Application.Current as App;
             _noteController = app.NoteController;
 
-            _noteController.Delete(noteId);
+            _noteController.Delete(Note.Id);
             LoadPatientsNotes();
         }
 
-        public void OpenAlarmField()
+        public void DiscardNote()
         {
-            Console.WriteLine("Hello world");
+            var app = Application.Current as App;
+            Frame patientFrame = (Frame)app.Properties["PatientFrame"];
+            patientFrame.Content = new PatientNotesView();
         }
 
     }

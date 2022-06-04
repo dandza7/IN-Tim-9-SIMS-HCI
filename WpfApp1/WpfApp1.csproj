@@ -139,10 +139,15 @@
     <Compile Include="Repository\PatientRepository.cs" />
     <None Include="Resources\Data\note.csv" />
     <Compile Include="Service\NoteService.cs" />
+    <Compile Include="ViewModel\AppointmentViewModel.cs" />
     <Compile Include="ViewModel\Commands\Patient\AddNewNote.cs" />
+    <Compile Include="ViewModel\Commands\Patient\DeleteAppointment.cs" />
     <Compile Include="ViewModel\Commands\Patient\DeleteNote.cs" />
+    <Compile Include="ViewModel\Commands\Patient\DiscardAppointment.cs" />
+    <Compile Include="ViewModel\Commands\Patient\DiscardNote.cs" />
+    <Compile Include="ViewModel\Commands\Patient\OpenAddAppointmentDialog.cs" />
     <Compile Include="ViewModel\Commands\Patient\OpenAddNoteDialog.cs" />
-    <Compile Include="ViewModel\Commands\Patient\OpenAlarmField.cs" />
+    <Compile Include="ViewModel\Commands\Patient\OpenMoveAppointmentDialog.cs" />
     <Compile Include="ViewModel\Commands\Patient\OpenUpdateNoteDialog.cs" />
     <Compile Include="ViewModel\Commands\Patient\UpdateNote.cs" />
     <Compile Include="ViewModel\NotesViewModel.cs" />

@@ -4,15 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using WpfApp1.Model;
 
 namespace WpfApp1.ViewModel.Commands.Patient
 {
-    public class DeleteNote : ICommand
+    public class DiscardNote : ICommand
     {
         public NotesViewModel NotesViewModel { get; set; }
 
-        public DeleteNote(NotesViewModel notesViewModel)
+        public DiscardNote(NotesViewModel notesViewModel)
         {
             NotesViewModel = notesViewModel;
         }
@@ -26,7 +25,7 @@ namespace WpfApp1.ViewModel.Commands.Patient
 
         public void Execute(object parameter)
         {
-            NotesViewModel.DeleteNote();
+            NotesViewModel.DiscardNote();
         }
     }
 }

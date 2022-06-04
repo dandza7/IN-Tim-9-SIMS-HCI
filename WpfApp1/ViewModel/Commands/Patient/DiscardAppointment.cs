@@ -7,12 +7,13 @@ using System.Windows.Input;
 
 namespace WpfApp1.ViewModel.Commands.Patient
 {
-    public class OpenAlarmField : ICommand
+    public class DiscardAppointment : ICommand
     {
-        public NotesViewModel NotesViewModel { get; set; }  
-        public OpenAlarmField(NotesViewModel notesViewModel)
+        public AppointmentViewModel AppointmentViewModel { get; set; }
+
+        public DiscardAppointment(AppointmentViewModel appointmentViewModel)
         {
-            NotesViewModel = notesViewModel;
+            AppointmentViewModel = appointmentViewModel;
         }
 
         public event EventHandler CanExecuteChanged;
@@ -24,8 +25,7 @@ namespace WpfApp1.ViewModel.Commands.Patient
 
         public void Execute(object parameter)
         {
-            Console.WriteLine("Parametar koji je poslan je " + parameter);
-            NotesViewModel.OpenAlarmField();
+            AppointmentViewModel.DiscardAppointment();
         }
     }
 }
