@@ -5,12 +5,13 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
-namespace WpfApp1.ViewModel.Commands
+namespace WpfApp1.ViewModel.Commands.Patient
 {
-    public class UpdateNote : ICommand
+    public class DiscardNote : ICommand
     {
         public NotesViewModel NotesViewModel { get; set; }
-        public UpdateNote(NotesViewModel notesViewModel)
+
+        public DiscardNote(NotesViewModel notesViewModel)
         {
             NotesViewModel = notesViewModel;
         }
@@ -24,7 +25,7 @@ namespace WpfApp1.ViewModel.Commands
 
         public void Execute(object parameter)
         {
-            NotesViewModel.UpdateNote();
+            NotesViewModel.DiscardNote();
         }
     }
 }

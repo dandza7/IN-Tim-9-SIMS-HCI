@@ -43,7 +43,7 @@
         </WrapPanel>
         <WrapPanel Grid.Row="5" Grid.Column="2" Grid.ColumnSpan="2" HorizontalAlignment="Right" VerticalAlignment="Center" Width="200" Margin="0, 20, 15, 20">
             <Button Content="Confirm" Style="{StaticResource PatientDataGridButton}" FontSize="17" Margin="5" Command="{Binding Update}"/>
-            <Button Content="Discard" Style="{StaticResource PatientDataGridButton}" FontSize="17" Margin="5"/>
+            <Button Content="Discard" Style="{StaticResource PatientDataGridButton}" FontSize="17" Margin="5" Command="{Binding Discard}"/>
         </WrapPanel>
 
     </Grid>

@@ -42,6 +42,10 @@ namespace WpfApp1.View.Model
         private string _jmbg;
         private string _username;
         private string _password;
+        private string _phoneNumber;
+        private string _street;
+        private string _city;
+        private string _country;
 
         public int Id
         {
@@ -93,6 +97,7 @@ namespace WpfApp1.View.Model
                 }
             }
         }
+
         public string Username
         {
             get => _username;
@@ -118,5 +123,56 @@ namespace WpfApp1.View.Model
             }
         }
 
+        public string PhoneNumber
+        {
+            get => _phoneNumber;
+            set
+            {
+                if (_phoneNumber != value)
+                {
+                    _phoneNumber = value;
+                    OnPropertyChanged("PhoneNumber");
+                }
+            }
+        }
+
+        public string Street
+        {
+            get => _street;
+            set
+            {
+                if (_street != value)
+                {
+                    _street = value;
+                    OnPropertyChanged("Street");
+                }
+            }
+        }
+
+        public string City
+        {
+            get => _city;
+            set
+            {
+                if (_city != value)
+                {
+                    _city = value;
+                    OnPropertyChanged("City");
+                }
+            }
+        }
+
+        public string Country
+        {
+            get => _country;
+            set
+            {
+                if (_country != value)
+                {
+                    _country = value;
+                    OnPropertyChanged("Country");
+                }
+            }
+        }
     }
 }

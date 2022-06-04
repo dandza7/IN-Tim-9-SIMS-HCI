@@ -44,25 +44,19 @@ namespace WpfApp1.Service
 
         public bool IsAlreadyGraded(int patientId, int appointmentId)
         {
-            bool isGraded = false;
             List<Survey> allSurveys = _surveyRepository.GetAll().ToList();
             foreach(Survey survey in allSurveys)
             {
-                if(survey.PatientId == patientId && survey.AppointmentId == appointmentId)
-                {
-                    isGraded = true;
-                }
+                if (survey.PatientId == patientId && survey.AppointmentId == appointmentId)
+                    return true;
             }
-            return isGraded;
+            return false;
         }
 
         public Survey Create(List<int> grades, int appointmentId, int patientId)
         {
             if (appointmentId == -1)
-            {
-                Survey completedHospitalSurvey = new Survey(patientId, -1, -1, grades);
-                return _surveyRepository.Create(completedHospitalSurvey);
-            }
+                return _surveyRepository.Create(new Survey(patientId, -1, -1, grades));
 
             Appointment appointment = _appointmentRepository.GetById(appointmentId);
             Doctor doctor = _doctorRepository.GetById(appointment.DoctorId);

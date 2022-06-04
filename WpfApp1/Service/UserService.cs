@@ -56,17 +56,8 @@ namespace WpfApp1.Service
             List<User> users = _userRepository.GetAll().ToList();
             foreach(User user in users)
             {
-                if (user.Username.Equals(username))
-                {
-                    if (user.Password.Equals(pw))
-                    {
-                        return user;
-                    } 
-                    else
-                    {
-                        return null;
-                    }
-                }
+                if (!user.Username.Equals(username)) continue;
+                return user.Password.Equals(pw) ? user : null;
             }
             return null;
         }

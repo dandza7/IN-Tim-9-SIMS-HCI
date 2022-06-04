@@ -77,8 +77,6 @@ namespace WpfApp1.Repository
                     n.PatientId = note.PatientId;
                     n.Content = note.Content;
                     n.AlarmTime = note.AlarmTime;
-                    n.IsDeleted = note.IsDeleted;
-                    n.DeletedTime = note.DeletedTime;
                 }
                 newFile.Add(ConvertNoteToCSVFormat(n));
             }
@@ -109,9 +107,7 @@ namespace WpfApp1.Repository
             return new Note(int.Parse(tokens[0]),
                 int.Parse(tokens[1]),
                 tokens[2],
-                DateTime.Parse(tokens[3]),
-                bool.Parse(tokens[4]),
-                DateTime.Parse(tokens[5]));
+                DateTime.Parse(tokens[3]));
         }
 
         private string ConvertNoteToCSVFormat(Note note)
@@ -120,9 +116,7 @@ namespace WpfApp1.Repository
                 note.Id,
                 note.PatientId,
                 note.Content,
-                note.AlarmTime.ToString(_datetimeFormat),
-                note.IsDeleted.ToString(),
-                note.DeletedTime.ToString(_datetimeFormat));
+                note.AlarmTime.ToString(_datetimeFormat));
         }
 
         private void AppendLineToFile(string path, string line)

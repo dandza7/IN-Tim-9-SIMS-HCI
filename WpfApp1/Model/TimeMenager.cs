@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WpfApp1.View.Model.Patient;
 
 namespace WpfApp1.Model
 {
@@ -73,6 +74,14 @@ namespace WpfApp1.Model
             {
                 Ending = CalculateWorkingHours("end").AddDays(-1);
             }
+        }
+
+        public bool AreAvailableAppointmentsCollected(List<AppointmentView> appointments)
+        {
+            MoveStartOfIntervalIfNeeded();
+            if (GetIncrementedBeginning() > Ending) return true;
+            if (appointments.Count == 10) return true;
+            return false;
         }
     }
 }

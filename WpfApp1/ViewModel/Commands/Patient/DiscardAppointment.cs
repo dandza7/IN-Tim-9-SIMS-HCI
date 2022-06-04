@@ -5,15 +5,15 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
-namespace WpfApp1.ViewModel.Commands
+namespace WpfApp1.ViewModel.Commands.Patient
 {
-    public class OpenAddNoteDialog : ICommand
+    public class DiscardAppointment : ICommand
     {
-        public NotesViewModel NotesViewModel { get; set; }
+        public AppointmentViewModel AppointmentViewModel { get; set; }
 
-        public OpenAddNoteDialog(NotesViewModel notesViewModel)
+        public DiscardAppointment(AppointmentViewModel appointmentViewModel)
         {
-            NotesViewModel = notesViewModel;
+            AppointmentViewModel = appointmentViewModel;
         }
 
         public event EventHandler CanExecuteChanged;
@@ -25,7 +25,7 @@ namespace WpfApp1.ViewModel.Commands
 
         public void Execute(object parameter)
         {
-            NotesViewModel.OpenAddNoteDialog();
+            AppointmentViewModel.DiscardAppointment();
         }
     }
 }

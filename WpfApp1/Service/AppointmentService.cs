@@ -97,16 +97,19 @@ namespace WpfApp1.Service
             return _appointmentRepo.GetAllByDoctorId(id);
         }
 
+        internal IEnumerable<Appointment> GetAllByPatientId(int patientId)
+        {
+            return _appointmentRepo.GetAllByPatientId(patientId);
+        }
+
         private List<AppointmentView> GetAppointmentsForFreeTimeInterval(DateTime startOfInterval, DateTime endOfInterval,
             List<AppointmentView> appointments, Room room, Doctor doctor, User doctorUser, int patientId)
         {
             TimeMenager interval = new TimeMenager(startOfInterval, endOfInterval);
             while (interval.GetIncrementedBeginning() <= interval.Ending)
             {
-                interval.MoveStartOfIntervalIfNeeded();
-                if (interval.IncrementBeginning() > interval.Ending) return appointments;
+                if (interval.AreAvailableAppointmentsCollected(appointments)) return appointments;
 
-                if (appointments.Count == 10) return appointments;
                 bool isRoomAvailable = _renovationRepo.IsRoomAvailable(room.Id, interval.Beginning, interval.GetIncrementedBeginning());
                 if (isRoomAvailable)
                 {
@@ -118,27 +121,18 @@ namespace WpfApp1.Service
             return appointments;
         }
 
-        internal IEnumerable<Appointment> GetAllByPatientId(int patientId)
-        {
-            return _appointmentRepo.GetAllByPatientId(patientId);
-        }
-
-
         private List<AppointmentView> GetAppointmentsHappyCase(DateTime startOfInterval, DateTime endOfInterval,
             List<Appointment> appointmentsOfDoctor, List<AppointmentView> appointments, Room room, Doctor doctor, User doctorUser, int patientId)
         {
             TimeMenager interval = new TimeMenager(startOfInterval, endOfInterval);
-          
-            interval.MoveStartOfIntervalIfNeeded();
-            if (interval.GetIncrementedBeginning() > interval.Ending) return appointments;
-          
+
+            if (interval.AreAvailableAppointmentsCollected(appointments)) return appointments;
+
             foreach (Appointment appointment in appointmentsOfDoctor)
             {
                 while (interval.GetIncrementedBeginning() <= appointment.Beginning)
                 {
-                    interval.MoveStartOfIntervalIfNeeded();
-                    if (interval.GetIncrementedBeginning() > interval.Ending) return appointments;
-                    if (appointments.Count == 10) return appointments;
+                    if (interval.AreAvailableAppointmentsCollected(appointments)) return appointments;
                     bool isRoomAvailable = _renovationRepo.IsRoomAvailable(room.Id, interval.Beginning, interval.GetIncrementedBeginning());
                     if (isRoomAvailable)
                     {
@@ -152,9 +146,7 @@ namespace WpfApp1.Service
 
             while (interval.GetIncrementedBeginning() <= interval.Ending)
             {
-                interval.MoveStartOfIntervalIfNeeded();
-                if (interval.GetIncrementedBeginning() > interval.Ending) return appointments;
-                if (appointments.Count == 10) return appointments;
+                if (interval.AreAvailableAppointmentsCollected(appointments)) return appointments;
                 bool isRoomAvailable = _renovationRepo.IsRoomAvailable(room.Id, interval.Beginning, interval.GetIncrementedBeginning());
                 if (isRoomAvailable)
                 {
@@ -180,21 +172,18 @@ namespace WpfApp1.Service
 
             return (interval.Beginning, interval.Ending);
         }
-
+        
         private List<AppointmentView> GetAppointmentFromDoctorOfSpec(List<AppointmentView> appointments, DateTime startOfInterval, DateTime endOfInterval, List<Doctor> doctorsOfThatSpec, int patientId)
         {
             TimeMenager interval = new TimeMenager(startOfInterval, endOfInterval);
             foreach (Doctor doctor in doctorsOfThatSpec)
             {
-                interval.MoveStartOfIntervalIfNeeded();
-                if (interval.GetIncrementedBeginning() > interval.Ending) return appointments;
-                if (appointments.Count == 10) return appointments;
+                if (interval.AreAvailableAppointmentsCollected(appointments)) return appointments;
 
                 List<Appointment> doctorsAppointments = _appointmentRepo.GetAllAppointmentsInTimeIntervalForDoctor(interval.Beginning, interval.GetIncrementedBeginning(), doctor.Id).ToList();
                 if (doctorsAppointments.Count == 0)
                 {
-                    interval.MoveStartOfIntervalIfNeeded();
-                    if (interval.GetIncrementedBeginning() > interval.Ending) return appointments;
+                    if (interval.AreAvailableAppointmentsCollected(appointments)) return appointments;
 
                     User doctorUser = _userRepo.GetById(doctor.Id);
                     Room doctorRoom = _roomRepo.Get(doctor.RoomId);
@@ -211,8 +200,6 @@ namespace WpfApp1.Service
             return appointments;
         }
 
-        // Ukoliko je riječ o dodavanju novog appointmenta onda pri pozivu funkcije treba proslijediti -1 za oldAppointmentId 
-        // dok se pri pomjeranju postojećeg appointmenta za oldAppointmentId prosleđuje Id appointmenta koji se pomjera
         public List<AppointmentView> GetAvailableAppointmentOptions(string priority,
             DateTime startOfInterval, DateTime endOfInterval, int doctorId, SpecType specialization, int patientId, int oldAppointmentId)
         {
@@ -257,8 +244,7 @@ namespace WpfApp1.Service
             {
                 while(interval.GetIncrementedBeginning() <= appointment.Beginning)
                 {
-                    interval.MoveStartOfIntervalIfNeeded();
-                    if (appointments.Count == 5) return appointments;
+                    if (interval.AreAvailableAppointmentsCollected(appointments)) return appointments;
                     bool isRoomAvailable = _renovationRepo.IsRoomAvailable(room.Id, interval.Beginning, interval.GetIncrementedBeginning());
 
                     if (isRoomAvailable)
@@ -291,8 +277,7 @@ namespace WpfApp1.Service
             List<Appointment> appointmentsInInterval = _appointmentRepo.GetAllAppointmentsInTimeInterval(startOfInterval, endOfInterval).ToList();
 
             TimeMenager interval = new TimeMenager(startOfInterval, endOfInterval);
-            interval.MoveStartOfIntervalIfNeeded();
-            if (interval.GetIncrementedBeginning() > interval.Ending) return appointments;
+            if (interval.AreAvailableAppointmentsCollected(appointments)) return appointments;
 
             appointments = GetAppointmentFromDoctorOfSpec(appointments, interval.Beginning, interval.GetIncrementedBeginning(), doctorsBySpec, patientId);
 
@@ -300,8 +285,7 @@ namespace WpfApp1.Service
             {
                 foreach(Appointment appointmentInInterval in appointmentsInInterval)
                 {
-                    interval.MoveStartOfIntervalIfNeeded();
-                    if (interval.GetIncrementedBeginning() > interval.Ending) return appointments;
+                    if (interval.AreAvailableAppointmentsCollected(appointments)) return appointments;
 
                     interval.Beginning = appointmentInInterval.Ending;
                     if (interval.GetIncrementedBeginning() > interval.Ending) return appointments;

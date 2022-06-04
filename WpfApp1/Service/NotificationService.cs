@@ -14,15 +14,18 @@ namespace WpfApp1.Service
         private readonly DrugRepository _drugRepo;
         private readonly MedicalRecordRepository _medicalRecordRepo;
         private readonly TherapyRepository _therapyRepo;
+        private readonly NoteRepository _noteRepo;
         public NotificationService(NotificationRepository notificationRepo, 
             DrugRepository drugRepo, 
             MedicalRecordRepository medicalRecordRepo,
-            TherapyRepository therapyRepo)
+            TherapyRepository therapyRepo,
+            NoteRepository noteRepo)
         {
             _notificationRepo = notificationRepo;
             _drugRepo = drugRepo;
             _medicalRecordRepo = medicalRecordRepo;
             _therapyRepo = therapyRepo;
+            _noteRepo = noteRepo;
         }
 
         public IEnumerable<Notification> GetAll()
@@ -43,13 +46,49 @@ namespace WpfApp1.Service
 
         public IEnumerable<Notification> GetUsersNotifications(int userId)
         {
-            //sortira userove notifikacije u rastucem redoslijedu vremena kada su poslane (starije notifikacije idu na vrh)
             return _notificationRepo.GetAllForUser(userId).OrderBy(notification => notification.Date).ToList();
         }
 
         public IEnumerable<Notification> GetUsersNotDeletedNotifications(int userId)
         {
             return _notificationRepo.GetAllNotDeletedForUser(userId).OrderBy(notification => notification.Date).ToList();
+        }
+
+        public void GetScheduledAlarmsForPatient(int patientId)
+        {
+            List<Note> patientsNotes = _noteRepo.GetPatientsNotes(patientId).ToList();
+            
+            foreach(Note note in patientsNotes)
+            {
+                if(note.AlarmTime <= DateTime.Now)
+                {
+                    CreateAlarmNotificationForPatient(note);
+                }
+            }
+        }
+
+        private void CreateAlarmNotificationForPatient(Note note)
+        {
+            string title = "Patient Notification Alarm for Note " + note.Id;
+            string content = "You set an alarm for the note!";
+            
+            if(!IsAlarmDuplicate(note))
+            {
+                Notification notification = new Notification(note.AlarmTime, content, title, note.PatientId, false, false);
+                _notificationRepo.Create(notification);
+            }
+        }
+
+        private bool IsAlarmDuplicate(Note note)
+        {
+            List<Notification> sentNotifications = _notificationRepo.GetAllForUser(note.PatientId).ToList();
+            string title = "Patient Notification Alarm for Note " + note.Id;
+            foreach (Notification sentNotification in sentNotifications)
+            {
+                if (sentNotification.Title.Equals(title))
+                    return true;
+            }
+            return false;
         }
 
         public void GetScheduledTherapyNotifications(int patientId)
@@ -79,28 +118,27 @@ namespace WpfApp1.Service
             bool isDuplicate = false;
             List<Notification> sentNotifications = _notificationRepo.GetAllForUser(patientId).ToList();
             foreach (Notification sentNotification in sentNotifications)
-            {
-                if (sentNotification.Date == whenToSend && sentNotification.Content.Equals(content))
-                {
-                    isDuplicate = true;
-                }
-                // Ukoliko se terapija pije manje od jednom dnevno onda treba provjeriti koliko je dana prošlo od prethodne notifikacije
-                // za terapiju, ukoliko je prošlo manje nego što treba proći da bi se opet pila onda se ne treba slati nova notifikacija
-                if (frequency < 1)
-                {
-                    int daysToPass = (int)Math.Round(1 / frequency);
-                    if (sentNotification.Content.Equals(content) && sentNotification.Date.AddDays(daysToPass) > whenToSend)
-                    {
-                        isDuplicate = true;
-                    }
-                }
-            }
+                isDuplicate = IsTherapyDuplicate(sentNotification, whenToSend, content, frequency);
+
             if (whenToSend < DateTime.Now && isDuplicate == false)
-            {
-                Notification notification = new Notification(whenToSend, content, title, patientId, false, false);
-                _notificationRepo.Create(notification);
-            }
+                _notificationRepo.Create(new Notification(whenToSend, content, title, patientId, false, false));
         }
+
+        private bool IsTherapyDuplicate(Notification notification, DateTime sendingTime, string content, float frequency)
+        {
+            if (notification.Date == sendingTime && notification.Content.Equals(content))
+                return true;
+
+            if (frequency < 1)
+            {
+                int daysToPass = (int)Math.Round(1 / frequency);
+                if (notification.Content.Equals(content) && notification.Date.AddDays(daysToPass) > sendingTime)
+                    return true;
+            }
+
+            return false;
+        }
+
         public Notification Update(Notification notification)
         {
             return _notificationRepo.Update(notification);

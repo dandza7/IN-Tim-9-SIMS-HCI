@@ -50,9 +50,10 @@ namespace WpfApp1.View.Model.Patient
 
             int patientId = (int)app.Properties["userId"];
 
-            Patient = PatientConverter.ConvertPatientToPatientView(_userController.GetById(patientId));
+            Patient = PatientConverter.ConvertPatientToPatientView(_userController.GetById(patientId), _patientController.GetById(patientId));
+            _patientController.DeleteOldPatientsTherapyNotifications(patientId);
             _notificationController.GetScheduledTherapyNotifications(patientId);
-            _patientController.DeleteOldPatientsNotifications(patientId);
+            _notificationController.GetScheduledAlarmsForPatient(patientId);
             Notifications = new ObservableCollection<Notification>(_notificationController.GetUsersNotDeletedNotifications(patientId));
 
             List<Therapy> therapies = _patientController.GetPatientsTherapies(patientId).ToList();

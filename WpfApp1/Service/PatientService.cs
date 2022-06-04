@@ -60,7 +60,7 @@ namespace WpfApp1.Service
 
         // U ponoć se fizički brišu sve notifikacije pacijenta koje je on obrisao fiziški
         // Dugi 'if' samo provjerava da li je prošla ponoć i da li je to pacijent koji otvara notifikacije
-        public void DeleteOldPatientsNotifications(int patientId)
+        public void DeleteOldPatientsTherapyNotifications(int patientId)
         {
             List<Notification> deletedNotifications = _notificationRepo.GetAllLogicallyDeleted().ToList();
             MedicalRecord medicalRecord = _medicalRecordRepo.GetPatientsMedicalRecord(patientId);
@@ -69,6 +69,12 @@ namespace WpfApp1.Service
             List<Drug> drugs = _drugRepo.GetAll().ToList();
             foreach (Notification notification in deletedNotifications)
             {
+                if(notification.Content.Split(' ')[0] != "Take")
+                {
+                    _notificationRepo.Delete(notification.Id);
+                    continue;
+                }
+
                 int id = notification.UserId;
                 if (id != patientId) continue;
                 int drugId = -1;
