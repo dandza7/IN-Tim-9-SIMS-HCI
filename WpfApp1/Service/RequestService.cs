@@ -37,8 +37,8 @@ namespace WpfApp1.Service
             foreach (Request r in this.GetAcceptedRequests())
             {
                 if (
-                    !(request.Beginning.Date > r.Ending.Date || request.Ending.Date < r.Beginning.Date) ||
-                    _doctorRepository.GetById(r.DoctorId).Specialization == doctor.Specialization
+                    !(request.Beginning.Date > r.Ending.Date || request.Ending.Date < r.Beginning.Date))
+                    if(_doctorRepository.GetById(r.DoctorId).Specialization == doctor.Specialization
                     ) numberOfAvailableSpecialists--;
                 if (numberOfAvailableSpecialists <= 1) return false;
             }

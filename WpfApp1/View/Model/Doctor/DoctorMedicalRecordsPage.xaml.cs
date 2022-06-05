@@ -42,7 +42,8 @@ namespace WpfApp1.View.Model.Doctor
         public ObservableCollection<DoctorAppointmentView> upcomingAppointments = new ObservableCollection<DoctorAppointmentView>();
         public DoctorAppointmentView currentAppointment = new DoctorAppointmentView();
 
-            public List<int> DrugIds = new List<int>();
+        public List<int> DrugIds = new List<int>();
+        public List<int> DoctorIds = new List<int>();
 
         public int userId = -1;
         public static int trenutniTerminIndex = 0;
@@ -67,6 +68,8 @@ namespace WpfApp1.View.Model.Doctor
 
 
             foreach (Drug d in _drugController.GetAll()) DrugIds.Add(d.Id);
+            foreach (User u in _doctorController.GetAll()) DoctorIds.Add(u.Id);
+            DoctorIds.Remove(userId);
             foreach (Appointment a in _appointmentController.GetAllByDoctorId(userId))
                 if (a.Beginning >= DateTime.Now)
                     this.upcomingAppointments.Add(
@@ -76,11 +79,14 @@ namespace WpfApp1.View.Model.Doctor
                             _patientController.GetById(a.PatientId)
                             )
                         );
-
-            FillMedicalRecord(upcomingAppointments[trenutniTerminIndex]);
+            Debug.WriteLine(trenutniTerminIndex);
+           if(upcomingAppointments.Count>0)FillMedicalRecord(upcomingAppointments[trenutniTerminIndex]);
         }
         public void RefreshMedicalRecordForms()
         {
+            UrgentCB.IsChecked= false;
+            EndingDTP.Text = BeginningDTP.Text = "";
+            TypeCB.SelectedItem = DoctorCB.SelectedIndex = -1;
 
             DescriptionLabel.Content = "New Description";
             ReportsGrid.SelectedIndex = -1;
@@ -107,6 +113,7 @@ namespace WpfApp1.View.Model.Doctor
             ReportsGrid.ItemsSource = patientReports;
             TherapiesGrid.ItemsSource = patientTherapies;
             DrugCB.ItemsSource = DrugIds;
+            DoctorCB.ItemsSource = DoctorIds;
 
             FromLabel.Content = currentAppointment.Beginning;
             ToLabel.Content = currentAppointment.Ending;
@@ -229,6 +236,28 @@ namespace WpfApp1.View.Model.Doctor
                 SaveTherapyBT.IsEnabled = true ;
             }
             
+        }
+
+        private void RefferalConfirmBT_Click(object sender, RoutedEventArgs e)
+        {
+            Enum.TryParse(TypeCB.SelectedItem.ToString(), true, out Appointment.AppointmentType type);
+            _appointmentController.Create(new Appointment(
+                Convert.ToDateTime(BeginningDTP.Text),
+                Convert.ToDateTime(EndingDTP.Text),
+                type,
+                (bool)UrgentCB.IsChecked,
+                int.Parse(DoctorCB.SelectedItem.ToString()),
+                currentAppointment.PatientId,
+                _doctorController.GetById(int.Parse(DoctorCB.SelectedItem.ToString())).RoomId
+                    )
+                    );
+            RefreshMedicalRecordForms();
+
+        }
+
+        private void RefferalDiscardBT_Click(object sender, RoutedEventArgs e)
+        {
+            RefreshMedicalRecordForms();
         }
     }
 }

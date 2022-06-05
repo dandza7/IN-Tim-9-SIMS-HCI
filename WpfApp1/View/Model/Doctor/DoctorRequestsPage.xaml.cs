@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -25,6 +26,7 @@ namespace WpfApp1.View.Model.Doctor
     {
         RequestController _requestController;
         public ObservableCollection<Request> Requests;
+        public ObservableCollection<Request> DeclinedRequests;
         public int userId = -1;
 
         public DoctorRequestsPage()
@@ -33,9 +35,11 @@ namespace WpfApp1.View.Model.Doctor
             var app = Application.Current as App;
             userId = int.Parse(app.Properties["userId"].ToString());
             _requestController = app.RequestController;
-            Requests = new ObservableCollection<Request>();
+            DeclinedRequests=Requests = new ObservableCollection<Request>();
             Requests = (ObservableCollection<Request>)_requestController.GetAllByDoctorId(userId);
+            foreach (Request r in Requests) if (r.Status == Request.RequestStatusType.Declined) DeclinedRequests.Add(r);
             RequestViewGrid.ItemsSource = Requests;
+            DeclinedRequestsGrid.ItemsSource = DeclinedRequests;
             this.DataContext = this;
         }
 
@@ -51,16 +55,25 @@ namespace WpfApp1.View.Model.Doctor
                     userId,
                     TitleTB.Text,
                     ContentTB.Text,
-                    (bool)UrgentCBX.IsChecked
+                    (bool)UrgentCBX.IsChecked,
+                    ""
                     )) == null
                     ) exceptionLabel.Visibility = Visibility.Visible;
             else exceptionLabel.Visibility = Visibility.Hidden;
+
+            Debug.WriteLine(UrgentCBX.IsChecked);
 
             BeginningDTP.Text = "";
             EndingDTP.Text = "";
             TitleTB.Clear();
             ContentTB.Clear();
 
+
+        }
+
+        private void DeclinedRequestsGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            CommentTB.Text = ((Request)DeclinedRequestsGrid.SelectedItems[0]).Comment;
 
         }
     }
