@@ -157,6 +157,7 @@
     <Compile Include="ViewModel\Commands\Executive\NavigateDoctorsList.cs" />
     <Compile Include="ViewModel\DoctorsListViewModel.cs" />
     <Compile Include="ViewModel\NotesViewModel.cs" />
+    <Compile Include="ViewModel\PDFViewModel.cs" />
     <Compile Include="ViewModel\StatisticsViewModel.cs" />
     <Compile Include="View\Dialog\PatientDialog\AddNoteDialog.xaml.cs">
       <DependentUpon>AddNoteDialog.xaml</DependentUpon>
@@ -178,6 +179,9 @@
     </Compile>
     <Compile Include="View\Model\Executive\ExecutiveStatisticsPages.xaml.cs">
       <DependentUpon>ExecutiveStatisticsPages.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Model\Patient\PDFView.xaml.cs">
+      <DependentUpon>PDFView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Validation\EmailValidation.cs" />
     <Compile Include="View\Validation\JmbgValidation.cs" />
@@ -370,9 +374,6 @@
     </Compile>
     <Compile Include="View\Model\Patient\PatientProfileView.xaml.cs">
       <DependentUpon>PatientProfileView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\Model\Patient\PatientReportsView.xaml.cs">
-      <DependentUpon>PatientReportsView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Model\Patient\ReportDetailsView.xaml.cs">
       <DependentUpon>ReportDetailsView.xaml</DependentUpon>
@@ -670,9 +671,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="View\Model\Patient\PatientReportsView.xaml">
-      <Generator>MSBuild:Compile</Generator>
+    <Page Include="View\Model\Patient\PDFView.xaml">
       <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Model\Patient\ReportDetailsView.xaml">
       <SubType>Designer</SubType>
@@ -843,6 +844,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Icons\VeryInterestingLogo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\printer.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
