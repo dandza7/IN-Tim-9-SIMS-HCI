@@ -160,16 +160,6 @@ namespace WpfApp1.Repository
             return appointment;
         }
 
-        internal List<Appointment> GetAllByDoctorId(int id)
-        {
-            List<Appointment> doctorsAppointments = new List<Appointment>();
-            foreach (Appointment a in GetAll())
-            {
-                if (a.DoctorId == id) doctorsAppointments.Add(a);
-            }
-
-            return doctorsAppointments;
-        }
 
         public bool Delete(int id)
         {

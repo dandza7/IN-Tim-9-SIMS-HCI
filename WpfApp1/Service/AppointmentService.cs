@@ -94,7 +94,13 @@ namespace WpfApp1.Service
 
         internal List<Appointment> GetAllByDoctorId(int id)
         {
-            return _appointmentRepo.GetAllByDoctorId(id);
+            List<Appointment> doctorsAppointments = new List<Appointment>();
+            foreach (Appointment a in _appointmentRepo.GetAll())
+            {
+                if (a.DoctorId == id) doctorsAppointments.Add(a);
+            }
+
+            return doctorsAppointments;
         }
 
         internal IEnumerable<Appointment> GetAllByPatientId(int patientId)

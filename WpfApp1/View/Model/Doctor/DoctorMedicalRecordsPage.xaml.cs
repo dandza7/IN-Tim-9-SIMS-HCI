@@ -36,6 +36,7 @@ namespace WpfApp1.View.Model.Doctor
         MedicalRecordController _medicalRecordController;
         DrugController _drugController;
         AllergyController _allergyController;
+        NotificationController _notificationController;
         public List<Therapy> patientTherapies = new List<Therapy>();
         public List<DoctorsReport> patientReports = new List<DoctorsReport>();
         public List<int> allergiesDrugIds= new List<int>();
@@ -64,6 +65,7 @@ namespace WpfApp1.View.Model.Doctor
                 _medicalRecordController = app.MedicalRecordController;
                 _drugController = app.DrugController;
                 _allergyController = app.AllergyController;
+                _notificationController = app.NotificationController;
             }//controller initialization
 
 
@@ -241,18 +243,24 @@ namespace WpfApp1.View.Model.Doctor
         private void RefferalConfirmBT_Click(object sender, RoutedEventArgs e)
         {
             Enum.TryParse(TypeCB.SelectedItem.ToString(), true, out Appointment.AppointmentType type);
-            _appointmentController.Create(new Appointment(
-                Convert.ToDateTime(BeginningDTP.Text),
-                Convert.ToDateTime(EndingDTP.Text),
-                type,
-                (bool)UrgentCB.IsChecked,
-                int.Parse(DoctorCB.SelectedItem.ToString()),
-                currentAppointment.PatientId,
-                _doctorController.GetById(int.Parse(DoctorCB.SelectedItem.ToString())).RoomId
-                    )
-                    );
+            SendAppointmentNotification(
+                _appointmentController.Create(new Appointment(
+                        Convert.ToDateTime(BeginningDTP.Text),
+                        Convert.ToDateTime(EndingDTP.Text),
+                        type,
+                        (bool)UrgentCB.IsChecked,
+                        int.Parse(DoctorCB.SelectedItem.ToString()),
+                        currentAppointment.PatientId,
+                        _doctorController.GetById(int.Parse(DoctorCB.SelectedItem.ToString())).RoomId
+                        ))
+                );
             RefreshMedicalRecordForms();
 
+        }
+        private void SendAppointmentNotification(Appointment appointment)
+        {
+            _notificationController.Create(new Notification(DateTime.Now, "You have a new appointment at "+appointment.Beginning, "Appointment Notification", appointment.DoctorId, false, false));
+            _notificationController.Create(new Notification(DateTime.Now, "You have a new appointment at "+appointment.Beginning, "Appointment Notification", appointment.PatientId, false, false));
         }
 
         private void RefferalDiscardBT_Click(object sender, RoutedEventArgs e)

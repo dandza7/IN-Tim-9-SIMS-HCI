@@ -29,17 +29,15 @@ namespace WpfApp1.Service
             foreach (Request r in _requestRepository.GetAll()) if (r.Status == Request.RequestStatusType.Accepted) requests.Add(r);
             return requests;
         }
-        public bool IsEligibleForAbsence(Request request)
+        public bool IsEligibleForAbsence(Request request)//provera odsustva specijalista
         {
-            Doctor doctor = new Doctor();
-            doctor = _doctorRepository.GetById(request.DoctorId);
-            int numberOfAvailableSpecialists=_doctorRepository.GetAllDoctorsBySpecialization(doctor.Specialization).Count();
-            foreach (Request r in this.GetAcceptedRequests())
+            Doctor.SpecType doctorsSpecialization = _doctorRepository.GetById(request.DoctorId).Specialization;
+            int numberOfAvailableSpecialists=_doctorRepository.GetAllDoctorsBySpecialization(doctorsSpecialization).Count();
+
+            foreach (Request r in GetAcceptedRequests())
             {
-                if (
-                    !(request.Beginning.Date > r.Ending.Date || request.Ending.Date < r.Beginning.Date))
-                    if(_doctorRepository.GetById(r.DoctorId).Specialization == doctor.Specialization
-                    ) numberOfAvailableSpecialists--;
+                if (!(request.Beginning.Date > r.Ending.Date || request.Ending.Date < r.Beginning.Date)&&
+                    _doctorRepository.GetById(r.DoctorId).Specialization == doctorsSpecialization) numberOfAvailableSpecialists--;
                 if (numberOfAvailableSpecialists <= 1) return false;
             }
             return true;
@@ -48,8 +46,9 @@ namespace WpfApp1.Service
 
         internal Request Create(Request request)
         {
+            if (request.Urgnet) return _requestRepository.Create(request);
             if (IsEligibleForAbsence(request)) return _requestRepository.Create(request);
-            else return null;
+            return null;
         }
     }
 }

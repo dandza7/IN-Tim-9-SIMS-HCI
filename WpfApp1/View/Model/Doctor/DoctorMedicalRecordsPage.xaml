@@ -76,7 +76,7 @@
                                         </DataGrid.Columns>
                                     </DataGrid>
                                 </Grid>
-                                <Grid x:Name="ReferalView" Visibility="Hidden">
+                                <Grid x:Name="ReferalView" Visibility="Visible">
                                     <Label  FontSize="15" Foreground="White" Content="Doctor:" HorizontalAlignment="Left" Margin="210,67,0,336" Width="141" />
                                     <ComboBox FontSize="15"   x:Name="DoctorCB"  HorizontalAlignment="Left" Margin="364,67,0,0" VerticalAlignment="Top" Width="262" SelectedIndex="0" Height="28">
                                     </ComboBox>
