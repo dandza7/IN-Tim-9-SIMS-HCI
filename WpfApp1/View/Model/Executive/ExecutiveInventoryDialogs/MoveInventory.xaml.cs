@@ -59,9 +59,9 @@ namespace WpfApp1.View.Model.Executive.ExecutiveInventoryDialogs
             InitializeComponent();
             this.DataContext = this;
             this.ParentPage = parent;
-            this.SOPRooms = parent.InventoryController.GetSOPRooms();
-            InventoryName.Text = ParentPage.SelectedInventoryName;
-            OldRoom.Text = ParentPage.SelectedRoomName;
+            //this.SOPRooms = parent.InventoryController.GetSOPRooms();
+            //InventoryName.Text = ParentPage.SelectedInventoryName;
+            //OldRoom.Text = ParentPage.SelectedRoomName;
             Feedback = "";
         }
 
@@ -86,14 +86,14 @@ namespace WpfApp1.View.Model.Executive.ExecutiveInventoryDialogs
                 Feedback = "*you must select date that is either today or in future!";
                 return;
             }
-            ParentPage.InventoryMovingController.NewMoving(new InventoryMoving(0, ParentPage.SelectedId, ParentPage.RoomController.GetIdByNametag(NewRoom.Text), DateTime.Parse(MoveDate.Text)));
+            //ParentPage.InventoryMovingController.NewMoving(new InventoryMoving(0, ParentPage.SelectedId, ParentPage.RoomController.GetIdByNametag(NewRoom.Text), DateTime.Parse(MoveDate.Text)));
             ParentPage.CloseFrame.Begin();
             InventoryName.Text = "";
             OldRoom.Text = "";
             NewRoom.Text = "";
             Feedback = "";
-            ParentPage.InventorySource = ParentPage.InventoryController.GetPreviews();
-            ParentPage.FilterInventory();
+            //ParentPage.InventorySource = ParentPage.InventoryController.GetPreviews();
+            //ParentPage.FilterInventory();
         }
     }
 }

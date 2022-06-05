@@ -60,7 +60,7 @@ namespace WpfApp1.View.Model.Executive.ExecutiveInventoryDialogs
             InitializeComponent();
             this.DataContext = this;
             this.ParentPage = parent;
-            this.SOPRooms = parent.InventoryController.GetSOPRooms();
+            //this.SOPRooms = parent.InventoryController.GetSOPRooms();
             AddRooms.Text = "";
             AddName.Text = "";
             Feedback = "";
@@ -87,13 +87,13 @@ namespace WpfApp1.View.Model.Executive.ExecutiveInventoryDialogs
                 Feedback = "*you can't use semicolon (;) in name!";
                 return;
             }
-            ParentPage.InventoryController.Create(new Inventory(0, 0, AddName.Text, "S", 1), AddRooms.Text);
+            //ParentPage.InventoryController.Create(new Inventory(0, 0, AddName.Text, "S", 1), AddRooms.Text);
             ParentPage.CloseFrame.Begin();
             AddRooms.Text = "";
             AddName.Text = "";
             Feedback = "";
-            ParentPage.InventorySource = ParentPage.InventoryController.GetPreviews();
-            ParentPage.FilterInventory();
+            //ParentPage.InventorySource = ParentPage.InventoryController.GetPreviews();
+            //ParentPage.FilterInventory();
         }
     }
 }
