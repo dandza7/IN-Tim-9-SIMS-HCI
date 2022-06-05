@@ -77,24 +77,21 @@
                                     </DataGrid>
                                 </Grid>
                                 <Grid x:Name="ReferalView" Visibility="Hidden">
-                                    <Label  FontSize="15" Foreground="White" Content="Specialist:" HorizontalAlignment="Left" Margin="210,67,0,336" Width="141" />
-                                    <ComboBox FontSize="15"   x:Name="SpecialistComboBox2"  HorizontalAlignment="Left" Margin="364,67,0,0" VerticalAlignment="Top" Width="262" SelectedIndex="0" Height="28">
-                                        <ComboBoxItem Content="anesthesiologist"/>
-                                        <ComboBoxItem Content="cardiologist"/>
-                                        <ComboBoxItem Content="generalPracticioner"/>
+                                    <Label  FontSize="15" Foreground="White" Content="Doctor:" HorizontalAlignment="Left" Margin="210,67,0,336" Width="141" />
+                                    <ComboBox FontSize="15"   x:Name="DoctorCB"  HorizontalAlignment="Left" Margin="364,67,0,0" VerticalAlignment="Top" Width="262" SelectedIndex="0" Height="28">
                                     </ComboBox>
                                     <Label  FontSize="15" Foreground="White" Content="Type:" HorizontalAlignment="Left" Margin="210,110,0,293" Width="141" />
-                                    <ComboBox FontSize="15"   x:Name="SpecialistComboBox"  HorizontalAlignment="Left" Margin="364,110,0,0" VerticalAlignment="Top" Width="262" SelectedIndex="0" Height="28">
-                                        <ComboBoxItem Content="surgery"/>
+                                    <ComboBox FontSize="15"   x:Name="TypeCB"  HorizontalAlignment="Left" Margin="364,110,0,0" VerticalAlignment="Top" Width="262" SelectedIndex="0" Height="28">
                                         <ComboBoxItem Content="regular"/>
+                                        <ComboBoxItem Content="surgery"/>
                                     </ComboBox>
                                     <Label FontSize="15" Foreground="White" Content="From:" HorizontalAlignment="Left" Margin="210,152,0,251" RenderTransformOrigin="-0.212,0.179" Width="83" />
                                     <Label FontSize="15" Foreground="White" Content="To:" Margin="210,196,560,197" />
-                                    <CheckBox FontSize="15"  Content="Urgent" HorizontalAlignment="Left" Margin="515,243,0,166" Foreground="{DynamicResource WhiteBrush}" Width="111"/>
-                                    <xctk:DateTimePicker x:Name="BeginningDTP" Margin="364,152,227,253"/>
-                                    <xctk:DateTimePicker x:Name="EndingDTP" Margin="364,196,227,0" VerticalAlignment="Top" Height="26"/>
-                                    <Button x:Name="ConfirmBT" Style="{StaticResource DoctorYesButton}" Content="Confirm" Margin="0,0,227,117" Width="126" VerticalAlignment="Bottom" HorizontalAlignment="Right" Height="30"/>
-                                    <Button Style="{StaticResource DoctorNoButton}" Content="Discard" HorizontalAlignment="Left" Margin="210,0,0,117" Width="126" VerticalAlignment="Bottom" Height="30" />
+                                    <CheckBox x:Name="UrgentCB" FontSize="15"  Content="Urgent" HorizontalAlignment="Left" Margin="515,243,0,166" Foreground="{DynamicResource WhiteBrush}" Width="111"/>
+                                    <xctk:DateTimePicker x:Name="BeginningDTP" Margin="364,152,227,253" FontSize="15"/>
+                                    <xctk:DateTimePicker x:Name="EndingDTP" Margin="364,196,227,0" VerticalAlignment="Top" Height="26" FontSize="15"/>
+                                    <Button x:Name="RefferalConfirmBT" Style="{StaticResource DoctorYesButton}" Content="Confirm" Margin="0,0,227,117" Width="126" VerticalAlignment="Bottom" HorizontalAlignment="Right" Height="30" Click="RefferalConfirmBT_Click"/>
+                                    <Button x:Name="RefferalDiscardBT" Style="{StaticResource DoctorNoButton}" Content="Discard" HorizontalAlignment="Left" Margin="210,0,0,117" Width="126" VerticalAlignment="Bottom" Height="30" Click="RefferalDiscardBT_Click" />
 
 
                                 </Grid>
@@ -111,14 +108,8 @@
                       ItemsSource="{Binding upcomingAppointments}" SelectionChanged="FutureAppointmentsGrid_SelectionChanged" >
                 <DataGrid.Columns>
                     <DataGridTextColumn Header=" Patient" Width="150"  Binding="{Binding Patient}" HeaderStyle="{StaticResource DoctorDGHeader}" CellStyle="{StaticResource DoctorDGCell}"/>
-                    <DataGridTextColumn Header=" Beginning" Width="150" Binding="{Binding Beginning}"  HeaderStyle="{StaticResource DoctorDGHeader}" CellStyle="{StaticResource DoctorDGCell}"/>
-                    <DataGridTemplateColumn Header=" Medical Record" Width="2*"  HeaderStyle="{StaticResource DoctorDGHeader}" CellStyle="{StaticResource DoctorDGCell}">
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <Button Content="View" Style="{StaticResource DoctorStandardButton}"  />
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
+                    <DataGridTextColumn Header=" Beginning" Width="1*" Binding="{Binding Beginning}"  HeaderStyle="{StaticResource DoctorDGHeader}" CellStyle="{StaticResource DoctorDGCell}"/>
+                    <DataGridTextColumn Header=" Ending" Width="1*" Binding="{Binding Ending}"  HeaderStyle="{StaticResource DoctorDGHeader}" CellStyle="{StaticResource DoctorDGCell}"/>
                 </DataGrid.Columns>
             </DataGrid>
         </GroupBox>

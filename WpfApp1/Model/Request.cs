@@ -28,7 +28,7 @@ namespace WpfApp1.Model
 
         public Request() { }
 
-        public Request(int v1, DateTime dateTime1, DateTime dateTime2, RequestStatusType type, int v2, string v3, string v4, bool v5)
+        public Request(int v1, DateTime dateTime1, DateTime dateTime2, RequestStatusType type, int v2, string v3, string v4, bool v5,string v6)
         {
             _id = v1;
             _beginning = dateTime1;
@@ -38,8 +38,9 @@ namespace WpfApp1.Model
             _title = v3;
             _content = v4;
             _urgent = v5;
+            _comment = v6;
         }
-        public Request(DateTime dateTime1, DateTime dateTime2, RequestStatusType type, int v2, string v3, string v4, bool v5)
+        public Request(DateTime dateTime1, DateTime dateTime2, RequestStatusType type, int v2, string v3, string v4, bool v5, string v6)
         {
 
             _beginning = dateTime1;
@@ -49,12 +50,14 @@ namespace WpfApp1.Model
             _title = v3;
             _content = v4;
             _urgent = v5;
+            _comment = v6;
         }
 
         private int _id;
         private int _doctorId;
         private string _title;
         private string _content;
+        private string _comment;
         private DateTime _beginning;
         private DateTime _ending;
         private RequestStatusType _status;
@@ -72,6 +75,21 @@ namespace WpfApp1.Model
                 {
                     _urgent = value;
                     OnPropertyChanged("Urgnet");
+                }
+            }
+        }
+        public string Comment
+        {
+            get
+            {
+                return _comment;
+            }
+            set
+            {
+                if (value != _comment)
+                {
+                    _comment = value;
+                    OnPropertyChanged("Comment");
                 }
             }
         }

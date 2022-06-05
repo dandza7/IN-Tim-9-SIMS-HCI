@@ -110,6 +110,7 @@ namespace WpfApp1.View.Model.Doctor
         }
         public void ClearAppointmentForm()
         {
+            UrgentCB.IsChecked = false;
             EndingDTP.Text = BeginningDTP.Text = "";
             TypeCB.SelectedItem = PatientCB.SelectedIndex = -1;
             FormGB.Header = "Create Appointment";

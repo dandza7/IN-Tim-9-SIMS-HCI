@@ -35,7 +35,9 @@ namespace WpfApp1.Repository
                 int.Parse(tokens[4]),
                 tokens[5],
                 tokens[6],
-                bool.Parse(tokens[7]));
+                bool.Parse(tokens[7]),
+                tokens[8]);
+
         }
         private string ConvertRequestToCSVFormat(Request request)
         {
@@ -46,7 +48,9 @@ namespace WpfApp1.Repository
                 request.Status.ToString(),
                 request.DoctorId,
                 request.Title,
-                request.Content);
+                request.Content,
+                request.Urgnet,
+                request.Comment);
         }
 
         public List<Request> GetAll()
