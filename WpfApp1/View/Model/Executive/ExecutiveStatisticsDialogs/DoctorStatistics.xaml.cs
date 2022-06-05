@@ -23,10 +23,10 @@ namespace WpfApp1.View.Model.Executive.ExecutiveStatisticsDialogs
     /// </summary>
     public partial class DoctorStatistics : Page
     {
-        public DoctorStatistics(DoctorPreview doc, SurveyController surCon)
+        public DoctorStatistics(DoctorPreview doc)
         {
             InitializeComponent();
-            this.DataContext = new DoctorStatisticsViewModel(doc, surCon);
+            this.DataContext = new DoctorStatisticsViewModel(doc);
         }
     }
 }
