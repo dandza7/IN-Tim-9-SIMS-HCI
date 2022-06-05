@@ -94,5 +94,15 @@ namespace WpfApp1.View.Util
             app.Properties["userRole"] = "loggedOut";
             CloseAllWindows();
         }
+
+        private void SecretaryLeaveRequests_Click(object sender, RoutedEventArgs e)
+        {
+            PageHeader.Text = "Leave Request List";
+            DynamicEquipmentColorMark.Background = (SolidColorBrush)new BrushConverter().ConvertFromString("#FF130A38");
+            PatientsColorMark.Background = (SolidColorBrush)new BrushConverter().ConvertFromString("#FF130A38");
+            AppointmentsColorMark.Background = (SolidColorBrush)new BrushConverter().ConvertFromString("#FF130A38");
+            DashboardColorMark.Background = (SolidColorBrush)new BrushConverter().ConvertFromString("#FF130A38");
+            Main.Content = new SecretaryLeaveRequestsView();
+        }
     }
 }

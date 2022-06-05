@@ -64,6 +64,13 @@ namespace WpfApp1.Repository
             }
             return requests;
         }
+        public Request GetById(int id)
+        {
+            List<Request> requests = GetAll().ToList();
+            return requests.FirstOrDefault(request => request.Id == id);
+        }
+
+
         public IEnumerable<Request> GetAllByDoctorId(int id)
         {
             ObservableCollection<Request> doctorsRequests = new ObservableCollection<Request>();
@@ -74,7 +81,17 @@ namespace WpfApp1.Repository
 
             return doctorsRequests;
         }
+        public IEnumerable<Request> GetAllPending()
+        {
+            ObservableCollection<Request> requests = new ObservableCollection<Request>();
+            foreach (Request request in GetAll())
+            {
+                if (request.Status == RequestStatusType.Pending ) {requests.Add(request);
+                Console.WriteLine("a");}
+            }
 
+            return requests;
+        }
         public Request Create(Request request)
         {
             int maxId = GetMaxId(GetAll());
@@ -82,6 +99,24 @@ namespace WpfApp1.Repository
             AppendLineToFile(_path, ConvertRequestToCSVFormat(request));
             return request;
         }
+        public Request Update(Request requestForUpdate)
+        {
+            List<Request> requests = GetAll().ToList();
+            List<string> newFile = new List<string>();
+            foreach (Request request in requests)
+            {
+
+                if (request.Id == requestForUpdate.Id)
+                {
+                    request.Status = requestForUpdate.Status;
+                    request.Comment = requestForUpdate.Comment;
+                }
+                newFile.Add(ConvertRequestToCSVFormat(request));
+            }
+            File.WriteAllLines(_path, newFile);
+            return requestForUpdate;
+        }
+
 
         private int GetMaxId(IEnumerable<Request> requests)
         {
