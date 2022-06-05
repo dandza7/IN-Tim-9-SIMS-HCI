@@ -26,5 +26,19 @@ namespace WpfApp1.Controller
         {
             return _requestService.Create(request);
         }
+        public IEnumerable<Request> GetAllPending()
+        {
+            return _requestService.GetAllPending();
+        }
+
+        public Request GetById(int id)
+        {
+            return _requestService.GetById(id);
+        }
+        public Request Update(Request request)
+        {
+            return _requestService.Update(request);
+        }
+
     }
 }

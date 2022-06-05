@@ -51,5 +51,18 @@ namespace WpfApp1.Service
             if (IsEligibleForAbsence(request)) return _requestRepository.Create(request);
             else return null;
         }
+        public IEnumerable<Request> GetAllPending()
+        {
+            return _requestRepository.GetAllPending();
+        }
+        public Request GetById(int id)
+        {
+            return _requestRepository.GetById(id);
+        }
+        public Request Update(Request request)
+        {
+            return _requestRepository.Update(request);
+        }
+
     }
 }

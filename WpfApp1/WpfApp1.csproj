@@ -160,6 +160,9 @@
     <Compile Include="ViewModel\Commands\Patient\OpenUpdateNoteDialog.cs" />
     <Compile Include="ViewModel\Commands\Patient\UpdateNote.cs" />
     <Compile Include="ViewModel\Commands\Executive\NavigateHospitalStats.cs" />
+    <Compile Include="ViewModel\Commands\Secretary\AcceptRequest.cs" />
+    <Compile Include="ViewModel\Commands\Secretary\DenyRequest.cs" />
+    <Compile Include="ViewModel\Commands\Secretary\OpenLeaveRequestDialog.cs" />
     <Compile Include="ViewModel\DoctorStatisticsViewModel.cs" />
     <Compile Include="ViewModel\Commands\Executive\NavigateDoctorsList.cs" />
     <Compile Include="ViewModel\DoctorsListViewModel.cs" />
@@ -167,6 +170,8 @@
     <Compile Include="ViewModel\MoveInventoryViewModel.cs" />
     <Compile Include="ViewModel\NewInventoryViewModel.cs" />
     <Compile Include="ViewModel\NotesViewModel.cs" />
+    <Compile Include="ViewModel\Secretary\LeaveRequestsViewModel.cs" />
+    <Compile Include="ViewModel\Secretary\ManageLeaveRequestViewModel.cs" />
     <Compile Include="ViewModel\PDFViewModel.cs" />
     <Compile Include="ViewModel\StatisticsViewModel.cs" />
     <Compile Include="View\Dialog\PatientDialog\AddNoteDialog.xaml.cs">
@@ -174,6 +179,9 @@
     </Compile>
     <Compile Include="View\Dialog\PatientDialog\UpdateNoteDialog.xaml.cs">
       <DependentUpon>UpdateNoteDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Dialog\SecretaryLeaveRequestDialog.xaml.cs">
+      <DependentUpon>SecretaryLeaveRequestDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Model\Doctor\DoctorReportView.xaml.cs">
       <DependentUpon>DoctorReportView.xaml</DependentUpon>
@@ -189,6 +197,9 @@
     </Compile>
     <Compile Include="View\Model\Executive\ExecutiveStatisticsPages.xaml.cs">
       <DependentUpon>ExecutiveStatisticsPages.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Model\Secretary\SecretaryLeaveRequestsView.xaml.cs">
+      <DependentUpon>SecretaryLeaveRequestsView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Model\Patient\PDFView.xaml.cs">
       <DependentUpon>PDFView.xaml</DependentUpon>
@@ -517,6 +528,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\Dialog\SecretaryLeaveRequestDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\Dialog\SecretaryManageAllergiesDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -718,6 +733,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Model\Secretary\SecretaryDynamicEquipmentView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Model\Secretary\SecretaryLeaveRequestsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
