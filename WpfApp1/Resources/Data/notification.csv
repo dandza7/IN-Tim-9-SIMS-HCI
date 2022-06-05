@@ -1,31 +1,18 @@
 1;22.04.2022. 07:00:00;Take Bromazepam in one hour time!;Patient 3 Bromazepam Therapy;4;False;False
-32;30.05.2022. 15:00:00;Take Bromazepam in one hour time!;Patient 3 Bromazepam Therapy;3;False;False
-33;30.05.2022. 17:40:00;Take Xanax in one hour time!;Patient 3 Xanax Therapy;3;False;False
-34;31.05.2022. 07:00:00;Take Bromazepam in one hour time!;Patient 3 Bromazepam Therapy;3;False;False
-35;31.05.2022. 07:00:00;Take Xanax in one hour time!;Patient 3 Xanax Therapy;3;False;False
+32;30.05.2022. 15:00:00;Take Bromazepam in one hour time!;Patient 3 Bromazepam Therapy;3;False;True
+33;30.05.2022. 17:40:00;Take Xanax in one hour time!;Patient 3 Xanax Therapy;3;False;True
+34;31.05.2022. 07:00:00;Take Bromazepam in one hour time!;Patient 3 Bromazepam Therapy;3;False;True
+35;31.05.2022. 07:00:00;Take Xanax in one hour time!;Patient 3 Xanax Therapy;3;False;True
 36;31.05.2022. 07:00:00;Take Paracetamol in one hour time!;Patient 3 Paracetamol Therapy;3;False;True
-38;18.05.2022. 11:41:45;You set an alarm for the note!;Patient Notification Alarm for Note 6;3;False;False
-39;01.06.2022. 07:00:00;Take Bromazepam in one hour time!;Patient 3 Bromazepam Therapy;3;False;False
-40;01.06.2022. 07:00:00;Take Xanax in one hour time!;Patient 3 Xanax Therapy;3;False;False
-41;01.06.2022. 07:00:00;Take Paracetamol in one hour time!;Patient 3 Paracetamol Therapy;3;False;False
-42;21.05.2022. 09:10:35;You set an alarm for the note!;Patient Notification Alarm for Note 7;3;False;False
-43;03.06.2022. 07:00:00;Take Bromazepam in one hour time!;Patient 3 Bromazepam Therapy;3;False;False
-44;03.06.2022. 07:00:00;Take Xanax in one hour time!;Patient 3 Xanax Therapy;3;False;False
-45;03.06.2022. 07:00:00;Take Paracetamol in one hour time!;Patient 3 Paracetamol Therapy;3;False;False
-46;03.06.2022. 07:00:00;Take Ritalin in one hour time!;Patient 3 Ritalin Therapy;3;False;False
-47;01.01.2001. 00:00:00;You set an alarm for the note!;Patient Notification Alarm for Note 4;3;False;False
-48;04.06.2022. 07:00:00;Take Bromazepam in one hour time!;Patient 3 Bromazepam Therapy;3;False;False
-49;04.06.2022. 07:00:00;Take Xanax in one hour time!;Patient 3 Xanax Therapy;3;False;False
-50;04.06.2022. 12:20:00;Take Xanax in one hour time!;Patient 3 Xanax Therapy;3;False;False
-51;04.06.2022. 07:00:00;Take Paracetamol in one hour time!;Patient 3 Paracetamol Therapy;3;False;False
-52;04.06.2022. 07:00:00;Take Ritalin in one hour time!;Patient 3 Ritalin Therapy;3;False;False
-53;05.06.2022. 07:00:00;Take Bromazepam in one hour time!;Patient 3 Bromazepam Therapy;3;False;False
-54;05.06.2022. 15:00:00;Take Bromazepam in one hour time!;Patient 3 Bromazepam Therapy;3;False;False
-55;05.06.2022. 07:00:00;Take Xanax in one hour time!;Patient 3 Xanax Therapy;3;False;False
-56;05.06.2022. 12:20:00;Take Xanax in one hour time!;Patient 3 Xanax Therapy;3;False;False
-57;05.06.2022. 17:40:00;Take Xanax in one hour time!;Patient 3 Xanax Therapy;3;False;False
-58;05.06.2022. 07:00:00;Take Paracetamol in one hour time!;Patient 3 Paracetamol Therapy;3;False;False
-59;05.06.2022. 07:00:00;Take Ritalin in one hour time!;Patient 3 Ritalin Therapy;3;False;False
-60;01.01.2001. 07:00:00;You set an alarm for the note!;Patient Notification Alarm for Note 1;3;False;False
-61;01.01.2001. 07:00:00;You set an alarm for the note!;Patient Notification Alarm for Note 2;3;False;False
-62;01.01.2001. 07:00:00;You set an alarm for the note!;Patient Notification Alarm for Note 3;3;False;False
+37;04.06.2022. 07:00:00;Take Bromazepam in one hour time!;Patient 3 Bromazepam Therapy;3;False;False
+39;04.06.2022. 07:00:00;Take Xanax in one hour time!;Patient 3 Xanax Therapy;3;False;False
+44;04.06.2022. 07:00:00;Take Ritalin in one hour time!;Patient 3 Ritalin Therapy;3;False;True
+45;01.01.2001. 07:00:00;You set an alarm for the note!;Patient Notification Alarm for Note 1;3;False;False
+46;01.01.2001. 07:00:00;You set an alarm for the note!;Patient Notification Alarm for Note 2;3;False;False
+47;01.01.2001. 07:00:00;You set an alarm for the note!;Patient Notification Alarm for Note 3;3;False;False
+48;01.01.2001. 07:00:00;You set an alarm for the note!;Patient Notification Alarm for Note 4;3;False;False
+49;05.06.2022. 07:00:00;Take Bromazepam in one hour time!;Patient 3 Bromazepam Therapy;3;False;False
+50;05.06.2022. 07:00:00;Take Xanax in one hour time!;Patient 3 Xanax Therapy;3;False;False
+51;05.06.2022. 07:00:00;Take Paracetamol in one hour time!;Patient 3 Paracetamol Therapy;3;False;False
+52;05.06.2022. 12:20:00;Take Xanax in one hour time!;Patient 3 Xanax Therapy;3;False;False
+

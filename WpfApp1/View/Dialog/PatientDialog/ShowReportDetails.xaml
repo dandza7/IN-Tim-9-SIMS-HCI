@@ -40,9 +40,8 @@
             <TextBlock Grid.Row="4" Grid.Column="2" Text="{Binding ReportDetails.Nametag}" Style="{StaticResource SmallProfileTextBlock}" FontWeight="Normal" Margin="0,0,40,0"/>
             <TextBlock Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="4" Style="{StaticResource SmallProfileTextBlock}" Margin="40,10,40,0" Text="{Binding ReportDetails.ReportContent}"/>
         </Grid>
-        <WrapPanel HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="250,0,0,55">
+        <WrapPanel HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="335,0,0,55">
             <Button Content="Grade" Style="{StaticResource PatientDataGridButton}" FontSize="17" Margin="5" Click="Grade_Click"/>
-            <Button Content="Convert to PDF" Style="{StaticResource PatientDataGridButton}" FontSize="17" Margin="5"/>
             <Button Content="Go Back" Style="{StaticResource PatientDataGridButton}" FontSize="17" Click="GoBack_Click" Margin="5"/>
         </WrapPanel>
     </Grid>

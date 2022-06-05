@@ -142,6 +142,13 @@
     <None Include="Resources\Data\note.csv" />
     <Compile Include="Service\NoteService.cs" />
     <Compile Include="ViewModel\AppointmentViewModel.cs" />
+    <Compile Include="ViewModel\Commands\Executive\CloseFrame.cs" />
+    <Compile Include="ViewModel\Commands\Executive\ConfirmAdding.cs" />
+    <Compile Include="ViewModel\Commands\Executive\ConfirmMoving.cs" />
+    <Compile Include="ViewModel\Commands\Executive\ConfirmProblem.cs" />
+    <Compile Include="ViewModel\Commands\Executive\InventoryFilter.cs" />
+    <Compile Include="ViewModel\Commands\Executive\OpenMoveStaticPage.cs" />
+    <Compile Include="ViewModel\Commands\Executive\OpenNewStaticPage.cs" />
     <Compile Include="ViewModel\Commands\Patient\AddNewNote.cs" />
     <Compile Include="ViewModel\Commands\Patient\DeleteAppointment.cs" />
     <Compile Include="ViewModel\Commands\Patient\DeleteNote.cs" />
@@ -159,9 +166,13 @@
     <Compile Include="ViewModel\DoctorStatisticsViewModel.cs" />
     <Compile Include="ViewModel\Commands\Executive\NavigateDoctorsList.cs" />
     <Compile Include="ViewModel\DoctorsListViewModel.cs" />
+    <Compile Include="ViewModel\InventoryViewModel.cs" />
+    <Compile Include="ViewModel\MoveInventoryViewModel.cs" />
+    <Compile Include="ViewModel\NewInventoryViewModel.cs" />
     <Compile Include="ViewModel\NotesViewModel.cs" />
     <Compile Include="ViewModel\Secretary\LeaveRequestsViewModel.cs" />
     <Compile Include="ViewModel\Secretary\ManageLeaveRequestViewModel.cs" />
+    <Compile Include="ViewModel\PDFViewModel.cs" />
     <Compile Include="ViewModel\StatisticsViewModel.cs" />
     <Compile Include="View\Dialog\PatientDialog\AddNoteDialog.xaml.cs">
       <DependentUpon>AddNoteDialog.xaml</DependentUpon>
@@ -189,6 +200,9 @@
     </Compile>
     <Compile Include="View\Model\Secretary\SecretaryLeaveRequestsView.xaml.cs">
       <DependentUpon>SecretaryLeaveRequestsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Model\Patient\PDFView.xaml.cs">
+      <DependentUpon>PDFView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Validation\EmailValidation.cs" />
     <Compile Include="View\Validation\JmbgValidation.cs" />
@@ -381,9 +395,6 @@
     </Compile>
     <Compile Include="View\Model\Patient\PatientProfileView.xaml.cs">
       <DependentUpon>PatientProfileView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\Model\Patient\PatientReportsView.xaml.cs">
-      <DependentUpon>PatientReportsView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Model\Patient\ReportDetailsView.xaml.cs">
       <DependentUpon>ReportDetailsView.xaml</DependentUpon>
@@ -685,9 +696,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="View\Model\Patient\PatientReportsView.xaml">
-      <Generator>MSBuild:Compile</Generator>
+    <Page Include="View\Model\Patient\PDFView.xaml">
       <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Model\Patient\ReportDetailsView.xaml">
       <SubType>Designer</SubType>
@@ -862,6 +873,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Icons\VeryInterestingLogo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\printer.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

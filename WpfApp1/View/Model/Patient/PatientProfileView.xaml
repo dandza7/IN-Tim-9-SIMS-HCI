@@ -64,7 +64,7 @@
                         <ColumnDefinition Width="9*"/>
                         <ColumnDefinition Width="214*"/>
                     </Grid.ColumnDefinitions>
-                    <StackPanel Orientation="Horizontal" Margin="50,100,50,440" Grid.ColumnSpan="3">
+                    <StackPanel Orientation="Horizontal" Margin="50,50,50,490" Grid.ColumnSpan="3">
                         <Label Content="Choose time period:" FontSize="17" FontWeight="Bold" Foreground="White" Margin="0,0,50,0"/>
                         <Label Content="From:" FontSize="17" Foreground="White"/>
                         <DatePicker x:Name="FromDP" Margin="0,0,20,0"/>
@@ -72,9 +72,8 @@
                         <DatePicker x:Name="ToDP" Margin="0,0,20,0"/>
                         <Button Content="Search" Style="{StaticResource PatientSearchButton}" Click="SearchReports_Click"/>
                     </StackPanel>
-                    <DataGrid x:Name="PatientReportsDataGrid" MaxHeight="500" MaxWidth="705" Style="{StaticResource PatientDataGrid}" Margin="0,145,0,0" ItemsSource="{Binding Reports, UpdateSourceTrigger=PropertyChanged}" Grid.ColumnSpan="3">
+                    <DataGrid x:Name="PatientReportsDataGrid" MaxHeight="500" MaxWidth="705" Style="{StaticResource PatientDataGrid}" Margin="0,95,0,0" ItemsSource="{Binding Reports, UpdateSourceTrigger=PropertyChanged}" Grid.ColumnSpan="3">
                         <DataGrid.Columns>
-                            <DataGridTextColumn Header="Id" Binding="{Binding Id}" CanUserSort="False"  ElementStyle="{StaticResource ColumnElementStyle}" CellStyle="{StaticResource PatientDataGridCell}"/>
                             <DataGridTextColumn Header="Room" Binding="{Binding NameTag}" CanUserSort="False" ElementStyle="{StaticResource ColumnElementStyle}" CellStyle="{StaticResource PatientDataGridCell}"/>
                             <DataGridTextColumn Header="Doctor" Binding="{Binding Username}" CanUserSort="False" ElementStyle="{StaticResource ColumnElementStyle}" CellStyle="{StaticResource PatientDataGridCell}"/>
                             <DataGridTextColumn Header="Beginning" Binding="{Binding Beginning, StringFormat=dd.MM.yyyy. HH:mm:ss}" CanUserSort="False" ElementStyle="{StaticResource ColumnElementStyle}" CellStyle="{StaticResource PatientDataGridCell}"/>
@@ -87,13 +86,13 @@
                             </DataGridTemplateColumn>
                         </DataGrid.Columns>
                     </DataGrid>
+                    <Button Grid.Column="2" Content="Convert to PDF" Style="{StaticResource AddAppointmentButton}"  HorizontalAlignment="Left" Margin="376,509,0,0" Click="PDFConverter_Click"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Notifications" Style="{StaticResource PatientTabItem}">
                 <Grid Background="{StaticResource DarkBlueBrush}">
                     <DataGrid x:Name="PatientNotificationsDataGrid" MaxHeight="400" MaxWidth="720" Style="{StaticResource PatientDataGrid}" ItemsSource="{Binding Notifications, UpdateSourceTrigger=PropertyChanged}" HorizontalScrollBarVisibility="Disabled">
                         <DataGrid.Columns>
-                            <DataGridTextColumn Header="Id" Binding="{Binding Id}" CanUserSort="False" ElementStyle="{StaticResource ProfileColumnElementStyle}" CellStyle="{StaticResource PatientDataGridCell}"/>
                             <DataGridTextColumn Header="Date and Time" Binding="{Binding Date}" CanUserSort="False" ElementStyle="{StaticResource ProfileColumnElementStyle}" CellStyle="{StaticResource PatientDataGridCell}"/>
                             <DataGridTextColumn Header="Content of Notification" Binding="{Binding Content}" CanUserSort="False" ElementStyle="{StaticResource ProfileColumnElementStyle}" CellStyle="{StaticResource PatientDataGridCell}"/>
                             <DataGridTemplateColumn Header="Remove" MinWidth="90">

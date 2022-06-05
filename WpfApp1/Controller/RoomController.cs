@@ -40,10 +40,6 @@ namespace WpfApp1.Controller
         {
             return _roomService.Delete(id);
         }
-        public int GetIdByNametag(string nametag)
-        {
-            return _roomService.GetIdByNametag(nametag);
-        }
         public Room GetByNametag(string nametag)
         {
             return _roomService.GetByNametag(nametag);

@@ -28,9 +28,8 @@ namespace WpfApp1.View.Model.Executive.ExecutiveStatisticsDialogs
         public DoctorsList()
         {
             InitializeComponent();
-            var app = Application.Current as App;
             this.sb1 = FindResource("myStoryboard") as Storyboard;
-            this.DataContext = new DoctorsListViewModel(this, app.DoctorController, app.SurveyController);
+            this.DataContext = new DoctorsListViewModel(this);
         }
     }
 }
