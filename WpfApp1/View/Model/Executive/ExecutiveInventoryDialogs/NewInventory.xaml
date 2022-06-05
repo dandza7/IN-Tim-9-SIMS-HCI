@@ -33,12 +33,12 @@
                     </Grid.RowDefinitions>
                     <TextBlock Grid.Row="1" Grid.RowSpan="2" Grid.Column="1" Style="{StaticResource Title}">NEW INVENTORY</TextBlock>
                     <Label Grid.Row="3" Grid.Column="1" Content="Name:" Style="{StaticResource FormLabel}"></Label>
-                    <TextBox x:Name="AddName" Grid.Row="4" Grid.Column="1" Style="{StaticResource FormInputBox}"></TextBox>
+                    <TextBox x:Name="AddName" Grid.Row="4" Grid.Column="1" Style="{StaticResource FormInputBox}" Text="{Binding Path=NewName, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"></TextBox>
                     <Label Grid.Row="5" Grid.Column="1" Content="Room:" Style="{StaticResource FormLabel}"></Label>
-                    <ComboBox Name="AddRooms" Grid.Row="6" Grid.Column="1" Style="{StaticResource FormInputComboBox}" Height="30" Width="300" ItemsSource="{Binding Path=SOPRooms}"></ComboBox>
+                    <ComboBox Name="AddRooms" Grid.Row="6" Grid.Column="1" Style="{StaticResource FormInputComboBox}" Text="{Binding Path=NewRoom, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}" Height="30" Width="300" ItemsSource="{Binding Path=SOPRooms}"></ComboBox>
                     <TextBlock Grid.Row="7" Grid.Column="1" Style="{StaticResource SmallText}" Text="{Binding Path=Feedback, UpdateSourceTrigger=PropertyChanged}"></TextBlock>
-                    <Button x:Name="ConfirmButton" Grid.Column="1" Grid.Row="8" Style="{StaticResource ClassicButton}" Margin="50 4" Click="ConfirmButton_Click">Add Equipment</Button>
-                    <Button x:Name="CloseButton" Grid.Column="3" Grid.Row="1" Style="{StaticResource ClassicButton}" Click="CloseButton_Click">X</Button>
+                    <Button x:Name="ConfirmButton" Grid.Column="1" Grid.Row="8" Style="{StaticResource ClassicButton}" Margin="50 4" Command="{Binding ConfirmAdding}">Add Equipment</Button>
+                    <Button x:Name="CloseButton" Grid.Column="3" Grid.Row="1" Style="{StaticResource ClassicButton}" Command="{Binding CloseFrame}">X</Button>
                 </Grid>
             </Border>
         </Border>

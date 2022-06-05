@@ -189,5 +189,9 @@ namespace WpfApp1.ViewModel
         {
             ParentPage.WrongSelectionContainer.Visibility = Visibility.Collapsed;
         }
+        public void CloseFrameF()
+        {
+            ParentPage.CloseFrame.Begin();
+        }
     }
 }

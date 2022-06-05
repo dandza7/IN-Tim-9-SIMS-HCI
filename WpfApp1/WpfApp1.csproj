@@ -142,6 +142,8 @@
     <None Include="Resources\Data\note.csv" />
     <Compile Include="Service\NoteService.cs" />
     <Compile Include="ViewModel\AppointmentViewModel.cs" />
+    <Compile Include="ViewModel\Commands\Executive\CloseFrame.cs" />
+    <Compile Include="ViewModel\Commands\Executive\ConfirmAdding.cs" />
     <Compile Include="ViewModel\Commands\Executive\ConfirmProblem.cs" />
     <Compile Include="ViewModel\Commands\Executive\InventoryFilter.cs" />
     <Compile Include="ViewModel\Commands\Executive\OpenMoveStaticPage.cs" />
@@ -161,6 +163,7 @@
     <Compile Include="ViewModel\Commands\Executive\NavigateDoctorsList.cs" />
     <Compile Include="ViewModel\DoctorsListViewModel.cs" />
     <Compile Include="ViewModel\InventoryViewModel.cs" />
+    <Compile Include="ViewModel\NewInventoryViewModel.cs" />
     <Compile Include="ViewModel\NotesViewModel.cs" />
     <Compile Include="ViewModel\PDFViewModel.cs" />
     <Compile Include="ViewModel\StatisticsViewModel.cs" />
