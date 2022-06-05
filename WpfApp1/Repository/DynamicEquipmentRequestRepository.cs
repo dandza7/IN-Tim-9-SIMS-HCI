@@ -11,7 +11,6 @@ namespace WpfApp1.Repository
 {
     public class DynamicEquipmentRequestRepository
     {
-        private const string NOT_FOUND_ERROR = "Inventory moving with {0}:{1} can not be found!";
         private string _path;
         private string _delimiter;
 
@@ -21,35 +20,35 @@ namespace WpfApp1.Repository
             _delimiter = delimiter;
         }
 
-        public DynamicEquipmentRequest Get(int id)
+        public DynamicEquipmentRequest GetById(int id)
         {
-            List<DynamicEquipmentRequest> dyneqRequests = File.ReadAllLines(_path)
+            List<DynamicEquipmentRequest> requests = File.ReadAllLines(_path)
                 .Select(ConvertCsvFormatToDynamicEquipmentRequest)
                 .ToList();
-            foreach (DynamicEquipmentRequest dynreq in dyneqRequests)
+            foreach (DynamicEquipmentRequest request in requests)
             {
-                if (dynreq.Id == id)
-                    return dynreq;
+                if (request.Id == id)
+                    return request;
             }
             return null;
         }
 
         public List<DynamicEquipmentRequest> GetAllForUpdating()
         {
-            List<DynamicEquipmentRequest> dyneqRequests = File.ReadAllLines(_path)
+            List<DynamicEquipmentRequest> requests = File.ReadAllLines(_path)
                 .Select(ConvertCsvFormatToDynamicEquipmentRequest)
                 .ToList();
 
-            List<DynamicEquipmentRequest> dyneqRequestForMoving = new List<DynamicEquipmentRequest>();
+            List<DynamicEquipmentRequest> requestForMoving = new List<DynamicEquipmentRequest>();
 
-            foreach (DynamicEquipmentRequest dynreq in dyneqRequests)
+            foreach (DynamicEquipmentRequest request in requests)
             {
-                if (dynreq.ArrivalDate <= DateTime.Now)
+                if (request.ArrivalDate <= DateTime.Now)
                 {
-                    dyneqRequestForMoving.Add(dynreq);
+                    requestForMoving.Add(request);
                 }   
             }
-            return dyneqRequestForMoving;
+            return requestForMoving;
         }
 
         public List<DynamicEquipmentRequest> GetAll()
@@ -59,22 +58,21 @@ namespace WpfApp1.Repository
                 .ToList();
         }
 
-        private int GetMaxId(List<DynamicEquipmentRequest> dynReqs)
+        private int GetMaxId(List<DynamicEquipmentRequest> requests)
         {
-            return dynReqs.Count() == 0 ? 0 : dynReqs.Max(dynReq => dynReq.Id);
+            return requests.Count() == 0 ? 0 : requests.Max(request => request.Id);
         }
 
-        public DynamicEquipmentRequest Create(DynamicEquipmentRequest dynReq)
+        public DynamicEquipmentRequest Create(DynamicEquipmentRequest request)
         {
-            dynReq.Id = GetMaxId(GetAll()) + 1;
-            AppendLineToFile(_path, ConvertDynamicEquipmentRequestToCsvFormat(dynReq));
-            return dynReq;
+            request.Id = GetMaxId(GetAll()) + 1;
+            AppendLineToFile(_path, ConvertDynamicEquipmentRequestToCsvFormat(request));
+            return request;
         }
 
-        private DynamicEquipmentRequest ConvertCsvFormatToDynamicEquipmentRequest(string DynamicEquipmentRequestCsvFormat)
+        private DynamicEquipmentRequest ConvertCsvFormatToDynamicEquipmentRequest(string RequestCsvFormat)
         {
-            var tokens = DynamicEquipmentRequestCsvFormat.Split(_delimiter.ToCharArray());
-            string format = "dd/MM/yyyy H:mm:ss";
+            var tokens = RequestCsvFormat.Split(_delimiter.ToCharArray());
             return new DynamicEquipmentRequest(
                 int.Parse(tokens[0]),
                 tokens[1],
@@ -82,13 +80,13 @@ namespace WpfApp1.Repository
                 DateTime.Parse(tokens[3]));
         }
 
-        private string ConvertDynamicEquipmentRequestToCsvFormat(DynamicEquipmentRequest dynReq)
+        private string ConvertDynamicEquipmentRequestToCsvFormat(DynamicEquipmentRequest request)
         {
             return string.Join(_delimiter,
-                dynReq.Id,
-                dynReq.Name,
-                dynReq.Amount,
-                dynReq.ArrivalDate);
+                request.Id,
+                request.Name,
+                request.Amount,
+                request.ArrivalDate);
         }
 
         private void AppendLineToFile(String path, String line)
@@ -98,14 +96,14 @@ namespace WpfApp1.Repository
 
         public bool Delete(int id)
         {
-            List<DynamicEquipmentRequest> dynRequests = GetAll().ToList();
+            List<DynamicEquipmentRequest> requests = GetAll().ToList();
             List<string> newFile = new List<string>();
             bool isDeleted = false;
-            foreach (DynamicEquipmentRequest der in dynRequests)
+            foreach (DynamicEquipmentRequest request in requests)
             {
-                if (der.Id != id)
+                if (request.Id != id)
                 {
-                    newFile.Add(ConvertDynamicEquipmentRequestToCsvFormat(der));
+                    newFile.Add(ConvertDynamicEquipmentRequestToCsvFormat(request));
                     isDeleted = true;
                 }
             }

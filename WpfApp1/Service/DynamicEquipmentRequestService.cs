@@ -10,31 +10,31 @@ namespace WpfApp1.Service
 {
     public class DynamicEquipmentRequestService
     {
-        public readonly DynamicEquipmentRequestRepository _dynamicEquipmentRequestRepository;
+        public readonly DynamicEquipmentRequestRepository _equipmentRequestRepo;
         public readonly InventoryRepository _inventoryRepository;
 
-        public DynamicEquipmentRequestService(DynamicEquipmentRequestRepository dynReqRepository, InventoryRepository eqRepository)
+        public DynamicEquipmentRequestService(DynamicEquipmentRequestRepository requestRepo, InventoryRepository inventoryRepo)
         {
-            _dynamicEquipmentRequestRepository = dynReqRepository;
-            _inventoryRepository = eqRepository;
+            _equipmentRequestRepo = requestRepo;
+            _inventoryRepository = inventoryRepo;
         }
-        public DynamicEquipmentRequest Create(DynamicEquipmentRequest dynReq)
+        public DynamicEquipmentRequest Create(DynamicEquipmentRequest request)
         {
-            return _dynamicEquipmentRequestRepository.Create(dynReq);
+            return _equipmentRequestRepo.Create(request);
 
         }
         public IEnumerable<DynamicEquipmentRequest> GetAll()
         {
-            return _dynamicEquipmentRequestRepository.GetAll();
+            return _equipmentRequestRepo.GetAll();
         }
 
         public bool Delete(int id)
         {
-            return _dynamicEquipmentRequestRepository.Delete(id);
+            return _equipmentRequestRepo.Delete(id);
         }
         public List<DynamicEquipmentRequest> UpdateDynamicEquipment()
         {
-            List<DynamicEquipmentRequest> requests = _dynamicEquipmentRequestRepository.GetAllForUpdating();
+            List<DynamicEquipmentRequest> requests = _equipmentRequestRepo.GetAllForUpdating();
 
             foreach (DynamicEquipmentRequest request in requests)
             {
@@ -50,7 +50,7 @@ namespace WpfApp1.Service
                         _inventoryRepository.Create(newDynamicEquipment);
                     }
 
-                _dynamicEquipmentRequestRepository.Delete(request.Id);
+                _equipmentRequestRepo.Delete(request.Id);
 
             }
             return requests;
