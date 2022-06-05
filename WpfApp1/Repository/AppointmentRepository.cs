@@ -70,34 +70,34 @@ namespace WpfApp1.Repository
         }
         public IEnumerable<Appointment> GetDoctorsMovableAppointments(DateTime startOfInterval, DateTime endOfInterval, int doctorId)
         {
-            List<Appointment> appointmentsInTimeInterval = GetAllAppointmentsInTimeInterval(startOfInterval, endOfInterval).ToList();
-            List<Appointment> doctorsAppointmentsInTimeInterval = new List<Appointment>();
+            List<Appointment> allAppointments = GetAllAppointmentsInTimeInterval(startOfInterval, endOfInterval).ToList();
+            List<Appointment> doctorsAppointments = new List<Appointment>();
 
-            foreach (Appointment appointment in appointmentsInTimeInterval)
+            foreach (Appointment appointment in allAppointments)
             {
                 if (appointment.DoctorId == doctorId && appointment.IsUrgent != true && appointment.Type != AppointmentType.surgery)
                 {
-                    doctorsAppointmentsInTimeInterval.Add(appointment);
+                    doctorsAppointments.Add(appointment);
                 }
             }
 
-            return doctorsAppointmentsInTimeInterval.ToList();
+            return doctorsAppointments.ToList();
         }
 
         public IEnumerable<Appointment> GetAllAppointmentsForDoctor(int doctorId)
         {
             List<Appointment> allAppointments = GetAll().ToList();
-            List<Appointment> appointmentsForDoctor = new List<Appointment>();
+            List<Appointment> appointments = new List<Appointment>();
 
             foreach (Appointment appointment in allAppointments)
             {
                 if (appointment.DoctorId == doctorId)
                 {
-                    appointmentsForDoctor.Add(appointment);
+                    appointments.Add(appointment);
                 }
             }
 
-            return appointmentsForDoctor.OrderBy(appointment => appointment.Beginning).ToList();
+            return appointments.OrderBy(appointment => appointment.Beginning).ToList();
         }
 
         public IEnumerable<Appointment> GetAllAppointmentsForPatient(int patientId)

@@ -12,9 +12,9 @@ namespace WpfApp1.Controller
     {
         private readonly AllergyService _allergyService;
 
-        public AllergyController(AllergyService allergyservice)
+        public AllergyController(AllergyService allergyService)
         {
-            _allergyService = allergyservice;
+            _allergyService = allergyService;
         }
         public IEnumerable<Allergy> GetAll()
         {

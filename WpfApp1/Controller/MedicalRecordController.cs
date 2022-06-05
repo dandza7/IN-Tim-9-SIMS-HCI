@@ -26,9 +26,9 @@ namespace WpfApp1.Controller
         {
             return _medicalRecordService.GetById(id);
         }
-        public MedicalRecord GetByPatientId(int id)
+        public MedicalRecord GetByPatientId(int patientId)
         {
-            return _medicalRecordService.GetPatientsMedicalRecord(id);
+            return _medicalRecordService.GetPatientsMedicalRecord(patientId);
         }
         public MedicalRecord Create(MedicalRecord medicalRecord)
         {

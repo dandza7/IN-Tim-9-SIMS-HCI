@@ -76,9 +76,9 @@ namespace WpfApp1.Controller
         {
             return _appointmentService.GetById(id);
         }
-        public List<AppointmentView> GetSortedMovableAppointments(SpecType specialization, DateTime start)
+        public List<AppointmentView> GetSortedMovableAppointments(SpecType specialization, DateTime startOfInterval)
         {
-            return _appointmentService.GetSortedMovableAppointments(specialization, start);
+            return _appointmentService.GetSortedMovableAppointments(specialization, startOfInterval);
         }
 
         public DateTime GetNearestFreeTerm(int appointmentId)
@@ -96,9 +96,9 @@ namespace WpfApp1.Controller
             return _appointmentService.GetAllByDoctorId(id);
         }
 
-        public bool CreateUrgentAppointment(int patientId, SpecType spec, DateTime startOfInterval)
+        public bool CreateUrgentAppointment(int patientId, SpecType specialization, DateTime startOfInterval)
         {
-            return _appointmentService.CreateUrgentAppointment(patientId, spec, startOfInterval);
+            return _appointmentService.CreateUrgentAppointment(patientId, specialization, startOfInterval);
         }
 
 

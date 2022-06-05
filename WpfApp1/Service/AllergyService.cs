@@ -12,9 +12,9 @@ namespace WpfApp1.Service
     {
         private readonly AllergyRepository _allergyRepo;
 
-        public AllergyService(AllergyRepository therapyRepo)
+        public AllergyService(AllergyRepository allergyRepo)
         {
-            _allergyRepo = therapyRepo;
+            _allergyRepo = allergyRepo;
         }
         public IEnumerable<Allergy> GetAll()
         {

@@ -10,28 +10,28 @@ namespace WpfApp1.Controller
 {
     public class DynamicEquipmentRequestController
     {
-        private readonly DynamicEquipmentRequestService _dynReqService;
+        private readonly DynamicEquipmentRequestService _requestService;
 
-        public DynamicEquipmentRequestController(DynamicEquipmentRequestService dynReqService)
+        public DynamicEquipmentRequestController(DynamicEquipmentRequestService requestService)
         {
-            _dynReqService = dynReqService;
+            _requestService = requestService;
         }
-        public DynamicEquipmentRequest Create(DynamicEquipmentRequest dynReq)
+        public DynamicEquipmentRequest Create(DynamicEquipmentRequest request)
         {
-                return _dynReqService.Create(dynReq);
+                return _requestService.Create(request);
 
         }
         public IEnumerable<DynamicEquipmentRequest> GetAll()
         {
-            return _dynReqService.GetAll();
+            return _requestService.GetAll();
         }
         public bool Delete(int id)
         {
-            return _dynReqService.Delete(id);
+            return _requestService.Delete(id);
         }
         public List<DynamicEquipmentRequest> UpdateDynamicEquipment()
         {
-            return _dynReqService.UpdateDynamicEquipment();
+            return _requestService.UpdateDynamicEquipment();
         }
     }
 }
