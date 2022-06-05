@@ -36,6 +36,8 @@ namespace WpfApp1.View.Model.Patient
         public ObservableCollection<AppointmentView> Reports { get; set; }
         public PatientView Patient { get; set; }
 
+        public bool IsSelected { get; set; } = false;
+
         public PatientProfileView()
         {
             InitializeComponent();
@@ -66,6 +68,7 @@ namespace WpfApp1.View.Model.Patient
             Therapies = therapyViews;
 
             Reports = new ObservableCollection<AppointmentView>(_appointmentController.GetPatientsReportsView(patientId));
+            app.Properties["Reports"] = Reports;
         }
 
         private void DeleteNotification_Click(object sender, RoutedEventArgs e)
@@ -119,8 +122,13 @@ namespace WpfApp1.View.Model.Patient
                 return;
             }
 
+            ObservableCollection<AppointmentView> apps = new ObservableCollection<AppointmentView>(_appointmentController.GetPatientsReportsInTimeInterval(patientId, startOfInterval, endOfInterval));
             PatientReportsDataGrid.ItemsSource = null;
-            PatientReportsDataGrid.ItemsSource = _appointmentController.GetPatientsReportsInTimeInterval(patientId, startOfInterval, endOfInterval);
+            PatientReportsDataGrid.ItemsSource = apps;
+            app.Properties["from"] = startOfInterval;
+            app.Properties["to"] = endOfInterval;
+            IsSelected = true;
+            app.Properties["Reports"] = apps;
         }
 
         private void ShowDetails_Click(object sender, RoutedEventArgs e)
@@ -140,6 +148,18 @@ namespace WpfApp1.View.Model.Patient
                 "search button. If you are interested in a more detailed view of appointment click on the button for details. " +
                 "After reading the details you are welcome to grade the appointment.";
             PatientHelp.Show(APPOINTMENT_HISTORY_HELP);
+        }
+
+        private void PDFConverter_Click(object sender, RoutedEventArgs e)
+        {
+            var app = Application.Current as App;
+            if (!IsSelected)
+            {
+                app.Properties["from"] = new DateTime(2001, 1, 1);
+                app.Properties["to"] = new DateTime(2030, 1, 1);
+            }
+            Window PDFView = new PDFView();
+            PDFView.Show();
         }
     }
 }

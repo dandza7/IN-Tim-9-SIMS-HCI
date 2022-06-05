@@ -115,13 +115,15 @@ namespace WpfApp1.Service
 
             string content = "Take " + drugName + " in one hour time!";
             string title = "Patient " + patientId + " " + drugName + " Therapy";
-            bool isDuplicate = false;
             List<Notification> sentNotifications = _notificationRepo.GetAllForUser(patientId).ToList();
             foreach (Notification sentNotification in sentNotifications)
-                isDuplicate = IsTherapyDuplicate(sentNotification, whenToSend, content, frequency);
-
-            if (whenToSend < DateTime.Now && isDuplicate == false)
+                if(IsTherapyDuplicate(sentNotification, whenToSend, content, frequency)) return;
+            
+            if (whenToSend < DateTime.Now)
+            {
+                Console.WriteLine("Notifikacija sa sadrzajem: '" + content + "' do sada nije poslana.");
                 _notificationRepo.Create(new Notification(whenToSend, content, title, patientId, false, false));
+            }
         }
 
         private bool IsTherapyDuplicate(Notification notification, DateTime sendingTime, string content, float frequency)
@@ -135,7 +137,6 @@ namespace WpfApp1.Service
                 if (notification.Content.Equals(content) && notification.Date.AddDays(daysToPass) > sendingTime)
                     return true;
             }
-
             return false;
         }
 

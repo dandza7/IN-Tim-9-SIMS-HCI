@@ -105,8 +105,7 @@ namespace WpfApp1.View.Dialog.PatientDialog
         {
             const string REPORT_DETAILS_HELP = "Here you can see the detailed review of the appointment." +
                 "In doctors report you can find his diagnosis for the appointment. If you are willing to give us feedback about your " +
-                "experience you are welcomed to do so by clicking on the button grade. If you wish to print this information you " +
-                "can click on the button to easily convert it to PDF format.";
+                "experience you are welcomed to do so by clicking on the button grade.";
             PatientHelp.Show(REPORT_DETAILS_HELP);
         }
     }
