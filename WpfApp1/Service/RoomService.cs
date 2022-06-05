@@ -84,19 +84,7 @@ namespace WpfApp1.Service
 
             return _roomRepository.Delete(id);
         }
-        public int GetIdByNametag(string nametag)
-        {
-            ExecuteFinishedAdvancedRenovations();
-            List<Room> rooms = _roomRepository.GetAll();
-            foreach(Room room in rooms)
-            {
-                if (room.Nametag.Equals(nametag) && room.IsActive)
-                {
-                    return room.Id;
-                }
-            }
-            return -1;
-        }
+
         public Room GetByNametag(string nametag)
         {
             ExecuteFinishedAdvancedRenovations();

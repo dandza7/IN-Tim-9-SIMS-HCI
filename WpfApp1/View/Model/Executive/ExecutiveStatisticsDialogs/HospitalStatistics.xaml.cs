@@ -26,8 +26,7 @@ namespace WpfApp1.View.Model.Executive.ExecutiveStatisticsDialogs
         public HospitalStatistics()
         {
             InitializeComponent();
-            var app = Application.Current as App;
-            this.DataContext = new DoctorStatisticsViewModel(new DoctorPreview(-1, "", ""), app.SurveyController);
+            this.DataContext = new DoctorStatisticsViewModel(new DoctorPreview(-1, "", ""));
         }
     }
 }

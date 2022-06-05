@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using WpfApp1.Controller;
 using WpfApp1.Model.Preview;
 using WpfApp1.View.Model.Executive.ExecutiveStatisticsDialogs;
@@ -38,18 +39,19 @@ namespace WpfApp1.ViewModel
         private DoctorController doctorController;
         private SurveyController surveyController;
         public List<DoctorPreview> Doctors { get; set; }
-        public DoctorsListViewModel(DoctorsList parentPage, DoctorController docCon, SurveyController surCon)
+        public DoctorsListViewModel(DoctorsList parentPage)
         {
             this.ParentPage = parentPage;
-            doctorController = docCon;
-            surveyController = surCon;
+            var app = Application.Current as App;
+            doctorController = app.DoctorController;
+            surveyController = app.SurveyController;
             this.Doctors = doctorController.GetAllPreviews().ToList();
             if(Doctors.Count > 0)
                 SelectedDoctor = Doctors[0];
         }
         public void ShowStatistics()
         {
-            ParentPage.StatsFrame.Content = new DoctorStatistics(SelectedDoctor, surveyController);
+            ParentPage.StatsFrame.Content = new DoctorStatistics(SelectedDoctor);
             ParentPage.sb1.Begin();
         }
     }

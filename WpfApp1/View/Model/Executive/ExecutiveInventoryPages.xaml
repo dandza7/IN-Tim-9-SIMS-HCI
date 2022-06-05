@@ -8,7 +8,7 @@
       d:DesignHeight="570" d:DesignWidth="1280"
       Title="ExecutiveInventoryPages">
     <Page.Resources>
-        <Storyboard x:Name="FormFrameAnimation" x:Key="FormFrameAnimation">
+        <Storyboard x:Name="OpenFrame" x:Key="OpenFrame">
             <DoubleAnimationUsingKeyFrames
                        Storyboard.TargetName="FormFrame"
                        Storyboard.TargetProperty="Opacity"
@@ -26,22 +26,16 @@
                 <LinearDoubleKeyFrame Value="0" KeyTime="0:0:0.3" />
             </DoubleAnimationUsingKeyFrames>
         </Storyboard>
-        <Storyboard x:Name="CloseDG" x:Key="CloseDG" Completed="CloseDG_Completed">
+        <Storyboard x:Name="RefreshDG" x:Key="RefreshDG">
             <DoubleAnimationUsingKeyFrames
                        Storyboard.TargetName="InventoryDG"
                        Storyboard.TargetProperty="Opacity"
-                       Duration="0:0:0.2">
-                <LinearDoubleKeyFrame Value="0" KeyTime="0:0:0.2" />
+                       Duration="0:0:0.5">
+                <LinearDoubleKeyFrame Value="0" KeyTime="0:0:0" />
+                <LinearDoubleKeyFrame Value="1" KeyTime="0:0:0.5" />
             </DoubleAnimationUsingKeyFrames>
         </Storyboard>
-        <Storyboard x:Name="OpenDG" x:Key="OpenDG">
-            <DoubleAnimationUsingKeyFrames
-                       Storyboard.TargetName="InventoryDG"
-                       Storyboard.TargetProperty="Opacity"
-                       Duration="0:0:0.2">
-                <LinearDoubleKeyFrame Value="1" KeyTime="0:0:0.2" />
-            </DoubleAnimationUsingKeyFrames>
-        </Storyboard>
+
     </Page.Resources>
 
     <Grid>
@@ -61,12 +55,12 @@
                 <TextBlock FontSize="20" FontFamily="Impact" Foreground="{StaticResource DarkestBlueBrush}" Margin="35 0 40 0" VerticalAlignment="Center">SEARCH</TextBlock>
                 <TextBlock FontSize="18" FontFamily="Impact" Foreground="{StaticResource DarkestBlueBrush}" Margin="35 0 10 0" VerticalAlignment="Center">Name:</TextBlock>
                 <TextBox x:Name="SearchTokenInput" Style="{StaticResource FormInputBox}" Width="200" FontSize="15" Margin="0 0 50 0" Text="{Binding SearchToken, UpdateSourceTrigger=PropertyChanged}"></TextBox>
-                <CheckBox Name="StaticCB" IsChecked="True" Content="Display Static Inventory" Click="Filter_Click" Style="{StaticResource CheckBoxExecutive}" VerticalAlignment="Center"></CheckBox>
-                <CheckBox Name="DynamicCB" IsChecked="True" Content="Display Dynamic Inventory" Click="Filter_Click" Style="{StaticResource CheckBoxExecutive}" VerticalAlignment="Center"></CheckBox>
+                <CheckBox Name="StaticCB" IsChecked="True" Content="Display Static Inventory" Command="{Binding InventoryFilter}" Style="{StaticResource CheckBoxExecutive}" VerticalAlignment="Center"></CheckBox>
+                <CheckBox Name="DynamicCB" IsChecked="True" Content="Display Dynamic Inventory" Command="{Binding InventoryFilter}" Style="{StaticResource CheckBoxExecutive}" VerticalAlignment="Center"></CheckBox>
             </StackPanel>
         </Border>
-        <Button x:Name="MoveStaticInventory" Grid.Column="2"  Style="{StaticResource ClassicButton}" Margin="20 5 20 5" Click="MoveStaticInventory_Click">Move Static Inventory</Button>
-        <Button x:Name="AddNewStaticEquipment" Grid.Column="3"  Style="{StaticResource ClassicButton}" Margin="0 5 20 5" Click="AddNewStaticEquipment_Click">Add New Static Inventory</Button>
+        <Button x:Name="MoveStaticInventory" Grid.Column="2"  Style="{StaticResource ClassicButton}" Margin="20 5 20 5" Command="{Binding OpenMoveStaticPage}">Move Static Inventory</Button>
+        <Button x:Name="AddNewStaticEquipment" Grid.Column="3"  Style="{StaticResource ClassicButton}" Margin="0 5 20 5" Command="{Binding OpenNewStaticPage}">Add New Static Inventory</Button>
         <DataGrid x:Name="InventoryDG" AutoGenerateColumns="False" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="4" Style="{StaticResource ExecutiveDataGrid}" ItemsSource="{Binding Inventory}" Margin="20 0 20 0">
             <DataGrid.Columns>
                 <DataGridTextColumn Header=" ID" Width="*"  Binding="{Binding Id}" HeaderStyle="{StaticResource ExecutiveDGHeader}" CellStyle="{StaticResource ExecutiveDGCell}"/>
@@ -95,7 +89,7 @@
                 </Grid.RowDefinitions>
                 <TextBlock Grid.Row="0" Text="Problem with starting action:" Style="{StaticResource Title}" FontSize="22"></TextBlock>
                 <TextBlock Grid.Row="1" Text="{Binding Path=WrongSelection, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource NotificationText}" Margin="20 0"></TextBlock>
-                <Button x:Name="WrongSelectionOK" Grid.Row="2" Style="{StaticResource ClassicButton}" Margin="100 5" Click="WrongSelectionOK_Click" FontSize="24">OK</Button>
+                <Button x:Name="WrongSelectionOK" Grid.Row="2" Style="{StaticResource ClassicButton}" Margin="100 5" Command="{Binding ConfirmProblem}" FontSize="24">OK</Button>
             </Grid>
         </Border>
         <Frame Name="FormFrame" Grid.ColumnSpan="4" Grid.RowSpan="3">

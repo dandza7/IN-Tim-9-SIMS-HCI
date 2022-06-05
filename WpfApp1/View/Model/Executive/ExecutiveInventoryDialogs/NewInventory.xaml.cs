@@ -14,6 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using WpfApp1.Model;
+using WpfApp1.ViewModel;
 
 namespace WpfApp1.View.Model.Executive.ExecutiveInventoryDialogs
 {
@@ -21,79 +22,12 @@ namespace WpfApp1.View.Model.Executive.ExecutiveInventoryDialogs
     /// Interaction logic for NewInventory.xaml
     /// </summary>
     
-    public partial class NewInventory : Page, INotifyPropertyChanged
-    {
-        #region NotifyProperties
-        public String _feedback;
-        public string Feedback
-        {
-            get
-            {
-                return _feedback;
-            }
-            set
-            {
-                if (value != _feedback)
-                {
-                    _feedback = value;
-                    OnPropertyChanged("Feedback");
-                }
-            }
-        }
-
-        #endregion
-        #region PropertyChangedNotifier
-        protected virtual void OnPropertyChanged(string name)
-        {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(name));
-            }
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-        #endregion
-        public ExecutiveInventoryPages ParentPage { get; set; }
-        public List<string> SOPRooms { get; set; }
+    public partial class NewInventory : Page
+        { 
         public NewInventory(ExecutiveInventoryPages parent)
         {
             InitializeComponent();
-            this.DataContext = this;
-            this.ParentPage = parent;
-            this.SOPRooms = parent.InventoryController.GetSOPRooms();
-            AddRooms.Text = "";
-            AddName.Text = "";
-            Feedback = "";
-            
-        }
-
-        private void CloseButton_Click(object sender, RoutedEventArgs e)
-        {
-            ParentPage.CloseFrame.Begin();
-            AddRooms.Text = "";
-            AddName.Text = "";
-            Feedback = "";
-        }
-
-        private void ConfirmButton_Click(object sender, RoutedEventArgs e)
-        {
-            if (AddRooms.Text == "" || AddName.Text == "")
-            {
-                Feedback = "*you must fill all fields!";
-                return;
-            }
-            if (AddName.Text.Contains(";"))
-            {
-                Feedback = "*you can't use semicolon (;) in name!";
-                return;
-            }
-            ParentPage.InventoryController.Create(new Inventory(0, 0, AddName.Text, "S", 1), AddRooms.Text);
-            ParentPage.CloseFrame.Begin();
-            AddRooms.Text = "";
-            AddName.Text = "";
-            Feedback = "";
-            ParentPage.InventorySource = ParentPage.InventoryController.GetPreviews();
-            ParentPage.FilterInventory();
+            this.DataContext = new NewInventoryViewModel(parent);
         }
     }
 }

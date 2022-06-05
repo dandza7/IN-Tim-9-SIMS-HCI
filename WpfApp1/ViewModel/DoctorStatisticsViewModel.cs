@@ -4,6 +4,8 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
 using WpfApp1.Controller;
 using WpfApp1.Model;
 using WpfApp1.Model.Preview;
@@ -28,10 +30,11 @@ namespace WpfApp1.ViewModel
         public double Grade4 { get; set; }
         public double Grade5 { get; set; }
         public double AvgGrade { get; set; }
-        public DoctorStatisticsViewModel(DoctorPreview doctor, SurveyController surCon)
+        public DoctorStatisticsViewModel(DoctorPreview doctor)
         {
             DoctorsName = doctor.Name;
-            surveyController = surCon;
+            var app = Application.Current as App;
+            surveyController = app.SurveyController;
             List<Survey> surveys = surveyController.GetAllByDoctorsId(doctor.Id);
             int count = 0;
             foreach (Survey survey in surveys)
