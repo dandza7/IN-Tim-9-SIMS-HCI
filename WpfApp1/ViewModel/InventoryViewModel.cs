@@ -114,9 +114,7 @@ namespace WpfApp1.ViewModel
         public InventoryMovingController InventoryMovingController { get { return _inventoryMovingController; } }
         private RoomController _roomController;
         public RoomController RoomController { get { return _roomController; } }
-        public int SelectedId { get; set; }
-        public string SelectedRoomName { get; set; }
-        public string SelectedInventoryName { get; set; }
+
         public InventoryFilter InventoryFilter { get; set; }
         public OpenNewStaticPage OpenNewStaticPage { get; set; }
         public OpenMoveStaticPage OpenMoveStaticPage { get; set; }
@@ -132,9 +130,6 @@ namespace WpfApp1.ViewModel
             this.SOPRooms = new List<string>();
             this.Feedback = "";
             this.WrongSelection = "";
-            SelectedId = -1;
-            SelectedRoomName = "";
-            SelectedInventoryName = "";
             this.InventorySource = _inventoryController.GetPreviews();
             this.Inventory = new ObservableCollection<InventoryPreview>();
             this.SearchToken = "";
@@ -178,10 +173,10 @@ namespace WpfApp1.ViewModel
                 ParentPage.WrongSelectionContainer.Visibility = Visibility.Visible;
                 return;
             }
-            SelectedRoomName = i.Room;
-            SelectedInventoryName = i.Name;
-            SelectedId = i.Id;
-            
+            var app = Application.Current as App;
+            app.Properties["CurrentRoomOfInventory"] =  i.Room;
+            app.Properties["NameOfInventory"] = i.Name;
+            app.Properties["IdOfInventory"] = i.Id;
             ParentPage.FormFrame.Content = new MoveInventory(ParentPage);
             ParentPage.OpenFrame.Begin();
         }

@@ -11,7 +11,7 @@ using WpfApp1.ViewModel.Commands.Executive;
 
 namespace WpfApp1.ViewModel
 {
-    internal class NewInventoryViewModel : INotifyPropertyChanged
+    internal class MoveInventoryViewModel : INotifyPropertyChanged
     {
         #region NotifyProperties
         public String _feedback;
@@ -30,19 +30,19 @@ namespace WpfApp1.ViewModel
                 }
             }
         }
-        public String _newName;
-        public string NewName
+        public String _date;
+        public string Date
         {
             get
             {
-                return _newName;
+                return _date;
             }
             set
             {
-                if (value != _newName)
+                if (value != _date)
                 {
-                    _newName = value;
-                    OnPropertyChanged("NewName");
+                    _date = value;
+                    OnPropertyChanged("Date");
                 }
             }
         }
@@ -75,31 +75,35 @@ namespace WpfApp1.ViewModel
         public ExecutiveInventoryPages ParentPage { get; set; }
         public List<string> SOPRooms { get; set; }
         public CloseFrame CloseFrame { get; set; }
-        public ConfirmAdding ConfirmAdding { get; set; }
-        public NewInventoryViewModel(ExecutiveInventoryPages parent)
+        public ConfirmMoving ConfirmMoving { get; set; }
+        public string CurrentRoom { get; set; }
+        public string InventoryName { get; set; }
+        public MoveInventoryViewModel(ExecutiveInventoryPages parent)
         {
             var app = Application.Current as App;
             SOPRooms = app.InventoryController.GetSOPRooms();
             this.ParentPage = parent;
             this.ParentsDataContext = (InventoryViewModel)parent.DataContext;
             this.CloseFrame = new CloseFrame(ParentsDataContext);
-            this.ConfirmAdding = new ConfirmAdding(this);
+            this.ConfirmMoving = new ConfirmMoving(this);
+            CurrentRoom = (string)app.Properties["CurrentRoomOfInventory"]; 
+            InventoryName = (string)app.Properties["NameOfInventory"];
             Feedback = "";
         }
-        public void ConfirmAddingF()
+        public void ConfirmMovingF()
         {
-            if (NewRoom == "" || NewName == "")
+            if (NewRoom == "" || Date == "")
             {
                 Feedback = "*you must fill all fields!";
                 return;
             }
-            if (NewName.Contains(";"))
+            if (DateTime.Compare(DateTime.Parse(Date), DateTime.Today) < 0)
             {
-                Feedback = "*you can't use semicolon (;) in name!";
+                Feedback = "*you must select date that is either today or in future!";
                 return;
             }
             var app = Application.Current as App;
-            app.InventoryController.Create(new Inventory(0, 0, NewName, "S", 1), NewRoom);
+            app.InventoryMovingController.NewMoving(new InventoryMoving(0, (int)app.Properties["IdOfInventory"], app.RoomController.GetByNametag(NewRoom).Id, DateTime.Parse(Date)));
             Feedback = "";
             ParentsDataContext.InventorySource = app.InventoryController.GetPreviews();
             ParentsDataContext.FilterInventory();

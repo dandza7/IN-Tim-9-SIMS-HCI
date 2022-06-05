@@ -24,13 +24,10 @@ namespace WpfApp1.View.Model.Executive.ExecutiveInventoryDialogs
     
     public partial class NewInventory : Page
         { 
-        public ExecutiveInventoryPages ParentPage { get; set; }
-        public List<string> SOPRooms { get; set; }
         public NewInventory(ExecutiveInventoryPages parent)
         {
             InitializeComponent();
             this.DataContext = new NewInventoryViewModel(parent);
-            this.ParentPage = parent;
         }
     }
 }
