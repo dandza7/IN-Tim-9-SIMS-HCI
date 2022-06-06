@@ -36,9 +36,10 @@ namespace WpfApp1.View.Model.Doctor
         MedicalRecordController _medicalRecordController;
         DrugController _drugController;
         AllergyController _allergyController;
+        NotificationController _notificationController;
         public List<Therapy> patientTherapies = new List<Therapy>();
         public List<DoctorsReport> patientReports = new List<DoctorsReport>();
-        public List<int> allergiesDrugIds= new List<int>();
+        public List<int> allergiesDrugIds = new List<int>();
         public ObservableCollection<DoctorAppointmentView> upcomingAppointments = new ObservableCollection<DoctorAppointmentView>();
         public DoctorAppointmentView currentAppointment = new DoctorAppointmentView();
 
@@ -64,6 +65,7 @@ namespace WpfApp1.View.Model.Doctor
                 _medicalRecordController = app.MedicalRecordController;
                 _drugController = app.DrugController;
                 _allergyController = app.AllergyController;
+                _notificationController = app.NotificationController;
             }//controller initialization
 
 
@@ -80,11 +82,11 @@ namespace WpfApp1.View.Model.Doctor
                             )
                         );
             Debug.WriteLine(trenutniTerminIndex);
-           if(upcomingAppointments.Count>0)FillMedicalRecord(upcomingAppointments[trenutniTerminIndex]);
+            if (upcomingAppointments.Count > 0) FillMedicalRecord(upcomingAppointments[trenutniTerminIndex]);
         }
         public void RefreshMedicalRecordForms()
         {
-            UrgentCB.IsChecked= false;
+            UrgentCB.IsChecked = false;
             EndingDTP.Text = BeginningDTP.Text = "";
             TypeCB.SelectedItem = DoctorCB.SelectedIndex = -1;
 
@@ -107,7 +109,7 @@ namespace WpfApp1.View.Model.Doctor
             currentAppointment = appointment;
             patientReports = _doctorsReportController.GetByPatientId(currentAppointment.PatientId);
             patientTherapies = (List<Therapy>)_therapyController.GetByMedicalRecordId(_medicalRecordController.GetByPatientId(currentAppointment.PatientId).Id);
-            foreach(Allergy a in _allergyController.GetAllAllergiesForPatient(_medicalRecordController.GetByPatientId(currentAppointment.PatientId).Id)) allergiesDrugIds.Add(a.DrugId);
+            foreach (Allergy a in _allergyController.GetAllAllergiesForPatient(_medicalRecordController.GetByPatientId(currentAppointment.PatientId).Id)) allergiesDrugIds.Add(a.DrugId);
 
             UpcomingAppointmentsGrid.ItemsSource = upcomingAppointments;
             ReportsGrid.ItemsSource = patientReports;
@@ -124,8 +126,8 @@ namespace WpfApp1.View.Model.Doctor
         private void FutureAppointmentsGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             Appointment a = _appointmentController.GetById(((DoctorAppointmentView)UpcomingAppointmentsGrid.SelectedItems[0]).Id);
-            FillMedicalRecord( AppointmentConverter.ConvertAppointmentToDoctorAppointmentView(a, _doctorController.GetById(a.DoctorId), _patientController.GetById(a.PatientId)));
-            
+            FillMedicalRecord(AppointmentConverter.ConvertAppointmentToDoctorAppointmentView(a, _doctorController.GetById(a.DoctorId), _patientController.GetById(a.PatientId)));
+
         }
 
         private void InfoBT_Click(object sender, RoutedEventArgs e)
@@ -181,8 +183,9 @@ namespace WpfApp1.View.Model.Doctor
         private void SaveDescriptionBT_Click(object sender, RoutedEventArgs e)
         {
             if ((string)DescriptionLabel.Content == "New Description") _doctorsReportController.Create(new DoctorsReport(currentAppointment.Id, DescriptionTB.Text));
-            else {
-                DoctorsReport dr=  _doctorsReportController.GetById(((DoctorsReport)ReportsGrid.SelectedItems[0]).Id);
+            else
+            {
+                DoctorsReport dr = _doctorsReportController.GetById(((DoctorsReport)ReportsGrid.SelectedItems[0]).Id);
                 dr.Description = DescriptionTB.Text;
                 _doctorsReportController.Update(dr);
             }
@@ -196,9 +199,10 @@ namespace WpfApp1.View.Model.Doctor
 
         private void ReportsGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (ReportsGrid.SelectedIndex != -1) { 
-            DescriptionLabel.Content = "Update Description";
-            DescriptionTB.Text = ((DoctorsReport)ReportsGrid.SelectedItems[0]).Description;
+            if (ReportsGrid.SelectedIndex != -1)
+            {
+                DescriptionLabel.Content = "Update Description";
+                DescriptionTB.Text = ((DoctorsReport)ReportsGrid.SelectedItems[0]).Description;
             }
         }
 
@@ -211,48 +215,55 @@ namespace WpfApp1.View.Model.Doctor
 
         private void TherapiesGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (TherapiesGrid.SelectedIndex != -1) { 
-            Therapy t = (Therapy)TherapiesGrid.SelectedItems[0];
-            TherapyIdLabel.Content = "Update Therapy";
-            DrugCB.SelectedItem = t.DrugId;
-            FrequencyTB.Text = t.Frequency.ToString();
-            DurationTB.Text = t.Duration.ToString();
+            if (TherapiesGrid.SelectedIndex != -1)
+            {
+                Therapy t = (Therapy)TherapiesGrid.SelectedItems[0];
+                TherapyIdLabel.Content = "Update Therapy";
+                DrugCB.SelectedItem = t.DrugId;
+                FrequencyTB.Text = t.Frequency.ToString();
+                DurationTB.Text = t.Duration.ToString();
             }
         }
 
         private void DrugCB_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
-            if (DrugCB.SelectedIndex!=-1&& allergiesDrugIds.Contains(int.Parse(DrugCB.SelectedItem.ToString())))
+            if (DrugCB.SelectedIndex != -1 && allergiesDrugIds.Contains(int.Parse(DrugCB.SelectedItem.ToString())))
             {
                 AllergyWarningLabel.Visibility = Visibility.Visible;
                 DrugIdLabel.Foreground = AllergyWarningLabel.Foreground;
-                SaveTherapyBT.IsEnabled=false;
+                SaveTherapyBT.IsEnabled = false;
             }
             else
             {
                 AllergyWarningLabel.Visibility = Visibility.Hidden;
                 DrugIdLabel.Foreground = Brushes.White;
-                SaveTherapyBT.IsEnabled = true ;
+                SaveTherapyBT.IsEnabled = true;
             }
-            
+
         }
 
         private void RefferalConfirmBT_Click(object sender, RoutedEventArgs e)
         {
             Enum.TryParse(TypeCB.SelectedItem.ToString(), true, out Appointment.AppointmentType type);
-            _appointmentController.Create(new Appointment(
-                Convert.ToDateTime(BeginningDTP.Text),
-                Convert.ToDateTime(EndingDTP.Text),
-                type,
-                (bool)UrgentCB.IsChecked,
-                int.Parse(DoctorCB.SelectedItem.ToString()),
-                currentAppointment.PatientId,
-                _doctorController.GetById(int.Parse(DoctorCB.SelectedItem.ToString())).RoomId
-                    )
-                    );
+            SendAppointmentNotification(
+                _appointmentController.Create(new Appointment(
+                        Convert.ToDateTime(BeginningDTP.Text),
+                        Convert.ToDateTime(EndingDTP.Text),
+                        type,
+                        (bool)UrgentCB.IsChecked,
+                        int.Parse(DoctorCB.SelectedItem.ToString()),
+                        currentAppointment.PatientId,
+                        _doctorController.GetById(int.Parse(DoctorCB.SelectedItem.ToString())).RoomId
+                        ))
+                );
             RefreshMedicalRecordForms();
 
+        }
+        private void SendAppointmentNotification(Appointment appointment)
+        {
+            _notificationController.Create(new Notification(DateTime.Now, "You have a new appointment at " + appointment.Beginning, "Appointment Notification", appointment.DoctorId, false, false));
+            _notificationController.Create(new Notification(DateTime.Now, "You have a new appointment at " + appointment.Beginning, "Appointment Notification", appointment.PatientId, false, false));
         }
 
         private void RefferalDiscardBT_Click(object sender, RoutedEventArgs e)

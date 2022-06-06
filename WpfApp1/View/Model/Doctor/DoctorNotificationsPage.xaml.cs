@@ -25,16 +25,38 @@ namespace WpfApp1.View.Model.Doctor
     {
         public NotificationController _notificationController;
         public List<Notification> Notifications;
+        public int userId = -1;
         public DoctorNotificationsPage()
         {
             InitializeComponent();
             var app = Application.Current as App;
+            userId = int.Parse(app.Properties["userId"].ToString());
             _notificationController = app.NotificationController;
             Notifications = new List<Notification>();
-            Notifications = (List<Notification>)_notificationController.GetUsersNotifications(1);
+            Notifications = (List<Notification>)_notificationController.GetUsersNotDeletedNotifications(userId);
             NotificationsGrid.ItemsSource = Notifications;
             this.DataContext = this;
         }
 
+        private void NotificationsGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+            Notification notification = ((Notification)NotificationsGrid.SelectedItems[0]);
+            DateLabel.Content = notification.Date;
+            TitleTB.Text = notification.Title;
+            ContentTB.Text = notification.Content;
+            notification.IsRead = true;
+            _notificationController.Update(notification);
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            Notification notification = ((Notification)NotificationsGrid.SelectedItems[0]);
+            notification.IsDeleted = true;
+            _notificationController.Update(notification);
+            DateLabel.Content = "dd/mm/yyyy";
+            TitleTB.Clear();
+            ContentTB.Clear();
+        }
     }
 }
