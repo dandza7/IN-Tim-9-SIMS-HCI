@@ -20,7 +20,6 @@ namespace WpfApp1.Model
 
 
         private int _id;
-        private string _title;
         private DateTime _beginning;
         private DateTime _ending;
         private int _roomId;
@@ -105,38 +104,22 @@ namespace WpfApp1.Model
                 }
             }
         }
-        public string Title
-        {
-            get
-            {
-                return _title;
-            }
-            set
-            {
-                if (value != _title)
-                {
-                    _title = value;
-                    OnPropertyChanged("Title");
-                }
-            }
-        }
 
-        public Meeting(int id, string title, DateTime start, DateTime end, int roomId, List<string> list)
+
+        public Meeting(int id, DateTime start, DateTime end, int roomId, List<string> users)
         {
             Id = id;
             Beginning = start;
             Ending = end;
             RoomId = roomId;
-            Users = list;
-            Title = title;
+            Users = users;
         }
-        public Meeting(string title, DateTime start, DateTime end, int roomId, List<string> list)
+        public Meeting(DateTime start, DateTime end, int roomId, List<string> users)
         {
             Beginning = start;
             Ending = end;
             RoomId = roomId;
-            Users = list;
-            Title= title;
+            Users = users;
         }
     }
 }
