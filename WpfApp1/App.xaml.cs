@@ -37,6 +37,7 @@ namespace WpfApp1
         private string DYNAMIC_EQ_REQUEST_FILE = _projectPath + "\\Resources\\Data\\dynamic_equipment_requests.csv";
         private string REQUEST_FILE = _projectPath + "\\Resources\\Data\\doctors_requests.csv";
         private string NOTE_FILE = _projectPath + "\\Resources\\Data\\note.csv";
+        private string MEETING_FILE = _projectPath + "\\Resources\\Data\\meeting.csv";
 
         private const string CSV_DELIMITER = ";";
         private const string DATETIME_FORMAT = "dd.MM.yyyy. HH:mm:ss";
@@ -59,6 +60,7 @@ namespace WpfApp1
         public DynamicEquipmentRequestController DynamicEquipmentReqeustController { get; set; }
         public RequestController RequestController { get; set; }
         public NoteController NoteController { get; set; }
+        public MeetingController MeetingController { get; set; }
 
         public App()
         {
@@ -80,6 +82,7 @@ namespace WpfApp1
             var dynamicEqRequestRepository = new DynamicEquipmentRequestRepository(DYNAMIC_EQ_REQUEST_FILE, CSV_DELIMITER);
             var requestRepository = new RequestRepository(REQUEST_FILE, CSV_DELIMITER, DATETIME_FORMAT);
             var noteRepository = new NoteRepository(NOTE_FILE, CSV_DELIMITER, DATETIME_FORMAT);
+            var meetingRepository = new MeetingRepository(MEETING_FILE, CSV_DELIMITER);
 
             var notificationService = new NotificationService(notificationRepository, drugRepository, medicalRecordRepository, therapyRepository, noteRepository);
             NotificationController = new NotificationController(notificationService);
@@ -135,6 +138,9 @@ namespace WpfApp1
 
             var noteService = new NoteService(noteRepository);
             NoteController = new NoteController(noteService);
+
+            var meetingService = new MeetingService(meetingRepository);
+            MeetingController = new MeetingController(meetingService);
         }
     }
 }

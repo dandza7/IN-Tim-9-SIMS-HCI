@@ -104,5 +104,15 @@ namespace WpfApp1.View.Util
             DashboardColorMark.Background = (SolidColorBrush)new BrushConverter().ConvertFromString("#FF130A38");
             Main.Content = new SecretaryLeaveRequestsView();
         }
+
+        private void SecretaryMeetingsClick(object sender, RoutedEventArgs e)
+        {
+            PageHeader.Text = "Meeting List";
+            DynamicEquipmentColorMark.Background = (SolidColorBrush)new BrushConverter().ConvertFromString("#FF130A38");
+            PatientsColorMark.Background = (SolidColorBrush)new BrushConverter().ConvertFromString("#FF130A38");
+            AppointmentsColorMark.Background = (SolidColorBrush)new BrushConverter().ConvertFromString("#FF130A38");
+            DashboardColorMark.Background = (SolidColorBrush)new BrushConverter().ConvertFromString("#FF130A38");
+            Main.Content = new SecretaryMeetingsView();
+        }
     }
 }

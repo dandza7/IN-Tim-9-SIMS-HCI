@@ -1,0 +1,83 @@
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using WpfApp1.Model;
+
+namespace WpfApp1.Repository
+{
+    public class MeetingRepository
+    {
+        private string _path;
+        private string _delimiter;
+
+        public MeetingRepository(string path, string delimiter)
+        {
+            _path = path;
+            _delimiter = delimiter;
+        }
+        private int GetMaxId(IEnumerable<Meeting> meetings)
+        {
+            return meetings.Count() == 0 ? 0 : meetings.Max(meeting => meeting.Id);
+        }
+
+        public IEnumerable<Meeting> GetAll()
+        {
+            List<string> lines = File.ReadAllLines(_path).ToList();
+            List<Meeting> meetings = new List<Meeting>();
+            foreach (string line in lines)
+            {
+                if (line == "") continue;
+                meetings.Add(ConvertCSVFormatToMeeting(line));
+            }
+            return meetings;
+        }
+
+
+        public Meeting Create(Meeting meeting)
+        {
+            int maxId = GetMaxId(GetAll());
+            meeting.Id = ++maxId;
+            AppendLineToFile(_path, ConvertMeetingToCSVFormat(meeting));
+            return meeting;
+        }
+
+        private Meeting ConvertCSVFormatToMeeting(string meetingCSVFormat)
+        {
+            var tokens = meetingCSVFormat.Split(_delimiter.ToCharArray());
+            List<string> result = tokens[5]?.Split(',').ToList();
+            return new Meeting(int.Parse(tokens[0]),
+                tokens[1],
+                DateTime.Parse(tokens[2]),
+                DateTime.Parse(tokens[3]),
+                int.Parse(tokens[4]),
+                result
+                );
+        }
+
+        private string ConvertMeetingToCSVFormat(Meeting meeting)
+        {
+            string a = "";
+            foreach (string b in meeting.Users)
+            {
+                Console.WriteLine("Repo");
+                Console.WriteLine(b);
+                a = a + b + "|";
+            }
+
+            return string.Join(_delimiter,
+                meeting.Id,
+                meeting.Beginning,
+                meeting.Ending,
+                a);
+        }
+
+
+        private void AppendLineToFile(string path, string line)
+        {
+            File.AppendAllText(path, line + Environment.NewLine);
+        }
+    }
+}

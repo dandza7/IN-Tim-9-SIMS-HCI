@@ -23,6 +23,7 @@ namespace WpfApp1.ViewModel.Secretary
         }
 
         private RequestController _requestController;
+        private NotificationController _notificationController;
         private string _title;
         private string _urgency;
         private string _doctor;
@@ -137,23 +138,34 @@ namespace WpfApp1.ViewModel.Secretary
             _requestController = app.RequestController;
             int requestId = (int)app.Properties["requestId"];
             Request = _requestController.GetById(requestId);
+            Title = Request.Title;
         }
 
         public void DenyRequest()
         {
             var app = Application.Current as App;
+            _notificationController = app.NotificationController;
             int requestId = (int)app.Properties["requestId"];
             Request = _requestController.GetById(requestId);
             Request deniedRequest = new Request(Request.Id,Request.Beginning,Request.Ending,Request.RequestStatusType.Declined,Request.DoctorId,Request.Title,Request.Content,Request.Urgnet,Comment);
             _requestController.Update(deniedRequest);
+            string title = "Odbijen zahtev za odstustvo";
+            string content = "Vas zahtev za odsustvo" + deniedRequest.Beginning + "je odbijen zbog " + Comment ;
+            Notification deniedNotification = new Notification(DateTime.Now,content, title, deniedRequest.DoctorId, false, false);
+            _notificationController.Create(deniedNotification);
         }
         public void AcceptRequest()
         {
             var app = Application.Current as App;
+            _notificationController = app.NotificationController;
             int requestId = (int)app.Properties["requestId"];
             Request = _requestController.GetById(requestId);
             Request acceptedRequest = new Request(Request.Id, Request.Beginning, Request.Ending, Request.RequestStatusType.Accepted, Request.DoctorId, Request.Title, Request.Content, Request.Urgnet, "");
             _requestController.Update(acceptedRequest);
+            string title = "Prihvacen zahtev za odstustvo";
+            string content = "Vas zahtev za odsustvo" + acceptedRequest.Beginning + "je prihvacen";
+            Notification acceptedNotification = new Notification(DateTime.Now, content, title, acceptedRequest.DoctorId, false, false);
+            _notificationController.Create(acceptedNotification);
         }
 
     }
