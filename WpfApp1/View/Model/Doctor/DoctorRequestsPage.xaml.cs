@@ -45,9 +45,8 @@ namespace WpfApp1.View.Model.Doctor
 
         private void SaveBT_Click(object sender, RoutedEventArgs e)
         {
-            if (Convert.ToDateTime(BeginningDTP.Text).Date <= DateTime.Today.Add(new TimeSpan(TimeSpan.TicksPerDay * 2))) exceptionLabel.Visibility = Visibility.Visible;
-            else if
-                (_requestController.Create(
+            if (Convert.ToDateTime(BeginningDTP.Text).Date <= DateTime.Today.Add(new TimeSpan(TimeSpan.TicksPerDay * 2))
+            ||_requestController.Create(
                 new Request(
                     Convert.ToDateTime(BeginningDTP.Text),
                     Convert.ToDateTime(EndingDTP.Text),

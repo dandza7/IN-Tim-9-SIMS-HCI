@@ -114,6 +114,8 @@ namespace WpfApp1.Repository
                     n.Date = notification.Date;
                     n.Content = notification.Content;
                     n.Title = notification.Title;
+                    n.IsDeleted = notification.IsDeleted;
+                    n.IsRead = notification.IsRead;
                 }
                 newFile.Add(ConvertNotificationToCSVFormat(n));
             }
