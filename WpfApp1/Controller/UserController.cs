@@ -36,7 +36,10 @@ namespace WpfApp1.Controller
         {
             return _userService.GetAllDoctors();
         }
-
+        public IEnumerable<User> GetAllEmployees()
+        {
+            return _userService.GetAllEmployees();
+        }
         public IEnumerable<User> GetAllExecutives()
         {
             return _userService.GetAllExecutives();

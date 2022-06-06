@@ -47,12 +47,11 @@ namespace WpfApp1.Repository
         private Meeting ConvertCSVFormatToMeeting(string meetingCSVFormat)
         {
             var tokens = meetingCSVFormat.Split(_delimiter.ToCharArray());
-            List<string> result = tokens[5]?.Split(',').ToList();
+            List<string> result = tokens[4]?.Split(',').ToList();
             return new Meeting(int.Parse(tokens[0]),
-                tokens[1],
+                DateTime.Parse(tokens[1]),
                 DateTime.Parse(tokens[2]),
-                DateTime.Parse(tokens[3]),
-                int.Parse(tokens[4]),
+                int.Parse(tokens[3]),
                 result
                 );
         }
@@ -60,17 +59,21 @@ namespace WpfApp1.Repository
         private string ConvertMeetingToCSVFormat(Meeting meeting)
         {
             string a = "";
+            int count = meeting.Users.Count();
+            int i = 0;
             foreach (string b in meeting.Users)
             {
-                Console.WriteLine("Repo");
-                Console.WriteLine(b);
-                a = a + b + "|";
+                if(i<count-1)
+                a = a + b + ",";
+                else { a = a + b; }
+                i++;
             }
 
             return string.Join(_delimiter,
                 meeting.Id,
                 meeting.Beginning,
                 meeting.Ending,
+                meeting.RoomId,
                 a);
         }
 

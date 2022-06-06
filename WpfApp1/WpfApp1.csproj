@@ -50,6 +50,15 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Syncfusion.Licensing, Version=20.1460.0.58, Culture=neutral, PublicKeyToken=632609b4d040f6b4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Syncfusion.Licensing.20.1.0.58\lib\net46\Syncfusion.Licensing.dll</HintPath>
+    </Reference>
+    <Reference Include="Syncfusion.Shared.WPF, Version=20.1460.0.58, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
+      <HintPath>..\packages\Syncfusion.Shared.WPF.20.1.0.58\lib\net46\Syncfusion.Shared.WPF.dll</HintPath>
+    </Reference>
+    <Reference Include="Syncfusion.Tools.WPF, Version=20.1460.0.58, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
+      <HintPath>..\packages\Syncfusion.Tools.WPF.20.1.0.58\lib\net46\Syncfusion.Tools.WPF.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
@@ -167,8 +176,10 @@
     <Compile Include="ViewModel\Commands\Executive\NavigateHospitalStats.cs" />
     <Compile Include="ViewModel\Commands\Secretary\AcceptRequest.cs" />
     <Compile Include="ViewModel\Commands\Secretary\DenyRequest.cs" />
+    <Compile Include="ViewModel\Commands\Secretary\FindMeetingTerm.cs" />
     <Compile Include="ViewModel\Commands\Secretary\OpenLeaveRequestDialog.cs" />
     <Compile Include="ViewModel\Commands\Secretary\OpenNewMeetingDialog.cs" />
+    <Compile Include="ViewModel\Commands\Secretary\ScheduleMeeting.cs" />
     <Compile Include="ViewModel\DoctorStatisticsViewModel.cs" />
     <Compile Include="ViewModel\Commands\Executive\NavigateDoctorsList.cs" />
     <Compile Include="ViewModel\DoctorsListViewModel.cs" />
@@ -176,6 +187,7 @@
     <Compile Include="ViewModel\MoveInventoryViewModel.cs" />
     <Compile Include="ViewModel\NewInventoryViewModel.cs" />
     <Compile Include="ViewModel\NotesViewModel.cs" />
+    <Compile Include="ViewModel\Secretary\CreateMeetingPageViewModel.cs" />
     <Compile Include="ViewModel\Secretary\LeaveRequestsViewModel.cs" />
     <Compile Include="ViewModel\Secretary\ManageLeaveRequestViewModel.cs" />
     <Compile Include="ViewModel\PDFViewModel.cs" />

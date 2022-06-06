@@ -35,6 +35,10 @@ namespace WpfApp1.Service
         {
             return _userRepository.GetAllDoctors();
         }
+        public IEnumerable<User> GetAllEmployees()
+        {
+            return _userRepository.GetAllEmployees();
+        }
 
         public IEnumerable<User> GetAllExecutives()
         {

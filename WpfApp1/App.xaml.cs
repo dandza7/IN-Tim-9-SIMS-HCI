@@ -64,6 +64,7 @@ namespace WpfApp1
 
         public App()
         {
+            Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("NjUxNjk3QDMyMzAyZTMxMmUzMG10TS85NWoyeTI4VEd5alEvcjFFSU5kV1BZWnRhVUxRQVpsSTZndkFGbm89");
             var notificationRepository = new NotificationRepository(NOTIFICATION_FILE, CSV_DELIMITER, DATETIME_FORMAT);
             var therapyRepository = new TherapyRepository(THERAPY_FILE, CSV_DELIMITER);
             var roomRepository = new RoomRepository(ROOM_FILE, CSV_DELIMITER);
@@ -139,7 +140,7 @@ namespace WpfApp1
             var noteService = new NoteService(noteRepository);
             NoteController = new NoteController(noteService);
 
-            var meetingService = new MeetingService(meetingRepository);
+            var meetingService = new MeetingService(meetingRepository, appointmentRepository, doctorRepository, patientRepository, roomRepository, userRepository, renovationRepository);
             MeetingController = new MeetingController(meetingService);
         }
     }

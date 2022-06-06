@@ -137,7 +137,19 @@ namespace WpfApp1.Repository
             }
             return doctors;
         }
-
+        public IEnumerable<User> GetAllEmployees()
+        {
+            List<User> users = GetAll().ToList();
+            List<User> employees = new List<User>();
+            foreach (User user in users)
+            {
+                if (user.Role != RoleType.patient)
+                {
+                    employees.Add(user);
+                }
+            }
+            return employees;
+        }
         public IEnumerable<User> GetAllExecutives()
         {
             List<User> users = GetAll().ToList();

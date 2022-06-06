@@ -26,6 +26,7 @@ namespace WpfApp1.ViewModel.Secretary
 
         private MeetingController _meetingController;
         private ObservableCollection<Meeting> _meetings;
+        private ObservableCollection<Room> _rooms;
         private Meeting _meeting;
         private string _title;
         private DateTime _beginning;
