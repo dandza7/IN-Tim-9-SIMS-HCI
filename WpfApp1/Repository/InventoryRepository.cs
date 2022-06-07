@@ -8,7 +8,7 @@ using WpfApp1.Model;
 
 namespace WpfApp1.Repository
 {
-    public class InventoryRepository
+    public class InventoryRepository : Repository<Inventory>
     {
         private const string NOT_FOUND_ERROR = "Inventory with {0}:{1} can not be found!";
         private string _path;
@@ -33,7 +33,7 @@ namespace WpfApp1.Repository
             return null;
         }
 
-        public List<Inventory> GetAll()
+        public IEnumerable<Inventory> GetAll()
         {
             return File.ReadAllLines(_path)
                 .Select(ConvertCsvFormatToInventory)
@@ -79,7 +79,7 @@ namespace WpfApp1.Repository
 
         public Inventory Create(Inventory inventory)
         {
-            inventory.Id = GetMaxId(GetAll()) + 1;
+            inventory.Id = GetMaxId(GetAll().ToList()) + 1;
             AppendLineToFile(_path, ConvertInventoryToCsvFormat(inventory));
             return inventory;
         }

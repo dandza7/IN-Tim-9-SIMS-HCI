@@ -8,7 +8,7 @@ using WpfApp1.Repository;
 
 namespace WpfApp1.Service
 {
-    public class RoomService
+    public class RoomService : Service<Room>
     {
         public readonly RoomRepository _roomRepository;
         public readonly DoctorRepository _doctorRepository;
@@ -27,10 +27,10 @@ namespace WpfApp1.Service
             _renovationRepository = renovationRepository;
             _appointmentRepository = appointmentRepository;
         }
-        public List<Room> GetAll()
+        public IEnumerable<Room> GetAll()
         {
             ExecuteFinishedAdvancedRenovations();
-            List<Room> allRooms = _roomRepository.GetAll();
+            List<Room> allRooms = _roomRepository.GetAll().ToList();
             List<Room> activeRooms = new List<Room>();
             foreach (Room room in allRooms)
             {
@@ -45,7 +45,7 @@ namespace WpfApp1.Service
         public Room GetById(int id)
         {
             ExecuteFinishedAdvancedRenovations();
-            return _roomRepository.Get(id);
+            return _roomRepository.GetById(id);
         }
 
         public Room Create(Room room)
@@ -55,7 +55,7 @@ namespace WpfApp1.Service
 
         public Room Update(Room room)
         {
-            Room oldRoom = this._roomRepository.Get(room.Id);
+            Room oldRoom = this._roomRepository.GetById(room.Id);
             if (oldRoom.Type.Equals("Office") && !room.Type.Equals(oldRoom.Type))
             {
                 MoveDoctorsToMainOffice(room.Id);
@@ -88,7 +88,7 @@ namespace WpfApp1.Service
         public Room GetByNametag(string nametag)
         {
             ExecuteFinishedAdvancedRenovations();
-            List<Room> rooms = _roomRepository.GetAll();
+            List<Room> rooms = _roomRepository.GetAll().ToList();
             foreach (Room room in rooms)
             {
                 if (room.Nametag.Equals(nametag) && room.IsActive)
@@ -98,10 +98,10 @@ namespace WpfApp1.Service
             }
             return null;
         }
-        public List<string> GetEditableNametags()
+        public IEnumerable<string> GetEditableNametags()
         {
             ExecuteFinishedAdvancedRenovations();
-            List<Room> rooms = _roomRepository.GetAll();
+            List<Room> rooms = _roomRepository.GetAll().ToList();
             List<string> nametags = new List<string>();
             foreach(Room room in rooms)
             {
@@ -114,14 +114,14 @@ namespace WpfApp1.Service
         }
         public void ExecuteFinishedAdvancedRenovations()
         {
-            List<Renovation> renovations = _renovationRepository.GetAll();
+            List<Renovation> renovations = _renovationRepository.GetAll().ToList();
             foreach(Renovation renovation in renovations)
             {
                 if(renovation.Type == "A" && DateTime.Compare(DateTime.Today, DateTime.Parse(renovation.Ending.ToShortDateString())) >= 0)
                 {
                     foreach(int id in renovation.RoomsIds)
                     {
-                        Room r = _roomRepository.Get(id);
+                        Room r = _roomRepository.GetById(id);
                         if (!r.IsActive)
                         {
                             r.IsActive = true;

@@ -20,7 +20,7 @@ namespace WpfApp1.Controller
 
         public List<InventoryPreview> GetPreviews()
         {
-            return _inventoryService.GetPreviews();
+            return _inventoryService.GetPreviews().ToList();
         }
         
         public List<string> GetSOPRooms()

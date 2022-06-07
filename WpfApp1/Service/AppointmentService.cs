@@ -186,7 +186,7 @@ namespace WpfApp1.Service
                     if (interval.AreAvailableAppointmentsCollected(appointments)) return appointments;
 
                     User doctorUser = _userRepo.GetById(doctor.Id);
-                    Room doctorRoom = _roomRepo.Get(doctor.RoomId);
+                    Room doctorRoom = _roomRepo.GetById(doctor.RoomId);
                     bool isRoomAvailable = _renovationRepo.IsRoomAvailable(doctorRoom.Id, interval.Beginning, interval.GetIncrementedBeginning());
 
                     if (isRoomAvailable)
@@ -213,7 +213,7 @@ namespace WpfApp1.Service
                 doctorId).ToList();
 
             Doctor doctor = _doctorRepo.GetById(doctorId);
-            Room room = _roomRepo.Get(doctor.RoomId);
+            Room room = _roomRepo.GetById(doctor.RoomId);
             User doctorUser = _userRepo.GetById(doctorId);
 
             if (appointmentsForDoctor.Count == 0 && interval.GetIncrementedBeginning() <= interval.Ending)
@@ -306,7 +306,7 @@ namespace WpfApp1.Service
                 {
                     Doctor doctor = _doctorRepo.GetById(appointment.DoctorId);
                     User user = _userRepo.GetById(doctor.Id);
-                    Room room = _roomRepo.Get(doctor.RoomId);
+                    Room room = _roomRepo.GetById(doctor.RoomId);
                     appointmentViews.Add(AppointmentConverter.ConvertAppointmentAndDoctorToAppointmentView(appointment, user, room));
                 }
             }
@@ -323,7 +323,7 @@ namespace WpfApp1.Service
                 {
                     Doctor doctor = _doctorRepo.GetById(appointment.DoctorId);
                     User user = _userRepo.GetById(doctor.Id);
-                    Room room = _roomRepo.Get(doctor.RoomId);
+                    Room room = _roomRepo.GetById(doctor.RoomId);
                     appointmentViews.Add(AppointmentConverter.ConvertAppointmentAndDoctorToAppointmentView(appointment, user, room));
                 }
             }
@@ -341,7 +341,7 @@ namespace WpfApp1.Service
                 {
                     Doctor doctor = _doctorRepo.GetById(appointment.DoctorId);
                     User user = _userRepo.GetById(doctor.Id);
-                    Room room = _roomRepo.Get(doctor.RoomId);
+                    Room room = _roomRepo.GetById(doctor.RoomId);
                     appointmentViews.Add(AppointmentConverter.ConvertAppointmentAndDoctorToAppointmentView(appointment, user, room));
                 }
             }
@@ -444,7 +444,7 @@ namespace WpfApp1.Service
             {
                 Appointment appointmentForMoving = _appointmentRepo.GetById(nearestFreeTerm.Key);
                 appointmentViews.Add(AppointmentConverter.ConvertAppointmentAndDoctorToAppointmentView(appointmentForMoving,
-                    _userRepo.GetById(appointmentForMoving.DoctorId), _roomRepo.Get(appointmentForMoving.RoomId)));
+                    _userRepo.GetById(appointmentForMoving.DoctorId), _roomRepo.GetById(appointmentForMoving.RoomId)));
             }
 
             return appointmentViews;

@@ -8,7 +8,7 @@ using WpfApp1.Repository;
 
 namespace WpfApp1.Service
 {
-    public class DrugService
+    public class DrugService : Service<Drug>
     {
         private readonly DrugRepository _drugRepo;
 
@@ -17,7 +17,7 @@ namespace WpfApp1.Service
             _drugRepo = drugRepo;
         }
 
-        internal IEnumerable<Drug> GetAll()
+        public IEnumerable<Drug> GetAll()
         {
             return _drugRepo.GetAll();
         }

@@ -9,7 +9,7 @@ using WpfApp1.Repository;
 
 namespace WpfApp1.Service
 {
-    public class InventoryService
+    public class InventoryService : Service<Inventory>
     {
         public readonly InventoryRepository _inventoryRepository;
         public readonly InventoryMovingRepository _inventoryMovingRepository;
@@ -21,10 +21,13 @@ namespace WpfApp1.Service
             _roomRepository = roomRepositroy;
             _inventoryMovingRepository = inventoryMovingRepository;
         }
-
-        public List<InventoryPreview> GetPreviews()
+        public IEnumerable<Inventory> GetAll()
         {
-            List<InventoryMoving> invMovs = _inventoryMovingRepository.GetAll();
+            return _inventoryRepository.GetAll();
+        }
+        public IEnumerable<InventoryPreview> GetPreviews()
+        {
+            List<InventoryMoving> invMovs = _inventoryMovingRepository.GetAll().ToList();
             List<int> forDelete = new List<int>();
             foreach(InventoryMoving invMov in invMovs)
             {
@@ -40,11 +43,11 @@ namespace WpfApp1.Service
             {
                 _inventoryMovingRepository.Delete(id);
             }
-            List<Inventory> invs = _inventoryRepository.GetAll();
+            List<Inventory> invs = _inventoryRepository.GetAll().ToList();
             List<InventoryPreview> inventoryPreviews = new List<InventoryPreview>();
             foreach(Inventory inv in invs)
             {
-                string nametag = _roomRepository.Get(inv.RoomId) == null ? " " : _roomRepository.Get(inv.RoomId).Nametag;
+                string nametag = _roomRepository.GetById(inv.RoomId) == null ? " " : _roomRepository.GetById(inv.RoomId).Nametag;
                 inventoryPreviews.Add(new InventoryPreview(inv.Id, nametag, inv.Name, inv.Type, inv.Amount));
             }
             return inventoryPreviews;
@@ -55,7 +58,7 @@ namespace WpfApp1.Service
         }
         public List<string> GetSOPRooms()
         {
-            List<Room> rooms = _roomRepository.GetAll();
+            List<Room> rooms = _roomRepository.GetAll().ToList();
             List<string> sopRooms = new List<string>();
             foreach(Room room in rooms)
             {
@@ -70,7 +73,7 @@ namespace WpfApp1.Service
         public Inventory Create(Inventory inv, string roomName)
         {
             Inventory newInv = inv;
-            List<Room> rooms = _roomRepository.GetAll();
+            List<Room> rooms = _roomRepository.GetAll().ToList();
             foreach(Room room in rooms)
             {
                 if (room.Nametag.Equals(roomName))
@@ -85,6 +88,13 @@ namespace WpfApp1.Service
             return _inventoryRepository.GetAllDynamic();
         }
 
-
+        public Inventory Create(Inventory inv)
+        {
+            return _inventoryRepository.Create(inv);
+        }
+        public bool Delete(int id)
+        {
+            return _inventoryRepository.Delete(id);
+        }
     }
 }
