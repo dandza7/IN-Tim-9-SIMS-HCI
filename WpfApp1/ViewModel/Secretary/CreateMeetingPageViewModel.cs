@@ -155,14 +155,22 @@ namespace WpfApp1.ViewModel.Secretary
         {
             var app = Application.Current as App;
             _meetingController = app.MeetingController;
+            bool isMeetingFound = false;
             List<int> userIds = new List<int>();
             for (int i = 0; i < CheckedUsers.Count; i++)
             {
                 User user = (User)CheckedUsers[i];
                 userIds.Add(user.Id);
             }
-            AvailableMeetings = new ObservableCollection<MeetingView>(_meetingController.GetAvailableOptions(
-                DateTime.Parse(Beginning), DateTime.Parse(Beginning).AddHours(5), userIds, SelecetedRoom).ToList());
+            isMeetingFound = _meetingController.FindMeetingTerm(DateTime.Parse(Beginning), DateTime.Parse(Beginning).AddHours(3), userIds);
+            if(isMeetingFound == true)
+            {
+                AvailableMeetings = new ObservableCollection<MeetingView>(_meetingController.GetMeetings(
+                DateTime.Parse(Beginning), DateTime.Parse(Beginning).AddHours(5), SelecetedRoom).ToList());
+            }
+            else {
+                MessageBox.Show("There is no available terms for meeting in selected time");
+            }
 
         }
 
