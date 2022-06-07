@@ -9,7 +9,7 @@ using WpfApp1.Model;
 
 namespace WpfApp1.Repository
 {
-    public class RenovationRepository
+    public class RenovationRepository : Repository<Renovation>
     {
         private const string NOT_FOUND_ERROR = "Renovation with {0}:{1} can not be found!";
         private string _path;
@@ -21,12 +21,12 @@ namespace WpfApp1.Repository
             _delimiter = delimiter;
         }
 
-        public Renovation Get(int id)
+        public Renovation GetById(int id)
         {
             throw new NotImplementedException();
         }
 
-        public List<Renovation> GetAll()
+        public IEnumerable<Renovation> GetAll()
         {
             return File.ReadAllLines(_path)
                 .Select(ConvertCsvFormatToRenovation)
@@ -35,7 +35,7 @@ namespace WpfApp1.Repository
 
         private IEnumerable<Renovation> GetAllRenovationsForRoom(int roomId)
         {
-            List<Renovation> allRenovations = GetAll();
+            List<Renovation> allRenovations = GetAll().ToList();
             List<Renovation> roomRenovations = new List<Renovation>();
 
             foreach (var renovation in allRenovations)
@@ -70,7 +70,7 @@ namespace WpfApp1.Repository
 
         public Renovation Create(Renovation renovation)
         {
-            renovation.Id = GetMaxId(GetAll()) + 1;
+            renovation.Id = GetMaxId(GetAll().ToList()) + 1;
             AppendLineToFile(_path, ConvertRenovationToCsvFormat(renovation));
             return renovation;
         }

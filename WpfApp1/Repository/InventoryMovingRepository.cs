@@ -9,7 +9,7 @@ using WpfApp1.Model;
 
 namespace WpfApp1.Repository
 {
-    public class InventoryMovingRepository
+    public class InventoryMovingRepository : Repository<InventoryMoving>
     {
         private const string NOT_FOUND_ERROR = "Inventory moving with {0}:{1} can not be found!";
         private string _path;
@@ -21,7 +21,7 @@ namespace WpfApp1.Repository
             _delimiter = delimiter;
         }
 
-        public InventoryMoving Get(int id)
+        public InventoryMoving GetById(int id)
         {
             List<InventoryMoving> invMovs = File.ReadAllLines(_path)
                 .Select(ConvertCsvFormatToInventoryMoving)
@@ -34,7 +34,7 @@ namespace WpfApp1.Repository
             return null;
         }
 
-        public List<InventoryMoving> GetAll()
+        public IEnumerable<InventoryMoving> GetAll()
         {
             return File.ReadAllLines(_path)
                 .Select(ConvertCsvFormatToInventoryMoving)
@@ -48,7 +48,7 @@ namespace WpfApp1.Repository
 
         public InventoryMoving Create(InventoryMoving invMov)
         {
-            invMov.Id = GetMaxId(GetAll()) + 1;
+            invMov.Id = GetMaxId(GetAll().ToList()) + 1;
             AppendLineToFile(_path, ConvertInventoryMovingToCsvFormat(invMov));
             return invMov;
         }

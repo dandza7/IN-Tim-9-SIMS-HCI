@@ -19,7 +19,7 @@ namespace WpfApp1.Controller
 
         public List<Room> GetAll()
         {
-            return _roomService.GetAll();
+            return _roomService.GetAll().ToList();
         }
 
         public Room GetById(int id)
@@ -46,7 +46,7 @@ namespace WpfApp1.Controller
         }
         public List<string> GetEditableNametags()
         {
-            return _roomService.GetEditableNametags();
+            return _roomService.GetEditableNametags().ToList();
         }
     }
 }

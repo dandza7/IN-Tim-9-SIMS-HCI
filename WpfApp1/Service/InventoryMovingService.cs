@@ -8,7 +8,7 @@ using WpfApp1.Repository;
 
 namespace WpfApp1.Service
 {
-    public class InventoryMovingService
+    public class InventoryMovingService : Service<InventoryMoving>
     {
         public readonly InventoryMovingRepository _invMovRepository;
         public readonly InventoryRepository _invRepository;
@@ -29,5 +29,19 @@ namespace WpfApp1.Service
         {
             return _invMovRepository.Create(invMov);
         }
+
+        public IEnumerable<InventoryMoving> GetAll()
+        {
+            return _invMovRepository.GetAll();
+        }
+        public InventoryMoving GetById(int id)
+        {
+            return _invMovRepository.GetById(id);
+        }
+        public bool Delete(int id)
+        {
+            return _invMovRepository.Delete(id);
+        }
+
     }
 }

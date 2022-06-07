@@ -9,7 +9,7 @@ using WpfApp1.Model;
 
 namespace WpfApp1.Repository
 {
-    public class RoomRepository
+    public class RoomRepository : Repository<Room>
     {
         private const string NOT_FOUND_ERROR = "Room with {0}:{1} can not be found!";
         private string _path;
@@ -21,7 +21,7 @@ namespace WpfApp1.Repository
             _delimiter = delimiter;
         }
 
-        public Room Get(int id)
+        public Room GetById(int id)
         {
             List<Room> rooms = File.ReadAllLines(_path)
                 .Select(ConvertCsvFormatToRoom)
@@ -34,11 +34,10 @@ namespace WpfApp1.Repository
             return null;
         }
 
-        public List<Room> GetAll()
+        public IEnumerable<Room> GetAll()
         {
             return File.ReadAllLines(_path)
-                .Select(ConvertCsvFormatToRoom)
-                .ToList();
+                .Select(ConvertCsvFormatToRoom);
         }
 
         private int GetMaxId(List<Room> rooms)
@@ -48,7 +47,7 @@ namespace WpfApp1.Repository
 
         public Room Create(Room room)
         {
-            room.Id = GetMaxId(GetAll()) + 1;
+            room.Id = GetMaxId(GetAll().ToList()) + 1;
             AppendLineToFile(_path, ConvertRoomToCsvFormat(room));
             return room;
         }

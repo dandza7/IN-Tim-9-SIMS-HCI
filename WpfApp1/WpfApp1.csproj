@@ -143,6 +143,7 @@
     <Compile Include="Repository\MedicalRecordRepository.cs" />
     <Compile Include="Repository\MeetingRepository.cs" />
     <Compile Include="Repository\NoteRepository.cs" />
+    <Compile Include="Repository\Repository.cs" />
     <Compile Include="Repository\RequestRepository.cs" />
     <Compile Include="Repository\SurveyRepository.cs" />
     <Compile Include="Repository\TherapyRepository.cs" />
@@ -155,6 +156,7 @@
     <None Include="Resources\Data\meeting.csv" />
     <Compile Include="Service\MeetingService.cs" />
     <Compile Include="Service\NoteService.cs" />
+    <Compile Include="Service\Service.cs" />
     <Compile Include="ViewModel\AppointmentViewModel.cs" />
     <Compile Include="ViewModel\Commands\Executive\CloseFrame.cs" />
     <Compile Include="ViewModel\Commands\Executive\ConfirmAdding.cs" />
