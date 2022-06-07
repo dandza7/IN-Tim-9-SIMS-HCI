@@ -7,6 +7,7 @@ using WpfApp1.Model;
 using WpfApp1.Repository;
 using WpfApp1.View.Converter;
 using WpfApp1.View.Model.Patient;
+using WpfApp1.View.Model.Secretary;
 
 namespace WpfApp1.Service
 {
@@ -42,50 +43,42 @@ namespace WpfApp1.Service
         {
             return _meetingRepo.Create(meeting);
         }
-        public List<AppointmentView> GetAvailableMeetingOptions(
-            DateTime startOfInterval, DateTime endOfInterval, List<int> doctorIds)
+        public List<MeetingView> GetAvailableMeetingOptions(
+            DateTime startOfInterval, DateTime endOfInterval, List<int> userIds, Room room)
         {
             TimeMenager interval = new TimeMenager(startOfInterval, endOfInterval);
-           
-            List<AppointmentView> appointments = new List<AppointmentView>();
+            List<MeetingView> meetings = new List<MeetingView>();
+            List<Appointment> appointments = new List<Appointment>();
 
-                int doctorId = doctorIds[0];
-            Console.WriteLine(doctorId);
-            List<Appointment> appointmentsForDoctor = _appointmentRepo.GetAllAppointmentsInTimeIntervalForDoctor(interval.Beginning,
-                    interval.Ending,
-                    doctorId).ToList();
-
-                Doctor doctor = _doctorRepo.GetById(doctorId);
-                Room room = _roomRepo.Get(doctor.RoomId);
-                User doctorUser = _userRepo.GetById(doctorId);
-
-                if (appointmentsForDoctor.Count == 0)
-                {
-                Console.WriteLine("ttt");
-                    return GetAppointmentsForFreeTimeInterval(interval.Beginning, interval.Ending, appointments, room, doctor, doctorUser);
-                }
-                
-            
-
-            return appointments;
+            foreach (int id in userIds)
+            {
+                List<Appointment> appointmentsForDoctor = _appointmentRepo.GetAllAppointmentsInTimeIntervalForDoctor(interval.Beginning,
+                    interval.Ending,id).ToList();
+                appointments.AddRange(appointmentsForDoctor);   
+            }
+            if (appointments.Count == 0)
+            {
+                return GetMeetings(interval.Beginning, interval.Ending, meetings, room);
+            }
+            else return meetings;
         }
-        private List<AppointmentView> GetAppointmentsForFreeTimeInterval(DateTime startOfInterval, DateTime endOfInterval,
-    List<AppointmentView> appointments, Room room, Doctor doctor, User doctorUser)
+        private List<MeetingView> GetMeetings(DateTime startOfInterval, DateTime endOfInterval,
+            List<MeetingView> meetings, Room room )
         {
             TimeMenager interval = new TimeMenager(startOfInterval, endOfInterval);
+            var attendees = new List<string>();
             while (interval.GetIncrementedBeginning() <= interval.Ending)
             {
-                if (interval.AreAvailableAppointmentsCollected(appointments)) return appointments;
 
                 bool isRoomAvailable = _renovationRepo.IsRoomAvailable(room.Id, interval.Beginning, interval.GetIncrementedBeginning());
                 if (isRoomAvailable)
                 {
-                    Appointment freeAppointment = new Appointment(interval.Beginning, interval.GetIncrementedBeginning(), Appointment.AppointmentType.regular, false, doctor.Id, 5, doctor.RoomId);
-                    appointments.Add(AppointmentConverter.ConvertAppointmentAndDoctorToAppointmentView(freeAppointment, doctorUser, room));
+                    Meeting meeting = new Meeting(interval.Beginning, interval.GetIncrementedBeginning(), room.Id, attendees);
+                    meetings.Add(MeetingConverter.ConvertMeetingToMeetingView(meeting,room));
                 }
                 interval.IncrementBeginning();
             }
-            return appointments;
+            return meetings;
         }
     } 
 }

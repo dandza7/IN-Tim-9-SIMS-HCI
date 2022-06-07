@@ -9,6 +9,7 @@ using System.Windows;
 using WpfApp1.Controller;
 using WpfApp1.Model;
 using WpfApp1.View.Model.Patient;
+using WpfApp1.View.Model.Secretary;
 using WpfApp1.ViewModel.Commands.Secretary;
 
 namespace WpfApp1.ViewModel.Secretary
@@ -31,9 +32,8 @@ namespace WpfApp1.ViewModel.Secretary
         public UserController _userController;
         private ObservableCollection<User> _users;
         private ObservableCollection<object> checkedUsers = new ObservableCollection<object>();
-        private ObservableCollection<AppointmentView> _meetings;
+        private ObservableCollection<MeetingView> _meetings;
         private string _beginning;
-        private string _ending;
         private Room _selectedRoom;
         public FindMeetingTerm Find { get; set; }
         public ScheduleMeeting Schedule { get; set; }
@@ -79,7 +79,7 @@ namespace WpfApp1.ViewModel.Secretary
                 OnPropertyChanged("CheckedUsers");
             }
         }
-        public ObservableCollection<AppointmentView> Meetings
+        public ObservableCollection<MeetingView> AvailableMeetings
         {
             get
             {
@@ -90,7 +90,7 @@ namespace WpfApp1.ViewModel.Secretary
                 if (value != _meetings)
                 {
                     _meetings = value;
-                    OnPropertyChanged("Meetings");
+                    OnPropertyChanged("AvailableMeetings");
                 }
             }
         }
@@ -151,20 +151,35 @@ namespace WpfApp1.ViewModel.Secretary
             Users = new ObservableCollection<User>(_userController.GetAllEmployees());
 
         }
-        public void ScheduleMeeting()
+        public void FindMeeting()
         {
             var app = Application.Current as App;
             _meetingController = app.MeetingController;
+            List<int> userIds = new List<int>();
+            for (int i = 0; i < CheckedUsers.Count; i++)
+            {
+                User user = (User)CheckedUsers[i];
+                userIds.Add(user.Id);
+            }
+            AvailableMeetings = new ObservableCollection<MeetingView>(_meetingController.GetAvailableOptions(
+                DateTime.Parse(Beginning), DateTime.Parse(Beginning).AddHours(5), userIds, SelecetedRoom).ToList());
+
+        }
+
+        public void ScheduleMeeting(DateTime chosenTime)
+        {
             List<string> userIds = new List<string>();
             for (int i = 0; i < CheckedUsers.Count; i++)
             {
                 User user = (User)CheckedUsers[i];
                 userIds.Add(user.Id.ToString());
             }
-            Meeting newMeeting = new Meeting(DateTime.Parse(Beginning), DateTime.Parse(Beginning).AddHours(1), SelecetedRoom.Id, userIds);
+            Meeting newMeeting = new Meeting(chosenTime, chosenTime.AddMinutes(30), SelecetedRoom.Id, userIds);
             _meetingController.Create(newMeeting);
-            Notify(userIds);
+             Notify(userIds);
         }
+
+
         private void Notify(List<string> users)
         {
             var app = Application.Current as App;
@@ -174,7 +189,10 @@ namespace WpfApp1.ViewModel.Secretary
             foreach (string user in users) {
                 int userId = Int32.Parse(user);
                 Notification notification = new Notification(DateTime.Now, content, title,userId, false, false);
-                _notificationController.Create(notification);   
+                _notificationController.Create(notification);
+
+
+                
             }
         }
 

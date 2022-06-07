@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using WpfApp1.Model;
 using WpfApp1.Service;
 using WpfApp1.View.Model.Patient;
+using WpfApp1.View.Model.Secretary;
 
 namespace WpfApp1.Controller
 {
@@ -27,10 +28,10 @@ namespace WpfApp1.Controller
         {
             return _meetingService.Create(meeting);
         }
-        public List<AppointmentView> GetAvailableOptions(DateTime startOfInterval, DateTime endOfInterval,
-                                                            List<int> doctorIds)
+        public List<MeetingView> GetAvailableOptions(DateTime startOfInterval, DateTime endOfInterval,
+                                                            List<int> doctorIds, Room room)
         {
-            return _meetingService.GetAvailableMeetingOptions(startOfInterval, endOfInterval, doctorIds);
+            return _meetingService.GetAvailableMeetingOptions(startOfInterval, endOfInterval, doctorIds, room);
         }
        
 

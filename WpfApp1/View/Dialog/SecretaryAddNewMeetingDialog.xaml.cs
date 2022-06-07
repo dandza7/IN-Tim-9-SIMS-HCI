@@ -24,6 +24,7 @@ namespace WpfApp1.View.Dialog
         {
             InitializeComponent();
             DataContext = new CreateMeetingPageViewModel();
+            AvailableAppointmentsGrid.Items.Refresh();
         }
     }
 }
