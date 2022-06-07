@@ -28,12 +28,16 @@ namespace WpfApp1.Controller
         {
             return _meetingService.Create(meeting);
         }
-        public List<MeetingView> GetAvailableOptions(DateTime startOfInterval, DateTime endOfInterval,
-                                                            List<int> doctorIds, Room room)
+        public bool FindMeetingTerm(DateTime startOfInterval, DateTime endOfInterval,
+                                                            List<int> doctorIds)
         {
-            return _meetingService.GetAvailableMeetingOptions(startOfInterval, endOfInterval, doctorIds, room);
+            return _meetingService.FindMeetingTerm(startOfInterval, endOfInterval, doctorIds);
         }
-       
+        public List<MeetingView> GetMeetings(DateTime startOfInterval, DateTime endOfInterval,
+                                                      Room room)
+        {
+            return _meetingService.GetMeetings(startOfInterval, endOfInterval, room);
+        }
 
     }
 }

@@ -20,16 +20,11 @@ namespace WpfApp1.Service
         private readonly RoomRepository _roomRepo;
         private readonly RenovationRepository _renovationRepo;
         public MeetingService(MeetingRepository meetingRepo, AppointmentRepository appointmentRepo,
-            DoctorRepository doctorRepository,
-            PatientRepository patientRepo,
             RoomRepository roomRepo,
-            UserRepository userRepo,
             RenovationRepository renovationRepo)
         {
             _meetingRepo = meetingRepo;
             _appointmentRepo = appointmentRepo;
-            _userRepo = userRepo;
-            _doctorRepo = doctorRepository;
             _roomRepo = roomRepo;
             _renovationRepo = renovationRepo;
 
@@ -43,11 +38,10 @@ namespace WpfApp1.Service
         {
             return _meetingRepo.Create(meeting);
         }
-        public List<MeetingView> GetAvailableMeetingOptions(
-            DateTime startOfInterval, DateTime endOfInterval, List<int> userIds, Room room)
+        public bool FindMeetingTerm(
+            DateTime startOfInterval, DateTime endOfInterval, List<int> userIds)
         {
             TimeMenager interval = new TimeMenager(startOfInterval, endOfInterval);
-            List<MeetingView> meetings = new List<MeetingView>();
             List<Appointment> appointments = new List<Appointment>();
 
             foreach (int id in userIds)
@@ -58,14 +52,15 @@ namespace WpfApp1.Service
             }
             if (appointments.Count == 0)
             {
-                return GetMeetings(interval.Beginning, interval.Ending, meetings, room);
+                return true;
             }
-            else return meetings;
+            else return false;
         }
-        private List<MeetingView> GetMeetings(DateTime startOfInterval, DateTime endOfInterval,
-            List<MeetingView> meetings, Room room )
+        public List<MeetingView> GetMeetings(DateTime startOfInterval, DateTime endOfInterval,
+            Room room )
         {
             TimeMenager interval = new TimeMenager(startOfInterval, endOfInterval);
+            List<MeetingView> meetings = new List<MeetingView>();
             var attendees = new List<string>();
             while (interval.GetIncrementedBeginning() <= interval.Ending)
             {

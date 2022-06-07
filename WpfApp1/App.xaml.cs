@@ -140,7 +140,7 @@ namespace WpfApp1
             var noteService = new NoteService(noteRepository);
             NoteController = new NoteController(noteService);
 
-            var meetingService = new MeetingService(meetingRepository, appointmentRepository, doctorRepository, patientRepository, roomRepository, userRepository, renovationRepository);
+            var meetingService = new MeetingService(meetingRepository, appointmentRepository, roomRepository, renovationRepository);
             MeetingController = new MeetingController(meetingService);
         }
     }
