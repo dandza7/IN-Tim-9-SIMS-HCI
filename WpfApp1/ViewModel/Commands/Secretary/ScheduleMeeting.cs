@@ -25,7 +25,9 @@ namespace WpfApp1.ViewModel.Commands.Secretary
 
         public void Execute(object parameter)
         {
-            CreateMeetingViewModel.ScheduleMeeting();
+            DateTime beginning = (DateTime)parameter;
+            Console.WriteLine(beginning);
+            CreateMeetingViewModel.ScheduleMeeting(beginning);
         }
     }
 }

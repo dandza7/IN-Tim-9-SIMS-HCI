@@ -25,6 +25,7 @@ namespace WpfApp1.ViewModel.Commands.Secretary
 
         public void Execute(object parameter)
         {
+            CreateMeetingViewModel.FindMeeting();
         }
     
     }

@@ -193,6 +193,7 @@
     <Compile Include="ViewModel\PDFViewModel.cs" />
     <Compile Include="ViewModel\Secretary\MeetingViewModel.cs" />
     <Compile Include="ViewModel\StatisticsViewModel.cs" />
+    <Compile Include="View\Converter\MeetingConverter.cs" />
     <Compile Include="View\Dialog\PatientDialog\AddNoteDialog.xaml.cs">
       <DependentUpon>AddNoteDialog.xaml</DependentUpon>
     </Compile>
@@ -219,6 +220,9 @@
     </Compile>
     <Compile Include="View\Model\Executive\ExecutiveStatisticsPages.xaml.cs">
       <DependentUpon>ExecutiveStatisticsPages.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Model\Secretary\MeetingView.xaml.cs">
+      <DependentUpon>MeetingView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Model\Secretary\SecretaryLeaveRequestsView.xaml.cs">
       <DependentUpon>SecretaryLeaveRequestsView.xaml</DependentUpon>
@@ -746,6 +750,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Model\Secretary\DynamicEquipmentView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Model\Secretary\MeetingView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

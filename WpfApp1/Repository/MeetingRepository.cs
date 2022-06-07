@@ -58,14 +58,14 @@ namespace WpfApp1.Repository
 
         private string ConvertMeetingToCSVFormat(Meeting meeting)
         {
-            string a = "";
+            string attendees = "";
             int count = meeting.Users.Count();
             int i = 0;
-            foreach (string b in meeting.Users)
+            foreach (string user in meeting.Users)
             {
-                if(i<count-1)
-                a = a + b + ",";
-                else { a = a + b; }
+                if(i < count-1)
+                attendees = attendees + user + ",";
+                else { attendees = attendees + user; }
                 i++;
             }
 
@@ -74,7 +74,7 @@ namespace WpfApp1.Repository
                 meeting.Beginning,
                 meeting.Ending,
                 meeting.RoomId,
-                a);
+                attendees);
         }
 
 

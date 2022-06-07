@@ -86,8 +86,7 @@ namespace WpfApp1.Repository
             ObservableCollection<Request> requests = new ObservableCollection<Request>();
             foreach (Request request in GetAll())
             {
-                if (request.Status == RequestStatusType.Pending ) {requests.Add(request);
-                Console.WriteLine("a");}
+                if (request.Status == RequestStatusType.Pending ) {requests.Add(request);}
             }
 
             return requests;
