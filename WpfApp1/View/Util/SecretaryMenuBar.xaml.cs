@@ -43,6 +43,9 @@ namespace WpfApp1.View.Util
             PatientsColorMark.Background = (SolidColorBrush)new BrushConverter().ConvertFromString("#FF130A38");
             AppointmentsColorMark.Background = (SolidColorBrush)new BrushConverter().ConvertFromString("#FF130A38");
             DynamicEquipmentColorMark.Background = (SolidColorBrush)new BrushConverter().ConvertFromString("#FF130A38");
+            MeetingsColorMark.Background = (SolidColorBrush)new BrushConverter().ConvertFromString("#FF130A38");
+            LeaveRequestsColorMark.Background = (SolidColorBrush)new BrushConverter().ConvertFromString("#FF130A38");
+            NotificationsColorMark.Background = (SolidColorBrush)new BrushConverter().ConvertFromString("#FF130A38");
             Main.Content = new SecretaryDashboard();
         }
 
@@ -50,28 +53,37 @@ namespace WpfApp1.View.Util
         private void SecretaryPatients_Click(object sender, RoutedEventArgs e)
         {
             PageHeader.Text = "Patient List";
+            DashboardColorMark.Background = (SolidColorBrush)new BrushConverter().ConvertFromString("#FF130A38");
             PatientsColorMark.Background = (SolidColorBrush)new BrushConverter().ConvertFromString("#FF7153C7");
             AppointmentsColorMark.Background = (SolidColorBrush)new BrushConverter().ConvertFromString("#FF130A38");
             DynamicEquipmentColorMark.Background = (SolidColorBrush)new BrushConverter().ConvertFromString("#FF130A38");
-            DashboardColorMark.Background = (SolidColorBrush)new BrushConverter().ConvertFromString("#FF130A38");
+            MeetingsColorMark.Background = (SolidColorBrush)new BrushConverter().ConvertFromString("#FF130A38");
+            LeaveRequestsColorMark.Background = (SolidColorBrush)new BrushConverter().ConvertFromString("#FF130A38");
+            NotificationsColorMark.Background = (SolidColorBrush)new BrushConverter().ConvertFromString("#FF130A38");
             Main.Content = new SecretaryPatientsView();
         }
         private void SecretaryAppointments_Click(object sender, RoutedEventArgs e)
         {
             PageHeader.Text = "Appointment List";
-            AppointmentsColorMark.Background = (SolidColorBrush)new BrushConverter().ConvertFromString("#FF7153C7");
-            PatientsColorMark.Background = (SolidColorBrush)new BrushConverter().ConvertFromString("#FF130A38");
-            DynamicEquipmentColorMark.Background = (SolidColorBrush)new BrushConverter().ConvertFromString("#FF130A38");
             DashboardColorMark.Background = (SolidColorBrush)new BrushConverter().ConvertFromString("#FF130A38");
+            PatientsColorMark.Background = (SolidColorBrush)new BrushConverter().ConvertFromString("#FF130A38");
+            AppointmentsColorMark.Background = (SolidColorBrush)new BrushConverter().ConvertFromString("#FF7153C7");
+            DynamicEquipmentColorMark.Background = (SolidColorBrush)new BrushConverter().ConvertFromString("#FF130A38");
+            MeetingsColorMark.Background = (SolidColorBrush)new BrushConverter().ConvertFromString("#FF130A38");
+            LeaveRequestsColorMark.Background = (SolidColorBrush)new BrushConverter().ConvertFromString("#FF130A38");
+            NotificationsColorMark.Background = (SolidColorBrush)new BrushConverter().ConvertFromString("#FF130A38");
             Main.Content = new SecretaryAppointmentsView();
         }
         private void SecretaryDynamicEquipemnt_Click(object sender, RoutedEventArgs e)
         {
             PageHeader.Text = "Dynamic Equipment List";
-            DynamicEquipmentColorMark.Background = (SolidColorBrush)new BrushConverter().ConvertFromString("#FF7153C7");
+            DashboardColorMark.Background = (SolidColorBrush)new BrushConverter().ConvertFromString("#FF130A38");
             PatientsColorMark.Background = (SolidColorBrush)new BrushConverter().ConvertFromString("#FF130A38");
             AppointmentsColorMark.Background = (SolidColorBrush)new BrushConverter().ConvertFromString("#FF130A38");
-            DashboardColorMark.Background = (SolidColorBrush)new BrushConverter().ConvertFromString("#FF130A38");
+            DynamicEquipmentColorMark.Background = (SolidColorBrush)new BrushConverter().ConvertFromString("#FF7153C7");
+            MeetingsColorMark.Background = (SolidColorBrush)new BrushConverter().ConvertFromString("#FF130A38");
+            LeaveRequestsColorMark.Background = (SolidColorBrush)new BrushConverter().ConvertFromString("#FF130A38");
+            NotificationsColorMark.Background = (SolidColorBrush)new BrushConverter().ConvertFromString("#FF130A38");
             Main.Content = new SecretaryDynamicEquipmentView();
         }
         private void CloseAllWindows()
@@ -98,21 +110,40 @@ namespace WpfApp1.View.Util
         private void SecretaryLeaveRequests_Click(object sender, RoutedEventArgs e)
         {
             PageHeader.Text = "Leave Request List";
-            DynamicEquipmentColorMark.Background = (SolidColorBrush)new BrushConverter().ConvertFromString("#FF130A38");
+            DashboardColorMark.Background = (SolidColorBrush)new BrushConverter().ConvertFromString("#FF130A38");
             PatientsColorMark.Background = (SolidColorBrush)new BrushConverter().ConvertFromString("#FF130A38");
             AppointmentsColorMark.Background = (SolidColorBrush)new BrushConverter().ConvertFromString("#FF130A38");
-            DashboardColorMark.Background = (SolidColorBrush)new BrushConverter().ConvertFromString("#FF130A38");
+            DynamicEquipmentColorMark.Background = (SolidColorBrush)new BrushConverter().ConvertFromString("#FF130A38");
+            MeetingsColorMark.Background = (SolidColorBrush)new BrushConverter().ConvertFromString("#FF130A38");
+            LeaveRequestsColorMark.Background = (SolidColorBrush)new BrushConverter().ConvertFromString("#FF7153C7");
+            NotificationsColorMark.Background = (SolidColorBrush)new BrushConverter().ConvertFromString("#FF130A38");
             Main.Content = new SecretaryLeaveRequestsView();
         }
 
         private void SecretaryMeetingsClick(object sender, RoutedEventArgs e)
         {
             PageHeader.Text = "Meeting List";
-            DynamicEquipmentColorMark.Background = (SolidColorBrush)new BrushConverter().ConvertFromString("#FF130A38");
+            DashboardColorMark.Background = (SolidColorBrush)new BrushConverter().ConvertFromString("#FF130A38");
             PatientsColorMark.Background = (SolidColorBrush)new BrushConverter().ConvertFromString("#FF130A38");
             AppointmentsColorMark.Background = (SolidColorBrush)new BrushConverter().ConvertFromString("#FF130A38");
-            DashboardColorMark.Background = (SolidColorBrush)new BrushConverter().ConvertFromString("#FF130A38");
+            DynamicEquipmentColorMark.Background = (SolidColorBrush)new BrushConverter().ConvertFromString("#FF130A38");
+            MeetingsColorMark.Background = (SolidColorBrush)new BrushConverter().ConvertFromString("#FF7153C7");
+            LeaveRequestsColorMark.Background = (SolidColorBrush)new BrushConverter().ConvertFromString("#FF130A38");
+            NotificationsColorMark.Background = (SolidColorBrush)new BrushConverter().ConvertFromString("#FF130A38");
             Main.Content = new SecretaryMeetingsView();
+        }
+
+        private void SecretaryNotifications_Click(object sender, RoutedEventArgs e)
+        {
+            PageHeader.Text = "Notification List";
+            DashboardColorMark.Background = (SolidColorBrush)new BrushConverter().ConvertFromString("#FF130A38");
+            PatientsColorMark.Background = (SolidColorBrush)new BrushConverter().ConvertFromString("#FF130A38");
+            AppointmentsColorMark.Background = (SolidColorBrush)new BrushConverter().ConvertFromString("#FF130A38");
+            DynamicEquipmentColorMark.Background = (SolidColorBrush)new BrushConverter().ConvertFromString("#FF130A38");
+            MeetingsColorMark.Background = (SolidColorBrush)new BrushConverter().ConvertFromString("#FF130A38");
+            LeaveRequestsColorMark.Background = (SolidColorBrush)new BrushConverter().ConvertFromString("#FF130A38");
+            NotificationsColorMark.Background = (SolidColorBrush)new BrushConverter().ConvertFromString("#FF7153C7");
+            Main.Content = new NotificationsView();
         }
     }
 }
