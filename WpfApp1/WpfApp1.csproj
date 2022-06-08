@@ -185,6 +185,7 @@
     <Compile Include="ViewModel\Commands\Secretary\FindMeetingTerm.cs" />
     <Compile Include="ViewModel\Commands\Secretary\OpenLeaveRequestDialog.cs" />
     <Compile Include="ViewModel\Commands\Secretary\OpenNewMeetingDialog.cs" />
+    <Compile Include="ViewModel\Commands\Secretary\OpenReadNotificationDialog.cs" />
     <Compile Include="ViewModel\Commands\Secretary\ScheduleMeeting.cs" />
     <Compile Include="ViewModel\DoctorStatisticsViewModel.cs" />
     <Compile Include="ViewModel\Commands\Executive\NavigateDoctorsList.cs" />
@@ -198,6 +199,8 @@
     <Compile Include="ViewModel\Secretary\ManageLeaveRequestViewModel.cs" />
     <Compile Include="ViewModel\PDFViewModel.cs" />
     <Compile Include="ViewModel\Secretary\MeetingViewModel.cs" />
+    <Compile Include="ViewModel\Secretary\NotificationsViewModel.cs" />
+    <Compile Include="ViewModel\Secretary\SelectedNotificationViewModel.cs" />
     <Compile Include="ViewModel\StatisticsViewModel.cs" />
     <Compile Include="View\Converter\MeetingConverter.cs" />
     <Compile Include="View\Dialog\PatientDialog\AddNoteDialog.xaml.cs">
@@ -211,6 +214,9 @@
     </Compile>
     <Compile Include="View\Dialog\SecretaryLeaveRequestDialog.xaml.cs">
       <DependentUpon>SecretaryLeaveRequestDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Dialog\SecretaryViewNotificationDialog.xaml.cs">
+      <DependentUpon>SecretaryViewNotificationDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Model\Doctor\DoctorReportView.xaml.cs">
       <DependentUpon>DoctorReportView.xaml</DependentUpon>
@@ -229,6 +235,9 @@
     </Compile>
     <Compile Include="View\Model\Secretary\MeetingView.xaml.cs">
       <DependentUpon>MeetingView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Model\Secretary\NotificationsView.xaml.cs">
+      <DependentUpon>NotificationsView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Model\Secretary\SecretaryLeaveRequestsView.xaml.cs">
       <DependentUpon>SecretaryLeaveRequestsView.xaml</DependentUpon>
@@ -587,6 +596,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\Dialog\SecretaryViewNotificationDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -760,6 +773,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Model\Secretary\MeetingView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Model\Secretary\NotificationsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
