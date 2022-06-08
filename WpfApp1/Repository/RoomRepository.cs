@@ -9,7 +9,7 @@ using WpfApp1.Model;
 
 namespace WpfApp1.Repository
 {
-    public class RoomRepository : Repository<Room>
+    public class RoomRepository
     {
         private const string NOT_FOUND_ERROR = "Room with {0}:{1} can not be found!";
         private string _path;

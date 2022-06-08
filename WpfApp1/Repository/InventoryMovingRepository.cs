@@ -9,7 +9,7 @@ using WpfApp1.Model;
 
 namespace WpfApp1.Repository
 {
-    public class InventoryMovingRepository : Repository<InventoryMoving>
+    public class InventoryMovingRepository
     {
         private const string NOT_FOUND_ERROR = "Inventory moving with {0}:{1} can not be found!";
         private string _path;

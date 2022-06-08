@@ -8,7 +8,7 @@ using WpfApp1.Repository;
 
 namespace WpfApp1.Service
 {
-    public class RenovationService : Service<Renovation>
+    public class RenovationService
     {
         public readonly RenovationRepository _renovationRepository;
         public readonly AppointmentRepository _appointmentRepository;

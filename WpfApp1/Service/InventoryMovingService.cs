@@ -8,7 +8,7 @@ using WpfApp1.Repository;
 
 namespace WpfApp1.Service
 {
-    public class InventoryMovingService : Service<InventoryMoving>
+    public class InventoryMovingService
     {
         public readonly InventoryMovingRepository _invMovRepository;
         public readonly InventoryRepository _invRepository;

@@ -8,7 +8,7 @@ using WpfApp1.Model;
 
 namespace WpfApp1.Repository
 {
-    public class InventoryRepository : Repository<Inventory>
+    public class InventoryRepository
     {
         private const string NOT_FOUND_ERROR = "Inventory with {0}:{1} can not be found!";
         private string _path;
