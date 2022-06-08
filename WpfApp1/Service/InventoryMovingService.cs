@@ -5,22 +5,23 @@ using System.Text;
 using System.Threading.Tasks;
 using WpfApp1.Model;
 using WpfApp1.Repository;
+using WpfApp1.Repository.Interface;
 
 namespace WpfApp1.Service
 {
     public class InventoryMovingService
     {
-        public readonly InventoryMovingRepository _invMovRepository;
-        public readonly InventoryRepository _invRepository;
+        public readonly IInventoryMovingRepository _invMovRepository;
+        public readonly IInventoryRepository _invRepository;
 
-        public InventoryMovingService(InventoryMovingRepository invMovRepository, InventoryRepository invRepository)
+        public InventoryMovingService(IInventoryMovingRepository invMovRepository, IInventoryRepository invRepository)
         {
             _invMovRepository = invMovRepository;
             _invRepository = invRepository;
         }
         public InventoryMoving MoveToday(InventoryMoving invMov)
         {
-            Inventory updatedInv = _invRepository.Get(invMov.InventoryId);
+            Inventory updatedInv = _invRepository.GetById(invMov.InventoryId);
             updatedInv.RoomId = invMov.RoomId;
             _invRepository.Update(updatedInv);
             return invMov;

@@ -139,9 +139,15 @@
     <Compile Include="Repository\DoctorsReportRepository.cs" />
     <Compile Include="Repository\DynamicEquipmentRequestRepository.cs" />
     <Compile Include="Repository\Interface\IAppointmentRepository.cs" />
+    <Compile Include="Repository\Interface\IDoctorRepository.cs" />
+    <Compile Include="Repository\Interface\IDrugRepository.cs" />
+    <Compile Include="Repository\Interface\IInventoryMovingRepository.cs" />
+    <Compile Include="Repository\Interface\IInventoryRepository.cs" />
     <Compile Include="Repository\Interface\INoteRepository.cs" />
     <Compile Include="Repository\Interface\INotificationRepository.cs" />
     <Compile Include="Repository\Interface\IPatientRepository.cs" />
+    <Compile Include="Repository\Interface\IRenovationRepository.cs" />
+    <Compile Include="Repository\Interface\IRoomRepository.cs" />
     <Compile Include="Repository\Interface\ISurveyRepository.cs" />
     <Compile Include="Repository\Interface\IUserRepository.cs" />
     <Compile Include="Repository\InventoryMovingRepository.cs" />

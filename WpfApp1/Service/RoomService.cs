@@ -5,20 +5,22 @@ using System.Text;
 using System.Threading.Tasks;
 using WpfApp1.Model;
 using WpfApp1.Repository;
+using WpfApp1.Repository.Interface;
+using WpfApp1.Repository.Interfaces;
 
 namespace WpfApp1.Service
 {
     public class RoomService
     {
-        public readonly RoomRepository _roomRepository;
-        public readonly DoctorRepository _doctorRepository;
-        public readonly InventoryMovingRepository _inventoryMovingRepository;
-        public readonly InventoryRepository _inventoryRepository;
-        public readonly RenovationRepository _renovationRepository;
-        public readonly AppointmentRepository _appointmentRepository;
+        public readonly IRoomRepository _roomRepository;
+        public readonly IDoctorRepository _doctorRepository;
+        public readonly IInventoryMovingRepository _inventoryMovingRepository;
+        public readonly IInventoryRepository _inventoryRepository;
+        public readonly IRenovationRepository _renovationRepository;
+        public readonly IAppointmentRepository _appointmentRepository;
 
-        public RoomService(RoomRepository roomRepository, DoctorRepository doctorRepository, InventoryMovingRepository inventoryMovingRepository, 
-                            InventoryRepository inventoryRepository, RenovationRepository renovationRepository, AppointmentRepository appointmentRepository)
+        public RoomService(IRoomRepository roomRepository, IDoctorRepository doctorRepository, IInventoryMovingRepository inventoryMovingRepository, 
+                            IInventoryRepository inventoryRepository, IRenovationRepository renovationRepository, IAppointmentRepository appointmentRepository)
         {
             _roomRepository = roomRepository;
             _doctorRepository = doctorRepository;

@@ -6,10 +6,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using WpfApp1.Model;
+using WpfApp1.Repository.Interface;
 
 namespace WpfApp1.Repository
 {
-    public class InventoryMovingRepository
+    public class InventoryMovingRepository : IInventoryMovingRepository
     {
         private const string NOT_FOUND_ERROR = "Inventory moving with {0}:{1} can not be found!";
         private string _path;
