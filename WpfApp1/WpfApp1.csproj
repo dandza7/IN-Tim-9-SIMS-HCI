@@ -138,6 +138,12 @@
     <Compile Include="Repository\AllergyRepository.cs" />
     <Compile Include="Repository\DoctorsReportRepository.cs" />
     <Compile Include="Repository\DynamicEquipmentRequestRepository.cs" />
+    <Compile Include="Repository\Interface\IAppointmentRepository.cs" />
+    <Compile Include="Repository\Interface\INoteRepository.cs" />
+    <Compile Include="Repository\Interface\INotificationRepository.cs" />
+    <Compile Include="Repository\Interface\IPatientRepository.cs" />
+    <Compile Include="Repository\Interface\ISurveyRepository.cs" />
+    <Compile Include="Repository\Interface\IUserRepository.cs" />
     <Compile Include="Repository\InventoryMovingRepository.cs" />
     <Compile Include="Repository\InventoryRepository.cs" />
     <Compile Include="Repository\MedicalRecordRepository.cs" />

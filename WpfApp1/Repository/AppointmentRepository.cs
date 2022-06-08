@@ -5,11 +5,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using WpfApp1.Model;
+using WpfApp1.Repository.Interfaces;
 using static WpfApp1.Model.Appointment;
 
 namespace WpfApp1.Repository
 {
-    public class AppointmentRepository
+    public class AppointmentRepository : IAppointmentRepository
     {
         private string _path;
         private string _delimiter;
@@ -160,7 +161,7 @@ namespace WpfApp1.Repository
             return appointment;
         }
 
-        internal List<Appointment> GetAllByDoctorId(int id)
+        public List<Appointment> GetAllByDoctorId(int id)
         {
             List<Appointment> doctorsAppointments = new List<Appointment>();
             foreach (Appointment a in GetAll())
