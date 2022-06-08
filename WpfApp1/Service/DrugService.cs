@@ -8,7 +8,7 @@ using WpfApp1.Repository;
 
 namespace WpfApp1.Service
 {
-    public class DrugService : Service<Drug>
+    public class DrugService
     {
         private readonly DrugRepository _drugRepo;
 

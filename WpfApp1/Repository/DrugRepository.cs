@@ -8,7 +8,7 @@ using WpfApp1.Model;
 
 namespace WpfApp1.Repository
 {
-    public class DrugRepository : Repository<Drug>
+    public class DrugRepository
     {
         private string _path;
         private string _delimiter;

@@ -9,7 +9,7 @@ using WpfApp1.Model;
 
 namespace WpfApp1.Repository
 {
-    public class RenovationRepository : Repository<Renovation>
+    public class RenovationRepository
     {
         private const string NOT_FOUND_ERROR = "Renovation with {0}:{1} can not be found!";
         private string _path;
