@@ -73,6 +73,7 @@ namespace WpfApp1.Service
         public Inventory Create(Inventory inv)
         {
             return _inventoryRepository.Create(inv);
+
         }
         public IEnumerable<Inventory> GetAllDynamic()
         {

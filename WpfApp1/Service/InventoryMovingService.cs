@@ -30,5 +30,6 @@ namespace WpfApp1.Service
             return _invMovRepository.Create(invMov);
         }
 
+
     }
 }

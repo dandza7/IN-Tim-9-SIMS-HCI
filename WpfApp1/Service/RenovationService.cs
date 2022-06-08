@@ -18,12 +18,12 @@ namespace WpfApp1.Service
             _renovationRepository = renovationRepository;
             _appointmentRepository = appointmentRepository;
         }
-        
 
         public Renovation Create(Renovation renovation)
         {
             return _renovationRepository.Create(renovation);
         }
+
 
 
         public List<String> GetDaysAvailableForRenovation(List<int> roomsIds, string beginning = "")
