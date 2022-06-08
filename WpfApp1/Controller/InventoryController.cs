@@ -12,10 +12,12 @@ namespace WpfApp1.Controller
     public class InventoryController
     {
         public InventoryService _inventoryService;
+        public RoomService _roomService;
 
-        public InventoryController(InventoryService inventoryService)
+        public InventoryController(InventoryService inventoryService, RoomService roomService)
         {
             _inventoryService = inventoryService;
+            _roomService = roomService;
         }
 
         public List<InventoryPreview> GetPreviews()
@@ -33,7 +35,15 @@ namespace WpfApp1.Controller
         }
         public Inventory Create(Inventory inv, string roomName)
         {
-            return _inventoryService.Create(inv, roomName);
+            List<Room> rooms = _roomService.GetAll().ToList();
+            foreach (Room room in rooms)
+            {
+                if (room.Nametag.Equals(roomName))
+                {
+                    inv.RoomId = room.Id;
+                }
+            }
+            return _inventoryService.Create(inv);
         }
         public IEnumerable<Inventory> GetAllDynamic()
         {

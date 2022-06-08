@@ -8,13 +8,6 @@ namespace WpfApp1.Service
 {
     public interface Service<T>
     {
-        IEnumerable<T> GetAll();
-
-        T GetById(int id);
-
         T Create(T entity);
-
-        bool Delete(int id);
-
     }
 }

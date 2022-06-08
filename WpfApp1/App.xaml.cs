@@ -111,7 +111,7 @@ namespace WpfApp1
             TherapyController = new TherapyController(therapyService);
 
             var inventoryService = new InventoryService(inventoryRepository, roomRepository, inventoryMovingRepository);
-            InventoryController = new InventoryController(inventoryService);
+            InventoryController = new InventoryController(inventoryService, roomService);
 
             var inventoryMovingService = new InventoryMovingService(inventoryMovingRepository, inventoryRepository);
             InventoryMovingController = new InventoryMovingController(inventoryMovingService);

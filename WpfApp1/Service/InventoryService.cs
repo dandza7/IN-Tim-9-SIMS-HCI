@@ -70,31 +70,13 @@ namespace WpfApp1.Service
             return sopRooms;
         }
 
-        public Inventory Create(Inventory inv, string roomName)
-        {
-            Inventory newInv = inv;
-            List<Room> rooms = _roomRepository.GetAll().ToList();
-            foreach(Room room in rooms)
-            {
-                if (room.Nametag.Equals(roomName))
-                {
-                    newInv.RoomId = room.Id;
-                }
-            }
-            return _inventoryRepository.Create(newInv);
-        }
-        public IEnumerable<Inventory> GetAllDynamic()
-        {
-            return _inventoryRepository.GetAllDynamic();
-        }
-
         public Inventory Create(Inventory inv)
         {
             return _inventoryRepository.Create(inv);
         }
-        public bool Delete(int id)
+        public IEnumerable<Inventory> GetAllDynamic()
         {
-            return _inventoryRepository.Delete(id);
+            return _inventoryRepository.GetAllDynamic();
         }
     }
 }

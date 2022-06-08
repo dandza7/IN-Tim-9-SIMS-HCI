@@ -30,18 +30,5 @@ namespace WpfApp1.Service
             return _invMovRepository.Create(invMov);
         }
 
-        public IEnumerable<InventoryMoving> GetAll()
-        {
-            return _invMovRepository.GetAll();
-        }
-        public InventoryMoving GetById(int id)
-        {
-            return _invMovRepository.GetById(id);
-        }
-        public bool Delete(int id)
-        {
-            return _invMovRepository.Delete(id);
-        }
-
     }
 }
