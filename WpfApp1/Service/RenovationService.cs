@@ -18,24 +18,13 @@ namespace WpfApp1.Service
             _renovationRepository = renovationRepository;
             _appointmentRepository = appointmentRepository;
         }
-        public Renovation GetById(int id)
-        {
-            return _renovationRepository.GetById(id);
-        }
-        public IEnumerable<Renovation> GetAll()
-        {
-            return _renovationRepository.GetAll();
-        }
 
         public Renovation Create(Renovation renovation)
         {
             return _renovationRepository.Create(renovation);
         }
 
-        public bool Delete(int id)
-        {
-            return _renovationRepository.Delete(id);
-        }
+
 
         public List<String> GetDaysAvailableForRenovation(List<int> roomsIds, string beginning = "")
         {
