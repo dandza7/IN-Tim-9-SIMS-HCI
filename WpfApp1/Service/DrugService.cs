@@ -5,14 +5,15 @@ using System.Text;
 using System.Threading.Tasks;
 using WpfApp1.Model;
 using WpfApp1.Repository;
+using WpfApp1.Repository.Interface;
 
 namespace WpfApp1.Service
 {
     public class DrugService
     {
-        private readonly DrugRepository _drugRepo;
+        private readonly IDrugRepository _drugRepo;
 
-        public DrugService(DrugRepository drugRepo)
+        public DrugService(IDrugRepository drugRepo)
         {
             _drugRepo = drugRepo;
         }
