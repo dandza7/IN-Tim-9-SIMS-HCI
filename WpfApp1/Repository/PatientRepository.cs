@@ -5,10 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using WpfApp1.Model;
+using WpfApp1.Repository.Interface;
 
 namespace WpfApp1.Repository
 {
-    public class PatientRepository
+    public class PatientRepository : IPatientRepository
     {
         private string _path;
         private string _delimiter;

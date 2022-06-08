@@ -5,11 +5,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using WpfApp1.Model;
+using WpfApp1.Repository.Interface;
 using static WpfApp1.Model.User;
 
 namespace WpfApp1.Repository
 {
-    public class UserRepository
+    public class UserRepository : IUserRepository
     {
         private string _path;
         private string _delimiter;
