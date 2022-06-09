@@ -28,8 +28,10 @@ namespace WpfApp1.ViewModel.Secretary
         private string _urgency;
         private string _doctor;
         private DateTime _beginning;
+        private DateTime _ending;
         private Request _request;
         private string _comment;
+        private string _content;
         public DenyRequest Deny { get; set; }
         public AcceptRequest Accept { get; set; }
         public ManageLeaveRequestViewModel()
@@ -70,7 +72,21 @@ namespace WpfApp1.ViewModel.Secretary
                 }
             }
         }
-
+        public DateTime Ending
+        {
+            get
+            {
+                return _ending;
+            }
+            set
+            {
+                if (value != _ending)
+                {
+                    _ending = value;
+                    OnPropertyChanged("Ending");
+                }
+            }
+        }
         public string Doctor
         {
             get
@@ -132,6 +148,23 @@ namespace WpfApp1.ViewModel.Secretary
                 }
             }
         }
+
+        public string Content
+        {
+            get
+            {
+                return _content;
+            }
+            set
+            {
+                if (value != _content)
+                {
+                    _content = value;
+                    OnPropertyChanged("Content");
+                }
+            }
+        }
+
         private void LoadLeaveRequest()
         {
             var app = Application.Current as App;
@@ -139,6 +172,10 @@ namespace WpfApp1.ViewModel.Secretary
             int requestId = (int)app.Properties["requestId"];
             Request = _requestController.GetById(requestId);
             Title = Request.Title;
+            Content = Request.Content;
+            Beggining = Request.Beginning;
+            Ending = Request.Ending;
+            Urgency = Request.Urgnet ? "Urgent" : "Not urgent";
         }
 
         public void DenyRequest()
