@@ -10,42 +10,51 @@
 
     <Grid Background="{DynamicResource GrayBrush}">
         <Label HorizontalContentAlignment="Center" Content="Drug Validation" Margin="350,20,350,750" FontSize="50" BorderThickness="0,0,0,5" BorderBrush="{DynamicResource MedicalGreenBrush}" Height="Auto" VerticalAlignment="Stretch" Foreground="{DynamicResource MedicalGreenBrush}" FontFamily="Trajan Pro 3" FontWeight="Bold"/>
-        <Border HorizontalAlignment="Left" Height="488" Margin="350,152,0,0" VerticalAlignment="Top" Width="1000" BorderBrush="{DynamicResource MedicalGreenBrush}" BorderThickness="4" >
-            <Grid>
-                <Label Name="CommentLabel" Content="Comment:" HorizontalAlignment="Left" Margin="283,13,0,0" VerticalAlignment="Top" Height="30" Width="137" Foreground="{DynamicResource WhiteBrush}" FontFamily="Trajan Pro 3 Bold" FontSize="20"/>
-                <Label Name="CommentExceptionLabel" Visibility="Hidden" Content="Comment is required:" HorizontalAlignment="Left" Margin="139,13,0,0" VerticalAlignment="Top" Height="30" Width="366" Foreground="{DynamicResource NoRedBrush}" FontFamily="Trajan Pro 3 Bold" FontSize="20"/>
-                <TextBox x:Name="CommentTB" HorizontalAlignment="Left" TextWrapping="Wrap"  VerticalAlignment="Top" Width="347" Margin="425,10,0,0" Height="42" />
-                <Button x:Name="DeclineBT" Click="DeclineBT_Click" Content="Decline"   Style="{StaticResource DoctorNoButton}" Margin="787,10,20,428"  />
-                <DataGrid x:Name="DrugValidationGrid" Margin="6,64,6,12"
-                      AutoGenerateColumns="False" Style="{StaticResource DoctorDataGrid}" 
-                      ItemsSource="{Binding DrugsToValidate}" >
-                    <DataGrid.Columns>
-                        <DataGridTextColumn Header="Id" Width="150"  Binding="{Binding Id}" HeaderStyle="{StaticResource DoctorDGHeader}" CellStyle="{StaticResource DoctorDGCell}"/>
-                        <DataGridTextColumn Header="Name" Width="150"  Binding="{Binding Name}" HeaderStyle="{StaticResource DoctorDGHeader}" CellStyle="{StaticResource DoctorDGCell}"/>
-                        <DataGridTextColumn Header="Information" Width="3*" Binding="{Binding Info}"  HeaderStyle="{StaticResource DoctorDGHeader}" CellStyle="{StaticResource DoctorDGCell}"/>
-                        <DataGridTemplateColumn Header="Verify" Width="2*"  HeaderStyle="{StaticResource DoctorDGHeader}" CellStyle="{StaticResource DoctorDGCell}">
-                            <DataGridTemplateColumn.CellTemplate>
-                                <DataTemplate>
-                                    <Button x:Name="VerifyBT" Click="VerifyBT_Click" Content="Verify" Style="{StaticResource DoctorStandardButton}"  />
-                                </DataTemplate>
-                            </DataGridTemplateColumn.CellTemplate>
-                        </DataGridTemplateColumn>
-                        <DataGridTemplateColumn x:Name="CommentColumn" Visibility="Hidden" Header="Comment*" Width="4*"  >
-                            <DataGridTemplateColumn.CellTemplate>
-                                <DataTemplate>
 
-                                </DataTemplate>
-                            </DataGridTemplateColumn.CellTemplate>
-                        </DataGridTemplateColumn>
-                        <DataGridTemplateColumn  x:Name="DeclineColumn" Visibility="Hidden" Header=" Decline" Width="2*"  >
-                            <DataGridTemplateColumn.CellTemplate>
-                                <DataTemplate>
-                                </DataTemplate>
-                            </DataGridTemplateColumn.CellTemplate>
-                        </DataGridTemplateColumn>
-                    </DataGrid.Columns>
-                </DataGrid>
+        <GroupBox Header="Drug List" HorizontalAlignment="Left" Height="586" Margin="260,142,0,0" VerticalAlignment="Top" Width="596" BorderBrush="{DynamicResource MedicalGreenBrush}" Foreground="{DynamicResource MedicalGreenBrush}" FontSize="30" FontFamily="Trajan Pro 3 Bold" FontWeight="Bold">
+            <DataGrid x:Name="DrugValidationGrid" Margin="10,36,13,16"
+                      AutoGenerateColumns="False" Style="{StaticResource DoctorDataGrid}" 
+                      ItemsSource="{Binding DrugsToValidate}" SelectionChanged="DrugValidationGrid_SelectionChanged" >
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Id" Width="50"  Binding="{Binding Id}" HeaderStyle="{StaticResource DoctorDGHeader}" CellStyle="{StaticResource DoctorDGCell}"/>
+                    <DataGridTextColumn Header="Name" Width="150"  Binding="{Binding Name}" HeaderStyle="{StaticResource DoctorDGHeader}" CellStyle="{StaticResource DoctorDGCell}"/>
+                    <DataGridTextColumn Header="Information" Width="3*" Binding="{Binding Info}"  HeaderStyle="{StaticResource DoctorDGHeader}" CellStyle="{StaticResource DoctorDGCell}"/>
+                    <DataGridTemplateColumn Header="Verify" Width="2*"  HeaderStyle="{StaticResource DoctorDGHeader}" CellStyle="{StaticResource DoctorDGCell}">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button x:Name="VerifyBT" Click="VerifyBT_Click" Content="Verify" Style="{StaticResource DoctorStandardButton}"  />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn x:Name="CommentColumn" Visibility="Hidden" Header="Comment*" Width="4*"  >
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn  x:Name="DeclineColumn" Visibility="Hidden" Header=" Decline" Width="2*"  >
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+
+        </GroupBox>
+        <GroupBox Header="Drug View" HorizontalAlignment="Left" Height="586" Margin="892,142,0,0" VerticalAlignment="Top" Width="530" BorderBrush="{DynamicResource MedicalGreenBrush}" Foreground="{DynamicResource MedicalGreenBrush}" FontSize="30" FontFamily="Trajan Pro 3 Bold" FontWeight="Bold">
+            <Grid>
+                <Label Name="CommentLabel" Content="Comment:" HorizontalAlignment="Left" Margin="63,358,0,0" VerticalAlignment="Top" Height="30" Width="143" Foreground="{DynamicResource WhiteBrush}" FontFamily="Trajan Pro 3 Bold" FontSize="20"/>
+                <Label Name="CommentExceptionLabel" Visibility="Hidden" Content="Comment is required:" HorizontalAlignment="Left" Margin="63,358,0,0" VerticalAlignment="Top" Height="30" Width="366" Foreground="{DynamicResource NoRedBrush}" FontFamily="Trajan Pro 3 Bold" FontSize="20"/>
+                <TextBox x:Name="CommentTB" HorizontalAlignment="Left" TextWrapping="Wrap"  VerticalAlignment="Top" Width="402" Margin="63,398,0,0" Height="35" FontSize="20" />
+                <Button x:Name="DeclineBT" Click="DeclineBT_Click" Content="Decline"  Style="{StaticResource DoctorNoButton}" Margin="334,458,53,50" />
+
+                <Label Content="Name:" HorizontalAlignment="Left" Margin="63,40,0,0" VerticalAlignment="Top" FontSize="20" Foreground="{DynamicResource MedicalGreenBrush}" Width="84"/>
+                <Label x:Name="NameLabel" Content="" HorizontalAlignment="Left" Margin="147,40,0,0" VerticalAlignment="Top" FontSize="20" Foreground="{DynamicResource MedicalGreenBrush}" Width="287" Height="34"/>
+                <Label Content="Information:" HorizontalAlignment="Left" Margin="63,78,0,0" VerticalAlignment="Top" FontSize="20" Foreground="{DynamicResource MedicalGreenBrush}" Width="182"/>
+                <TextBox x:Name="InformationTB" HorizontalAlignment="Left" Height="176" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="402" Margin="63,118,0,0" FontSize="20" IsEnabled="False"/>
             </Grid>
-        </Border>
+        </GroupBox>
     </Grid>
 </Page>
