@@ -55,6 +55,9 @@ namespace WpfApp1.View.Model.Doctor
                 drug.IsRejected = true;
                 drug.Comment = CommentTB.Text;
                 _drugController.Update(drug);
+                NameLabel.Content = "";
+                InformationTB.Clear();
+                CommentTB.Clear();
             }
         }
         private void VerifyBT_Click(object sender, RoutedEventArgs e)
@@ -63,7 +66,17 @@ namespace WpfApp1.View.Model.Doctor
             Drug drug = _drugController.GetById(((Drug)DrugValidationGrid.SelectedItems[0]).Id);
             drug.IsVerified = true;
             _drugController.Update(drug);
+            NameLabel.Content = "";
+            InformationTB.Clear();
+            CommentTB.Clear();
 
+        }
+
+        private void DrugValidationGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            Drug drug = _drugController.GetById(((Drug)DrugValidationGrid.SelectedItems[0]).Id);
+            NameLabel.Content = drug.Name;
+            InformationTB.Text = drug.Info;
         }
     }
 }

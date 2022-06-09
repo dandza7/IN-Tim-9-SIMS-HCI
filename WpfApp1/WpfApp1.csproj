@@ -947,5 +947,8 @@
   <ItemGroup>
     <Resource Include="Resources\Images\printer.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="ViewModel\Commands\Doctor\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
