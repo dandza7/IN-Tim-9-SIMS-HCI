@@ -25,6 +25,7 @@ namespace WpfApp1.View.Model.Executive
         {
             InitializeComponent();
             this.DataContext = this;
+            ExecutivePagesFrame.Content = new ExecutiveRoomPages();
         }
 
         private void DrugsButton_Click(object sender, RoutedEventArgs e)

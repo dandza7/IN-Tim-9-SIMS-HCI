@@ -41,7 +41,7 @@
                     <Label Grid.Row="5" Grid.Column="1" Content="Drug info:" Style="{StaticResource FormLabel}"></Label>
                     <TextBox x:Name="DrugInfo" Grid.Row="6" Grid.RowSpan="4" Grid.Column="1" Style="{StaticResource FormInputBox}" Height="150" IsEnabled="True" TextWrapping="Wrap" AcceptsReturn="True"></TextBox>
                     <Button x:Name="CloseButton" Grid.Column="3" Grid.Row="1" Style="{StaticResource ClassicButton}" Click="CloseButton_Click">X</Button>
-                    <TextBlock Grid.Row="10" Grid.RowSpan="2" Grid.Column="1" Style="{StaticResource SmallText}" Text="{Binding Path=Feedback, UpdateSourceTrigger=PropertyChanged}"></TextBlock>
+                    <TextBlock Grid.Row="10" Grid.RowSpan="2" Grid.Column="1" Style="{StaticResource SmallText}" Foreground="Red" Text="{Binding Path=Feedback, UpdateSourceTrigger=PropertyChanged}"></TextBlock>
                     <Button x:Name="AddDrug" Grid.Column="1" Grid.Row="12" Style="{StaticResource ClassicButton}" Click="AddDrug_Click" Margin="70 5">Add Drug</Button>
                 </Grid>
             </Border>

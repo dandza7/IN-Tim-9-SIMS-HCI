@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using WpfApp1.View.Model.Executive;
+using WpfApp1.View.Model.Executive.ExecutiveStatisticsDialogs;
 using WpfApp1.ViewModel.Commands.Executive;
 
 namespace WpfApp1.ViewModel
@@ -27,6 +28,7 @@ namespace WpfApp1.ViewModel
             this.ParentPage = parentPage;
             this.NavigateDoctorsList = new NavigateDoctorsList(this);
             this.NavigateHospitalStats = new NavigateHospitalStats(this);
+            this.ParentPage.ListFrame.Content = new DoctorsList();
         }
 
         public void NavigateFrame(string path)

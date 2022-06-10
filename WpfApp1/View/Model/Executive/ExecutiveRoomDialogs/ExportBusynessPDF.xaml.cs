@@ -158,8 +158,6 @@ namespace WpfApp1.View.Model.Executive.ExecutiveRoomDialogs
         private void ExportButton_Click(object sender, RoutedEventArgs e)
         {
             PrintDialog printDialog = new PrintDialog();
-            Console.WriteLine(printDialog.PrintableAreaHeight);
-            Console.WriteLine(printDialog.PrintableAreaWidth);
             printDialog.PrintVisual(toPrint, "Rooms Busyness Report");
             ParentPage.CloseFrame.Begin();
         }
