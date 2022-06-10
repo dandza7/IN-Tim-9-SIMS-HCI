@@ -342,6 +342,10 @@ namespace WpfApp1.View.Model.Executive
             FormFrame.Opacity = 1;
         }
 
-
+        private void BusynessDetails_Click(object sender, RoutedEventArgs e)
+        {
+            FormFrame.Content = new ExportBusynessPDF(this);
+            FrameAnimation.Begin();
+        }
     }
 }
