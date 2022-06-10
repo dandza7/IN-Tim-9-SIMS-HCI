@@ -24,7 +24,7 @@
         <DataGrid Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="3" SelectionMode="Single" SelectionUnit="FullRow"  ItemsSource="{Binding Notifications}" SelectedItem="{Binding SelectedNotification}" BorderThickness="0" HeadersVisibility="Column" x:Name="SecretaryDynamicEquipmentDataGrid" Style="{StaticResource SecretaryPatientsDataGrid}"  AutoGenerateColumns="False"   FontSize="20" VerticalGridLinesBrush="{x:Null}" Width="Auto" VerticalAlignment="Top" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}" Padding="30">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Date" Width="300" Binding="{Binding Date}"/>
-                <DataGridTextColumn Header="Title" Width="500" Binding="{Binding Title}" />
+                <DataGridTextColumn Header="Title" Width="540" Binding="{Binding Title}" />
 
                 <DataGridTemplateColumn Header="Read" Width="130">
                     <DataGridTemplateColumn.CellTemplate>
