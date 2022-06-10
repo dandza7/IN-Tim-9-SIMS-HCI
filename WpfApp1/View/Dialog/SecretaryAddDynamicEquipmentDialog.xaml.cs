@@ -33,8 +33,8 @@ namespace WpfApp1.View.Dialog
             var app = Application.Current as App;
             InventoryController _inventoryController = app.InventoryController;
 
-            idTB.Text = dynEqId.ToString();
-            nameTB.Text = _inventoryController.GetById(dynEqId).Name;
+            idTB.Content = dynEqId.ToString();
+            nameTB.Content = _inventoryController.GetById(dynEqId).Name;
         }
 
         private void Add_DynamicEquipment_Click(object sender, RoutedEventArgs e)
@@ -42,7 +42,7 @@ namespace WpfApp1.View.Dialog
             var app = Application.Current as App;
             DynamicEquipmentRequestController _dynamicReqController = app.DynamicEquipmentReqeustController;
 
-            DynamicEquipmentRequest der = new DynamicEquipmentRequest(nameTB.Text, int.Parse(amountTB.Text), DateTime.Now.AddSeconds(10));
+            DynamicEquipmentRequest der = new DynamicEquipmentRequest(nameTB.Content.ToString(), int.Parse(amountTB.Text), DateTime.Now.AddSeconds(10));
             _dynamicReqController.Create(der);
 
             Close();
