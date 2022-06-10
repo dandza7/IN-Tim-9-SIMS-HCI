@@ -3,8 +3,8 @@
 3;Adderall;neki info 3;True;False;
 4;Ritalin;neki info 4;True;False;
 5;Paracetamol;neki info 5;True;False;
-6;OdbijeniLek1;neki info;False;True;neki komentar
-7;OdbijeniLek2;neki info 5;False;True;neki komentar
+6;OdbijeniLek1;neki info;False;False;
+7;OdbijeniLek2;neki info 5;False;False;
 8;NeodobreniLek1;neki info 5;False;False;
 9;NeodobreniLek2;neki info 5;False;False;
 10;NeodobreniLek3;neki info 5;False;False;

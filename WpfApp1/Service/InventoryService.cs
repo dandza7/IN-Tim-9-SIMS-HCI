@@ -6,16 +6,17 @@ using System.Threading.Tasks;
 using WpfApp1.Model;
 using WpfApp1.Model.Preview;
 using WpfApp1.Repository;
+using WpfApp1.Repository.Interface;
 
 namespace WpfApp1.Service
 {
-    public class InventoryService : Service<Inventory>
+    public class InventoryService
     {
-        public readonly InventoryRepository _inventoryRepository;
-        public readonly InventoryMovingRepository _inventoryMovingRepository;
+        public readonly IInventoryRepository _inventoryRepository;
+        public readonly IInventoryMovingRepository _inventoryMovingRepository;
         public readonly RoomRepository _roomRepository;
 
-        public InventoryService(InventoryRepository inventoryRepository, RoomRepository roomRepositroy, InventoryMovingRepository inventoryMovingRepository)
+        public InventoryService(IInventoryRepository inventoryRepository, RoomRepository roomRepositroy, IInventoryMovingRepository inventoryMovingRepository)
         {
             _inventoryRepository = inventoryRepository;
             _roomRepository = roomRepositroy;
@@ -33,7 +34,7 @@ namespace WpfApp1.Service
             {
                 if(DateTime.Compare(invMov.MovingDate, DateTime.Today) <= 0)
                 {
-                    Inventory inv = _inventoryRepository.Get(invMov.InventoryId);
+                    Inventory inv = _inventoryRepository.GetById(invMov.InventoryId);
                     inv.RoomId = invMov.RoomId;
                     _inventoryRepository.Update(inv);
                     forDelete.Add(invMov.Id);

@@ -5,15 +5,17 @@ using System.Text;
 using System.Threading.Tasks;
 using WpfApp1.Model;
 using WpfApp1.Repository;
+using WpfApp1.Repository.Interface;
+using WpfApp1.Repository.Interfaces;
 
 namespace WpfApp1.Service
 {
-    public class RenovationService : Service<Renovation>
+    public class RenovationService
     {
-        public readonly RenovationRepository _renovationRepository;
-        public readonly AppointmentRepository _appointmentRepository;
+        public readonly IRenovationRepository _renovationRepository;
+        public readonly IAppointmentRepository _appointmentRepository;
 
-        public RenovationService(RenovationRepository renovationRepository, AppointmentRepository appointmentRepository)
+        public RenovationService(IRenovationRepository renovationRepository, IAppointmentRepository appointmentRepository)
         {
             _renovationRepository = renovationRepository;
             _appointmentRepository = appointmentRepository;

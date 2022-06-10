@@ -31,10 +31,10 @@
         </GroupBox>
         <GroupBox Header="Notification View" HorizontalAlignment="Left" Height="586" Margin="892,142,0,0" VerticalAlignment="Top" Width="530" BorderBrush="{DynamicResource MedicalGreenBrush}" Foreground="{DynamicResource MedicalGreenBrush}" FontSize="30" FontFamily="Trajan Pro 3 Bold" FontWeight="Bold">
             <Grid>
-                <Label Content="Date:" HorizontalAlignment="Left" Margin="61,94,0,0" VerticalAlignment="Top" FontSize="20" Foreground="{DynamicResource WhiteBrush}"/>
-                <Label x:Name="DateLabel" Content="dd/mm/yyyy" HorizontalAlignment="Left" Margin="140,94,0,0" VerticalAlignment="Top" FontSize="20" Foreground="{DynamicResource WhiteBrush}" Width="287"/>
-                <Label Content="Title:" HorizontalAlignment="Left" Margin="59,143,0,0" VerticalAlignment="Top" FontSize="20" Foreground="{DynamicResource WhiteBrush}"/>
-                <Label Content="Content:" HorizontalAlignment="Left" Margin="59,226,0,0" VerticalAlignment="Top" FontSize="20" Foreground="{DynamicResource WhiteBrush}"/>
+                <Label Content="Date:" HorizontalAlignment="Left" Margin="61,94,0,0" VerticalAlignment="Top" FontSize="20" Foreground="{DynamicResource MedicalGreenBrush}"/>
+                <Label x:Name="DateLabel" Content="dd/mm/yyyy" HorizontalAlignment="Left" Margin="140,94,0,0" VerticalAlignment="Top" FontSize="20" Foreground="{DynamicResource MedicalGreenBrush}" Width="287"/>
+                <Label Content="Title:" HorizontalAlignment="Left" Margin="59,143,0,0" VerticalAlignment="Top" FontSize="20" Foreground="{DynamicResource MedicalGreenBrush}"/>
+                <Label Content="Content:" HorizontalAlignment="Left" Margin="59,226,0,0" VerticalAlignment="Top" FontSize="20" Foreground="{DynamicResource MedicalGreenBrush}"/>
                 <TextBox x:Name="TitleTB" HorizontalAlignment="Left" Height="29" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="388" Margin="64,177,0,0" FontSize="20" IsEnabled="False"/>
                 <TextBox x:Name="ContentTB" HorizontalAlignment="Left" Height="176" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="388" Margin="64,265,0,0" FontSize="20" IsEnabled="False"/>
 
