@@ -69,27 +69,29 @@
             <ColumnDefinition/>
             <ColumnDefinition/>
             <ColumnDefinition/>
+            <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="70"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <Button x:Name="RenovationButton" Style="{StaticResource ClassicButton}" Margin="40 5" MouseEnter="RenovationButton_MouseEnter">Renovate Room</Button>
+        <Button x:Name="RenovationButton" Style="{StaticResource ClassicButton}" Margin="10 5" MouseEnter="RenovationButton_MouseEnter">Renovate Room</Button>
         <Border x:Name="RenovationPicker" MouseLeave="BARenovationButton_MouseLeave">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
-                <Button x:Name="BasicRenovationButton" Grid.Column="0" Style="{StaticResource InvertedButton}" Margin="40 5 0 5" Click="BasicRenovationButton_Click" Visibility="Collapsed">Basic</Button>
-                <Button x:Name="AdvancedRenovationButton" Grid.Column="1" Style="{StaticResource InvertedButton}" Margin="0 5 40 5" Click="AdvancedRenovationButton_Click" Visibility="Collapsed">Advanced</Button>
+                <Button x:Name="BasicRenovationButton" Grid.Column="0" Style="{StaticResource InvertedButton}" Margin="10 5 0 5" Click="BasicRenovationButton_Click" Visibility="Collapsed">Basic</Button>
+                <Button x:Name="AdvancedRenovationButton" Grid.Column="1" Style="{StaticResource InvertedButton}" Margin="0 5 10 5" Click="AdvancedRenovationButton_Click" Visibility="Collapsed">Advanced</Button>
             </Grid>
         </Border>
-        <Button x:Name="AddRoomButton" Grid.Column="1" Style="{StaticResource ClassicButton}" Margin="40 5" Click="AddRoomButton_Click">Add New Room</Button>
-        <Button x:Name="EditRoomButton" Grid.Column="2" Style="{StaticResource ClassicButton}" Margin="40 5" Click="EditRoomButton_Click">Edit Selected Room</Button>
-        <Button x:Name="DeleteConfirmButton" Grid.Column="3" Style="{StaticResource InvertedButton}" Margin="40 5" Click="DeleteConfirmButton_Click" MouseLeave="DeleteConfirmButton_MouseLeave"> CONFIRM DELETING</Button>
-        <Button x:Name="DeleteRoomButton" Grid.Column="3" Style="{StaticResource ClassicButton}" Margin="40 5" Click="DeleteRoomButton_Click">Delete Selected Room</Button>
-        <DataGrid x:Name="RoomsDG" AutoGenerateColumns="False" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="4" Style="{StaticResource ExecutiveDataGrid}" ItemsSource="{Binding Rooms}" Margin="20 0 20 0">
+        <Button x:Name="AddRoomButton" Grid.Column="1" Style="{StaticResource ClassicButton}" Margin="10 5" Click="AddRoomButton_Click">Add New Room</Button>
+        <Button x:Name="EditRoomButton" Grid.Column="2" Style="{StaticResource ClassicButton}" Margin="10 5" Click="EditRoomButton_Click">Edit Selected Room</Button>
+        <Button x:Name="DeleteConfirmButton" Grid.Column="3" Style="{StaticResource InvertedButton}" Margin="10 5" Click="DeleteConfirmButton_Click" MouseLeave="DeleteConfirmButton_MouseLeave"> CONFIRM DELETING</Button>
+        <Button x:Name="DeleteRoomButton" Grid.Column="3" Style="{StaticResource ClassicButton}" Margin="10 5" Click="DeleteRoomButton_Click">Delete Selected Room</Button>
+        <Button x:Name="BusynessDetails" Grid.Column="4" Style="{StaticResource ClassicButton}" Margin="10 5" Click="BusynessDetails_Click">Busyness PDF</Button>
+        <DataGrid x:Name="RoomsDG" AutoGenerateColumns="False" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="5" Style="{StaticResource ExecutiveDataGrid}" ItemsSource="{Binding Rooms}" Margin="20 0 20 0">
             <DataGrid.Columns>
                 <DataGridTextColumn Header=" ID" Width="2*"  Binding="{Binding Id}" HeaderStyle="{StaticResource ExecutiveDGHeader}" CellStyle="{StaticResource ExecutiveDGCell}"/>
                 <DataGridTextColumn Header=" NAMETAG" Width="9*" Binding="{Binding Nametag}"  HeaderStyle="{StaticResource ExecutiveDGHeader}" CellStyle="{StaticResource ExecutiveDGCell}"/>
@@ -118,7 +120,7 @@
                 <Button x:Name="WrongSelectionOK" Grid.Row="2" Style="{StaticResource ClassicButton}" Margin="100 5" Click="WrongSelectionOK_Click" FontSize="24">OK</Button>
             </Grid>
         </Border>
-        <Frame Name="FormFrame" Grid.ColumnSpan="4" Grid.RowSpan="2">
+        <Frame Name="FormFrame" Grid.ColumnSpan="5" Grid.RowSpan="2">
             <Frame.Effect>
                 <DropShadowEffect BlurRadius="5"/>
             </Frame.Effect>

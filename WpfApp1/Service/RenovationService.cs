@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using WpfApp1.Model;
+using WpfApp1.Model.Preview;
 using WpfApp1.Repository;
 using WpfApp1.Repository.Interface;
 using WpfApp1.Repository.Interfaces;
@@ -101,5 +102,7 @@ namespace WpfApp1.Service
             }
             return retVal;
         }
+
+        
     }
 }

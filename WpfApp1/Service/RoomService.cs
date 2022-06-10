@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using WpfApp1.Model;
+using WpfApp1.Model.Preview;
 using WpfApp1.Repository;
 using WpfApp1.Repository.Interface;
 using WpfApp1.Repository.Interfaces;
@@ -191,6 +192,25 @@ namespace WpfApp1.Service
                     _renovationRepository.Delete(renovation.Id);
             }
         }
+        //KOD ZA HCI, SIMONA, NE GLEDAJTE OVO :)
 
+        public List<BusynessPreview> GetBusynessPreview()
+        {
+            List<Appointment> apps = _appointmentRepository.GetAll().ToList();
+            List<Renovation> rens = _renovationRepository.GetAll().ToList();
+            List<BusynessPreview> retVal = new List<BusynessPreview>();
+            foreach (Appointment appointment in apps)
+            {
+                retVal.Add(new BusynessPreview(_roomRepository.GetById(appointment.RoomId).Nametag, "Appointment", appointment.Beginning, appointment.Ending));
+            }
+            foreach (Renovation renovation in rens)
+            {
+                foreach(int id in renovation.RoomsIds)
+                {
+                    retVal.Add(new BusynessPreview(_roomRepository.GetById(id).Nametag, "Renovation", renovation.Beginning, renovation.Ending));
+                }
+            }
+            return retVal;
+        }
     }
 }
