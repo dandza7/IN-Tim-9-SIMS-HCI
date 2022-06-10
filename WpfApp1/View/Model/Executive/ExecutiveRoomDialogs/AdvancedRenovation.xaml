@@ -132,7 +132,7 @@
                         <ComboBox x:Name="Ending" Grid.Row="5" Grid.Column="2" Style="{StaticResource FormInputComboBox}" Height="30" Width="250" ItemsSource="{Binding Path=Endings, UpdateSourceTrigger=PropertyChanged}" IsEnabled="False"></ComboBox>
                         <Label Grid.Row="6" Grid.Column="1" Content="Description:" Style="{StaticResource FormLabel}" HorizontalAlignment="Left"></Label>
                         <TextBox x:Name="Description" Grid.Row="7" Grid.Column="1" Grid.ColumnSpan="1" Grid.RowSpan="1" Style="{StaticResource DescriptionBox}" Margin="0 0 20 5"></TextBox>
-                        <TextBlock Grid.Row="8" Grid.Column="1" Style="{StaticResource SmallText}" Text="{Binding Path=Feedback, UpdateSourceTrigger=PropertyChanged}" TextWrapping="Wrap"></TextBlock>
+                        <TextBlock Grid.Row="8" Grid.Column="1" Style="{StaticResource SmallText}" Foreground="Red" Text="{Binding Path=Feedback, UpdateSourceTrigger=PropertyChanged}" TextWrapping="Wrap"></TextBlock>
                         <Border Width="2" Grid.RowSpan="11" Grid.Column="0" BorderBrush="{StaticResource BasicRedBrush}" BorderThickness="1" HorizontalAlignment="Left"></Border>
                         <Button Name="Confirm" Grid.Column="1" Grid.Row="9" Style="{StaticResource ClassicButton}" Margin="90 0 110 0" Click="Confirm_Click">Confirm</Button>
                     </Grid>

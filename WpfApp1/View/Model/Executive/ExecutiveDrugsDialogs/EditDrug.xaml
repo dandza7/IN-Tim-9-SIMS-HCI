@@ -44,7 +44,7 @@
                     <Label Grid.Row="9" Grid.Column="1" Content="Comment on rejection:" Style="{StaticResource FormLabel}"></Label>
                     <TextBox x:Name="DrugComment" Grid.Row="10" Grid.RowSpan="2" Grid.Column="1" Style="{StaticResource FormInputBox}" Height="70" IsEnabled="False" TextWrapping="Wrap"></TextBox>
                     <Button x:Name="CloseButton" Grid.Column="3" Grid.Row="1" Style="{StaticResource ClassicButton}" Click="CloseButton_Click">X</Button>
-                    <TextBlock Grid.Row="12" Grid.Column="1" Style="{StaticResource SmallText}" Text="{Binding Path=Feedback, UpdateSourceTrigger=PropertyChanged}"></TextBlock>
+                    <TextBlock Grid.Row="12" Grid.Column="1" Style="{StaticResource SmallText}" Foreground="Red" Text="{Binding Path=Feedback, UpdateSourceTrigger=PropertyChanged}"></TextBlock>
                     <Button x:Name="EditDrugBTN" Grid.Column="1" Grid.Row="13" Style="{StaticResource ClassicButton}" Click="EditDrug_Click" Margin="70 5">Edit Drug</Button>
                 </Grid>
             </Border>

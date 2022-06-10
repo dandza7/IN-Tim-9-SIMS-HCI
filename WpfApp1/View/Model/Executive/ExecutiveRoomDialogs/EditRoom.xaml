@@ -36,7 +36,7 @@
                     <TextBox x:Name="RoomNametag" Grid.Row="4" Grid.Column="1" Style="{StaticResource FormInputBox}"></TextBox>
                     <Label Grid.Row="5" Grid.Column="1" Content="Room type:" Style="{StaticResource FormLabel}"></Label>
                     <ComboBox Name="RoomType" Grid.Row="6" Grid.Column="1" Style="{StaticResource FormInputComboBox}" Height="30" Width="300" ItemsSource="{Binding Path=RoomTypes}"></ComboBox>
-                    <TextBlock Grid.Row="7" Grid.Column="1" Style="{StaticResource SmallText}" Text="{Binding Path=Feedback, UpdateSourceTrigger=PropertyChanged}"></TextBlock>
+                    <TextBlock Grid.Row="7" Grid.Column="1" Style="{StaticResource SmallText}" Foreground="Red" Text="{Binding Path=Feedback, UpdateSourceTrigger=PropertyChanged}"></TextBlock>
                     <Button x:Name="ConfirmButton" Grid.Column="1" Grid.Row="8" Style="{StaticResource ClassicButton}" Margin="50 4" Click="ConfirmButton_Click">Edit Room</Button>
                     <Button x:Name="CloseButton" Grid.Column="3" Grid.Row="1" Style="{StaticResource ClassicButton}" Click="CloseButton_Click">X</Button>
                 </Grid>
