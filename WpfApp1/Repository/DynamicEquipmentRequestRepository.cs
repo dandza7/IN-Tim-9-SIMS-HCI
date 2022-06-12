@@ -6,10 +6,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using WpfApp1.Model;
+using WpfApp1.Repository.Interface;
 
 namespace WpfApp1.Repository
 {
-    public class DynamicEquipmentRequestRepository
+    public class DynamicEquipmentRequestRepository : IDynamicEquipmentRequestRepository
     {
         private string _path;
         private string _delimiter;

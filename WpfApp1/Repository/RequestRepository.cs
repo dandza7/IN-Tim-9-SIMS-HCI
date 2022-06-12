@@ -6,11 +6,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using WpfApp1.Model;
+using WpfApp1.Repository.Interface;
 using static WpfApp1.Model.Request;
 
 namespace WpfApp1.Repository
 {
-    public class RequestRepository
+    public class RequestRepository : IRequestRepository
     {
 
         private string _path;
