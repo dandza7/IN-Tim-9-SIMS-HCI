@@ -193,6 +193,7 @@
     <None Include="Resources\Data\meeting.csv" />
     <Compile Include="Service\MeetingService.cs" />
     <Compile Include="Service\NoteService.cs" />
+    <Compile Include="Service\TimeMenagerService.cs" />
     <Compile Include="ViewModel\AppointmentViewModel.cs" />
     <Compile Include="ViewModel\Commands\Executive\CloseFrame.cs" />
     <Compile Include="ViewModel\Commands\Executive\ConfirmAdding.cs" />

@@ -22,15 +22,6 @@ namespace WpfApp1.Controller
             return _patientService.GetAll();
         }
 
-        public IEnumerable<Therapy> GetPatientsTherapies(int patientId)
-        {
-            return _patientService.GetPatientsTherapies(patientId);
-        }
-
-        public IEnumerable<Drug> GetPatientsDrugs(int patientId)
-        {
-            return _patientService.GetPatientsDrugs(patientId);
-        }
         public Patient GetByUsername(string username)
         {
             return _patientService.GetByUsername(username);
@@ -50,10 +41,6 @@ namespace WpfApp1.Controller
         public Patient GetById(int patientId)
         {
             return _patientService.GetById(patientId);
-        }
-        public void DeleteOldPatientsTherapyNotifications(int patientId)
-        {
-            _patientService.DeleteOldPatientsTherapyNotifications(patientId);
         }
     }
 }

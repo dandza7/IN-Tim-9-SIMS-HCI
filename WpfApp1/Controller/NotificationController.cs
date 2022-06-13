@@ -32,6 +32,11 @@ namespace WpfApp1.Controller
             return _notificationService.GetUsersNotDeletedNotifications(userId);
         }
 
+        public void DeleteOldPatientsTherapyNotifications(int patientId)
+        {
+            _notificationService.DeleteOldPatientsTherapyNotifications(patientId);
+        }
+
         public IEnumerable<Notification> GetUsersNotifications(int userId)
         {
             return _notificationService.GetUsersNotifications(userId);

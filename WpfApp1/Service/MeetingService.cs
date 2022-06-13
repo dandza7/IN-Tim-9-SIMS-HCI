@@ -60,18 +60,20 @@ namespace WpfApp1.Service
             Room room )
         {
             TimeMenager interval = new TimeMenager(startOfInterval, endOfInterval);
+            TimeMenagerService timeMenagerService = new TimeMenagerService(interval);
+
             List<MeetingView> meetings = new List<MeetingView>();
             var attendees = new List<string>();
-            while (interval.GetIncrementedBeginning() <= interval.Ending)
+            while (timeMenagerService.GetIncrementedBeginning() <= interval.Ending)
             {
 
-                bool isRoomAvailable = _renovationRepo.IsRoomAvailable(room.Id, interval.Beginning, interval.GetIncrementedBeginning());
+                bool isRoomAvailable = _renovationRepo.IsRoomAvailable(room.Id, interval.Beginning, timeMenagerService.GetIncrementedBeginning());
                 if (isRoomAvailable)
                 {
-                    Meeting meeting = new Meeting(interval.Beginning, interval.GetIncrementedBeginning(), room.Id, attendees);
+                    Meeting meeting = new Meeting(interval.Beginning, timeMenagerService.GetIncrementedBeginning(), room.Id, attendees);
                     meetings.Add(MeetingConverter.ConvertMeetingToMeetingView(meeting,room));
                 }
-                interval.IncrementBeginning();
+                timeMenagerService.IncrementBeginning();
             }
             return meetings;
         }
