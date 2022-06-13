@@ -31,6 +31,8 @@ namespace WpfApp1.View.Model.Patient
         private UserController _userController;
         private DrugController _drugController;
         private DoctorsReportController _doctorsReportController;
+        private TherapyController _therapyController;
+
         public ObservableCollection<Notification> Notifications { get; set; }
         public ObservableCollection<TherapyView> Therapies { get; set; }
         public ObservableCollection<AppointmentView> Reports { get; set; }
@@ -49,16 +51,17 @@ namespace WpfApp1.View.Model.Patient
             _userController = app.UserController;
             _drugController = app.DrugController;
             _appointmentController = app.AppointmentController;
+            _therapyController = app.TherapyController;
 
             int patientId = (int)app.Properties["userId"];
 
             Patient = PatientConverter.ConvertPatientToPatientView(_userController.GetById(patientId), _patientController.GetById(patientId));
-            _patientController.DeleteOldPatientsTherapyNotifications(patientId);
+            _notificationController.DeleteOldPatientsTherapyNotifications(patientId);
             _notificationController.GetScheduledTherapyNotifications(patientId);
             _notificationController.GetScheduledAlarmsForPatient(patientId);
             Notifications = new ObservableCollection<Notification>(_notificationController.GetUsersNotDeletedNotifications(patientId));
 
-            List<Therapy> therapies = _patientController.GetPatientsTherapies(patientId).ToList();
+            List<Therapy> therapies = _therapyController.GetPatientsTherapies(patientId).ToList();
             ObservableCollection<TherapyView> therapyViews = new ObservableCollection<TherapyView>();
             foreach(Therapy therapy in therapies)
             {

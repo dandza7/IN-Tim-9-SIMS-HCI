@@ -91,7 +91,7 @@ namespace WpfApp1
             var roomService = new RoomService(roomRepository, doctorRepository, inventoryMovingRepository, inventoryRepository, renovationRepository, appointmentRepository);
             RoomController = new RoomController(roomService);
 
-            var patientService = new PatientService(userRepository, patientRepository, therapyRepository, medicalRecordRepository, drugRepository, notificationRepository, appointmentRepository);
+            var patientService = new PatientService(userRepository, patientRepository, medicalRecordRepository, appointmentRepository);
             PatientController = new PatientController(patientService);
 
             var doctorService = new DoctorService(userRepository, doctorRepository);
@@ -107,7 +107,7 @@ namespace WpfApp1
             var renovationService = new RenovationService(renovationRepository, appointmentRepository);
             RenovationController = new RenovationController(renovationService);
 
-            var therapyService = new TherapyService(therapyRepository);
+            var therapyService = new TherapyService(therapyRepository, medicalRecordRepository, drugRepository);
             TherapyController = new TherapyController(therapyService);
 
             var inventoryService = new InventoryService(inventoryRepository, roomRepository, inventoryMovingRepository);
