@@ -32,7 +32,7 @@
 
         <WrapPanel Grid.Column="0" Grid.ColumnSpan="4" Margin="0, 15, 0, 15" HorizontalAlignment="Center">
             <Label Content="Note Update" Foreground="White" FontSize="24" FontWeight="Bold"/>
-            <Button Style="{StaticResource HelpButton}"/>
+            <Button Style="{StaticResource HelpButton}" Command="{Binding Help}"/>
         </WrapPanel>
         <TextBlock Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="4" Text="Note content:" Style="{StaticResource ProfileTextBlock}" FontWeight="Normal" Margin="30,0,0,0"/>
         <TextBox Text="{Binding Content, Mode=TwoWay}"  Height="30"  Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" FontWeight="Normal" Margin="30,20,0,20" FontSize="17" MaxLength="30"/>

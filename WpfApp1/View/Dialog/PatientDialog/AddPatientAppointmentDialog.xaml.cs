@@ -55,9 +55,16 @@ namespace WpfApp1.View.Dialog.PatientDialog
             _appointmentController = app.AppointmentController;
             _doctorController = app.DoctorController;
 
-            if (PriorityComboBox.SelectedValue == null) return;
-            if (DoctorComboBox.SelectedValue == null) return;
-
+            if (PriorityComboBox.SelectedValue == null)
+            {
+                PatientErrorMessageBox.Show("ERROR: Appointment priority not specified!");
+                return;
+            }
+            if (DoctorComboBox.SelectedValue == null)
+            {
+                PatientErrorMessageBox.Show("ERROR: Appointment doctor not specified!");
+                return;
+            }
             if (BeginningDTP.Text == null)
             {
                 PatientErrorMessageBox.Show("ERROR: Beginning of searching interval not specified!");
