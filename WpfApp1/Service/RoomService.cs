@@ -14,25 +14,25 @@ namespace WpfApp1.Service
     public class RoomService
     {
         public readonly IRoomRepository _roomRepository;
-        public readonly IDoctorRepository _doctorRepository;
-        public readonly IInventoryMovingRepository _inventoryMovingRepository;
-        public readonly IInventoryRepository _inventoryRepository;
-        public readonly IRenovationRepository _renovationRepository;
-        public readonly IAppointmentRepository _appointmentRepository;
+        public readonly DoctorService _doctorService;
+        public readonly InventoryMovingService _inventoryMovingService;
+        public readonly InventoryService _inventoryService;
+        public readonly RenovationService _renovationService;
+        public readonly AppointmentService _appointmentService;
 
-        public RoomService(IRoomRepository roomRepository, IDoctorRepository doctorRepository, IInventoryMovingRepository inventoryMovingRepository, 
-                            IInventoryRepository inventoryRepository, IRenovationRepository renovationRepository, IAppointmentRepository appointmentRepository)
+        public RoomService(IRoomRepository roomRepository, DoctorService doctorService, InventoryMovingService inventoryMovingService,
+                            InventoryService inventoryService, RenovationService renovationService, AppointmentService appointmentService)
         {
             _roomRepository = roomRepository;
-            _doctorRepository = doctorRepository;
-            _inventoryMovingRepository = inventoryMovingRepository;
-            _inventoryRepository = inventoryRepository;
-            _renovationRepository = renovationRepository;
-            _appointmentRepository = appointmentRepository;
+            _doctorService = doctorService;
+            _inventoryMovingService = inventoryMovingService;
+            _inventoryService = inventoryService;
+            _renovationService = renovationService;
+            _appointmentService = appointmentService;
         }
         public IEnumerable<Room> GetAll()
         {
-            ExecuteFinishedAdvancedRenovations();
+            _renovationService.ExecuteFinishedAdvancedRenovations();
             List<Room> allRooms = _roomRepository.GetAll().ToList();
             List<Room> activeRooms = new List<Room>();
             foreach (Room room in allRooms)
@@ -47,7 +47,7 @@ namespace WpfApp1.Service
 
         public Room GetById(int id)
         {
-            ExecuteFinishedAdvancedRenovations();
+            _renovationService.ExecuteFinishedAdvancedRenovations();
             return _roomRepository.GetById(id);
         }
 
@@ -61,16 +61,16 @@ namespace WpfApp1.Service
             Room oldRoom = this._roomRepository.GetById(room.Id);
             if (oldRoom.Type.Equals("Office") && !room.Type.Equals(oldRoom.Type))
             {
-                MoveDoctorsToMainOffice(room.Id);
+                _doctorService.MoveDoctorsToMainOffice(room.Id);
             }
             if ((oldRoom.Type.Equals("Storage") || oldRoom.Type.Equals("Operating")) && !(room.Type.Equals("Storage") || room.Type.Equals("Operating")))
             {
-                CancelInvenoryMovings(room.Id);
-                MoveInventoryToMainStorage(room.Id);
+                _inventoryMovingService.CancelInvenoryMovings(room.Id);
+                _inventoryService.MoveInventoryToMainStorage(room.Id);
             }
             if ((oldRoom.Type.Equals("Office") || oldRoom.Type.Equals("Operating")) && !(room.Type.Equals("Office") || room.Type.Equals("Operating")))
             {
-                CancelAppointments(room.Id);
+                _appointmentService.CancelAppointments(room.Id);
             }
             return _roomRepository.Update(room);
         }
@@ -78,11 +78,11 @@ namespace WpfApp1.Service
         public bool Delete(int id)
         {
 
-            CancelAppointments(id);
-            CancelRenovations(id);
-            CancelInvenoryMovings(id);
-            MoveInventoryToMainStorage(id);
-            MoveDoctorsToMainOffice(id);
+            _appointmentService.CancelAppointments(id);
+            _renovationService.CancelRenovations(id);
+            _inventoryMovingService.CancelInvenoryMovings(id);
+            _inventoryService.MoveInventoryToMainStorage(id);
+            _doctorService.MoveDoctorsToMainOffice(id);
 
 
             return _roomRepository.Delete(id);
@@ -90,7 +90,7 @@ namespace WpfApp1.Service
 
         public Room GetByNametag(string nametag)
         {
-            ExecuteFinishedAdvancedRenovations();
+            _renovationService.ExecuteFinishedAdvancedRenovations();
             List<Room> rooms = _roomRepository.GetAll().ToList();
             foreach (Room room in rooms)
             {
@@ -103,7 +103,7 @@ namespace WpfApp1.Service
         }
         public IEnumerable<string> GetEditableNametags()
         {
-            ExecuteFinishedAdvancedRenovations();
+            _renovationService.ExecuteFinishedAdvancedRenovations();
             List<Room> rooms = _roomRepository.GetAll().ToList();
             List<string> nametags = new List<string>();
             foreach(Room room in rooms)
@@ -115,102 +115,6 @@ namespace WpfApp1.Service
             }
             return nametags;
         }
-        public void ExecuteFinishedAdvancedRenovations()
-        {
-            List<Renovation> renovations = _renovationRepository.GetAll().ToList();
-            foreach(Renovation renovation in renovations)
-            {
-                if(renovation.Type == "A" && DateTime.Compare(DateTime.Today, DateTime.Parse(renovation.Ending.ToShortDateString())) >= 0)
-                {
-                    foreach(int id in renovation.RoomsIds)
-                    {
-                        Room r = _roomRepository.GetById(id);
-                        if (!r.IsActive)
-                        {
-                            r.IsActive = true;
-                            _roomRepository.Update(r);
-                        } else
-                        {
-                            _roomRepository.Delete(r.Id);
-                        }
-                    }
-                    _renovationRepository.Delete(renovation.Id);
-                }
-            }
-        }
-        private void MoveDoctorsToMainOffice(int roomId)
-        {
-            List<Doctor> doctors = this._doctorRepository.GetAll().ToList();
-            foreach (Doctor doctor in doctors)
-            {
-                if (doctor.RoomId == roomId)
-                {
-                    doctor.RoomId = 2;
-                    _doctorRepository.Update(doctor);
-                }
-                    
-            }
-        }
-        private void MoveInventoryToMainStorage(int roomId)
-        {
-            List<Inventory> inventories = this._inventoryRepository.GetAll().ToList();
-            foreach (Inventory inventory in inventories)
-            {
-                if (inventory.RoomId == roomId)
-                {
-                    inventory.RoomId = 1;
-                    _inventoryRepository.Update(inventory);
-                }
-            }
-            _inventoryRepository.UpdateAll(inventories);
-        }
-        private void CancelInvenoryMovings(int roomId)
-        {
-            List<InventoryMoving> inventoryMovings = this._inventoryMovingRepository.GetAll().ToList();
-            foreach (InventoryMoving inventoryMoving in inventoryMovings)
-            {
-                if (inventoryMoving.RoomId == roomId)
-                    _inventoryMovingRepository.Delete(inventoryMoving.Id);
-            }
-        }
-        private void CancelAppointments(int roomId)
-        {
-            List<Appointment> appointments = this._appointmentRepository.GetAll().ToList();
-            foreach (Appointment appointment in appointments)
-            {
-                if (appointment.RoomId == roomId)
-                    _appointmentRepository.Delete(appointment.Id);
-            }
-
-        }
-        private void CancelRenovations(int roomId)
-        {
-            List<Renovation> renovations = this._renovationRepository.GetAll().ToList();
-            foreach (Renovation renovation in renovations)
-            {
-                if (renovation.RoomsIds.Contains(roomId))
-                    _renovationRepository.Delete(renovation.Id);
-            }
-        }
-        //KOD ZA HCI, SIMONA, NE GLEDAJTE OVO :)
-
-        public List<BusynessPreview> GetBusynessPreview()
-        {
-            List<Appointment> apps = _appointmentRepository.GetAll().ToList();
-            List<Renovation> rens = _renovationRepository.GetAll().ToList();
-            List<BusynessPreview> retVal = new List<BusynessPreview>();
-            foreach (Appointment appointment in apps)
-            {
-                retVal.Add(new BusynessPreview(_roomRepository.GetById(appointment.RoomId).Nametag, "Appointment", appointment.Beginning, appointment.Ending));
-            }
-            foreach (Renovation renovation in rens)
-            {
-                foreach(int id in renovation.RoomsIds)
-                {
-                    retVal.Add(new BusynessPreview(_roomRepository.GetById(id).Nametag, "Renovation", renovation.Beginning, renovation.Ending));
-                }
-            }
-            return retVal;
-        }
+        
     }
 }

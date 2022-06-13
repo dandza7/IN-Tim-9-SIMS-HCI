@@ -486,5 +486,15 @@ namespace WpfApp1.Service
 
             return appointmentViews;
         }
+        public void CancelAppointments(int roomId)
+        {
+            List<Appointment> appointments = this._appointmentRepo.GetAll().ToList();
+            foreach (Appointment appointment in appointments)
+            {
+                if (appointment.RoomId == roomId)
+                    _appointmentRepo.Delete(appointment.Id);
+            }
+
+        }
     }
 }

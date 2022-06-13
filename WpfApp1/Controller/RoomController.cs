@@ -49,9 +49,6 @@ namespace WpfApp1.Controller
         {
             return _roomService.GetEditableNametags().ToList();
         }
-        public List<BusynessPreview> GetBusynessPreview()
-        {
-            return _roomService.GetBusynessPreview();
-        }
+
     }
 }

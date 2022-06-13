@@ -61,5 +61,18 @@ namespace WpfApp1.Service
         {
             return _doctorRepo.Delete(id);
         }
+        public void MoveDoctorsToMainOffice(int roomId)
+        {
+            List<Doctor> doctors = this._doctorRepo.GetAll().ToList();
+            foreach (Doctor doctor in doctors)
+            {
+                if (doctor.RoomId == roomId)
+                {
+                    doctor.RoomId = 2;
+                    _doctorRepo.Update(doctor);
+                }
+
+            }
+        }
     }
 }
