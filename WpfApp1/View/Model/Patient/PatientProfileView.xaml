@@ -48,7 +48,12 @@
             </TabItem>
             <TabItem Header="Therapies" Style="{StaticResource PatientTabItem}">
                 <Grid Background="{StaticResource DarkBlueBrush}">
-                    <DataGrid x:Name="PatientTherapiesDataGrid" MaxWidth="705" Style="{StaticResource PatientProfileDataGrid}" ItemsSource="{Binding Therapies, UpdateSourceTrigger=PropertyChanged}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="70*"/>
+                        <ColumnDefinition Width="29*"/>
+                        <ColumnDefinition Width="166*"/>
+                    </Grid.ColumnDefinitions>
+                    <DataGrid x:Name="PatientTherapiesDataGrid" MaxWidth="705" Style="{StaticResource PatientProfileDataGrid}" ItemsSource="{Binding Therapies, UpdateSourceTrigger=PropertyChanged}" Grid.ColumnSpan="3" Margin="50,95,50,0">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Drug Name" Binding="{Binding DrugName}" CanUserSort="False" CellStyle="{StaticResource PatientDataGridCell}"/>
                             <DataGridTextColumn Header="Administration Frequency" Binding="{Binding Frequency}" CanUserSort="False" CellStyle="{StaticResource PatientDataGridCell}"/>
@@ -72,7 +77,7 @@
                         <DatePicker x:Name="ToDP" Margin="0,0,20,0"/>
                         <Button Content="Search" Style="{StaticResource PatientSearchButton}" Click="SearchReports_Click"/>
                     </StackPanel>
-                    <DataGrid x:Name="PatientReportsDataGrid" MaxHeight="500" MaxWidth="705" Style="{StaticResource PatientDataGrid}" Margin="0,95,0,0" ItemsSource="{Binding Reports, UpdateSourceTrigger=PropertyChanged}" Grid.ColumnSpan="3">
+                    <DataGrid x:Name="PatientReportsDataGrid" MaxHeight="500" MaxWidth="705" Style="{StaticResource PatientDataGrid}" Margin="50,95,50,0" ItemsSource="{Binding Reports, UpdateSourceTrigger=PropertyChanged}" Grid.ColumnSpan="3">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Room" Binding="{Binding NameTag}" CanUserSort="False" ElementStyle="{StaticResource ColumnElementStyle}" CellStyle="{StaticResource PatientDataGridCell}"/>
                             <DataGridTextColumn Header="Doctor" Binding="{Binding Username}" CanUserSort="False" ElementStyle="{StaticResource ColumnElementStyle}" CellStyle="{StaticResource PatientDataGridCell}"/>
@@ -91,7 +96,7 @@
             </TabItem>
             <TabItem Header="Notifications" Style="{StaticResource PatientTabItem}">
                 <Grid Background="{StaticResource DarkBlueBrush}">
-                    <DataGrid x:Name="PatientNotificationsDataGrid" MaxHeight="400" MaxWidth="720" Style="{StaticResource PatientDataGrid}" ItemsSource="{Binding Notifications, UpdateSourceTrigger=PropertyChanged}" HorizontalScrollBarVisibility="Disabled">
+                    <DataGrid x:Name="PatientNotificationsDataGrid" Margin="35,95,35,0" MaxHeight="400" MaxWidth="720" Style="{StaticResource PatientDataGrid}" ItemsSource="{Binding Notifications, UpdateSourceTrigger=PropertyChanged}" HorizontalScrollBarVisibility="Disabled">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Date and Time" Binding="{Binding Date}" CanUserSort="False" ElementStyle="{StaticResource ProfileColumnElementStyle}" CellStyle="{StaticResource PatientDataGridCell}"/>
                             <DataGridTextColumn Header="Content of Notification" Binding="{Binding Content}" CanUserSort="False" ElementStyle="{StaticResource ProfileColumnElementStyle}" CellStyle="{StaticResource PatientDataGridCell}"/>
