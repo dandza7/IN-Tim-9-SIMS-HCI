@@ -14,7 +14,7 @@
     </Page.DataContext>
     
     <Grid>
-        <Rectangle Width="850" Height="580" Stroke="{StaticResource LightBlueBrush}" StrokeThickness="3"></Rectangle>
+        <Rectangle Width="850" Height="580" Stroke="{StaticResource LightBlueBrush}" StrokeThickness="3" Fill="{StaticResource DarkBlueBrush}"></Rectangle>
         <Button Content="Add New Note" Style="{StaticResource AddAppointmentButton}" Command="{Binding OpenDialog}"/>
         <DataGrid MaxWidth="785" Style="{StaticResource PatientDataGrid}" ItemsSource="{Binding Notes}" SelectedItem="{Binding Note}">
             <DataGrid.Columns>
