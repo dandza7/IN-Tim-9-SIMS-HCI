@@ -80,5 +80,19 @@ namespace WpfApp1.Service
         {
             return _inventoryRepository.GetAllDynamic();
         }
+
+        public void MoveInventoryToMainStorage(int roomId)
+        {
+            List<Inventory> inventories = this._inventoryRepository.GetAll().ToList();
+            foreach (Inventory inventory in inventories)
+            {
+                if (inventory.RoomId == roomId)
+                {
+                    inventory.RoomId = 1;
+                    _inventoryRepository.Update(inventory);
+                }
+            }
+            _inventoryRepository.UpdateAll(inventories);
+        }
     }
 }
