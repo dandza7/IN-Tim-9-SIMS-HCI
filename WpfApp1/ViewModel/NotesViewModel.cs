@@ -38,6 +38,7 @@ namespace WpfApp1.ViewModel
         public OpenUpdateNoteDialog UpdateDialog { get; set; }
         public UpdateNote Update { get; set; }
         public DiscardNote Discard { get; set; }
+        public NoteHelp Help { get; set; }
 
         public NotesViewModel()
         {
@@ -48,6 +49,7 @@ namespace WpfApp1.ViewModel
             UpdateDialog = new OpenUpdateNoteDialog(this);
             Update = new UpdateNote(this);
             Discard = new DiscardNote(this);
+            Help = new NoteHelp(this);  
         }
 
         public ObservableCollection<Note> Notes
@@ -206,5 +208,14 @@ namespace WpfApp1.ViewModel
             patientFrame.Content = new PatientNotesView();
         }
 
+        public void NoteHelp()
+        {
+            const string ADD_NOTE_HELP_CONTENT = "Notes are a convenient way for you to remind yourself of something inside of " +
+                "the application. If you need an extra reminder you can set an alarm which will go off and new notification will " +
+                "arive for you to make sure you do not forget what you wrote in your note. Just write the note down and then set alarm " +
+                "if you would like and when. Then click confirm in order to add the new note.";
+
+            PatientHelp.Show(ADD_NOTE_HELP_CONTENT);
+        }
     }
 }

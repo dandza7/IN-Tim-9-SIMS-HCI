@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
-            this.HelpContent = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
+            this.HelpContent = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -45,17 +45,6 @@
             this.panel1.Size = new System.Drawing.Size(405, 415);
             this.panel1.TabIndex = 0;
             // 
-            // HelpContent
-            // 
-            this.HelpContent.CausesValidation = false;
-            this.HelpContent.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.HelpContent.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(49)))), ((int)(((byte)(110)))));
-            this.HelpContent.Location = new System.Drawing.Point(21, 22);
-            this.HelpContent.Name = "HelpContent";
-            this.HelpContent.Size = new System.Drawing.Size(361, 333);
-            this.HelpContent.TabIndex = 0;
-            this.HelpContent.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
             // button1
             // 
             this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(130)))), ((int)(((byte)(240)))));
@@ -68,6 +57,17 @@
             this.button1.Text = "Close";
             this.button1.UseVisualStyleBackColor = false;
             this.button1.Click += new System.EventHandler(this.CloseButton_Click);
+            // 
+            // HelpContent
+            // 
+            this.HelpContent.CausesValidation = false;
+            this.HelpContent.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.HelpContent.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(49)))), ((int)(((byte)(110)))));
+            this.HelpContent.Location = new System.Drawing.Point(21, 22);
+            this.HelpContent.Name = "HelpContent";
+            this.HelpContent.Size = new System.Drawing.Size(361, 333);
+            this.HelpContent.TabIndex = 0;
+            this.HelpContent.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // PatientHelp
             // 

@@ -67,6 +67,7 @@
             this.Content.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(185)))), ((int)(((byte)(222)))), ((int)(((byte)(254)))));
             this.Content.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Content.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(49)))), ((int)(((byte)(110)))));
+            this.Content.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.Content.Location = new System.Drawing.Point(8, 5);
             this.Content.Name = "Content";
             this.Content.Size = new System.Drawing.Size(440, 116);

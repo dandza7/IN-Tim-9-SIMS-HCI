@@ -17,7 +17,7 @@
     </Window.DataContext>
 
     <ScrollViewer>
-        <Grid x:Name="printGrid">
+        <Grid x:Name="printGrid" Margin="0,0,0,50">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="128"/>
                 <ColumnDefinition Width="188"/>
