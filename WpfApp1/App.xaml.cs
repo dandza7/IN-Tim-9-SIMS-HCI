@@ -88,9 +88,6 @@ namespace WpfApp1
             var notificationService = new NotificationService(notificationRepository, drugRepository, medicalRecordRepository, therapyRepository, noteRepository);
             NotificationController = new NotificationController(notificationService);
 
-            var roomService = new RoomService(roomRepository, doctorRepository, inventoryMovingRepository, inventoryRepository, renovationRepository, appointmentRepository);
-            RoomController = new RoomController(roomService);
-
             var patientService = new PatientService(userRepository, patientRepository, medicalRecordRepository, appointmentRepository);
             PatientController = new PatientController(patientService);
 
@@ -104,14 +101,11 @@ namespace WpfApp1
             var drugService = new DrugService(drugRepository);
             DrugController = new DrugController(drugService);
 
-            var renovationService = new RenovationService(renovationRepository, appointmentRepository);
+            var renovationService = new RenovationService(renovationRepository, appointmentRepository, roomRepository);
             RenovationController = new RenovationController(renovationService);
 
             var therapyService = new TherapyService(therapyRepository, medicalRecordRepository, drugRepository);
             TherapyController = new TherapyController(therapyService);
-
-            var inventoryService = new InventoryService(inventoryRepository, roomRepository, inventoryMovingRepository);
-            InventoryController = new InventoryController(inventoryService, roomService);
 
             var inventoryMovingService = new InventoryMovingService(inventoryMovingRepository, inventoryRepository);
             InventoryMovingController = new InventoryMovingController(inventoryMovingService);
@@ -142,6 +136,13 @@ namespace WpfApp1
 
             var meetingService = new MeetingService(meetingRepository, appointmentRepository, roomRepository, renovationRepository);
             MeetingController = new MeetingController(meetingService);
+
+            var inventoryService = new InventoryService(inventoryRepository, roomRepository, inventoryMovingRepository);
+
+            var roomService = new RoomService(roomRepository, doctorService, inventoryMovingService, inventoryService, renovationService, appointmentService);
+            RoomController = new RoomController(roomService);
+
+            InventoryController = new InventoryController(inventoryService, roomService);
         }
     }
 }

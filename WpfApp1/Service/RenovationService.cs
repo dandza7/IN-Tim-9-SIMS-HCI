@@ -15,11 +15,14 @@ namespace WpfApp1.Service
     {
         public readonly IRenovationRepository _renovationRepository;
         public readonly IAppointmentRepository _appointmentRepository;
+        public readonly IRoomRepository _roomRepository;
 
-        public RenovationService(IRenovationRepository renovationRepository, IAppointmentRepository appointmentRepository)
+        public RenovationService(IRenovationRepository renovationRepository, IAppointmentRepository appointmentRepository, IRoomRepository roomRepository)
         {
             _renovationRepository = renovationRepository;
             _appointmentRepository = appointmentRepository;
+            _roomRepository = roomRepository;
+
         }
 
         public Renovation Create(Renovation renovation)
@@ -102,7 +105,59 @@ namespace WpfApp1.Service
             }
             return retVal;
         }
+        public void ExecuteFinishedAdvancedRenovations()
+        {
+            List<Renovation> renovations = _renovationRepository.GetAll().ToList();
+            foreach (Renovation renovation in renovations)
+            {
+                if (renovation.Type == "A" && DateTime.Compare(DateTime.Today, DateTime.Parse(renovation.Ending.ToShortDateString())) >= 0)
+                {
+                    foreach (int id in renovation.RoomsIds)
+                    {
+                        Room r = _roomRepository.GetById(id);
+                        if (!r.IsActive)
+                        {
+                            r.IsActive = true;
+                            _roomRepository.Update(r);
+                        }
+                        else
+                        {
+                            _roomRepository.Delete(r.Id);
+                        }
+                    }
+                    _renovationRepository.Delete(renovation.Id);
+                }
+            }
+        }
+        public void CancelRenovations(int roomId)
+        {
+            List<Renovation> renovations = this._renovationRepository.GetAll().ToList();
+            foreach (Renovation renovation in renovations)
+            {
+                if (renovation.RoomsIds.Contains(roomId))
+                    _renovationRepository.Delete(renovation.Id);
+            }
+        }
+        //KOD ZA HCI, SIMONA, NE GLEDAJTE OVO :)
 
-        
+        public List<BusynessPreview> GetBusynessPreview()
+        {
+            List<Appointment> apps = _appointmentRepository.GetAll().ToList();
+            List<Renovation> rens = _renovationRepository.GetAll().ToList();
+            List<BusynessPreview> retVal = new List<BusynessPreview>();
+            foreach (Appointment appointment in apps)
+            {
+                retVal.Add(new BusynessPreview(_roomRepository.GetById(appointment.RoomId).Nametag, "Appointment", appointment.Beginning, appointment.Ending));
+            }
+            foreach (Renovation renovation in rens)
+            {
+                foreach (int id in renovation.RoomsIds)
+                {
+                    retVal.Add(new BusynessPreview(_roomRepository.GetById(id).Nametag, "Renovation", renovation.Beginning, renovation.Ending));
+                }
+            }
+            return retVal;
+        }
+
     }
 }

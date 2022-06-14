@@ -110,7 +110,7 @@ namespace WpfApp1.View.Model.Executive.ExecutiveRoomDialogs
         public event PropertyChangedEventHandler PropertyChanged;
         #endregion
         public ExecutiveRoomPages ParentPage { get; set; }
-        private RoomController _roomController;
+        private RenovationController _renovationController;
         private int IsBeginningSelected = 0;
         private int IsEndingSelected = 0;
 
@@ -120,8 +120,8 @@ namespace WpfApp1.View.Model.Executive.ExecutiveRoomDialogs
             this.DataContext = this;
             this.ParentPage = parent;
             var app = Application.Current as App;
-            this._roomController = app.RoomController;
-            this.ListSource = _roomController.GetBusynessPreview();
+            this._renovationController = app.RenovationController;
+            this.ListSource = _renovationController.GetBusynessPreview();
             BusynessPreviews = new ObservableCollection<BusynessPreview>();
             Beginning.SelectedDate = DateTime.Today.AddDays(-10);
             Ending.SelectedDate = DateTime.Today.AddDays(10);

@@ -31,6 +31,14 @@ namespace WpfApp1.Service
             return _invMovRepository.Create(invMov);
         }
 
-
+        public void CancelInvenoryMovings(int roomId)
+        {
+            List<InventoryMoving> inventoryMovings = this._invMovRepository.GetAll().ToList();
+            foreach (InventoryMoving inventoryMoving in inventoryMovings)
+            {
+                if (inventoryMoving.RoomId == roomId)
+                    _invMovRepository.Delete(inventoryMoving.Id);
+            }
+        }
     }
 }

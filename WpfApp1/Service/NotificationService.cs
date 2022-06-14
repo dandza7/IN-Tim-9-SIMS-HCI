@@ -175,10 +175,8 @@ namespace WpfApp1.Service
                 if(IsTherapyDuplicate(sentNotification, whenToSend, content, frequency)) return;
             
             if (whenToSend < DateTime.Now)
-            {
-                Console.WriteLine("Notifikacija sa sadrzajem: '" + content + "' do sada nije poslana.");
                 _notificationRepo.Create(new Notification(whenToSend, content, title, patientId, false, false));
-            }
+            
         }
 
         private bool IsTherapyDuplicate(Notification notification, DateTime sendingTime, string content, float frequency)
