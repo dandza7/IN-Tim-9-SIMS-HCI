@@ -50,6 +50,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Syncfusion.Licensing, Version=20.1460.0.59, Culture=neutral, PublicKeyToken=632609b4d040f6b4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Syncfusion.Licensing.20.1.0.59\lib\net46\Syncfusion.Licensing.dll</HintPath>
+    </Reference>
+    <Reference Include="Syncfusion.SfChart.WPF, Version=20.1460.0.59, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
+      <HintPath>..\packages\Syncfusion.SfChart.WPF.20.1.0.59\lib\net46\Syncfusion.SfChart.WPF.dll</HintPath>
+      </Reference>
     <Reference Include="BouncyCastle.Crypto, Version=1.8.9.0, Culture=neutral, PublicKeyToken=0e99375e54769942, processorArchitecture=MSIL">
       <HintPath>..\packages\Portable.BouncyCastle.1.8.9\lib\net40\BouncyCastle.Crypto.dll</HintPath>
     </Reference>
@@ -291,13 +297,17 @@
     <Compile Include="ViewModel\MoveInventoryViewModel.cs" />
     <Compile Include="ViewModel\NewInventoryViewModel.cs" />
     <Compile Include="ViewModel\NotesViewModel.cs" />
+    <Compile Include="ViewModel\Secretary\AppointmentsMonthViewModel.cs" />
     <Compile Include="ViewModel\Secretary\CreateMeetingPageViewModel.cs" />
+    <Compile Include="ViewModel\Secretary\DashboardViewModel.cs" />
     <Compile Include="ViewModel\Secretary\LeaveRequestsViewModel.cs" />
     <Compile Include="ViewModel\Secretary\ManageLeaveRequestViewModel.cs" />
     <Compile Include="ViewModel\PDFViewModel.cs" />
     <Compile Include="ViewModel\Secretary\MeetingViewModel.cs" />
     <Compile Include="ViewModel\Secretary\NotificationsViewModel.cs" />
+    <Compile Include="ViewModel\Secretary\RoomCountViewModel.cs" />
     <Compile Include="ViewModel\Secretary\SelectedNotificationViewModel.cs" />
+    <Compile Include="ViewModel\Secretary\SpecializationCountViewModel.cs" />
     <Compile Include="ViewModel\StatisticsViewModel.cs" />
     <Compile Include="View\Converter\MeetingConverter.cs" />
     <Compile Include="View\Dialog\PatientDialog\AddNoteDialog.xaml.cs">

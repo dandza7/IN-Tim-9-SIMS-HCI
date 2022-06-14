@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using WpfApp1.ViewModel.Secretary;
 
 namespace WpfApp1.View.Model.Secretary
 {
@@ -23,6 +24,7 @@ namespace WpfApp1.View.Model.Secretary
         public SecretaryDashboard()
         {
             InitializeComponent();
+            this.DataContext = new DashboardViewModel();
         }
     }
 }

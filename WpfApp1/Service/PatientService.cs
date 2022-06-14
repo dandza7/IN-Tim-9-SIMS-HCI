@@ -65,7 +65,9 @@ namespace WpfApp1.Service
         public Patient GetByUsername(string username)
         {
             User user = _userRepo.GetByUsername(username);
-            return _patientRepo.GetById(user.Id);
+            if (_patientRepo.GetById(user.Id) == null) return null;
+            else
+                return _patientRepo.GetById(user.Id);
         }
     }
 }

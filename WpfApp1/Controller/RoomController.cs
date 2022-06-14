@@ -22,7 +22,10 @@ namespace WpfApp1.Controller
         {
             return _roomService.GetAll().ToList();
         }
-
+        public List<Room> GetAllByType(string type)
+        {
+            return _roomService.GetAllByType(type).ToList();
+        }
         public Room GetById(int id)
         {
             return _roomService.GetById(id);

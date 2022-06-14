@@ -40,7 +40,19 @@ namespace WpfApp1.Repository
             return File.ReadAllLines(_path)
                 .Select(ConvertCsvFormatToRoom);
         }
-
+        public IEnumerable<Room> GetAllByType(string type) {
+            List<Room> rooms = File.ReadAllLines(_path)
+                .Select(ConvertCsvFormatToRoom)
+                .ToList();
+            List<Room> roomsByType = new List<Room>();
+            foreach (Room room in rooms)
+            {
+                if (room.Type == type)
+                    roomsByType.Add(room);
+            }
+            return roomsByType;
+        }
+    
         private int GetMaxId(List<Room> rooms)
         {
             return rooms.Count() == 0 ? 0 : rooms.Max(room => room.Id);

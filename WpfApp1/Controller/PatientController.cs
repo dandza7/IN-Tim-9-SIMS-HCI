@@ -24,7 +24,9 @@ namespace WpfApp1.Controller
 
         public Patient GetByUsername(string username)
         {
-            return _patientService.GetByUsername(username);
+            if (_patientService.GetByUsername(username) == null)
+                return null;
+            else return _patientService.GetByUsername(username);
         }
         public Patient Create(Patient patient)
         {
