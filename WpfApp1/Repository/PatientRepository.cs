@@ -36,7 +36,15 @@ namespace WpfApp1.Repository
 
         public Patient GetById(int id)
         {
-            return GetAll().ToList().SingleOrDefault(patient => patient.Id == id);
+            List<Patient> patients = File.ReadAllLines(_path)
+                                    .Select(ConvertCSVFormatToPatient)
+                                    .ToList();
+            foreach (Patient patient in patients)
+            {
+                if (patient.Id == id)
+                    return patient;
+            }
+            return null;
         }
 
         public Patient Create(Patient patient)

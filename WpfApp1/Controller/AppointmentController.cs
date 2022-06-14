@@ -24,6 +24,14 @@ namespace WpfApp1.Controller
         {
             return _appointmentService.GetAll();
         }
+        public IEnumerable<Appointment> GetAllBySpecialization(string spec)
+        {
+            return _appointmentService.GetAllBySpecialization(spec);
+        }
+        public IEnumerable<Appointment> GetAllByMonth(int month)
+        {
+            return _appointmentService.GetAllByMonth(month);
+        }
 
         public Appointment Create(Appointment appointment)
         {

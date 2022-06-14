@@ -14,5 +14,6 @@ namespace WpfApp1.Repository.Interface
         Room Create(Room room);
         bool Delete(int id);
         Room Update(Room room);
+        IEnumerable<Room> GetAllByType(string type);
     }
 }

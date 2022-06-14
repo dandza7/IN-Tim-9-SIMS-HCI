@@ -45,6 +45,37 @@ namespace WpfApp1.Service
             return _appointmentRepo.GetAll();
         }
 
+        public IEnumerable<Appointment> GetAllBySpecialization(string spec)
+        {
+            List<Appointment> appointments = _appointmentRepo.GetAll().ToList();
+            List<Appointment> appointmentsBySpecailization = new List<Appointment>();
+            foreach (Appointment a in appointments)
+            {
+                if(_doctorRepo.GetById(a.DoctorId).Specialization.ToString() == spec)
+                {
+                    appointmentsBySpecailization.Add(a);
+                }
+            }
+            return appointmentsBySpecailization;
+
+        }
+
+        public IEnumerable<Appointment> GetAllByMonth(int month)
+        {
+            List<Appointment> appointments = _appointmentRepo.GetAll().ToList();
+            List<Appointment> appointmentsByMonth = new List<Appointment>();
+            foreach (Appointment a in appointments)
+            {
+                if (a.Beginning.Month == month)
+                {
+                    appointmentsByMonth.Add(a);
+                }
+            }
+            return appointmentsByMonth;
+
+        }
+
+
         public Appointment Create(Appointment appointment)
         {
             return _appointmentRepo.Create(appointment);

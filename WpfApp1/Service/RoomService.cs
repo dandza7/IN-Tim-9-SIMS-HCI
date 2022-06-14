@@ -50,6 +50,9 @@ namespace WpfApp1.Service
             ExecuteFinishedAdvancedRenovations();
             return _roomRepository.GetById(id);
         }
+        public IEnumerable<Room> GetAllByType(string type) {
+            return _roomRepository.GetAllByType(type);
+        }
 
         public Room Create(Room room)
         {
