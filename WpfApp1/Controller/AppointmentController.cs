@@ -57,7 +57,10 @@ namespace WpfApp1.Controller
         {
             return _appointmentService.GetSecretaryAppointmentViews();
         }
-
+        public List<SecretaryAppointmentView> GetSecretaryAppointmentViewsInTimeInterval(DateTime startOfInterval, DateTime endOfInterval)
+        {
+            return _appointmentService.GetSecretaryAppointmentViewsInTimeInterval(startOfInterval, endOfInterval);
+        }
         public List<AppointmentView> GetPatientsAppointmentsView(int patientId)
         {
             return _appointmentService.GetPatientsAppointmentsView(patientId);

@@ -405,7 +405,21 @@ namespace WpfApp1.Service
         }
 
 
-
+         public List<SecretaryAppointmentView> GetSecretaryAppointmentViewsInTimeInterval(DateTime startOfInterval, DateTime endOfInterval)
+        {
+            List<SecretaryAppointmentView> appointmentViews = new List<SecretaryAppointmentView>();
+            List<Appointment> appointments = _appointmentRepo.GetAll().ToList();
+            foreach (Appointment appointment in appointments)
+            {
+                if (appointment.Beginning >= startOfInterval & appointment.Ending <= endOfInterval)
+                {
+                    User doctor = _userRepo.GetById(_doctorRepo.GetById(appointment.DoctorId).Id);
+                    User patient = _userRepo.GetById(_patientRepo.GetById(appointment.PatientId).Id);
+                    appointmentViews.Add(AppointmentConverter.ConvertSecretaryAppointmentSecretaryAppointmentView(appointment, doctor, patient));
+                }
+            }
+            return appointmentViews;
+        }
         public int FindFreeDoctor(SpecType spec, DateTime startOfInterval, DateTime endOfInterval)
         {
             List<Doctor> doctors = (List<Doctor>)_doctorRepo.GetAllDoctorsBySpecialization(spec);

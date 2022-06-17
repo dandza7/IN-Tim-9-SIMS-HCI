@@ -77,5 +77,11 @@ namespace WpfApp1.View.Model.Secretary
             var s = new SecretaryAddNewUrgentAppointmentDialog();
             s.Show();
         }
+
+        private void Show_Report_Click(object sender, RoutedEventArgs e)
+        {
+            var s = new SecretaryReportDialog();
+            s.Show();
+        }
     }
 }
