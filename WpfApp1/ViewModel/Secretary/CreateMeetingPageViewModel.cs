@@ -37,6 +37,8 @@ namespace WpfApp1.ViewModel.Secretary
         private Room _selectedRoom;
         public FindMeetingTerm Find { get; set; }
         public ScheduleMeeting Schedule { get; set; }
+
+
         public ObservableCollection<Room> Rooms
         {
             get
@@ -160,7 +162,7 @@ namespace WpfApp1.ViewModel.Secretary
             for (int i = 0; i < CheckedUsers.Count; i++)
             {
                 User user = (User)CheckedUsers[i];
-                userIds.Add(user.Id);
+                userIds.Add(1);
             }
             isMeetingFound = _meetingController.FindMeetingTerm(DateTime.Parse(Beginning), DateTime.Parse(Beginning).AddHours(3), userIds);
             if(isMeetingFound == true)

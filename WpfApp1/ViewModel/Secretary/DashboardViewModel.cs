@@ -261,7 +261,12 @@ namespace WpfApp1.ViewModel.Secretary
             foreach (string spec in specializations)
                 {
                     int num = _appointmentController.GetAllBySpecialization(spec).Count();
-                    SpecializationCountViewModel s = new SpecializationCountViewModel(spec, num);
+                string specc="";
+                if (spec == "radiologist") { specc = "Radiology"; }
+                if (spec == "cardiologist") { specc = "Cardiology"; }
+                if (spec == "anesthesiologist") { specc = "Anesthesiology"; }
+                if (spec == "generalPracticioner") { specc = "General Practice"; }
+                SpecializationCountViewModel s = new SpecializationCountViewModel(specc, num);
                     Console.WriteLine(s.Number);
                     SpecializationList.Add(s);
                 }
